@@ -6,9 +6,9 @@ import { connect } from "react-redux";
 import { login } from "../../state/actions/authActions";
 
 const FormContainer = styled.div`
-    margin: 10px;
-    width: 20rem;
-    height: 16rem;
+    margin: 20px auto;
+    width: 22rem;
+    height: 17rem;
     border: 2px solid lightgray;
 `
 
@@ -52,11 +52,12 @@ const Login = props => {
             <form onSubmit={submitForm}>
                 <FormContainer>
                     <FormTitle>
-                        <h3>Login</h3>
+                        Login
                     </FormTitle>
                     <FormInput>
                         <TextField 
                             id="outlined-basic" 
+                            variant="outlined"
                             type="text"
                             label="Username"
                             value={creds.username}
@@ -66,6 +67,7 @@ const Login = props => {
                     <FormInput>
                         <TextField 
                             id="outlined-basic" 
+                            variant="outlined"
                             type="password"
                             label="Password"
                             value={creds.password}
@@ -76,7 +78,7 @@ const Login = props => {
                         <Button variant="contained">Login</Button>
                     </FormButton>
                     <FormLink>
-                        <p>Don't have an account? <Link to="/signup">Signup</Link></p>
+                        Don't have an account? <Link to="/signup">Signup</Link>
                     </FormLink>
                 </FormContainer>
             </form>

@@ -6,9 +6,9 @@ import { connect } from "react-redux";
 import { signup } from "../../state/actions/authActions"
 
 const FormContainer = styled.div`
-    margin: 10px;
-    width: 20rem;
-    height: 24rem;
+    margin: 20px auto;
+    width: 22rem;
+    height: 25rem;
     border: 2px solid lightgray;
 `
 
@@ -51,11 +51,12 @@ const Signup = props => {
             <form onSubmit={submitForm}>
                 <FormContainer>
                     <FormTitle>
-                        <h3>Signup</h3>
+                        Signup
                     </FormTitle>
                     <FormInput>
                         <TextField 
                             id="outlined-basic" 
+                            variant="outlined"
                             type="text"
                             label="Username" 
                             value={creds.username}
@@ -65,6 +66,7 @@ const Signup = props => {
                     <FormInput>
                         <TextField 
                             id="outlined-basic" 
+                            variant="outlined"
                             type="email"
                             label="Email" 
                             value={creds.email}
@@ -73,7 +75,8 @@ const Signup = props => {
                     </FormInput>
                     <FormInput>
                         <TextField 
-                            id="outlined-basic" 
+                            id="outlined-basic"
+                            variant="outlined" 
                             type="password"
                             label="Password" 
                             value={creds.password}
@@ -83,6 +86,7 @@ const Signup = props => {
                     <FormInput>
                         <TextField 
                             id="outlined-basic" 
+                            variant="outlined"
                             type="password"
                             label="Confirm Password" 
                             value={creds.confirmPassword}
@@ -93,7 +97,7 @@ const Signup = props => {
                         <Button variant="contained">Signup</Button>
                     </FormButton>
                     <FormLink>
-                        <p>Already have an account? <Link to="/login">Login</Link></p>
+                        Already have an account? <Link to="/login">Login</Link>
                     </FormLink>
                 </FormContainer>
             </form>
