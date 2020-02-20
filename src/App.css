@@ -77,3 +77,7 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+.App{
+  text-align: center;
+}
