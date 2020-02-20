@@ -41,7 +41,7 @@ const Login = () => {
 
     const submitForm = e => {
         e.preventDefault();
-        // action function here
+
     }
 
     return (
