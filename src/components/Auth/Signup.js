@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import {TextField, Button} from '@material-ui/core';
 import styled from 'styled-components';
-import {Link} from "react-router-dom" 
+import {Link} from "react-router-dom";
+import { connect } from "react-redux";
+import { signup } from "../../state/actions/authActions"
 
 const FormContainer = styled.div`
     margin: 10px;
@@ -25,7 +27,7 @@ const FormLink = styled.p`
     margin: 15px;
 `
 
-const Signup = () => {
+const Signup = props => {
     
     const [creds, setCreds] = useState({
         username: "", 
@@ -41,6 +43,7 @@ const Signup = () => {
     const submitForm = e => {
         e.preventDefault();
         // action function here
+        props.signup(creds)
     }
 
     return (
@@ -98,8 +101,8 @@ const Signup = () => {
     )
 }
 
-// mapStateToProps = () => {
+const mapStateToProps = state => {
+    return state
+}
 
-// }
-
-export default Signup;
+export default connect(mapStateToProps, { signup })(Signup);

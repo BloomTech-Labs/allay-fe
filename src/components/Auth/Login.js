@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { TextField, Button } from '@material-ui/core';
 import styled from 'styled-components';
-import { Link } from "react-router-dom" 
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../../state/actions/authActions";
 
 const FormContainer = styled.div`
     margin: 10px;
@@ -26,7 +28,7 @@ const FormLink = styled.p`
 `
 
 
-const Login = () => {
+const Login = props => {
 
     const [creds, setCreds] = useState({
         username: "", 
@@ -41,7 +43,8 @@ const Login = () => {
 
     const submitForm = e => {
         e.preventDefault();
-
+        // action function here
+        props.login(creds)
     }
 
     return (
@@ -81,4 +84,8 @@ const Login = () => {
     )
 }
 
-export default Login;
+const mapStateToProps = state => {
+    return state;
+};
+
+export default connect(mapStateToProps, { login })(Login);
