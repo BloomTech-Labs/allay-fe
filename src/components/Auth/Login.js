@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../state/actions/authActions";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const FormContainer = styled.div`
     margin: 20px auto;
@@ -78,7 +79,7 @@ const Login = props => {
                         <Button variant="contained">Submit</Button>
                     </FormButton>
                     <FormLink>
-                        {/* Don't have an account? <Link to="/signup">Signup</Link> */}
+                        Don't have an account? <Router><Link to="/signup">Signup</Link></Router>
                     </FormLink>
                 </FormContainer>
             </form>

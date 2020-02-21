@@ -3,7 +3,8 @@ import {TextField, Button} from '@material-ui/core';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
 import { connect } from "react-redux";
-import { signup } from "../../state/actions/authActions"
+import { signup } from "../../state/actions/authActions";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const FormContainer = styled.div`
     margin: 20px auto;
@@ -97,7 +98,7 @@ const Signup = props => {
                         <Button variant="contained">Submit</Button>
                     </FormButton>
                     <FormLink>
-                        {/* Already have an account? <Link to="/login">Login</Link> */}
+                        Already have an account? <Router><Link to="/login">Login</Link></Router>
                     </FormLink>
                 </FormContainer>
             </form>
