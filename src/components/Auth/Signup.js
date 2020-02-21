@@ -94,10 +94,10 @@ const Signup = props => {
                         />
                     </FormInput>
                     <FormButton>
-                        <Button variant="contained">Signup</Button>
+                        <Button variant="contained">Submit</Button>
                     </FormButton>
                     <FormLink>
-                        Already have an account? <Link to="/login">Login</Link>
+                        {/* Already have an account? <Link to="/login">Login</Link> */}
                     </FormLink>
                 </FormContainer>
             </form>
@@ -109,4 +109,4 @@ const mapStateToProps = state => {
     return state
 }
 
-export default connect(mapStateToProps, { signup })(Signup);
+export default (Signup);
