@@ -10,12 +10,12 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 // import mainReducer from './state/reducers';
-import { authReducer } from "./state/reducers/authReducer";
+import { rootReducer } from "./state/reducers/index";
 
 // redux dev tools and store
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-  authReducer,
+  rootReducer,
   composeEnhancers(applyMiddleware(thunk, logger))
 );
 
