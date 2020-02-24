@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, makeStyles } from '@material-ui/core';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../state/actions/authActions";
-import { BrowserRouter as Router } from "react-router-dom";
+// import { BrowserRouter as Router } from "react-router-dom";
 
 const FormContainer = styled.div`
     margin: 20px auto;
@@ -28,16 +28,16 @@ const FormLink = styled.p`
     margin: 15px;
 `
 
-
 const Login = props => {
 
     const [creds, setCreds] = useState({
         username: "", 
-        password: "",
+        password: ""
     });
 
     const handleChanges = e => {
         setCreds({
+            ...creds,
             [e.target.name]: e.target.value
         })
     }
@@ -45,7 +45,7 @@ const Login = props => {
     const submitForm = e => {
         e.preventDefault();
         // action function here
-        props.login(creds)
+        props.login(creds).then(() => props.history.push("/dashboard"))
     }
 
     return (
@@ -58,9 +58,10 @@ const Login = props => {
                     <FormInput>
                         <TextField 
                             id="outlined-basic" 
-                            variant="outlined"
+                            variant="filled"
                             type="text"
                             label="Username"
+                            name="username"
                             value={creds.username}
                             onChange={handleChanges}
                         />
@@ -68,18 +69,19 @@ const Login = props => {
                     <FormInput>
                         <TextField 
                             id="outlined-basic" 
-                            variant="outlined"
+                            variant="filled"
                             type="password"
                             label="Password"
+                            name="password"
                             value={creds.password}
                             onChange={handleChanges}
                         />
                     </FormInput>
                     <FormButton>
-                        <Button variant="contained">Submit</Button>
+                        <Button variant="contained" type="submit">Submit</Button>
                     </FormButton>
                     <FormLink>
-                        Don't have an account? <Router><Link to="/signup">Signup</Link></Router>
+                        Don't have an account? <Link to="/signup">Signup</Link>
                     </FormLink>
                 </FormContainer>
             </form>
@@ -91,4 +93,4 @@ const mapStateToProps = state => {
     return state;
 };
 
-export default (Login);
+export default connect(mapStateToProps, { login })(Login);
