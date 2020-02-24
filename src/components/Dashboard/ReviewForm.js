@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router';
+// import { Redirect } from 'react-router';
 import {
   TextField,
   Button,
@@ -8,6 +8,8 @@ import {
   Typography
 } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+
+
 const useStyles = makeStyles(theme => ({
   center: {
     display: 'flex',
@@ -28,6 +30,8 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '700px'
   }
 }));
+
+
 const ReviewForm = () => {
   const classes = useStyles();
   const [newReviewPost, setNewReviewPost] = React.useState({
@@ -122,7 +126,9 @@ const ReviewForm = () => {
           />
           <ButtonGroup>
             <Button type="submit">Add Your Review</Button>
-            <Button onClick={() => <Redirect />} color="secondary">
+            <Button 
+            // onClick={} 
+            color="secondary">
               Cancel
             </Button>
           </ButtonGroup>
