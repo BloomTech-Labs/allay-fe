@@ -8,7 +8,8 @@ import {
   Typography
 } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-
+import { connect } from "react-redux";
+import { postReview } from "../../state/actions/reviewActions";
 
 const useStyles = makeStyles(theme => ({
   center: {
@@ -32,38 +33,46 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const ReviewForm = () => {
+const ReviewForm = props => {
+  
   const classes = useStyles();
   const [newReviewPost, setNewReviewPost] = React.useState({
-    company: '',
+    company_name: '',
     job_title: '',
     job_location: '',
     salary: '',
     interview_review: '',
     interview_rating: '',
     job_review: '',
-    job_rating: ''
+    job_rating: '',
+    reviewer: 'matt'
   });
   const changeHandler = e => {
     setNewReviewPost({
       ...newReviewPost,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
+      
     });
+    // console.log(newReviewPost)
   };
   const handleSubmit = e => {
     e.preventDefault();
+    props.postReview(newReviewPost)
+    // console.log("handleSubmit", newReviewPost)
+    // props.history.push('/dashboard')
   };
   return (
     <div className={classes.center}>
+      
       <div>
         <Typography className={classes.heading}> Add a Review</Typography>
         <form onSubmit={handleSubmit} className={classes.container}>
           <TextField
             className={classes.company}
-            type="company"
-            name="company"
+            type="text"
+            name="company_name"
             placeholder="Name of Company"
-            value={newReviewPost.company}
+            value={newReviewPost.company_name}
             onChange={changeHandler}
           />
           <TextField
@@ -124,6 +133,14 @@ const ReviewForm = () => {
             value={newReviewPost.job_review}
             onChange={changeHandler}
           />
+          <TextField
+            // className={classes.r}
+            type="text"
+            name="reviewer"
+            placeholder="Posted by"
+            value={newReviewPost.reviewer}
+            onChange={changeHandler}
+          />
           <ButtonGroup>
             <Button type="submit">Add Your Review</Button>
             <Button 
@@ -137,4 +154,9 @@ const ReviewForm = () => {
     </div>
   );
 };
-export default ReviewForm;
+
+const mapStateToProps = state => {
+  return state
+}
+
+export default connect(mapStateToProps, { postReview })(ReviewForm);

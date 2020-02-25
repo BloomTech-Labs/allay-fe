@@ -8,7 +8,6 @@ export const login = creds => dispatch => {
         .post("https://allay-be-staging.herokuapp.com/api/auth/login", creds)
         .then(res => {
             localStorage.setItem("token", res.data.token);
-            console.log(res)
             dispatch({ type: LOGIN_SUCCESS, payload: res.data })
         })
         .catch(err => {
@@ -21,8 +20,7 @@ export const signup = creds => dispatch => {
     return axios
         .post("https://allay-be-staging.herokuapp.com/api/auth/register", creds)
         .then(res => {
-            // localStorage.setItem("token", res.data.token);
-            console.log(res)
+            localStorage.setItem("token", res.data.token);
             dispatch({ type: SIGNUP_SUCCESS, payload: res.data })
         })
         .catch(err => {

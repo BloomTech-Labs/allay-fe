@@ -6,21 +6,24 @@ import { connect } from 'react-redux';
 import './App.css';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
-import ReviewList from './components/Dashboard/ReviewList';
 import ReviewForm from './components/Dashboard/ReviewForm';
+import ReviewList from './components/Dashboard/ReviewList';
+import PrivateRoute from "./utils/PrivateRoute"
 
 const App = () => {
   return (
     <Router>
       <div className='App'>
         <h1>WELCOME TO ALLAY!</h1>
-        <Route path="/login" component={Login}/>
-        <Route path="/signup" component={Signup} />
-        <Route path="/dashboard" component={ReviewList} />
-        <Route path="/add-review" component={ReviewForm} />
+          <Switch>
+          <Route exact path="/" component={Login}/>
+          <Route path="/signup" component={Signup} />
+          <PrivateRoute exact path="/dashboard" component={ReviewList} />
+          <PrivateRoute path="/dashboard/add-review" component={ReviewForm} />
+        </Switch>
       </div>
     </Router>
-  );
+  ); 
 };
 
 const mapStateToProps = state => {

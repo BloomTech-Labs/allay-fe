@@ -17,10 +17,6 @@ const FormTitle = styled.h3`
     background: lightgray;
 `
 
-const FormSelect = styled.div`
-    margin: 10px
-`
-
 const FormInput = styled.div`
     margin: 10px;
 `
@@ -37,10 +33,8 @@ const Signup = props => {
     const [creds, setCreds] = useState({
         username: "", 
         email: "",
-        // track: "",
-        // cohort: "",
         password: "",
-        // confirmPassword: ""
+        confirmPassword: ""
     });
 
     const handleChanges = (e) => {
@@ -50,15 +44,9 @@ const Signup = props => {
     const submitForm = e => {
         e.preventDefault();
         console.log("form submitted")
-        // if (creds.password === creds.confirmPassword) {
-          props.signup(creds)
-          setCreds({
-            username: "",
-            email: "",
-            password: "",
-            // confirmPassword: ""
-          });
-        // }
+        if (creds.confirmPassword === creds.password){
+            props.signup({username: creds.username, email: creds.email, password: creds.password}).then(() => props.history.push("/dashboard"))
+        }
       };
 
     return (
@@ -88,22 +76,6 @@ const Signup = props => {
                             onChange={handleChanges}
                         />
                     </FormInput>
-                    {/* <FormSelect>
-                        <TextField 
-                            variant="filled"
-                            select
-                            label="Track" 
-                            value={creds.track}
-                            onChange={handleChanges}
-                        />
-                        <TextField 
-                            variant="filled"
-                            select
-                            label="Cohort" 
-                            value={creds.cohort}
-                            onChange={handleChanges}
-                        />
-                    </FormSelect> */}
                     <FormInput>
                         <TextField 
                             variant="filled"
@@ -115,7 +87,7 @@ const Signup = props => {
                             onChange={handleChanges}
                         />
                     </FormInput>
-                    {/* <FormInput>
+                    <FormInput>
                         <TextField 
                             variant="filled"
                             type="password"
@@ -124,7 +96,7 @@ const Signup = props => {
                             value={creds.confirmPassword}
                             onChange={handleChanges}
                         />
-                    </FormInput> */}
+                    </FormInput>
                     <FormButton>
                         <Button variant="contained" type="submit">Submit</Button>
                     </FormButton>
