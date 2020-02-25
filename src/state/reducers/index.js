@@ -1,12 +1,12 @@
 import mainReducer from './mainReducer';
 import { combineReducers } from "redux";
 import { authReducer } from "../reducers/authReducer";
-import reviewListReducer from "../reducers/reviewListReducer";
+import reviewReducer from "../reducers/reviewReducer";
 
 // export default mainReducer;
 
 
 export const rootReducer = combineReducers({
-    authReducer,
-    reviewListReducer
+    auth: authReducer,
+    review: reviewReducer
 })
