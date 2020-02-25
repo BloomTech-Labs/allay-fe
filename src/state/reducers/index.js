@@ -1,12 +1,11 @@
-import mainReducer from './mainReducer';
 import { combineReducers } from "redux";
-import { authReducer } from "../reducers/authReducer";
+
+//local imports
+import authReducer from "../reducers/authReducer";
 import reviewReducer from "../reducers/reviewReducer";
 
-// export default mainReducer;
-
-
+// combineReducers is a function from redux that joins all of our reducers together
 export const rootReducer = combineReducers({
-    auth: authReducer,
-    review: reviewReducer
-})
+  auth: authReducer,
+  review: reviewReducer
+});

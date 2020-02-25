@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getReviewById } from "../../state/actions/reviewActions";
-import reviewReducer from "../../state/reducers/reviewReducer";
+import getReviewById from "../../state/actions/index";
 
 //imported styles
 import {
@@ -36,9 +35,9 @@ const useStyles = makeStyles({
 const SingleReview = props => {
   const classes = useStyles();
 
-  React.useEffect(() => {
+  useEffect(() => {
     props.getReviewById(props.match.params.id);
-  }, []);
+  }, [props.match.params.id]);
 
   return (
     <div className={classes.card}>
@@ -86,4 +85,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getReviewById })(SingleReview);
+export default connect(mapStateToProps, getReviewById)(SingleReview);

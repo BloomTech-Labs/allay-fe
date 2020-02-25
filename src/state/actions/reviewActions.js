@@ -11,14 +11,13 @@ import {
   POST_REVIEW_SUCCESS
 } from "../types";
 
-// ============ GET ALL REVIEW ===========
+// ============ GET ALL REVIEWS ===========
 
 export const getReview = () => dispatch => {
   dispatch({ type: FETCH_REVIEWS_START });
   axiosWithAuth()
     .get("/reviews")
     .then(res => {
-      // console.log("reviewActions", res.data);
       dispatch({ type: FETCH_REVIEWS_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -32,7 +31,6 @@ export const getReviewById = id => dispatch => {
   axiosWithAuth()
     .get(`/reviews/${id}`)
     .then(res => {
-      console.log("getReview By ID", res);
       dispatch({ type: FETCH_REVIEW_BY_ID_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -46,11 +44,9 @@ export const postReview = newReview => dispatch => {
   axiosWithAuth()
     .post("/reviews", newReview)
     .then(res => {
-      console.log("action passes", res);
-      dispatch({ type: POST_REVIEW_SUCCESS, payload: res.data });
+      dispatch({ type: POST_REVIEW_SUCCESS, payload: newReview });
     })
     .catch(err => {
-      console.log("action fails", err);
       dispatch({ type: POST_REVIEW_FAILURE, payload: err.response });
     });
 };

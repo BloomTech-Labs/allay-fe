@@ -3,7 +3,7 @@ import { TextField, Button } from "@material-ui/core";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { signup } from "../../state/actions/authActions";
+import signup from "../../state/actions/index";
 // import { BrowserRouter as Router } from "react-router-dom";
 
 const FormContainer = styled.div`
@@ -118,4 +118,4 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps, { signup })(Signup);
+export default connect(mapStateToProps, signup)(Signup);

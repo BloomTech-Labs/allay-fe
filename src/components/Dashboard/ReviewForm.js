@@ -1,69 +1,68 @@
-import React from 'react';
-// import { Redirect } from 'react-router';
+import React, { useState } from "react";
+
 import {
   TextField,
   Button,
   TextareaAutosize,
   ButtonGroup,
   Typography
-} from '@material-ui/core';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+} from "@material-ui/core";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import { connect } from "react-redux";
-import { postReview } from "../../state/actions/reviewActions";
+import postReview from "../../state/actions";
 
 const useStyles = makeStyles(theme => ({
   center: {
-    display: 'flex',
-    justifyContent: 'center',
-    width: '0 auto'
+    display: "flex",
+    justifyContent: "center",
+    width: "0 auto"
   },
   container: {
-    display: 'flex',
-    border: '2px solid grey',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-    maxWidth: '600px'
+    display: "flex",
+    border: "2px solid grey",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    maxWidth: "600px"
   },
   heading: {
-    backgroundColor: 'lightgrey',
-    maxWidth: '700px'
+    backgroundColor: "lightgrey",
+    maxWidth: "700px"
   }
 }));
 
-
 const ReviewForm = props => {
-  
   const classes = useStyles();
-  const [newReviewPost, setNewReviewPost] = React.useState({
-    company_name: '',
-    job_title: '',
-    job_location: '',
-    salary: '',
-    interview_review: '',
-    interview_rating: '',
-    job_review: '',
-    job_rating: '',
-    reviewer: 'matt'
+  const [newReviewPost, setNewReviewPost] = useState({
+    company_id: "",
+    job_title: "",
+    job_location: "",
+    salary: "",
+    interview_review: "",
+    interview_rating: "",
+    job_review: "",
+    job_rating: ""
   });
+
   const changeHandler = e => {
     setNewReviewPost({
       ...newReviewPost,
-      [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
-      
+      [e.target.name]:
+        e.target.type === "number" ? parseInt(e.target.value) : e.target.value
     });
     // console.log(newReviewPost)
   };
+
   const handleSubmit = e => {
     e.preventDefault();
-    props.postReview(newReviewPost)
+    props.postReview(newReviewPost);
     // console.log("handleSubmit", newReviewPost)
     // props.history.push('/dashboard')
   };
+
   return (
     <div className={classes.center}>
-      
       <div>
         <Typography className={classes.heading}> Add a Review</Typography>
         <form onSubmit={handleSubmit} className={classes.container}>
@@ -143,11 +142,7 @@ const ReviewForm = props => {
           />
           <ButtonGroup>
             <Button type="submit">Add Your Review</Button>
-            <Button 
-            // onClick={} 
-            color="secondary">
-              Cancel
-            </Button>
+            <Button color="secondary">Cancel</Button>
           </ButtonGroup>
         </form>
       </div>
@@ -156,7 +151,7 @@ const ReviewForm = props => {
 };
 
 const mapStateToProps = state => {
-  return state
-}
+  return state;
+};
 
-export default connect(mapStateToProps, { postReview })(ReviewForm);
+export default connect(mapStateToProps, postReview)(ReviewForm);

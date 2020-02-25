@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getReview } from "../../state/actions/reviewActions";
+import getReview from "../../state/actions/index";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -10,7 +10,6 @@ import {
   Typography
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import SingleReview from "./SingleReview";
 
 const useStyles = makeStyles({
   root: {
@@ -35,38 +34,39 @@ const useStyles = makeStyles({
 const ReviewList = props => {
   const classes = useStyles();
 
-  React.useEffect(() => {
+  useEffect(() => {
     props.getReview();
   }, []);
 
   return (
-    <div className={classes.root}>
+    <>
       <Link to="/dashboard/add-review">Add A Review</Link>
-      {/* <Link to="/dashboard/r">Add A Review</Link> */}
-      {props.data.map(review => (
-        <div>
-          <Card className={classes.root}>
-            <CardContent>
-              <Typography variant="body2" component="p">
-                Company name: {review.company_name}
-              </Typography>
-              <Typography variant="h5" component="h2">
-                Job Title: {review.job_title}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                Location: {review.job_location}
-              </Typography>
-              <Typography variant="body2" component="p">
-                Salary: {review.salary}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link to={`/dashboard/${review.id}`}>Learn More</Link>
-            </CardActions>
-          </Card>
-        </div>
-      ))}
-    </div>
+      <div className={classes.root}>
+        {props.data.map(review => (
+          <div key={review.id}>
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography variant="body2" component="p">
+                  Company name: {review.company_name}
+                </Typography>
+                <Typography variant="h5" component="h2">
+                  Job Title: {review.job_title}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  Location: {review.job_location}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  Salary: {review.salary}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Link to={`/dashboard/${review.id}`}>Learn More</Link>
+              </CardActions>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -75,4 +75,4 @@ const mapStateToProps = state => {
     data: state.review.data
   };
 };
-export default connect(mapStateToProps, { getReview })(ReviewList);
+export default connect(mapStateToProps, getReview)(ReviewList);
