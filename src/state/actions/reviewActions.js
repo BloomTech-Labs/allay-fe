@@ -39,12 +39,12 @@ export const getReviewById = id => dispatch => {
 };
 // ============ POST REVIEW ===========
 
-export const postReview = newReview => dispatch => {
+export const postReview = (id, newReview) => dispatch => {
   dispatch({ type: POST_REVIEW_START });
   axiosWithAuth()
-    .post("/reviews", newReview)
+    .post(`/users/${id}/reviews`, newReview)
     .then(res => {
-      dispatch({ type: POST_REVIEW_SUCCESS, payload: newReview });
+      dispatch({ type: POST_REVIEW_SUCCESS, payload: res.data });
     })
     .catch(err => {
       dispatch({ type: POST_REVIEW_FAILURE, payload: err.response });

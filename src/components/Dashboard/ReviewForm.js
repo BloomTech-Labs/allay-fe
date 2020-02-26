@@ -56,9 +56,8 @@ const ReviewForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.postReview(newReviewPost);
-    // console.log("handleSubmit", newReviewPost)
-    // props.history.push('/dashboard')
+    props.postReview(localStorage.getItem("userId"), newReviewPost);
+    props.history.push("/dashboard");
   };
 
   return (
@@ -67,11 +66,11 @@ const ReviewForm = props => {
         <Typography className={classes.heading}> Add a Review</Typography>
         <form onSubmit={handleSubmit} className={classes.container}>
           <TextField
-            className={classes.company}
-            type="text"
-            name="company_name"
+            className={classes.company_id}
+            type="number"
+            name="company_id"
             placeholder="Name of Company"
-            value={newReviewPost.company_name}
+            value={newReviewPost.company_id}
             onChange={changeHandler}
           />
           <TextField
@@ -130,14 +129,6 @@ const ReviewForm = props => {
             name="job_review"
             placeholder="Write a Review"
             value={newReviewPost.job_review}
-            onChange={changeHandler}
-          />
-          <TextField
-            // className={classes.r}
-            type="text"
-            name="reviewer"
-            placeholder="Posted by"
-            value={newReviewPost.reviewer}
             onChange={changeHandler}
           />
           <ButtonGroup>

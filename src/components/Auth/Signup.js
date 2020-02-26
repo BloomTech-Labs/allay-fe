@@ -54,6 +54,10 @@ const Signup = props => {
     }
   };
 
+  if (props.isLoading) {
+    return <h1>Signing you up</h1>;
+  }
+
   return (
     <div>
       <form onSubmit={submitForm}>
@@ -106,7 +110,7 @@ const Signup = props => {
             </Button>
           </FormButton>
           <FormLink>
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account? <Link to="/">Login</Link>
           </FormLink>
         </FormContainer>
       </form>
@@ -115,7 +119,9 @@ const Signup = props => {
 };
 
 const mapStateToProps = state => {
-  return state;
+  return {
+    isLoading: state.auth.isLoading
+  };
 };
 
 export default connect(mapStateToProps, signup)(Signup);

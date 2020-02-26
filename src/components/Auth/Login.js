@@ -46,6 +46,10 @@ const Login = props => {
     props.login(creds).then(() => props.history.push("/dashboard"));
   };
 
+  if (props.isLoading) {
+    return <h1>Logging you in</h1>;
+  }
+
   return (
     <div>
       <form onSubmit={submitForm}>
@@ -88,7 +92,9 @@ const Login = props => {
 };
 
 const mapStateToProps = state => {
-  return state;
+  return {
+    isLoading: state.auth.isLoading
+  };
 };
 
 export default connect(mapStateToProps, login)(Login);

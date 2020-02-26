@@ -20,7 +20,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
-        isLoggedIn: true
+        isLoading: true
       };
     case LOGIN_SUCCESS:
       return {
