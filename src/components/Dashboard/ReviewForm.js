@@ -62,15 +62,6 @@ const ReviewForm = props => {
   };
   console.log("company", newReviewPost);
 
-  const handleChange = e => {
-    setCompanyName(e.target.value);
-    setNewReviewPost({
-      ...newReviewPost,
-      company_id: companyName
-    });
-  };
-  console.log("company", newReviewPost);
-
   const handleSubmit = e => {
     e.preventDefault();
     props
@@ -91,10 +82,10 @@ const ReviewForm = props => {
             id="standard-select-currency"
             select
             name="company_id"
-            label="Select a Company"
+            label="Company"
             value={newReviewPost.company_id}
             onChange={changeHandler}
-            helperText="Please select your currency"
+            helperText="Please select your company"
           >
             {props.companies.map(company => (
               <MenuItem key={company.id} value={company.id}>
