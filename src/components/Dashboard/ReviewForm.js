@@ -59,16 +59,17 @@ const ReviewForm = props => {
       [e.target.name]:
         e.target.type === "number" ? parseInt(e.target.value) : e.target.value
     });
-    console.log("company", newReviewPost);
   };
+  console.log("company", newReviewPost);
+
   const handleChange = e => {
     setCompanyName(e.target.value);
     setNewReviewPost({
       ...newReviewPost,
       company_id: companyName
     });
-    console.log("company", newReviewPost);
   };
+  console.log("company", newReviewPost);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -91,7 +92,7 @@ const ReviewForm = props => {
             select
             name="company_id"
             label="Select a Company"
-            value={companyName}
+            value={newReviewPost.company_id}
             onChange={changeHandler}
             helperText="Please select your currency"
           >
