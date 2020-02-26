@@ -28,7 +28,7 @@ export const getReview = () => dispatch => {
 
 export const getReviewById = id => dispatch => {
   dispatch({ type: FETCH_REVIEW_BY_ID_START });
-  axiosWithAuth()
+  return axiosWithAuth()
     .get(`/reviews/${id}`)
     .then(res => {
       dispatch({ type: FETCH_REVIEW_BY_ID_SUCCESS, payload: res.data });
@@ -41,7 +41,7 @@ export const getReviewById = id => dispatch => {
 
 export const postReview = (id, newReview) => dispatch => {
   dispatch({ type: POST_REVIEW_START });
-  axiosWithAuth()
+  return axiosWithAuth()
     .post(`/users/${id}/reviews`, newReview)
     .then(res => {
       dispatch({ type: POST_REVIEW_SUCCESS, payload: res.data });

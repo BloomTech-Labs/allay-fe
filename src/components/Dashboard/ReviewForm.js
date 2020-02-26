@@ -55,9 +55,9 @@ const ReviewForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.postReview(localStorage.getItem("userId"), newReviewPost);
-    props.history.push("/dashboard");
-    // .then(() => props.history.push("/dashboard"));
+    props
+      .postReview(localStorage.getItem("userId"), newReviewPost)
+      .then(() => props.history.push("/dashboard"));
   };
 
   if (props.isLoading) {
@@ -73,7 +73,7 @@ const ReviewForm = props => {
             className={classes.company_id}
             type="number"
             name="company_id"
-            placeholder="Name of Company"
+            placeholder="Company ID"
             value={newReviewPost.company_id}
             onChange={changeHandler}
           />
