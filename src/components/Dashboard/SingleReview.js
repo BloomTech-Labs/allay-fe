@@ -32,43 +32,45 @@ const useStyles = makeStyles({
   }
 });
 
-const SingleReview = props => {
+const SingleReview = ({ review, getReviewById, match }) => {
   const classes = useStyles();
 
+  const id = match.params.id;
+
   useEffect(() => {
-    props.getReviewById(props.match.params.id);
-  }, [props.match.params.id]);
+    getReviewById(id);
+  }, [id, getReviewById]);
 
   return (
     <div className={classes.card}>
       <Card>
         <CardContent>
           <Typography variant="h5" component="h2">
-            Job Title: {props.review.job_title}
+            Job Title: {review.job_title}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-            Location: {props.review.job_location}
+            Location: {review.job_location}
           </Typography>
           <Typography variant="body2" component="p">
-            Salary: {props.review.salary}
+            Salary: {review.salary}
           </Typography>
           <Typography variant="body2" component="p">
-            Interview Process: {props.review.interview_review}
+            Interview Process: {review.interview_review}
           </Typography>
           <Typography variant="body2" component="p">
-            Interview Rating: {props.review.interview_rating}
+            Interview Rating: {review.interview_rating}
           </Typography>
           <Typography variant="body2" component="p">
-            Review: {props.review.job_review}
+            Review: {review.job_review}
           </Typography>
           <Typography variant="body2" component="p">
-            Job Rating: {props.review.job_rating}
+            Job Rating: {review.job_rating}
           </Typography>
           <Typography variant="body2" component="p">
-            Posted by: {props.review.reviewer}
+            Posted by: {review.reviewer}
           </Typography>
           <Typography variant="body2" component="p">
-            Company name: {props.review.company_name}
+            Company name: {review.company_name}
           </Typography>
         </CardContent>
         <CardActions>

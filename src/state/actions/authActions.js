@@ -29,6 +29,7 @@ export const signup = creds => dispatch => {
     .post("https://allay-be-staging.herokuapp.com/api/auth/register", creds)
     .then(res => {
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userId", res.data.id);
       dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
     })
     .catch(err => {

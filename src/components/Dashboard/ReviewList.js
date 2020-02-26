@@ -31,18 +31,18 @@ const useStyles = makeStyles({
   }
 });
 
-const ReviewList = props => {
+const ReviewList = ({ data, getReview }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    props.getReview();
-  }, []);
+    getReview();
+  }, [getReview]);
 
   return (
     <>
       <Link to="/dashboard/add-review">Add A Review</Link>
       <div className={classes.root}>
-        {props.data.map(review => (
+        {data.map(review => (
           <div key={review.id}>
             <Card className={classes.card}>
               <CardContent>

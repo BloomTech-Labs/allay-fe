@@ -51,14 +51,18 @@ const ReviewForm = props => {
       [e.target.name]:
         e.target.type === "number" ? parseInt(e.target.value) : e.target.value
     });
-    // console.log(newReviewPost)
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     props.postReview(localStorage.getItem("userId"), newReviewPost);
     props.history.push("/dashboard");
+    // .then(() => props.history.push("/dashboard"));
   };
+
+  if (props.isLoading) {
+    return <h1>Adding your review</h1>;
+  }
 
   return (
     <div className={classes.center}>
@@ -142,7 +146,9 @@ const ReviewForm = props => {
 };
 
 const mapStateToProps = state => {
-  return state;
+  return {
+    isLoading: state.review.fetchingData
+  };
 };
 
 export default connect(mapStateToProps, postReview)(ReviewForm);
