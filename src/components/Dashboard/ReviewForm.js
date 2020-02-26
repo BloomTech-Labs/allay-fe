@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   TextField,
   Button,
   TextareaAutosize,
   ButtonGroup,
-  Typography
+  Typography,
+  MenuItem
 } from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import { connect } from "react-redux";
 import postReview from "../../state/actions";
+import getCompanies from "../../state/actions";
 
 const useStyles = makeStyles(theme => ({
   center: {
@@ -34,8 +36,9 @@ const useStyles = makeStyles(theme => ({
 
 const ReviewForm = props => {
   const classes = useStyles();
+  const [companyName, setCompanyName] = useState("");
   const [newReviewPost, setNewReviewPost] = useState({
-    company_id: "",
+    company_id: companyName,
     job_title: "",
     job_location: "",
     salary: "",
@@ -45,12 +48,26 @@ const ReviewForm = props => {
     job_rating: ""
   });
 
+  useEffect(() => {
+    props.getCompanies();
+    console.log(props.companies);
+  }, []);
+
   const changeHandler = e => {
     setNewReviewPost({
       ...newReviewPost,
       [e.target.name]:
         e.target.type === "number" ? parseInt(e.target.value) : e.target.value
     });
+    console.log("company", newReviewPost);
+  };
+  const handleChange = e => {
+    setCompanyName(e.target.value);
+    setNewReviewPost({
+      ...newReviewPost,
+      company_id: companyName
+    });
+    console.log("company", newReviewPost);
   };
 
   const handleSubmit = e => {
@@ -70,13 +87,20 @@ const ReviewForm = props => {
         <Typography className={classes.heading}> Add a Review</Typography>
         <form onSubmit={handleSubmit} className={classes.container}>
           <TextField
-            className={classes.company_id}
-            type="number"
+            id="standard-select-currency"
+            select
             name="company_id"
-            placeholder="Company ID"
-            value={newReviewPost.company_id}
+            label="Select a Company"
+            value={companyName}
             onChange={changeHandler}
-          />
+            helperText="Please select your currency"
+          >
+            {props.companies.map(company => (
+              <MenuItem key={company.id} value={company.id}>
+                {company.name}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             className={classes.job_title}
             type="text"
@@ -147,8 +171,9 @@ const ReviewForm = props => {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.review.fetchingData
+    isLoading: state.review.fetchingData,
+    companies: state.company.data
   };
 };
 
-export default connect(mapStateToProps, postReview)(ReviewForm);
+export default connect(mapStateToProps, (postReview, getCompanies))(ReviewForm);
