@@ -27,7 +27,7 @@ const FormLink = styled.p`
   margin: 15px;
 `;
 
-const Login = props => {
+const Login = ({ login, isLoading, history }) => {
   const [creds, setCreds] = useState({
     username: "",
     password: ""
@@ -43,10 +43,10 @@ const Login = props => {
   const submitForm = e => {
     e.preventDefault();
     // action function here
-    props.login(creds).then(() => props.history.push("/dashboard"));
+    login(creds).then(() => history.push("/dashboard"));
   };
 
-  if (props.isLoading) {
+  if (isLoading) {
     return <h1>Logging you in</h1>;
   }
 

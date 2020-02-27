@@ -28,7 +28,7 @@ const FormLink = styled.p`
   margin: 15px;
 `;
 
-const Signup = props => {
+const Signup = ({ signup, isLoading, history }) => {
   const [creds, setCreds] = useState({
     username: "",
     email: "",
@@ -44,17 +44,15 @@ const Signup = props => {
     e.preventDefault();
     console.log("form submitted");
     if (creds.confirmPassword === creds.password) {
-      props
-        .signup({
-          username: creds.username,
-          email: creds.email,
-          password: creds.password
-        })
-        .then(() => props.history.push("/dashboard"));
+      signup({
+        username: creds.username,
+        email: creds.email,
+        password: creds.password
+      }).then(() => history.push("/dashboard"));
     }
   };
 
-  if (props.isLoading) {
+  if (isLoading) {
     return <h1>Signing you up</h1>;
   }
 

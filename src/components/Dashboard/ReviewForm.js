@@ -8,6 +8,7 @@ import {
   Typography,
   MenuItem
 } from "@material-ui/core";
+
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import { connect } from "react-redux";
 import postReview from "../../state/actions";
@@ -34,11 +35,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ReviewForm = props => {
+const ReviewForm = ({
+  postReview,
+  getCompanies,
+  companies,
+  history,
+  isLoading
+}) => {
   const classes = useStyles();
-  const [companyName, setCompanyName] = useState("");
   const [newReviewPost, setNewReviewPost] = useState({
-    company_id: companyName,
+    company_id: "",
     job_title: "",
     job_location: "",
     salary: "",
@@ -49,8 +55,7 @@ const ReviewForm = props => {
   });
 
   useEffect(() => {
-    props.getCompanies();
-    console.log(props.companies);
+    getCompanies();
   }, []);
 
   const changeHandler = e => {
@@ -64,12 +69,12 @@ const ReviewForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props
-      .postReview(localStorage.getItem("userId"), newReviewPost)
-      .then(() => props.history.push("/dashboard"));
+    postReview(localStorage.getItem("userId"), newReviewPost).then(() =>
+      history.push("/dashboard")
+    );
   };
 
-  if (props.isLoading) {
+  if (isLoading) {
     return <h1>Adding your review</h1>;
   }
 
@@ -79,7 +84,6 @@ const ReviewForm = props => {
         <Typography className={classes.heading}> Add a Review</Typography>
         <form onSubmit={handleSubmit} className={classes.container}>
           <TextField
-            id="standard-select-currency"
             select
             name="company_id"
             label="Company"
@@ -87,14 +91,13 @@ const ReviewForm = props => {
             onChange={changeHandler}
             helperText="Please select your company"
           >
-            {props.companies.map(company => (
+            {companies.map(company => (
               <MenuItem key={company.id} value={company.id}>
                 {company.name}
               </MenuItem>
             ))}
           </TextField>
           <TextField
-            className={classes.job_title}
             type="text"
             name="job_title"
             placeholder="Job Title"
@@ -102,7 +105,6 @@ const ReviewForm = props => {
             onChange={changeHandler}
           />
           <TextField
-            className={classes.job_location}
             type="text"
             name="job_location"
             placeholder="Job Location"
@@ -110,7 +112,6 @@ const ReviewForm = props => {
             onChange={changeHandler}
           />
           <TextField
-            className={classes.salary}
             type="number"
             name="salary"
             placeholder="Salary"
@@ -118,7 +119,6 @@ const ReviewForm = props => {
             onChange={changeHandler}
           />
           <TextField
-            className={classes.interview_rating}
             type="number"
             name="interview_rating"
             placeholder="Interview rating"
@@ -126,8 +126,7 @@ const ReviewForm = props => {
             onChange={changeHandler}
           />
           <TextareaAutosize
-            rowsMax={4}
-            className={classes.interview_review}
+            rowsMax={6}
             type="text"
             name="interview_review"
             placeholder="Describe the interview process"
@@ -135,7 +134,6 @@ const ReviewForm = props => {
             onChange={changeHandler}
           />
           <TextField
-            className={classes.job_rating}
             type="number"
             name="job_rating"
             placeholder="Job rating 0-5"
@@ -144,7 +142,6 @@ const ReviewForm = props => {
           />
           <TextareaAutosize
             rowsMax={6}
-            className={classes.job_review}
             type="text"
             name="job_review"
             placeholder="Write a Review"
