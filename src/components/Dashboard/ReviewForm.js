@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import { connect } from "react-redux";
 import postReview from "../../state/actions";
 import getCompanies from "../../state/actions";
@@ -78,25 +79,30 @@ const ReviewForm = ({
     return <h1>Adding your review</h1>;
   }
 
+  const companyOptions = companies.map(company => {
+    return { id: company.id, name: company.name };
+  });
+
   return (
     <div className={classes.center}>
       <div>
         <Typography className={classes.heading}> Add a Review</Typography>
         <form onSubmit={handleSubmit} className={classes.container}>
-          <TextField
-            select
-            name="company_id"
-            label="Company"
-            value={newReviewPost.company_id}
-            onChange={changeHandler}
-            helperText="Please select your company"
-          >
-            {companies.map(company => (
-              <MenuItem key={company.id} value={company.id}>
-                {company.name}
-              </MenuItem>
-            ))}
-          </TextField>
+          <Autocomplete
+            id="combo-box-demo"
+            options={companyOptions}
+            getOptionLabel={company => company.name}
+            onChange={(event, value) =>
+              setNewReviewPost({
+                ...newReviewPost,
+                company_id: value ? value.id : ""
+              })
+            }
+            style={{ width: 200 }}
+            renderInput={params => (
+              <TextField {...params} label="Find A Company" />
+            )}
+          />
           <TextField
             type="text"
             name="job_title"
