@@ -1,6 +1,9 @@
 {
   "name": "code",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "engines": {
+    "node": "12.13.0"
+  },
   "private": true,
   "dependencies": {
     "@chakra-ui/core": "^0.5.2",
