@@ -15,7 +15,6 @@ const App = () => {
 	return (
 		<Router>
 			<div className='App'>
-				<h1>WELCOME TO ALLAY!</h1>
 				<Switch>
 					<Route exact path='/' component={Login} />
 					<Route path='/signup' component={Signup} />

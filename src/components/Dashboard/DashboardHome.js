@@ -7,6 +7,8 @@ import {
 	CardActions,
 	CardContent,
 	Button,
+	ButtonGroup,
+	Box,
 	Typography
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -16,55 +18,47 @@ const useStyles = makeStyles({
 		maxWidth: 1200,
 		margin: '0 auto',
 		display: 'flex',
-		justifyContent: 'center',
+		flexDirection: 'column',
 		flexWrap: 'wrap'
 	},
-	card: {
-		maxWidth: 380,
-		margin: '10px'
+	header: {
+		display: 'flex',
+		padding: '3%'
 	},
-	title: {
-		fontSize: 14
+	addOrSearch: {
+		display: 'flex',
+		justifyContent: 'flex-end'
 	},
-	pos: {
-		marginBottom: 12
+	Button: {
+		border: '1px solid black'
 	}
 });
 
-const ReviewList = ({ data, getReview }) => {
+const DashboardHome = ({ data, getReview, history }) => {
+	console.log(history);
+	// access css classes
 	const classes = useStyles();
 
+	// pull review data
 	useEffect(() => {
 		getReview();
 	}, [getReview]);
 
+	const navToReviewForm = () => {
+		history.push('/dashboard/add-review');
+	};
+
 	return (
 		<>
-			<Link to='/dashboard/add-review'>Add A Review</Link>
 			<div className={classes.root}>
-				{data.map(review => (
-					<div key={review.id}>
-						<Card className={classes.card}>
-							<CardContent>
-								<Typography variant='body2' component='p'>
-									Company name: {review.company_name}
-								</Typography>
-								<Typography variant='h5' component='h2'>
-									Job Title: {review.job_title}
-								</Typography>
-								<Typography className={classes.pos} color='textSecondary'>
-									Location: {review.job_location}
-								</Typography>
-								<Typography variant='body2' component='p'>
-									Salary: {review.salary}
-								</Typography>
-							</CardContent>
-							<CardActions>
-								<Link to={`/dashboard/${review.id}`}>Learn More</Link>
-							</CardActions>
-						</Card>
-					</div>
-				))}
+				<Box component='div' className={classes.header}>
+					<h1> Allay </h1>
+				</Box>
+				<Box component='div' className={classes.addOrSearch}>
+					<ButtonGroup>
+						<Button onClick={navToReviewForm}>Add A Review</Button>
+					</ButtonGroup>
+				</Box>
 			</div>
 		</>
 	);
@@ -75,4 +69,4 @@ const mapStateToProps = state => {
 		data: state.review.data
 	};
 };
-export default connect(mapStateToProps, getReview)(ReviewList);
+export default connect(mapStateToProps, getReview)(DashboardHome);
