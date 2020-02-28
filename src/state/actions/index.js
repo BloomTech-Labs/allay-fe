@@ -1,8 +1,8 @@
 // ACTIONS LIVE HERE
 
-import { login, signup } from "./authActions";
-import { getReview, getReviewById, postReview } from "./reviewActions";
-import { getCompanies } from "./companyActions";
+import { login, signup } from './authActions';
+import { getReview, getReviewById, postReview } from './reviewActions';
+import { getCompanies, postCompany } from './companyActions';
 
 export default {
   login,
@@ -10,5 +10,6 @@ export default {
   getReview,
   getReviewById,
   postReview,
-  getCompanies
+  getCompanies,
+  postCompany
 };
