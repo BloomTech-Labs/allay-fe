@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 // action
 import getReview from '../../state/actions/index';
+// component
+import ReviewCard from './ReviewCard';
 // styles
 import avatar from '../../placeholder.jpeg';
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,7 +30,7 @@ const useStyles = makeStyles({
 	headerContainer: {
 		display: 'flex',
 		alignItems: 'center',
-		padding: '3%'
+		padding: '1.5% 0'
 	},
 	avatar: {
 		marginRight: '2%'
@@ -36,21 +38,21 @@ const useStyles = makeStyles({
 	addOrSearchContainer: {
 		display: 'flex',
 		justifyContent: 'flex-end',
-		padding: '1.5%'
+		padding: '1.5% 0'
 	},
 	optionsContainer: {
 		display: 'flex',
 		justifyContent: 'flex-start',
-		padding: '1.5% 3%'
+		padding: '1.5% 0'
 	},
 	cardContainer: {
 		border: '1px solid black',
-		height: '65vh'
+		height: '70vh'
 	}
 });
 
 const DashboardHome = ({ data, getReview, history }) => {
-	console.log(history);
+	console.log(data);
 	// access css classes
 	const classes = useStyles();
 
@@ -79,7 +81,9 @@ const DashboardHome = ({ data, getReview, history }) => {
 					<h3> Recent Posts </h3>
 				</Box>
 				<Container className={classes.cardContainer}>
-					<p>cards go here</p>
+					{data.map(review => (
+						<ReviewCard key={review.id} review={review} />
+					))}
 				</Container>
 			</div>
 		</>
