@@ -10,6 +10,7 @@ import ReviewForm from './components/Dashboard/ReviewForm';
 import PrivateRoute from './utils/PrivateRoute';
 import SingleReview from './components/Dashboard/SingleReview';
 import DashboardHome from './components/Dashboard/DashboardHome';
+import AddCompanyForm from './components/Dashboard/AddCompanyForm';
 
 const App = () => {
 	return (
@@ -21,6 +22,7 @@ const App = () => {
 					<PrivateRoute exact path='/dashboard' component={DashboardHome} />
 					<PrivateRoute path='/dashboard/add-review' component={ReviewForm} />
 					<PrivateRoute path='/dashboard/:id' component={SingleReview} />
+					<PrivateRoute path='/add-company' component={AddCompanyForm} />
 				</Switch>
 			</div>
 		</Router>

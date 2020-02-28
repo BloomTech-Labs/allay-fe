@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
 	TextField,
 	Button,
 	TextareaAutosize,
 	ButtonGroup,
-	Typography,
-	MenuItem
+	Typography
 } from '@material-ui/core';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -103,6 +103,7 @@ const ReviewForm = ({
 							<TextField {...params} label='Find A Company' />
 						)}
 					/>
+					<Link to='/add-company'>Need to add a company?</Link>
 					<TextField
 						type='text'
 						name='job_title'

@@ -8,21 +8,19 @@ import {
   POST_REVIEW_FAILURE,
   POST_REVIEW_START,
   POST_REVIEW_SUCCESS
-} from "../types";
+} from '../types';
 
 const initialState = {
   data: [],
   dataById: {},
   fetchingData: false,
   reviewAdded: false,
-  error: ""
+  error: ''
 };
 
 // Reducer
 const reviewReducer = (state = initialState, action) => {
-  console.log("reducer is running", { state });
   switch (action.type) {
-    // place cases here
     case FETCH_REVIEWS_START: {
       return {
         ...state,
