@@ -1,13 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
 const axiosWithAuth = () => {
- 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   return axios.create({
-    baseURL: 'https://allay-be-staging.herokuapp.com/api',
+    baseURL: process.env.REACT_APP_databaseURL,
     headers: {
-      authorization: token,
-    },
+      authorization: token
+    }
   });
 };
- export default axiosWithAuth;
+export default axiosWithAuth;
