@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 		flexWrap: 'wrap'
 	},
 	card: {
-		maxWidth: 380,
+		width: '100%',
 		margin: '10px'
 	},
 	title: {
@@ -37,27 +37,27 @@ const ReviewCard = ({ review }) => {
 
 	return (
 		<>
-			<div className={classes.root}>
-				<Card className={classes.card}>
-					<CardContent>
-						<Typography variant='body2' component='p'>
-							Company name: {review.company_name}
-						</Typography>
-						<Typography variant='h5' component='h2'>
-							Job Title: {review.job_title}
-						</Typography>
-						<Typography className={classes.pos} color='textSecondary'>
-							Location: {review.job_location}
-						</Typography>
-						<Typography variant='body2' component='p'>
-							Salary: {review.salary}
-						</Typography>
-					</CardContent>
-					<CardActions>
-						<Link to={`/dashboard/${review.id}`}>Learn More</Link>
-					</CardActions>
-				</Card>
-			</div>
+			{/* <div className={classes.root}> */}
+			<Card className={classes.card}>
+				<CardContent>
+					<Typography variant='body2' component='p'>
+						Company name: {review.company_name}
+					</Typography>
+					<Typography variant='h5' component='h2'>
+						Job Title: {review.job_title}
+					</Typography>
+					<Typography className={classes.pos} color='textSecondary'>
+						Location: {review.job_location}
+					</Typography>
+					<Typography variant='body2' component='p'>
+						Salary: {review.salary}
+					</Typography>
+				</CardContent>
+				<CardActions>
+					<Link to={`/dashboard/${review.id}`}>Learn More</Link>
+				</CardActions>
+			</Card>
+			{/* </div> */}
 		</>
 	);
 };
