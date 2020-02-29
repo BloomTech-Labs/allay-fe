@@ -14,7 +14,7 @@ const ReviewCard = ({ review, history }) => {
 
 	return (
 		<>
-			<Box overflow='hidden'>
+			<Box maxW='3xl' overflow='hidden'>
 				<Box p='2' width='100%' d='flex' onClick={learnMore}>
 					<Box
 						p='5'
