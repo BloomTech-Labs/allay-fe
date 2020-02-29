@@ -37,7 +37,7 @@ const ReviewCard = ({ review }) => {
 				<Box p='2' d='flex'>
 					<Box p='6' d='flex' alignItems='center' flexDirection='column'>
 						<h4>{review.reviewer}</h4>
-						<Avatar src='https://bit.ly/broken-link' />
+						<Avatar name={review.reviewer} src='https://bit.ly/broken-link' />
 					</Box>
 					<Box d='flex' flexDirection='column' width='100%'>
 						<Box d='flex'>
