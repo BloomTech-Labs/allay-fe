@@ -66,7 +66,6 @@ const ReviewForm = ({
 				e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
 		});
 	};
-	console.log('company', newReviewPost);
 
 	const handleSubmit = e => {
 		e.preventDefault();
