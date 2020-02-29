@@ -85,7 +85,6 @@ select {
 .Fixed {
 	position: fixed;
 	overflow: hidden;
-	border: 1px solid red;
 	width: 900px;
 	top: 0;
 	background-color: white;
