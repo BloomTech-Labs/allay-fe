@@ -43,7 +43,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 					</Flex>
 					<Flex height='100%' direction='column'>
 						{data.map(review => (
-							<ReviewCard key={review.id} review={review} />
+							<ReviewCard key={review.id} review={review} history={history} />
 						))}
 					</Flex>
 				</Flex>
