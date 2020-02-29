@@ -15,8 +15,14 @@ const ReviewCard = ({ review, history }) => {
 	return (
 		<>
 			<Box overflow='hidden'>
-				<Box p='2' d='flex' onClick={learnMore}>
-					<Box p='6' d='flex' alignItems='center' flexDirection='column'>
+				<Box p='2' width='100%' d='flex' onClick={learnMore}>
+					<Box
+						p='5'
+						width='15%'
+						d='flex'
+						alignItems='center'
+						flexDirection='column'
+					>
 						<h4>{review.reviewer}</h4>
 						<Avatar name={review.reviewer} src='https://bit.ly/broken-link' />
 					</Box>
@@ -25,7 +31,7 @@ const ReviewCard = ({ review, history }) => {
 							<h3>{review.company_name}</h3>
 						</Box>
 						<Box p='2' d='flex' flexDirection='row'>
-							<Box width='35%' d='flex' justifyContent='flex-start'>
+							<Box width='40%' d='flex' justifyContent='flex-start'>
 								<h4>Summary</h4>
 							</Box>
 							<Box width='20%' d='flex' justifyContent='flex-start'>
@@ -40,7 +46,7 @@ const ReviewCard = ({ review, history }) => {
 						</Box>
 						<Box p='2' d='flex' flexDirection='row'>
 							<Box
-								width='35%'
+								width='40%'
 								d='flex'
 								justifyContent='flex-start'
 								mt='1'
