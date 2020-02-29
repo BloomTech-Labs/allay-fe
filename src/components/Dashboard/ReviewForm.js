@@ -57,7 +57,7 @@ const ReviewForm = ({
 
 	useEffect(() => {
 		getCompanies();
-	}, []);
+	}, [getCompanies]);
 
 	const changeHandler = e => {
 		setNewReviewPost({

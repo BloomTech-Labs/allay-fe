@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // actions
 import login from '../../state/actions/index';
 // styles
-import { TextField, makeStyles } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import styled from 'styled-components';
 import { Button } from '@chakra-ui/core';
 

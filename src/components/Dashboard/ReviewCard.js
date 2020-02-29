@@ -1,15 +1,9 @@
 // previously ReviewList
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import getReview from '../../state/actions/index';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-	Card,
-	CardActions,
-	CardContent,
-	Button,
-	Typography
-} from '@material-ui/core';
+import { Card, CardActions, CardContent, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
