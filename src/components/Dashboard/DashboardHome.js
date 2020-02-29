@@ -6,92 +6,56 @@ import getReview from '../../state/actions/index';
 // component
 import ReviewCard from './ReviewCard';
 // styles
-import avatar from '../../placeholder.jpeg';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-	Card,
-	CardActions,
-	CardContent,
-	Button,
-	ButtonGroup,
-	Box,
-	Avatar,
-	Container
-} from '@material-ui/core';
+import { Flex, Button, Avatar } from '@chakra-ui/core';
 
-const useStyles = makeStyles({
-	root: {
-		maxWidth: 1200,
-		margin: '0 auto',
-		display: 'flex',
-		flexDirection: 'column',
-		flexWrap: 'wrap'
-	},
-	headerContainer: {
-		display: 'flex',
-		alignItems: 'center',
-		padding: '1.5% 0'
-	},
-	avatar: {
-		marginRight: '2%'
-	},
-	addOrSearchContainer: {
-		display: 'flex',
-		justifyContent: 'flex-end',
-		padding: '1.5% 0'
-	},
-	optionsContainer: {
-		display: 'flex',
-		justifyContent: 'flex-start',
-		padding: '1.5% 0'
-	},
-	cardContainer: {
-		border: '1px solid black',
-		height: '70vh'
-	}
-});
-
-const DashboardHome = ({ data, getReview, history }) => {
-	console.log(data);
-	// access css classes
-	const classes = useStyles();
-
+const DashboardHome = ({ data, getReview, history, isLoading }) => {
 	// pull review data
 	useEffect(() => {
 		getReview();
 	}, [getReview]);
 
+	// use to navigate to review form
 	const navToReviewForm = () => {
 		history.push('/dashboard/add-review');
 	};
 
 	return (
 		<>
-			<div className={classes.root}>
-				<Box component='div' className={classes.headerContainer}>
-					<Avatar alt='Place Holder' src={avatar} className={classes.avatar} />
-					<h1> Allay </h1>
-				</Box>
-				<Box component='div' className={classes.addOrSearchContainer}>
-					<ButtonGroup>
-						<Button onClick={navToReviewForm}>Add A Review</Button>
-					</ButtonGroup>
-				</Box>
-				<Box component='div' className={classes.optionsContainer}>
-					<h3> Recent Posts </h3>
-				</Box>
-				<Container className={classes.cardContainer}>
-					{data.map(review => (
-						<ReviewCard key={review.id} review={review} />
-					))}
-				</Container>
-			</div>
+			<Flex maxWidth='900px' margin='0 auto' direction='column' wrap='wrap'>
+				<Flex className='Fixed' direction='column'>
+					<Flex align='center' padding='1.5% 0'>
+						<Avatar marginRight='2%' src='https://bit.ly/broken-link' />
+						<h1> Allay </h1>
+					</Flex>
+					<Flex align='center' justify='flex-end' padding='1.5% 0'>
+						<Button
+							variantColor='teal'
+							size='sm'
+							isLoading={isLoading}
+							onClick={navToReviewForm}
+						>
+							Add A Review
+						</Button>
+					</Flex>
+				</Flex>
+				<Flex marginTop='15%' direction='column'>
+					<Flex align='center' justify='flex-start' padding='1.5% 0'>
+						<h3> Recent Posts </h3>
+					</Flex>
+					<Flex height='100%' direction='column'>
+						{data.map(review => (
+							<ReviewCard key={review.id} review={review} />
+						))}
+					</Flex>
+				</Flex>
+			</Flex>
 		</>
 	);
 };
 
 const mapStateToProps = state => {
 	return {
+		isLoading: state.review.fetchingData,
 		data: state.review.data
 	};
 };
