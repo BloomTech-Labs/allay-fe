@@ -89,3 +89,9 @@ select {
 	top: 0;
 	background-color: white;
 }
+
+.Card {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

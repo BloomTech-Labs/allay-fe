@@ -14,7 +14,7 @@ const ReviewCard = ({ review, history }) => {
 
 	return (
 		<>
-			<Box maxW='3xl' overflow='hidden'>
+			<Box maxW='4xl' className='Card'>
 				<Box p='2' width='100%' d='flex' onClick={learnMore}>
 					<Box
 						p='5'
@@ -24,41 +24,54 @@ const ReviewCard = ({ review, history }) => {
 						flexDirection='column'
 					>
 						<h4>{review.reviewer}</h4>
-						<Avatar name={review.reviewer} src='https://bit.ly/broken-link' />
+						<Avatar
+							name={review.reviewer}
+							src='https://bit.ly/broken-link'
+							zIndex='1'
+						/>
 					</Box>
-					<Box d='flex' flexDirection='column' width='100%'>
+					<Box
+						d='flex'
+						flexDirection='column'
+						width='100%'
+						overflow='hidden'
+						whiteSpace='nowrap'
+					>
 						<Box d='flex'>
 							<h3>{review.company_name}</h3>
 						</Box>
 						<Box p='2' d='flex' flexDirection='row'>
-							<Box width='40%' d='flex' justifyContent='flex-start'>
+							<Box mr='3' width='55%' d='flex' justifyContent='flex-start'>
 								<h4>Summary</h4>
 							</Box>
-							<Box width='20%' d='flex' justifyContent='flex-start'>
+							<Box mr='3' width='30%' d='flex' justifyContent='flex-start'>
 								<h4>Pros</h4>
 							</Box>
-							<Box width='20%' d='flex' justifyContent='flex-start'>
+							<Box mr='3' width='30%' d='flex' justifyContent='flex-start'>
 								<h4>Cons</h4>
 							</Box>
-							<Box width='20%' d='flex' justifyContent='flex-start'>
+							<Box mr='3' width='20%' d='flex' justifyContent='flex-start'>
 								<h4>Salary</h4>
 							</Box>
 						</Box>
 						<Box p='2' d='flex' flexDirection='row'>
 							<Box
-								width='40%'
+								mr='3'
+								width='55%'
 								d='flex'
 								justifyContent='flex-start'
 								mt='1'
 								fontWeight='semibold'
 								as='h4'
 								lineHeight='tight'
-								isTruncated
+								isTruncated='...'
+								overflow='hidden'
 							>
 								{review.job_review}
 							</Box>
 							<Box
-								width='20%'
+								mr='3'
+								width='30%'
 								d='flex'
 								justifyContent='flex-start'
 								mt='1'
@@ -70,7 +83,8 @@ const ReviewCard = ({ review, history }) => {
 								"any pros"
 							</Box>
 							<Box
-								width='20%'
+								mr='3'
+								width='30%'
 								d='flex'
 								justifyContent='flex-start'
 								mt='1'
@@ -82,6 +96,7 @@ const ReviewCard = ({ review, history }) => {
 								"any cons"
 							</Box>
 							<Box
+								mr='3'
 								width='20%'
 								d='flex'
 								justifyContent='flex-start'
