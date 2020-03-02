@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
   FormControl,
@@ -7,7 +7,6 @@ import {
   Flex,
   Input,
   Textarea,
-  Link,
   Button,
   ButtonGroup,
   Spinner,
@@ -82,7 +81,7 @@ const ReviewForm = ({
   if (isLoading) {
     return (
       <h1>
-        <Spinner size="xl" />
+        <Spinner size='xl' />
       </h1>
     );
   }
@@ -92,14 +91,14 @@ const ReviewForm = ({
   });
 
   return (
-    <Flex justify="center" w="0 auto">
-      <Flex justify="center" align="center" flexDir="column" maxW="600px">
+    <Flex justify='center' w='0 auto'>
+      <Flex justify='center' align='center' flexDir='column' maxW='600px'>
         <h2> Add a Review</h2>
         <p> Company Information</p>
         <form onSubmit={handleSubmit}>
           <FormControl>
             <Autocomplete
-              id="combo-box-demo"
+              id='combo-box-demo'
               options={companyOptions}
               getOptionLabel={company => company.name}
               onChange={(event, value) =>
@@ -110,72 +109,74 @@ const ReviewForm = ({
               }
               style={{ width: 250 }}
               renderInput={params => (
-                <TextField {...params} label="Find A Company" />
+                <TextField {...params} label='Find A Company' />
               )}
             />
-            <Link to="/add-company">Need to add a company?</Link>
+            <Link onClick={() => history.push('/add-company')}>
+              Need to add a company?
+            </Link>
             <Input
-              m="3"
-              type="text"
-              name="job_title"
-              placeholder="Job Title"
+              m='3'
+              type='text'
+              name='job_title'
+              placeholder='Job Title'
               value={newReviewPost.job_title}
               onChange={changeHandler}
             />
             <Input
-              m="3"
-              type="text"
-              name="job_location"
-              placeholder="Job Location"
+              m='3'
+              type='text'
+              name='job_location'
+              placeholder='Job Location'
               value={newReviewPost.job_location}
               onChange={changeHandler}
             />
             <Input
-              m="3"
-              type="number"
-              name="salary"
-              placeholder="Salary"
+              m='3'
+              type='number'
+              name='salary'
+              placeholder='Salary'
               value={newReviewPost.salary}
               onChange={changeHandler}
             />
             <p>Interview Process </p>
             <Input
-              m="3"
-              type="number"
-              name="interview_rating"
-              placeholder="Interview Rating"
+              m='3'
+              type='number'
+              name='interview_rating'
+              placeholder='Interview Rating'
               value={newReviewPost.interview_rating}
               onChange={changeHandler}
             />
             <Textarea
-              m="3"
+              m='3'
               rowsMax={6}
-              type="text"
-              name="interview_review"
-              placeholder="Describe the interview process"
+              type='text'
+              name='interview_review'
+              placeholder='Describe the interview process'
               value={newReviewPost.interview_review}
               onChange={changeHandler}
             />
             <p>Overall Job Review</p>
             <Input
-              m="3"
-              type="number"
-              name="job_rating"
-              placeholder="Job rating 0-5"
+              m='3'
+              type='number'
+              name='job_rating'
+              placeholder='Job rating 0-5'
               value={newReviewPost.job_rating}
               onChange={changeHandler}
             />
             <Textarea
-              m="3"
+              m='3'
               rowsMax={6}
-              type="text"
-              name="job_review"
-              placeholder="Write a Review"
+              type='text'
+              name='job_review'
+              placeholder='Write a Review'
               value={newReviewPost.job_review}
               onChange={changeHandler}
             />
             <ButtonGroup>
-              <Button type="submit">Add Your Review</Button>
+              <Button type='submit'>Add Your Review</Button>
               <Button
                 onClick={() =>
                   alert(
