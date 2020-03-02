@@ -44,102 +44,103 @@ const Signup = ({ signup, isLoading, history }) => {
 
   return (
     <Flex background='#E5E5E5' w='100%' h='100vh' justify='center'>
-      <Flex w='50%' justify='center' align='center'>
-        <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
-          Allay - <br />
-          Together, we are <br />
-          stronger.
-        </Text>
-      </Flex>
-      <Flex w='50%' justify='center' align='center'>
-        <form onSubmit={submitForm}>
-          <Flex
-            m=' 20px auto'
-            w='490px'
-            h='754px'
-            flexDir='column'
-            background='#FFFFFF'
-            rounded='6px'
-            justify='center'
-          >
-            <FormControl isRequired>
-              <Flex as='h2' w='100%' ml='35px' pb='10px'>
-                Let's get started!
-              </Flex>
-              <Flex mx='35px' my='20px' flexDir='column'>
-                <FormLabel>Email</FormLabel>
-                <Input
+      <Flex w='1200px'>
+        <Flex w='50%' justify='center' align='center'>
+          <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
+            Allay - <br />
+            Together, we are <br />
+            stronger.
+          </Text>
+        </Flex>
+        <Flex w='50%' justify='center' align='center'>
+          <form onSubmit={submitForm}>
+            <Flex
+              w='490px'
+              h='754px'
+              flexDir='column'
+              background='#FFFFFF'
+              rounded='6px'
+              justify='center'
+            >
+              <FormControl isRequired>
+                <Flex as='h2' w='100%' ml='35px' pb='10px'>
+                  Let's get started!
+                </Flex>
+                <Flex mx='35px' my='20px' flexDir='column'>
+                  <FormLabel>Email</FormLabel>
+                  <Input
+                    w='417px'
+                    h='64px'
+                    variant='filled'
+                    type='text'
+                    label='Username'
+                    name='username'
+                    value={creds.username}
+                    onChange={handleChanges}
+                  />
+                </Flex>
+                <Flex mx='35px' my='20px' flexDir='column'>
+                  <FormLabel>Username</FormLabel>
+                  <Input
+                    w='417px'
+                    h='64px'
+                    variant='filled'
+                    type='email'
+                    label='Email'
+                    name='email'
+                    value={creds.email}
+                    onChange={handleChanges}
+                  />
+                </Flex>
+                <Flex mx='35px' my='20px' flexDir='column'>
+                  <FormLabel>Password</FormLabel>
+                  <Input
+                    w='417px'
+                    h='64px'
+                    variant='filled'
+                    type='password'
+                    label='Password'
+                    helperText='At least 8 characters'
+                    name='password'
+                    value={creds.password}
+                    onChange={handleChanges}
+                  />
+                  <FormHelperText>
+                    Must be longer than 8 characters
+                  </FormHelperText>
+                </Flex>
+                <Flex mx='35px' my='20px' flexDir='column'>
+                  <FormLabel>Confirm Password</FormLabel>
+                  <Input
+                    w='417px'
+                    h='64px'
+                    variant='filled'
+                    type='password'
+                    label='Confirm Password'
+                    name='confirmPassword'
+                    value={creds.confirmPassword}
+                    onChange={handleChanges}
+                  />
+                </Flex>
+              </FormControl>
+              <Flex m='35px'>
+                <Button
                   w='417px'
                   h='64px'
-                  variant='filled'
-                  type='text'
-                  label='Username'
-                  name='username'
-                  value={creds.username}
-                  onChange={handleChanges}
-                />
+                  rounded='6px'
+                  border='none'
+                  variantColor='teal'
+                  type='submit'
+                >
+                  Sign Up
+                </Button>
               </Flex>
-              <Flex mx='35px' my='20px' flexDir='column'>
-                <FormLabel>Username</FormLabel>
-                <Input
-                  w='417px'
-                  h='64px'
-                  variant='filled'
-                  type='email'
-                  label='Email'
-                  name='email'
-                  value={creds.email}
-                  onChange={handleChanges}
-                />
+              <Flex as='p' w='100%' justify='center'>
+                <Link to='/'>Already have an account?</Link>
               </Flex>
-              <Flex mx='35px' my='20px' flexDir='column'>
-                <FormLabel>Password</FormLabel>
-                <Input
-                  w='417px'
-                  h='64px'
-                  variant='filled'
-                  type='password'
-                  label='Password'
-                  helperText='At least 8 characters'
-                  name='password'
-                  value={creds.password}
-                  onChange={handleChanges}
-                />
-                <FormHelperText>
-                  Must be longer than 8 characters
-                </FormHelperText>
-              </Flex>
-              <Flex mx='35px' my='20px' flexDir='column'>
-                <FormLabel>Confirm Password</FormLabel>
-                <Input
-                  w='417px'
-                  h='64px'
-                  variant='filled'
-                  type='password'
-                  label='Confirm Password'
-                  name='confirmPassword'
-                  value={creds.confirmPassword}
-                  onChange={handleChanges}
-                />
-              </Flex>
-            </FormControl>
-            <Flex m='35px'>
-              <Button
-                w='417px'
-                h='64px'
-                rounded='6px'
-                border='none'
-                variantColor='teal'
-                type='submit'
-              >
-                Submit
-              </Button>
             </Flex>
-            <Flex as='p' ml='35px'>
-              <Link to='/'>Already have an account?</Link>
-            </Flex>
-          </Flex>
-        </form>
+          </form>
+        </Flex>
       </Flex>
     </Flex>
   );
