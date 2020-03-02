@@ -176,7 +176,16 @@ const ReviewForm = ({
             />
             <ButtonGroup>
               <Button type="submit">Add Your Review</Button>
-              <Button color="secondary">Cancel</Button>
+              <Button
+                onClick={() =>
+                  alert(
+                    'Are you sure you want to cancel?',
+                    history.push('/dashboard')
+                  )
+                }
+              >
+                Cancel
+              </Button>
             </ButtonGroup>
           </FormControl>
         </form>
