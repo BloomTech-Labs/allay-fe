@@ -67,7 +67,7 @@ const Login = ({ login, isLoading, history }) => {
               justify='center'
             >
               <FormControl isRequired>
-                <Flex as='h2' m='10px'>
+                <Flex as='h2' m='10px' pb='10px'>
                   Login
                 </Flex>
                 <Flex m='10px' flexDir='column'>
