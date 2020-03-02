@@ -14,8 +14,31 @@ const ReviewCard = ({ review, history }) => {
 
   return (
     <>
-      <Flex maxW='4xl'>
-        <Flex p='2' width='100%' onClick={learnMore}>
+      <Flex w='100%' h='254px' wrap='wrap' onClick={learnMore}>
+        <Flex flexDir='column' justify='center' align='center' w='20%' px='2'>
+          <Avatar size='xl' src='https://bit.ly/broken-link' />
+          <Flex as='h4' pt='5px'>
+            {review.company_name}
+          </Flex>
+        </Flex>
+        <Flex flexDir='column' w='80%'>
+          <Flex></Flex>
+          <Flex>tag line</Flex>
+          <Flex>summary</Flex>
+        </Flex>
+      </Flex>
+    </>
+  );
+};
+
+const mapStateToProps = state => {
+  return {
+    data: state.review.data
+  };
+};
+export default connect(mapStateToProps, getReview)(ReviewCard);
+
+/*        <Flex p='2' width='100%' onClick={learnMore}>
           <Flex
             p='1'
             w='20%'
@@ -115,14 +138,4 @@ const ReviewCard = ({ review, history }) => {
             </Box>
           </Flex>
         </Flex>
-      </Flex>
-    </>
-  );
-};
-
-const mapStateToProps = state => {
-  return {
-    data: state.review.data
-  };
-};
-export default connect(mapStateToProps, getReview)(ReviewCard);
+        */
