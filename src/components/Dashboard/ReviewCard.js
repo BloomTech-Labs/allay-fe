@@ -7,34 +7,34 @@ import getReview from '../../state/actions/index';
 import { Box, Avatar, Flex } from '@chakra-ui/core';
 
 const ReviewCard = ({ review, history }) => {
-  //routes to single review
-  const learnMore = () => {
-    history.push(`/dashboard/${review.id}`);
-  };
+	//routes to single review
+	const learnMore = () => {
+		history.push(`/dashboard/${review.id}`);
+	};
 
-  return (
-    <>
-      <Flex w='100%' h='254px' wrap='wrap' onClick={learnMore}>
-        <Flex flexDir='column' justify='center' align='center' w='20%' px='2'>
-          <Avatar size='xl' src='https://bit.ly/broken-link' />
-          <Flex as='h4' pt='5px'>
-            {review.company_name}
-          </Flex>
-        </Flex>
-        <Flex flexDir='column' w='80%'>
-          <Flex></Flex>
-          <Flex>tag line</Flex>
-          <Flex>summary</Flex>
-        </Flex>
-      </Flex>
-    </>
-  );
+	return (
+		<>
+			<Flex w='100%' h='254px' wrap='wrap' onClick={learnMore}>
+				<Flex flexDir='column' justify='center' align='center' w='20%' px='2'>
+					<Avatar size='xl' src='https://bit.ly/broken-link' />
+					<Flex as='p' fontSize='22px' pt='5px'>
+						{review.company_name}
+					</Flex>
+				</Flex>
+				<Flex flexDir='column' w='80%'>
+					<Flex></Flex>
+					<Flex>tag line</Flex>
+					<Flex>summary</Flex>
+				</Flex>
+			</Flex>
+		</>
+	);
 };
 
 const mapStateToProps = state => {
-  return {
-    data: state.review.data
-  };
+	return {
+		data: state.review.data
+	};
 };
 export default connect(mapStateToProps, getReview)(ReviewCard);
 
