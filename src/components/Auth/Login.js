@@ -107,7 +107,7 @@ const Login = ({ login, isLoading, history }) => {
                   border='none'
                   rounded='6px'
                   variantColor='teal'
-                  size='sm'
+                  fontSize='22px'
                   type='submit'
                 >
                   Login

@@ -123,13 +123,14 @@ const Signup = ({ signup, isLoading, history }) => {
                   />
                 </Flex>
               </FormControl>
-              <Flex m='35px'>
+              <Flex mx='35px' my='20px'>
                 <Button
                   w='417px'
                   h='64px'
                   rounded='6px'
                   border='none'
                   variantColor='teal'
+                  fontSize='22px'
                   type='submit'
                 >
                   Sign Up
