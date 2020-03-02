@@ -57,7 +57,7 @@ const ReviewCard = ({ review, history }) => {
             </Box>
             <Box
               p='2'
-              h='90px'
+              h='85px'
               w='100%'
               d='flex'
               flexDirection='row'
