@@ -1,44 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 // import { Link } from 'react-router-dom';
 
 import {
   FormControl,
-  FormLabel,
   Flex,
+  Text,
   Input,
   Textarea,
   Link,
   Button,
   ButtonGroup,
-  Spinner,
-  Select
+  Spinner
 } from '@chakra-ui/core';
 
 import { TextField } from '@material-ui/core';
 
-import makeStyles from '@material-ui/core/styles/makeStyles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { connect } from 'react-redux';
 import postReview from '../../state/actions';
 import getCompanies from '../../state/actions';
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-    maxWidth: '600px'
-  },
-  heading: {
-    maxWidth: '700px'
-  },
-  inputs: {
-    margin: '3%'
-  },
-  paragraphs: {}
-}));
 
 const ReviewForm = ({
   postReview,
@@ -47,7 +28,6 @@ const ReviewForm = ({
   history,
   isLoading
 }) => {
-  const classes = useStyles();
   const [newReviewPost, setNewReviewPost] = useState({
     company_id: '',
     job_title: '',
@@ -82,7 +62,7 @@ const ReviewForm = ({
   if (isLoading) {
     return (
       <h1>
-        <Spinner size="xl" />
+        <Spinner size='xl' />
       </h1>
     );
   }
@@ -92,91 +72,120 @@ const ReviewForm = ({
   });
 
   return (
-    <Flex justify="center" w="0 auto">
-      <Flex justify="center" align="center" flexDir="column" maxW="600px">
+    <Flex justify='center' w='0 auto'>
+      <Flex align='start' flexDir='column'>
         <h2> Add a Review</h2>
-        <p> Company Information</p>
+        <Flex as='h3' mb='3'>
+          {' '}
+          Company Information
+        </Flex>
         <form onSubmit={handleSubmit}>
           <FormControl>
+            <Text fontSize='15px' color='#6B778C'>
+              Company Name
+            </Text>
             <Autocomplete
-              id="combo-box-demo"
+              id='combo-box-demo'
               options={companyOptions}
               getOptionLabel={company => company.name}
-              onChange={(event, value) =>
+              onChange={value =>
                 setNewReviewPost({
                   ...newReviewPost,
                   company_id: value ? value.id : ''
                 })
               }
               style={{ width: 250 }}
-              renderInput={params => (
-                <TextField {...params} label="Find A Company" />
-              )}
+              renderInput={params => <TextField {...params} />}
             />
-            <Link to="/add-company">Need to add a company?</Link>
+            <Link href='/add-company' color='black'>
+              Need to add a company?
+            </Link>
+            <Text fontSize='15px' color='#6B778C' mt='3'>
+              Job Title
+            </Text>
             <Input
-              m="3"
-              type="text"
-              name="job_title"
-              placeholder="Job Title"
+              mb='3'
+              type='text'
+              name='job_title'
               value={newReviewPost.job_title}
               onChange={changeHandler}
             />
+            <Text fontSize='15px' color='#6B778C'>
+              Job Location
+            </Text>
             <Input
-              m="3"
-              type="text"
-              name="job_location"
-              placeholder="Job Location"
+              mb='3'
+              type='text'
+              name='job_location'
               value={newReviewPost.job_location}
               onChange={changeHandler}
             />
+            <Text fontSize='15px' color='#6B778C'>
+              Salary
+            </Text>
             <Input
-              m="3"
-              type="number"
-              name="salary"
-              placeholder="Salary"
+              mb='3'
+              type='number'
+              name='salary'
               value={newReviewPost.salary}
               onChange={changeHandler}
             />
-            <p>Interview Process </p>
+            <Flex as='h3' mb='3'>
+              Interview Process
+            </Flex>
+            <Text fontSize='15px' color='#6B778C'>
+              Interview Difficulty
+            </Text>
             <Input
-              m="3"
-              type="number"
-              name="interview_rating"
-              placeholder="Interview Rating"
+              mb='3'
+              type='number'
+              name='interview_rating'
               value={newReviewPost.interview_rating}
               onChange={changeHandler}
             />
+            <Text fontSize='15px' color='#6B778C'>
+              Interview Process
+            </Text>
             <Textarea
-              m="3"
+              mb='3'
               rowsMax={6}
-              type="text"
-              name="interview_review"
-              placeholder="Describe the interview process"
+              type='text'
+              name='interview_review'
               value={newReviewPost.interview_review}
               onChange={changeHandler}
             />
-            <p>Overall Job Review</p>
+            <Flex as='h3' mb='3'>
+              Overall Job Review
+            </Flex>
+            <Text fontSize='15px' color='#6B778C'>
+              Job Rating
+            </Text>
             <Input
-              m="3"
-              type="number"
-              name="job_rating"
-              placeholder="Job rating 0-5"
+              mb='3'
+              type='number'
+              name='job_rating'
               value={newReviewPost.job_rating}
               onChange={changeHandler}
             />
+            <Text fontSize='15px' color='#6B778C'>
+              Job Review
+            </Text>
             <Textarea
-              m="3"
+              mb='3'
               rowsMax={6}
-              type="text"
-              name="job_review"
-              placeholder="Write a Review"
+              type='text'
+              name='job_review'
               value={newReviewPost.job_review}
               onChange={changeHandler}
             />
-            <ButtonGroup>
-              <Button type="submit">Add Your Review</Button>
+            <ButtonGroup mb='3'>
+              <Button type='submit' bg='#615E5E' color='white'>
+                Add Your Review
+              </Button>
               <Button
+                border='2px solid #615E5E'
+                bg='none'
+                color='#615E5E'
                 onClick={() =>
                   alert(
                     'Are you sure you want to cancel?',
