@@ -10,7 +10,8 @@ import {
   FormControl,
   FormLabel,
   Flex,
-  Spinner
+  Spinner,
+  Text
 } from '@chakra-ui/core';
 
 const Login = ({ login, isLoading, history }) => {
@@ -47,46 +48,79 @@ const Login = ({ login, isLoading, history }) => {
   }
 
   return (
-    <form onSubmit={submitForm}>
-      <Flex m='20px auto' w='22rem' h='17rem' flexDir='column'>
-        <FormControl isRequired>
-          <Flex as='h2'>Login</Flex>
-          <Flex m='10px' flexDir='column'>
-            <FormLabel>Username</FormLabel>
-            <Input
-              id='outlined-basic'
-              variant='filled'
-              type='text'
-              label='Username'
-              name='username'
-              value={creds.username}
-              onChange={handleChanges}
-            />
-          </Flex>
-          <Flex m='10px' flexDir='column'>
-            <FormLabel>Password</FormLabel>
-            <Input
-              id='outlined-basic'
-              variant='filled'
-              type='password'
-              label='Password'
-              name='password'
-              value={creds.password}
-              onChange={handleChanges}
-            />
-          </Flex>
-        </FormControl>
-
-        <Flex m='10px'>
-          <Button variantColor='teal' size='sm' type='submit'>
-            Login
-          </Button>
+    <Flex background='#E5E5E5' w='100%' h='100vh' justify='center'>
+      <Flex w='1200px'>
+        <Flex w='50%' justify='center' align='center'>
+          <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
+            Allay - <br />
+            Together, we are <br />
+            stronger.
+          </Text>
         </Flex>
-        <Flex m='15px' justify='flex-end' fontWeight='light'>
-          Don't have an account? <Link to='/signup'>Signup</Link>
+        <Flex w='50%' justify='center' align='center'>
+          <form onSubmit={submitForm}>
+            <Flex
+              p='5'
+              flexDir='column'
+              background='#FFFFFF'
+              rounded='6px'
+              justify='center'
+            >
+              <FormControl isRequired>
+                <Flex as='h2' m='10px'>
+                  Login
+                </Flex>
+                <Flex m='10px' flexDir='column'>
+                  <FormLabel>Username</FormLabel>
+                  <Input
+                    w='417px'
+                    h='64px'
+                    id='outlined-basic'
+                    variant='filled'
+                    type='text'
+                    label='Username'
+                    name='username'
+                    value={creds.username}
+                    onChange={handleChanges}
+                  />
+                </Flex>
+                <Flex m='10px' flexDir='column'>
+                  <FormLabel>Password</FormLabel>
+                  <Input
+                    w='417px'
+                    h='64px'
+                    id='outlined-basic'
+                    variant='filled'
+                    type='password'
+                    label='Password'
+                    name='password'
+                    value={creds.password}
+                    onChange={handleChanges}
+                  />
+                </Flex>
+              </FormControl>
+
+              <Flex m='10px'>
+                <Button
+                  w='417px'
+                  h='64px'
+                  border='none'
+                  rounded='6px'
+                  variantColor='teal'
+                  size='sm'
+                  type='submit'
+                >
+                  Login
+                </Button>
+              </Flex>
+              <Flex m='15px' justify='center' fontWeight='light'>
+                <Link to='/signup'>Don't have an account?</Link>
+              </Flex>
+            </Flex>
+          </form>
         </Flex>
       </Flex>
-    </form>
+    </Flex>
   );
 };
 
