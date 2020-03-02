@@ -20,16 +20,16 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 
   return (
     <>
-      <Flex maxWidth="900px" margin="0 auto" direction="column" wrap="wrap">
-        <Flex className="Fixed" direction="column">
-          <Flex align="center" padding="1.5% 0">
-            <Avatar marginRight="2%" src="https://bit.ly/broken-link" />
+      <Flex maxWidth='900px' margin='0 auto' direction='column' wrap='wrap'>
+        <Flex className='Fixed' direction='column'>
+          <Flex align='center' padding='1.5% 0'>
+            <Avatar marginRight='2%' src='https://bit.ly/broken-link' />
             <h1> Allay </h1>
           </Flex>
-          <Flex align="center" justify="flex-end" padding="1.5% 0">
+          <Flex align='center' justify='flex-end' padding='1.5% 0'>
             <Button
-              variantColor="teal"
-              size="sm"
+              variantColor='teal'
+              size='sm'
               isLoading={isLoading}
               onClick={navToReviewForm}
             >
@@ -37,11 +37,11 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             </Button>
           </Flex>
         </Flex>
-        <Flex marginTop="15%" direction="column">
-          <Flex align="center" justify="flex-start" padding="1.5% 0">
+        <Flex marginTop='15%' direction='column'>
+          <Flex align='center' justify='flex-start' padding='1.5% 0'>
             <h3> Recent Posts </h3>
           </Flex>
-          <Flex height="100%" direction="column">
+          <Flex height='100%' direction='column'>
             {data.map(review => (
               <ReviewCard key={review.id} review={review} history={history} />
             ))}

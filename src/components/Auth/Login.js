@@ -4,100 +4,96 @@ import { connect } from 'react-redux';
 // actions
 import login from '../../state/actions/index';
 // styles
-import { TextField } from '@material-ui/core';
-import styled from 'styled-components';
-import { Button } from '@chakra-ui/core';
-
-const FormContainer = styled.div`
-	margin: 20px auto;
-	width: 22rem;
-	height: 17rem;
-	border: 2px solid lightgray;
-`;
-
-const FormTitle = styled.h3`
-	background: lightgray;
-`;
-
-const FormInput = styled.div`
-	margin: 10px;
-`;
-const FormButton = styled.p`
-	margin: 15px;
-`;
-
-const FormLink = styled.p`
-	margin: 15px;
-`;
+import {
+  Button,
+  Input,
+  FormControl,
+  FormLabel,
+  Flex,
+  Spinner
+} from '@chakra-ui/core';
 
 const Login = ({ login, isLoading, history }) => {
-	const [creds, setCreds] = useState({
-		username: '',
-		password: ''
-	});
+  const [creds, setCreds] = useState({
+    username: '',
+    password: ''
+  });
 
-	const handleChanges = e => {
-		setCreds({
-			...creds,
-			[e.target.name]: e.target.value
-		});
-	};
+  const handleChanges = e => {
+    setCreds({
+      ...creds,
+      [e.target.name]: e.target.value
+    });
+  };
 
-	const submitForm = e => {
-		e.preventDefault();
-		// action function here
-		login(creds).then(() => history.push('/dashboard'));
-	};
+  const submitForm = e => {
+    e.preventDefault();
+    // action function here
+    login(creds).then(() => history.push('/dashboard'));
+  };
 
-	if (isLoading) {
-		return <h1>Logging you in</h1>;
-	}
+  if (isLoading) {
+    return (
+      <Flex justify='center' align='center' w='100vh' h='100vh'>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      </Flex>
+    );
+  }
 
-	return (
-		<div>
-			<form onSubmit={submitForm}>
-				<FormContainer>
-					<FormTitle>Login</FormTitle>
-					<FormInput>
-						<TextField
-							id='outlined-basic'
-							variant='filled'
-							type='text'
-							label='Username'
-							name='username'
-							value={creds.username}
-							onChange={handleChanges}
-						/>
-					</FormInput>
-					<FormInput>
-						<TextField
-							id='outlined-basic'
-							variant='filled'
-							type='password'
-							label='Password'
-							name='password'
-							value={creds.password}
-							onChange={handleChanges}
-						/>
-					</FormInput>
-					<FormButton>
-						<Button variant='contained' type='submit'>
-							Submit
-						</Button>
-					</FormButton>
-					<FormLink>
-						Don't have an account? <Link to='/signup'>Signup</Link>
-					</FormLink>
-				</FormContainer>
-			</form>
-		</div>
-	);
+  return (
+    <form onSubmit={submitForm}>
+      <Flex m='20px auto' w='22rem' h='17rem' flexDir='column'>
+        <FormControl isRequired>
+          <Flex as='h2'>Login</Flex>
+          <Flex m='10px' flexDir='column'>
+            <FormLabel>Username</FormLabel>
+            <Input
+              id='outlined-basic'
+              variant='filled'
+              type='text'
+              label='Username'
+              name='username'
+              value={creds.username}
+              onChange={handleChanges}
+            />
+          </Flex>
+          <Flex m='10px' flexDir='column'>
+            <FormLabel>Password</FormLabel>
+            <Input
+              id='outlined-basic'
+              variant='filled'
+              type='password'
+              label='Password'
+              name='password'
+              value={creds.password}
+              onChange={handleChanges}
+            />
+          </Flex>
+        </FormControl>
+
+        <Flex m='10px'>
+          <Button variantColor='teal' size='sm' type='submit'>
+            Login
+          </Button>
+        </Flex>
+        <Flex m='15px' justify='flex-end' fontWeight='light'>
+          Don't have an account? <Link to='/signup'>Signup</Link>
+        </Flex>
+      </Flex>
+    </form>
+  );
 };
 
 const mapStateToProps = state => {
-	return {
-		isLoading: state.auth.isLoading
-	};
+  return {
+    isLoading: state.auth.isLoading
+  };
 };
 
 export default connect(mapStateToProps, login)(Login);
