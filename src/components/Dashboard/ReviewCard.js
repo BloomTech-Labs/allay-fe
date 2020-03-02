@@ -17,23 +17,30 @@ const ReviewCard = ({ review, history }) => {
       <Flex maxW='4xl'>
         <Flex p='2' width='100%' onClick={learnMore}>
           <Flex
-            p='5'
-            width='15%'
+            p='1'
+            w='20%'
             alignItems='center'
-            justifyItems='center'
-            flexDirection='column'
+            justifyContent='center'
+            wrap='wrap'
           >
-            <h4>{review.company_name}</h4>
-            <Avatar
-              name={review.company_name}
-              src='https://bit.ly/broken-link'
-              zIndex='1'
-            />
+            <Flex
+              alignItems='center'
+              justifyContent='center'
+              flexDirection='column'
+            >
+              <h4>{review.company_name}</h4>
+              <Avatar
+                name={review.company_name}
+                src='https://bit.ly/broken-link'
+                zIndex='1'
+              />
+            </Flex>
           </Flex>
+
           <Flex flexDirection='column' width='100%'>
-            <Box d='flex'>
+            <Flex>
               <h3>'BIG HEADING'</h3>
-            </Box>
+            </Flex>
             <Box p='2' d='flex' flexDirection='row'>
               <Box mr='3' width='55%' d='flex' justifyContent='flex-start'>
                 <h4>Summary</h4>
@@ -48,18 +55,23 @@ const ReviewCard = ({ review, history }) => {
                 <h4>Salary</h4>
               </Box>
             </Box>
-            <Box p='2' h='100px' d='flex' flexDirection='row' wrap='no-wrap'>
+            <Box
+              p='2'
+              h='90px'
+              w='100%'
+              d='flex'
+              flexDirection='row'
+              wrap='no-wrap'
+              className='Card'
+            >
               <Box
                 mr='3'
-                width='55%'
-                h='70px'
-                d='flex'
-                justifyContent='flex-start'
+                w='55%'
                 fontWeight='semibold'
                 as='p'
                 lineHeight='tight'
-                // isTruncated
                 wrap='wrap'
+                // isTruncated
                 overflow='hidden'
               >
                 {review.job_review}
@@ -67,7 +79,6 @@ const ReviewCard = ({ review, history }) => {
               <Box
                 mr='3'
                 width='30%'
-                h='70px'
                 d='flex'
                 justifyContent='flex-start'
                 fontWeight='semibold'
@@ -80,9 +91,7 @@ const ReviewCard = ({ review, history }) => {
               <Box
                 mr='3'
                 width='30%'
-                h='70px'
                 d='flex'
-                justifyContent='flex-start'
                 fontWeight='semibold'
                 as='p'
                 lineHeight='tight'
