@@ -1,39 +1,25 @@
-import React, { useState } from "react";
-import { TextField, Button } from "@material-ui/core";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import signup from "../../state/actions/index";
-// import { BrowserRouter as Router } from "react-router-dom";
-
-const FormContainer = styled.div`
-  margin: 20px auto;
-  width: 22rem;
-  height: 22.5rem;
-  border: 2px solid lightgray;
-`;
-
-const FormTitle = styled.h3`
-  background: lightgray;
-`;
-
-const FormInput = styled.div`
-  margin: 10px;
-`;
-const FormButton = styled.p`
-  margin: 15px;
-`;
-
-const FormLink = styled.p`
-  margin: 15px;
-`;
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+//actions
+import signup from '../../state/actions/index';
+//styles
+import {
+  Button,
+  Input,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Flex,
+  Text
+} from '@chakra-ui/core';
 
 const Signup = ({ signup, isLoading, history }) => {
   const [creds, setCreds] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   });
 
   const handleChanges = e => {
@@ -42,13 +28,13 @@ const Signup = ({ signup, isLoading, history }) => {
 
   const submitForm = e => {
     e.preventDefault();
-    console.log("form submitted");
+    console.log('form submitted');
     if (creds.confirmPassword === creds.password) {
       signup({
         username: creds.username,
         email: creds.email,
         password: creds.password
-      }).then(() => history.push("/dashboard"));
+      }).then(() => history.push('/dashboard'));
     }
   };
 
@@ -57,62 +43,105 @@ const Signup = ({ signup, isLoading, history }) => {
   }
 
   return (
-    <div>
-      <form onSubmit={submitForm}>
-        <FormContainer>
-          <FormTitle>Signup</FormTitle>
-          <FormInput>
-            <TextField
-              variant="filled"
-              type="text"
-              label="Username"
-              name="username"
-              value={creds.username}
-              onChange={handleChanges}
-            />
-          </FormInput>
-          <FormInput>
-            <TextField
-              variant="filled"
-              type="email"
-              label="Email"
-              name="email"
-              value={creds.email}
-              onChange={handleChanges}
-            />
-          </FormInput>
-          <FormInput>
-            <TextField
-              variant="filled"
-              type="password"
-              label="Password"
-              helperText="At least 8 characters"
-              name="password"
-              value={creds.password}
-              onChange={handleChanges}
-            />
-          </FormInput>
-          <FormInput>
-            <TextField
-              variant="filled"
-              type="password"
-              label="Confirm Password"
-              name="confirmPassword"
-              value={creds.confirmPassword}
-              onChange={handleChanges}
-            />
-          </FormInput>
-          <FormButton>
-            <Button variant="contained" type="submit">
-              Submit
-            </Button>
-          </FormButton>
-          <FormLink>
-            Already have an account? <Link to="/">Login</Link>
-          </FormLink>
-        </FormContainer>
-      </form>
-    </div>
+    <Flex background='#E5E5E5' w='100%' h='100vh' justify='center'>
+      <Flex w='50%' justify='center' align='center'>
+        <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
+          Allay - <br />
+          Together, we are <br />
+          stronger.
+        </Text>
+      </Flex>
+      <Flex w='50%' justify='center' align='center'>
+        <form onSubmit={submitForm}>
+          <Flex
+            m=' 20px auto'
+            w='490px'
+            h='754px'
+            flexDir='column'
+            background='#FFFFFF'
+            rounded='6px'
+            justify='center'
+          >
+            <FormControl isRequired>
+              <Flex as='h2' w='100%' ml='35px' pb='10px'>
+                Let's get started!
+              </Flex>
+              <Flex mx='35px' my='20px' flexDir='column'>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  w='417px'
+                  h='64px'
+                  variant='filled'
+                  type='text'
+                  label='Username'
+                  name='username'
+                  value={creds.username}
+                  onChange={handleChanges}
+                />
+              </Flex>
+              <Flex mx='35px' my='20px' flexDir='column'>
+                <FormLabel>Username</FormLabel>
+                <Input
+                  w='417px'
+                  h='64px'
+                  variant='filled'
+                  type='email'
+                  label='Email'
+                  name='email'
+                  value={creds.email}
+                  onChange={handleChanges}
+                />
+              </Flex>
+              <Flex mx='35px' my='20px' flexDir='column'>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  w='417px'
+                  h='64px'
+                  variant='filled'
+                  type='password'
+                  label='Password'
+                  helperText='At least 8 characters'
+                  name='password'
+                  value={creds.password}
+                  onChange={handleChanges}
+                />
+                <FormHelperText>
+                  Must be longer than 8 characters
+                </FormHelperText>
+              </Flex>
+              <Flex mx='35px' my='20px' flexDir='column'>
+                <FormLabel>Confirm Password</FormLabel>
+                <Input
+                  w='417px'
+                  h='64px'
+                  variant='filled'
+                  type='password'
+                  label='Confirm Password'
+                  name='confirmPassword'
+                  value={creds.confirmPassword}
+                  onChange={handleChanges}
+                />
+              </Flex>
+            </FormControl>
+            <Flex m='35px'>
+              <Button
+                w='417px'
+                h='64px'
+                rounded='6px'
+                border='none'
+                variantColor='teal'
+                type='submit'
+              >
+                Submit
+              </Button>
+            </Flex>
+            <Flex as='p' ml='35px'>
+              <Link to='/'>Already have an account?</Link>
+            </Flex>
+          </Flex>
+        </form>
+      </Flex>
+    </Flex>
   );
 };
 
