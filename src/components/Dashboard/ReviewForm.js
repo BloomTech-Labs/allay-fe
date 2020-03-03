@@ -6,17 +6,19 @@ import {
   FormControl,
   Flex,
   Text,
+  Select,
+  NumberInput,
   Input,
   Textarea,
   Link,
   Button,
   ButtonGroup,
-  Spinner
+  Spinner,
+  FormErrorMessage,
+  FormLabel,
+  NumberInputField
 } from '@chakra-ui/core';
 
-import { TextField } from '@material-ui/core';
-
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import { connect } from 'react-redux';
 import postReview from '../../state/actions';
 import getCompanies from '../../state/actions';
@@ -28,33 +30,26 @@ const ReviewForm = ({
   history,
   isLoading
 }) => {
-  const [newReviewPost, setNewReviewPost] = useState({
-    company_id: '',
-    job_title: '',
-    job_location: '',
-    salary: '',
-    interview_review: '',
-    interview_rating: '',
-    job_review: '',
-    job_rating: ''
-  });
+  const { register, handleSubmit, errors, formState } = useForm();
+
+  // validating salary
+  function validateSalary(value) {
+    console.log('validate', value);
+    let error;
+    if (!value) {
+      error = 'Salary is required';
+    } else if (value < 0) {
+      error = 'Salary cannot be less than zero.';
+    }
+    return error || true;
+  }
 
   useEffect(() => {
     getCompanies();
   }, [getCompanies]);
 
-  const changeHandler = e => {
-    setNewReviewPost({
-      ...newReviewPost,
-      [e.target.name]:
-        e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
-    });
-  };
-  console.log(newReviewPost);
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    postReview(localStorage.getItem('userId'), newReviewPost).then(() =>
+  const submitForm = data => {
+    postReview(localStorage.getItem('userId'), data).then(() =>
       history.push('/dashboard')
     );
   };
@@ -67,136 +62,168 @@ const ReviewForm = ({
     );
   }
 
-  const companyOptions = companies.map(company => {
-    return { id: company.id, name: company.name };
-  });
-
   return (
     <Flex justify='center' w='0 auto'>
       <Flex align='start' flexDir='column'>
         <h2> Add a Review</h2>
         <Flex as='h3' mb='3'>
-          {' '}
           Company Information
         </Flex>
-        <form onSubmit={handleSubmit}>
-          <FormControl>
-            <Text fontSize='15px' color='#6B778C'>
+        <form onSubmit={handleSubmit(submitForm)}>
+          <FormControl isRequired>
+            <FormLabel fontSize='15px' color='#525252'>
               Company Name
-            </Text>
-            <Autocomplete
-              id='combo-box-demo'
-              options={companyOptions}
-              getOptionLabel={company => company.name}
-              onChange={value =>
-                setNewReviewPost({
-                  ...newReviewPost,
-                  company_id: value ? value.id : ''
-                })
-              }
-              style={{ width: 250 }}
-              renderInput={params => <TextField {...params} />}
-            />
-            <Link href='/add-company' color='black'>
-              Need to add a company?
-            </Link>
-            <Text fontSize='15px' color='#6B778C' mt='3'>
+            </FormLabel>
+            <Select
+              variant='filled'
+              borderRadius='none'
+              placeholder='Select a company'
+              name='company_id'
+              id='company_name'
+              type='select'
+              ref={register}
+            >
+              {companies.map(company => (
+                <option value={company.id} key={company.id}>
+                  {company.name}
+                </option>
+              ))}
+            </Select>
+            <Flex>
+              <Link href='/add-company' color='black'>
+                Need to add a company?
+              </Link>
+            </Flex>
+            <FormLabel fontSize='15px' mt='3' color='#525252'>
               Job Title
-            </Text>
+            </FormLabel>
             <Input
+              variant='filled'
+              ref={register}
               mb='3'
               type='text'
               name='job_title'
-              value={newReviewPost.job_title}
-              onChange={changeHandler}
+              placeholder='e.g. Software Engineer'
+              borderRadius='none'
             />
-            <Text fontSize='15px' color='#6B778C'>
+            <FormLabel fontSize='15px' color='#525252'>
               Job Location
-            </Text>
+            </FormLabel>
             <Input
+              variant='filled'
+              ref={register}
               mb='3'
               type='text'
               name='job_location'
-              value={newReviewPost.job_location}
-              onChange={changeHandler}
+              placeholder='City, State'
+              borderRadius='none'
             />
-            <Text fontSize='15px' color='#6B778C'>
+          </FormControl>
+          <FormControl isRequired isInvalid={errors.salary}>
+            <FormLabel fontSize='15px' color='#525252'>
               Salary
-            </Text>
+            </FormLabel>
             <Input
+              variant='filled'
+              ref={register({ validate: validateSalary })}
               mb='3'
               type='number'
               name='salary'
-              value={newReviewPost.salary}
-              onChange={changeHandler}
+              borderRadius='none'
+              placeholder='e.g. 70,000'
             />
+            <FormErrorMessage>
+              {errors.salary && errors.salary.message}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isRequired>
             <Flex as='h3' mb='3'>
               Interview Process
             </Flex>
-            <Text fontSize='15px' color='#6B778C'>
+            <FormLabel fontSize='15px' color='#525252'>
               Interview Difficulty
-            </Text>
+            </FormLabel>
             <Input
+              variant='filled'
+              min='1'
+              max='5'
+              ref={register}
               mb='3'
               type='number'
               name='interview_rating'
-              value={newReviewPost.interview_rating}
-              onChange={changeHandler}
+              placeholder='1 to 5, very difficult to very easy'
+              borderRadius='none'
             />
-            <Text fontSize='15px' color='#6B778C'>
+            <FormLabel fontSize='15px' color='#525252'>
               Interview Process
-            </Text>
+            </FormLabel>
             <Textarea
+              variant='filled'
+              ref={register}
               mb='3'
               rowsMax={6}
               type='text'
               name='interview_review'
-              value={newReviewPost.interview_review}
-              onChange={changeHandler}
+              placeholder='Describe the interview process.'
+              borderRadius='none'
             />
             <Flex as='h3' mb='3'>
               Overall Job Review
             </Flex>
-            <Text fontSize='15px' color='#6B778C'>
+            <FormLabel fontSize='15px' color='#525252'>
               Job Rating
-            </Text>
+            </FormLabel>
             <Input
+              variant='filled'
+              min='1'
+              max='5'
+              ref={register}
               mb='3'
               type='number'
               name='job_rating'
-              value={newReviewPost.job_rating}
-              onChange={changeHandler}
+              placeholder='1 to 5, terrible to great'
+              borderRadius='none'
             />
-            <Text fontSize='15px' color='#6B778C'>
+            <FormLabel fontSize='15px' color='#525252'>
               Job Review
-            </Text>
+            </FormLabel>
             <Textarea
+              variant='filled'
+              ref={register}
               mb='3'
               rowsMax={6}
               type='text'
               name='job_review'
-              value={newReviewPost.job_review}
-              onChange={changeHandler}
+              placeholder='Describe your experiences at your job.'
+              borderRadius='none'
             />
-            <ButtonGroup mb='3'>
-              <Button type='submit' bg='#615E5E' color='white'>
-                Add Your Review
-              </Button>
-              <Button
-                border='2px solid #615E5E'
-                bg='none'
-                color='#615E5E'
-                onClick={() =>
-                  alert(
-                    'Are you sure you want to cancel?',
-                    history.push('/dashboard')
-                  )
-                }
-              >
-                Cancel
-              </Button>
-            </ButtonGroup>
           </FormControl>
+          <ButtonGroup mb='3' mt='3'>
+            <Button
+              w='20rem'
+              type='submit'
+              _hover={{ bg: '#979797' }}
+              _active={{ bg: '#979797' }}
+              bg='#615E5E'
+              color='white'
+              isLoading={formState.isSubmitting}
+            >
+              Add Your Review
+            </Button>
+            <Button
+              border='2px solid #615E5E'
+              bg='none'
+              color='#615E5E'
+              onClick={() =>
+                alert(
+                  'Are you sure you want to cancel?',
+                  history.push('/dashboard')
+                )
+              }
+            >
+              Cancel
+            </Button>
+          </ButtonGroup>
         </form>
       </Flex>
     </Flex>
