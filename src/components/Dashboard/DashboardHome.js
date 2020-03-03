@@ -20,10 +20,10 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 
 	return (
 		<>
-			<Flex maxWidth='1440px' pl='45px' direction='column' wrap='wrap'>
+			<Flex maxWidth='1440px' direction='column' wrap='wrap'>
 				<Flex
-					px='45px'
-					w='95%'
+					w='100%'
+					px='30px'
 					background='#FFFFFF'
 					top='0'
 					position='fixed'
@@ -33,8 +33,8 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 				>
 					<Flex align='center' pt='1.5%'>
 						<Avatar
-							marginRight='2%'
-							size='xl'
+							marginRight='1%'
+							size='lg'
 							src='https://bit.ly/broken-link'
 						/>
 						<h1> Allay </h1>
@@ -51,8 +51,11 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 					</Flex>
 				</Flex>
 				<Flex marginTop='10%' direction='column'>
-					<Flex align='center' justify='flex-start' padding='1.5% 0'>
-						<h3> Recent Posts </h3>
+					<Flex align='center' justify='flex-start' pl='30px' py='20px'>
+						<Flex as='h2' fontSize='32px'>
+							{' '}
+							Recent Posts{' '}
+						</Flex>
 					</Flex>
 					<Flex height='100%' direction='column'>
 						{data.map(review => (
