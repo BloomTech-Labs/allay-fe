@@ -62,18 +62,20 @@ const Login = ({ login, isLoading, history }) => {
 	}
 
 	return (
-		<Flex background='#E5E5E5' w='100%' h='100vh' justify='center'>
-			<Flex w='1200px'>
-				<Flex w='50%' justify='center' align='center'>
+		<Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
+			<Flex w='1440px'>
+				<Flex w='40%' justify='center' align='center'>
 					<Text fontSize='64px' fontWeight='600' lineHeight='92px'>
 						Allay - <br />
 						Together, we are <br />
 						stronger.
 					</Text>
 				</Flex>
-				<Flex w='50%' justify='center' align='center'>
+				<Flex w='60%' justify='center' align='center'>
 					<form onSubmit={handleSubmit(submitForm)}>
 						<Flex
+							w='490px'
+							h='40%'
 							p='5'
 							flexDir='column'
 							background='#FFFFFF'
@@ -81,14 +83,12 @@ const Login = ({ login, isLoading, history }) => {
 							justify='center'
 						>
 							<FormControl isInvalid={errors.username}>
-								<Flex as='h2' m='10px' pb='10px'>
+								<Flex as='h2' mx='5%' my='2%'>
 									Login
 								</Flex>
-								<Flex m='10px' flexDir='column'>
+								<Flex mx='5%' my='2%' flexDir='column'>
 									<FormLabel>Username</FormLabel>
 									<Input
-										w='417px'
-										h='64px'
 										type='text'
 										variant='filled'
 										label='Username'
@@ -101,11 +101,9 @@ const Login = ({ login, isLoading, history }) => {
 								</Flex>
 							</FormControl>
 							<FormControl isInvalid={errors.password}>
-								<Flex m='10px' flexDir='column'>
+								<Flex mx='5%' my='2%' flexDir='column'>
 									<FormLabel>Password</FormLabel>
 									<Input
-										w='417px'
-										h='64px'
 										type='password'
 										variant='filled'
 										label='Password'
@@ -118,10 +116,9 @@ const Login = ({ login, isLoading, history }) => {
 								</Flex>
 							</FormControl>
 
-							<Flex m='10px'>
+							<Flex mx='5%' my='2%'>
 								<Button
-									w='417px'
-									h='64px'
+									px='50%'
 									border='none'
 									rounded='6px'
 									variantColor='teal'
