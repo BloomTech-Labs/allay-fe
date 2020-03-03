@@ -13,7 +13,6 @@ export const login = creds => dispatch => {
 	return axiosWithAuth()
 		.post('/auth/login', creds)
 		.then(res => {
-			console.log(res.data);
 			localStorage.setItem('token', res.data.token);
 			localStorage.setItem('userId', res.data.id);
 			dispatch({ type: LOGIN_SUCCESS, payload: res.data });
@@ -29,7 +28,7 @@ export const signup = creds => dispatch => {
 		.post('/auth/register', creds)
 		.then(res => {
 			localStorage.setItem('token', res.data.token);
-			localStorage.setItem('userId', res.data.id);
+			localStorage.setItem('userId', res.data.newUser.id);
 			dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
 		})
 		.catch(err => {
