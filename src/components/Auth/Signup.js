@@ -33,7 +33,7 @@ const Signup = ({ signup, isLoading, history }) => {
 		if (!value) {
 			error = 'Username is required';
 		} else if (value.length < 8) {
-			error = 'Username must be longer than 8 characters';
+			error = 'Username must be at least 8 characters';
 		}
 		return error || true;
 	}
@@ -53,7 +53,7 @@ const Signup = ({ signup, isLoading, history }) => {
 		if (!value) {
 			error = 'Password is required';
 		} else if (value.length < 8) {
-			error = 'Password must be longer than 8 characters';
+			error = 'Password must be at least 8 characters';
 		}
 		return error || true;
 	}
