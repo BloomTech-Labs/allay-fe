@@ -17,33 +17,40 @@ import {
 	Text
 } from '@chakra-ui/core';
 
-//validation
-const schema = yup.object().shape({
-	username: yup.string().required(),
-	password: yup
-		.string()
-		.required(8, 'Password must contain at least 8 characters')
-});
+// //validation
+// const schema = yup.object().shape({
+// 	username: yup.string().required(),
+// 	password: yup
+// 		.string()
+// 		.required(8, 'Password must contain at least 8 characters')
+// });
 
 const Login = ({ login, isLoading, history }) => {
-	const { handleSubmit, errors, register, formState } = useForm({
-		validationSchema: schema
-	});
+	const { handleSubmit, errors, register, formState } = useForm();
 	const [creds, setCreds] = useState({
 		username: '',
 		password: ''
 	});
 
-	// function validateUsername(value) {
-	// 	console.log(value);
-	// 	let error;
-	// 	if (!value) {
-	// 		error = 'Username is required';
-	// 	} else if (value !== 'Naruto') {
-	// 		error = "Jeez! You're not a fan 😱";
-	// 	}
-	// 	return error || true;
-	// }
+	function validateUsername(value) {
+		let error;
+		if (!value) {
+			error = 'Username is required';
+		} else if (value.length < 8) {
+			error = 'Username must be longer than 8 characters';
+		}
+		return error || true;
+	}
+
+	function validatePassword(value) {
+		let error;
+		if (!value) {
+			error = 'Password is required';
+		} else if (value.length < 8) {
+			error = 'Password must be longer than 8 characters';
+		}
+		return error || true;
+	}
 
 	const handleChanges = e => {
 		setCreds({
@@ -93,7 +100,7 @@ const Login = ({ login, isLoading, history }) => {
 							rounded='6px'
 							justify='center'
 						>
-							<FormControl>
+							<FormControl isInvalid={errors.username}>
 								<Flex as='h2' m='10px' pb='10px'>
 									Login
 								</Flex>
@@ -109,12 +116,14 @@ const Login = ({ login, isLoading, history }) => {
 										name='username'
 										value={creds.username}
 										onChange={handleChanges}
-										ref={register}
+										ref={register({ validate: validateUsername })}
 									/>
-
-									{errors.username && errors.username.message}
+									<FormErrorMessage>
+										{errors.username && errors.username.message}
+									</FormErrorMessage>
 								</Flex>
-
+							</FormControl>
+							<FormControl isInvalid={errors.password}>
 								<Flex m='10px' flexDir='column'>
 									<FormLabel>Password</FormLabel>
 									<Input
@@ -127,7 +136,7 @@ const Login = ({ login, isLoading, history }) => {
 										name='password'
 										value={creds.password}
 										onChange={handleChanges}
-										ref={register}
+										ref={register({ validate: validatePassword })}
 									/>
 									<FormErrorMessage>
 										{errors.password && errors.password.message}
