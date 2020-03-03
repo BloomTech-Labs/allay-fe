@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // action
 import getReview from '../../state/actions/index';
 // component
+import NavBar from './NavBar';
 import ReviewCard from './ReviewCard';
 // styles
 import { Flex, Button, Avatar } from '@chakra-ui/core';
@@ -21,7 +22,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 	return (
 		<>
 			<Flex maxWidth='1440px' direction='column' wrap='wrap'>
-				<Flex
+				{/* <Flex
 					w='100%'
 					px='30px'
 					background='#FFFFFF'
@@ -55,7 +56,8 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 							Recent Posts{' '}
 						</Flex>
 					</Flex>
-				</Flex>
+				</Flex> */}
+				<NavBar history={history} isLoading={isLoading} />
 				<Flex mt='15%' direction='column'>
 					<Flex height='100%' direction='column'>
 						{data.map(review => (
