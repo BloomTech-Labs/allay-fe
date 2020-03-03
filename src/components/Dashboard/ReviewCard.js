@@ -17,7 +17,7 @@ const ReviewCard = ({ review, history }) => {
 	return (
 		<>
 			<Flex
-				w='100%'
+				w='1440px'
 				h='246px'
 				p='35p'
 				wrap='wrap'
@@ -25,13 +25,13 @@ const ReviewCard = ({ review, history }) => {
 				justify='column'
 			>
 				{/* avatar box */}
-				<Flex justify='center' align='center' w='20%'>
+				<Flex justify='center' align='center' w='20%' h='246px'>
 					<Avatar size='xl' src='https://bit.ly/broken-link' />
 				</Flex>
 				{/* content container */}
 				<Flex w='80%' flexDir='column'>
 					{/* tag container */}
-					<Flex w='100%' justify='flex-start' pr='150px' p='20px' h='32px'>
+					<Flex w='100%' justify='flex-start' h='32px'>
 						<Flex align='center' h='32px' mr='35px'>
 							<Box as={TiArchive}></Box>
 							<Flex as='h3' fontWeight='light' pl='10px'>
@@ -64,7 +64,7 @@ const ReviewCard = ({ review, history }) => {
 						</h2>
 					</Flex>
 					{/* summary container */}
-					<Flex w='100%' h='176px' px='20px'>
+					<Flex w='100%' h='130px' px='20px'>
 						<p>{review.job_review}</p>
 					</Flex>
 				</Flex>

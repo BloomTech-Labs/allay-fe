@@ -19,13 +19,6 @@ import {
 
 const Signup = ({ signup, isLoading, history }) => {
 	const { handleSubmit, errors, register, formState } = useForm();
-	const [creds, setCreds] = useState({
-		email: '',
-		username: '',
-		password: '',
-		confirmPassword: ''
-	});
-	console.log('outside', creds.password);
 
 	//validation
 	function validateUsername(value) {
@@ -57,25 +50,10 @@ const Signup = ({ signup, isLoading, history }) => {
 		}
 		return error || true;
 	}
-	// function validateCheckPassword(value, creds) {
-	// 	let error;
-	// 	console.log('isndide', creds.password);
-	// 	if (!value) {
-	// 		error = 'Password is required';
-	// 	} else if (value.length < 8) {
-	// 		error = 'Password must be longer than 8 characters';
-	// 	} else if (value !== creds.password) {
-	// 		error = 'Passwords do not match';
-	// 	}
-	// 	return error || true;
-	// }
 	// end validation
 
-	const handleChanges = e => {
-		setCreds({ ...creds, [e.target.name]: e.target.value });
-	};
-
-	const submitForm = e => {
+	const submitForm = creds => {
+		console.log(creds);
 		if (creds.confirmPassword === creds.password) {
 			signup({
 				username: creds.username,
@@ -105,41 +83,37 @@ const Signup = ({ signup, isLoading, history }) => {
 	}
 
 	return (
-		<Flex background='#E5E5E5' w='100%' h='100vh' justify='center'>
-			<Flex w='1200px'>
-				<Flex w='50%' justify='center' align='center'>
+		<Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
+			<Flex w='1440px'>
+				<Flex w='40%' justify='center' align='center'>
 					<Text fontSize='64px' fontWeight='600' lineHeight='92px'>
 						Allay - <br />
 						Together, we are <br />
 						stronger.
 					</Text>
 				</Flex>
-				<Flex w='50%' justify='center' align='center'>
+				<Flex w='60%' justify='center' align='center'>
 					<form onSubmit={handleSubmit(submitForm)}>
 						<Flex
 							w='490px'
-							h='754px'
+							h='40%'
+							p='6'
 							flexDir='column'
 							background='#FFFFFF'
 							rounded='6px'
 							justify='center'
 						>
 							<FormControl isInvalid={errors.email}>
-								<Flex as='h2' w='100%' ml='35px' pb='10px'>
+								<Flex as='h2' w='100%' ml='5%' pb='10px'>
 									Let's get started!
 								</Flex>
-								<Flex mx='35px' my='20px' flexDir='column'>
+								<Flex mx='5%' my='2%' flexDir='column'>
 									<FormLabel>Email</FormLabel>
 									<Input
-										isInvalid={errors.email}
-										w='417px'
-										h='64px'
 										variant='filled'
 										type='email'
 										label='email'
 										name='email'
-										value={creds.email}
-										onChange={handleChanges}
 										ref={register({ validate: validateEmail })}
 									/>
 									<FormErrorMessage>
@@ -149,17 +123,13 @@ const Signup = ({ signup, isLoading, history }) => {
 							</FormControl>
 
 							<FormControl isInvalid={errors.username}>
-								<Flex mx='35px' my='20px' flexDir='column'>
+								<Flex mx='5%' my='2%' flexDir='column'>
 									<FormLabel>Username</FormLabel>
 									<Input
-										w='417px'
-										h='64px'
 										variant='filled'
 										type='text'
 										label='username'
 										name='username'
-										value={creds.username}
-										onChange={handleChanges}
 										ref={register({ validate: validateUsername })}
 									/>
 									<FormErrorMessage>
@@ -169,17 +139,13 @@ const Signup = ({ signup, isLoading, history }) => {
 							</FormControl>
 
 							<FormControl isInvalid={errors.password}>
-								<Flex mx='35px' my='20px' flexDir='column'>
+								<Flex mx='5%' my='2%' flexDir='column'>
 									<FormLabel>Password</FormLabel>
 									<Input
-										w='417px'
-										h='64px'
 										variant='filled'
 										type='password'
 										label='Password'
 										name='password'
-										value={creds.password}
-										onChange={handleChanges}
 										ref={register({ validate: validatePassword })}
 									/>
 									<FormHelperText>
@@ -191,28 +157,23 @@ const Signup = ({ signup, isLoading, history }) => {
 								</Flex>
 							</FormControl>
 							<FormControl isRequired>
-								<Flex mx='35px' my='20px' flexDir='column'>
+								<Flex mx='5%' my='2%' flexDir='column'>
 									<FormLabel>Confirm Password</FormLabel>
 									<Input
-										w='417px'
-										h='64px'
 										variant='filled'
 										type='password'
 										label='Confirm Password'
 										name='confirmPassword'
-										value={creds.confirmPassword}
-										onChange={handleChanges}
+										ref={register}
 									/>
 								</Flex>
 							</FormControl>
-							<Flex mx='35px' my='20px'>
+							<Flex mx='5%' my='3%'>
 								<Button
-									w='417px'
-									h='64px'
+									px='50%'
 									rounded='6px'
 									border='none'
 									variantColor='teal'
-									fontSize='22px'
 									isLoading={formState.isSubmitting}
 									type='submit'
 								>
