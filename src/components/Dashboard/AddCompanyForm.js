@@ -17,14 +17,14 @@ import {
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogBody,
-  AlertDialogFooter
+  AlertDialogFooter,
+  Spinner
 } from '@chakra-ui/core';
 
 const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   const { register, handleSubmit, errors, formState } = useForm();
 
   function validateCompanyState(value) {
-    console.log('validate', value);
     let error;
     if (!value) {
       error = 'Company name is required';
@@ -42,6 +42,20 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   const [isOpen, setIsOpen] = useState();
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef();
+
+  if (isLoading) {
+    return (
+      <Flex justify='center' align='center' w='100vh' h='100vh'>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      </Flex>
+    );
+  }
 
   return (
     <>

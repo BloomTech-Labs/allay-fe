@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { useForm } from 'react-hook-form';
-// import { Link } from 'react-router-dom';
 
 import {
   FormControl,
@@ -38,7 +37,6 @@ const ReviewForm = ({
 
   // validating salary
   function validateSalary(value) {
-    console.log('validate', value);
     let error;
     if (!value) {
       error = 'Salary is required';
@@ -65,9 +63,15 @@ const ReviewForm = ({
 
   if (isLoading) {
     return (
-      <h1>
-        <Spinner size='xl' />
-      </h1>
+      <Flex justify='center' align='center' w='100vh' h='100vh'>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      </Flex>
     );
   }
 
