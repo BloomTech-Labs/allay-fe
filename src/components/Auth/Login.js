@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // actions
@@ -9,16 +10,29 @@ import {
 	Input,
 	FormControl,
 	FormLabel,
+	FormErrorMessage,
 	Flex,
 	Spinner,
 	Text
 } from '@chakra-ui/core';
 
 const Login = ({ login, isLoading, history }) => {
+	const { handleSubmit, errors, register, formState } = useForm();
 	const [creds, setCreds] = useState({
 		username: '',
 		password: ''
 	});
+
+	function validateUsername(value) {
+		console.log(value);
+		let error;
+		if (!value) {
+			error = 'Username is required';
+		} else if (value !== 'Naruto') {
+			error = "Jeez! You're not a fan 😱";
+		}
+		return error || true;
+	}
 
 	const handleChanges = e => {
 		setCreds({
@@ -60,7 +74,7 @@ const Login = ({ login, isLoading, history }) => {
 					</Text>
 				</Flex>
 				<Flex w='50%' justify='center' align='center'>
-					<form onSubmit={submitForm}>
+					<form onSubmit={handleSubmit(submitForm)}>
 						<Flex
 							p='5'
 							flexDir='column'
@@ -68,7 +82,7 @@ const Login = ({ login, isLoading, history }) => {
 							rounded='6px'
 							justify='center'
 						>
-							<FormControl isRequired>
+							<FormControl isRequired isInvalid={errors.username}>
 								<Flex as='h2' m='10px' pb='10px'>
 									Login
 								</Flex>
@@ -84,8 +98,13 @@ const Login = ({ login, isLoading, history }) => {
 										name='username'
 										value={creds.username}
 										onChange={handleChanges}
+										ref={register({ validate: validateUsername })}
 									/>
+									<FormErrorMessage>
+										{errors.username && errors.username.message}
+									</FormErrorMessage>
 								</Flex>
+
 								<Flex m='10px' flexDir='column'>
 									<FormLabel>Password</FormLabel>
 									<Input
@@ -110,6 +129,7 @@ const Login = ({ login, isLoading, history }) => {
 									rounded='6px'
 									variantColor='teal'
 									fontSize='22px'
+									isLoading={formState.isSubmitting}
 									type='submit'
 								>
 									Login
