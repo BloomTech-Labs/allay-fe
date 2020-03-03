@@ -49,14 +49,14 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 							Add A Review
 						</Button>
 					</Flex>
-				</Flex>
-				<Flex marginTop='10%' direction='column'>
-					<Flex align='center' justify='flex-start' pl='30px' py='20px'>
+					<Flex align='center' justify='flex-start'>
 						<Flex as='h2' fontSize='32px'>
 							{' '}
 							Recent Posts{' '}
 						</Flex>
 					</Flex>
+				</Flex>
+				<Flex mt='15%' direction='column'>
 					<Flex height='100%' direction='column'>
 						{data.map(review => (
 							<ReviewCard key={review.id} review={review} history={history} />
