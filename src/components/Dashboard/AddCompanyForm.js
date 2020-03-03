@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import postCompany from '../../state/actions';
 import { useForm } from 'react-hook-form';
@@ -12,11 +12,6 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  CloseButton,
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
@@ -42,9 +37,12 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   const submitForm = newCompany => {
     postCompany(newCompany).then(() => history.push('/dashboard/add-review'));
   };
-  const [isOpen, setIsOpen] = React.useState();
+
+  // specifically for the cancel button functionality
+  const [isOpen, setIsOpen] = useState();
   const onClose = () => setIsOpen(false);
-  const cancelRef = React.useRef();
+  const cancelRef = useRef();
+
   return (
     <>
       <form onSubmit={handleSubmit(submitForm)}>
