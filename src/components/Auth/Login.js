@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as yup from 'yup';
 // actions
 import login from '../../state/actions/index';
 // styles
@@ -17,27 +16,16 @@ import {
 	Text
 } from '@chakra-ui/core';
 
-// //validation
-// const schema = yup.object().shape({
-// 	username: yup.string().required(),
-// 	password: yup
-// 		.string()
-// 		.required(8, 'Password must contain at least 8 characters')
-// });
-
 const Login = ({ login, isLoading, history }) => {
 	const { handleSubmit, errors, register, formState } = useForm();
-	const [creds, setCreds] = useState({
-		username: '',
-		password: ''
-	});
 
 	function validateUsername(value) {
+		console.log('validate', value);
 		let error;
 		if (!value) {
 			error = 'Username is required';
 		} else if (value.length < 8) {
-			error = 'Username must be longer than 8 characters';
+			error = 'Username must be at least 8 characters';
 		}
 		return error || true;
 	}
@@ -47,20 +35,12 @@ const Login = ({ login, isLoading, history }) => {
 		if (!value) {
 			error = 'Password is required';
 		} else if (value.length < 8) {
-			error = 'Password must be longer than 8 characters';
+			error = 'Password must be at least 8 characters';
 		}
 		return error || true;
 	}
 
-	const handleChanges = e => {
-		setCreds({
-			...creds,
-			[e.target.name]: e.target.value
-		});
-	};
-
-	const submitForm = e => {
-		e.preventDefault();
+	const submitForm = creds => {
 		// action function here
 		login(creds).then(() => history.push('/dashboard'));
 	};
@@ -109,13 +89,10 @@ const Login = ({ login, isLoading, history }) => {
 									<Input
 										w='417px'
 										h='64px'
-										id='outlined-basic'
-										variant='filled'
 										type='text'
+										variant='filled'
 										label='Username'
 										name='username'
-										value={creds.username}
-										onChange={handleChanges}
 										ref={register({ validate: validateUsername })}
 									/>
 									<FormErrorMessage>
@@ -129,13 +106,10 @@ const Login = ({ login, isLoading, history }) => {
 									<Input
 										w='417px'
 										h='64px'
-										id='outlined-basic'
-										variant='filled'
 										type='password'
+										variant='filled'
 										label='Password'
 										name='password'
-										value={creds.password}
-										onChange={handleChanges}
 										ref={register({ validate: validatePassword })}
 									/>
 									<FormErrorMessage>
