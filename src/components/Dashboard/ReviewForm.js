@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { useForm } from 'react-hook-form';
 // import { Link } from 'react-router-dom';
 
-
 import {
   FormControl,
   Flex,
-  Text,
   Select,
-  NumberInput,
   Input,
   Textarea,
   Button,
@@ -17,7 +14,13 @@ import {
   Spinner,
   FormErrorMessage,
   FormLabel,
-  NumberInputField
+  Link,
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogOverlay,
+  AlertDialogFooter
 } from '@chakra-ui/core';
 
 import { connect } from 'react-redux';
@@ -55,6 +58,11 @@ const ReviewForm = ({
     );
   };
 
+  // specifically for the cancel button functionality
+  const [isOpen, setIsOpen] = useState();
+  const onClose = () => setIsOpen(false);
+  const cancelRef = useRef();
+
   if (isLoading) {
     return (
       <h1>
@@ -65,7 +73,6 @@ const ReviewForm = ({
 
   return (
     <Flex justify='center' w='0 auto'>
-
       <Flex align='start' flexDir='column'>
         <h2> Add a Review</h2>
         <Flex as='h3' mb='3'>
@@ -216,15 +223,34 @@ const ReviewForm = ({
               border='2px solid #615E5E'
               bg='none'
               color='#615E5E'
-              onClick={() =>
-                alert(
-                  'Are you sure you want to cancel?',
-                  history.push('/dashboard')
-                )
-              }
+              onClick={() => setIsOpen(true)}
             >
               Cancel
             </Button>
+            <AlertDialog
+              isOpen={isOpen}
+              leastDestructiveRef={cancelRef}
+              onClose={onClose}
+            >
+              <AlertDialogOverlay />
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                  Cancel form?
+                </AlertDialogHeader>
+                <AlertDialogBody>
+                  Are you sure? You can't undo this action.
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button ref={cancelRef} onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button onClick={() => history.push('/dashboard')} ml={3}>
+                    Yes I'm sure
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </ButtonGroup>
         </form>
       </Flex>
