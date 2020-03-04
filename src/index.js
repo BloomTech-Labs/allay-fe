@@ -19,6 +19,11 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, logger))
 );
 
+// google analytics
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-159325981-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
