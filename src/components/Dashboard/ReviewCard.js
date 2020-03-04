@@ -17,21 +17,21 @@ const ReviewCard = ({ review, history }) => {
 	return (
 		<>
 			<Flex
-				w='1440px'
-				h='246px'
-				p='35p'
+				w='100%'
+				h='150px'
+				px='30px'
 				wrap='wrap'
 				onClick={learnMore}
 				justify='column'
 			>
 				{/* avatar box */}
-				<Flex justify='center' align='center' w='20%' h='246px'>
+				<Flex justify='center' align='center' w='15%' h='100%'>
 					<Avatar size='xl' src='https://bit.ly/broken-link' />
 				</Flex>
 				{/* content container */}
-				<Flex w='80%' flexDir='column'>
+				<Flex w='85%' flexDir='column'>
 					{/* tag container */}
-					<Flex w='100%' justify='flex-start' h='32px'>
+					<Flex justify='flex-start' w='100%' h='15%' pt='1%'>
 						<Flex align='center' h='32px' mr='35px'>
 							<Box as={TiArchive}></Box>
 							<Flex as='h3' fontWeight='light' pl='10px'>
@@ -57,14 +57,14 @@ const ReviewCard = ({ review, history }) => {
 						</Flex>
 					</Flex>
 					{/* headline line container  */}
-					<Flex w='100%' h='35' p='20px' align='center' wrap='wrap'>
+					<Flex w='100%' h='25%' align='center' wrap='wrap' pt='2%'>
 						<h2>
 							“The traditional two-person interview format, sometimes is not
 							easy to deal with or kind of”
 						</h2>
 					</Flex>
 					{/* summary container */}
-					<Flex w='100%' h='130px' px='20px'>
+					<Flex w='100%' h='50%' px='20px' pt='1%' wrap='nowrap'>
 						<p>{review.job_review}</p>
 					</Flex>
 				</Flex>

@@ -6,18 +6,13 @@ import getReview from '../../state/actions/index';
 import NavBar from './NavBar';
 import ReviewCard from './ReviewCard';
 // styles
-import { Flex, Button, Avatar } from '@chakra-ui/core';
+import { Flex } from '@chakra-ui/core';
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
 	// pull review data
 	useEffect(() => {
 		getReview();
 	}, [getReview]);
-
-	// use to navigate to review form
-	const navToReviewForm = () => {
-		history.push('/dashboard/add-review');
-	};
 
 	return (
 		<>
