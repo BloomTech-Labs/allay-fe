@@ -22,10 +22,7 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log("location.pathname", location.pathname);
     ReactGA.initialize("UA-159325981-1");
-    ReactGA.set({ page: location.pathname });
-    ReactGA.pageview(location.pathname);
     ReactGA.ga('send', 'pageview', location.pathname);
   }, [location]);
 
