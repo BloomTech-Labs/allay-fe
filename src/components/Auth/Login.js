@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga'; // for google analytics
 // actions
 import login from '../../state/actions/index';
 // styles
@@ -40,10 +41,23 @@ const Login = ({ login, isLoading, history }) => {
     return error || true;
   }
 
-  const submitForm = creds => {
-    // action function here
+
+	const submitForm = creds => {
+		// action function here
     login(creds).then(() => history.push('/dashboard'));
+    ReactGA.event({
+      category: 'User',
+      action: `Button Login`
+    });
   };
+  
+  const gaSignup = () => {
+    ReactGA.event({
+      category: 'User',
+      action: `Link Don't have an account`
+    });
+  }
+
 
   if (isLoading) {
     return (
@@ -118,8 +132,7 @@ const Login = ({ login, isLoading, history }) => {
                     {errors.password && errors.password.message}
                   </FormErrorMessage>
                 </Flex>
-              </FormControl>
-
+              </FormControl>	
               <Button
                 border='none'
                 h='64px'
@@ -133,16 +146,16 @@ const Login = ({ login, isLoading, history }) => {
               >
                 Login
               </Button>
+							<Flex m='15px' justify='center' fontWeight='light'>
+								<Link to='/signup' onClick={gaSignup} >Don't have an account?</Link>
+							</Flex>
+						</Flex>
+					</form>
+				</Flex>
+			</Flex>
+		</Flex>
+	);
 
-              <Flex m='15px' justify='center' fontWeight='light'>
-                <Link to='/signup'>Don't have an account?</Link>
-              </Flex>
-            </Flex>
-          </form>
-        </Flex>
-      </Flex>
-    </Flex>
-  );
 };
 
 const mapStateToProps = state => {
