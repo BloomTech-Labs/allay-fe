@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga'; // for google analytics
 //actions
 import signup from '../../state/actions/index';
 //styles
@@ -52,19 +53,29 @@ const Signup = ({ signup, isLoading, history }) => {
   }
   // end validation
 
-  const submitForm = creds => {
-    console.log(creds);
-    if (creds.confirmPassword === creds.password) {
-      signup({
-        username: creds.username,
-        email: creds.email,
-        password: creds.password
-      }).then(() => history.push('/dashboard'));
-    } else {
-      console.log('form NOT submitted');
-      alert('Your Passwords must match!');
-    }
+	const submitForm = creds => {
+		if (creds.confirmPassword === creds.password) {
+			signup({
+				username: creds.username,
+				email: creds.email,
+				password: creds.password
+			}).then(() => history.push('/dashboard'));
+		} else {
+			console.log('form NOT submitted');
+			alert('Your Passwords must match!');
+    };
+    ReactGA.event({
+      category: 'User',
+      action: `Button Sign Up`
+    });
   };
+  
+  const gaLogin = () => {
+    ReactGA.event({
+      category: 'User',
+      action: `Link Already have an account`
+    });
+  }
 
   if (isLoading) {
     return (
@@ -186,7 +197,7 @@ const Signup = ({ signup, isLoading, history }) => {
                 Sign Up
               </Button>
               <Flex as='p' w='100%' justify='center'>
-                <Link to='/'>Already have an account?</Link>
+                <Link to='/' onClick={gaLogin}>Already have an account?</Link>
               </Flex>
             </Flex>
           </form>
@@ -194,6 +205,7 @@ const Signup = ({ signup, isLoading, history }) => {
       </Flex>
     </Flex>
   );
+
 };
 
 const mapStateToProps = state => {

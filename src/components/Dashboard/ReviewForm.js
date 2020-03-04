@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactGA from 'react-ga'; // for google analytics
 
 import { useForm } from 'react-hook-form';
 
@@ -54,6 +55,10 @@ const ReviewForm = ({
     postReview(localStorage.getItem('userId'), data).then(() =>
       history.push('/dashboard')
     );
+    ReactGA.event({
+      category: 'Review',
+      action: `Submit review`
+    });
   };
 
   // specifically for the cancel button functionality
