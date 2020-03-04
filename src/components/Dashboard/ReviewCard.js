@@ -31,40 +31,46 @@ const ReviewCard = ({ review, history }) => {
         {/* content container */}
         <Flex w='85%' flexDir='column'>
           {/* tag container */}
-          <Flex justify='flex-start' w='100%' h='15%' pt='1%'>
-            <Flex align='center' h='32px' mr='35px'>
-              <Box as={TiArchive}></Box>
-              <Flex as='h3' fontWeight='light' pl='10px'>
+          <Flex
+            justify='flex-start'
+            w='100%'
+            h='32px'
+            mt='0.5%'
+            overflow='hidden'
+          >
+            <Flex align='center' w='20%' wrap='nowrap'>
+              <Box as={TiArchive} mr='10px'></Box>
+              <Flex as='h3' fontWeight='light' mr='10px' isTruncated>
                 {review.company_name}
               </Flex>
             </Flex>
-            <Flex align='center' h='32px' mr='35px'>
-              <Box as={TiLocationOutline}></Box>
-              <Flex as='h3' fontWeight='light' pl='10px'>
+            <Flex align='center' w='18%' wrap='nowrap'>
+              <Box as={TiLocationOutline} mr='10px'></Box>
+              <Flex as='h3' fontWeight='light' mr='10px' isTruncated>
                 {review.job_location}
               </Flex>
             </Flex>
-            <Flex align='center' h='32px' mr='35px'>
-              <Box as={TiThumbsUp}></Box>
-              <Flex as='h3' fontWeight='light' pl='10px'>
+            <Flex align='center' w='18%' wrap='nowrap'>
+              <Box as={TiThumbsUp} mr='10px'></Box>
+              <Flex as='h3' fontWeight='light' mr='10px'>
                 Received 0ffer
               </Flex>
             </Flex>
-            <Flex align='center' h='32px' mr='35px'>
-              <Flex as='h3' fontWeight='light' pl='10px'>
+            <Flex align='center' w='40%' wrap='nowrap'>
+              <Flex as='h3' fontWeight='light' mr='10px' isTruncated>
                 Position: {review.job_title}
               </Flex>
             </Flex>
           </Flex>
           {/* headline line container  */}
-          <Flex w='100%' h='25%' align='center' wrap='wrap' pt='2%'>
+          <Flex w='100%' align='center' wrap='wrap' pl='1%' mt='1%'>
             <h2>
               “The traditional two-person interview format, sometimes is not
               easy to deal with or kind of”
             </h2>
           </Flex>
           {/* summary container */}
-          <Flex w='100%' h='50%' px='20px' pt='1%' wrap='nowrap'>
+          <Flex w='100%' wrap='wrap' pl='1%' mt='0.5%'>
             <p>{review.job_review}</p>
           </Flex>
         </Flex>
