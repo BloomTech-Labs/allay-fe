@@ -9,31 +9,33 @@ import ReviewCard from './ReviewCard';
 import { Flex } from '@chakra-ui/core';
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
-	// pull review data
-	useEffect(() => {
-		getReview();
-	}, [getReview]);
+  // pull review data
+  useEffect(() => {
+    getReview();
+  }, [getReview]);
 
-	return (
-		<>
-			<Flex maxWidth='1440px' direction='column' wrap='wrap'>
-				<NavBar history={history} isLoading={isLoading} />
-				<Flex mt='15%' direction='column'>
-					<Flex height='100%' direction='column'>
-						{data.map(review => (
-							<ReviewCard key={review.id} review={review} history={history} />
-						))}
-					</Flex>
-				</Flex>
-			</Flex>
-		</>
-	);
+  return (
+    <>
+      <Flex w='100%' minH='100vh' justify='center'>
+        <Flex w='1440px' direction='column' wrap='wrap'>
+          <NavBar history={history} isLoading={isLoading} />
+          <Flex mt='15%' direction='column'>
+            <Flex height='100%' direction='column'>
+              {data.map(review => (
+                <ReviewCard key={review.id} review={review} history={history} />
+              ))}
+            </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
+    </>
+  );
 };
 
 const mapStateToProps = state => {
-	return {
-		isLoading: state.review.fetchingData,
-		data: state.review.data
-	};
+  return {
+    isLoading: state.review.fetchingData,
+    data: state.review.data
+  };
 };
 export default connect(mapStateToProps, getReview)(DashboardHome);
