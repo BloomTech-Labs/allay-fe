@@ -21,12 +21,23 @@ import {
   AlertDialogOverlay,
   AlertDialogFooter,
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
+
+  // modal
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure
 } from '@chakra-ui/core';
 
 import { connect } from 'react-redux';
 import postReview from '../../state/actions';
 import getCompanies from '../../state/actions';
+import postCompany from '../../state/actions';
 
 const ReviewForm = ({
   postReview,
@@ -48,6 +59,16 @@ const ReviewForm = ({
     return error || true;
   }
 
+  function validateCompanyState(value) {
+    let error;
+    if (!value) {
+      error = 'Company state is required';
+    } else if (value.length !== 2) {
+      error = 'Must abbreviate state';
+    }
+    return error || true;
+  }
+
   useEffect(() => {
     getCompanies();
   }, [getCompanies]);
@@ -57,11 +78,19 @@ const ReviewForm = ({
       history.push('/dashboard')
     );
   };
+  const submitCompanyForm = newCompany => {
+    postCompany(newCompany).then(onClose);
+  };
 
   // specifically for the cancel button functionality
-  const [isOpen, setIsOpen] = useState();
-  const onClose = () => setIsOpen(false);
-  const cancelRef = useRef();
+  // const [isOpen, setIsOpen] = useState();
+  // const onClose = () => setIsOpen(false);
+  // const cancelRef = useRef();
+
+  // company form modal
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const initialRef = React.useRef();
 
   if (isLoading) {
     return (
@@ -134,9 +163,81 @@ const ReviewForm = ({
                 ))}
               </Select>
               <Flex>
-                <Link href='/add-company' color='black'>
+                <Link
+                  as='p'
+                  color='black'
+                  onClick={onOpen}
+                  _hover={{ cursor: 'pointer' }}
+                >
                   Need to add a company?
                 </Link>
+                <Modal initialFocusRef={initialRef} isOpen={isOpen}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>Add a Company</ModalHeader>
+                    <ModalCloseButton onClick={onClose} />
+                    <ModalBody pb={6}>
+                      <form onSubmit={handleSubmit(submitCompanyForm)}>
+                        <FormControl isRequired isInvalid={errors.hq_state}>
+                          <FormLabel color='#525252'>Company Name</FormLabel>
+                          <Input
+                            mb='1rem'
+                            variant='filled'
+                            borderRadius='none'
+                            type='text'
+                            name='name'
+                            label='Company Name'
+                            placeholder='Ex: UPS'
+                            ref={register}
+                          />
+                          <FormLabel color='#525252'>City</FormLabel>
+                          <Input
+                            mb='1rem'
+                            variant='filled'
+                            borderRadius='none'
+                            type='text'
+                            name='hq_city'
+                            label='City'
+                            placeholder='Ex: Los Angeles'
+                            ref={register}
+                          />
+                          <FormLabel color='#525252'>State</FormLabel>
+                          <Input
+                            borderRadius='none'
+                            variant='filled'
+                            label='State'
+                            type='text'
+                            name='hq_state'
+                            placeholder='Ex: CA'
+                            ref={register({ validate: validateCompanyState })}
+                          />
+                          <FormErrorMessage>
+                            {errors.hq_state && errors.hq_state.message}
+                          </FormErrorMessage>
+                        </FormControl>
+                      </form>
+                    </ModalBody>
+
+                    <ModalFooter>
+                      <Button
+                        bg='#615E5E'
+                        color='white'
+                        _hover={{ bg: '#979797' }}
+                        _active={{
+                          bg: '#979797'
+                        }}
+                        isLoading={formState.isSubmitting}
+                        type='submit'
+                        m='0 auto'
+                        w='400px'
+                        h='50px'
+                        center
+                      >
+                        Add
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
               </Flex>
               <FormLabel fontSize='15px' mt='3' color='#525252'>
                 Job Title
@@ -245,6 +346,7 @@ const ReviewForm = ({
             <ButtonGroup mb='3' mt='3'>
               <Button
                 w='558px'
+                h='50px'
                 type='submit'
                 _hover={{ bg: '#979797' }}
                 _active={{ bg: '#979797' }}
@@ -254,7 +356,7 @@ const ReviewForm = ({
               >
                 Add Your Review
               </Button>
-              <Button
+              {/* <Button
                 border='2px solid #615E5E'
                 bg='none'
                 color='#615E5E'
@@ -285,7 +387,7 @@ const ReviewForm = ({
                     </Button>
                   </AlertDialogFooter>
                 </AlertDialogContent>
-              </AlertDialog>
+              </AlertDialog> */}
             </ButtonGroup>
           </form>
         </Flex>
