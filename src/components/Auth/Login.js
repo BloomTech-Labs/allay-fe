@@ -41,23 +41,21 @@ const Login = ({ login, isLoading, history }) => {
     return error || true;
   }
 
-
-	const submitForm = creds => {
-		// action function here
+  const submitForm = creds => {
+    // action function here
     login(creds).then(() => history.push('/dashboard'));
     ReactGA.event({
       category: 'User',
       action: `Button Login`
     });
   };
-  
+
   const gaSignup = () => {
     ReactGA.event({
       category: 'User',
       action: `Link Don't have an account`
     });
-  }
-
+  };
 
   if (isLoading) {
     return (
@@ -77,7 +75,7 @@ const Login = ({ login, isLoading, history }) => {
 
   return (
     <Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
-      <Flex w='1440px'>
+      <Flex maxW='1440px' w='100%'>
         <Flex w='40%' justify='center' align='center'>
           <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
             Allay - <br />
@@ -132,7 +130,7 @@ const Login = ({ login, isLoading, history }) => {
                     {errors.password && errors.password.message}
                   </FormErrorMessage>
                 </Flex>
-              </FormControl>	
+              </FormControl>
               <Button
                 border='none'
                 h='64px'
@@ -146,16 +144,17 @@ const Login = ({ login, isLoading, history }) => {
               >
                 Login
               </Button>
-							<Flex m='15px' justify='center' fontWeight='light'>
-								<Link to='/signup' onClick={gaSignup} >Don't have an account?</Link>
-							</Flex>
-						</Flex>
-					</form>
-				</Flex>
-			</Flex>
-		</Flex>
-	);
-
+              <Flex m='15px' justify='center' fontWeight='light'>
+                <Link to='/signup' onClick={gaSignup}>
+                  Don't have an account?
+                </Link>
+              </Flex>
+            </Flex>
+          </form>
+        </Flex>
+      </Flex>
+    </Flex>
+  );
 };
 
 const mapStateToProps = state => {

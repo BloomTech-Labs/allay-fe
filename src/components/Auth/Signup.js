@@ -53,29 +53,29 @@ const Signup = ({ signup, isLoading, history }) => {
   }
   // end validation
 
-	const submitForm = creds => {
-		if (creds.confirmPassword === creds.password) {
-			signup({
-				username: creds.username,
-				email: creds.email,
-				password: creds.password
-			}).then(() => history.push('/dashboard'));
-		} else {
-			console.log('form NOT submitted');
-			alert('Your Passwords must match!');
-    };
+  const submitForm = creds => {
+    if (creds.confirmPassword === creds.password) {
+      signup({
+        username: creds.username,
+        email: creds.email,
+        password: creds.password
+      }).then(() => history.push('/dashboard'));
+    } else {
+      console.log('form NOT submitted');
+      alert('Your Passwords must match!');
+    }
     ReactGA.event({
       category: 'User',
       action: `Button Sign Up`
     });
   };
-  
+
   const gaLogin = () => {
     ReactGA.event({
       category: 'User',
       action: `Link Already have an account`
     });
-  }
+  };
 
   if (isLoading) {
     return (
@@ -95,7 +95,7 @@ const Signup = ({ signup, isLoading, history }) => {
 
   return (
     <Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
-      <Flex w='1440px'>
+      <Flex maxW='1440px' w='100%'>
         <Flex w='40%' justify='center' align='center'>
           <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
             Allay - <br />
@@ -197,7 +197,9 @@ const Signup = ({ signup, isLoading, history }) => {
                 Sign Up
               </Button>
               <Flex as='p' w='100%' justify='center'>
-                <Link to='/' onClick={gaLogin}>Already have an account?</Link>
+                <Link to='/' onClick={gaLogin}>
+                  Already have an account?
+                </Link>
               </Flex>
             </Flex>
           </form>
@@ -205,7 +207,6 @@ const Signup = ({ signup, isLoading, history }) => {
       </Flex>
     </Flex>
   );
-
 };
 
 const mapStateToProps = state => {

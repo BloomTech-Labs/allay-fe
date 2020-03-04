@@ -16,7 +16,8 @@ export default function NavBar({ history, isLoading }) {
   return (
     // <Flex w='1440px' direction='column' wrap='wrap'>
     <Flex
-      w='1440px'
+      maxW='1440px'
+      w='100%'
       px='40px'
       background='#FFFFFF'
       top='0'
