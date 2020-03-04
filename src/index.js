@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ReactGA from 'react-ga'; // for google analytics
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // configure redux
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -20,14 +20,11 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, logger))
 );
 
-// google analytics
-
-ReactGA.initialize('UA-159325981-1');
-ReactGA.pageview(window.location.pathname + window.location.search);
-
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

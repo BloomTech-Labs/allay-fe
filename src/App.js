@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 // React Router
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 // styles
 import './App.css';
 import { ThemeProvider } from '@chakra-ui/core';
@@ -13,10 +13,24 @@ import PrivateRoute from './utils/PrivateRoute';
 import SingleReview from './components/Dashboard/SingleReview';
 import DashboardHome from './components/Dashboard/DashboardHome';
 import AddCompanyForm from './components/Dashboard/AddCompanyForm';
+// google analytics
+import ReactGA from 'react-ga';
+import { useLocation } from 'react-router-dom';
 
 const App = () => {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log("location.pathname", location.pathname);
+    ReactGA.initialize("UA-159325981-1");
+    ReactGA.set({ page: location.pathname });
+    ReactGA.pageview(location.pathname);
+    ReactGA.ga('send', 'pageview', location.pathname);
+  }, [location]);
+
 	return (
-		<Router>
+		// <Router>
 			<ThemeProvider theme={customTheme}>
 				<div className='App'>
 					<Switch>
@@ -29,7 +43,7 @@ const App = () => {
 					</Switch>
 				</div>
 			</ThemeProvider>
-		</Router>
+		// </Router>
 	);
 };
 
