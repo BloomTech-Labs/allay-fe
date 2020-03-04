@@ -6,13 +6,13 @@ import { Flex, Button, Avatar } from '@chakra-ui/core';
 export default function NavBar({ history, isLoading }) {
   // use to navigate to review form
   const navToReviewForm = () => {
-    history.push('/dashboard/add-review')
-     ReactGA.event({
+    history.push('/dashboard/add-review');
+    ReactGA.event({
       category: 'Review',
       action: `Add new review`
     });
-	};
   };
+
   return (
     // <Flex w='1440px' direction='column' wrap='wrap'>
     <Flex
