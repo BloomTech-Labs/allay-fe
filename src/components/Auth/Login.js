@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga'; // for google analytics
 // actions
 import login from '../../state/actions/index';
 // styles
@@ -42,8 +43,19 @@ const Login = ({ login, isLoading, history }) => {
 
 	const submitForm = creds => {
 		// action function here
-		login(creds).then(() => history.push('/dashboard'));
-	};
+    login(creds).then(() => history.push('/dashboard'));
+    ReactGA.event({
+      category: 'User',
+      action: `Button Login`
+    });
+  };
+  
+  const gaSignup = () => {
+    ReactGA.event({
+      category: 'User',
+      action: `Link Don't have an account`
+    });
+  }
 
 	if (isLoading) {
 		return (
@@ -130,7 +142,7 @@ const Login = ({ login, isLoading, history }) => {
 								</Button>
 							</Flex>
 							<Flex m='15px' justify='center' fontWeight='light'>
-								<Link to='/signup'>Don't have an account?</Link>
+								<Link to='/signup' onClick={gaSignup} >Don't have an account?</Link>
 							</Flex>
 						</Flex>
 					</form>

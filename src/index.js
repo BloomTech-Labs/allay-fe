@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import ReactGA from 'react-ga'; // for google analytics
 
 // configure redux
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -20,7 +21,7 @@ const store = createStore(
 );
 
 // google analytics
-import ReactGA from 'react-ga';
+
 ReactGA.initialize('UA-159325981-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
 
