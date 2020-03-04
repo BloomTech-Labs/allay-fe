@@ -120,7 +120,6 @@ const Login = ({ login, isLoading, history }) => {
                 </Flex>
               </FormControl>
 
-              {/* <Flex px='1%'> */}
               <Button
                 border='none'
                 h='64px'
@@ -134,7 +133,7 @@ const Login = ({ login, isLoading, history }) => {
               >
                 Login
               </Button>
-              {/* </Flex> */}
+
               <Flex m='15px' justify='center' fontWeight='light'>
                 <Link to='/signup'>Don't have an account?</Link>
               </Flex>
