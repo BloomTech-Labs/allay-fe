@@ -178,6 +178,7 @@ const Signup = ({ signup, isLoading, history }) => {
                 my='6%'
                 rounded='6px'
                 border='none'
+                size='lg'
                 variantColor='teal'
                 isLoading={formState.isSubmitting}
                 type='submit'
