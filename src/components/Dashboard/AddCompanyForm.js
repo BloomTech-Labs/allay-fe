@@ -58,109 +58,110 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit(submitForm)}>
-        <Flex m='20px auto' w='20rem' justify='center' flexDir='column'>
-          <FormControl isRequired isInvalid={errors.hq_state}>
-            <h2> Add a Company</h2>
-            <FormLabel color='#525252'>Company Name</FormLabel>
-            <Input
-              mb='1rem'
-              variant='filled'
-              borderRadius='none'
-              type='text'
-              name='name'
-              label='Company Name'
-              placeholder='Ex: UPS'
-              ref={register}
-            />
+    <Flex bg='rgba(72, 72, 72, 0.1)' w='100%' minH='100vh'>
+      <Flex justify='flexStart' py='6rem' px='15rem' bg='white'>
+        <Flex justify='center' flexDir='column'>
+          <form onSubmit={handleSubmit(submitForm)}>
+            <FormControl isRequired isInvalid={errors.hq_state}>
+              <h2> Add a Company</h2>
+              <FormLabel color='#525252'>Company Name</FormLabel>
+              <Input
+                mb='1rem'
+                variant='filled'
+                borderRadius='none'
+                type='text'
+                name='name'
+                label='Company Name'
+                placeholder='e.g. UPS'
+                ref={register}
+              />
+              <FormLabel color='#525252'>City</FormLabel>
+              <Input
+                mb='1rem'
+                variant='filled'
+                borderRadius='none'
+                type='text'
+                name='hq_city'
+                label='City'
+                placeholder='e.g. Los Angeles'
+                ref={register}
+              />
 
-            <FormLabel color='#525252'>City</FormLabel>
-            <Input
-              mb='1rem'
-              variant='filled'
-              borderRadius='none'
-              type='text'
-              name='hq_city'
-              label='City'
-              placeholder='Ex: Los Angeles'
-              ref={register}
-            />
+              <FormLabel color='#525252'>State</FormLabel>
+              <Input
+                mb='1rem'
+                borderRadius='none'
+                variant='filled'
+                label='State'
+                type='text'
+                name='hq_state'
+                placeholder='e.g. CA'
+                ref={register({ validate: validateCompanyState })}
+              />
+              <FormErrorMessage>
+                {errors.hq_state && errors.hq_state.message}
+              </FormErrorMessage>
+            </FormControl>
+            <ButtonGroup mt='1rem' spacing={2}>
+              <Button
+                bg='#615E5E'
+                color='white'
+                _hover={{ bg: '#979797' }}
+                _active={{
+                  bg: '#979797'
+                }}
+                isLoading={formState.isSubmitting}
+                type='submit'
+                size='md'
+                w='558px'
+                h='50px'
+              >
+                Add
+              </Button>
+              <Button
+                isloading
+                size='md'
+                height='48px'
+                width='100px'
+                border='2px solid #615E5E'
+                bg='none'
+                color='#615E5E'
+                onClick={() => setIsOpen(true)}
+              >
+                Cancel
+              </Button>
+              <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+              >
+                <AlertDialogOverlay />
+                <AlertDialogContent>
+                  <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                    Cancel form?
+                  </AlertDialogHeader>
+                  <AlertDialogBody>
+                    Are you sure? You can't undo this action.
+                  </AlertDialogBody>
 
-            <FormLabel color='#525252'>State</FormLabel>
-            <Input
-              mb='1rem'
-              borderRadius='none'
-              variant='filled'
-              label='State'
-              type='text'
-              name='hq_state'
-              placeholder='Ex: CA'
-              ref={register({ validate: validateCompanyState })}
-            />
-            <FormErrorMessage>
-              {errors.hq_state && errors.hq_state.message}
-            </FormErrorMessage>
-          </FormControl>
-          <ButtonGroup mt='1rem' spacing={2}>
-            <Button
-              bg='#615E5E'
-              color='white'
-              _hover={{ bg: '#979797' }}
-              _active={{
-                bg: '#979797'
-              }}
-              isLoading={formState.isSubmitting}
-              type='submit'
-              size='md'
-              height='48px'
-              width='200px'
-            >
-              Add
-            </Button>
-            <Button
-              isloading
-              size='md'
-              height='48px'
-              width='100px'
-              border='2px solid #615E5E'
-              bg='none'
-              color='#615E5E'
-              onClick={() => setIsOpen(true)}
-            >
-              Cancel
-            </Button>
-            <AlertDialog
-              isOpen={isOpen}
-              leastDestructiveRef={cancelRef}
-              onClose={onClose}
-            >
-              <AlertDialogOverlay />
-              <AlertDialogContent>
-                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                  Cancel form?
-                </AlertDialogHeader>
-                <AlertDialogBody>
-                  Are you sure? You can't undo this action.
-                </AlertDialogBody>
-
-                <AlertDialogFooter>
-                  <Button ref={cancelRef} onClick={onClose}>
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={() => history.push('/dashboard/add-review')}
-                    ml={3}
-                  >
-                    Yes I'm sure
-                  </Button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </ButtonGroup>
+                  <AlertDialogFooter>
+                    <Button ref={cancelRef} onClick={onClose}>
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={() => history.push('/dashboard/add-review')}
+                      ml={3}
+                    >
+                      Yes I'm sure
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </ButtonGroup>
+          </form>
         </Flex>
-      </form>
-    </>
+      </Flex>
+    </Flex>
   );
 };
 
