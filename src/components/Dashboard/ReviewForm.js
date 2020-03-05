@@ -37,9 +37,9 @@ const ReviewForm = ({
 }) => {
   const { register, handleSubmit, errors, formState } = useForm();
 
-  // useEffect(() => {
-  //   getCompanies();
-  // }, [getCompanies]);
+  useEffect(() => {
+    getCompanies();
+  }, [getCompanies]);
 
   // validating salary
   function validateSalary(value) {
