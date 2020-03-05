@@ -26,7 +26,7 @@ const ReviewCard = ({ review, history }) => {
 			>
 				{/* avatar box */}
 				<Flex justify='center' align='center' w='15%' h='90%'>
-					<Avatar size='xl' src={`//logo.clearbit.com/${review.url}`} />
+					<Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
 				</Flex>
 				{/* content container */}
 				<Flex w='85%' flexDir='column'>
