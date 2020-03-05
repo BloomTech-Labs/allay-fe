@@ -20,18 +20,7 @@ import {
   AlertDialogBody,
   AlertDialogOverlay,
   AlertDialogFooter,
-  Checkbox,
-  CheckboxGroup,
-
-  // modal
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure
+  Checkbox
 } from '@chakra-ui/core';
 
 import { connect } from 'react-redux';
@@ -48,6 +37,10 @@ const ReviewForm = ({
 }) => {
   const { register, handleSubmit, errors, formState } = useForm();
 
+  // useEffect(() => {
+  //   getCompanies();
+  // }, [getCompanies]);
+
   // validating salary
   function validateSalary(value) {
     let error;
@@ -59,38 +52,16 @@ const ReviewForm = ({
     return error || true;
   }
 
-  function validateCompanyState(value) {
-    let error;
-    if (!value) {
-      error = 'Company state is required';
-    } else if (value.length !== 2) {
-      error = 'Must abbreviate state';
-    }
-    return error || true;
-  }
-
-  useEffect(() => {
-    getCompanies();
-  }, [getCompanies]);
-
   const submitForm = data => {
     postReview(localStorage.getItem('userId'), data).then(() =>
       history.push('/dashboard')
     );
   };
-  const submitCompanyForm = newCompany => {
-    postCompany(newCompany).then(onClose);
-  };
 
   // specifically for the cancel button functionality
-  // const [isOpen, setIsOpen] = useState();
-  // const onClose = () => setIsOpen(false);
-  // const cancelRef = useRef();
-
-  // company form modal
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const initialRef = React.useRef();
+  const [isOpen, setIsOpen] = useState();
+  const onClose = () => setIsOpen(false);
+  const cancelRef = useRef();
 
   if (isLoading) {
     return (
@@ -108,7 +79,7 @@ const ReviewForm = ({
 
   return (
     <Flex bg='rgba(72, 72, 72, 0.1)'>
-      <Flex justify='flexStart' py='6rem' px='12rem' w='0 auto' bg='white'>
+      <Flex justify='flexStart' py='6rem' px='15rem' bg='white'>
         <Flex justify='center' align='start' flexDir='column'>
           <h2> Add a Review</h2>
           <form onSubmit={handleSubmit(submitForm)}>
@@ -122,7 +93,7 @@ const ReviewForm = ({
               <Input
                 variant='filled'
                 ref={register}
-                mb='3'
+                mb='4'
                 type='text'
                 name='tagline'
                 placeholder='e.g. Headline example goes here'
@@ -131,11 +102,16 @@ const ReviewForm = ({
               <FormLabel fontSize='15px' color='#525252'>
                 Did you receive an offer?
               </FormLabel>
-              <Flex mb='3'>
-                <Checkbox value='yes' mr='3' defaultIsChecked>
+              <Flex mb='4'>
+                <Checkbox
+                  name='offer_received'
+                  mr='3'
+                  defaultIsChecked
+                  ref={register}
+                >
                   Offer Received
                 </Checkbox>
-                <Checkbox value='no' defaultIsChecked>
+                <Checkbox name='offer_accepted' defaultIsChecked ref={register}>
                   Offer Accepted
                 </Checkbox>
               </Flex>
@@ -163,89 +139,17 @@ const ReviewForm = ({
                 ))}
               </Select>
               <Flex>
-                <Link
-                  as='p'
-                  color='black'
-                  onClick={onOpen}
-                  _hover={{ cursor: 'pointer' }}
-                >
+                <Link color='black' href='/add-company'>
                   Need to add a company?
                 </Link>
-                <Modal initialFocusRef={initialRef} isOpen={isOpen}>
-                  <ModalOverlay />
-                  <ModalContent>
-                    <ModalHeader>Add a Company</ModalHeader>
-                    <ModalCloseButton onClick={onClose} />
-                    <ModalBody pb={6}>
-                      <form onSubmit={handleSubmit(submitCompanyForm)}>
-                        <FormControl isRequired isInvalid={errors.hq_state}>
-                          <FormLabel color='#525252'>Company Name</FormLabel>
-                          <Input
-                            mb='1rem'
-                            variant='filled'
-                            borderRadius='none'
-                            type='text'
-                            name='name'
-                            label='Company Name'
-                            placeholder='Ex: UPS'
-                            ref={register}
-                          />
-                          <FormLabel color='#525252'>City</FormLabel>
-                          <Input
-                            mb='1rem'
-                            variant='filled'
-                            borderRadius='none'
-                            type='text'
-                            name='hq_city'
-                            label='City'
-                            placeholder='Ex: Los Angeles'
-                            ref={register}
-                          />
-                          <FormLabel color='#525252'>State</FormLabel>
-                          <Input
-                            borderRadius='none'
-                            variant='filled'
-                            label='State'
-                            type='text'
-                            name='hq_state'
-                            placeholder='Ex: CA'
-                            ref={register({ validate: validateCompanyState })}
-                          />
-                          <FormErrorMessage>
-                            {errors.hq_state && errors.hq_state.message}
-                          </FormErrorMessage>
-                        </FormControl>
-                      </form>
-                    </ModalBody>
-
-                    <ModalFooter>
-                      <Button
-                        bg='#615E5E'
-                        color='white'
-                        _hover={{ bg: '#979797' }}
-                        _active={{
-                          bg: '#979797'
-                        }}
-                        isLoading={formState.isSubmitting}
-                        type='submit'
-                        m='0 auto'
-                        w='400px'
-                        h='50px'
-                        center
-                      >
-                        Add
-                      </Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
               </Flex>
-              <FormLabel fontSize='15px' mt='3' color='#525252'>
+              <FormLabel fontSize='15px' mt='4' color='#525252'>
                 Job Title
               </FormLabel>
               <Input
                 variant='filled'
                 ref={register}
-                mb='3'
+                mb='4'
                 type='text'
                 name='job_title'
                 placeholder='e.g. Software Engineer'
@@ -257,7 +161,7 @@ const ReviewForm = ({
               <Input
                 variant='filled'
                 ref={register}
-                mb='3'
+                mb='4'
                 type='text'
                 name='job_location'
                 placeholder='e.g. San Francisco, CA'
@@ -271,11 +175,11 @@ const ReviewForm = ({
               <Input
                 variant='filled'
                 ref={register({ validate: validateSalary })}
-                mb='3'
+                mb='4'
                 type='number'
                 name='salary'
                 borderRadius='none'
-                placeholder='e.g. 70,000'
+                placeholder='e.g. 70000'
               />
               <FormErrorMessage>
                 {errors.salary && errors.salary.message}
@@ -293,7 +197,7 @@ const ReviewForm = ({
                 min='1'
                 max='5'
                 ref={register}
-                mb='3'
+                mb='4'
                 type='number'
                 name='interview_rating'
                 placeholder='1 to 5, very difficult to very easy'
@@ -305,7 +209,7 @@ const ReviewForm = ({
               <Textarea
                 variant='filled'
                 ref={register}
-                mb='3'
+                mb='4'
                 rowsMax={6}
                 type='text'
                 name='interview_review'
@@ -323,7 +227,7 @@ const ReviewForm = ({
                 min='1'
                 max='5'
                 ref={register}
-                mb='3'
+                mb='4'
                 type='number'
                 name='job_rating'
                 placeholder='1 to 5, terrible to great'
@@ -335,7 +239,7 @@ const ReviewForm = ({
               <Textarea
                 variant='filled'
                 ref={register}
-                mb='3'
+                mb='4'
                 rowsMax={6}
                 type='text'
                 name='job_review'
@@ -356,7 +260,8 @@ const ReviewForm = ({
               >
                 Add Your Review
               </Button>
-              {/* <Button
+              <Button
+                h='50px'
                 border='2px solid #615E5E'
                 bg='none'
                 color='#615E5E'
@@ -387,9 +292,10 @@ const ReviewForm = ({
                     </Button>
                   </AlertDialogFooter>
                 </AlertDialogContent>
-              </AlertDialog> */}
+              </AlertDialog>
             </ButtonGroup>
           </form>
+          <Flex></Flex>
         </Flex>
       </Flex>
     </Flex>
@@ -403,4 +309,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, (postReview, getCompanies))(ReviewForm);
+export default connect(
+  mapStateToProps,
+  (postReview, getCompanies, postCompany)
+)(ReviewForm);
