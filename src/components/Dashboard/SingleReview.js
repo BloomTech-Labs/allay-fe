@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 
 //imported styles
 import { Box, Flex, Avatar } from '@chakra-ui/core';
-import { TiLocationOutline, TiThumbsUp } from 'react-icons/ti';
+import { TiLocationOutline, TiThumbsUp, TiThumbsDown } from 'react-icons/ti';
 
 const SingleReview = ({ review, getReviewById, match, history }) => {
 	const id = match.params.id;
@@ -51,10 +51,22 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 										</Flex>
 									</Flex>
 									<Flex align='center' h='32px' mr='35px'>
-										<Box as={TiThumbsUp}></Box>
-										<Flex as='h3' fontWeight='light' pl='10px'>
-											{review.offer_received}
-										</Flex>
+										{review.offer_received ? (
+											<>
+												<Box as={TiThumbsUp} mr='10px'></Box>
+												<Flex as='h3' fontWeight='light' mr='10px'>
+													Received 0ffer
+												</Flex>{' '}
+											</>
+										) : (
+											<>
+												{' '}
+												<Box as={TiThumbsDown} mr='10px'></Box>
+												<Flex as='h3' fontWeight='light' mr='10px'>
+													No Offer
+												</Flex>{' '}
+											</>
+										)}
 									</Flex>
 								</Flex>
 								<Box>
