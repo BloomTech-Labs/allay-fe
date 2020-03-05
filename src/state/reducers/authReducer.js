@@ -5,13 +5,13 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   SIGNUP_FAIL
-} from "../types";
+} from '../types';
 
 const initialState = {
   isLoading: false,
   isLoggedIn: false,
   isSignedUp: false,
-  error: ""
+  error: ''
 };
 
 const authReducer = (state = initialState, action) => {
@@ -31,6 +31,7 @@ const authReducer = (state = initialState, action) => {
     case LOGIN_FAIL:
       return {
         ...state,
+        isLoading: false,
         isLoggedIn: false,
         error: action.payload
       };
@@ -49,6 +50,7 @@ const authReducer = (state = initialState, action) => {
     case SIGNUP_FAIL:
       return {
         ...state,
+        isLoading: false,
         isSignedUp: false,
         error: action.payload
       };

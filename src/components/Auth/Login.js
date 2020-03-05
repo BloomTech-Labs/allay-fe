@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga'; // for google analytics
 // actions
 import login from '../../state/actions/index';
 // styles
@@ -43,6 +44,17 @@ const Login = ({ login, isLoading, history }) => {
   const submitForm = creds => {
     // action function here
     login(creds).then(() => history.push('/dashboard'));
+    ReactGA.event({
+      category: 'User',
+      action: `Button Login`
+    });
+  };
+
+  const gaSignup = () => {
+    ReactGA.event({
+      category: 'User',
+      action: `Link Don't have an account`
+    });
   };
 
   if (isLoading) {
@@ -63,7 +75,7 @@ const Login = ({ login, isLoading, history }) => {
 
   return (
     <Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
-      <Flex w='1440px'>
+      <Flex maxW='1440px' w='100%'>
         <Flex w='40%' justify='center' align='center'>
           <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
             Allay - <br />
@@ -119,7 +131,6 @@ const Login = ({ login, isLoading, history }) => {
                   </FormErrorMessage>
                 </Flex>
               </FormControl>
-
               <Button
                 border='none'
                 h='64px'
@@ -133,9 +144,10 @@ const Login = ({ login, isLoading, history }) => {
               >
                 Login
               </Button>
-
               <Flex m='15px' justify='center' fontWeight='light'>
-                <Link to='/signup'>Don't have an account?</Link>
+                <Link to='/signup' onClick={gaSignup}>
+                  Don't have an account?
+                </Link>
               </Flex>
             </Flex>
           </form>

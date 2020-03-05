@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga'; // for google analytics
 //styles
 import { Flex, Button, Avatar } from '@chakra-ui/core';
 
@@ -6,11 +7,17 @@ export default function NavBar({ history, isLoading }) {
   // use to navigate to review form
   const navToReviewForm = () => {
     history.push('/dashboard/add-review');
+    ReactGA.event({
+      category: 'Review',
+      action: `Add new review`
+    });
   };
+
   return (
     // <Flex w='1440px' direction='column' wrap='wrap'>
     <Flex
-      w='1440px'
+      maxW='1440px'
+      w='100%'
       px='40px'
       background='#FFFFFF'
       top='0'

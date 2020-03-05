@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga'; // for google analytics
 //actions
 import signup from '../../state/actions/index';
 //styles
@@ -53,7 +54,6 @@ const Signup = ({ signup, isLoading, history }) => {
   // end validation
 
   const submitForm = creds => {
-    console.log(creds);
     if (creds.confirmPassword === creds.password) {
       signup({
         username: creds.username,
@@ -64,6 +64,17 @@ const Signup = ({ signup, isLoading, history }) => {
       console.log('form NOT submitted');
       alert('Your Passwords must match!');
     }
+    ReactGA.event({
+      category: 'User',
+      action: `Button Sign Up`
+    });
+  };
+
+  const gaLogin = () => {
+    ReactGA.event({
+      category: 'User',
+      action: `Link Already have an account`
+    });
   };
 
   if (isLoading) {
@@ -84,7 +95,7 @@ const Signup = ({ signup, isLoading, history }) => {
 
   return (
     <Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
-      <Flex w='1440px'>
+      <Flex maxW='1440px' w='100%'>
         <Flex w='40%' justify='center' align='center'>
           <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
             Allay - <br />
@@ -186,7 +197,9 @@ const Signup = ({ signup, isLoading, history }) => {
                 Sign Up
               </Button>
               <Flex as='p' w='100%' justify='center'>
-                <Link to='/'>Already have an account?</Link>
+                <Link to='/' onClick={gaLogin}>
+                  Already have an account?
+                </Link>
               </Flex>
             </Flex>
           </form>

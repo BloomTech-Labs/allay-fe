@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactGA from 'react-ga'; // for google analytics
 
 import { useForm } from 'react-hook-form';
 
@@ -29,53 +30,68 @@ import getCompanies from '../../state/actions';
 import postCompany from '../../state/actions';
 
 const ReviewForm = ({
-  postReview,
-  getCompanies,
-  companies,
-  history,
-  isLoading
+	postReview,
+	getCompanies,
+	companies,
+	history,
+	isLoading
 }) => {
-  const { register, handleSubmit, errors, formState } = useForm();
+	const { register, handleSubmit, errors, formState } = useForm();
+	// specifically for the cancel button functionality
+	const [isOpen, setIsOpen] = useState();
+	const onClose = () => setIsOpen(false);
+	const cancelRef = useRef();
+	// search state
+	const [searchTerm, setSearchTerm] = useState('');
+	const [searchResults, setSearchResults] = useState([]);
 
-  useEffect(() => {
-    getCompanies();
-  }, [getCompanies]);
+	// validating salary
+	function validateSalary(value) {
+		let error;
+		if (!value) {
+			error = 'Salary is required';
+		} else if (value < 0) {
+			error = 'Salary cannot be less than zero.';
+		}
+		return error || true;
+	}
 
-  // validating salary
-  function validateSalary(value) {
-    let error;
-    if (!value) {
-      error = 'Salary is required';
-    } else if (value < 0) {
-      error = 'Salary cannot be less than zero.';
-    }
-    return error || true;
-  }
+	useEffect(() => {
+		getCompanies();
+	}, [getCompanies]);
 
-  const submitForm = data => {
-    postReview(localStorage.getItem('userId'), data).then(() =>
-      history.push('/dashboard')
-    );
-  };
+	useEffect(() => {
+		if (searchTerm.length >= 4) {
+			const results = companies.filter(company =>
+				company.name.toLowerCase().includes(searchTerm.toLowerCase())
+			);
+			setSearchResults(results);
+		}
+	}, [searchTerm, companies]);
+	console.log('search results', searchResults);
+	const submitForm = data => {
+		postReview(localStorage.getItem('userId'), data).then(() =>
+			history.push('/dashboard')
+		);
+		ReactGA.event({
+			category: 'Review',
+			action: `Submit review`
+		});
+	};
 
-  // specifically for the cancel button functionality
-  const [isOpen, setIsOpen] = useState();
-  const onClose = () => setIsOpen(false);
-  const cancelRef = useRef();
-
-  if (isLoading) {
-    return (
-      <Flex justify='center' align='center' w='100vh' h='100vh'>
-        <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
-        />
-      </Flex>
-    );
-  }
+	if (isLoading) {
+		return (
+			<Flex justify='center' align='center' w='100vh' h='100vh'>
+				<Spinner
+					thickness='4px'
+					speed='0.65s'
+					emptyColor='gray.200'
+					color='blue.500'
+					size='xl'
+				/>
+			</Flex>
+		);
+	}
 
   return (
     <Flex bg='rgba(72, 72, 72, 0.1)'>
@@ -123,6 +139,16 @@ const ReviewForm = ({
               <FormLabel fontSize='15px' color='#525252'>
                 Company Name
               </FormLabel>
+                  						<Input
+							variant='filled'
+							mb='3'
+							type='text'
+							name='company'
+							value={searchTerm}
+							onChange={e => setSearchTerm(e.target.value)}
+							placeholder='Search for a company'
+							borderRadius='none'
+						/>
               <Select
                 variant='filled'
                 borderRadius='none'
@@ -303,10 +329,10 @@ const ReviewForm = ({
 };
 
 const mapStateToProps = state => {
-  return {
-    isLoading: state.review.fetchingData,
-    companies: state.company.data
-  };
+	return {
+		isLoading: state.review.fetchingData,
+		companies: state.company.data
+	};
 };
 
 export default connect(
