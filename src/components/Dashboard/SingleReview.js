@@ -19,23 +19,24 @@ const SingleReview = ({ review, getReviewById, match }) => {
       <Flex w='1440px' direction='column' wrap='wrap'>
         <NavBar />
         <Box bg='red' mt='14rem'>
-          <Flex w='100%' h='160px' px='30px' wrap='wrap' justify='column'>
+          <Flex w='90%' h='160px' ml='5%' px='30px' justify='column'>
             {/* avatar */}
             <Flex justify='center' align='center' w='15%' h='90%'>
               <Avatar size='xl' src='https://bit.ly/broken-link' />
             </Flex>
             {/* tag */}
             <Flex>
-              <Box ml='10%'>
+              <Box ml='5%'>
                 <Flex justifyContent='space-between'>
                   <Flex as='h2' fontSize='32px'>
                     {review.company_name} Interview Review
                   </Flex>
                   <Flex as='h2' fontSize='32px'>
-                    icon{review.interview_rating}
+                    icon{review.interview_rating}/10
                   </Flex>
                 </Flex>
-                <Flex justify='flex-start' w='100%' h='15%' pt='1%'>
+                {/* tag */}
+                <Flex justify='flex-start' w='100%' h='15%' mb='2%' pt='1%'>
                   <Flex align='center' h='32px' mr='35px'>
                     Location:
                     <Flex as='h3' fontWeight='light' pl='10px'>
@@ -57,19 +58,24 @@ const SingleReview = ({ review, getReviewById, match }) => {
                   </Flex>
                 </Flex>
                 <Box>
-                  <Flex>
-                    <Flex as='h2' fontWeight='light' mt='5px'>
-                      “insert users headline here insert users headline here
-                      insert users”
-                    </Flex>
+                  <Flex as='h2' fontWeight='light' mb='2%' mt='5px'>
+                    “insert users headline here insert users headline here
+                    insert users”
                   </Flex>
+
                   <Box>
-                    <Flex as='p'>Description: </Flex>
-                    <Flex>
-                      {/* I interviewed at {review.company_name} in
-                      {review.job_location} for a {review.job_title} position.
-                      The interview process was {review.interview_rating}.
-                      {review.interview_review} */}
+                    <Flex as='p' fontSize='24px' mb='1%'>
+                      Description:
+                    </Flex>
+                    <Flex fontWeight='light' as='p' fontSize='18px'>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
                     </Flex>
                   </Box>
                 </Box>
