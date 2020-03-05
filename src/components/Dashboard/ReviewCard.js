@@ -24,7 +24,7 @@ const ReviewCard = ({ review, history }) => {
 			<Flex
 				w='100%'
 				h='160px'
-				mb='1%'
+				mb='3%'
 				px='30px'
 				wrap='nowrap'
 				onClick={learnMore}
