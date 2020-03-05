@@ -18,7 +18,7 @@ const ReviewCard = ({ review, history }) => {
 	const learnMore = () => {
 		history.push(`/dashboard/${review.id}`);
 	};
-	console.log(review);
+
 	return (
 		<>
 			<Flex
