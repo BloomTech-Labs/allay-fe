@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 // actions
 import getReview from '../../state/actions/index';
 // icons
-import { TiLocationOutline, TiArchive, TiThumbsUp } from 'react-icons/ti';
+import {
+	TiLocationOutline,
+	TiArchive,
+	TiThumbsUp,
+	TiThumbsDown
+} from 'react-icons/ti';
 // styles
 import { Box, Avatar, Flex } from '@chakra-ui/core';
 
@@ -19,8 +24,9 @@ const ReviewCard = ({ review, history }) => {
 			<Flex
 				w='100%'
 				h='160px'
+				mb='1%'
 				px='30px'
-				wrap='wrap'
+				wrap='nowrap'
 				onClick={learnMore}
 				justify='column'
 			>
@@ -61,7 +67,7 @@ const ReviewCard = ({ review, history }) => {
 							) : (
 								<>
 									{' '}
-									<Box as={TiThumbsUp} mr='10px'></Box>
+									<Box as={TiThumbsDown} mr='10px'></Box>
 									<Flex as='h3' fontWeight='light' mr='10px'>
 										No Offer
 									</Flex>{' '}
@@ -75,11 +81,18 @@ const ReviewCard = ({ review, history }) => {
 						</Flex>
 					</Flex>
 					{/* headline line container  */}
-					<Flex w='100%' align='center' wrap='wrap' pl='1%' mt='1%'>
+					<Flex w='100%' align='center' wrap='nowrap' pl='1%' mt='1%'>
 						<h2>{review.tagline}</h2>
 					</Flex>
 					{/* summary container */}
-					<Flex w='100%' wrap='wrap' pl='1%' mt='0.5%'>
+					<Flex
+						w='100%'
+						h='50%'
+						wrap='nowrap'
+						overflow='hidden'
+						pl='1%'
+						mt='0.5%'
+					>
 						<p>{review.job_review}</p>
 					</Flex>
 				</Flex>

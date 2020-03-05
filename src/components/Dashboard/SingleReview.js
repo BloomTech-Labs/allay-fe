@@ -22,7 +22,7 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 					<Flex w='90%' h='160px' ml='5%' px='30px' justify='column'>
 						{/* avatar */}
 						<Flex justify='center' align='center' w='15%' h='90%'>
-							<Avatar size='xl' src='https://bit.ly/broken-link' />
+							<Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
 						</Flex>
 						{/* tag */}
 						<Flex>
@@ -32,7 +32,7 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 										{review.company_name} Interview Review
 									</Flex>
 									<Flex as='h2' fontSize='32px'>
-										icon{review.interview_rating}/10
+										{review.interview_rating}/10
 									</Flex>
 								</Flex>
 								{/* tag */}
@@ -53,14 +53,13 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 									<Flex align='center' h='32px' mr='35px'>
 										<Box as={TiThumbsUp}></Box>
 										<Flex as='h3' fontWeight='light' pl='10px'>
-											{/* {Received 0ffer} */}
+											{review.offer_received}
 										</Flex>
 									</Flex>
 								</Flex>
 								<Box>
 									<Flex as='h2' fontWeight='light' mb='2%' mt='5px'>
-										“insert users headline here insert users headline here
-										insert users”
+										{review.tagline}
 									</Flex>
 
 									<Box>
@@ -68,21 +67,11 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 											Description:
 										</Flex>
 										<Flex fontWeight='light' as='p' fontSize='18px'>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-											sed do eiusmod tempor incididunt ut labore et dolore magna
-											aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-											ullamco laboris nisi ut aliquip ex ea commodo consequat.
-											Duis aute irure dolor in reprehenderit in voluptate velit
-											esse cillum dolore eu fugiat nulla pariatur. Excepteur
-											sint occaecat cupidatat non proident, sunt in culpa qui
-											officia deserunt mollit anim id est laborum.
+											{review.job_review}
 										</Flex>
 									</Box>
 								</Box>
 							</Box>
-							{/* <Typography>Salary: {review.salary}</Typography>
-            
-          <Typography>Posted by: {review.reviewer}</Typography> */}
 						</Flex>
 					</Flex>
 				</Box>
