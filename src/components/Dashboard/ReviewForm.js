@@ -121,14 +121,20 @@ const ReviewForm = ({
 							</FormLabel>
 							<Flex mb='4'>
 								<Checkbox
+									size='lg'
+									border='rgba(72, 72, 72, 0.1)'
 									name='offer_received'
 									mr='3'
-									defaultIsChecked
 									ref={register}
 								>
 									Offer Received
 								</Checkbox>
-								<Checkbox name='offer_accepted' defaultIsChecked ref={register}>
+								<Checkbox
+									size='lg'
+									border='rgba(72, 72, 72, 0.1)'
+									name='offer_accepted'
+									ref={register}
+								>
 									Offer Accepted
 								</Checkbox>
 							</Flex>
