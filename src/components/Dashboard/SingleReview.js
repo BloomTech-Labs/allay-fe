@@ -32,7 +32,7 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 										{review.company_name} Interview Review
 									</Flex>
 									<Flex as='h2' fontSize='32px'>
-										{review.interview_rating}/10
+										{review.interview_rating}/5
 									</Flex>
 								</Flex>
 								{/* tag */}
