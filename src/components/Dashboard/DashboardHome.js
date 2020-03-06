@@ -17,7 +17,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 	return (
 		<>
 			<Flex w='100%' minH='100vh' justify='center'>
-				<Flex w='1440px' direction='column' wrap='wrap'>
+				<Flex maxW='1440px' w='100%' direction='column' wrap='wrap'>
 					<NavBar history={history} isLoading={isLoading} />
 					<Flex mt='15%' direction='column'>
 						<Flex height='100%' direction='column'>
