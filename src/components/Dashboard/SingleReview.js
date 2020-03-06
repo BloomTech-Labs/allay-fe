@@ -18,14 +18,14 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 		<Flex w='100%' minH='100vh' justify='center'>
 			<Flex maxW='1440px' w='100%' direction='column' wrap='wrap'>
 				<NavBar history={history} />
-				<Box bg='red' mt='14rem'>
-					<Flex w='90%' h='160px' ml='5%' px='30px' justify='column'>
+				<Box mt='14rem' w='100%'>
+					<Flex w='100%' h='100%' ml='5%' px='30px' justify='column'>
 						{/* avatar */}
 						<Flex justify='center' align='center' w='15%' h='90%'>
 							<Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
 						</Flex>
 						{/* tag */}
-						<Flex>
+						<Flex w='100%'>
 							<Box ml='5%'>
 								<Flex justifyContent='space-between'>
 									<Flex as='h2' fontSize='32px'>

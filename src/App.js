@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 // React Router
 import { Route, Switch } from 'react-router-dom';
 // styles
@@ -18,28 +18,27 @@ import ReactGA from 'react-ga';
 import { useLocation } from 'react-router-dom';
 
 const App = () => {
+	const location = useLocation();
 
-  const location = useLocation();
-
-  useEffect(() => {
-    ReactGA.initialize("UA-159325981-1");
-    ReactGA.ga('send', 'pageview', location.pathname);
-  }, [location]);
+	useEffect(() => {
+		ReactGA.initialize('UA-159325981-1');
+		ReactGA.ga('send', 'pageview', location.pathname);
+	}, [location]);
 
 	return (
 		// <Router>
-			<ThemeProvider theme={customTheme}>
-				<div className='App'>
-					<Switch>
-						<Route exact path='/' component={Login} />
-						<Route path='/signup' component={Signup} />
-						<PrivateRoute exact path='/dashboard' component={DashboardHome} />
-						<PrivateRoute path='/dashboard/add-review' component={ReviewForm} />
-						<PrivateRoute path='/dashboard/:id' component={SingleReview} />
-						<PrivateRoute path='/add-company' component={AddCompanyForm} />
-					</Switch>
-				</div>
-			</ThemeProvider>
+		<ThemeProvider theme={customTheme}>
+			<div className='App'>
+				<Switch>
+					<Route exact path='/' component={Login} />
+					<Route path='/signup' component={Signup} />
+					<PrivateRoute exact path='/dashboard' component={DashboardHome} />
+					<PrivateRoute path='/dashboard/add-review' component={ReviewForm} />
+					<PrivateRoute path='/dashboard/:id' component={SingleReview} />
+					<PrivateRoute path='/add-company' component={AddCompanyForm} />
+				</Switch>
+			</div>
+		</ThemeProvider>
 		// </Router>
 	);
 };
