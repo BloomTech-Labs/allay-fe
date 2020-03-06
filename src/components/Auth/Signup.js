@@ -130,6 +130,7 @@ const Signup = ({ signup, isLoading, history }) => {
 										type='email'
 										label='email'
 										name='email'
+										autoCapitalize='none'
 										ref={register({ validate: validateEmail })}
 									/>
 									<FormErrorMessage>
@@ -147,6 +148,7 @@ const Signup = ({ signup, isLoading, history }) => {
 										type='text'
 										label='username'
 										name='username'
+										autoCapitalize='none'
 										ref={register({ validate: validateUsername })}
 									/>
 									<FormErrorMessage>
@@ -165,6 +167,7 @@ const Signup = ({ signup, isLoading, history }) => {
 											type={show ? 'text' : 'password'}
 											label='Password'
 											name='password'
+											autoCapitalize='none'
 											ref={register({ validate: validatePassword })}
 										/>
 										<InputRightElement width='4.5rem' py='32px'>
@@ -197,6 +200,7 @@ const Signup = ({ signup, isLoading, history }) => {
 										type={show ? 'text' : 'password'}
 										label='Confirm Password'
 										name='confirmPassword'
+										autoCapitalize='none'
 										ref={register}
 									/>
 								</Flex>
