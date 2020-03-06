@@ -59,7 +59,14 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
 
 	return (
 		<Flex bg='rgba(72, 72, 72, 0.1)' w='100%' minH='100vh'>
-			<Flex justify='flexStart' py='6rem' px='15rem' bg='white'>
+			<Flex
+				justify='flexStart'
+				maxW='1100px'
+				w='100%'
+				py='6rem'
+				px='15rem'
+				bg='white'
+			>
 				<Flex justify='center' flexDir='column'>
 					<form onSubmit={handleSubmit(submitForm)}>
 						<FormControl isRequired isInvalid={errors.hq_state}>
@@ -116,7 +123,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
 								isLoading={formState.isSubmitting}
 								type='submit'
 								size='md'
-								w='558px'
+								w='500px'
 								h='64px'
 							>
 								Add
