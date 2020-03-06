@@ -335,7 +335,7 @@ const ReviewForm = ({
 						</FormControl>
 						<ButtonGroup mb='3' mt='3'>
 							<Button
-								w='558px'
+								w='500px'
 								h='64px'
 								type='submit'
 								_hover={{ bg: '#979797' }}
