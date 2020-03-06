@@ -21,7 +21,9 @@ import {
 	AlertDialogBody,
 	AlertDialogOverlay,
 	AlertDialogFooter,
-	Checkbox
+	Checkbox,
+	InputGroup,
+	InputLeftElement
 } from '@chakra-ui/core';
 
 import { connect } from 'react-redux';
@@ -208,16 +210,26 @@ const ReviewForm = ({
 							<FormLabel fontSize='15px' color='#525252'>
 								Salary
 							</FormLabel>
-							<Input
-								variant='filled'
-								ref={register({ validate: validateSalary })}
-								mb='4'
-								py='32px'
-								type='number'
-								name='salary'
-								rounded='6px'
-								placeholder='e.g. 70000'
-							/>
+							<InputGroup>
+								<InputLeftElement
+									mb='4'
+									py='32px'
+									color='gray.300'
+									fontSize='1.2em'
+									children='$'
+								/>
+								<Input
+									variant='filled'
+									ref={register({ validate: validateSalary })}
+									mb='4'
+									py='32px'
+									type='number'
+									name='salary'
+									rounded='6px'
+									placeholder='e.g. 70000'
+								/>
+							</InputGroup>
+
 							<FormErrorMessage>
 								{errors.salary && errors.salary.message}
 							</FormErrorMessage>
