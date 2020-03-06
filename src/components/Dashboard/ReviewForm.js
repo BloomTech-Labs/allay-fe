@@ -96,8 +96,15 @@ const ReviewForm = ({
 	}
 
 	return (
-		<Flex bg='rgba(72, 72, 72, 0.1)'>
-			<Flex justify='flexStart' py='6rem' px='15rem' bg='white'>
+		<Flex w='100%' bg='rgba(72, 72, 72, 0.1)'>
+			<Flex
+				maxW='1100px'
+				w='100%'
+				justify='flexStart'
+				py='6rem'
+				px='15rem'
+				bg='white'
+			>
 				<Flex justify='center' align='start' flexDir='column'>
 					<h2> Add a Review</h2>
 					<form onSubmit={handleSubmit(submitForm)}>
@@ -118,12 +125,15 @@ const ReviewForm = ({
 								placeholder='e.g. Headline example goes here'
 								rounded='6px'
 							/>
+						</FormControl>
+
+						<FormControl>
 							<FormLabel fontSize='15px' color='#525252'>
 								Did you receive an offer?
 							</FormLabel>
 							<Flex mb='4'>
 								<Checkbox
-									size='lg'
+									size='md'
 									border='rgba(72, 72, 72, 0.1)'
 									name='offer_received'
 									mr='3'
@@ -132,7 +142,7 @@ const ReviewForm = ({
 									Offer Received
 								</Checkbox>
 								<Checkbox
-									size='lg'
+									size='md'
 									border='rgba(72, 72, 72, 0.1)'
 									name='offer_accepted'
 									ref={register}
@@ -162,6 +172,7 @@ const ReviewForm = ({
 							<Select
 								variant='filled'
 								h='64px'
+								mb='4'
 								rounded='6x'
 								name='company_id'
 								id='company_name'
@@ -234,25 +245,31 @@ const ReviewForm = ({
 								{errors.salary && errors.salary.message}
 							</FormErrorMessage>
 						</FormControl>
-						<FormControl isRequired>
+						<FormControl>
 							<Flex as='h3' mb='3'>
 								Interview Process
 							</Flex>
 							<FormLabel fontSize='15px' color='#525252'>
-								Interview Difficulty
+								Rate your Experience
 							</FormLabel>
-							<Input
+							{/* // change to dropdown */}
+							<Select
 								variant='filled'
-								min='1'
-								max='5'
-								ref={register}
+								h='64px'
 								mb='4'
-								py='32px'
-								type='number'
+								rounded='6x'
 								name='interview_rating'
-								placeholder='1 to 5, very difficult to very easy'
-								rounded='6px'
-							/>
+								id='interview_rating'
+								type='select'
+								ref={register}
+							>
+								<option></option>
+								<option value={5}>5 - Great</option>
+								<option value={4}>4 - Good</option>
+								<option value={3}>3 - Ok </option>
+								<option value={2}>2 - Poor </option>
+								<option value={1}>1 - Very Poor </option>
+							</Select>
 							<FormLabel fontSize='15px' color='#525252'>
 								Interview Process
 							</FormLabel>
@@ -260,6 +277,7 @@ const ReviewForm = ({
 								variant='filled'
 								ref={register}
 								mb='4'
+								h='200px'
 								rowsMax={6}
 								type='text'
 								name='interview_review'
@@ -272,18 +290,26 @@ const ReviewForm = ({
 							<FormLabel fontSize='15px' color='#525252'>
 								Job Rating
 							</FormLabel>
-							<Input
+						</FormControl>
+						<FormControl isRequired>
+							<Select
 								variant='filled'
-								min='1'
-								max='5'
-								ref={register}
+								h='64px'
 								mb='4'
-								py='32px'
-								type='number'
+								rounded='6x'
 								name='job_rating'
-								placeholder='1 to 5, terrible to great'
-								rounded='6px'
-							/>
+								id='job_rating'
+								type='select'
+								ref={register}
+							>
+								<option></option>
+								<option value={5}>5 - Great</option>
+								<option value={4}>4 - Good</option>
+								<option value={3}>3 - Ok </option>
+								<option value={2}>2 - Poor </option>
+								<option value={1}>1 - Very Poor </option>
+							</Select>
+
 							<FormLabel fontSize='15px' color='#525252'>
 								Job Review
 							</FormLabel>
@@ -291,6 +317,7 @@ const ReviewForm = ({
 								variant='filled'
 								ref={register}
 								mb='4'
+								h='200px'
 								rowsMax={6}
 								type='text'
 								name='job_review'
