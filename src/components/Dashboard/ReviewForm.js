@@ -23,7 +23,8 @@ import {
 	AlertDialogFooter,
 	Checkbox,
 	InputGroup,
-	InputLeftElement
+	InputLeftElement,
+	Icon
 } from '@chakra-ui/core';
 
 import { connect } from 'react-redux';
@@ -122,7 +123,7 @@ const ReviewForm = ({
 								mb='4'
 								type='text'
 								name='tagline'
-								placeholder='e.g. Headline example goes here'
+								placeholder='e.g. "Best company ever!"'
 								rounded='6px'
 							/>
 						</FormControl>
@@ -158,17 +159,24 @@ const ReviewForm = ({
 							<FormLabel fontSize='15px' color='#525252'>
 								Company Name
 							</FormLabel>
-							<Input
-								variant='filled'
-								mb='3'
-								py='32px'
-								type='text'
-								name='company'
-								value={searchTerm}
-								onChange={e => setSearchTerm(e.target.value)}
-								placeholder='Search for a company'
-								rounded='6px'
-							/>
+							<InputGroup>
+								<InputLeftElement
+									py='32px'
+									children={<Icon name='search-2' color='gray.300' />}
+								/>
+								<Input
+									variant='filled'
+									mb='3'
+									py='32px'
+									type='text'
+									name='company'
+									value={searchTerm}
+									onChange={e => setSearchTerm(e.target.value)}
+									placeholder='Search for a company'
+									rounded='6px'
+								/>
+							</InputGroup>
+
 							<Select
 								variant='filled'
 								h='64px'
