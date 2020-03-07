@@ -2,6 +2,7 @@
 
 You can find the deployed project on [Heroku](https://allay-fe-production.herokuapp.com/).
 
+
 ## Contributors
 
 |[Spencer McGuire](https://github.com/spencer-mcguire)|[Aaron Pleitez](https://github.com/Playtez)|[Nasra Aden](https://github.com/nasraaden)|[Matthew Weidner](https://github.com/taterntots)|[William Chambers](https://github.com/wchamber01)|[Ignacio San Martin](https://github.com/ignaciosm)|
@@ -9,6 +10,7 @@ You can find the deployed project on [Heroku](https://allay-fe-production.heroku
 |                      [<img src="https://tinyurl.com/vvaor9q" />](https://github.com/spencer-mcguire)                       |                      [<img src="https://tinyurl.com/qm7ayvt" width = "200" />](https://github.com/Playtez)                       |                      [<img src="https://tinyurl.com/vn7oxkl" width = "200" />](https://github.com/nasraaden)                       |                      [<img src="https://tinyurl.com/vrp5qsg" width = "200" />](https://github.com/taterntots)                       |                      [<img src="https://tinyurl.com/v6majhl" width = "200" />](https://github.com/wchamber01)                       |                      [<img src="https://tinyurl.com/vx4zeah" width = "200" />](https://github.com/ignaciosm)                       
 |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/spencer-mcguire)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Playtez)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/nasraaden)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/taterntots)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wchamber01)             |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ignaciosm)             
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/spencer-mcguire/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/aaron-pleitez-14277818a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/nasra-aden-168b5618a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/matthew-a-weidner/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/william-chambers-8729b650/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ignaciosm/) 
+
 
 <br>
 <br>
@@ -35,18 +37,20 @@ You can find the deployed project on [Heroku](https://allay-fe-production.heroku
 
 Welcome to Allay! We are a platform that aims to relieve stress for students by providing a message board where students and alumni can talk about their job seeking experience. We do this by allowing alumni to leave reviews, post about job interviews, and share salaries. Additionally, we aim to provide basic social networking between students and hired alumni.
 
+Allay is a job portal for Lambda students and alumni to network and talk about their place of employment, hiring process, and salary range.
 
 ### 4️⃣ Key Features
 
--    feature one
--    feature two
--    feature three
--    feature four
--    feature five
+- feature one
+- feature two
+- feature three
+- feature four
+- feature five
 
 ## 1️⃣ Tech Stack
 
 ### Front end built using:
+
 
 -    [React](https://reactjs.org/): Current industry standard for web applications, using React let us displaying large amounts of data effectively by implementing Components. It is also very scalable, perfect for large applications with huge growth potential.
 -    [Redux](https://redux.js.org/): Centralizes our application's state and logic, easy to test/debug, works with any UI layer
@@ -63,7 +67,6 @@ Welcome to Allay! We are a platform that aims to relieve stress for students by 
 -    Jest
 -    Okta
 
-🚫 Why did you choose this framework?
 
 # APIs
 
@@ -101,18 +104,8 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-🚫These are just examples, replace them with the specifics for your app
 
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
-    *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
-    *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
-    *  REACT_APP_storageBucket - in the Firebase dashboard
-    *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
-    *  REACT_APP_backendURL - optional for your local development server
-    *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
+    *  REACT_APP_databaseURL - URL to API
 
 # 5️⃣ Content Licenses
 
@@ -147,12 +140,13 @@ When contributing to this repository, please first discuss the change you wish t
 Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
 
 ## Issue/Bug Request
-   
- **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
- - Check first to see if your issue has already been reported.
- - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
- - Create a live example of the problem.
- - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
+
+**If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
+
+- Check first to see if your issue has already been reported.
+- Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
+- Create a live example of the problem.
+- Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
 
 ### Feature Requests
 
@@ -178,4 +172,6 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
+
 See [Backend Documentation](https://github.com/Lambda-School-Labs/allay-be) for details on the backend of our project.
+

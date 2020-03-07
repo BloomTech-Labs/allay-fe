@@ -1,33 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // React Router
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-// Redux
-import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+// styles
 import './App.css';
+import { ThemeProvider } from '@chakra-ui/core';
+import customTheme from './theme/customTheme';
+// Components
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
-import ReviewList from './components/Dashboard/ReviewList';
 import ReviewForm from './components/Dashboard/ReviewForm';
+import PrivateRoute from './utils/PrivateRoute';
+import SingleReview from './components/Dashboard/SingleReview';
+import DashboardHome from './components/Dashboard/DashboardHome';
+import AddCompanyForm from './components/Dashboard/AddCompanyForm';
+// google analytics
+import ReactGA from 'react-ga';
+import { useLocation } from 'react-router-dom';
 
 const App = () => {
-  return (
-    <Router>
-      <div className='App'>
-        <h1>WELCOME TO ALLAY!</h1>
-        <Route path="/login" component={Login}/>
-        <Route path="/signup" component={Signup} />
-        <Route path="/dashboard" component={ReviewList} />
-        <Route path="/add-review" component={ReviewForm} />
-      </div>
-    </Router>
-  );
+	const location = useLocation();
+
+	useEffect(() => {
+		ReactGA.initialize('UA-159325981-1');
+		ReactGA.ga('send', 'pageview', location.pathname);
+	}, [location]);
+
+	return (
+		// <Router>
+		<ThemeProvider theme={customTheme}>
+			<div className='App'>
+				<Switch>
+					<Route exact path='/' component={Login} />
+					<Route path='/signup' component={Signup} />
+					<PrivateRoute exact path='/dashboard' component={DashboardHome} />
+					<PrivateRoute path='/dashboard/add-review' component={ReviewForm} />
+					<PrivateRoute path='/dashboard/:id' component={SingleReview} />
+					<PrivateRoute path='/add-company' component={AddCompanyForm} />
+				</Switch>
+			</div>
+		</ThemeProvider>
+		// </Router>
+	);
 };
 
-const mapStateToProps = state => {
-  console.log('APP STATE', state);
-  return {
-    isLoggedIn: state.isLoggedIn
-  };
-};
-
-export default connect(mapStateToProps, {})(App);
+export default App;
