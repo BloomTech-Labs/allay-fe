@@ -1,23 +1,22 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline, feel free to add your own flare to it.
+# Allay Documentation
 
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by. Make sure to delete the numbers by the end of Labs.
+# Maintainability Score: https://codeclimate.com/github/Lambda-School-Labs/allay-fe/maintainability
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
+You can find the deployed project on [Heroku](https://allay-fe-production.herokuapp.com/).
 
-# 1️⃣ Title of project goes here
 
-1️⃣ You can find the deployed project at [allay-production-fe.herokuapp.com].
+## Contributors
 
-## 4️⃣ Contributors
+|[Spencer McGuire](https://github.com/spencer-mcguire)|[Aaron Pleitez](https://github.com/Playtez)|[Nasra Aden](https://github.com/nasraaden)|[Matthew Weidner](https://github.com/taterntots)|[William Chambers](https://github.com/wchamber01)|[Ignacio San Martin](https://github.com/ignaciosm)|
+| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
+|                      [<img src="https://tinyurl.com/vvaor9q" />](https://github.com/spencer-mcguire)                       |                      [<img src="https://tinyurl.com/qm7ayvt" width = "200" />](https://github.com/Playtez)                       |                      [<img src="https://tinyurl.com/vn7oxkl" width = "200" />](https://github.com/nasraaden)                       |                      [<img src="https://tinyurl.com/vrp5qsg" width = "200" />](https://github.com/taterntots)                       |                      [<img src="https://tinyurl.com/v6majhl" width = "200" />](https://github.com/wchamber01)                       |                      [<img src="https://tinyurl.com/vx4zeah" width = "200" />](https://github.com/ignaciosm)                       
+|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/spencer-mcguire)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Playtez)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/nasraaden)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/taterntots)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wchamber01)             |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ignaciosm)             
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/spencer-mcguire/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/aaron-pleitez-14277818a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/nasra-aden-168b5618a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/matthew-a-weidner/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/william-chambers-8729b650/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ignaciosm/) 
 
-|                                                 [Aaron Pleitez](https://github.com/playtez)                                                 |                                                   [Ignacio San Martin](https://github.com/)                                                   |                                              [Matthew Weidner](https://github.com/taterntots)                                               |                                                  [Nasra Aden](https://github.com/nasraaden)                                                   |                                            [Spencer McGuire](https://github.com/Spencer-Mcguire)                                            | [William Chambers](https://github.com/wchamber01) |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------- |
-| [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) |
-|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)                           |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)                            |
-|                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |
 
 <br>
 <br>
+
 
 🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
 
@@ -31,11 +30,12 @@
 
 ## Project Overview
 
-1️⃣ [Trello Board](https://trello.com/b/gHzGRDcS/allay)
+[Trello Board](https://trello.com/b/gHzGRDcS/allay)
 
-1️⃣ [Product Canvas](https://www.notion.so/Allay-eb3c5b88ffab4ff199663cb40fcc1402)
+[Product Canvas](https://www.notion.so/Allay-eb3c5b88ffab4ff199663cb40fcc1402)
 
-1️⃣ [UX Design files](https://www.figma.com/file/OfII2N2BzKwTZN7EbyMozO/Allay%2C-Hanina-%26-Kelly?node-id=179%3A0)
+[UX Design files](figma.com/file/OfII2N2BzKwTZN7EbyMozO/Allay%2C-Hanina-%26-Kelly?node-id=177%3A6)
+
 
 Welcome to Allay! We are a platform that aims to relieve stress for students by providing a message board where students and alumni can talk about their job seeking experience. We do this by allowing alumni to leave reviews, post about job interviews, and share salaries. Additionally, we aim to provide basic social networking between students and hired alumni.
 
@@ -53,34 +53,22 @@ Allay is a job portal for Lambda students and alumni to network and talk about t
 
 ### Front end built using:
 
-#### React.js
 
-- flexibility in building blocks
-- quick and efficient
-- React has virtual DOM where angular does not
-- large community support
+-    [React](https://reactjs.org/): Current industry standard for web applications, using React let us displaying large amounts of data effectively by implementing Components. It is also very scalable, perfect for large applications with huge growth potential.
+-    [Redux](https://redux.js.org/): Centralizes our application's state and logic, easy to test/debug, works with any UI layer
+-    [Chakra](https://chakra-ui.com/): Chakra UI is accessible abd themeable component library. Simple to implement and build beautiful looking apps fast.
 
-#### Redux
-
-- scalable
-- ease of debugging
-- data coming from multiple endpoints influence single component/view
-
-#### React-Hook-Forms
-
-🚫List the rest of the front end features and libraries in the same format as the framework above.
-
-#### Front end deployed to `Heroku`
+#### Front end deployed to [Heroku](https://allay-fe-production.herokuapp.com/).
 
 #### [Back end](https://github.com/Lambda-School-Labs/allay-be) built using:
 
-#### Node.js
+-    NodeJS
+-    Express
+-    Knex
+-    PostgreSQL
+-    Jest
+-    Okta
 
-- Express for flexibility, simple routing, and middleware support
-- Postgres for data persistence and ease of management
-- Okta for user authentication
-
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
 
 # APIs
 
@@ -118,7 +106,6 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-🚫These are just examples, replace them with the specifics for your app
 
     *  REACT_APP_databaseURL - URL to API
 
@@ -187,4 +174,6 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](🚫*link to your backend readme here*) for details on the backend of our project.
+
+See [Backend Documentation](https://github.com/Lambda-School-Labs/allay-be) for details on the backend of our project.
+
