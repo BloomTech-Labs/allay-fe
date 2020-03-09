@@ -13,6 +13,7 @@
 		"axios": "^0.19.2",
 		"dotenv": "^8.2.0",
 		"emotion-theming": "^10.0.27",
+		"mutationobserver-shim": "^0.3.3",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
 		"react-ga": "^2.7.0",
