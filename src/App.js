@@ -17,30 +17,34 @@ import AddCompanyForm from './components/Dashboard/AddCompanyForm';
 import ReactGA from 'react-ga';
 import { useLocation } from 'react-router-dom';
 
+function initializeAnalytics() {
+  return process.env.NODE_ENV === 'production'
+    ? ReactGA.initialize('UA-159325981-1') &&
+        ReactGA.ga('send', 'pageview', window.location.pathname)
+    : null;
+}
+
 const App = () => {
-	const location = useLocation();
+  const location = useLocation();
 
-	useEffect(() => {
-		ReactGA.initialize('UA-159325981-1');
-		ReactGA.ga('send', 'pageview', location.pathname);
-	}, [location]);
+  useEffect(() => {
+    initializeAnalytics();
+  }, [location]);
 
-	return (
-		// <Router>
-		<ThemeProvider theme={customTheme}>
-			<div className='App'>
-				<Switch>
-					<Route exact path='/' component={Login} />
-					<Route path='/signup' component={Signup} />
-					<PrivateRoute exact path='/dashboard' component={DashboardHome} />
-					<PrivateRoute path='/dashboard/add-review' component={ReviewForm} />
-					<PrivateRoute path='/dashboard/:id' component={SingleReview} />
-					<PrivateRoute path='/add-company' component={AddCompanyForm} />
-				</Switch>
-			</div>
-		</ThemeProvider>
-		// </Router>
-	);
+  return (
+    <ThemeProvider theme={customTheme}>
+      <div className='App'>
+        <Switch>
+          <Route exact path='/' component={Login} />
+          <Route path='/signup' component={Signup} />
+          <PrivateRoute exact path='/dashboard' component={DashboardHome} />
+          <PrivateRoute path='/dashboard/add-review' component={ReviewForm} />
+          <PrivateRoute path='/dashboard/:id' component={SingleReview} />
+          <PrivateRoute path='/add-company' component={AddCompanyForm} />
+        </Switch>
+      </div>
+    </ThemeProvider>
+  );
 };
 
 export default App;
