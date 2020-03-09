@@ -4,19 +4,16 @@
 
 You can find the deployed project on [Heroku](https://allay-fe-production.herokuapp.com/).
 
-
 ## Contributors
 
-|[Spencer McGuire](https://github.com/spencer-mcguire)|[Aaron Pleitez](https://github.com/Playtez)|[Nasra Aden](https://github.com/nasraaden)|[Matthew Weidner](https://github.com/taterntots)|[William Chambers](https://github.com/wchamber01)|[Ignacio San Martin](https://github.com/ignaciosm)|
-| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|                      [<img src="https://tinyurl.com/vvaor9q" />](https://github.com/spencer-mcguire)                       |                      [<img src="https://tinyurl.com/qm7ayvt" width = "200" />](https://github.com/Playtez)                       |                      [<img src="https://tinyurl.com/vn7oxkl" width = "200" />](https://github.com/nasraaden)                       |                      [<img src="https://tinyurl.com/vrp5qsg" width = "200" />](https://github.com/taterntots)                       |                      [<img src="https://tinyurl.com/v6majhl" width = "200" />](https://github.com/wchamber01)                       |                      [<img src="https://tinyurl.com/vx4zeah" width = "200" />](https://github.com/ignaciosm)                       
-|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/spencer-mcguire)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Playtez)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/nasraaden)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/taterntots)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wchamber01)             |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ignaciosm)             
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/spencer-mcguire/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/aaron-pleitez-14277818a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/nasra-aden-168b5618a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/matthew-a-weidner/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/william-chambers-8729b650/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ignaciosm/) 
-
+|                                      [Spencer McGuire](https://github.com/spencer-mcguire)                                       |                                               [Aaron Pleitez](https://github.com/Playtez)                                                |                                              [Nasra Aden](https://github.com/nasraaden)                                               |                                          [Matthew Weidner](https://github.com/taterntots)                                          |                                             [William Chambers](https://github.com/wchamber01)                                              |                                     [Ignacio San Martin](https://github.com/ignaciosm)                                     |
+| :------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: |
+|                         [<img src="https://tinyurl.com/vvaor9q" />](https://github.com/spencer-mcguire)                          |                          [<img src="https://tinyurl.com/qm7ayvt" width = "200" />](https://github.com/Playtez)                           |                        [<img src="https://tinyurl.com/vn7oxkl" width = "200" />](https://github.com/nasraaden)                        |                      [<img src="https://tinyurl.com/vrp5qsg" width = "200" />](https://github.com/taterntots)                      |                          [<img src="https://tinyurl.com/v6majhl" width = "200" />](https://github.com/wchamber01)                          |                  [<img src="https://tinyurl.com/vx4zeah" width = "200" />](https://github.com/ignaciosm)                   |
+|                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/spencer-mcguire)                   |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Playtez)                           |                        [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/nasraaden)                         |                      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/taterntots)                       |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wchamber01)                           |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ignaciosm)                   |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/spencer-mcguire/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/aaron-pleitez-14277818a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/nasra-aden-168b5618a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/matthew-a-weidner/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/william-chambers-8729b650/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ignaciosm/) |
 
 <br>
 <br>
-
 
 🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
 
@@ -36,7 +33,6 @@ You can find the deployed project on [Heroku](https://allay-fe-production.heroku
 
 [UX Design files](figma.com/file/OfII2N2BzKwTZN7EbyMozO/Allay%2C-Hanina-%26-Kelly?node-id=177%3A6)
 
-
 Welcome to Allay! We are a platform that aims to relieve stress for students by providing a message board where students and alumni can talk about their job seeking experience. We do this by allowing alumni to leave reviews, post about job interviews, and share salaries. Additionally, we aim to provide basic social networking between students and hired alumni.
 
 Allay is a job portal for Lambda students and alumni to network and talk about their place of employment, hiring process, and salary range.
@@ -53,22 +49,20 @@ Allay is a job portal for Lambda students and alumni to network and talk about t
 
 ### Front end built using:
 
-
--    [React](https://reactjs.org/): Current industry standard for web applications, using React let us displaying large amounts of data effectively by implementing Components. It is also very scalable, perfect for large applications with huge growth potential.
--    [Redux](https://redux.js.org/): Centralizes our application's state and logic, easy to test/debug, works with any UI layer
--    [Chakra](https://chakra-ui.com/): Chakra UI is accessible abd themeable component library. Simple to implement and build beautiful looking apps fast.
+- [React](https://reactjs.org/): Current industry standard for web applications, using React let us displaying large amounts of data effectively by implementing Components. It is also very scalable, perfect for large applications with huge growth potential.
+- [Redux](https://redux.js.org/): Centralizes our application's state and logic, easy to test/debug, works with any UI layer
+- [Chakra](https://chakra-ui.com/): Chakra UI is accessible abd themeable component library. Simple to implement and build beautiful looking apps fast.
 
 #### Front end deployed to [Heroku](https://allay-fe-production.herokuapp.com/).
 
 #### [Back end](https://github.com/Lambda-School-Labs/allay-be) built using:
 
--    NodeJS
--    Express
--    Knex
--    PostgreSQL
--    Jest
--    Okta
-
+- NodeJS
+- Express
+- Knex
+- PostgreSQL
+- Jest
+- Okta
 
 # APIs
 
@@ -106,8 +100,8 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-
     *  REACT_APP_databaseURL - URL to API
+    *  REACT_APP_ENV - set to production
 
 # 5️⃣ Content Licenses
 
@@ -174,6 +168,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-
 See [Backend Documentation](https://github.com/Lambda-School-Labs/allay-be) for details on the backend of our project.
-
