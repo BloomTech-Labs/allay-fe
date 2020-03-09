@@ -21,7 +21,6 @@ const Login = ({ login, isLoading, history }) => {
 	const { handleSubmit, errors, register, formState } = useForm();
 
 	function validateUsername(value) {
-		console.log('validate', value);
 		let error;
 		if (!value) {
 			error = 'Username is required';

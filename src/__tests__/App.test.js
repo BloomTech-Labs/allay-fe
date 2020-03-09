@@ -11,10 +11,6 @@ import 'mutationobserver-shim';
 
 import store from '../store';
 
-ReactGA.initialize('UA-159325981-1', {
-  testMode: true
-});
-
 test('renders learn react link', () => {
   render(
     <Provider store={store}>
