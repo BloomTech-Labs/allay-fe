@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import postCompany from '../../state/actions';
 import { useForm } from 'react-hook-form';
 import OnboardingInput from '../InputFields/OnboardingInput.js';
+import CustomSpinner from '../CustomSpinner.js';
 
 // styles
 import {
-  Input,
   Button,
   ButtonGroup,
   Flex,
@@ -18,8 +18,7 @@ import {
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogBody,
-  AlertDialogFooter,
-  Spinner
+  AlertDialogFooter
 } from '@chakra-ui/core';
 
 const AddCompanyForm = ({ isLoading, postCompany, history }) => {
@@ -47,13 +46,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   if (isLoading) {
     return (
       <Flex justify="center" align="center" w="100vh" h="100vh">
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
+        <CustomSpinner />
       </Flex>
     );
   }
