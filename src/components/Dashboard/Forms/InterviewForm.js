@@ -202,6 +202,72 @@ const InterviewForm = () => {
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
+							{/* fourth prompt */}
+							<Flex
+								align='center'
+								h='5%'
+								w='416px'
+								mb='8%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>
+									Pre-sites interviews are as important as onsite interviews.
+									Tell me about yours.
+								</p>
+							</Flex>
+							<Flex w='100%' justify='flex-end'>
+								{/* long hand interview box */}
+								<Flex
+									w='459px'
+									h='694px'
+									mb='8%'
+									px='6'
+									py='6'
+									border='1px solid #BBBDC6'
+									rounded='6px'
+									flexDir='column'
+								>
+									<FormLabel>1. Phone interview</FormLabel>
+									<Textarea
+										variant='filled'
+										mb='6'
+										h='400px'
+										rowsMax={6}
+										type='text'
+										name='interview_review'
+										placeholder='Describe the interview process.'
+										rounded='6px'
+									/>
+
+									<FormLabel>2. Take home assignment </FormLabel>
+									<Textarea
+										variant='filled'
+										mb='6'
+										h='400px'
+										rowsMax={6}
+										type='text'
+										name='interview_review'
+										placeholder='Describe the interview process.'
+										rounded='6px'
+									/>
+									<FormLabel>3. Portfolio review </FormLabel>
+									<Textarea
+										variant='filled'
+										mb='6'
+										h='400px'
+										rowsMax={6}
+										type='text'
+										name='interview_review'
+										placeholder='Describe the interview process.'
+										rounded='6px'
+									/>
+								</Flex>
+								{/* avatar */}
+								<Flex h='694px' align='flex-end' ml='1%'>
+									<Avatar size='md' src='https://bit.ly/broken-link' />
+								</Flex>
+							</Flex>
 						</FormControl>
 					</form>
 					{/* blank space container */}
