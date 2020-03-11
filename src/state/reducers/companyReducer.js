@@ -11,6 +11,7 @@ const initialState = {
   data: [],
   dataById: {},
   fetchingData: false,
+  isLoading: false,
   companyAdded: false,
   error: ''
 };
@@ -21,13 +22,15 @@ const companyReducer = (state = initialState, action) => {
     case FETCH_COMPANIES_START: {
       return {
         ...state,
-        fetchingData: true
+        fetchingData: true,
+        isLoading: true
       };
     }
     case FETCH_COMPANIES_SUCCESS: {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         data: action.payload
       };
     }
@@ -35,19 +38,22 @@ const companyReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }
     case POST_COMPANY_START: {
       return {
         ...state,
-        fetchingData: true
+        fetchingData: true,
+        isLoading: true
       };
     }
     case POST_COMPANY_SUCCESS: {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         companyAdded: true
       };
     }
@@ -55,6 +61,7 @@ const companyReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }

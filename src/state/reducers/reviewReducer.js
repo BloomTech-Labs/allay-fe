@@ -14,6 +14,7 @@ const initialState = {
   data: [],
   dataById: {},
   fetchingData: false,
+  isLoading: false,
   reviewAdded: false,
   error: ''
 };
@@ -24,13 +25,15 @@ const reviewReducer = (state = initialState, action) => {
     case FETCH_REVIEWS_START: {
       return {
         ...state,
-        fetchingData: true
+        fetchingData: true,
+        isLoading: true
       };
     }
     case FETCH_REVIEWS_SUCCESS: {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         data: action.payload
       };
     }
@@ -38,19 +41,22 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }
     case FETCH_REVIEW_BY_ID_START: {
       return {
         ...state,
-        fetchingData: true
+        fetchingData: true,
+        isLoading: true
       };
     }
     case FETCH_REVIEW_BY_ID_SUCCESS: {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         dataById: action.payload
       };
     }
@@ -58,19 +64,22 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }
     case POST_REVIEW_START: {
       return {
         ...state,
-        fetchingData: true
+        fetchingData: true,
+        isLoading: true
       };
     }
     case POST_REVIEW_SUCCESS: {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         reviewAdded: true
       };
     }
@@ -78,6 +87,7 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }
