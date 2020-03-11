@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import ReactGA from 'react-ga'; // for google analytics
-//actions
-import getReview from '../../state/actions/index';
 //styles
 import { Flex, Button, Avatar, Input } from '@chakra-ui/core';
 
-const NavBar = ({ data, history, isLoading, getReview, handleInputChange }) => {
+export default function NavBar({ history, isLoading, setSearchResults }) {
 	// use to navigate to review form
 	const navToReviewForm = () => {
 		history.push('/dashboard/add-review');
@@ -15,31 +12,11 @@ const NavBar = ({ data, history, isLoading, getReview, handleInputChange }) => {
 			action: `Add new review`
 		});
 	};
-	console.log(handleInputChange);
 
-	// // search state
-	// const [filteredReviews, setFilteredReviews] = useState('');
-	// const [searchResults, setSearchResults] = useState([]);
-
-	// // pull review data
-	// useEffect(() => {
-	// 	getReview();
-	// }, [getReview]);
-
-	// useEffect(() => {
-	// 	const results = data.filter(review =>
-	// 		review.company_name.toLowerCase().includes(searchResults.toLowerCase())
-	// 	);
-	// 	// data = results;
-	// 	setFilteredReviews(results);
-
-	// }, [searchResults]);
-
-	// const handleInputChange = event => {
-	// 	event.preventDefault();
-	// 	setSearchResults(event.target.value);
-	// }
-	// console.log(searchResults);
+	const handleInputChange = event => {
+		event.preventDefault();
+		setSearchResults(event.target.value);
+	}
 
 	return (
 		<Flex
@@ -106,11 +83,3 @@ const NavBar = ({ data, history, isLoading, getReview, handleInputChange }) => {
 		</Flex>
 	);
 }
-
-const mapStateToProps = state => {
-	return {
-		isLoading: state.review.fetchingData,
-		data: state.review.data
-	};
-};
-export default connect(mapStateToProps, getReview)(NavBar);

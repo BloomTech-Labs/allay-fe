@@ -6,7 +6,7 @@ import getReview from '../../state/actions/index';
 import NavBar from './NavBar';
 import ReviewCard from './ReviewCard';
 // styles
-import { Flex, Spinner, Input } from '@chakra-ui/core';
+import { Flex, Spinner } from '@chakra-ui/core';
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
 	// search state
@@ -27,26 +27,11 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 
 	}, [searchResults]);
 
-	const handleInputChange = event => {
-		event.preventDefault();
-		setSearchResults(event.target.value);
-	}
-	console.log(searchResults);
-
 	return (
 		<>
 			<Flex w='100%' minH='100vh' justify='center'>
 				<Flex maxW='1440px' w='100%' direction='column' wrap='wrap'>
-					{/* <NavBar history={history} isLoading={isLoading} handleInputChange={handleInputChange} /> */}
-					<Input
-						type='text'
-						placeholder="Search"
-						rounded='20px'
-						borderColor='#F2F6FE'
-						borderWidth='2px'
-						width='35%'
-					onChange={handleInputChange}
-					/>
+					<NavBar history={history} isLoading={isLoading} setSearchResults={setSearchResults} />
 					<Flex mt='15%' direction='column'>
 						<Flex height='100%' direction='column'>
 							{isLoading ? (
