@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import ReactGA from 'react-ga'; // for google analytics
+//actions
+import getReview from '../../state/actions/index';
 //styles
 import { Flex, Button, Avatar, Input } from '@chakra-ui/core';
 
-export default function NavBar({ history, isLoading }) {
+const NavBar = ({ data, history, isLoading, getReview, handleInputChange }) => {
 	// use to navigate to review form
 	const navToReviewForm = () => {
 		history.push('/dashboard/add-review');
@@ -12,6 +15,31 @@ export default function NavBar({ history, isLoading }) {
 			action: `Add new review`
 		});
 	};
+	console.log(handleInputChange);
+
+	// // search state
+	// const [filteredReviews, setFilteredReviews] = useState('');
+	// const [searchResults, setSearchResults] = useState([]);
+
+	// // pull review data
+	// useEffect(() => {
+	// 	getReview();
+	// }, [getReview]);
+
+	// useEffect(() => {
+	// 	const results = data.filter(review =>
+	// 		review.company_name.toLowerCase().includes(searchResults.toLowerCase())
+	// 	);
+	// 	// data = results;
+	// 	setFilteredReviews(results);
+
+	// }, [searchResults]);
+
+	// const handleInputChange = event => {
+	// 	event.preventDefault();
+	// 	setSearchResults(event.target.value);
+	// }
+	// console.log(searchResults);
 
 	return (
 		<Flex
@@ -34,10 +62,12 @@ export default function NavBar({ history, isLoading }) {
 			<Flex align='center' justify='space-between' pt='2%'>
 				<Input
 					placeholder="Search"
+					type='text'
 					rounded='20px'
 					borderColor='#F2F6FE'
 					borderWidth='2px'
 					width='35%'
+					onChange={handleInputChange}
 				/>
 				<Button
 					variantColor='teal'
@@ -76,3 +106,11 @@ export default function NavBar({ history, isLoading }) {
 		</Flex>
 	);
 }
+
+const mapStateToProps = state => {
+	return {
+		isLoading: state.review.fetchingData,
+		data: state.review.data
+	};
+};
+export default connect(mapStateToProps, getReview)(NavBar);
