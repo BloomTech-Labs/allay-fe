@@ -30,6 +30,7 @@ const companyReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         data: action.payload
       };
     }
@@ -37,6 +38,7 @@ const companyReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }
@@ -51,6 +53,7 @@ const companyReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         companyAdded: true
       };
     }
@@ -58,6 +61,7 @@ const companyReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }

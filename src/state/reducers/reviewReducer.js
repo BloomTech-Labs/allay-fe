@@ -33,6 +33,7 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         data: action.payload
       };
     }
@@ -40,6 +41,7 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }
@@ -54,6 +56,7 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         dataById: action.payload
       };
     }
@@ -61,6 +64,7 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }
@@ -75,6 +79,7 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         reviewAdded: true
       };
     }
@@ -82,6 +87,7 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchingData: false,
+        isLoading: false,
         error: action.payload
       };
     }
