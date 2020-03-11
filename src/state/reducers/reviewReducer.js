@@ -14,6 +14,7 @@ const initialState = {
   data: [],
   dataById: {},
   fetchingData: false,
+  isLoading: false,
   reviewAdded: false,
   error: ''
 };
@@ -24,7 +25,8 @@ const reviewReducer = (state = initialState, action) => {
     case FETCH_REVIEWS_START: {
       return {
         ...state,
-        fetchingData: true
+        fetchingData: true,
+        isLoading: true
       };
     }
     case FETCH_REVIEWS_SUCCESS: {
@@ -44,7 +46,8 @@ const reviewReducer = (state = initialState, action) => {
     case FETCH_REVIEW_BY_ID_START: {
       return {
         ...state,
-        fetchingData: true
+        fetchingData: true,
+        isLoading: true
       };
     }
     case FETCH_REVIEW_BY_ID_SUCCESS: {
@@ -64,7 +67,8 @@ const reviewReducer = (state = initialState, action) => {
     case POST_REVIEW_START: {
       return {
         ...state,
-        fetchingData: true
+        fetchingData: true,
+        isLoading: true
       };
     }
     case POST_REVIEW_SUCCESS: {
