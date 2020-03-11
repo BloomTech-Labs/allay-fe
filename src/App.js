@@ -9,6 +9,7 @@ import customTheme from './theme/customTheme';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import ReviewForm from './components/Dashboard/Forms/ReviewForm';
+import InterviewForm from './components/Dashboard/Forms/InterviewForm';
 import PrivateRoute from './utils/PrivateRoute';
 import SingleReview from './components/Dashboard/SingleReview';
 import DashboardHome from './components/Dashboard/DashboardHome';
@@ -39,7 +40,11 @@ const App = () => {
 					<Route exact path='/' component={Login} />
 					<Route path='/signup' component={Signup} />
 					<PrivateRoute exact path='/dashboard' component={DashboardHome} />
-					<PrivateRoute path='/dashboard/add-review' component={ReviewForm} />
+					{/* <PrivateRoute path='/dashboard/add-review' component={ReviewForm} /> */}
+					<PrivateRoute
+						path='/dashboard/add-review'
+						component={InterviewForm}
+					/>
 					<PrivateRoute path='/dashboard/:id' component={SingleReview} />
 					<PrivateRoute path='/add-company' component={AddCompanyForm} />
 				</Switch>
