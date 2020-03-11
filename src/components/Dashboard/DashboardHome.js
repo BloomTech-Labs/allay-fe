@@ -18,9 +18,10 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 		getReview();
 	}, [getReview]);
 
+	// filter searchbar by company name
 	useEffect(() => {
 		const results = data.filter(review =>
-			review.company_name.toLowerCase().includes(searchResults.toLowerCase())
+			review.company_name.toLowerCase().includes(searchResults)
 		);
 		// data = results;
 		setFilteredReviews(results);
@@ -45,21 +46,27 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 									/>
 								</Flex>
 							) : (
-									filteredReviews.length >= 1 ?
+									filteredReviews.length >= 1
+										?
 										filteredReviews.map(review => (
 											<ReviewCard
 												key={review.id}
 												review={review}
 												history={history}
 											/>
-										)) :
-										data.map(review => (
-											<ReviewCard
-												key={review.id}
-												review={review}
-												history={history}
-											/>
 										))
+										:
+										searchResults.length > 0
+											?
+											<Flex as='h1'>No Reviews</Flex>
+											:
+											data.map(review => (
+												<ReviewCard
+													key={review.id}
+													review={review}
+													history={history}
+												/>
+											))
 								)}
 						</Flex>
 					</Flex>

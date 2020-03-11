@@ -17,7 +17,7 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 	return (
 		<Flex w='100%' minH='100vh' justify='center'>
 			<Flex maxW='1440px' w='100%' direction='column' wrap='wrap'>
-				<NavBar history={history} />
+				{/* <NavBar history={history} /> */}
 				<Flex mt='15%' w='100%' maxW='1440px'>
 					{/* avatar box */}
 					<Flex w='10%' h='100%' ml='5%' justify='center' align='center'>
