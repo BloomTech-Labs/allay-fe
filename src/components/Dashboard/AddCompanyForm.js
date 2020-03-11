@@ -82,8 +82,8 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
 
               <FormLabel color="#525252">State</FormLabel>
               <OnboardingInput
-                label="State"
                 name="hq_state"
+                label="State"
                 placeholder="e.g. CA"
                 ref={register({ validate: validateCompanyState })}
               />
