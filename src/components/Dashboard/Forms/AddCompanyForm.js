@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import postCompany from '../../state/actions';
+import postCompany from '../../../state/actions';
 import { useForm } from 'react-hook-form';
 
 // styles
