@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactGA from 'react-ga'; // for google analytics
 //styles
-import { Flex, Button, Avatar } from '@chakra-ui/core';
+import { Flex, Button, Avatar, Input } from '@chakra-ui/core';
 
-export default function NavBar({ history, isLoading }) {
+export default function NavBar({ history, isLoading, setSearchResults }) {
 	// use to navigate to review form
 	const navToReviewForm = () => {
 		history.push('/dashboard/add-review');
@@ -12,6 +12,11 @@ export default function NavBar({ history, isLoading }) {
 			action: `Add new review`
 		});
 	};
+
+	const handleInputChange = event => {
+		event.preventDefault();
+		setSearchResults(event.target.value);
+	}
 
 	return (
 		<Flex
@@ -30,22 +35,30 @@ export default function NavBar({ history, isLoading }) {
 					<Avatar mr='12%' size='lg' src='https://bit.ly/broken-link' />
 					<h1> Allay </h1>
 				</Flex>
-
-				<Flex align='center'>
-					<Button
-						variantColor='teal'
-						rounded='6px'
-						border='none'
-						size='lg'
-						isLoading={isLoading}
-						onClick={navToReviewForm}
-					>
-						Add A Review
-					</Button>
-				</Flex>
 			</Flex>
-			<Flex align='center' pr='25px' justify='flex-end' padding='1.5% 0'>
-				{/* <Button
+			<Flex align='center' justify='space-between' pt='2%'>
+				<Input
+					placeholder="Search"
+					type='text'
+					rounded='20px'
+					borderColor='#F2F6FE'
+					borderWidth='2px'
+					width='35%'
+					onChange={handleInputChange}
+				/>
+				<Button
+					variantColor='teal'
+					rounded='6px'
+					border='none'
+					size='lg'
+					isLoading={isLoading}
+					onClick={navToReviewForm}
+				>
+					Add Review
+					</Button>
+			</Flex>
+			{/* <Flex align='center' pr='25px' justify='flex-end' padding='1.5% 0'>
+				<Button
             variantColor='teal'
             rounded='6px'
             border='none'
@@ -54,18 +67,18 @@ export default function NavBar({ history, isLoading }) {
             onClick={navToReviewForm}
           >
             Add A Review
-          </Button> */}
-			</Flex>
-			<Flex align='center' justify='flex-start'>
+          </Button>
+			</Flex> */}
+			<Flex align='center' justify='flex-start' >
 				{window.location.href.includes('dashboard/') ? (
 					<Flex as='h2' fontSize='32px' display='none'>
 						Recent Posts
 					</Flex>
 				) : (
-					<Flex as='h2' fontSize='32px'>
-						Recent Posts
-					</Flex>
-				)}
+						<Flex as='h2' fontSize='32px'>
+							Recent Posts
+						</Flex>
+					)}
 			</Flex>
 		</Flex>
 	);

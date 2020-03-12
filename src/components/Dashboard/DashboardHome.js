@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 // action
 import getReview from '../../state/actions/index';
@@ -9,16 +9,30 @@ import ReviewCard from './ReviewCard';
 import { Flex, Spinner } from '@chakra-ui/core';
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
+	// search state
+	const [filteredReviews, setFilteredReviews] = useState('');
+	const [searchResults, setSearchResults] = useState([]);
+
 	// pull review data
 	useEffect(() => {
 		getReview();
 	}, [getReview]);
 
+	// filter searchbar by company name
+	useEffect(() => {
+		const results = data.filter(review =>
+			review.company_name.toLowerCase().includes(searchResults)
+		);
+		// data = results;
+		setFilteredReviews(results);
+
+	}, [searchResults]);
+
 	return (
 		<>
 			<Flex w='100%' minH='100vh' justify='center'>
 				<Flex maxW='1440px' w='100%' direction='column' wrap='wrap'>
-					<NavBar history={history} isLoading={isLoading} />
+					<NavBar history={history} isLoading={isLoading} setSearchResults={setSearchResults} />
 					<Flex mt='15%' direction='column'>
 						<Flex height='100%' direction='column'>
 							{isLoading ? (
@@ -32,14 +46,28 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 									/>
 								</Flex>
 							) : (
-								data.map(review => (
-									<ReviewCard
-										key={review.id}
-										review={review}
-										history={history}
-									/>
-								))
-							)}
+									filteredReviews.length >= 1
+										?
+										filteredReviews.map(review => (
+											<ReviewCard
+												key={review.id}
+												review={review}
+												history={history}
+											/>
+										))
+										:
+										searchResults.length > 0
+											?
+											<Flex as='h1'>No Reviews</Flex>
+											:
+											data.map(review => (
+												<ReviewCard
+													key={review.id}
+													review={review}
+													history={history}
+												/>
+											))
+								)}
 						</Flex>
 					</Flex>
 				</Flex>
