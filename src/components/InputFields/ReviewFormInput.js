@@ -1,8 +1,9 @@
 import React from 'react';
 import { Input } from '@chakra-ui/core';
+// import { useForm } from 'react-hook-form';
 
-function ReviewFormInput(props) {
-  // console.log('*********** props **********', props.placeholder);
+const ReviewFormInput = React.forwardRef((props, ref) => {
+  console.log('*********** props **********', props);
   return (
     <Input
       type='text'
@@ -13,8 +14,9 @@ function ReviewFormInput(props) {
       name={props.name}
       label={props.label}
       placeholder={props.placeholder}
+      // ref={ref}
     />
   );
-}
+});
 
 export default ReviewFormInput;

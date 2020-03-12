@@ -45,6 +45,8 @@ const ReviewForm = ({
   const [isOpen, setIsOpen] = useState();
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef();
+
+  const customRef = React.createRef({ register });
   // search state
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -124,6 +126,7 @@ const ReviewForm = ({
               <ReviewFormInput
                 placeholder='e.g. "Best company ever!"'
                 name='tagline'
+                ref={customRef}
               />
             </FormControl>
             <FormControl>
