@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 // redux
 import { connect } from 'react-redux';
@@ -32,6 +32,16 @@ import {
 } from '@chakra-ui/core';
 
 const InterviewForm = () => {
+	const [state, setstate] = useState({
+		rounds: 0
+	});
+	const onChange = e => {
+		setstate({
+			...state,
+			[e.target.name]: e.target.value
+		});
+	};
+	console.log(state);
 	return (
 		// main container
 		<Flex background='#E5E5E5' w='100%' justify='center'>
@@ -166,27 +176,44 @@ const InterviewForm = () => {
 									flexDir='column'
 								>
 									<FormLabel>1. Rounds of interview</FormLabel>
-									<Tabs mb='6'>
-										<TabList border='none' h='56px'>
-											<Tab
-												border='1px solid #BBBDC6'
-												roundedLeft='6px'
-												w='137px'
-											>
-												1 - 3
-											</Tab>
-											<Tab border='1px solid #BBBDC6' w='137px'>
-												4 - 6
-											</Tab>
-											<Tab
-												border='1px solid #BBBDC6'
-												roundedRight='6px'
-												w='137px'
-											>
-												7 +
-											</Tab>
-										</TabList>
-									</Tabs>
+									<ButtonGroup spacing={0} mb='6'>
+										<Button
+											w='136px'
+											h='56px'
+											border='1px solid #BBBDC6'
+											rounded='0'
+											roundedLeft='6px'
+											value={1}
+											name='rounds'
+											onClick={onChange}
+											_focus={{ bg: 'red' }}
+										>
+											1 - 3
+										</Button>
+										<Button
+											w='136px'
+											h='56px'
+											border='1px solid #BBBDC6'
+											rounded='0'
+											value={2}
+											name='rounds'
+											onClick={onChange}
+										>
+											4 - 6
+										</Button>
+										<Button
+											w='136px'
+											h='56px'
+											border='1px solid #BBBDC6'
+											rounded='0'
+											roundedRight='6px'
+											value={3}
+											name='rounds'
+											onClick={onChange}
+										>
+											7 +
+										</Button>
+									</ButtonGroup>
 
 									<FormLabel>2. Select types of interview </FormLabel>
 									<Select
