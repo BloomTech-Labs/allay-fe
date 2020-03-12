@@ -30,6 +30,7 @@ import {
 	Icon,
 	Avatar
 } from '@chakra-ui/core';
+import { ReviewInput } from '../../CustomFormComponents';
 
 const InterviewForm = () => {
 	const [state, setstate] = useState({
@@ -78,16 +79,10 @@ const InterviewForm = () => {
 									flexDir='column'
 								>
 									<FormLabel>1. Company name</FormLabel>
-									<Input
-										h='56px'
-										mb='6'
-										rounded='6px'
-										type='text'
-										variant='filled'
+									<ReviewInput
 										label='company_name'
 										name='company_name'
 										list='company_name'
-										autoCapitalize='none'
 									/>
 									<datalist id='company_name'>
 										<option>1</option>
