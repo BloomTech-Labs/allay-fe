@@ -93,3 +93,7 @@ select {
 	text-overflow: ellipsis;
 	white-space: wrap;
 }
+
+.Multi {
+	background: yellow;
+}

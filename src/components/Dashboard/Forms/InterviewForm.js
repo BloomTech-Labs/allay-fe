@@ -11,6 +11,7 @@ import {
 	FormControl,
 	Flex,
 	Select,
+	SelectControl,
 	Input,
 	Tabs,
 	Tab,
@@ -25,24 +26,15 @@ import {
 	FormLabel,
 	Link,
 	Checkbox,
+	CheckboxGroup,
 	InputGroup,
 	InputLeftElement,
 	Icon,
-	Avatar
+	Avatar,
+	Stack
 } from '@chakra-ui/core';
-import { ReviewInput } from '../../CustomFormComponents';
 
 const InterviewForm = () => {
-	const [state, setstate] = useState({
-		rounds: 0
-	});
-	const onChange = e => {
-		setstate({
-			...state,
-			[e.target.name]: e.target.value
-		});
-	};
-	console.log(state);
 	return (
 		// main container
 		<Flex background='#E5E5E5' w='100%' justify='center'>
@@ -50,12 +42,14 @@ const InterviewForm = () => {
 			<Flex maxW='1440px' w='100%'>
 				{/* form container */}
 				<Flex w='70%' bg='white' flexDir='column' px='2%' pt='2%'>
+					{/* start of form  */}
 					<form>
 						<FormControl>
 							{/* first prompt */}
 							<Flex
 								align='center'
 								h='5%'
+								py='1%'
 								w='416px'
 								mb='8%'
 								bg='#F2F6FE'
@@ -63,8 +57,6 @@ const InterviewForm = () => {
 							>
 								<p>Great! Let's begin with some general details</p>
 							</Flex>
-							{/* start of form  */}
-
 							{/* company container  */}
 							<Flex w='100%' justify='flex-end'>
 								{/* company box */}
@@ -79,10 +71,16 @@ const InterviewForm = () => {
 									flexDir='column'
 								>
 									<FormLabel>1. Company name</FormLabel>
-									<ReviewInput
+									<Input
+										variant='filled'
+										h='56px'
+										mb='6'
+										rounded='6px'
+										type='text'
 										label='company_name'
 										name='company_name'
 										list='company_name'
+										autoCapitalize='none'
 									/>
 									<datalist id='company_name'>
 										<option>1</option>
@@ -113,6 +111,7 @@ const InterviewForm = () => {
 								align='center'
 								h='5%'
 								w='416px'
+								py='1%'
 								mb='2%'
 								bg='#F2F6FE'
 								rounded='20px'
@@ -122,6 +121,7 @@ const InterviewForm = () => {
 							<Flex
 								justify='center'
 								align='center'
+								py='1%'
 								h='5%'
 								w='416px'
 								mb='8%'
@@ -146,7 +146,11 @@ const InterviewForm = () => {
 									flexDir='column'
 								>
 									<FormLabel>Select stages of interview</FormLabel>
-									<Select h='52px' variant='filled' placeholder='Select one' />
+									<Select h='52px' variant='filled' placeholder='Select one'>
+										<option>Only pre-site interviews</option>
+										<option>Only onsite interviews</option>
+										<option>Both pre-site and onsite interviews</option>
+									</Select>
 								</Flex>
 								{/* avatar */}
 								<Flex h='136px' align='flex-end' ml='1%'>
@@ -156,6 +160,7 @@ const InterviewForm = () => {
 							{/* third prompt */}
 							<Flex
 								align='center'
+								py='1%'
 								h='5%'
 								w='416px'
 								mb='8%'
@@ -180,53 +185,54 @@ const InterviewForm = () => {
 									flexDir='column'
 								>
 									<FormLabel>1. Rounds of interview</FormLabel>
-									<ButtonGroup spacing={0} mb='6'>
-										<Button
-											w='136px'
-											h='56px'
-											border='1px solid #BBBDC6'
-											rounded='0'
-											roundedLeft='6px'
-											value={1}
-											name='rounds'
-											onClick={onChange}
-											_focus={{ bg: 'red' }}
-										>
-											1 - 3
-										</Button>
-										<Button
-											w='136px'
-											h='56px'
-											border='1px solid #BBBDC6'
-											rounded='0'
-											value={2}
-											name='rounds'
-											onClick={onChange}
-										>
-											4 - 6
-										</Button>
-										<Button
-											w='136px'
-											h='56px'
-											border='1px solid #BBBDC6'
-											rounded='0'
-											roundedRight='6px'
-											value={3}
-											name='rounds'
-											onClick={onChange}
-										>
-											7 +
-										</Button>
-									</ButtonGroup>
-
-									<FormLabel>2. Select types of interview </FormLabel>
 									<Select
 										h='56px'
+										mb='6'
 										rounded='6px'
 										variant='filled'
-										label='job_title'
-										name='job_title'
-									/>
+										label=''
+										name=''
+										placeholder='Select one'
+									>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7+</option>
+									</Select>
+
+									<FormLabel>2. Select types of interview </FormLabel>
+
+									<CheckboxGroup isInline>
+										<Checkbox
+											size='md'
+											border='rgba(72, 72, 72, 0.1)'
+											name='offer_accepted'
+										>
+											Phone interview
+										</Checkbox>
+										<Checkbox size='md'>Resume review</Checkbox>
+										<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+											Take home assignments
+										</Checkbox>
+										<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+											Online coding tests
+										</Checkbox>
+										<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+											Portfolio review
+										</Checkbox>
+										<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+											Screen share
+										</Checkbox>
+										<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+											Open source contribution
+										</Checkbox>
+										<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+											Side projects
+										</Checkbox>
+									</CheckboxGroup>
 								</Flex>
 								{/* avatar */}
 								<Flex h='258px' align='flex-end' ml='1%'>
@@ -236,6 +242,7 @@ const InterviewForm = () => {
 							{/* fourth prompt */}
 							<Flex
 								align='center'
+								py='1%'
 								h='5%'
 								w='416px'
 								mb='8%'
@@ -251,7 +258,7 @@ const InterviewForm = () => {
 								{/* long hand interview box */}
 								<Flex
 									w='459px'
-									h='694px'
+									h='320px'
 									mb='8%'
 									px='6'
 									py='6'
@@ -259,34 +266,10 @@ const InterviewForm = () => {
 									rounded='6px'
 									flexDir='column'
 								>
-									<FormLabel>1. Phone interview</FormLabel>
+									<FormLabel>Comments about types of interview</FormLabel>
 									<Textarea
 										variant='filled'
-										mb='6'
-										h='400px'
-										rowsMax={6}
-										type='text'
-										name='interview_review'
-										placeholder='Describe the interview process.'
-										rounded='6px'
-									/>
-
-									<FormLabel>2. Take home assignment </FormLabel>
-									<Textarea
-										variant='filled'
-										mb='6'
-										h='400px'
-										rowsMax={6}
-										type='text'
-										name='interview_review'
-										placeholder='Describe the interview process.'
-										rounded='6px'
-									/>
-									<FormLabel>3. Portfolio review </FormLabel>
-									<Textarea
-										variant='filled'
-										mb='6'
-										h='400px'
+										h='300px'
 										rowsMax={6}
 										type='text'
 										name='interview_review'
@@ -295,7 +278,7 @@ const InterviewForm = () => {
 									/>
 								</Flex>
 								{/* avatar */}
-								<Flex h='694px' align='flex-end' ml='1%'>
+								<Flex h='320px' align='flex-end' ml='1%'>
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
