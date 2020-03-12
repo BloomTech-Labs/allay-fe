@@ -86,8 +86,17 @@ const InterviewForm = () => {
 										variant='filled'
 										label='company_name'
 										name='company_name'
+										list='company_name'
 										autoCapitalize='none'
 									/>
+									<datalist id='company_name'>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>1</option>
+										<option>1</option>
+									</datalist>
 									<FormLabel>2. Job title</FormLabel>
 									<Input
 										h='56px'
