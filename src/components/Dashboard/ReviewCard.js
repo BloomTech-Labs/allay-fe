@@ -21,31 +21,49 @@ const ReviewCard = ({ review, history }) => {
 
   return (
     <>
+      {/* Review container */}
       <Flex
-        w='636px'
+        w='45%'
         h='312px'
         mb='3rem'
-        ml='1rem'
+        ml='2.5rem'
         px='30px'
         wrap='nowrap'
         onClick={learnMore}
-        justify='column'
         background='#F2F6FE'
+        borderRadius='12px'
+        justify='center'
+        align='center'
       >
-        {/* avatar box */}
-        <Flex justify='center' align='center' w='15%' h='90%'>
-          <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
-        </Flex>
-        {/* content container */}
-        <Flex w='85%' flexDir='column'>
-          {/* tag container */}
-          <Flex
-            justify='flex-start'
-            w='100%'
-            h='32px'
-            mt='0.5%'
-            overflow='hidden'
-          >
+        {/* Review content container */}
+        <Flex w='90%' h='82%' wrap='wrap' alignContent='center'>
+          {/* headline line container  */}
+          <Flex>
+            {/* avatar box */}
+            <Flex justify='center' align='center' w='88px' h='88px' mr='36px'>
+              <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
+            </Flex>
+            {/* tag container */}
+            <Flex
+              // justify='flex-end'
+              w='100%'
+              h='32px'
+              wrap='wrap'
+              // overflow='hidden'
+            >
+              <Flex w='100%' align='center' wrap='nowrap' pl='1%' mt='1%'>
+                <h2>{review.tagline}</h2>
+              </Flex>
+              {/* <Flex align='center' w='40%' wrap='nowrap'> */}
+              <Flex as='h3' fontWeight='light' mr='10px' isTruncated>
+                Position: {review.job_title}
+              </Flex>
+            </Flex>
+            {/* </Flex> */}
+          </Flex>
+
+          {/* Company name & location container */}
+          <Flex w='100%'>
             <Flex align='center' w='20%' wrap='nowrap'>
               <Box as={TiArchive} mr='10px'></Box>
               <Flex as='h3' fontWeight='light' mr='10px' isTruncated>
@@ -76,20 +94,12 @@ const ReviewCard = ({ review, history }) => {
                 </>
               )}
             </Flex>
-            <Flex align='center' w='40%' wrap='nowrap'>
-              <Flex as='h3' fontWeight='light' mr='10px' isTruncated>
-                Position: {review.job_title}
-              </Flex>
-            </Flex>
           </Flex>
-          {/* headline line container  */}
-          <Flex w='100%' align='center' wrap='nowrap' pl='1%' mt='1%'>
-            <h2>{review.tagline}</h2>
-          </Flex>
+
           {/* summary container */}
           <Flex
-            w='100%'
-            h='50%'
+            w='510px'
+            h='106px'
             wrap='nowrap'
             overflow='hidden'
             pl='1%'
