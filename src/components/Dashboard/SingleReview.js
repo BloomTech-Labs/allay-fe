@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import getReviewById from '../../state/actions/index';
-import NavBar from './NavBar';
 
 //imported styles
-import { Box, Flex, Avatar, Icon } from '@chakra-ui/core';
+import {
+	Box,
+	Flex,
+	Avatar,
+	Icon
+} from '@chakra-ui/core';
 import { TiLocationOutline, TiThumbsUp, TiThumbsDown } from 'react-icons/ti';
 
 const SingleReview = ({ review, getReviewById, match, history }) => {
@@ -17,7 +21,6 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 	return (
 		<Flex w='100%' minH='100vh' justify='center'>
 			<Flex maxW='1440px' w='100%' direction='column' wrap='wrap'>
-				{/* <NavBar history={history} /> */}
 				<Flex mt='15%' w='100%' maxW='1440px'>
 					{/* avatar box */}
 					<Flex w='10%' h='100%' ml='5%' justify='center' align='center'>
@@ -74,13 +77,13 @@ const SingleReview = ({ review, getReviewById, match, history }) => {
 										</Flex>
 									</>
 								) : (
-									<>
-										<Box as={TiThumbsDown} mr='10px'></Box>
-										<Flex as='h3' fontWeight='light' mr='10px'>
-											No Offer
+										<>
+											<Box as={TiThumbsDown} mr='10px'></Box>
+											<Flex as='h3' fontWeight='light' mr='10px'>
+												No Offer
 										</Flex>
-									</>
-								)}
+										</>
+									)}
 							</Flex>
 						</Flex>
 						{/* tagline */}
@@ -108,11 +111,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, getReviewById)(SingleReview);
-
-/* <Box>
-
-
-									<Box>
-
-									</Box>
-								</Box> */
