@@ -8,8 +8,10 @@ import {
 	TiLocationOutline,
 	TiArchive,
 	TiThumbsUp,
-	TiThumbsDown
+	TiThumbsDown,
+	TiGlobe
 } from 'react-icons/ti';
+import { GiWeightLiftingUp } from 'react-icons/gi';
 // styles
 import {
 	Box,
@@ -38,80 +40,100 @@ const ReviewCard = ({ review, history }) => {
 
 	return (
 		<>
-			{/* Individual Cards that display as modals when clicked */}
+			{/* ------------------------------------------------------------------------------------------------ */}
+			{/* ---------------------------------------Modal Cards---------------------------------------------- */}
+			{/* ------------------------------------------------------------------------------------------------ */}
 			<Modal isOpen={isOpen} onClose={onClose} size='80%'>
 				<ModalOverlay />
-				<ModalContent>
+				<ModalContent
+					w='100%'
+					px='12%'
+					py='3%'
+					wrap='nowrap'
+				>
 					<ModalCloseButton />
-					<Flex
-						w='100%'
-						h='100%'
-						mb='3%'
-						px='6%'
-						py='3%'
-						wrap='nowrap'
-						onClick={onOpen}
-						justify='column'
-					>
-						{/* avatar box */}
-						<Flex justify='center' align='center' w='15%' h='90%'>
-							<Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
+
+					{/* Basic info container */}
+					<Flex align='center'>
+						<Flex justify='center' align='center'>
+							<Avatar size='xxl' src={`//logo.clearbit.com/${review.domain}`} />
 						</Flex>
+						<Flex w='100%' flexDir='column' ml='3%'>
+							<Flex as='h1' w='100%' align='center' wrap='nowrap'>
+								{review.company_name} Interview Review
+							</Flex>
+							<Flex as='h2' fontSize='lg' w='100%' fontWeight='medium' align='center' wrap='nowrap'>
+								{review.interview_rating} STARS
+							</Flex>
+							<Flex as='p' fontSize='md' align='center' wrap='nowrap'>
+								Position: {review.job_title}
+							</Flex>
+						</Flex>
+					</Flex>
 
-
-						<Flex w='100%' flexDir='column'>
-							{/* tag container */}
-							<Flex
-								justify='flex-start'
-								w='100%'
-								h='32px'
-								mt='0.5%'
-								overflow='hidden'
-							>
-								{/* headline line container  */}
-								<Flex w='100%' align='center' wrap='nowrap' pl='1%' mt='1%'>
-									<h2>{review.company_name}</h2>
+					{/* Secondary info container */}
+					<Flex w='100%' flexDir='column'>
+						<Flex
+							w='100%'
+							mt='1.5%'
+							overflow='hidden'
+							justify='space-between'
+						>
+							<Flex align='center' wrap='nowrap'>
+								<Box as={TiLocationOutline} mr='5px'></Box>
+								<Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
+									{review.job_location}
+								</Flex>
+							</Flex>
+							<Flex align='center' wrap='nowrap'>
+								{review.offer_received ? (
+									<>
+										<Box as={TiThumbsUp} mr='5px'></Box>
+										<Flex as='h3' fontWeight='light' fontSize='lg'>
+											Received 0ffer
+									</Flex>{' '}
+									</>
+								) : (
+										<>
+											{' '}
+											<Box as={TiThumbsDown} mr='5px'></Box>
+											<Flex as='h3' fontWeight='light' fontSize='lg'>
+												No Offer
+									</Flex>{' '}
+										</>
+									)}
+							</Flex>
+							<Flex align='center' wrap='nowrap'>
+								<Box as={GiWeightLiftingUp} mr='5px'></Box>
+								<Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
+									Difficult
+								</Flex>
+							</Flex>
+							<Flex align='center' wrap='nowrap'>
+								<Box as={TiGlobe} mr='5px'></Box>
+								<Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
+									4 Rounds
 								</Flex>
 							</Flex>
 						</Flex>
+					</Flex>
 
+					{/* Types container */}
+					<Flex as='h2' w='100%' wrap='nowrap' mt='3%' mb='1.5%' overflow='hidden'>
+						Interview Types
+					</Flex>
 
+					{/* Review container */}
+					<Flex as='p' w='100%' wrap='nowrap' overflow='hidden'>
+						{review.job_review}
 					</Flex>
-					{/* Job review container */}
-					<Flex
-						w='100%'
-						h='50%'
-						wrap='nowrap'
-						overflow='hidden'
-						pl='1%'
-						mt='0.5%'
-					>
-						<p>{review.job_review}</p>
+					<Flex as='h2' w='100%' fontWeight='bold' fontSize='xl' wrap='nowrap' overflow='hidden' mt='2.5%'>
+						Overall Rating 5 Stars!
 					</Flex>
-					{/* Overall Rating container */}
-					<Flex
-						w='100%'
-						h='50%'
-						wrap='nowrap'
-						overflow='hidden'
-						pl='1%'
-						mt='0.5%'
-					>
-						<h2>Overall Rating</h2>
-								5 Stars!
-							</Flex>
-					{/* Salary offered container */}
-					<Flex
-						w='100%'
-						h='50%'
-						wrap='nowrap'
-						overflow='hidden'
-						pl='1%'
-						mt='0.5%'
-					>
-						<h2>Salary Offered</h2>
-								${review.salary}
+					<Flex as='h2' w='100%' fontWeight='bold' fontSize='xl' wrap='nowrap' overflow='hidden' mt='1%'>
+						Salary Offered ${review.salary}
 					</Flex>
+
 					<ModalFooter>
 						<Button variantColor="blue" mr={3} onClick={onClose}>Edit</Button>
 						<Button variant="ghost">Delete</Button>
@@ -119,7 +141,7 @@ const ReviewCard = ({ review, history }) => {
 				</ModalContent>
 			</Modal>
 			{/* ------------------------------------------------------------------------------------------------ */}
-			{/* ---------------------------------------Actual Cards--------------------------------------------- */}
+			{/* ---------------------------------------DashBoard Cards------------------------------------------ */}
 			{/* ------------------------------------------------------------------------------------------------ */}
 			{/* Review container */}
 			<Flex
