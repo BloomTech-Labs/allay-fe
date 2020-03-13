@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactGA from 'react-ga'; // for google analytics
 //styles
 import {
@@ -8,10 +8,12 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Icon
+  Icon,
+  RadioButtonGroup
 } from '@chakra-ui/core';
 
-export default function NavBar({ history, isLoading, setSearchResults }) {
+export default function NavBar({ history, isLoading, setSearchResults,filters, setFilters }) {
+
   // use to navigate to review form
   const navToReviewForm = () => {
     history.push('/dashboard/add-review');
@@ -25,6 +27,30 @@ export default function NavBar({ history, isLoading, setSearchResults }) {
     event.preventDefault();
     setSearchResults(event.target.value);
   };
+
+  // temporary object until setup in db
+  const tracks = [
+    { id: 1, prefix: 'WEB' },
+    { id: 2, prefix: 'UX' },
+    { id: 3, prefix: 'DS' },
+    { id: 4, prefix: 'IOS' },
+    { id: 5, prefix: 'AND' }
+  ];
+
+  const [selectedTracks, setSelectedTracks] = useState(tracks);
+
+  useEffect(() => {
+    const newArray = tracks.map(track => ({ ...track, selected: false }));
+    setSelectedTracks(newArray);
+  }, []);
+
+  const handleFilter = e => {
+    filters === e.id ? setFilters() : setFilters(e.id);
+    e.selected = !e.selected;
+  };
+
+  console.log('filters', filters);
+
 
   return (
     <Flex
@@ -45,7 +71,7 @@ export default function NavBar({ history, isLoading, setSearchResults }) {
         </Flex>
       </Flex>
       <Flex align='center' justify='space-between' pt='2%'>
-        <InputGroup w='40%'>
+       <InputGroup w='40%'>
           <InputRightElement
             children={<Icon name='search-2' color='#344CD0' />}
           />
@@ -59,6 +85,16 @@ export default function NavBar({ history, isLoading, setSearchResults }) {
             onChange={handleInputChange}
           />
         </InputGroup>
+    <RadioButtonGroup onChange={handleFilter} isInline>
+          {selectedTracks.map(track => (
+            <Button
+              variantColor={track.selected ? 'blue' : 'gray'}
+              value={track}
+            >
+              {track.prefix}
+            </Button>
+          ))}
+        </RadioButtonGroup>
         <Button
           // variantColor='teal'
           background='#344CD0'
