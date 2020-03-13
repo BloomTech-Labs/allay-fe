@@ -30,11 +30,11 @@ const ReviewCard = ({ review, history }) => {
         ml='2.5%'
         px='30px'
         wrap='nowrap'
-        onClick={learnMore}
         background='#F2F6FE'
         borderRadius='12px'
         justify='center'
         align='center'
+        onClick={learnMore}
       >
         {/* Review content container */}
         <Flex
@@ -52,13 +52,15 @@ const ReviewCard = ({ review, history }) => {
               <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
             </Box>
             {/* tag container */}
-            <Flex
-              w='100%'
-              h='32px'
-              wrap='wrap'
-              // overflow='hidden'
-            >
-              <Flex as='h2' w='100%' align='center' wrap='nowrap'>
+            <Flex w='100%' h='32px' wrap='wrap'>
+              <Flex
+                as='h2'
+                w='100%'
+                align='center'
+                wrap='nowrap'
+                overflow='hidden'
+                isTruncated
+              >
                 {review.tagline}
               </Flex>
               <Flex as='h4' w='100%' align='center' wrap='nowrap'>
@@ -83,13 +85,13 @@ const ReviewCard = ({ review, history }) => {
           >
             <Flex align='center' w='100%' wrap='nowrap'>
               <Box as={TiArchive} mr='10px'></Box>
-              <Flex as='p' font-size='18' fontWeight='light' isTruncated>
+              <Flex as='p' font-size='18' fontWeight='light' overflow='hidden'>
                 {review.company_name}
               </Flex>
             </Flex>
             <Flex align='center' w='100%' wrap='nowrap'>
               <Box as={TiLocationOutline} mr='10px'></Box>
-              <Flex as='p' font-size='18' fontWeight='light' isTruncated>
+              <Flex as='p' font-size='18' fontWeight='light'>
                 {review.job_location}
               </Flex>
             </Flex>
@@ -114,7 +116,7 @@ const ReviewCard = ({ review, history }) => {
           </Flex>
 
           {/* summary container */}
-          <Flex w='100%' h='95px' overflow='hidden' truncate>
+          <Flex w='100%' h='95px' overflow='hidden'>
             <p>{review.job_review}</p>
           </Flex>
         </Flex>

@@ -1,7 +1,15 @@
 import React from 'react';
 import ReactGA from 'react-ga'; // for google analytics
 //styles
-import { Flex, Button, Avatar, Input } from '@chakra-ui/core';
+import {
+  Flex,
+  Button,
+  Avatar,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Icon
+} from '@chakra-ui/core';
 
 export default function NavBar({ history, isLoading, setSearchResults }) {
   // use to navigate to review form
@@ -37,15 +45,20 @@ export default function NavBar({ history, isLoading, setSearchResults }) {
         </Flex>
       </Flex>
       <Flex align='center' justify='space-between' pt='2%'>
-        <Input
-          placeholder='Search'
-          type='text'
-          rounded='20px'
-          borderColor='#F2F6FE'
-          borderWidth='2px'
-          width='35%'
-          onChange={handleInputChange}
-        />
+        <InputGroup w='40%'>
+          <InputRightElement
+            children={<Icon name='search-2' color='#344CD0' />}
+          />
+          <Input
+            width='100%'
+            placeholder='Search'
+            type='text'
+            rounded='20px'
+            borderColor='rgba(149, 149, 149, 0.2)'
+            borderWidth='1px'
+            onChange={handleInputChange}
+          />
+        </InputGroup>
         <Button
           // variantColor='teal'
           background='#344CD0'
@@ -77,7 +90,7 @@ export default function NavBar({ history, isLoading, setSearchResults }) {
             Recent Posts
           </Flex>
         ) : (
-          <Flex as='h2' my='1%'>
+          <Flex as='h2' mt='1%'>
             Recent Posts
           </Flex>
         )}
