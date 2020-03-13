@@ -40,11 +40,11 @@ const App = () => {
 					<Route exact path='/' component={Login} />
 					<Route path='/signup' component={Signup} />
 					<PrivateRoute exact path='/dashboard' component={DashboardHome} />
-					{/* <PrivateRoute path='/dashboard/add-review' component={ReviewForm} /> */}
-					<PrivateRoute
+					<PrivateRoute path='/dashboard/add-review' component={ReviewForm} />
+					{/* <PrivateRoute
 						path='/dashboard/add-review'
 						component={InterviewForm}
-					/>
+					/> */}
 					<PrivateRoute path='/dashboard/:id' component={SingleReview} />
 					<PrivateRoute path='/add-company' component={AddCompanyForm} />
 				</Switch>
