@@ -311,8 +311,7 @@ const InterviewForm = () => {
 									w='459px'
 									h='150px'
 									mb='8%'
-									px='6'
-									py='8'
+									p='6'
 									border='1px solid #BBBDC6'
 									rounded='6px'
 									flexDir='column'
@@ -468,6 +467,122 @@ const InterviewForm = () => {
 								</Flex>
 								{/* avatar */}
 								<Flex h='524px' align='flex-end' ml='1%'>
+									<Avatar size='md' src='https://bit.ly/broken-link' />
+								</Flex>
+							</Flex>
+							{/* 8th prompt */}
+							<Flex
+								align='center'
+								h='5%'
+								w='416px'
+								py='1%'
+								mb='2%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>Your review is very important to us </p>
+							</Flex>
+							<Flex
+								justify='center'
+								align='center'
+								py='1%'
+								h='5%'
+								w='416px'
+								mb='8%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>
+									Tell me how easy or difficult you found the onsite interviews
+								</p>
+							</Flex>
+							{/* diff container  */}
+							<Flex w='100%' justify='flex-end'>
+								{/* diff box */}
+								<Flex
+									w='459px'
+									h='136px'
+									mb='8%'
+									p='6'
+									border='1px solid #BBBDC6'
+									rounded='6px'
+									flexDir='column'
+								>
+									<FormLabel>Rate Interview difficulty</FormLabel>
+									<Select
+										h='56px'
+										rounded='6px'
+										variant='filled'
+										label=''
+										name=''
+										placeholder='Select one'
+									>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</Select>
+								</Flex>
+								{/* avatar */}
+								<Flex h='136px' align='flex-end' ml='1%'>
+									<Avatar size='md' src='https://bit.ly/broken-link' />
+								</Flex>
+							</Flex>
+							{/* 9th prompt */}
+							<Flex
+								align='center'
+								h='5%'
+								w='416px'
+								py='1%'
+								mb='2%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>Awesome! Your review is very much appreciated</p>
+							</Flex>
+							<Flex
+								justify='center'
+								align='center'
+								py='1%'
+								h='5%'
+								w='416px'
+								mb='8%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>You are almost finished. Just couple more questions.</p>
+							</Flex>
+							{/* diff container  */}
+							<Flex w='100%' justify='flex-end'>
+								{/* diff box */}
+								<Flex
+									w='459px'
+									h='176px'
+									mb='8%'
+									p='6'
+									border='1px solid #BBBDC6'
+									rounded='6px'
+									flexDir='column'
+								>
+									<FormLabel>Rate Interview difficulty</FormLabel>
+									<Select
+										h='56px'
+										rounded='6px'
+										variant='filled'
+										label=''
+										name=''
+										placeholder='Select one'
+									>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</Select>
+								</Flex>
+								{/* avatar */}
+								<Flex h='176px' align='flex-end' ml='1%'>
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
