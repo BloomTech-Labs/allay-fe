@@ -73,11 +73,13 @@ export default function NavBar({ history, isLoading, setSearchResults }) {
 			</Flex> */}
       <Flex align='center' justify='flex-start'>
         {window.location.href.includes('dashboard/') ? (
-          <Flex as='h2' display='none'>
+          <Flex as='h2' my='1%' display='none'>
             Recent Posts
           </Flex>
         ) : (
-          <Flex as='h2'>Recent Posts</Flex>
+          <Flex as='h2' my='1%'>
+            Recent Posts
+          </Flex>
         )}
       </Flex>
     </Flex>
