@@ -7,6 +7,7 @@ import postReview from '../../../state/actions';
 import getCompanies from '../../../state/actions';
 import postCompany from '../../../state/actions';
 // styles
+import BeautyStars from 'beauty-stars';
 import {
 	FormControl,
 	Flex,
@@ -31,10 +32,29 @@ import {
 	InputLeftElement,
 	Icon,
 	Avatar,
-	Stack
+	Stack,
+	RadioButtonGroup
 } from '@chakra-ui/core';
 
 const InterviewForm = () => {
+	const [starState, setStarState] = useState(0);
+
+	const CustomRadio = React.forwardRef((props, ref) => {
+		const { isChecked, isDisabled, value, ...rest } = props;
+		return (
+			<Button
+				h='42px'
+				w='114px'
+				ref={ref}
+				variantColor={isChecked ? 'blue' : 'gray'}
+				aria-checked={isChecked}
+				role='radio'
+				isDisabled={isDisabled}
+				{...rest}
+			/>
+		);
+	});
+
 	return (
 		// main container
 		<Flex background='#E5E5E5' w='100%' justify='center'>
@@ -508,21 +528,14 @@ const InterviewForm = () => {
 									rounded='6px'
 									flexDir='column'
 								>
-									<FormLabel>Rate Interview difficulty</FormLabel>
-									<Select
-										h='56px'
-										rounded='6px'
-										variant='filled'
-										label=''
-										name=''
-										placeholder='Select one'
-									>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-									</Select>
+									<FormLabel mb='4'>Rate Interview difficulty</FormLabel>
+									<Flex w='100%' justify='center'>
+										<BeautyStars
+											value={starState}
+											activeColor='blue'
+											onChange={value => setStarState(value)}
+										/>
+									</Flex>
 								</Flex>
 								{/* avatar */}
 								<Flex h='136px' align='flex-end' ml='1%'>
@@ -566,20 +579,11 @@ const InterviewForm = () => {
 									flexDir='column'
 								>
 									<FormLabel>Rate Interview difficulty</FormLabel>
-									<Select
-										h='56px'
-										rounded='6px'
-										variant='filled'
-										label=''
-										name=''
-										placeholder='Select one'
-									>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-									</Select>
+									<RadioButtonGroup isInline>
+										<CustomRadio value='rad1'>No offer</CustomRadio>
+										<CustomRadio value='rad2'>Accepted</CustomRadio>
+										<CustomRadio value='rad3'>Declined</CustomRadio>
+									</RadioButtonGroup>
 								</Flex>
 								{/* avatar */}
 								<Flex h='176px' align='flex-end' ml='1%'>
