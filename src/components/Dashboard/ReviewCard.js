@@ -12,6 +12,7 @@ import {
 } from 'react-icons/ti';
 // styles
 import { Box, Avatar, Flex } from '@chakra-ui/core';
+import BeautyStars from 'beauty-stars';
 
 const ReviewCard = ({ review, history }) => {
   //routes to single review
@@ -65,6 +66,14 @@ const ReviewCard = ({ review, history }) => {
               </Flex>
               <Flex as='h4' w='100%' align='center' wrap='nowrap'>
                 Job Rating: {review.job_rating}
+                {/* {Array(5)
+                  .fill('')
+                  .map((_, i) => (
+                    <StarIcon
+                      key={i}
+                      color={i < review.job_rating ? 'teal.500' : 'gray.300'}
+                    />
+                  ))} */}
               </Flex>
               {/* <Flex align='center' w='40%' wrap='nowrap'> */}
               <Flex as='p' w='100%' fontWeight='light'>
