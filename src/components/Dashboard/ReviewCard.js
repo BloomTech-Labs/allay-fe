@@ -20,9 +20,7 @@ import {
 	Modal,
 	ModalOverlay,
 	ModalContent,
-	ModalHeader,
 	ModalFooter,
-	ModalBody,
 	ModalCloseButton,
 	Button,
 	useDisclosure
@@ -51,14 +49,14 @@ const ReviewCard = ({ review, history }) => {
 					py='3%'
 					wrap='nowrap'
 				>
-					<ModalCloseButton />
+					<ModalCloseButton background='none' border='none' />
 
 					{/* Basic info container */}
 					<Flex align='center'>
-						<Flex justify='center' align='center'>
+						<Flex align='center'>
 							<Avatar size='xxl' src={`//logo.clearbit.com/${review.domain}`} />
 						</Flex>
-						<Flex w='100%' flexDir='column' ml='3%'>
+						<Flex w='100%' flexDir='column' pl='4%'>
 							<Flex as='h1' w='100%' align='center' wrap='nowrap'>
 								{review.company_name} Interview Review
 							</Flex>
@@ -119,9 +117,27 @@ const ReviewCard = ({ review, history }) => {
 					</Flex>
 
 					{/* Types container */}
-					<Flex as='h2' w='100%' wrap='nowrap' mt='3%' mb='1.5%' overflow='hidden'>
-						Interview Types
+					<Flex as='h2' w='100%' mt='3%' mb='1.5%' overflow='hidden'>
+						Interview Type
 					</Flex>
+					<Flex justify='space-between' wrap='wrap' mb='1.5%'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+							Phone screening
+						</Flex>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+							Online coding test
+						</Flex>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+							Behavioral questions
+						</Flex>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+							Case interviews
+						</Flex>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+							White boarding
+						</Flex>
+					</Flex>
+
 
 					{/* Review container */}
 					<Flex as='p' w='100%' wrap='nowrap' overflow='hidden'>
@@ -135,8 +151,26 @@ const ReviewCard = ({ review, history }) => {
 					</Flex>
 
 					<ModalFooter>
-						<Button variantColor="blue" mr={3} onClick={onClose}>Edit</Button>
-						<Button variant="ghost">Delete</Button>
+						<Button
+							background='#344CD0'
+							color='#FFFFFF'
+							rounded='6px'
+							border='none'
+							size='lg'
+							mr='2%'
+						>
+							Edit
+						</Button>
+						<Button
+							background='#B90101'
+							color='#FFFFFF'
+							rounded='6px'
+							border='none'
+							size='lg'
+							mr='2%'
+						>
+							Delete
+						</Button>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
