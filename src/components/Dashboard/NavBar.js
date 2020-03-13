@@ -32,7 +32,7 @@ export default function NavBar({ history, isLoading, setSearchResults }) {
     >
       <Flex align='center' justify='space-between' pt='2%'>
         <Flex align='center'>
-          <Avatar mr='12%' size='lg' src='https://bit.ly/broken-link' />
+          <Avatar mr='12%' size='xl' src='https://bit.ly/broken-link' />
           <h1> Allay </h1>
         </Flex>
       </Flex>
@@ -73,13 +73,11 @@ export default function NavBar({ history, isLoading, setSearchResults }) {
 			</Flex> */}
       <Flex align='center' justify='flex-start'>
         {window.location.href.includes('dashboard/') ? (
-          <Flex as='h2' fontSize='32px' display='none'>
+          <Flex as='h2' display='none'>
             Recent Posts
           </Flex>
         ) : (
-          <Flex as='h2' fontSize='32px'>
-            Recent Posts
-          </Flex>
+          <Flex as='h2'>Recent Posts</Flex>
         )}
       </Flex>
     </Flex>

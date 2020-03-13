@@ -36,8 +36,14 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             isLoading={isLoading}
             setSearchResults={setSearchResults}
           />
-          <Flex mt='15%' direction='column'>
-            <Flex height='100%' w='100%' wrap='wrap'>
+          <Flex mt='13%' direction='column'>
+            <Flex
+              height='100%'
+              maxW='1440px'
+              wrap='wrap'
+              justify='space-between'
+              mr='2.5%'
+            >
               {isLoading ? (
                 <Flex w='100%' h='100%' justify='center' align='center'>
                   <Spinner
