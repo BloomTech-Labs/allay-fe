@@ -40,16 +40,17 @@ const ReviewCard = ({ review, history }) => {
         <Flex
           w='100%'
           h='82%'
+          mx='5%'
           wrap='wrap'
           justify='right'
           alignContent='center'
         >
           {/* headline line container  */}
-          <Flex w='100%'>
+          <Flex w='100%' h='100px' mb='3%'>
             {/* avatar box */}
-            <Flex justify='center' align='center' w='88px' h='88px' mr='36px'>
-              {/* <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} /> */}
-            </Flex>
+            <Box justify='center' align='center' h='88px' mr='36px'>
+              <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
+            </Box>
             {/* tag container */}
             <Flex
               w='100%'
@@ -59,6 +60,9 @@ const ReviewCard = ({ review, history }) => {
             >
               <Flex as='h2' w='100%' align='center' wrap='nowrap'>
                 {review.tagline}
+              </Flex>
+              <Flex as='h4' w='100%' align='center' wrap='nowrap'>
+                Job Rating: {review.job_rating}
               </Flex>
               {/* <Flex align='center' w='40%' wrap='nowrap'> */}
               <Flex as='p' w='100%' fontWeight='light'>
@@ -110,7 +114,7 @@ const ReviewCard = ({ review, history }) => {
           </Flex>
 
           {/* summary container */}
-          <Flex w='100%' h='120px' overflow='hidden' truncate>
+          <Flex w='100%' h='95px' overflow='hidden' truncate>
             <p>{review.job_review}</p>
           </Flex>
         </Flex>
