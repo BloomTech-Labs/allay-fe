@@ -40,16 +40,15 @@ const ReviewCard = ({ review, history }) => {
         <Flex
           w='100%'
           h='82%'
-          mb='4%'
           wrap='wrap'
           justify='right'
           alignContent='center'
         >
           {/* headline line container  */}
-          <Flex>
+          <Flex w='100%'>
             {/* avatar box */}
             <Flex justify='center' align='center' w='88px' h='88px' mr='36px'>
-              <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
+              {/* <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} /> */}
             </Flex>
             {/* tag container */}
             <Flex
@@ -58,11 +57,11 @@ const ReviewCard = ({ review, history }) => {
               wrap='wrap'
               // overflow='hidden'
             >
-              <Flex w='100%' align='center' wrap='nowrap'>
-                <h2 fontSize='24px'>{review.tagline}</h2>
+              <Flex as='h2' w='100%' align='center' wrap='nowrap'>
+                {review.tagline}
               </Flex>
               {/* <Flex align='center' w='40%' wrap='nowrap'> */}
-              <Flex as='h3' fontSize='16px' w='100%' fontWeight='light'>
+              <Flex as='p' w='100%' fontWeight='light'>
                 Position: {review.job_title}
               </Flex>
             </Flex>
@@ -72,20 +71,21 @@ const ReviewCard = ({ review, history }) => {
           {/* Company name & location container */}
           <Flex
             w='100%'
-            justify='flex-start'
+            justify='center'
             align='center'
             wrap='nowrap'
-            my='1.5%'
+            mb='1%'
+            mt=''
           >
             <Flex align='center' w='100%' wrap='nowrap'>
               <Box as={TiArchive} mr='10px'></Box>
-              <Flex as='h3' fontSize='18px' fontWeight='light' isTruncated>
+              <Flex as='p' font-size='18' fontWeight='light' isTruncated>
                 {review.company_name}
               </Flex>
             </Flex>
             <Flex align='center' w='100%' wrap='nowrap'>
               <Box as={TiLocationOutline} mr='10px'></Box>
-              <Flex as='h3' fontSize='18px' fontWeight='light' isTruncated>
+              <Flex as='p' font-size='18' fontWeight='light' isTruncated>
                 {review.job_location}
               </Flex>
             </Flex>
@@ -93,7 +93,7 @@ const ReviewCard = ({ review, history }) => {
               {review.offer_received ? (
                 <>
                   <Box as={TiThumbsUp} mr='10px'></Box>
-                  <Flex as='h3' fontSize='18px' fontWeight='light'>
+                  <Flex as='p' font-size='18' fontWeight='light'>
                     Received Offer
                   </Flex>{' '}
                 </>
@@ -101,7 +101,7 @@ const ReviewCard = ({ review, history }) => {
                 <>
                   {' '}
                   <Box as={TiThumbsDown} mr='10px'></Box>
-                  <Flex as='h3' fontSize='18px' fontWeight='light' mr='10px'>
+                  <Flex as='p' font-size='18' fontWeight='light' mr='10px'>
                     No Offer
                   </Flex>{' '}
                 </>
@@ -110,8 +110,8 @@ const ReviewCard = ({ review, history }) => {
           </Flex>
 
           {/* summary container */}
-          <Flex w='100%' h='120px' wrap='nowrap' overflow='hidden'>
-            <p fontSize='16px'>{review.job_review}</p>
+          <Flex w='100%' h='120px' overflow='hidden' truncate>
+            <p>{review.job_review}</p>
           </Flex>
         </Flex>
       </Flex>
