@@ -19,7 +19,7 @@ import ReactGA from 'react-ga';
 import { useLocation } from 'react-router-dom';
 
 function initializeAnalytics() {
-	return process.env.REACT_APP_env === 'production'
+	return process.env.NODE_ENV === 'production'
 		? ReactGA.initialize('UA-159325981-1') &&
 				// ReactGA.ga('send', 'pageview', window.location.pathname)
 				ReactGA.pageview(window.location.pathname + window.location.search)
