@@ -6,18 +6,14 @@ import {
   Button,
   Avatar,
   Input,
-  Radio,
-  RadioGroup,
+  InputGroup,
+  InputRightElement,
+  Icon,
   RadioButtonGroup
 } from '@chakra-ui/core';
 
-export default function NavBar({
-  history,
-  isLoading,
-  setSearchResults,
-  filters,
-  setFilters
-}) {
+export default function NavBar({ history, isLoading, setSearchResults,filters, setFilters }) {
+
   // use to navigate to review form
   const navToReviewForm = () => {
     history.push('/dashboard/add-review');
@@ -55,6 +51,7 @@ export default function NavBar({
 
   console.log('filters', filters);
 
+
   return (
     <Flex
       maxW='1440px'
@@ -69,21 +66,26 @@ export default function NavBar({
     >
       <Flex align='center' justify='space-between' pt='2%'>
         <Flex align='center'>
-          <Avatar mr='12%' size='lg' src='https://bit.ly/broken-link' />
+          <Avatar mr='12%' size='xl' src='https://bit.ly/broken-link' />
           <h1> Allay </h1>
         </Flex>
       </Flex>
       <Flex align='center' justify='space-between' pt='2%'>
-        <Input
-          placeholder='Search'
-          type='text'
-          rounded='20px'
-          borderColor='#F2F6FE'
-          borderWidth='2px'
-          width='35%'
-          onChange={handleInputChange}
-        />
-        <RadioButtonGroup onChange={handleFilter} isInline>
+       <InputGroup w='40%'>
+          <InputRightElement
+            children={<Icon name='search-2' color='#344CD0' />}
+          />
+          <Input
+            width='100%'
+            placeholder='Search'
+            type='text'
+            rounded='20px'
+            borderColor='rgba(149, 149, 149, 0.2)'
+            borderWidth='1px'
+            onChange={handleInputChange}
+          />
+        </InputGroup>
+    <RadioButtonGroup onChange={handleFilter} isInline>
           {selectedTracks.map(track => (
             <Button
               variantColor={track.selected ? 'blue' : 'gray'}
@@ -94,7 +96,9 @@ export default function NavBar({
           ))}
         </RadioButtonGroup>
         <Button
-          variantColor='teal'
+          // variantColor='teal'
+          background='#344CD0'
+          color='#FFFFFF'
           rounded='6px'
           border='none'
           size='lg'
@@ -118,11 +122,11 @@ export default function NavBar({
 			</Flex> */}
       <Flex align='center' justify='flex-start'>
         {window.location.href.includes('dashboard/') ? (
-          <Flex as='h2' fontSize='32px' display='none'>
+          <Flex as='h2' my='1%' display='none'>
             Recent Posts
           </Flex>
         ) : (
-          <Flex as='h2' fontSize='32px'>
+          <Flex as='h2' mt='1%'>
             Recent Posts
           </Flex>
         )}
