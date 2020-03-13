@@ -69,7 +69,7 @@ const InterviewForm = () => {
 							<Flex
 								align='center'
 								h='5%'
-								py='1%'
+								p='1%'
 								w='416px'
 								mb='8%'
 								bg='#F2F6FE'
@@ -132,6 +132,7 @@ const InterviewForm = () => {
 								h='5%'
 								w='416px'
 								py='1%'
+								px='1%'
 								mb='2%'
 								bg='#F2F6FE'
 								rounded='20px'
@@ -141,7 +142,7 @@ const InterviewForm = () => {
 							<Flex
 								justify='center'
 								align='center'
-								py='1%'
+								p='1%'
 								h='5%'
 								w='416px'
 								mb='8%'
@@ -180,7 +181,7 @@ const InterviewForm = () => {
 							{/* third prompt */}
 							<Flex
 								align='center'
-								py='1%'
+								p='1%'
 								h='5%'
 								w='416px'
 								mb='8%'
@@ -247,7 +248,6 @@ const InterviewForm = () => {
 											<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
 												Portfolio review
 											</Checkbox>
-
 											<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
 												Screen share
 											</Checkbox>
@@ -268,7 +268,7 @@ const InterviewForm = () => {
 							{/* fourth prompt */}
 							<Flex
 								align='center'
-								py='1%'
+								p='1%'
 								h='5%'
 								w='416px'
 								mb='8%'
@@ -312,7 +312,7 @@ const InterviewForm = () => {
 							<Flex
 								align='center'
 								h='5%'
-								py='1%'
+								p='1%'
 								w='416px'
 								mb='8%'
 								bg='#F2F6FE'
@@ -355,7 +355,7 @@ const InterviewForm = () => {
 							{/* sixth prompt */}
 							<Flex
 								align='center'
-								py='1%'
+								p='1%'
 								h='5%'
 								w='416px'
 								mb='8%'
@@ -432,7 +432,7 @@ const InterviewForm = () => {
 							<Flex
 								align='center'
 								h='5%'
-								py='1%'
+								p='1%'
 								w='416px'
 								mb='8%'
 								bg='#F2F6FE'
@@ -495,7 +495,7 @@ const InterviewForm = () => {
 								align='center'
 								h='5%'
 								w='416px'
-								py='1%'
+								p='1%'
 								mb='2%'
 								bg='#F2F6FE'
 								rounded='20px'
@@ -505,7 +505,7 @@ const InterviewForm = () => {
 							<Flex
 								justify='center'
 								align='center'
-								py='1%'
+								p='1%'
 								h='5%'
 								w='416px'
 								mb='8%'
@@ -547,7 +547,7 @@ const InterviewForm = () => {
 								align='center'
 								h='5%'
 								w='416px'
-								py='1%'
+								p='1%'
 								mb='2%'
 								bg='#F2F6FE'
 								rounded='20px'
@@ -557,7 +557,7 @@ const InterviewForm = () => {
 							<Flex
 								justify='center'
 								align='center'
-								py='1%'
+								p='1%'
 								h='5%'
 								w='416px'
 								mb='8%'
