@@ -120,6 +120,7 @@ const ReviewCard = ({ review, history }) => {
 							>
 								<p>{review.job_review}</p>
 							</Flex>
+							{/* Overall Rating container */}
 							<Flex
 								w='100%'
 								h='50%'
@@ -131,6 +132,7 @@ const ReviewCard = ({ review, history }) => {
 								<h2>Overall Rating</h2>
 								5 Stars!
 							</Flex>
+							{/* Salary offered container */}
 							<Flex
 								w='100%'
 								h='50%'
