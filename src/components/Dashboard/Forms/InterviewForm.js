@@ -75,17 +75,17 @@ const InterviewForm = () => {
 								bg='#F2F6FE'
 								rounded='20px'
 							>
-								<p>Great! Let's begin with some general details</p>
+								<p>Great! I will need some general detail to get started</p>
 							</Flex>
 							{/* company container  */}
 							<Flex w='100%' justify='flex-end'>
 								{/* company box */}
 								<Flex
 									w='459px'
-									h='258px'
+									h='379px'
 									mb='8%'
 									px='6'
-									py='8'
+									py='10'
 									border='1px solid #BBBDC6'
 									rounded='6px'
 									flexDir='column'
@@ -113,6 +113,17 @@ const InterviewForm = () => {
 									<FormLabel>2. Job title</FormLabel>
 									<Input
 										h='56px'
+										mb='6'
+										rounded='6px'
+										type='text'
+										variant='filled'
+										label='job_title'
+										name='job_title'
+										autoCapitalize='none'
+									/>
+									<FormLabel>3. Place of interview</FormLabel>
+									<Input
+										h='56px'
 										rounded='6px'
 										type='text'
 										variant='filled'
@@ -122,7 +133,7 @@ const InterviewForm = () => {
 									/>
 								</Flex>
 								{/* avatar */}
-								<Flex h='258px' align='flex-end' ml='1%'>
+								<Flex h='379px' align='flex-end' ml='1%'>
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
@@ -150,13 +161,14 @@ const InterviewForm = () => {
 								rounded='20px'
 							>
 								<p>
-									To serve you best we want to customize the form to you. Please
-									let me know the interview stages you reached with this company
+									For the quality of your review I will ask you some in depth
+									questions. Let’s begin with how many rounds of interviews you
+									had?
 								</p>
 							</Flex>
-							{/* interview stages container  */}
+							{/* rounds container  */}
 							<Flex w='100%' justify='flex-end'>
-								{/* interview box */}
+								{/* rounds box */}
 								<Flex
 									w='459px'
 									h='136px'
@@ -166,11 +178,23 @@ const InterviewForm = () => {
 									rounded='6px'
 									flexDir='column'
 								>
-									<FormLabel>Select stages of interview</FormLabel>
-									<Select h='52px' variant='filled' placeholder='Select one'>
-										<option>Only pre-site interviews</option>
-										<option>Only onsite interviews</option>
-										<option>Both pre-site and onsite interviews</option>
+									<FormLabel>Select rounds of interview</FormLabel>
+									<Select
+										h='56px'
+										mb='6'
+										rounded='6px'
+										variant='filled'
+										label=''
+										name=''
+										placeholder='Select one'
+									>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7+</option>
 									</Select>
 								</Flex>
 								{/* avatar */}
@@ -189,15 +213,16 @@ const InterviewForm = () => {
 								rounded='20px'
 							>
 								<p>
-									Pre-sites interviews are as important as onsite interviews.
-									Tell me about yours.
+									To assist you better there are types of interview to choose
+									from. Select the options that best describes the process you
+									went through
 								</p>
 							</Flex>
 							<Flex w='100%' justify='flex-end'>
-								{/* rounds box */}
+								{/* types of interview box */}
 								<Flex
 									w='459px'
-									h='300px'
+									h='190px'
 									mb='8%'
 									px='6'
 									py='8'
@@ -205,26 +230,7 @@ const InterviewForm = () => {
 									rounded='6px'
 									flexDir='column'
 								>
-									<FormLabel>1. Rounds of interview</FormLabel>
-									<Select
-										h='56px'
-										mb='6'
-										rounded='6px'
-										variant='filled'
-										label=''
-										name=''
-										placeholder='Select one'
-									>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7+</option>
-									</Select>
-
-									<FormLabel>2. Select types of interview </FormLabel>
+									<FormLabel>Select types of interview </FormLabel>
 									<Flex>
 										<Flex direction='column' pr='0.5%'>
 											<Checkbox
@@ -261,11 +267,22 @@ const InterviewForm = () => {
 									</Flex>
 								</Flex>
 								{/* avatar */}
-								<Flex h='258px' align='flex-end' ml='1%'>
+								<Flex h='190px' align='flex-end' ml='1%'>
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
 							{/* fourth prompt */}
+							<Flex
+								align='center'
+								p='1%'
+								mb='2%'
+								h='5%'
+								w='416px'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>Great!</p>
+							</Flex>
 							<Flex
 								align='center'
 								p='1%'
@@ -276,35 +293,36 @@ const InterviewForm = () => {
 								rounded='20px'
 							>
 								<p>
-									Pre-sites interviews are as important as onsite interviews.
-									Tell me about yours.
+									Use this section to describe your interview experience. You
+									can choose the options you selected above to recount them in
+									detail
 								</p>
 							</Flex>
 							<Flex w='100%' justify='flex-end'>
 								{/* long hand interview box */}
 								<Flex
 									w='459px'
-									h='320px'
+									h='242px'
 									mb='8%'
 									px='6'
-									py='6'
+									py='8'
 									border='1px solid #BBBDC6'
 									rounded='6px'
 									flexDir='column'
 								>
-									<FormLabel>Comments about types of interview</FormLabel>
+									<FormLabel>Describe the interview process</FormLabel>
 									<Textarea
 										variant='filled'
-										h='300px'
+										h='144px'
 										rowsMax={6}
 										type='text'
 										name='interview_review'
-										placeholder='Describe the interview process.'
+										placeholder='What questions came up? What did you discuss? What did you come away with from this interview? '
 										rounded='6px'
 									/>
 								</Flex>
 								{/* avatar */}
-								<Flex h='320px' align='flex-end' ml='1%'>
+								<Flex h='242px' align='flex-end' ml='1%'>
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
@@ -314,19 +332,29 @@ const InterviewForm = () => {
 								h='5%'
 								p='1%'
 								w='416px'
+								mb='2%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>Well done!</p>
+							</Flex>
+							<Flex
+								align='center'
+								h='5%'
+								p='1%'
+								w='416px'
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
 							>
 								<p>
-									Thank you for sharing the information. Let’s move on to the
-									onsite interview. I need some general information regarding
-									that.
+									Tell me how you would rate the company for their interview
+									process
 								</p>
 							</Flex>
-							{/* location container  */}
+							{/* interview rating container  */}
 							<Flex w='100%' justify='flex-end'>
-								{/* location box */}
+								{/* interview rating box */}
 								<Flex
 									w='459px'
 									h='150px'
@@ -358,73 +386,48 @@ const InterviewForm = () => {
 								p='1%'
 								h='5%'
 								w='416px'
+								mb='2%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>Well done!</p>
+							</Flex>
+							<Flex
+								align='center'
+								p='1%'
+								h='5%'
+								w='416px'
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
 							>
 								<p>
-									Please share with me how the onsite discussions you selected
-									were.
+									Tell me how you would rate the company for their interview
+									process
 								</p>
 							</Flex>
 							<Flex w='100%' justify='flex-end'>
 								{/* long hand interview box */}
 								<Flex
 									w='459px'
-									h='880px'
+									h='136px'
 									mb='8%'
-									px='6'
-									py='6'
+									p='6'
 									border='1px solid #BBBDC6'
 									rounded='6px'
 									flexDir='column'
 								>
-									<FormLabel>1. Salary discussion</FormLabel>
-									<Textarea
-										variant='filled'
-										h='160px'
-										mb='6'
-										rowsMax={6}
-										type='text'
-										name='interview_review'
-										placeholder='Talk about how the disucssion went. Did you negotiate and how did it go?'
-										rounded='6px'
-									/>
-									<FormLabel>2. Whiteboarding problem-solving</FormLabel>
-									<Textarea
-										variant='filled'
-										h='160px'
-										mb='6'
-										rowsMax={6}
-										type='text'
-										name='interview_review'
-										placeholder='What problem were you given and how did you solve it?'
-										rounded='6px'
-									/>
-									<FormLabel>3. Tech topics discussion</FormLabel>
-									<Textarea
-										variant='filled'
-										h='160px'
-										mb='6'
-										rowsMax={6}
-										type='text'
-										name='interview_review'
-										placeholder='What topics were discussed? '
-										rounded='6px'
-									/>
-									<FormLabel>4. Comments</FormLabel>
-									<Textarea
-										variant='filled'
-										h='160px'
-										rowsMax={6}
-										type='text'
-										name='interview_review'
-										placeholder='Anything else you want to share?'
-										rounded='6px'
-									/>
+									<FormLabel mb='4'>Rate Interview</FormLabel>
+									<Flex w='100%' justify='center'>
+										<BeautyStars
+											value={starState}
+											activeColor='blue'
+											onChange={value => setStarState(value)}
+										/>
+									</Flex>
 								</Flex>
 								{/* avatar */}
-								<Flex h='880px' align='flex-end' ml='1%'>
+								<Flex h='136px' align='flex-end' ml='1%'>
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
@@ -434,59 +437,54 @@ const InterviewForm = () => {
 								h='5%'
 								p='1%'
 								w='416px'
+								mb='2%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>
+									Thanks. Your opinion is very valuable and helps job-seekers
+									prepare better
+								</p>
+							</Flex>
+							<Flex
+								align='center'
+								h='5%'
+								p='1%'
+								w='416px'
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
 							>
-								<p>Great! Let's begin with some general details</p>
+								<p>
+									Thanks. Your opinion is very valuable and helps job-seekers
+									prepare better
+								</p>
 							</Flex>
-							{/* questions container  */}
+							{/* diff container  */}
 							<Flex w='100%' justify='flex-end'>
-								{/* questions box */}
+								{/* diff box */}
 								<Flex
 									w='459px'
-									h='524px'
+									h='136px'
 									mb='8%'
-									px='6'
-									py='8'
+									p='6'
 									border='1px solid #BBBDC6'
 									rounded='6px'
 									flexDir='column'
 								>
-									<FormLabel>Question 1</FormLabel>
-									<Input
-										variant='filled'
+									<FormLabel>Rate the difficulty</FormLabel>
+									<Select
 										h='56px'
 										mb='6'
 										rounded='6px'
-										type='text'
-										label='company_name'
-										name='company_name'
-										autoCapitalize='none'
-									/>
-									<FormLabel>Question 2</FormLabel>
-									<Input
-										h='56px'
-										rounded='6px'
-										mb='20%'
-										type='text'
 										variant='filled'
-										label='job_title'
-										name='job_title'
-										autoCapitalize='none'
-									/>
-									<FormLabel>Your answers (optional)</FormLabel>
-									<Textarea
-										variant='filled'
-										h='160px'
-										rowsMax={6}
-										type='text'
-										name='interview_review'
-										rounded='6px'
+										label=''
+										name=''
+										placeholder='Select one'
 									/>
 								</Flex>
 								{/* avatar */}
-								<Flex h='524px' align='flex-end' ml='1%'>
+								<Flex h='136px' align='flex-end' ml='1%'>
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
@@ -578,7 +576,6 @@ const InterviewForm = () => {
 									rounded='6px'
 									flexDir='column'
 								>
-									<FormLabel>Rate Interview difficulty</FormLabel>
 									<RadioButtonGroup isInline>
 										<CustomRadio value='rad1'>No offer</CustomRadio>
 										<CustomRadio value='rad2'>Accepted</CustomRadio>
