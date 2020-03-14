@@ -56,7 +56,7 @@ const ReviewCard = ({ review, history }) => {
 						<Flex align='center'>
 							<Avatar size='xxl' src={`//logo.clearbit.com/${review.domain}`} />
 						</Flex>
-						<Flex w='100%' flexDir='column' pl='4%'>
+						<Flex flexDir='column' pl='4%'>
 							<Flex as='h1' w='100%' align='center' wrap='nowrap'>
 								{review.company_name} Interview Review
 							</Flex>
@@ -117,10 +117,10 @@ const ReviewCard = ({ review, history }) => {
 					</Flex>
 
 					{/* Types container */}
-					<Flex as='h2' w='100%' mt='3%' mb='1.5%' overflow='hidden'>
-						Interview Type
+					<Flex as='h2' fontWeight='medium' fontSize='xl' w='100%' mt='3%' mb='1.5%' overflow='hidden'>
+						Interview Types
 					</Flex>
-					<Flex justify='space-between' wrap='wrap' mb='1.5%'>
+					<Flex justify='space-between' wrap='wrap' mb='2%'>
 						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
 							Phone screening
 						</Flex>
@@ -143,10 +143,10 @@ const ReviewCard = ({ review, history }) => {
 					<Flex as='p' w='100%' wrap='nowrap' overflow='hidden'>
 						{review.job_review}
 					</Flex>
-					<Flex as='h2' w='100%' fontWeight='bold' fontSize='xl' wrap='nowrap' overflow='hidden' mt='2.5%'>
+					<Flex as='h2' w='100%' fontWeight='medium' fontSize='xl' wrap='nowrap' overflow='hidden' mt='3%'>
 						Overall Rating 5 Stars!
 					</Flex>
-					<Flex as='h2' w='100%' fontWeight='bold' fontSize='xl' wrap='nowrap' overflow='hidden' mt='1%'>
+					<Flex as='h2' w='100%' fontWeight='medium' fontSize='xl' wrap='nowrap' overflow='hidden' mt='1.5%'>
 						Salary Offered ${review.salary}
 					</Flex>
 
