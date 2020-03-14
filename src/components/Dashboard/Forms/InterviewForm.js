@@ -12,27 +12,16 @@ import {
 	FormControl,
 	Flex,
 	Select,
-	SelectControl,
 	Input,
-	Tabs,
-	Tab,
-	TabList,
-	TabPanel,
-	TabPanels,
 	Textarea,
 	Button,
-	ButtonGroup,
 	Spinner,
 	FormErrorMessage,
 	FormLabel,
-	Link,
 	Checkbox,
-	CheckboxGroup,
 	InputGroup,
 	InputLeftElement,
-	Icon,
 	Avatar,
-	Stack,
 	RadioButtonGroup
 } from '@chakra-ui/core';
 
@@ -553,9 +542,9 @@ const InterviewForm = () => {
 							</Flex>
 						</FormControl>
 					</form>
-					{/* blank space container */}
-					<Flex w='30%' />
 				</Flex>
+				{/* blank space container */}
+				<Flex w='30%' />
 			</Flex>
 		</Flex>
 	);
