@@ -43,8 +43,6 @@ const InterviewForm = () => {
 		const { isChecked, isDisabled, value, ...rest } = props;
 		return (
 			<Button
-				h='42px'
-				w='114px'
 				ref={ref}
 				variantColor={isChecked ? 'blue' : 'gray'}
 				aria-checked={isChecked}
@@ -326,112 +324,7 @@ const InterviewForm = () => {
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
-							{/* fifth prompt */}
-							<Flex
-								align='center'
-								h='5%'
-								p='1%'
-								w='416px'
-								mb='2%'
-								bg='#F2F6FE'
-								rounded='20px'
-							>
-								<p>Well done!</p>
-							</Flex>
-							<Flex
-								align='center'
-								h='5%'
-								p='1%'
-								w='416px'
-								mb='8%'
-								bg='#F2F6FE'
-								rounded='20px'
-							>
-								<p>
-									Tell me how you would rate the company for their interview
-									process
-								</p>
-							</Flex>
-							{/* interview rating container  */}
-							<Flex w='100%' justify='flex-end'>
-								{/* interview rating box */}
-								<Flex
-									w='459px'
-									h='150px'
-									mb='8%'
-									p='6'
-									border='1px solid #BBBDC6'
-									rounded='6px'
-									flexDir='column'
-								>
-									<FormLabel>Place of Interview</FormLabel>
-									<Input
-										h='56px'
-										rounded='6px'
-										type='text'
-										variant='filled'
-										label='job_title'
-										name='job_title'
-										autoCapitalize='none'
-									/>
-								</Flex>
-								{/* avatar */}
-								<Flex h='150px' align='flex-end' ml='1%'>
-									<Avatar size='md' src='https://bit.ly/broken-link' />
-								</Flex>
-							</Flex>
-							{/* sixth prompt */}
-							<Flex
-								align='center'
-								p='1%'
-								h='5%'
-								w='416px'
-								mb='2%'
-								bg='#F2F6FE'
-								rounded='20px'
-							>
-								<p>Well done!</p>
-							</Flex>
-							<Flex
-								align='center'
-								p='1%'
-								h='5%'
-								w='416px'
-								mb='8%'
-								bg='#F2F6FE'
-								rounded='20px'
-							>
-								<p>
-									Tell me how you would rate the company for their interview
-									process
-								</p>
-							</Flex>
-							<Flex w='100%' justify='flex-end'>
-								{/* long hand interview box */}
-								<Flex
-									w='459px'
-									h='136px'
-									mb='8%'
-									p='6'
-									border='1px solid #BBBDC6'
-									rounded='6px'
-									flexDir='column'
-								>
-									<FormLabel mb='4'>Rate Interview</FormLabel>
-									<Flex w='100%' justify='center'>
-										<BeautyStars
-											value={starState}
-											activeColor='blue'
-											onChange={value => setStarState(value)}
-										/>
-									</Flex>
-								</Flex>
-								{/* avatar */}
-								<Flex h='136px' align='flex-end' ml='1%'>
-									<Avatar size='md' src='https://bit.ly/broken-link' />
-								</Flex>
-							</Flex>
-							{/* seventh prompt */}
+							{/* 5th prompt */}
 							<Flex
 								align='center'
 								h='5%'
@@ -456,8 +349,8 @@ const InterviewForm = () => {
 								rounded='20px'
 							>
 								<p>
-									Thanks. Your opinion is very valuable and helps job-seekers
-									prepare better
+									Give a difficulty rating to your interview. How easy or hard
+									was the interview?
 								</p>
 							</Flex>
 							{/* diff container  */}
@@ -488,18 +381,7 @@ const InterviewForm = () => {
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
-							{/* 8th prompt */}
-							<Flex
-								align='center'
-								h='5%'
-								w='416px'
-								p='1%'
-								mb='2%'
-								bg='#F2F6FE'
-								rounded='20px'
-							>
-								<p>Your review is very important to us </p>
-							</Flex>
+							{/* 6th prompt */}
 							<Flex
 								justify='center'
 								align='center'
@@ -511,12 +393,130 @@ const InterviewForm = () => {
 								rounded='20px'
 							>
 								<p>
-									Tell me how easy or difficult you found the onsite interviews
+									Your review is almost complete. Tell me how your interview
+									process ended. Did you recieve an offer?
 								</p>
 							</Flex>
-							{/* diff container  */}
+							{/* offer container  */}
 							<Flex w='100%' justify='flex-end'>
 								{/* diff box */}
+								<Flex
+									w='459px'
+									h='176px'
+									mb='8%'
+									py='6'
+									border='1px solid #BBBDC6'
+									rounded='6px'
+									flexDir='column'
+								>
+									<Flex w='100%' justify='center'>
+										<RadioButtonGroup
+											display='flex'
+											flexDir='column'
+											spacing={0}
+										>
+											<CustomRadio value='rad1' h='42px' w='411px'>
+												No offer
+											</CustomRadio>
+											<CustomRadio value='rad2'>Accepted</CustomRadio>
+											<CustomRadio value='rad3'>Declined</CustomRadio>
+										</RadioButtonGroup>
+									</Flex>
+								</Flex>
+								{/* avatar */}
+								<Flex h='176px' align='flex-end' ml='1%'>
+									<Avatar size='md' src='https://bit.ly/broken-link' />
+								</Flex>
+							</Flex>
+							{/* 7th prompt */}
+							<Flex
+								align='center'
+								h='5%'
+								p='1%'
+								w='416px'
+								mb='2%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>Thank you for that information</p>
+							</Flex>
+							<Flex
+								align='center'
+								h='5%'
+								p='1%'
+								w='416px'
+								mb='8%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>
+									If you were offered, asked or negotiated a salary, including
+									it in your review increases the helpfulness of your post.
+								</p>
+							</Flex>
+							{/* salary container  */}
+							<Flex w='100%' justify='flex-end'>
+								{/* salary box */}
+								<Flex
+									w='459px'
+									h='150px'
+									mb='8%'
+									p='6'
+									border='1px solid #BBBDC6'
+									rounded='6px'
+									flexDir='column'
+								>
+									<FormLabel>Salary</FormLabel>
+									<InputGroup>
+										<InputLeftElement
+											mb='4'
+											py='28px'
+											color='gray.300'
+											fontSize='1.2em'
+											children='$'
+										/>
+										<Input
+											h='56px'
+											rounded='6px'
+											type='number'
+											variant='filled'
+											label='job_title'
+											name='job_title'
+											autoCapitalize='none'
+										/>
+									</InputGroup>
+								</Flex>
+								{/* avatar */}
+								<Flex h='150px' align='flex-end' ml='1%'>
+									<Avatar size='md' src='https://bit.ly/broken-link' />
+								</Flex>
+							</Flex>
+							{/* 8th prompt */}
+							<Flex
+								align='center'
+								h='5%'
+								w='416px'
+								p='1%'
+								mb='2%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>Thanks!</p>
+							</Flex>
+							<Flex
+								align='center'
+								p='1%'
+								h='5%'
+								w='416px'
+								mb='8%'
+								bg='#F2F6FE'
+								rounded='20px'
+							>
+								<p>Tell me how did you find the overall experience </p>
+							</Flex>
+							{/* overall container  */}
+							<Flex w='100%' justify='flex-end'>
+								{/* overall box */}
 								<Flex
 									w='459px'
 									h='136px'
@@ -526,8 +526,8 @@ const InterviewForm = () => {
 									rounded='6px'
 									flexDir='column'
 								>
-									<FormLabel mb='4'>Rate Interview difficulty</FormLabel>
-									<Flex w='100%' justify='center'>
+									<FormLabel mb='4'>Rate overall experience</FormLabel>
+									<Flex justify='center' w='100%'>
 										<BeautyStars
 											value={starState}
 											activeColor='blue'
@@ -540,20 +540,7 @@ const InterviewForm = () => {
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
-							{/* 9th prompt */}
 							<Flex
-								align='center'
-								h='5%'
-								w='416px'
-								p='1%'
-								mb='2%'
-								bg='#F2F6FE'
-								rounded='20px'
-							>
-								<p>Awesome! Your review is very much appreciated</p>
-							</Flex>
-							<Flex
-								justify='center'
 								align='center'
 								p='1%'
 								h='5%'
@@ -562,30 +549,7 @@ const InterviewForm = () => {
 								bg='#F2F6FE'
 								rounded='20px'
 							>
-								<p>You are almost finished. Just couple more questions.</p>
-							</Flex>
-							{/* diff container  */}
-							<Flex w='100%' justify='flex-end'>
-								{/* diff box */}
-								<Flex
-									w='459px'
-									h='176px'
-									mb='8%'
-									p='6'
-									border='1px solid #BBBDC6'
-									rounded='6px'
-									flexDir='column'
-								>
-									<RadioButtonGroup isInline>
-										<CustomRadio value='rad1'>No offer</CustomRadio>
-										<CustomRadio value='rad2'>Accepted</CustomRadio>
-										<CustomRadio value='rad3'>Declined</CustomRadio>
-									</RadioButtonGroup>
-								</Flex>
-								{/* avatar */}
-								<Flex h='176px' align='flex-end' ml='1%'>
-									<Avatar size='md' src='https://bit.ly/broken-link' />
-								</Flex>
+								<p>Thank you! Don’t forget to hit submit </p>
 							</Flex>
 						</FormControl>
 					</form>
