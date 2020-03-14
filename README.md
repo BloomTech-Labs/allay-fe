@@ -55,7 +55,7 @@ Allay is a job portal for Lambda students and alumni to network and talk about t
 
 #### Front end deployed to [Heroku](https://labs21-allay-fe.herokuapp.com/).
 
-#### [Back end](https://github.com/Lambda-School-Labs/allay-be) built using:
+### [Back end](https://github.com/Lambda-School-Labs/allay-be) built using:
 
 - NodeJS
 - Express
@@ -113,18 +113,13 @@ create a .env.local file that includes the following:
 🚫Document what you used for testing and why
 Jest
 
-# 4️⃣ Installation Instructions
+# Installation Instructions
 
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+To get the server running locally:
 
-## Other Scripts
-
-🚫replace these examples with your own
-
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+- Clone this repo
+- **npm install** to install all required dependencies
+- **npm start** to start the local server
 
 # Contributing
 
