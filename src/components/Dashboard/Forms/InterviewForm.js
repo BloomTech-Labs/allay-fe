@@ -48,7 +48,7 @@ const InterviewForm = () => {
 			{/* max size */}
 			<Flex maxW='1440px' w='100%'>
 				{/* form container */}
-				<Flex w='70%' bg='white' flexDir='column' px='2%' pt='2%'>
+				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='2%'>
 					{/* start of form  */}
 					<form>
 						<FormControl>
@@ -544,7 +544,7 @@ const InterviewForm = () => {
 					</form>
 				</Flex>
 				{/* blank space container */}
-				<Flex w='30%' />
+				{/* <Flex w='30%' /> */}
 			</Flex>
 		</Flex>
 	);

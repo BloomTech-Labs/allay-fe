@@ -10,6 +10,7 @@ import {
 	TabPanels
 } from '@chakra-ui/core';
 import InterviewForm from './InterviewForm';
+import ReviewForm from './ReviewForm';
 
 const FormControler = () => {
 	return (
@@ -58,14 +59,33 @@ const FormControler = () => {
 								rounded='6px'
 								flexDir='column'
 							>
-								<TabList>
-									<Tab _selected={{ color: 'white', bg: 'blue.500' }}>
+								<TabList variant='unstyled'>
+									<Tab
+										_selected={{ color: 'white', bg: 'blue.400' }}
+										rounded='50%'
+										w='100px'
+										h='100px'
+										mr='15%'
+									>
 										Tab 1
 									</Tab>
-									<Tab _selected={{ color: 'white', bg: 'green.400' }}>
+									<Tab
+										_selected={{ color: 'white', bg: 'green.400' }}
+										rounded='50%'
+										w='100px'
+										h='100px'
+									>
 										Tab 2
 									</Tab>
 								</TabList>
+								<Flex w='100%' pl='2%' mt='3%'>
+									<Flex as='h4' w='15%' mr='24%' textAlign='center'>
+										Interview Review
+									</Flex>
+									<Flex as='h4' w='15%' textAlign='center'>
+										Company Review
+									</Flex>
+								</Flex>
 							</Flex>
 							{/* avatar */}
 							<Flex h='234px' align='flex-end' ml='1%'>
@@ -74,10 +94,11 @@ const FormControler = () => {
 						</Flex>
 						<TabPanels>
 							<TabPanel>
+								{/* display interview form */}
 								<InterviewForm />
 							</TabPanel>
 							<TabPanel>
-								<p>two!</p>
+								<ReviewForm />
 							</TabPanel>
 						</TabPanels>
 					</Tabs>
