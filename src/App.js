@@ -3,14 +3,12 @@ import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 // styles
 import './App.css';
-import { ThemeProvider, FormControl } from '@chakra-ui/core';
+import { ThemeProvider } from '@chakra-ui/core';
 import customTheme from './theme/customTheme';
 // Components
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
-import ReviewForm from './components/Dashboard/Forms/ReviewForm';
-import InterviewForm from './components/Dashboard/Forms/InterviewForm';
-import FormControler from './components/Dashboard/Forms/FormControler';
+import FormController from './components/Dashboard/Forms/FormController';
 import PrivateRoute from './utils/PrivateRoute';
 import SingleReview from './components/Dashboard/SingleReview';
 import DashboardHome from './components/Dashboard/DashboardHome';
@@ -41,10 +39,9 @@ const App = () => {
 					<Route exact path='/' component={Login} />
 					<Route path='/signup' component={Signup} />
 					<PrivateRoute exact path='/dashboard' component={DashboardHome} />
-					{/* <PrivateRoute path='/dashboard/add-review' component={ReviewForm} /> */}
 					<PrivateRoute
 						path='/dashboard/add-review'
-						component={FormControler}
+						component={FormController}
 					/>
 					<PrivateRoute path='/dashboard/:id' component={SingleReview} />
 					<PrivateRoute path='/add-company' component={AddCompanyForm} />

@@ -10,9 +10,9 @@ import {
 	TabPanels
 } from '@chakra-ui/core';
 import InterviewForm from './InterviewForm';
-import ReviewForm from './ReviewForm';
+import ReviewForm2 from './ReviewForm2';
 
-const FormControler = () => {
+const FormController = () => {
 	return (
 		// main container
 		<Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
@@ -98,7 +98,7 @@ const FormControler = () => {
 								<InterviewForm />
 							</TabPanel>
 							<TabPanel>
-								<ReviewForm />
+								<ReviewForm2 />
 							</TabPanel>
 						</TabPanels>
 					</Tabs>
@@ -111,4 +111,4 @@ const FormControler = () => {
 	);
 };
 
-export default FormControler;
+export default FormController;
