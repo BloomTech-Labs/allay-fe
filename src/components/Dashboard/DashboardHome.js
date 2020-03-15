@@ -6,7 +6,7 @@ import getReview from '../../state/actions/index';
 import NavBar from './NavBar';
 import ReviewCard from './ReviewCard';
 // styles
-import { Flex } from '@chakra-ui/core';
+import { Flex, Spinner } from '@chakra-ui/core';
 import CustomSpinner from '../CustomSpinner.js';
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {

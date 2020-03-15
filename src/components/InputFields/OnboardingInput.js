@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from '@chakra-ui/core';
 
-const OnboardingInput = props => {
+function OnboardingInput({ ...props }, ref) {
   return (
     <Input
       mb='1rem'
@@ -12,9 +12,11 @@ const OnboardingInput = props => {
       name={props.name}
       label={props.label}
       placeholder={props.placeholder}
-      // ref={props.register}
+      ref={ref}
     />
   );
-};
+}
 
-export default OnboardingInput;
+const forwardedInput = React.forwardRef(OnboardingInput);
+
+export default forwardedInput;

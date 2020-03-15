@@ -1,20 +1,40 @@
+// import React from 'react';
+// import { Input } from '@chakra-ui/core';
+
+// function ReviewFormInput({ ...props }, ref) {
+//   return (
+//     <Input
+//       mb='1rem'
+//       py='32px'
+//       variant='filled'
+//       rounded='6px'
+//       type='text'
+//       name={props.name}
+//       label={props.label}
+//       placeholder={props.placeholder}
+//       ref={ref}
+//     />
+//   );
+// }
+
+// const forwardedInput = React.forwardRef(ReviewFormInput);
+// export default forwardedInput;
+
 import React from 'react';
 import { Input } from '@chakra-ui/core';
-// import { useForm } from 'react-hook-form';
 
-const ReviewFormInput = React.forwardRef((props, ref) => {
-  console.log('*********** props **********', props);
+const ReviewFormInput = React.forwardRef(({ ...props }, ref) => {
   return (
     <Input
-      type='text'
-      variant='filled'
+      mb='4'
       py='32px'
-      mb='1rem'
+      variant='filled'
       rounded='6px'
+      type='text'
+      type={props.type}
       name={props.name}
-      label={props.label}
       placeholder={props.placeholder}
-      // ref={ref}
+      ref={ref}
     />
   );
 });
