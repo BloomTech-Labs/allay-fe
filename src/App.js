@@ -8,11 +8,12 @@ import customTheme from './theme/customTheme';
 // Components
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
-import ReviewForm from './components/Dashboard/ReviewForm';
+import ReviewForm from './components/Dashboard/Forms/ReviewForm';
+import InterviewForm from './components/Dashboard/Forms/InterviewForm';
 import PrivateRoute from './utils/PrivateRoute';
 import SingleReview from './components/Dashboard/SingleReview';
 import DashboardHome from './components/Dashboard/DashboardHome';
-import AddCompanyForm from './components/Dashboard/AddCompanyForm';
+import AddCompanyForm from './components/Dashboard/Forms/AddCompanyForm';
 // google analytics
 import ReactGA from 'react-ga';
 import { useLocation } from 'react-router-dom';
@@ -40,6 +41,10 @@ const App = () => {
 					<Route path='/signup' component={Signup} />
 					<PrivateRoute exact path='/dashboard' component={DashboardHome} />
 					<PrivateRoute path='/dashboard/add-review' component={ReviewForm} />
+					{/* <PrivateRoute
+						path='/dashboard/add-review'
+						component={InterviewForm}
+					/> */}
 					<PrivateRoute path='/dashboard/:id' component={SingleReview} />
 					<PrivateRoute path='/add-company' component={AddCompanyForm} />
 				</Switch>

@@ -13,6 +13,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   // search state
   const [filteredReviews, setFilteredReviews] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [filters, setFilters] = useState();
 
   // pull review data
   useEffect(() => {
@@ -28,20 +29,45 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
     setFilteredReviews(results);
   }, [searchResults]);
 
+  // ignacio's filter
+  useEffect(() => {
+    const filteredResults = data.filter(
+      review => Number(review.job_rating) === Number(filters)
+    );
+    // data = results;
+    setFilteredReviews(filteredResults);
+  }, [filters]);
+
+  // console.log('IGNACIO filteredReviews', filteredReviews.length);
+
   return (
     <>
-      <Flex w="100%" minH="100vh" justify="center">
-        <Flex maxW="1440px" w="100%" direction="column" wrap="wrap">
+      <Flex w='100%' minH='100vh' justify='center'>
+        <Flex maxW='1440px' w='100%' direction='column' wrap='wrap'>
           <NavBar
             history={history}
             isLoading={isLoading}
             setSearchResults={setSearchResults}
+            filters={filters}
+            setFilters={setFilters}
           />
-          <Flex mt="15%" direction="column">
-            <Flex height="100%" direction="column">
+          <Flex mt='16%'>
+            <Flex
+              height='100%'
+              maxW='1440px'
+              wrap='wrap'
+              justify='space-between'
+              mr='2.5%'
+            >
               {isLoading ? (
-                <Flex w="100%" h="100%" justify="center" align="center">
-                  <CustomSpinner />
+                <Flex w='100%' h='100%' justify='center' align='center'>
+                  <Spinner
+                    thickness='4px'
+                    speed='0.65s'
+                    emptyColor='gray.200'
+                    color='blue.500'
+                    size='xl'
+                  />
                 </Flex>
               ) : filteredReviews.length >= 1 ? (
                 filteredReviews.map(review => (
@@ -51,8 +77,8 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
                     history={history}
                   />
                 ))
-              ) : searchResults.length > 0 ? (
-                <Flex as="h1">No Reviews</Flex>
+              ) : searchResults.length > 0 || filters ? (
+                <Flex as='h3'>No Reviews</Flex>
               ) : (
                 data.map(review => (
                   <ReviewCard
