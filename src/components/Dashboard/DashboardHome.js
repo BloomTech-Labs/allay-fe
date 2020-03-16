@@ -14,6 +14,7 @@ import {
   AlertTitle,
   AlertDescription
 } from '@chakra-ui/core';
+import CustomSpinner from '../CustomSpinner.js';
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
   // search state
