@@ -8,7 +8,7 @@ function OnboardingInput({ ...props }, ref) {
       py='32px'
       variant='filled'
       borderRadius='none'
-      type='text'
+      type={props.type ? props.type : 'text'}
       name={props.name}
       label={props.label}
       placeholder={props.placeholder}

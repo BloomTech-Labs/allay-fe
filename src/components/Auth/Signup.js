@@ -182,13 +182,26 @@ const Signup = ({ signup, isLoading, history }) => {
               <FormControl isRequired>
                 <Flex mx='1%' my='4%' flexDir='column'>
                   <FormLabel>Confirm Password</FormLabel>
-                  <SignupLoginInput
-                    type={show ? 'text' : 'password'}
-                    name='confirmPassword'
-                    label='Confirm Password'
-                    autoCapitalize='none'
-                    ref={register}
-                  />
+                  <InputGroup>
+                    <SignupLoginInput
+                      type={show ? 'text' : 'password'}
+                      name='confirmPassword'
+                      label='Confirm Password'
+                      autoCapitalize='none'
+                      ref={register}
+                    />
+                    <InputRightElement width='4.5rem' py='32px'>
+                      <Button
+                        h='1.75rem'
+                        color='rgba(72, 72, 72, 0.1)'
+                        border='none'
+                        size='sm'
+                        onClick={handleClick}
+                      >
+                        {show ? 'Hide' : 'Show'}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
                 </Flex>
               </FormControl>
               <Button

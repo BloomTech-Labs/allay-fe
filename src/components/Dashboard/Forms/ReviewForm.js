@@ -154,8 +154,8 @@ const ReviewForm = ({
                   py='32px'
                   children={<Icon name='search-2' color='gray.300' />}
                 />
-                <Input
-                  mb='3'
+                <Input //Can't use ReviewFormInput here because of value and onChange
+                  mb='4'
                   py='32px'
                   variant='filled'
                   rounded='6px'
@@ -217,7 +217,11 @@ const ReviewForm = ({
                   fontSize='1.2em'
                   children='$'
                 />
-                <ReviewFormInput
+                <Input
+                  mb='4'
+                  py='32px'
+                  variant='filled'
+                  rounded='6px'
                   type='number'
                   name='salary'
                   placeholder='e.g. 70000'
@@ -360,7 +364,6 @@ const ReviewForm = ({
               </AlertDialog>
             </ButtonGroup>
           </form>
-          <Flex></Flex>
         </Flex>
       </Flex>
     </Flex>
