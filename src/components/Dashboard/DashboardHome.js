@@ -7,6 +7,7 @@ import NavBar from './NavBar';
 import ReviewCard from './ReviewCard';
 // styles
 import { Flex, Spinner } from '@chakra-ui/core';
+import CustomSpinner from '../CustomSpinner.js';
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
   // search state
@@ -43,7 +44,6 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
     <>
       <Flex w='100%' minH='100vh' justify='center'>
         <Flex maxW='1440px' w='100%' direction='column' wrap='wrap'>
-
           <NavBar
             history={history}
             isLoading={isLoading}
