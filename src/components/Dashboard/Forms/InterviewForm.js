@@ -38,14 +38,15 @@ const InterviewForm = () => {
 
 	// timers for moves
 	let timer = null;
-	const time = () => {
+	const time1 = () => {
 		clearTimeout(timer);
-		timer = setTimeout(doStuff, 1000);
+		timer = setTimeout(routeToSecond, 4000);
 	};
 
-	function doStuff() {
-		alert('do stuff');
-	}
+	const routeToSecond = () => {
+		const element = document.getElementById('second');
+		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	};
 
 	// custom select for offer accepted
 	const CustomRadio = React.forwardRef((props, ref) => {
@@ -151,7 +152,7 @@ const InterviewForm = () => {
 										label='job_title'
 										name='job_title'
 										autoCapitalize='none'
-										onKeyPress={time}
+										onKeyPress={time1}
 									/>
 								</Flex>
 								{/* avatar */}
@@ -172,6 +173,7 @@ const InterviewForm = () => {
 							</Flex>
 							{/* second prompt */}
 							<Flex
+								id='second'
 								align='center'
 								h='5%'
 								w='416px'
