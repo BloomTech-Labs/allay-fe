@@ -48,6 +48,7 @@ const ReviewCard = ({ review, history }) => {
 					<ModalCloseButton background='none' border='none' />
 
 					{/* Basic info container */}
+					{/* <SingleReview /> */}
 					<Flex align='center'>
 						<Flex align='center'>
 							<Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
