@@ -134,7 +134,7 @@ const ReviewCard = ({ review, history }) => {
 							Case interviews
 						</Flex>
 						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
-							White boarding
+							Whiteboarding
 						</Flex>
 					</Flex>
 
