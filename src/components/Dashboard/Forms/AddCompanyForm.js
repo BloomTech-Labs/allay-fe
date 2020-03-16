@@ -2,10 +2,10 @@ import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import postCompany from '../../../state/actions';
 import { useForm } from 'react-hook-form';
-import OnboardingInput from '../../InputFields/OnboardingInput.js';
 import CustomSpinner from '../../CustomSpinner.js';
 
 // styles
+import OnboardingInput from '../../InputFields/OnboardingInput.js';
 import {
   Button,
   ButtonGroup,

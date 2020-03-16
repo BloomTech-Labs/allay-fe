@@ -7,9 +7,9 @@ import ReactGA from 'react-ga'; // for google analytics
 import signup from '../../state/actions/index';
 //styles
 import CustomSpinner from '../CustomSpinner.js';
+import SignupLoginInput from '../InputFields/SignupLoginInput.js';
 import {
   Button,
-  Input,
   FormControl,
   FormLabel,
   FormHelperText,
@@ -118,12 +118,10 @@ const Signup = ({ signup, isLoading, history }) => {
                 </Flex>
                 <Flex mx='1%' my='4%' flexDir='column'>
                   <FormLabel>Email</FormLabel>
-                  <Input
-                    py='32px'
-                    variant='filled'
+                  <SignupLoginInput
                     type='email'
-                    label='email'
                     name='email'
+                    label='email'
                     autoCapitalize='none'
                     ref={register({ validate: validateEmail })}
                   />
@@ -136,12 +134,10 @@ const Signup = ({ signup, isLoading, history }) => {
               <FormControl isRequired isInvalid={errors.username}>
                 <Flex mx='1%' my='4%' flexDir='column'>
                   <FormLabel>Username</FormLabel>
-                  <Input
-                    py='32px'
-                    variant='filled'
+                  <SignupLoginInput
                     type='text'
-                    label='username'
                     name='username'
+                    label='username'
                     autoCapitalize='none'
                     ref={register({ validate: validateUsername })}
                   />
@@ -155,12 +151,10 @@ const Signup = ({ signup, isLoading, history }) => {
                 <Flex mx='1%' my='4%' flexDir='column'>
                   <FormLabel>Password</FormLabel>
                   <InputGroup>
-                    <Input
-                      py='32px'
-                      variant='filled'
+                    <SignupLoginInput
                       type={show ? 'text' : 'password'}
-                      label='Password'
                       name='password'
+                      label='Password'
                       autoCapitalize='none'
                       ref={register({ validate: validatePassword })}
                     />
@@ -188,12 +182,10 @@ const Signup = ({ signup, isLoading, history }) => {
               <FormControl isRequired>
                 <Flex mx='1%' my='4%' flexDir='column'>
                   <FormLabel>Confirm Password</FormLabel>
-                  <Input
-                    py='32px'
-                    variant='filled'
+                  <SignupLoginInput
                     type={show ? 'text' : 'password'}
-                    label='Confirm Password'
                     name='confirmPassword'
+                    label='Confirm Password'
                     autoCapitalize='none'
                     ref={register}
                   />

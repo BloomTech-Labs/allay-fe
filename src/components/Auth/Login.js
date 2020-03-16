@@ -7,9 +7,9 @@ import ReactGA from 'react-ga'; // for google analytics
 import login from '../../state/actions/index';
 // styles
 import CustomSpinner from '../CustomSpinner.js';
+import SignupLoginInput from '../InputFields/SignupLoginInput.js';
 import {
   Button,
-  Input,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -97,13 +97,10 @@ const Login = ({ login, isLoading, history }) => {
                 </Flex>
                 <Flex mx='1%' my='4%' flexDir='column'>
                   <FormLabel>Username</FormLabel>
-                  <Input
-                    py='32px'
-                    rounded='6px'
+                  <SignupLoginInput
                     type='text'
-                    variant='filled'
-                    label='Username'
                     name='username'
+                    label='Username'
                     autoCapitalize='none'
                     ref={register({ validate: validateUsername })}
                   />
@@ -116,13 +113,10 @@ const Login = ({ login, isLoading, history }) => {
                 <Flex mx='1%' my='4%' flexDir='column'>
                   <FormLabel>Password</FormLabel>
                   <InputGroup>
-                    <Input
-                      py='32px'
-                      rounded='6px'
-                      variant='filled'
+                    <SignupLoginInput
                       type={show ? 'text' : 'password'}
-                      label='Password'
                       name='password'
+                      label='Password'
                       autoCapitalize='none'
                       ref={register({ validate: validatePassword })}
                     />

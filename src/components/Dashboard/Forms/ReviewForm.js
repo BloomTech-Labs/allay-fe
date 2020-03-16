@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactGA from 'react-ga'; // for google analytics
 import { useForm } from 'react-hook-form';
-import ReviewFormInput from '../../InputFields/ReviewFormInput.js';
 // redux
 import { connect } from 'react-redux';
 // actions
@@ -9,15 +8,16 @@ import postReview from '../../../state/actions';
 import getCompanies from '../../../state/actions';
 import postCompany from '../../../state/actions';
 // styles
+import CustomSpinner from '../../CustomSpinner.js';
+import ReviewFormInput from '../../InputFields/ReviewFormInput.js';
 import {
   FormControl,
   Flex,
   Select,
-  Input,
   Textarea,
+  Input,
   Button,
   ButtonGroup,
-  Spinner,
   FormErrorMessage,
   FormLabel,
   Link,
@@ -86,13 +86,7 @@ const ReviewForm = ({
   if (isLoading) {
     return (
       <Flex justify='center' align='center' w='100vh' h='100vh'>
-        <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
-        />
+        <CustomSpinner />
       </Flex>
     );
   }
