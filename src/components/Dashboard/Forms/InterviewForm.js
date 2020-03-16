@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 // redux
 import { connect } from 'react-redux';
@@ -24,10 +24,30 @@ import {
 	Avatar,
 	RadioButtonGroup
 } from '@chakra-ui/core';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const InterviewForm = () => {
 	const [starState, setStarState] = useState(0);
 
+	// brings to top on render
+	useEffect(() => {
+		const element = document.getElementById('first');
+		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}, []);
+
+	// timers for moves
+	let timer = null;
+	const time = () => {
+		clearTimeout(timer);
+		timer = setTimeout(doStuff, 1000);
+	};
+
+	function doStuff() {
+		alert('do stuff');
+	}
+
+	// custom select for offer accepted
 	const CustomRadio = React.forwardRef((props, ref) => {
 		const { isChecked, isDisabled, value, ...rest } = props;
 		return (
@@ -48,7 +68,7 @@ const InterviewForm = () => {
 			{/* max size */}
 			<Flex maxW='1440px' w='100%'>
 				{/* form container */}
-				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='2%'>
+				<Flex id='first' w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
 					{/* start of form  */}
 					<form>
 						<FormControl>
@@ -61,6 +81,13 @@ const InterviewForm = () => {
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='50'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>Great! I will need some general detail to get started</p>
 							</Flex>
@@ -76,6 +103,13 @@ const InterviewForm = () => {
 									border='1px solid #BBBDC6'
 									rounded='6px'
 									flexDir='column'
+									data-aos='fade-in'
+									data-aos-offset='200'
+									data-aos-delay='3000'
+									data-aos-duration='2000'
+									data-aos-easing='ease-in-out'
+									data-aos-mirror='true'
+									data-aos-once='true'
 								>
 									<FormLabel>1. Company name</FormLabel>
 									<Input
@@ -117,10 +151,22 @@ const InterviewForm = () => {
 										label='job_title'
 										name='job_title'
 										autoCapitalize='none'
+										onKeyPress={time}
 									/>
 								</Flex>
 								{/* avatar */}
-								<Flex h='379px' align='flex-end' ml='1%'>
+								<Flex
+									h='379px'
+									align='flex-end'
+									ml='1%'
+									data-aos='fade-in'
+									data-aos-offset='200'
+									data-aos-delay='3000'
+									data-aos-duration='2000'
+									data-aos-easing='ease-in-out'
+									data-aos-mirror='true'
+									data-aos-once='true'
+								>
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
@@ -134,6 +180,13 @@ const InterviewForm = () => {
 								mb='2%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='50'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>Thank you for that information.</p>
 							</Flex>
@@ -146,6 +199,13 @@ const InterviewForm = () => {
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='2000'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>
 									For the quality of your review I will ask you some in depth
@@ -198,6 +258,13 @@ const InterviewForm = () => {
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='50'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>
 									To assist you better there are types of interview to choose
@@ -267,6 +334,13 @@ const InterviewForm = () => {
 								w='416px'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='50'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>Great!</p>
 							</Flex>
@@ -278,6 +352,13 @@ const InterviewForm = () => {
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='600'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>
 									Use this section to describe your interview experience. You
@@ -322,6 +403,13 @@ const InterviewForm = () => {
 								mb='2%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='50'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>
 									Thanks. Your opinion is very valuable and helps job-seekers
@@ -336,6 +424,13 @@ const InterviewForm = () => {
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='2000'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>
 									Give a difficulty rating to your interview. How easy or hard
@@ -380,6 +475,13 @@ const InterviewForm = () => {
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='50'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>
 									Your review is almost complete. Tell me how your interview
@@ -426,6 +528,13 @@ const InterviewForm = () => {
 								mb='2%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='50'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>Thank you for that information</p>
 							</Flex>
@@ -437,6 +546,13 @@ const InterviewForm = () => {
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='1200'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>
 									If you were offered, asked or negotiated a salary, including
@@ -489,6 +605,13 @@ const InterviewForm = () => {
 								mb='2%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='50'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>Thanks!</p>
 							</Flex>
@@ -500,6 +623,13 @@ const InterviewForm = () => {
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='200'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>Tell me how did you find the overall experience </p>
 							</Flex>
@@ -537,6 +667,13 @@ const InterviewForm = () => {
 								mb='8%'
 								bg='#F2F6FE'
 								rounded='20px'
+								data-aos='fade-right'
+								data-aos-offset='200'
+								data-aos-delay='50'
+								data-aos-duration='1000'
+								data-aos-easing='ease-in-out'
+								data-aos-mirror='true'
+								data-aos-once='true'
 							>
 								<p>Thank you! Don’t forget to hit submit </p>
 							</Flex>
