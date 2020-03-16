@@ -8,7 +8,6 @@ import ReviewCard from './ReviewCard';
 // styles
 import {
   Flex,
-  Spinner,
   Alert,
   AlertIcon,
   AlertTitle,
