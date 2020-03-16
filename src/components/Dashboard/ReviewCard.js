@@ -75,7 +75,7 @@ const ReviewCard = ({ review, history }) => {
 											<Icon
 												name='star'
 												key={i}
-												color={i < review.job_rating ? 'black' : 'gray.300'}
+												color={i < review.interview_rating ? 'black' : 'gray.300'}
 											/>
 										))}
 								</Flex>
@@ -288,7 +288,7 @@ const ReviewCard = ({ review, history }) => {
 											<Icon
 												name='star'
 												key={i}
-												color={i < review.job_rating ? '#344CD0' : 'gray.300'}
+												color={i < review.interview_rating ? '#344CD0' : 'gray.300'}
 											/>
 										))}
 								</Flex>

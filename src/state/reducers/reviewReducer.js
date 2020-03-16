@@ -105,12 +105,6 @@ const reviewReducer = (state = initialState, action) => {
     case EDIT_REVIEW_SUCCESS: {
       return {
         ...state,
-        // data: state.data.map(item => {
-        //   if (item.id === action.payload.id) {
-        //     return action.payload
-        //   }
-        //   return item
-        // }),
         dataById: action.payload,
         isEditing: false,
         reviewEdited: true

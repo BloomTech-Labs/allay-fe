@@ -58,13 +58,12 @@ export const postReview = (id, newReview) => dispatch => {
 
 // ============ EDIT REVIEW ===========
 
-export const editReview = (id) => dispatch => {
-  console.log(id);
+export const editReview = (id, changes) => dispatch => {
+  console.log(changes);
   dispatch({ type: EDIT_REVIEW_START });
   return axiosWithAuth()
-    .put(`/reviews/${id.id}`, id)
+    .put(`/reviews/${id}`, changes)
     .then(res => {
-      console.log(res);
       dispatch({ type: EDIT_REVIEW_SUCCESS, payload: res.data });
     })
     .catch(err => {
