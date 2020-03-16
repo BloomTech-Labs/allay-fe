@@ -23,6 +23,7 @@ import {
 	ModalFooter,
 	ModalCloseButton,
 	Button,
+	Icon,
 	useDisclosure
 } from '@chakra-ui/core';
 
@@ -48,7 +49,7 @@ const ReviewCard = ({ review, history }) => {
 					{/* Basic info container */}
 					<Flex align='center'>
 						<Flex align='center'>
-							<Avatar size='xxl' src={`//logo.clearbit.com/${review.domain}`} />
+							<Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
 						</Flex>
 						<Flex flexDir='column' pl='4%'>
 							<Flex as='h1' w='100%' align='center' wrap='nowrap'>
@@ -62,7 +63,15 @@ const ReviewCard = ({ review, history }) => {
 								align='center'
 								wrap='nowrap'
 							>
-								{review.interview_rating} STARS
+								{Array(5)
+									.fill('')
+									.map((_, i) => (
+										<Icon
+											name='star'
+											key={i}
+											color={i < review.job_rating ? 'teal.500' : 'gray.300'}
+										/>
+									))}
 							</Flex>
 							<Flex as='p' fontSize='md' align='center' wrap='nowrap'>
 								Position: {review.job_title}
@@ -239,15 +248,16 @@ const ReviewCard = ({ review, history }) => {
 								{review.tagline}
 							</Flex>
 							<Flex as='h4' w='100%' align='center' wrap='nowrap'>
-								Job Rating: {review.job_rating}
-								{/* {Array(5)
-                  .fill('')
-                  .map((_, i) => (
-                    <StarIcon
-                      key={i}
-                      color={i < review.job_rating ? 'teal.500' : 'gray.300'}
-                    />
-                  ))} */}
+								Job Rating:
+								{Array(5)
+									.fill('')
+									.map((_, i) => (
+										<Icon
+											name='star'
+											key={i}
+											color={i < review.job_rating ? 'teal.500' : 'gray.300'}
+										/>
+									))}
 							</Flex>
 							{/* <Flex align='center' w='40%' wrap='nowrap'> */}
 							<Flex as='p' w='100%' fontWeight='light'>
