@@ -47,7 +47,7 @@ export default function NavBar({
 	useEffect(() => {
 		const newArray = tracks.map(track => ({ ...track, selected: false }));
 		setSelectedTracks(newArray);
-	}, [tracks]);
+	}, []);
 
 	const handleFilter = e => {
 		filters === e.id ? setFilters() : setFilters(e.id);

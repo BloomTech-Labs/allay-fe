@@ -27,7 +27,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 		);
 		// data = results;
 		setFilteredReviews(results);
-	}, [searchResults, data]);
+	}, [searchResults]);
 
 	// ignacio's filter
 	useEffect(() => {
@@ -36,7 +36,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 		);
 		// data = results;
 		setFilteredReviews(filteredResults);
-	}, [filters, data]);
+	}, [filters]);
 
 	// console.log('IGNACIO filteredReviews', filteredReviews.length);
 
