@@ -10,7 +10,7 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import FormController from './components/Dashboard/Forms/FormController';
 import PrivateRoute from './utils/PrivateRoute';
-import SingleReview from './components/Dashboard/SingleReview';
+import SingleReview from './components/Dashboard/SingleReview2';
 import DashboardHome from './components/Dashboard/DashboardHome';
 import AddCompanyForm from './components/Dashboard/Forms/AddCompanyForm';
 // google analytics

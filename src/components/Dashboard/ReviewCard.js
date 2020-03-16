@@ -33,7 +33,7 @@ const ReviewCard = ({ review, history }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	//routes to single review
-	const learnMore = () => {
+	const navToEditRoute = () => {
 		history.push(`/dashboard/${review.id}`);
 	};
 
@@ -216,6 +216,7 @@ const ReviewCard = ({ review, history }) => {
 							border='none'
 							size='lg'
 							mr='2%'
+							onClick={navToEditRoute}
 						>
 							Edit
 						</Button>
