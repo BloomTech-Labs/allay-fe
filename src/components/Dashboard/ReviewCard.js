@@ -64,15 +64,20 @@ const ReviewCard = ({ review, history }) => {
 								align='center'
 								wrap='nowrap'
 							>
-								{Array(5)
-									.fill('')
-									.map((_, i) => (
-										<Icon
-											name='star'
-											key={i}
-											color={i < review.job_rating ? 'teal.500' : 'gray.300'}
-										/>
-									))}
+								<Flex>
+									Interview Review:
+								</Flex>
+								<Flex ml='2%'>
+									{Array(5)
+										.fill('')
+										.map((_, i) => (
+											<Icon
+												name='star'
+												key={i}
+												color={i < review.job_rating ? 'black' : 'gray.300'}
+											/>
+										))}
+								</Flex>
 							</Flex>
 							<Flex as='p' fontSize='md' align='center' wrap='nowrap'>
 								Position: {review.job_title}
@@ -156,27 +161,50 @@ const ReviewCard = ({ review, history }) => {
 					<Flex as='p' w='100%' wrap='nowrap' overflow='hidden'>
 						{review.job_review}
 					</Flex>
+
 					<Flex
-						as='h2'
 						w='100%'
-						fontWeight='medium'
-						fontSize='xl'
-						wrap='nowrap'
-						overflow='hidden'
 						mt='3%'
+						align='center'
 					>
-						Overall Rating 5 Stars!
+						<Flex
+							fontWeight='medium'
+							fontSize='xl'
+							wrap='nowrap'>
+							Overall Rating
+						</Flex>
+						<Flex ml='1.5%'>
+							{Array(5)
+								.fill('')
+								.map((_, i) => (
+									<Icon
+										name='star'
+										key={i}
+										color={i < review.job_rating ? 'black' : 'gray.300'}
+									/>
+								))}
+						</Flex>
 					</Flex>
 					<Flex
 						as='h2'
 						w='100%'
-						fontWeight='medium'
-						fontSize='xl'
 						wrap='nowrap'
 						overflow='hidden'
 						mt='1.5%'
 					>
-						Salary Offered ${review.salary}
+						<Flex
+							fontWeight='medium'
+							fontSize='xl'
+						>
+							Salary Offered
+						</Flex>
+						<Flex
+							ml='1.5%'
+							fontWeight='light'
+							fontSize='xl'
+						>
+							${review.salary}
+						</Flex>
 					</Flex>
 
 					<ModalFooter>
