@@ -25,7 +25,6 @@ import {
 	Button,
 	useDisclosure
 } from '@chakra-ui/core';
-import BeautyStars from 'beauty-stars';
 
 const ReviewCard = ({ review, history }) => {
 	// basic usage for the SingleReview modal
@@ -43,12 +42,7 @@ const ReviewCard = ({ review, history }) => {
 			{/* ------------------------------------------------------------------------------------------------ */}
 			<Modal isOpen={isOpen} onClose={onClose} size='80%'>
 				<ModalOverlay />
-				<ModalContent
-					w='100%'
-					px='12%'
-					py='3%'
-					wrap='nowrap'
-				>
+				<ModalContent w='100%' px='12%' py='3%' wrap='nowrap'>
 					<ModalCloseButton background='none' border='none' />
 
 					{/* Basic info container */}
@@ -60,7 +54,14 @@ const ReviewCard = ({ review, history }) => {
 							<Flex as='h1' w='100%' align='center' wrap='nowrap'>
 								{review.company_name} Interview Review
 							</Flex>
-							<Flex as='h2' fontSize='lg' w='100%' fontWeight='medium' align='center' wrap='nowrap'>
+							<Flex
+								as='h2'
+								fontSize='lg'
+								w='100%'
+								fontWeight='medium'
+								align='center'
+								wrap='nowrap'
+							>
 								{review.interview_rating} STARS
 							</Flex>
 							<Flex as='p' fontSize='md' align='center' wrap='nowrap'>
@@ -71,12 +72,7 @@ const ReviewCard = ({ review, history }) => {
 
 					{/* Secondary info container */}
 					<Flex w='100%' flexDir='column'>
-						<Flex
-							w='100%'
-							mt='1.5%'
-							overflow='hidden'
-							justify='space-between'
-						>
+						<Flex w='100%' mt='1.5%' overflow='hidden' justify='space-between'>
 							<Flex align='center' wrap='nowrap'>
 								<Box as={TiLocationOutline} mr='5px'></Box>
 								<Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
@@ -89,17 +85,17 @@ const ReviewCard = ({ review, history }) => {
 										<Box as={TiThumbsUp} mr='5px'></Box>
 										<Flex as='h3' fontWeight='light' fontSize='lg'>
 											Received 0ffer
-									</Flex>{' '}
+										</Flex>{' '}
 									</>
 								) : (
-										<>
-											{' '}
-											<Box as={TiThumbsDown} mr='5px'></Box>
-											<Flex as='h3' fontWeight='light' fontSize='lg'>
-												No Offer
-									</Flex>{' '}
-										</>
-									)}
+									<>
+										{' '}
+										<Box as={TiThumbsDown} mr='5px'></Box>
+										<Flex as='h3' fontWeight='light' fontSize='lg'>
+											No Offer
+										</Flex>{' '}
+									</>
+								)}
 							</Flex>
 							<Flex align='center' wrap='nowrap'>
 								<Box as={GiWeightLiftingUp} mr='5px'></Box>
@@ -117,7 +113,15 @@ const ReviewCard = ({ review, history }) => {
 					</Flex>
 
 					{/* Types container */}
-					<Flex as='h2' fontWeight='medium' fontSize='xl' w='100%' mt='3%' mb='1.5%' overflow='hidden'>
+					<Flex
+						as='h2'
+						fontWeight='medium'
+						fontSize='xl'
+						w='100%'
+						mt='3%'
+						mb='1.5%'
+						overflow='hidden'
+					>
 						Interview Types
 					</Flex>
 					<Flex justify='space-between' wrap='wrap' mb='2%'>
@@ -138,15 +142,30 @@ const ReviewCard = ({ review, history }) => {
 						</Flex>
 					</Flex>
 
-
 					{/* Review container */}
 					<Flex as='p' w='100%' wrap='nowrap' overflow='hidden'>
 						{review.job_review}
 					</Flex>
-					<Flex as='h2' w='100%' fontWeight='medium' fontSize='xl' wrap='nowrap' overflow='hidden' mt='3%'>
+					<Flex
+						as='h2'
+						w='100%'
+						fontWeight='medium'
+						fontSize='xl'
+						wrap='nowrap'
+						overflow='hidden'
+						mt='3%'
+					>
 						Overall Rating 5 Stars!
 					</Flex>
-					<Flex as='h2' w='100%' fontWeight='medium' fontSize='xl' wrap='nowrap' overflow='hidden' mt='1.5%'>
+					<Flex
+						as='h2'
+						w='100%'
+						fontWeight='medium'
+						fontSize='xl'
+						wrap='nowrap'
+						overflow='hidden'
+						mt='1.5%'
+					>
 						Salary Offered ${review.salary}
 					</Flex>
 
@@ -265,17 +284,17 @@ const ReviewCard = ({ review, history }) => {
 									<Box as={TiThumbsUp} mr='10px'></Box>
 									<Flex as='p' font-size='18' fontWeight='light'>
 										Received Offer
-                  </Flex>{' '}
+									</Flex>{' '}
 								</>
 							) : (
-									<>
-										{' '}
-										<Box as={TiThumbsDown} mr='10px'></Box>
-										<Flex as='p' font-size='18' fontWeight='light' mr='10px'>
-											No Offer
-                  </Flex>{' '}
-									</>
-								)}
+								<>
+									{' '}
+									<Box as={TiThumbsDown} mr='10px'></Box>
+									<Flex as='p' font-size='18' fontWeight='light' mr='10px'>
+										No Offer
+									</Flex>{' '}
+								</>
+							)}
 						</Flex>
 					</Flex>
 
