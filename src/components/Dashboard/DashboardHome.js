@@ -6,7 +6,14 @@ import getReview from '../../state/actions/index';
 import NavBar from './NavBar';
 import ReviewCard from './ReviewCard';
 // styles
-import { Flex, Spinner } from '@chakra-ui/core';
+import {
+  Flex,
+  Spinner,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription
+} from '@chakra-ui/core';
 import CustomSpinner from '../CustomSpinner.js';
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
@@ -78,7 +85,26 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
                   />
                 ))
               ) : searchResults.length > 0 || filters ? (
-                <Flex as='h3'>No Reviews</Flex>
+                <Flex as='h3' w='100%' ml='6%' mt='5%' overflow='visible'>
+                  <Alert
+                    status='info'
+                    variant='subtle'
+                    flexDirection='column'
+                    justifyContent='center'
+                    textAlign='center'
+                    height='312px'
+                    width='625px'
+                    background='#F2F6FE'
+                    borderRadius='12px'
+                    mt='2%'
+                    wrap='nowrap'
+                  >
+                    {/* <AlertIcon size='40px' mr={0} /> */}
+                    <AlertDescription w='100%'>
+                      Sorry, no job reviews found.
+                    </AlertDescription>
+                  </Alert>
+                </Flex>
               ) : (
                 data.map(review => (
                   <ReviewCard
