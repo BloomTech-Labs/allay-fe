@@ -24,6 +24,7 @@ import {
 	ModalCloseButton,
 	Button,
 	Icon,
+	PseudoBox,
 	useDisclosure
 } from '@chakra-ui/core';
 
@@ -47,6 +48,7 @@ const ReviewCard = ({ review, history }) => {
 					<ModalCloseButton background='none' border='none' />
 
 					{/* Basic info container */}
+					{/* <SingleReview /> */}
 					<Flex align='center'>
 						<Flex align='center'>
 							<Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
@@ -63,15 +65,20 @@ const ReviewCard = ({ review, history }) => {
 								align='center'
 								wrap='nowrap'
 							>
-								{Array(5)
-									.fill('')
-									.map((_, i) => (
-										<Icon
-											name='star'
-											key={i}
-											color={i < review.job_rating ? 'teal.500' : 'gray.300'}
-										/>
-									))}
+								<Flex>
+									Interview Review:
+								</Flex>
+								<Flex ml='2%'>
+									{Array(5)
+										.fill('')
+										.map((_, i) => (
+											<Icon
+												name='star'
+												key={i}
+												color={i < review.job_rating ? 'black' : 'gray.300'}
+											/>
+										))}
+								</Flex>
 							</Flex>
 							<Flex as='p' fontSize='md' align='center' wrap='nowrap'>
 								Position: {review.job_title}
@@ -97,14 +104,14 @@ const ReviewCard = ({ review, history }) => {
 										</Flex>{' '}
 									</>
 								) : (
-									<>
-										{' '}
-										<Box as={TiThumbsDown} mr='5px'></Box>
-										<Flex as='h3' fontWeight='light' fontSize='lg'>
-											No Offer
+										<>
+											{' '}
+											<Box as={TiThumbsDown} mr='5px'></Box>
+											<Flex as='h3' fontWeight='light' fontSize='lg'>
+												No Offer
 										</Flex>{' '}
-									</>
-								)}
+										</>
+									)}
 							</Flex>
 							<Flex align='center' wrap='nowrap'>
 								<Box as={GiWeightLiftingUp} mr='5px'></Box>
@@ -155,27 +162,50 @@ const ReviewCard = ({ review, history }) => {
 					<Flex as='p' w='100%' wrap='nowrap' overflow='hidden'>
 						{review.job_review}
 					</Flex>
+
 					<Flex
-						as='h2'
 						w='100%'
-						fontWeight='medium'
-						fontSize='xl'
-						wrap='nowrap'
-						overflow='hidden'
 						mt='3%'
+						align='center'
 					>
-						Overall Rating 5 Stars!
+						<Flex
+							fontWeight='medium'
+							fontSize='xl'
+							wrap='nowrap'>
+							Overall Rating
+						</Flex>
+						<Flex ml='1.5%'>
+							{Array(5)
+								.fill('')
+								.map((_, i) => (
+									<Icon
+										name='star'
+										key={i}
+										color={i < review.job_rating ? 'black' : 'gray.300'}
+									/>
+								))}
+						</Flex>
 					</Flex>
 					<Flex
 						as='h2'
 						w='100%'
-						fontWeight='medium'
-						fontSize='xl'
 						wrap='nowrap'
 						overflow='hidden'
 						mt='1.5%'
 					>
-						Salary Offered ${review.salary}
+						<Flex
+							fontWeight='medium'
+							fontSize='xl'
+						>
+							Salary Offered
+						</Flex>
+						<Flex
+							ml='1.5%'
+							fontWeight='light'
+							fontSize='xl'
+						>
+							${review.salary}
+						</Flex>
 					</Flex>
 
 					<ModalFooter>
@@ -206,25 +236,24 @@ const ReviewCard = ({ review, history }) => {
 			{/* ---------------------------------------DashBoard Cards------------------------------------------ */}
 			{/* ------------------------------------------------------------------------------------------------ */}
 			{/* Review container */}
-			<Flex
+			<PseudoBox
 				w='45%'
-				h='312px'
-				mb='1%'
+				// h='50%'
 				mt='3%'
-				ml='2.5%'
-				px='30px'
+				mx='2.5%'
+				p='3.5%'
 				wrap='nowrap'
 				background='#F2F6FE'
 				borderRadius='12px'
-				justify='center'
-				align='center'
+				display='flex'
+				justifyContent='center'
+				alignItems='center'
+				_hover={{ bg: 'blue.500', color: 'white' }}
 				onClick={onOpen}
 			>
 				{/* Review content container */}
 				<Flex
 					w='100%'
-					h='82%'
-					mx='5%'
 					wrap='wrap'
 					justify='right'
 					alignContent='center'
@@ -247,17 +276,21 @@ const ReviewCard = ({ review, history }) => {
 							>
 								{review.tagline}
 							</Flex>
-							<Flex as='h4' w='100%' align='center' wrap='nowrap'>
-								Job Rating:
-								{Array(5)
-									.fill('')
-									.map((_, i) => (
-										<Icon
-											name='star'
-											key={i}
-											color={i < review.job_rating ? 'teal.500' : 'gray.300'}
-										/>
-									))}
+							<Flex width='100%'>
+								<Flex as='h4' align='center' wrap='nowrap'>
+									Job Rating:
+								</Flex>
+								<Flex align='center' wrap='nowrap' ml='1%'>
+									{Array(5)
+										.fill('')
+										.map((_, i) => (
+											<Icon
+												name='star'
+												key={i}
+												color={i < review.job_rating ? '#344CD0' : 'gray.300'}
+											/>
+										))}
+								</Flex>
 							</Flex>
 							{/* <Flex align='center' w='40%' wrap='nowrap'> */}
 							<Flex as='p' w='100%' fontWeight='light'>
@@ -270,25 +303,25 @@ const ReviewCard = ({ review, history }) => {
 					{/* Company name & location container */}
 					<Flex
 						w='100%'
-						justify='center'
+						justify='space-evenly'
 						align='center'
 						wrap='nowrap'
 						mb='1%'
 						mt=''
 					>
-						<Flex align='center' w='100%' wrap='nowrap'>
+						<Flex align='center' wrap='nowrap'>
 							<Box as={TiArchive} mr='10px'></Box>
 							<Flex as='p' font-size='18' fontWeight='light' overflow='hidden'>
 								{review.company_name}
 							</Flex>
 						</Flex>
-						<Flex align='center' w='100%' wrap='nowrap'>
+						<Flex align='center' wrap='nowrap'>
 							<Box as={TiLocationOutline} mr='10px'></Box>
 							<Flex as='p' font-size='18' fontWeight='light'>
 								{review.job_location}
 							</Flex>
 						</Flex>
-						<Flex align='center' w='100%' wrap='nowrap'>
+						<Flex align='center' wrap='nowrap'>
 							{review.offer_received ? (
 								<>
 									<Box as={TiThumbsUp} mr='10px'></Box>
@@ -297,14 +330,14 @@ const ReviewCard = ({ review, history }) => {
 									</Flex>{' '}
 								</>
 							) : (
-								<>
-									{' '}
-									<Box as={TiThumbsDown} mr='10px'></Box>
-									<Flex as='p' font-size='18' fontWeight='light' mr='10px'>
-										No Offer
+									<>
+										{' '}
+										<Box as={TiThumbsDown} mr='10px'></Box>
+										<Flex as='p' font-size='18' fontWeight='light' mr='10px'>
+											No Offer
 									</Flex>{' '}
-								</>
-							)}
+									</>
+								)}
 						</Flex>
 					</Flex>
 
@@ -313,7 +346,7 @@ const ReviewCard = ({ review, history }) => {
 						<p>{review.job_review}</p>
 					</Flex>
 				</Flex>
-			</Flex>
+			</PseudoBox>
 		</>
 	);
 };
