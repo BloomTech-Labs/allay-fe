@@ -28,6 +28,30 @@ import {
 const ReviewForm2 = props => {
 	const [starState, setStarState] = useState(0);
 
+	const dateArray = [
+		2000,
+		2001,
+		2002,
+		2003,
+		2004,
+		2005,
+		2006,
+		2007,
+		2008,
+		2009,
+		2010,
+		2011,
+		2012,
+		2013,
+		2014,
+		2015,
+		2016,
+		2017,
+		2018,
+		2019,
+		2020
+	];
+
 	return (
 		// main container
 		<Flex background='#E5E5E5' w='100%' justify='center'>
@@ -141,21 +165,31 @@ const ReviewForm2 = props => {
 										list='company_name'
 										autoCapitalize='none'
 									/>
-									<FormLabel>2. NOT SURE LENGTH OF POS</FormLabel>
-									<Select
-										h='56px'
-										rounded='6px'
-										variant='filled'
-										label=''
-										name=''
-										placeholder='Select one'
-									>
-										<option>Current employee</option>
-										<option>Former employee</option>
-										<option>Part time</option>
-										<option>Full time</option>
-										<option>Intern</option>
-									</Select>
+									<FormLabel>2. Length of position</FormLabel>
+									<Flex w='100%' justify='space-between'>
+										<Input
+											type='date'
+											h='56px'
+											w='45%'
+											mr='2%'
+											rounded='6px'
+											variant='filled'
+											label=''
+											name='posdate1'
+											placeholder='Select one'
+										/>
+
+										<Input
+											type='date'
+											h='56px'
+											w='45%'
+											rounded='6px'
+											variant='filled'
+											label=''
+											name=''
+											placeholder='Select one'
+										/>
+									</Flex>
 								</Flex>
 								{/* avatar */}
 								<Flex h='257px' align='flex-end' ml='1%'>
