@@ -8,7 +8,7 @@ const SignupLoginInput = React.forwardRef(({ ...props }, ref) => {
       py='32px'
       variant='filled'
       rounded='6px'
-      type={text || props.type}
+      type={props.type ? props.type : text}
       name={props.name}
       label={props.label}
       placeholder={props.placeholder}

@@ -217,11 +217,7 @@ const ReviewForm = ({
                   fontSize='1.2em'
                   children='$'
                 />
-                <Input
-                  mb='4'
-                  py='32px'
-                  variant='filled'
-                  rounded='6px'
+                <ReviewFormInput
                   type='number'
                   name='salary'
                   placeholder='e.g. 70000'
