@@ -140,20 +140,20 @@ const ReviewCard = ({ review, history }) => {
 					>
 						Interview Types
 					</Flex>
-					<Flex justify='space-between' wrap='wrap' mb='2%'>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+					<Flex justify='space-between' wrap='wrap' whiteSpace='nowrap' mb='2%'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Phone screening
 						</Flex>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Online coding test
 						</Flex>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Behavioral questions
 						</Flex>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Case interviews
 						</Flex>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Whiteboarding
 						</Flex>
 					</Flex>

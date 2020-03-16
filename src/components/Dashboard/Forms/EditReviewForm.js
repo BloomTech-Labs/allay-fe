@@ -99,7 +99,7 @@ const SingleReview = ({
               </FormLabel>
               <Input
                 mb='4'
-                py='20px'
+                h='56px'
                 variant='filled'
                 rounded='6px'
                 name='tagline'
@@ -117,7 +117,7 @@ const SingleReview = ({
               </FormLabel>
               <Input
                 mb='4'
-                py='20px'
+                h='56px'
                 variant='filled'
                 rounded='6px'
                 name='job_title'
@@ -135,7 +135,7 @@ const SingleReview = ({
               </FormLabel>
               <Input
                 mb='4'
-                py='20px'
+                h='56px'
                 variant='filled'
                 rounded='6px'
                 name='job_location'
@@ -154,14 +154,14 @@ const SingleReview = ({
               <InputGroup>
                 <InputLeftElement
                   mb='4'
-                  py='20px'
+                  h='56px'
                   color='gray.300'
                   fontSize='1.2em'
                   children='$'
                 />
                 <Input
                   mb='4'
-                  py='20px'
+                  h='56px'
                   variant='filled'
                   rounded='6px'
                   name='salary'
@@ -187,25 +187,23 @@ const SingleReview = ({
               </FormLabel>
               {/* // change to dropdown */}
               <Select
-                mb='4'
-                py='20px'
-                variant='filled'
+                h='56px'
+                mb='6'
                 rounded='6px'
+                variant='filled'
+                label=''
                 name='interview_rating'
-                type='select'
-                id='interview_rating'
                 placeholder={review.interview_rating}
-                ref={register}
                 value={editValue.interview_rating}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               >
-                <option></option>
                 <option value={5}>5 - Great</option>
                 <option value={4}>4 - Good</option>
                 <option value={3}>3 - Ok </option>
                 <option value={2}>2 - Poor </option>
                 <option value={1}>1 - Very Poor </option>
               </Select>
+
             </FormControl>
 
             <FormControl>
@@ -214,7 +212,7 @@ const SingleReview = ({
               </FormLabel>
               <Textarea
                 mb='4'
-                py='20px'
+                h='144px'
                 variant='filled'
                 rounded='6px'
                 h='200px'
@@ -235,7 +233,7 @@ const SingleReview = ({
               {/* // change to dropdown */}
               <Select
                 mb='4'
-                py='20px'
+                h='56px'
                 variant='filled'
                 rounded='6px'
                 name='job_rating'
@@ -245,7 +243,6 @@ const SingleReview = ({
                 // value={editValue.job_rating}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               >
-                <option></option>
                 <option value={5}>5 - Great</option>
                 <option value={4}>4 - Good</option>
                 <option value={3}>3 - Ok </option>
@@ -257,7 +254,7 @@ const SingleReview = ({
             <ButtonGroup mb='3' mt='3'>
               <Button
                 w='500px'
-                h='55px'
+                h='56px'
                 type='submit'
                 _hover={{ bg: '#979797' }}
                 _active={{ bg: '#979797' }}
@@ -270,7 +267,7 @@ const SingleReview = ({
                 Edit Review
               </Button>
               <Button
-                h='55px'
+                h='56px'
                 rounded='6x'
                 border='2px solid #615E5E'
                 bg='none'
