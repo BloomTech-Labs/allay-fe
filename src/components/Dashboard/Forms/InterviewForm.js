@@ -40,6 +40,9 @@ const InterviewForm = () => {
 		prog: 2
 	});
 
+	// thinking animation
+	const [thinking, setThinking] = useState(false);
+
 	// state for visibility
 	const [Tag2, setTag2] = useState(false);
 	const [Tag3, setTag3] = useState(false);
@@ -72,7 +75,7 @@ const InterviewForm = () => {
 			prog: 20
 		});
 		const element = document.getElementById('Tag2');
-		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	};
 	// 3rd tag
 	const time2 = () => {
@@ -240,7 +243,7 @@ const InterviewForm = () => {
 				</Flex>
 				{/* form container */}
 				<Flex id='Tag1' w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
-					{/* start of form  */}
+					{/*--------------- start of form ---------------  */}
 					<form>
 						<FormControl>
 							{/* first prompt */}
@@ -250,6 +253,7 @@ const InterviewForm = () => {
 								p='1%'
 								w='416px'
 								mb='8%'
+								mt='10%'
 								bg='#F2F6FE'
 								rounded='20px'
 								data-aos='fade-right'
@@ -263,6 +267,7 @@ const InterviewForm = () => {
 								<p>Great! I will need some general detail to get started</p>
 							</Flex>
 							{/* company container  */}
+
 							<Flex w='100%' justify='flex-end'>
 								{/* company box */}
 								<Flex
@@ -667,6 +672,7 @@ const InterviewForm = () => {
 										</p>
 									</Flex>
 									<Flex
+										id='diffTag'
 										align='center'
 										h='5%'
 										p='1%'
@@ -705,6 +711,7 @@ const InterviewForm = () => {
 											data-aos-easing='ease-in-out'
 											data-aos-mirror='true'
 											data-aos-once='true'
+											data-aos-anchor='#diffTag'
 										>
 											<FormLabel>Rate the difficulty</FormLabel>
 											<Select
@@ -733,6 +740,7 @@ const InterviewForm = () => {
 											data-aos-easing='ease-in-out'
 											data-aos-mirror='true'
 											data-aos-once='true'
+											data-aos-anchor='#diffTag'
 										>
 											<Avatar size='md' src='https://bit.ly/broken-link' />
 										</Flex>
