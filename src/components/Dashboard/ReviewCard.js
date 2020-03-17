@@ -239,16 +239,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 							>
 								Edit
 							</Button>
-						) : <Button
-							background='#344CD0'
-							color='#FFFFFF'
-							rounded='6px'
-							border='none'
-							size='lg'
-							mr='2%'
-						>
-								NO EDITS FOR YOU!
-					</Button>}
+						) : null}
 						{Number(loginId) === Number(review.user_id) ? (
 							<Button
 								background='#D31122'
@@ -261,16 +252,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 							>
 								Delete
 							</Button>
-						) : <Button
-							background='#344CD0'
-							color='#D31122'
-							rounded='6px'
-							border='none'
-							size='lg'
-							mr='2%'
-						>
-								NO DELETES FOR YOU!
-					</Button>}
+						) : null}
 
 					</ModalFooter>
 				</ModalContent>
