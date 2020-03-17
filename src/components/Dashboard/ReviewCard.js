@@ -28,18 +28,23 @@ import {
 	Button,
 	Icon,
 	PseudoBox,
-	Alert,
-	AlertIcon,
 	AlertDialog,
 	AlertDialogBody,
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogContent,
 	AlertDialogOverlay,
+	useToast,
 	useDisclosure
 } from '@chakra-ui/core';
 
-const ReviewCard = ({ review, history, deleteReview }) => {
+const ReviewCard = ({ review, error, reviewDeleted, history, deleteReview }) => {
+	//allows the use of toasts
+	const toast = useToast();
+
+	//toggle to determine whether deleting worked
+	const [deleteSuccess, setDeleteSuccess] = useState(false);
+
 	// basic usage for the SingleReview modal
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const loginId = localStorage.getItem('userId');
@@ -56,9 +61,29 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 
 	//deletes the review in question
 	const submitDelete = () => {
-		deleteReview(review.id).then(() =>
-			history.push('/dashboard')
-		);
+		deleteReview(review.id).then(() => {
+			history.push('/dashboard');
+		});
+		
+		console.log(error);
+
+		if (error) {
+			toast({
+				title: 'Review Not Deleted.',
+				description: `There was an error deleting your review`,
+				status: 'error',
+				duration: 5000,
+				isClosable: true
+			});
+		} else {
+			toast({
+				title: 'Review Deleted.',
+				description: `We've successfully deleted your review for you`,
+				status: 'success',
+				duration: 5000,
+				isClosable: true
+			});
+		}
 		ReactGA.event({
 			category: 'Delete',
 			action: `Submit delete`
@@ -251,7 +276,6 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 							</Button>
 						) : null}
 						{Number(loginId) === Number(review.user_id) ? (
-
 							<Button
 								background='#D31122'
 								color='#FFFFFF'
@@ -283,14 +307,16 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 									<Button ref={cancelRef} onClick={onClose2}>
 										Cancel
 									</Button>
-									<Button variantColor="red" onClick={submitDelete} ml={3}>
+									<Button
+										variantColor="red"
+										ml={3}
+										onClick={submitDelete}
+									>
 										Delete
 									</Button>
 								</AlertDialogFooter>
 							</AlertDialogContent>
 						</AlertDialog>
-
-
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
@@ -415,7 +441,9 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 
 const mapStateToProps = state => {
 	return {
-		data: state.review.data
+		data: state.review.data,
+		reviewDeleted: state.review.reviewDeleted,
+		error: state.review.error
 	};
 };
 export default connect(mapStateToProps, (getReview, deleteReview))(ReviewCard);

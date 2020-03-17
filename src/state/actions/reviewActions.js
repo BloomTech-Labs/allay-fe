@@ -76,12 +76,11 @@ export const editReview = (id, changes) => dispatch => {
 // ============ DELETE REVIEW ===========
 
 export const deleteReview = (id) => dispatch => {
-  console.log(id);
   dispatch({ type: DELETE_REVIEW_START });
   return axiosWithAuth()
     .delete(`/reviews/${id}`)
     .then(res => {
-      dispatch({ type: DELETE_REVIEW_SUCCESS, payload: id });
+      dispatch({ type: DELETE_REVIEW_SUCCESS, payload: res.data });
     })
     .catch(err => {
       dispatch({ type: DELETE_REVIEW_FAILURE, payload: err });

@@ -307,7 +307,6 @@ const SingleReview = ({
 };
 
 const mapStateToProps = state => {
-  // console.log(state.review.dataById)
   return {
     review: state.review.dataById
   };
