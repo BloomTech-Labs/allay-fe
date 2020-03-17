@@ -60,8 +60,6 @@ const SingleReview = ({
     getReviewById(id);
   }, [id, getReviewById]);
 
-  console.log(editValue);
-
   if (isLoading) {
     return (
       <Flex justify='center' align='center' w='100vh' h='100vh'>

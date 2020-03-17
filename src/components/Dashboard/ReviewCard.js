@@ -1,8 +1,11 @@
 // previously ReviewList
 import React from 'react';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
 // actions
 import getReview from '../../state/actions/index';
+import deleteReview from '../../state/actions/index';
+
 // icons
 import {
 	TiLocationOutline,
@@ -28,7 +31,7 @@ import {
 	useDisclosure
 } from '@chakra-ui/core';
 
-const ReviewCard = ({ review, history }) => {
+const ReviewCard = ({ review, history, deleteReview }) => {
 	// basic usage for the SingleReview modal
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const loginId = localStorage.getItem('userId');
@@ -37,6 +40,19 @@ const ReviewCard = ({ review, history }) => {
 	const navToEditRoute = () => {
 		history.push(`/dashboard/${review.id}`);
 	};
+
+	//deletes the review in question
+	const submitDelete = () => {
+		deleteReview(review.id).then(() =>
+			history.push('/dashboard')
+		);
+		ReactGA.event({
+			category: 'Delete',
+			action: `Submit delete`
+		});
+	};
+
+	console.log(review.id);
 
 	return (
 		<>
@@ -239,6 +255,7 @@ const ReviewCard = ({ review, history }) => {
 							border='none'
 							size='lg'
 							mr='2%'
+							onClick={submitDelete}
 						>
 							Delete
 						</Button>
@@ -369,4 +386,4 @@ const mapStateToProps = state => {
 		data: state.review.data
 	};
 };
-export default connect(mapStateToProps, getReview)(ReviewCard);
+export default connect(mapStateToProps, (getReview, deleteReview))(ReviewCard);
