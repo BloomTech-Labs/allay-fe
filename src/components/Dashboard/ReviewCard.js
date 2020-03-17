@@ -31,6 +31,7 @@ import {
 const ReviewCard = ({ review, history }) => {
 	// basic usage for the SingleReview modal
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const loginId = localStorage.getItem('userId');
 
 	//routes to single review
 	const navToEditRoute = () => {
@@ -209,17 +210,28 @@ const ReviewCard = ({ review, history }) => {
 					</Flex>
 
 					<ModalFooter>
-						<Button
+						{loginId === '1' ? (
+							<Button
+								background='#344CD0'
+								color='#FFFFFF'
+								rounded='6px'
+								border='none'
+								size='lg'
+								mr='2%'
+								onClick={navToEditRoute}
+							>
+								Edit
+							</Button>
+						) : <Button
 							background='#344CD0'
 							color='#FFFFFF'
 							rounded='6px'
 							border='none'
 							size='lg'
 							mr='2%'
-							onClick={navToEditRoute}
 						>
-							Edit
-						</Button>
+								NO EDITS FOR YOU!
+					</Button>}
 						<Button
 							background='#B90101'
 							color='#FFFFFF'
