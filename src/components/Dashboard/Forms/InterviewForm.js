@@ -23,7 +23,8 @@ import {
 	InputLeftElement,
 	Avatar,
 	RadioButtonGroup,
-	CheckboxGroup
+	CheckboxGroup,
+	Progress
 } from '@chakra-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -158,6 +159,25 @@ const InterviewForm = () => {
 		<Flex background='#E5E5E5' w='100%' justify='center'>
 			{/* max size */}
 			<Flex maxW='1440px' w='100%'>
+				{/* progress header */}
+				<Flex
+					m='0'
+					w='70%'
+					h='108px'
+					background='#F2F6FE'
+					top='0'
+					position='fixed'
+					overflow='hidden'
+					zIndex='999'
+					direction='column'
+					pt='2%'
+				>
+					{!Tag2 ? (
+						<Progress hasStripe isAnimated value={2} />
+					) : (
+						<Progress hasStripe isAnimated value={20} />
+					)}
+				</Flex>
 				{/* form container */}
 				<Flex id='Tag1' w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
 					{/* start of form  */}
