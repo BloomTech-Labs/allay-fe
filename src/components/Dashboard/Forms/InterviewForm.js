@@ -44,7 +44,17 @@ const InterviewForm = () => {
 	};
 
 	const routeToSecond = () => {
-		const element = document.getElementById('second');
+		const element = document.getElementById('2ndTag');
+		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	};
+
+	const time2 = () => {
+		clearTimeout(timer);
+		timer = setTimeout(routeTo3, 4000);
+	};
+
+	const routeTo3 = () => {
+		const element = document.getElementById('3rdTag');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	};
 
@@ -106,8 +116,8 @@ const InterviewForm = () => {
 									flexDir='column'
 									data-aos='fade-in'
 									data-aos-offset='200'
-									data-aos-delay='3000'
-									data-aos-duration='2000'
+									data-aos-delay='1000'
+									data-aos-duration='1500'
 									data-aos-easing='ease-in-out'
 									data-aos-mirror='true'
 									data-aos-once='true'
@@ -162,8 +172,8 @@ const InterviewForm = () => {
 									ml='1%'
 									data-aos='fade-in'
 									data-aos-offset='200'
-									data-aos-delay='3000'
-									data-aos-duration='2000'
+									data-aos-delay='1000'
+									data-aos-duration='1500'
 									data-aos-easing='ease-in-out'
 									data-aos-mirror='true'
 									data-aos-once='true'
@@ -173,7 +183,7 @@ const InterviewForm = () => {
 							</Flex>
 							{/* second prompt */}
 							<Flex
-								id='second'
+								id='2ndTag'
 								align='center'
 								h='5%'
 								w='416px'
@@ -193,6 +203,7 @@ const InterviewForm = () => {
 								<p>Thank you for that information.</p>
 							</Flex>
 							<Flex
+								id='roundsTag'
 								justify='center'
 								align='center'
 								p='1%'
@@ -203,7 +214,7 @@ const InterviewForm = () => {
 								rounded='20px'
 								data-aos='fade-right'
 								data-aos-offset='200'
-								data-aos-delay='2000'
+								data-aos-delay='1000'
 								data-aos-duration='1000'
 								data-aos-easing='ease-in-out'
 								data-aos-mirror='true'
@@ -226,6 +237,14 @@ const InterviewForm = () => {
 									border='1px solid #BBBDC6'
 									rounded='6px'
 									flexDir='column'
+									data-aos='fade-in'
+									data-aos-offset='200'
+									data-aos-delay='2000'
+									data-aos-duration='1500'
+									data-aos-easing='ease-in-out'
+									data-aos-mirror='true'
+									data-aos-once='true'
+									data-aos-anchor='#roundsTag'
 								>
 									<FormLabel>Select rounds of interview</FormLabel>
 									<Select
@@ -236,6 +255,7 @@ const InterviewForm = () => {
 										label=''
 										name=''
 										placeholder='Select one'
+										onChange={time2}
 									>
 										<option>1</option>
 										<option>2</option>
@@ -247,12 +267,24 @@ const InterviewForm = () => {
 									</Select>
 								</Flex>
 								{/* avatar */}
-								<Flex h='136px' align='flex-end' ml='1%'>
+								<Flex
+									h='136px'
+									align='flex-end'
+									ml='1%'
+									data-aos='fade-in'
+									data-aos-offset='200'
+									data-aos-delay='2000'
+									data-aos-duration='1500'
+									data-aos-easing='ease-in-out'
+									data-aos-mirror='true'
+									data-aos-once='true'
+								>
 									<Avatar size='md' src='https://bit.ly/broken-link' />
 								</Flex>
 							</Flex>
 							{/* third prompt */}
 							<Flex
+								id='3rdTag'
 								align='center'
 								p='1%'
 								h='5%'
