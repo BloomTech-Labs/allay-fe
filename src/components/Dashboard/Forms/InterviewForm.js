@@ -32,8 +32,8 @@ const InterviewForm = () => {
 	const [starState, setStarState] = useState(0);
 
 	// state for visibility
-	const [Tag2, setTag2] = useState(true);
-	const [Tag3, setTag3] = useState(true);
+	const [Tag2, setTag2] = useState(false);
+	const [Tag3, setTag3] = useState(false);
 	const [Tag4, setTag4] = useState(false);
 	const [Tag5, setTag5] = useState(false);
 	const [Tag6, setTag6] = useState(false);
@@ -80,6 +80,61 @@ const InterviewForm = () => {
 	const routeTo4 = () => {
 		setTag4(true);
 		const element = document.getElementById('Tag4');
+		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	};
+	// 5th tag
+	const time4 = () => {
+		clearTimeout(timer);
+		timer = setTimeout(routeTo5, 2000);
+	};
+
+	const routeTo5 = () => {
+		setTag5(true);
+		const element = document.getElementById('Tag5');
+		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	};
+	// 6th tag
+	const time5 = () => {
+		clearTimeout(timer);
+		timer = setTimeout(routeTo6, 2000);
+	};
+
+	const routeTo6 = () => {
+		setTag6(true);
+		const element = document.getElementById('Tag6');
+		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	};
+	// 7th tag
+	const time6 = () => {
+		clearTimeout(timer);
+		timer = setTimeout(routeTo7, 2000);
+	};
+
+	const routeTo7 = () => {
+		setTag7(true);
+		const element = document.getElementById('Tag7');
+		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	};
+	// 8th tag
+	const time7 = () => {
+		clearTimeout(timer);
+		timer = setTimeout(routeTo8, 2000);
+	};
+
+	const routeTo8 = () => {
+		setTag8(true);
+		const element = document.getElementById('Tag8');
+		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+	};
+	// 9th tag
+	const time8 = () => {
+		clearTimeout(timer);
+		timer = setTimeout(routeTo9, 2000);
+	};
+
+	const routeTo9 = () => {
+		setTag9(true);
+		const element = document.getElementById('Tag9');
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	};
 
@@ -485,6 +540,7 @@ const InterviewForm = () => {
 												name='interview_review'
 												placeholder='What questions came up? What did you discuss? What did you come away with from this interview? '
 												rounded='6px'
+												onKeyUp={time4}
 											/>
 										</Flex>
 										{/* avatar */}
@@ -540,7 +596,7 @@ const InterviewForm = () => {
 										rounded='20px'
 										data-aos='fade-right'
 										data-aos-offset='200'
-										data-aos-delay='2000'
+										data-aos-delay='2300'
 										data-aos-duration='1000'
 										data-aos-easing='ease-in-out'
 										data-aos-mirror='true'
@@ -562,6 +618,13 @@ const InterviewForm = () => {
 											border='1px solid #BBBDC6'
 											rounded='6px'
 											flexDir='column'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='3000'
+											data-aos-duration='1500'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
 										>
 											<FormLabel>Rate the difficulty</FormLabel>
 											<Select
@@ -572,10 +635,25 @@ const InterviewForm = () => {
 												label=''
 												name=''
 												placeholder='Select one'
-											/>
+												onChange={time5}
+											>
+												<option>Hard</option>
+												<option>Not so hard</option>
+											</Select>
 										</Flex>
 										{/* avatar */}
-										<Flex h='136px' align='flex-end' ml='1%'>
+										<Flex
+											h='136px'
+											align='flex-end'
+											ml='1%'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='3000'
+											data-aos-duration='1500'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
+										>
 											<Avatar size='md' src='https://bit.ly/broken-link' />
 										</Flex>
 									</Flex>
@@ -618,12 +696,20 @@ const InterviewForm = () => {
 											border='1px solid #BBBDC6'
 											rounded='6px'
 											flexDir='column'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='1000'
+											data-aos-duration='1500'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
 										>
 											<Flex w='100%' justify='center'>
 												<RadioButtonGroup
 													display='flex'
 													flexDir='column'
 													spacing={0}
+													onChange={time6}
 												>
 													<CustomRadio value='rad1' h='42px' w='411px'>
 														No offer
@@ -634,7 +720,18 @@ const InterviewForm = () => {
 											</Flex>
 										</Flex>
 										{/* avatar */}
-										<Flex h='176px' align='flex-end' ml='1%'>
+										<Flex
+											h='176px'
+											align='flex-end'
+											ml='1%'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='1000'
+											data-aos-duration='1500'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
+										>
 											<Avatar size='md' src='https://bit.ly/broken-link' />
 										</Flex>
 									</Flex>{' '}
@@ -663,6 +760,7 @@ const InterviewForm = () => {
 										<p>Thank you for that information</p>
 									</Flex>
 									<Flex
+										id='salaryTag'
 										align='center'
 										h='5%'
 										p='1%'
@@ -672,7 +770,7 @@ const InterviewForm = () => {
 										rounded='20px'
 										data-aos='fade-right'
 										data-aos-offset='200'
-										data-aos-delay='1200'
+										data-aos-delay='1500'
 										data-aos-duration='1000'
 										data-aos-easing='ease-in-out'
 										data-aos-mirror='true'
@@ -695,6 +793,14 @@ const InterviewForm = () => {
 											border='1px solid #BBBDC6'
 											rounded='6px'
 											flexDir='column'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='1000'
+											data-aos-duration='3000'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
+											data-aos-anchor='#salaryTag'
 										>
 											<FormLabel>Salary</FormLabel>
 											<InputGroup>
@@ -713,11 +819,24 @@ const InterviewForm = () => {
 													label='job_title'
 													name='job_title'
 													autoCapitalize='none'
+													onKeyUp={time7}
 												/>
 											</InputGroup>
 										</Flex>
 										{/* avatar */}
-										<Flex h='150px' align='flex-end' ml='1%'>
+										<Flex
+											h='150px'
+											align='flex-end'
+											ml='1%'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='1000'
+											data-aos-duration='3000'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
+											data-aos-anchor='#salaryTag'
+										>
 											<Avatar size='md' src='https://bit.ly/broken-link' />
 										</Flex>
 									</Flex>
@@ -746,6 +865,7 @@ const InterviewForm = () => {
 										<p>Thanks!</p>
 									</Flex>
 									<Flex
+										id='ratingTag'
 										align='center'
 										p='1%'
 										h='5%'
@@ -755,7 +875,7 @@ const InterviewForm = () => {
 										rounded='20px'
 										data-aos='fade-right'
 										data-aos-offset='200'
-										data-aos-delay='200'
+										data-aos-delay='900'
 										data-aos-duration='1000'
 										data-aos-easing='ease-in-out'
 										data-aos-mirror='true'
@@ -774,18 +894,39 @@ const InterviewForm = () => {
 											border='1px solid #BBBDC6'
 											rounded='6px'
 											flexDir='column'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='1500'
+											data-aos-duration='1000'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
 										>
 											<FormLabel mb='4'>Rate overall experience</FormLabel>
 											<Flex justify='center' w='100%'>
 												<BeautyStars
 													value={starState}
 													activeColor='blue'
-													onChange={value => setStarState(value)}
+													onChange={value => {
+														setStarState(value);
+														time8();
+													}}
 												/>
 											</Flex>
 										</Flex>
 										{/* avatar */}
-										<Flex h='136px' align='flex-end' ml='1%'>
+										<Flex
+											h='136px'
+											align='flex-end'
+											ml='1%'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='1500'
+											data-aos-duration='1000'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
+										>
 											<Avatar size='md' src='https://bit.ly/broken-link' />
 										</Flex>
 									</Flex>{' '}
@@ -809,9 +950,47 @@ const InterviewForm = () => {
 										data-aos-easing='ease-in-out'
 										data-aos-mirror='true'
 										data-aos-once='true'
+										data-aos-anchor='#ratingTag'
 									>
 										<p>Thank you! Don’t forget to hit submit </p>
-									</Flex>{' '}
+									</Flex>
+									{/* submit container  */}
+									<Flex w='100%' justify='flex-end'>
+										{/* submit box */}
+										<Flex
+											w='459px'
+											h='136px'
+											mb='8%'
+											p='6'
+											border='1px solid #BBBDC6'
+											rounded='6px'
+											flexDir='column'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='1500'
+											data-aos-duration='1000'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
+										>
+											<Button> Submit </Button>
+										</Flex>
+										{/* avatar */}
+										<Flex
+											h='136px'
+											align='flex-end'
+											ml='1%'
+											data-aos='fade-in'
+											data-aos-offset='200'
+											data-aos-delay='1500'
+											data-aos-duration='1000'
+											data-aos-easing='ease-in-out'
+											data-aos-mirror='true'
+											data-aos-once='true'
+										>
+											<Avatar size='md' src='https://bit.ly/broken-link' />
+										</Flex>
+									</Flex>
 								</>
 							) : null}
 						</FormControl>
