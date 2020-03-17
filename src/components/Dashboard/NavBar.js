@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactGA from 'react-ga'; // for google analytics
 //styles
-import {
-  Flex,
-  Button,
-  Avatar,
-  Input,
-  Radio,
-  RadioGroup,
-  RadioButtonGroup
-} from '@chakra-ui/core';
+import { Flex, Button, Avatar, Input, RadioButtonGroup } from '@chakra-ui/core';
 
 export default function NavBar({
   history,
