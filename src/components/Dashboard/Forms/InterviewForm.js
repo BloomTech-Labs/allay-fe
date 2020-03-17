@@ -30,7 +30,15 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const InterviewForm = () => {
+	// star rating
 	const [starState, setStarState] = useState(0);
+
+	//progress bar
+	const [progress, setProgress] = useState({
+		prec: 99,
+		mins: 10,
+		prog: 2
+	});
 
 	// state for visibility
 	const [Tag2, setTag2] = useState(false);
@@ -58,6 +66,11 @@ const InterviewForm = () => {
 
 	const routeTo2 = () => {
 		setTag2(true);
+		setProgress({
+			prec: 80,
+			mins: 8,
+			prog: 20
+		});
 		const element = document.getElementById('Tag2');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	};
@@ -69,6 +82,11 @@ const InterviewForm = () => {
 
 	const routeTo3 = () => {
 		setTag3(true);
+		setProgress({
+			prec: 70,
+			mins: 7,
+			prog: 30
+		});
 		const element = document.getElementById('Tag3');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	};
@@ -80,6 +98,11 @@ const InterviewForm = () => {
 
 	const routeTo4 = () => {
 		setTag4(true);
+		setProgress({
+			prec: 60,
+			mins: 6,
+			prog: 40
+		});
 		const element = document.getElementById('Tag4');
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	};
@@ -91,6 +114,11 @@ const InterviewForm = () => {
 
 	const routeTo5 = () => {
 		setTag5(true);
+		setProgress({
+			prec: 50,
+			mins: 5,
+			prog: 50
+		});
 		const element = document.getElementById('Tag5');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	};
@@ -102,6 +130,11 @@ const InterviewForm = () => {
 
 	const routeTo6 = () => {
 		setTag6(true);
+		setProgress({
+			prec: 40,
+			mins: 4,
+			prog: 60
+		});
 		const element = document.getElementById('Tag6');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	};
@@ -113,6 +146,11 @@ const InterviewForm = () => {
 
 	const routeTo7 = () => {
 		setTag7(true);
+		setProgress({
+			prec: 30,
+			mins: 3,
+			prog: 70
+		});
 		const element = document.getElementById('Tag7');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	};
@@ -124,6 +162,11 @@ const InterviewForm = () => {
 
 	const routeTo8 = () => {
 		setTag8(true);
+		setProgress({
+			prec: 20,
+			mins: 1,
+			prog: 85
+		});
 		const element = document.getElementById('Tag8');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	};
@@ -135,6 +178,11 @@ const InterviewForm = () => {
 
 	const routeTo9 = () => {
 		setTag9(true);
+		setProgress({
+			prec: 100,
+			mins: 0,
+			prog: 100
+		});
 		const element = document.getElementById('Tag9');
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	};
@@ -161,7 +209,8 @@ const InterviewForm = () => {
 			<Flex maxW='1440px' w='100%'>
 				{/* progress header */}
 				<Flex
-					m='0'
+					pt='1%'
+					px='2%'
 					w='70%'
 					h='108px'
 					background='#F2F6FE'
@@ -170,13 +219,24 @@ const InterviewForm = () => {
 					overflow='hidden'
 					zIndex='999'
 					direction='column'
-					pt='2%'
 				>
-					{!Tag2 ? (
-						<Progress hasStripe isAnimated value={2} />
-					) : (
-						<Progress hasStripe isAnimated value={20} />
-					)}
+					<Flex w='100%' color='#259BF8'>
+						Your progress
+					</Flex>
+
+					<Flex w='100%' justify='space-between' mb='1%'>
+						{progress.prec === 100 ? (
+							<>
+								<Flex as='h4'>{progress.prec}% Completed!</Flex>{' '}
+							</>
+						) : (
+							<>
+								<Flex as='h4'>{progress.prec}% not completed</Flex>
+								<Flex color='#259BF8'> {progress.mins} mins</Flex>
+							</>
+						)}
+					</Flex>
+					<Progress hasStripe isAnimated value={progress.prog} />
 				</Flex>
 				{/* form container */}
 				<Flex id='Tag1' w='100%' bg='white' flexDir='column' px='2%' pt='10%'>

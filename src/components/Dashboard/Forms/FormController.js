@@ -27,13 +27,14 @@ const FormController = () => {
 					bg='white'
 					justify='center'
 					flexDir='column'
-					px='2%'
+					// px='2%'
 					pt='5%'
 				>
 					{/* Start of messenger  */}
 					<Flex
 						align='center'
 						p='1%'
+						ml='2%'
 						w='416px'
 						mb='2%'
 						bg='#F2F6FE'
@@ -54,6 +55,7 @@ const FormController = () => {
 					<Flex
 						align='center'
 						p='1%'
+						ml='2%'
 						w='416px'
 						mb='8%'
 						bg='#F2F6FE'
@@ -127,6 +129,7 @@ const FormController = () => {
 							h='234px'
 							align='flex-end'
 							ml='1%'
+							mr='2%'
 							data-aos='fade-in'
 							data-aos-offset='200'
 							data-aos-delay='3000'
