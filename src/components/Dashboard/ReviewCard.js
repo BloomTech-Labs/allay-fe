@@ -31,9 +31,10 @@ import {
 const ReviewCard = ({ review, history }) => {
 	// basic usage for the SingleReview modal
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const loginId = localStorage.getItem('userId');
 
 	//routes to single review
-	const learnMore = () => {
+	const navToEditRoute = () => {
 		history.push(`/dashboard/${review.id}`);
 	};
 
@@ -75,7 +76,7 @@ const ReviewCard = ({ review, history }) => {
 											<Icon
 												name='star'
 												key={i}
-												color={i < review.job_rating ? 'black' : 'gray.300'}
+												color={i < review.interview_rating ? 'black' : 'gray.300'}
 											/>
 										))}
 								</Flex>
@@ -140,20 +141,20 @@ const ReviewCard = ({ review, history }) => {
 					>
 						Interview Types
 					</Flex>
-					<Flex justify='space-between' wrap='wrap' mb='2%'>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+					<Flex justify='space-between' wrap='wrap' whiteSpace='nowrap' mb='2%'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Phone screening
 						</Flex>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Online coding test
 						</Flex>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Behavioral questions
 						</Flex>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Case interviews
 						</Flex>
-						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%' overflow='hidden'>
+						<Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
 							Whiteboarding
 						</Flex>
 					</Flex>
@@ -209,7 +210,19 @@ const ReviewCard = ({ review, history }) => {
 					</Flex>
 
 					<ModalFooter>
-						<Button
+						{loginId === '1' ? (
+							<Button
+								background='#344CD0'
+								color='#FFFFFF'
+								rounded='6px'
+								border='none'
+								size='lg'
+								mr='2%'
+								onClick={navToEditRoute}
+							>
+								Edit
+							</Button>
+						) : <Button
 							background='#344CD0'
 							color='#FFFFFF'
 							rounded='6px'
@@ -217,8 +230,8 @@ const ReviewCard = ({ review, history }) => {
 							size='lg'
 							mr='2%'
 						>
-							Edit
-						</Button>
+								NO EDITS FOR YOU!
+					</Button>}
 						<Button
 							background='#B90101'
 							color='#FFFFFF'
@@ -287,7 +300,7 @@ const ReviewCard = ({ review, history }) => {
 											<Icon
 												name='star'
 												key={i}
-												color={i < review.job_rating ? '#344CD0' : 'gray.300'}
+												color={i < review.interview_rating ? '#344CD0' : 'gray.300'}
 											/>
 										))}
 								</Flex>
