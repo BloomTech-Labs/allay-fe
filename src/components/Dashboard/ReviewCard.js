@@ -1,5 +1,5 @@
 // previously ReviewList
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
 // actions
@@ -28,6 +28,14 @@ import {
 	Button,
 	Icon,
 	PseudoBox,
+	Alert,
+	AlertIcon,
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogContent,
+	AlertDialogOverlay,
 	useDisclosure
 } from '@chakra-ui/core';
 
@@ -35,6 +43,11 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 	// basic usage for the SingleReview modal
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const loginId = localStorage.getItem('userId');
+
+	// specifically for the cancel review delete button functionality
+	const [isOpen2, setIsOpen2] = useState();
+	const onClose2 = () => setIsOpen2(false);
+	const cancelRef = useRef();
 
 	//routes to single review
 	const navToEditRoute = () => {
@@ -51,9 +64,6 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 			action: `Submit delete`
 		});
 	};
-
-	console.log('user_id:', review.user_id);
-	console.log('localstorage_ID:', loginId);
 
 	return (
 		<>
@@ -241,6 +251,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 							</Button>
 						) : null}
 						{Number(loginId) === Number(review.user_id) ? (
+
 							<Button
 								background='#D31122'
 								color='#FFFFFF'
@@ -248,11 +259,37 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 								border='none'
 								size='lg'
 								mr='2%'
-								onClick={submitDelete}
+								onClick={() => setIsOpen2(true)}
 							>
 								Delete
 							</Button>
 						) : null}
+						<AlertDialog
+							isOpen={isOpen2}
+							leastDestructiveRef={cancelRef}
+							onClose={onClose2}
+						>
+							<AlertDialogOverlay />
+							<AlertDialogContent>
+								<AlertDialogHeader fontSize="lg" fontWeight="bold">
+									Delete Review
+								</AlertDialogHeader>
+
+								<AlertDialogBody>
+									Are you sure? You can't undo this action afterwards.
+								</AlertDialogBody>
+
+								<AlertDialogFooter>
+									<Button ref={cancelRef} onClick={onClose2}>
+										Cancel
+									</Button>
+									<Button variantColor="red" onClick={submitDelete} ml={3}>
+										Delete
+									</Button>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialog>
+
 
 					</ModalFooter>
 				</ModalContent>
@@ -312,7 +349,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 											<Icon
 												name='star'
 												key={i}
-												color={i < review.interview_rating ? '#344CD0' : 'gray.300'}
+												color={i < review.job_rating ? '#344CD0' : 'gray.300'}
 											/>
 										))}
 								</Flex>
