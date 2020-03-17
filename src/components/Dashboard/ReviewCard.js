@@ -52,7 +52,8 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 		});
 	};
 
-	console.log(review.id);
+	console.log('user_id:', review.user_id);
+	console.log('localstorage_ID:', loginId);
 
 	return (
 		<>
@@ -226,7 +227,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 					</Flex>
 
 					<ModalFooter>
-						{loginId === '1' ? (
+						{Number(loginId) === Number(review.user_id) ? (
 							<Button
 								background='#344CD0'
 								color='#FFFFFF'
@@ -248,17 +249,29 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 						>
 								NO EDITS FOR YOU!
 					</Button>}
-						<Button
-							background='#B90101'
-							color='#FFFFFF'
+						{Number(loginId) === Number(review.user_id) ? (
+							<Button
+								background='#D31122'
+								color='#FFFFFF'
+								rounded='6px'
+								border='none'
+								size='lg'
+								mr='2%'
+								onClick={submitDelete}
+							>
+								Delete
+							</Button>
+						) : <Button
+							background='#344CD0'
+							color='#D31122'
 							rounded='6px'
 							border='none'
 							size='lg'
 							mr='2%'
-							onClick={submitDelete}
 						>
-							Delete
-						</Button>
+								NO DELETES FOR YOU!
+					</Button>}
+
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
@@ -278,7 +291,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
 				display='flex'
 				justifyContent='center'
 				alignItems='center'
-				_hover={{ bg: 'blue.500', color: 'white' }}
+				_hover={{ bg: '#4EADF9', color: 'white' }}
 				onClick={onOpen}
 			>
 				{/* Review content container */}
