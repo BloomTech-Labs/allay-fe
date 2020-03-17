@@ -7,7 +7,10 @@ import {
   FETCH_REVIEW_BY_ID_SUCCESS,
   POST_REVIEW_FAILURE,
   POST_REVIEW_START,
-  POST_REVIEW_SUCCESS
+  POST_REVIEW_SUCCESS,
+  EDIT_REVIEW_FAILURE,
+  EDIT_REVIEW_START,
+  EDIT_REVIEW_SUCCESS
 } from '../types';
 
 const initialState = {
@@ -15,7 +18,9 @@ const initialState = {
   dataById: {},
   fetchingData: false,
   isLoading: false,
+  isEditing: false,
   reviewAdded: false,
+  reviewEdited: false,
   error: ''
 };
 
@@ -88,6 +93,28 @@ const reviewReducer = (state = initialState, action) => {
         ...state,
         fetchingData: false,
         isLoading: false,
+        error: action.payload
+      };
+    }
+    case EDIT_REVIEW_START: {
+      return {
+        ...state,
+        isEditing: true
+      };
+    }
+    case EDIT_REVIEW_SUCCESS: {
+      return {
+        ...state,
+        dataById: action.payload,
+        isEditing: false,
+        reviewEdited: true
+      };
+    }
+    case EDIT_REVIEW_FAILURE: {
+      return {
+        ...state,
+        isEditing: false,
+        reviewEdited: false,
         error: action.payload
       };
     }

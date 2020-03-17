@@ -8,7 +8,10 @@ import {
   FETCH_REVIEW_BY_ID_SUCCESS,
   POST_REVIEW_FAILURE,
   POST_REVIEW_START,
-  POST_REVIEW_SUCCESS
+  POST_REVIEW_SUCCESS,
+  EDIT_REVIEW_FAILURE,
+  EDIT_REVIEW_START,
+  EDIT_REVIEW_SUCCESS
 } from "../types";
 
 // ============ GET ALL REVIEWS ===========
@@ -24,6 +27,7 @@ export const getReview = () => dispatch => {
       dispatch({ type: FETCH_REVIEWS_FAILURE, payload: err.response });
     });
 };
+
 // ============ GET REVIEW BY ID ===========
 
 export const getReviewById = id => dispatch => {
@@ -37,6 +41,7 @@ export const getReviewById = id => dispatch => {
       dispatch({ type: FETCH_REVIEW_BY_ID_FAILURE, payload: err.response });
     });
 };
+
 // ============ POST REVIEW ===========
 
 export const postReview = (id, newReview) => dispatch => {
@@ -50,3 +55,18 @@ export const postReview = (id, newReview) => dispatch => {
       dispatch({ type: POST_REVIEW_FAILURE, payload: err.response });
     });
 };
+
+// ============ EDIT REVIEW ===========
+
+export const editReview = (id, changes) => dispatch => {
+  console.log(changes);
+  dispatch({ type: EDIT_REVIEW_START });
+  return axiosWithAuth()
+    .put(`/reviews/${id}`, changes)
+    .then(res => {
+      dispatch({ type: EDIT_REVIEW_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: EDIT_REVIEW_FAILURE, payload: err.response });
+    })
+}
