@@ -11,7 +11,10 @@ import {
   POST_REVIEW_SUCCESS,
   EDIT_REVIEW_FAILURE,
   EDIT_REVIEW_START,
-  EDIT_REVIEW_SUCCESS
+  EDIT_REVIEW_SUCCESS,
+  DELETE_REVIEW_FAILURE,
+  DELETE_REVIEW_START,
+  DELETE_REVIEW_SUCCESS
 } from "../types";
 
 // ============ GET ALL REVIEWS ===========
@@ -59,7 +62,6 @@ export const postReview = (id, newReview) => dispatch => {
 // ============ EDIT REVIEW ===========
 
 export const editReview = (id, changes) => dispatch => {
-  console.log(changes);
   dispatch({ type: EDIT_REVIEW_START });
   return axiosWithAuth()
     .put(`/reviews/${id}`, changes)
@@ -68,5 +70,19 @@ export const editReview = (id, changes) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: EDIT_REVIEW_FAILURE, payload: err.response });
+    })
+}
+
+// ============ DELETE REVIEW ===========
+
+export const deleteReview = (id) => dispatch => {
+  dispatch({ type: DELETE_REVIEW_START });
+  return axiosWithAuth()
+    .delete(`/reviews/${id}`, { headers: { Authorization: localStorage.getItem('token') } })
+    .then(res => {
+      dispatch({ type: DELETE_REVIEW_SUCCESS, payload: id.id });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_REVIEW_FAILURE, payload: err });
     })
 }

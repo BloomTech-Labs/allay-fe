@@ -10,7 +10,10 @@ import {
   POST_REVIEW_SUCCESS,
   EDIT_REVIEW_FAILURE,
   EDIT_REVIEW_START,
-  EDIT_REVIEW_SUCCESS
+  EDIT_REVIEW_SUCCESS,
+  DELETE_REVIEW_START,
+  DELETE_REVIEW_SUCCESS,
+  DELETE_REVIEW_FAILURE
 } from '../types';
 
 const initialState = {
@@ -19,8 +22,10 @@ const initialState = {
   fetchingData: false,
   isLoading: false,
   isEditing: false,
+  isDeleting: false,
   reviewAdded: false,
   reviewEdited: false,
+  reviewDeleted: false,
   error: ''
 };
 
@@ -115,6 +120,28 @@ const reviewReducer = (state = initialState, action) => {
         ...state,
         isEditing: false,
         reviewEdited: false,
+        error: action.payload
+      };
+    }
+    case DELETE_REVIEW_START: {
+      return {
+        ...state,
+        isDeleting: true
+      };
+    }
+    case DELETE_REVIEW_SUCCESS: {
+      return {
+        ...state,
+        dataById: action.payload,
+        isDeleting: true,
+        reviewDeleted: true,
+        data: state.data.filter(i => action.payload !== i.id)
+      };
+    }
+    case DELETE_REVIEW_FAILURE: {
+      return {
+        ...state,
+        isDeleting: false,
         error: action.payload
       };
     }
