@@ -42,8 +42,6 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 	//allows the use of toasts
 	const toast = useToast();
 
-	console.log();
-
 	//toggle to determine whether deleting worked
 	const [deleteSuccess, setDeleteSuccess] = useState(false);
 
@@ -58,12 +56,12 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 
 	//routes to single review
 	const navToEditRoute = () => {
-		history.push(`/dashboard/${review.id}`);
+		history.push(`/dashboard/${review.interview_review_id}`);
 	};
 
 	//deletes the review in question
 	const submitDelete = () => {
-		deleteReview(review.id).then(() => {
+		deleteReview(review.user_id, review.interview_review_id).then(() => {
 			window.location.reload()
 			// history.push('/dashboard')
 			toast({
@@ -371,20 +369,21 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 								overflow='hidden'
 								isTruncated
 							>
-								{review.tagline}
+								{review.company_name} interview review
 							</Flex>
 							<Flex width='100%'>
 								<Flex as='h4' align='center' wrap='nowrap'>
-									Job Rating:
+									{review.overall_rating}.0
 								</Flex>
-								<Flex align='center' wrap='nowrap' ml='1%'>
+								<Flex align='center' wrap='nowrap' >
 									{Array(5)
 										.fill('')
 										.map((_, i) => (
 											<Icon
 												name='star'
 												key={i}
-												color={i < review.job_rating ? '#344CD0' : 'gray.300'}
+												color={i < review.overall_rating ? '#344CD0' : 'gray.300'}
+												ml='8%'
 											/>
 										))}
 								</Flex>
@@ -400,6 +399,8 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 					{/* Company name & location container */}
 					<Flex
 						w='100%'
+						font-size='18'
+						fontWeight='light'
 						justify='space-evenly'
 						align='center'
 						wrap='nowrap'
@@ -408,21 +409,21 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 					>
 						<Flex align='center' wrap='nowrap'>
 							<Box as={TiArchive} mr='10px'></Box>
-							<Flex as='p' font-size='18' fontWeight='light' overflow='hidden'>
-								{review.company_name}
+							<Flex as='p' overflow='hidden'>
+								${review.salary}
 							</Flex>
 						</Flex>
 						<Flex align='center' wrap='nowrap'>
 							<Box as={TiLocationOutline} mr='10px'></Box>
-							<Flex as='p' font-size='18' fontWeight='light'>
-								{review.job_location}
+							<Flex as='p'>
+								{review.city}, {review.abbreviation}
 							</Flex>
 						</Flex>
 						<Flex align='center' wrap='nowrap'>
-							{review.offer_received ? (
+							{review.offer_status ? (
 								<>
 									<Box as={TiThumbsUp} mr='10px'></Box>
-									<Flex as='p' font-size='18' fontWeight='light'>
+									<Flex as='p'>
 										Received Offer
 									</Flex>{' '}
 								</>
@@ -430,7 +431,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 									<>
 										{' '}
 										<Box as={TiThumbsDown} mr='10px'></Box>
-										<Flex as='p' font-size='18' fontWeight='light' mr='10px'>
+										<Flex as='p' mr='10px'>
 											No Offer
 									</Flex>{' '}
 									</>

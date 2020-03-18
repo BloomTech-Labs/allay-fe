@@ -75,7 +75,7 @@ const SingleReview = ({
   }
 
   const submitEdits = () => {
-    editReview(review.id, editValue).then(() => {
+    editReview(review.user_id, review.interview_review_id, editValue).then(() => {
       history.push('/dashboard')
       toast({
         title: `Review Edit Success!`,
