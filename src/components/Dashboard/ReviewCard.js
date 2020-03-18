@@ -42,8 +42,6 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 	//allows the use of toasts
 	const toast = useToast();
 
-	console.log();
-
 	//toggle to determine whether deleting worked
 	const [deleteSuccess, setDeleteSuccess] = useState(false);
 
@@ -58,12 +56,12 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 
 	//routes to single review
 	const navToEditRoute = () => {
-		history.push(`/dashboard/${review.id}`);
+		history.push(`/dashboard/${review.interview_review_id}`);
 	};
 
 	//deletes the review in question
 	const submitDelete = () => {
-		deleteReview(review.id).then(() => {
+		deleteReview(review.user_id, review.interview_review_id).then(() => {
 			window.location.reload()
 			// history.push('/dashboard')
 			toast({
