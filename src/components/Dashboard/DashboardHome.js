@@ -12,7 +12,8 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   // search state
   const [filteredReviews, setFilteredReviews] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [filters, setFilters] = useState();
+  const [filters, setFilters] = useState([]);
+  const [selectedTracks, setSelectedTracks] = useState();
 
   // pull review data
   useEffect(() => {
@@ -30,9 +31,15 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 
   // ignacio's filter
   useEffect(() => {
-    const filteredResults = data.filter(
-      review => Number(review.job_rating) === Number(filters)
+    // const filteredResults = data.filter(
+    //   review => Number(review.job_rating) === Number(filters)
+    // );
+
+    const filteredResults = data.filter(review =>
+      filters.includes(review.job_rating)
     );
+    console.log('filteredResults', filteredResults);
+
     // data = results;
     setFilteredReviews(filteredResults);
   }, [filters]);
@@ -49,6 +56,8 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             setSearchResults={setSearchResults}
             filters={filters}
             setFilters={setFilters}
+            selectedTracks={selectedTracks}
+            setSelectedTracks={setSelectedTracks}
           />
           <Flex mt='15%' direction='column'>
             <Flex height='100%' direction='column'>
@@ -70,7 +79,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
                     history={history}
                   />
                 ))
-              ) : searchResults.length > 0 || filters ? (
+              ) : searchResults.length > 0 || filters.length > 0 ? (
                 <Flex as='h1'>No Reviews</Flex>
               ) : (
                 data.map(review => (

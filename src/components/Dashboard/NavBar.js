@@ -8,7 +8,9 @@ export default function NavBar({
   isLoading,
   setSearchResults,
   filters,
-  setFilters
+  setFilters,
+  selectedTracks,
+  setSelectedTracks
 }) {
   // use to navigate to review form
   const navToReviewForm = () => {
@@ -33,18 +35,29 @@ export default function NavBar({
     { id: 5, prefix: 'AND' }
   ];
 
-  const [selectedTracks, setSelectedTracks] = useState(tracks);
+  const [selectableTracks, setSelectableTracks] = useState(tracks);
+  // const [selectedTracks, setSelectedTracks] = useState([]);
 
   useEffect(() => {
     const newArray = tracks.map(track => ({ ...track, selected: false }));
-    setSelectedTracks(newArray);
+    setSelectableTracks(newArray);
   }, []);
 
+  useEffect(() => {
+    const filteredArray = selectableTracks.filter(
+      track => track.selected === true
+    );
+    setSelectedTracks(filteredArray);
+  }, [filters]);
+
   const handleFilter = e => {
-    filters === e.id ? setFilters() : setFilters(e.id);
+    filters.includes(e.id)
+      ? setFilters(filters.filter(item => item !== e.id))
+      : setFilters([...filters, e.id]);
     e.selected = !e.selected;
   };
 
+  // console.log('selectedTracks', selectedTracks);
   console.log('filters', filters);
 
   return (
@@ -76,7 +89,7 @@ export default function NavBar({
           onChange={handleInputChange}
         />
         <RadioButtonGroup onChange={handleFilter} isInline>
-          {selectedTracks.map(track => (
+          {tracks.map(track => (
             <Button
               variantColor={track.selected ? 'blue' : 'gray'}
               value={track}
