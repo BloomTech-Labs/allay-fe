@@ -26,6 +26,7 @@ const initialState = {
   reviewAdded: false,
   reviewEdited: false,
   reviewDeleted: false,
+  deleteFail: false,
   error: ''
 };
 
@@ -104,7 +105,9 @@ const reviewReducer = (state = initialState, action) => {
     case EDIT_REVIEW_START: {
       return {
         ...state,
-        isEditing: true
+        isEditing: true,
+        reviewEdited: false,
+        error: ''
       };
     }
     case EDIT_REVIEW_SUCCESS: {
@@ -112,7 +115,8 @@ const reviewReducer = (state = initialState, action) => {
         ...state,
         dataById: action.payload,
         isEditing: false,
-        reviewEdited: true
+        reviewEdited: true,
+        error: ''
       };
     }
     case EDIT_REVIEW_FAILURE: {
@@ -126,22 +130,26 @@ const reviewReducer = (state = initialState, action) => {
     case DELETE_REVIEW_START: {
       return {
         ...state,
-        isDeleting: true
+        isDeleting: true,
+        deleteFail: false,
+        reviewDeleted: false
       };
     }
     case DELETE_REVIEW_SUCCESS: {
       return {
         ...state,
         dataById: action.payload,
-        isDeleting: true,
-        reviewDeleted: true,
-        data: state.data.filter(i => action.payload !== i.id)
+        isDeleting: false,
+        deleteFail: false,
+        reviewDeleted: true
       };
     }
     case DELETE_REVIEW_FAILURE: {
       return {
         ...state,
         isDeleting: false,
+        deleteFail: true,
+        reviewDeleted: false,
         error: action.payload
       };
     }

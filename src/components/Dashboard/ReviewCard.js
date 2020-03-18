@@ -38,9 +38,11 @@ import {
 	useDisclosure
 } from '@chakra-ui/core';
 
-const ReviewCard = ({ review, error, reviewDeleted, history, deleteReview }) => {
+const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 	//allows the use of toasts
 	const toast = useToast();
+
+	console.log();
 
 	//toggle to determine whether deleting worked
 	const [deleteSuccess, setDeleteSuccess] = useState(false);
@@ -62,33 +64,40 @@ const ReviewCard = ({ review, error, reviewDeleted, history, deleteReview }) => 
 	//deletes the review in question
 	const submitDelete = () => {
 		deleteReview(review.id).then(() => {
-			history.push('/dashboard');
-		});
-		
-		console.log(error);
-
-		if (error) {
+			window.location.reload()
+			// history.push('/dashboard')
 			toast({
-				title: 'Review Not Deleted.',
-				description: `There was an error deleting your review`,
-				status: 'error',
-				duration: 5000,
-				isClosable: true
-			});
-		} else {
-			toast({
-				title: 'Review Deleted.',
+				title: 'Review Deleted',
 				description: `We've successfully deleted your review for you`,
 				status: 'success',
 				duration: 5000,
 				isClosable: true
-			});
-		}
+			})
+		})
+
+		// if (reviewDeleted === true) {
+		// 	toast({
+		// 		title: 'Review Deleted',
+		// 		description: `We've successfully deleted your review for you`,
+		// 		status: 'success',
+		// 		duration: 5000,
+		// 		isClosable: true
+		// 	})
+		// } else {
+		// 	toast({
+		// 		title: 'Review Not Deleted',
+		// 		description: `There was an error deleting your review`,
+		// 		status: 'error',
+		// 		duration: 5000,
+		// 		isClosable: true
+		// 	});
+		// }
+
 		ReactGA.event({
 			category: 'Delete',
 			action: `Submit delete`
 		});
-	};
+	}
 
 	return (
 		<>
@@ -358,7 +367,7 @@ const ReviewCard = ({ review, error, reviewDeleted, history, deleteReview }) => 
 								as='h2'
 								w='100%'
 								align='center'
-								wrap='nowrap'
+								wrap='wrap'
 								overflow='hidden'
 								isTruncated
 							>
@@ -441,9 +450,7 @@ const ReviewCard = ({ review, error, reviewDeleted, history, deleteReview }) => 
 
 const mapStateToProps = state => {
 	return {
-		data: state.review.data,
-		reviewDeleted: state.review.reviewDeleted,
-		error: state.review.error
+		reviewDeleted: state.review.reviewDeleted
 	};
 };
 export default connect(mapStateToProps, (getReview, deleteReview))(ReviewCard);
