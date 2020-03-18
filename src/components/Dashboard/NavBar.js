@@ -7,8 +7,8 @@ export default function NavBar({
   history,
   isLoading,
   setSearchResults,
-  filters,
-  setFilters
+  trackFilters,
+  setTrackFilters
 }) {
   // use to navigate to review form
   const navToReviewForm = () => {
@@ -34,9 +34,9 @@ export default function NavBar({
   ];
 
   const handleFilter = e => {
-    filters.includes(e.id)
-      ? setFilters(filters.filter(item => item !== e.id))
-      : setFilters([...filters, e.id]);
+    trackFilters.includes(e.id)
+      ? setTrackFilters(trackFilters.filter(item => item !== e.id))
+      : setTrackFilters([...trackFilters, e.id]);
     e.selected = !e.selected;
   };
 
@@ -73,7 +73,7 @@ export default function NavBar({
             <Button
               size='sm'
               rounded='full'
-              variantColor={filters.includes(track.id) ? 'blue' : 'gray'}
+              variantColor={trackFilters.includes(track.id) ? 'blue' : 'gray'}
               value={track}
             >
               {track.prefix}
