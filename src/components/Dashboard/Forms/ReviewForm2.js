@@ -4,7 +4,7 @@ import ReactGA from 'react-ga'; // for google analytics
 // redux
 import { connect } from 'react-redux';
 // actions
-import postReview from '../../../state/actions';
+import postCompanyReview from '../../../state/actions';
 import getCompanies from '../../../state/actions';
 import postCompany from '../../../state/actions';
 // styles
@@ -27,7 +27,13 @@ import {
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
+const ReviewForm2 = ({
+	history,
+	isLoading,
+	companies,
+	getCompanies,
+	postCompanyReview
+}) => {
 	//initialize animations
 	AOS.init();
 	const { register, handleSubmit, errors, formState } = useForm();
@@ -70,7 +76,7 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 	useEffect(() => {
 		if (searchTerm.length >= 3) {
 			const results = companies.filter(company =>
-				company.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+				company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
 			);
 			setSearchResults(results);
 		}
@@ -177,9 +183,10 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 
 	//submit handler
 	const submitForm = data => {
-		postReview(localStorage.getItem('userId'), data).then(() =>
-			history.push('/dashboard')
-		);
+		postCompanyReview(localStorage.getItem('userId'), {
+			...data,
+			job_rating: starState
+		}).then(() => history.push('/dashboard'));
 		ReactGA.event({
 			category: 'Review',
 			action: `Submit review`
@@ -285,7 +292,7 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 									<datalist id='company_id'>
 										{searchResults.map(company => (
 											<option value={company.id} key={company.id}>
-												{company.name}
+												{company.company_name}
 											</option>
 										))}
 									</datalist>
@@ -294,16 +301,17 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 										h='56px'
 										rounded='6px'
 										variant='filled'
-										label=''
-										name=''
+										label='work_status_id'
+										name='work_status_id'
 										placeholder='Select one'
 										onChange={time1}
+										ref={register}
 									>
-										<option>Current employee</option>
-										<option>Former employee</option>
-										<option>Part time</option>
-										<option>Full time</option>
-										<option>Intern</option>
+										<option value={1}>Current employee </option>
+										<option value={2}>Former employee</option>
+										<option value={3}>Part time</option>
+										<option value={4}>Full time</option>
+										<option value={5}>Intern</option>
 									</Select>
 								</Flex>
 								{/* avatar */}
@@ -371,10 +379,10 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 												mb='6'
 												rounded='6px'
 												type='text'
-												label='company_name'
-												name='company_name'
+												label='job_title'
+												name='job_title'
 												list='company_name'
-												autoCapitalize='none'
+												ref={register}
 											/>
 											<FormLabel>2. Length of position</FormLabel>
 											<Flex w='100%' justify='space-between'>
@@ -387,9 +395,10 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 													mr='2%'
 													rounded='6px'
 													variant='filled'
-													label=''
-													name='posdate1'
+													label='start_date'
+													name='start_date'
 													placeholder='YYYY'
+													ref={register}
 												/>
 
 												<Input
@@ -400,10 +409,11 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 													w='45%'
 													rounded='6px'
 													variant='filled'
-													label=''
-													name=''
+													label='end_date'
+													name='end_date'
 													placeholder='YYYY'
 													onKeyUp={time2}
+													ref={register}
 												/>
 											</Flex>
 										</Flex>
@@ -496,9 +506,10 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 												h='144px'
 												rowsMax={6}
 												type='text'
-												name='interview_review'
+												name='comment'
 												rounded='6px'
 												onKeyUp={time3}
+												ref={register}
 											/>
 										</Flex>
 										{/* avatar */}
@@ -584,10 +595,11 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 												mb='6'
 												rounded='6px'
 												variant='filled'
-												label=''
-												name=''
+												label='typical_hours'
+												name='typical_hours'
 												placeholder='Select one'
 												onChange={time4}
+												ref={register}
 											>
 												<option value={29}>29 hours or less</option>
 												<option value={30}>30 hours</option>
@@ -672,10 +684,11 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 													rounded='6px'
 													type='number'
 													variant='filled'
-													label='job_title'
-													name='job_title'
+													label='salary'
+													name='salary'
 													autoCapitalize='none'
 													onChange={time5}
+													ref={register}
 												/>
 											</InputGroup>
 										</Flex>
@@ -827,7 +840,7 @@ const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
 											data-aos-mirror='true'
 											data-aos-once='true'
 										>
-											<Button> Submit </Button>
+											<Button type='submit'> Submit </Button>
 										</Flex>
 										{/* avatar */}
 										<Flex
@@ -864,5 +877,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	(postReview, getCompanies, postCompany)
+	(postCompanyReview, getCompanies, postCompany)
 )(ReviewForm2);
