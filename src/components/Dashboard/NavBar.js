@@ -71,6 +71,7 @@ export default function NavBar({
         <Flex align='center'>
           <Avatar mr='12%' size='xl' src='https://bit.ly/broken-link' />
           <h1> Allay </h1>
+          <PlacesAutocomplete />
         </Flex>
       </Flex>
       <Flex align='center' justify='space-between' pt='2%'>
