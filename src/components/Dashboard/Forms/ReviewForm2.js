@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import ReactGA from 'react-ga'; // for google analytics
 // redux
 import { connect } from 'react-redux';
 // actions
@@ -26,10 +27,15 @@ import {
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const ReviewForm2 = props => {
+const ReviewForm2 = ({ history, isLoading, companies, getCompanies }) => {
+	//initialize animations
+	AOS.init();
+	const { register, handleSubmit, errors, formState } = useForm();
+	// search state
+	const [searchTerm, setSearchTerm] = useState('');
+	const [searchResults, setSearchResults] = useState([]);
 	// star rating
 	const [starState, setStarState] = useState(0);
-
 	//progress bar
 	const [progress, setProgress] = useState({
 		prec: 99,
@@ -47,6 +53,7 @@ const ReviewForm2 = props => {
 
 	// brings to top on render
 	useEffect(() => {
+		getCompanies();
 		setProgress({
 			prec: 95,
 			mins: 8,
@@ -58,6 +65,16 @@ const ReviewForm2 = props => {
 			block: 'start'
 		});
 	}, []);
+
+	// company search function
+	useEffect(() => {
+		if (searchTerm.length >= 3) {
+			const results = companies.filter(company =>
+				company.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+			);
+			setSearchResults(results);
+		}
+	}, [searchTerm, companies]);
 
 	// timers for moves
 	let timer = null;
@@ -158,6 +175,17 @@ const ReviewForm2 = props => {
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	};
 
+	//submit handler
+	const submitForm = data => {
+		postReview(localStorage.getItem('userId'), data).then(() =>
+			history.push('/dashboard')
+		);
+		ReactGA.event({
+			category: 'Review',
+			action: `Submit review`
+		});
+	};
+
 	return (
 		// main container
 		<Flex background='#E5E5E5' w='100%' justify='center'>
@@ -197,7 +225,7 @@ const ReviewForm2 = props => {
 				{/* form container */}
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='5%'>
 					{/* start of form  */}
-					<form>
+					<form onSubmit={handleSubmit(submitForm)}>
 						<FormControl>
 							{/* first prompt */}
 							<Flex
@@ -247,11 +275,20 @@ const ReviewForm2 = props => {
 										mb='6'
 										rounded='6px'
 										type='text'
-										label='company_name'
-										name='company_name'
-										list='company_name'
+										label='company_id'
+										name='company_id'
+										list='company_id'
 										autoCapitalize='none'
+										ref={register}
+										onChange={e => setSearchTerm(e.target.value)}
 									/>
+									<datalist id='company_id'>
+										{searchResults.map(company => (
+											<option value={company.id} key={company.id}>
+												{company.name}
+											</option>
+										))}
+									</datalist>
 									<FormLabel>2. Status at the company</FormLabel>
 									<Select
 										h='56px'
@@ -552,9 +589,11 @@ const ReviewForm2 = props => {
 												placeholder='Select one'
 												onChange={time4}
 											>
-												<option>30 hours or less</option>
-												<option>40 - 55 hours</option>
-												<option>60 hours+</option>
+												<option value={29}>29 hours or less</option>
+												<option value={30}>30 hours</option>
+												<option value={40}>40 hours</option>
+												<option value={50}>50 hours</option>
+												<option value={60}>60 hours+</option>
 											</Select>
 										</Flex>
 										{/* avatar */}

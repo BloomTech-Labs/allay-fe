@@ -8,7 +8,7 @@ import 'aos/dist/aos.css';
 import InterviewForm from './InterviewForm';
 import ReviewForm2 from './ReviewForm2';
 
-const FormController = () => {
+const FormController = ({ history }) => {
 	// initialize AOS
 	AOS.init();
 	// state to show interview review
@@ -184,9 +184,9 @@ const FormController = () => {
 							<Avatar size='md' src='https://bit.ly/broken-link' />
 						</Flex>
 					</Flex>
-					{showInterview ? <InterviewForm /> : null}
+					{showInterview ? <InterviewForm history={history} /> : null}
 
-					{showCompanyReview ? <ReviewForm2 /> : null}
+					{showCompanyReview ? <ReviewForm2 history={history} /> : null}
 				</Flex>
 
 				{/* blank space container */}
