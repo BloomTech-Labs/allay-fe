@@ -30,6 +30,7 @@ export const getReview = () => dispatch => {
 			dispatch({ type: FETCH_REVIEWS_SUCCESS, payload: res.data });
 		})
 		.catch(err => {
+			console.log(err);
 			dispatch({ type: FETCH_REVIEWS_FAILURE, payload: err.response });
 		});
 };
@@ -77,6 +78,7 @@ export const editReview = (userId, interviewId, changes) => dispatch => {
 // =========== POST COMPANY REVIEW ===============
 
 export const postCompanyReview = (id, companyReview) => dispatch => {
+	console.log('FORM INFO', companyReview);
 	dispatch({ type: POST_COMPANY_REVIEW_START });
 	return axiosWithAuth()
 		.post(`/users/${id}/add-company-review`, companyReview)

@@ -282,16 +282,16 @@ const ReviewForm2 = ({
 										mb='6'
 										rounded='6px'
 										type='text'
-										label='company_id'
-										name='company_id'
-										list='company_id'
+										label='company_name'
+										name='company_name'
+										list='company_name'
 										autoCapitalize='none'
 										ref={register}
 										onChange={e => setSearchTerm(e.target.value)}
 									/>
-									<datalist id='company_id'>
+									<datalist id='company_name'>
 										{searchResults.map(company => (
-											<option value={company.id} key={company.id}>
+											<option value={company.company_name} key={company.id}>
 												{company.company_name}
 											</option>
 										))}
@@ -301,17 +301,17 @@ const ReviewForm2 = ({
 										h='56px'
 										rounded='6px'
 										variant='filled'
-										label='work_status_id'
-										name='work_status_id'
+										label='work_status'
+										name='work_status'
 										placeholder='Select one'
 										onChange={time1}
 										ref={register}
 									>
-										<option value={1}>Current employee </option>
-										<option value={2}>Former employee</option>
-										<option value={3}>Part time</option>
-										<option value={4}>Full time</option>
-										<option value={5}>Intern</option>
+										<option value='Current employee'>Current employee </option>
+										<option value='Former employee'>Former employee</option>
+										<option value='Full time'>Full time</option>
+										<option value='Part time'>Part time</option>
+										<option value='Intern<'>Intern</option>
 									</Select>
 								</Flex>
 								{/* avatar */}
@@ -381,7 +381,6 @@ const ReviewForm2 = ({
 												type='text'
 												label='job_title'
 												name='job_title'
-												list='company_name'
 												ref={register}
 											/>
 											<FormLabel>2. Length of position</FormLabel>
