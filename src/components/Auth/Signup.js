@@ -17,7 +17,8 @@ import {
   Flex,
   Text,
   InputGroup,
-  InputRightElement
+  InputRightElement,
+  Select
 } from '@chakra-ui/core';
 
 const Signup = ({ signup, isLoading, history }) => {
@@ -46,6 +47,14 @@ const Signup = ({ signup, isLoading, history }) => {
     return error || true;
   }
 
+  function validateTrack(value) {
+    let error;
+    if (!value) {
+      error = 'Lambda track is required';
+    }
+    return error || true;
+  }
+
   function validatePassword(value) {
     let error;
     if (!value) {
@@ -62,7 +71,8 @@ const Signup = ({ signup, isLoading, history }) => {
       signup({
         username: creds.username,
         email: creds.email,
-        password: creds.password
+        password: creds.password,
+        track_name: creds.track_name
       }).then(() => history.push('/dashboard'));
     } else {
       console.log('form NOT submitted');
@@ -122,6 +132,7 @@ const Signup = ({ signup, isLoading, history }) => {
                     type='email'
                     name='email'
                     label='email'
+                    placeholder='someone@somedomain.com'
                     autoCapitalize='none'
                     ref={register({ validate: validateEmail })}
                   />
@@ -143,6 +154,40 @@ const Signup = ({ signup, isLoading, history }) => {
                   />
                   <FormErrorMessage>
                     {errors.username && errors.username.message}
+                  </FormErrorMessage>
+                </Flex>
+              </FormControl>
+
+              <FormControl isRequired isInvalid={errors.track_name}>
+                <Flex mx='1%' my='4%' flexDir='column'>
+                  <FormLabel>Lambda Track</FormLabel>
+                  <Select
+                    h='70px'
+                    variant='filled'
+                    rounded='6px'
+                    name='track_name'
+                    label='track_name'
+                    placeholder='Select Your Lambda Track'
+                    ref={register({ validate: validateTrack })}
+                  >
+                    <option id='1' value='Android Development'>
+                      Android Development
+                    </option>
+                    <option id='2' value='Data Science'>
+                      Data Science
+                    </option>
+                    <option id='3' value='Full Stack Web Development'>
+                      Full Stack Web Development
+                    </option>
+                    <option id='4' value='iOS Development'>
+                      iOS Development{' '}
+                    </option>
+                    <option id='5' value='UX Design'>
+                      UX Design
+                    </option>
+                  </Select>
+                  <FormErrorMessage>
+                    {errors.track_name && errors.track_name.message}
                   </FormErrorMessage>
                 </Flex>
               </FormControl>
