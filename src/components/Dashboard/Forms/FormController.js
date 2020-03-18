@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //styles
-import { Flex, Avatar } from '@chakra-ui/core';
+import { Flex, Avatar, Progress } from '@chakra-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -15,6 +15,13 @@ const FormController = () => {
 	const [showInterview, setShowInterview] = useState(false);
 	// state to show company review
 	const [showCompanyReview, setShowCompanyReview] = useState(false);
+	//progress bar
+	//progress bar
+	const [progress] = useState({
+		prec: 99,
+		mins: 10,
+		prog: 2
+	});
 
 	return (
 		// main container
@@ -30,21 +37,57 @@ const FormController = () => {
 					// px='2%'
 					pt='5%'
 				>
+					{/* progress header */}
+					<Flex
+						pt='1%'
+						px='2%'
+						w='70%'
+						h='108px'
+						background='#F2F6FE'
+						top='0'
+						position='fixed'
+						overflow='hidden'
+						zIndex='999'
+						direction='column'
+					>
+						<Flex w='100%' color='#259BF8'>
+							Your progress
+						</Flex>
+
+						<Flex w='100%' justify='space-between' mb='1%'>
+							{progress.prec === 100 ? (
+								<>
+									<Flex as='h4'>{progress.prec}% Completed!</Flex>{' '}
+								</>
+							) : (
+								<>
+									<Flex as='h4'>{progress.prec}% not completed</Flex>
+									<Flex color='#259BF8'> {progress.mins} mins</Flex>
+								</>
+							)}
+						</Flex>
+						<Progress hasStripe isAnimated value={progress.prog} />
+					</Flex>
 					{/* Start of messenger  */}
 					<Flex
 						align='center'
 						p='1%'
 						ml='2%'
 						w='416px'
+						mt='10%'
 						mb='2%'
 						bg='#F2F6FE'
+						position='relative'
+						right='0'
+						bottom=' 0'
+						left='0'
 						rounded='20px'
 						data-aos='fade-right'
 						data-aos-offset='200'
 						data-aos-delay='50'
 						data-aos-duration='1000'
 						data-aos-easing='ease-in-out'
-						data-aos-mirror='true'
+						data-aos-mirror='false'
 						data-aos-once='false'
 					>
 						<p>

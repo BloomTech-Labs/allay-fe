@@ -55,6 +55,11 @@ const InterviewForm = () => {
 
 	// brings to top on render
 	useEffect(() => {
+		setProgress({
+			prec: 95,
+			mins: 8,
+			prog: 5
+		});
 		const element = document.getElementById('Tag1');
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}, []);
@@ -241,22 +246,24 @@ const InterviewForm = () => {
 					</Flex>
 					<Progress hasStripe isAnimated value={progress.prog} />
 				</Flex>
+
 				{/* form container */}
-				<Flex id='Tag1' w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
+				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
 					{/*--------------- start of form ---------------  */}
 					<form>
 						<FormControl>
 							{/* first prompt */}
 							<Flex
+								id='Tag1'
 								align='center'
 								h='5%'
 								p='1%'
 								w='416px'
 								mb='8%'
-								mt='10%'
+								// mt='10%'
 								bg='#F2F6FE'
 								rounded='20px'
-								data-aos='fade-right'
+								data-aos='fade-up'
 								data-aos-offset='200'
 								data-aos-delay='50'
 								data-aos-duration='1000'
@@ -286,6 +293,7 @@ const InterviewForm = () => {
 									data-aos-easing='ease-in-out'
 									data-aos-mirror='true'
 									data-aos-once='true'
+									data-aos-anchor='#Tag1'
 								>
 									<FormLabel>1. Company name</FormLabel>
 									<Input

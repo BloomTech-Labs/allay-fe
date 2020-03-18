@@ -47,6 +47,11 @@ const ReviewForm2 = props => {
 
 	// brings to top on render
 	useEffect(() => {
+		setProgress({
+			prec: 95,
+			mins: 8,
+			prog: 5
+		});
 		const element = document.getElementById('Tag1');
 		element.scrollIntoView({
 			behavior: 'smooth',
@@ -65,7 +70,7 @@ const ReviewForm2 = props => {
 	const routeTo2 = () => {
 		setTag2(true);
 		setProgress({
-			prec: 80,
+			prec: 70,
 			mins: 8,
 			prog: 20
 		});
@@ -81,9 +86,9 @@ const ReviewForm2 = props => {
 	const routeTo3 = () => {
 		setTag3(true);
 		setProgress({
-			prec: 70,
-			mins: 7,
-			prog: 30
+			prec: 65,
+			mins: 6,
+			prog: 35
 		});
 		const element = document.getElementById('Tag3');
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -97,9 +102,9 @@ const ReviewForm2 = props => {
 	const routeTo4 = () => {
 		setTag4(true);
 		setProgress({
-			prec: 60,
-			mins: 6,
-			prog: 40
+			prec: 45,
+			mins: 4.5,
+			prog: 65
 		});
 		const element = document.getElementById('Tag4');
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -113,9 +118,9 @@ const ReviewForm2 = props => {
 	const routeTo5 = () => {
 		setTag5(true);
 		setProgress({
-			prec: 50,
-			mins: 5,
-			prog: 50
+			prec: 30,
+			mins: 3,
+			prog: 75
 		});
 		const element = document.getElementById('Tag5');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -129,9 +134,9 @@ const ReviewForm2 = props => {
 	const routeTo6 = () => {
 		setTag6(true);
 		setProgress({
-			prec: 40,
-			mins: 4,
-			prog: 60
+			prec: 10,
+			mins: 1,
+			prog: 85
 		});
 		const element = document.getElementById('Tag6');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -145,38 +150,13 @@ const ReviewForm2 = props => {
 	const routeTo7 = () => {
 		setTag7(true);
 		setProgress({
-			prec: 30,
-			mins: 3,
-			prog: 70
+			prec: 100,
+			mins: 0,
+			prog: 100
 		});
 		const element = document.getElementById('Tag7');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	};
-
-	// date auto complete
-	const dateArray = [
-		2000,
-		2001,
-		2002,
-		2003,
-		2004,
-		2005,
-		2006,
-		2007,
-		2008,
-		2009,
-		2010,
-		2011,
-		2012,
-		2013,
-		2014,
-		2015,
-		2016,
-		2017,
-		2018,
-		2019,
-		2020
-	];
 
 	return (
 		// main container
@@ -272,14 +252,6 @@ const ReviewForm2 = props => {
 										list='company_name'
 										autoCapitalize='none'
 									/>
-									<datalist id='company_name'>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>1</option>
-										<option>1</option>
-									</datalist>
 									<FormLabel>2. Status at the company</FormLabel>
 									<Select
 										h='56px'
@@ -325,6 +297,13 @@ const ReviewForm2 = props => {
 										mb='8%'
 										bg='#F2F6FE'
 										rounded='20px'
+										data-aos='fade-right'
+										data-aos-offset='200'
+										data-aos-delay='50'
+										data-aos-duration='1000'
+										data-aos-easing='ease-in-out'
+										data-aos-mirror='true'
+										data-aos-once='true'
 									>
 										<p>I need a little more detail still</p>
 									</Flex>
@@ -363,7 +342,9 @@ const ReviewForm2 = props => {
 											<FormLabel>2. Length of position</FormLabel>
 											<Flex w='100%' justify='space-between'>
 												<Input
-													type='date'
+													type='number'
+													min='1970'
+													max='2030'
 													h='56px'
 													w='45%'
 													mr='2%'
@@ -371,19 +352,21 @@ const ReviewForm2 = props => {
 													variant='filled'
 													label=''
 													name='posdate1'
-													placeholder='Select one'
+													placeholder='YYYY'
 												/>
 
 												<Input
-													type='date'
+													type='number'
+													min='1970'
+													max='2030'
 													h='56px'
 													w='45%'
 													rounded='6px'
 													variant='filled'
 													label=''
 													name=''
-													placeholder='Select one'
-													onChange={time2}
+													placeholder='YYYY'
+													onKeyUp={time2}
 												/>
 											</Flex>
 										</Flex>
@@ -417,6 +400,13 @@ const ReviewForm2 = props => {
 										w='416px'
 										bg='#F2F6FE'
 										rounded='20px'
+										data-aos='fade-right'
+										data-aos-offset='200'
+										data-aos-delay='50'
+										data-aos-duration='1000'
+										data-aos-easing='ease-in-out'
+										data-aos-mirror='true'
+										data-aos-once='true'
 									>
 										<p>Thank you for that information</p>
 									</Flex>
@@ -429,6 +419,13 @@ const ReviewForm2 = props => {
 										mb='8%'
 										bg='#F2F6FE'
 										rounded='20px'
+										data-aos='fade-right'
+										data-aos-offset='200'
+										data-aos-delay='800'
+										data-aos-duration='1000'
+										data-aos-easing='ease-in-out'
+										data-aos-mirror='true'
+										data-aos-once='true'
 									>
 										<p>
 											Please write your comment below. Some topics you can
@@ -449,7 +446,7 @@ const ReviewForm2 = props => {
 											flexDir='column'
 											data-aos='fade-in'
 											data-aos-offset='200'
-											data-aos-delay='1000'
+											data-aos-delay='2400'
 											data-aos-duration='1500'
 											data-aos-easing='ease-in-out'
 											data-aos-mirror='true'
@@ -474,7 +471,7 @@ const ReviewForm2 = props => {
 											ml='1%'
 											data-aos='fade-in'
 											data-aos-offset='200'
-											data-aos-delay='1000'
+											data-aos-delay='2400'
 											data-aos-duration='1500'
 											data-aos-easing='ease-in-out'
 											data-aos-mirror='true'
@@ -497,6 +494,13 @@ const ReviewForm2 = props => {
 										mb='2%'
 										bg='#F2F6FE'
 										rounded='20px'
+										data-aos='fade-right'
+										data-aos-offset='200'
+										data-aos-delay='50'
+										data-aos-duration='1000'
+										data-aos-easing='ease-in-out'
+										data-aos-mirror='true'
+										data-aos-once='true'
 									>
 										<p>Thank you for sharing that</p>
 									</Flex>
@@ -508,6 +512,13 @@ const ReviewForm2 = props => {
 										mb='8%'
 										bg='#F2F6FE'
 										rounded='20px'
+										data-aos='fade-right'
+										data-aos-offset='200'
+										data-aos-delay='1500'
+										data-aos-duration='1000'
+										data-aos-easing='ease-in-out'
+										data-aos-mirror='true'
+										data-aos-once='true'
 									>
 										<p>To understand better can you please add some details</p>
 									</Flex>
@@ -524,7 +535,7 @@ const ReviewForm2 = props => {
 											flexDir='column'
 											data-aos='fade-in'
 											data-aos-offset='200'
-											data-aos-delay='1000'
+											data-aos-delay='2800'
 											data-aos-duration='1500'
 											data-aos-easing='ease-in-out'
 											data-aos-mirror='true'
@@ -540,7 +551,11 @@ const ReviewForm2 = props => {
 												name=''
 												placeholder='Select one'
 												onChange={time4}
-											/>
+											>
+												<option>30 hours or less</option>
+												<option>40 - 55 hours</option>
+												<option>60 hours+</option>
+											</Select>
 										</Flex>
 										{/* avatar */}
 										<Flex
@@ -549,7 +564,7 @@ const ReviewForm2 = props => {
 											ml='1%'
 											data-aos='fade-in'
 											data-aos-offset='200'
-											data-aos-delay='1000'
+											data-aos-delay='2800'
 											data-aos-duration='1500'
 											data-aos-easing='ease-in-out'
 											data-aos-mirror='true'
@@ -572,6 +587,13 @@ const ReviewForm2 = props => {
 										mb='8%'
 										bg='#F2F6FE'
 										rounded='20px'
+										data-aos='fade-right'
+										data-aos-offset='200'
+										data-aos-delay='50'
+										data-aos-duration='1000'
+										data-aos-easing='ease-in-out'
+										data-aos-mirror='true'
+										data-aos-once='true'
 									>
 										<p>
 											Posting your salary helps many job-seekers negotiate for
@@ -648,6 +670,13 @@ const ReviewForm2 = props => {
 										mb='2%'
 										bg='#F2F6FE'
 										rounded='20px'
+										data-aos='fade-right'
+										data-aos-offset='200'
+										data-aos-delay='50'
+										data-aos-duration='1000'
+										data-aos-easing='ease-in-out'
+										data-aos-mirror='true'
+										data-aos-once='true'
 									>
 										<p>Awesome! Thank you for sharing that.</p>
 									</Flex>
@@ -659,6 +688,13 @@ const ReviewForm2 = props => {
 										mb='8%'
 										bg='#F2F6FE'
 										rounded='20px'
+										data-aos='fade-right'
+										data-aos-offset='200'
+										data-aos-delay='1000'
+										data-aos-duration='1000'
+										data-aos-easing='ease-in-out'
+										data-aos-mirror='true'
+										data-aos-once='true'
 									>
 										<p>One last question</p>
 									</Flex>
@@ -675,7 +711,7 @@ const ReviewForm2 = props => {
 											flexDir='column'
 											data-aos='fade-in'
 											data-aos-offset='200'
-											data-aos-delay='1000'
+											data-aos-delay='1500'
 											data-aos-duration='1500'
 											data-aos-easing='ease-in-out'
 											data-aos-mirror='true'
@@ -700,7 +736,7 @@ const ReviewForm2 = props => {
 											ml='1%'
 											data-aos='fade-in'
 											data-aos-offset='200'
-											data-aos-delay='1000'
+											data-aos-delay='1500'
 											data-aos-duration='1500'
 											data-aos-easing='ease-in-out'
 											data-aos-mirror='true'
