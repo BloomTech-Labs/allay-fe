@@ -54,8 +54,6 @@ export default function NavBar({
 		e.selected = !e.selected;
 	};
 
-	console.log('filters', filters);
-
 	return (
 		<Flex
 			maxW='1440px'

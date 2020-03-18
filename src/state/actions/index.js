@@ -1,7 +1,7 @@
 // ACTIONS LIVE HERE
 
 import { login, signup } from './authActions';
-import { getReview, getReviewById, postReview, editReview, } from './reviewActions';
+import { getReview, getReviewById, postReview, editReview, deleteReview } from './reviewActions';
 import { getCompanies, postCompany } from './companyActions';
 
 export default {
@@ -11,6 +11,7 @@ export default {
   getReviewById,
   postReview,
   editReview,
+  deleteReview,
   getCompanies,
   postCompany
 };
