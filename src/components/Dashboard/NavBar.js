@@ -91,7 +91,7 @@ export default function NavBar({
         <RadioButtonGroup onChange={handleFilter} isInline>
           {tracks.map(track => (
             <Button
-              variantColor={track.selected ? 'blue' : 'gray'}
+              variantColor={filters.includes(track.id) ? 'blue' : 'gray'}
               value={track}
             >
               {track.prefix}
