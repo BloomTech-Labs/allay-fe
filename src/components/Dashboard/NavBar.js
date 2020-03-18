@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactGA from 'react-ga'; // for google analytics
-import PlacesAutocomplete from '../InputFields/PlacesAPI.js';
 //styles
 import {
   Flex,
@@ -17,8 +16,8 @@ export default function NavBar({
   history,
   isLoading,
   setSearchResults,
-  filters,
-  setFilters
+  trackFilters,
+  setTrackFilters
 }) {
   // use to navigate to review form
   const navToReviewForm = () => {
@@ -43,15 +42,10 @@ export default function NavBar({
     { id: 5, prefix: 'AND' }
   ];
 
-  const [selectedTracks, setSelectedTracks] = useState(tracks);
-
-  useEffect(() => {
-    const newArray = tracks.map(track => ({ ...track, selected: false }));
-    setSelectedTracks(newArray);
-  }, []);
-
   const handleFilter = e => {
-    filters === e.id ? setFilters() : setFilters(e.id);
+    trackFilters.includes(e.id)
+      ? setTrackFilters(trackFilters.filter(item => item !== e.id))
+      : setTrackFilters([...trackFilters, e.id]);
     e.selected = !e.selected;
   };
 
@@ -71,7 +65,6 @@ export default function NavBar({
         <Flex align='center'>
           <Avatar mr='12%' size='xl' src='https://bit.ly/broken-link' />
           <h1> Allay </h1>
-          <PlacesAutocomplete />
         </Flex>
       </Flex>
       <Flex align='center' justify='space-between' pt='2%'>
@@ -90,9 +83,11 @@ export default function NavBar({
           />
         </InputGroup>
         <RadioButtonGroup onChange={handleFilter} isInline>
-          {selectedTracks.map(track => (
+          {tracks.map(track => (
             <Button
-              variantColor={track.selected ? 'blue' : 'gray'}
+              size='sm'
+              rounded='full'
+              variantColor={trackFilters.includes(track.id) ? 'blue' : 'gray'}
               value={track}
             >
               {track.prefix}
