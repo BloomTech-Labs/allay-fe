@@ -83,7 +83,7 @@ export default function NavBar({
           />
         </InputGroup>
         <RadioButtonGroup onChange={handleFilter} isInline>
-          {selectedTracks.map(track => (
+          {tracks.map(track => (
             <Button
               size='sm'
               rounded='full'
