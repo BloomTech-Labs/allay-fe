@@ -9,6 +9,7 @@ import customTheme from './theme/customTheme';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import FormController from './components/Dashboard/Forms/FormController';
+import InterviewReview from './components/Dashboard/Forms/InterviewForm';
 import PrivateRoute from './utils/PrivateRoute';
 import EditReviewForm from './components/Dashboard/Forms/EditReviewForm';
 import DashboardHome from './components/Dashboard/DashboardHome';
