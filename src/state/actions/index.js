@@ -7,7 +7,7 @@ import {
 	postReview,
 	editReview,
 	postCompanyReview
-} from './reviewActions';
+} from './interviewReviewActions';
 import { getCompanies, postCompany } from './companyActions';
 
 export default {

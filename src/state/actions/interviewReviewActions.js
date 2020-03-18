@@ -14,7 +14,10 @@ import {
 	POST_COMPANY_REVIEW_FAILURE,
 	EDIT_REVIEW_FAILURE,
 	EDIT_REVIEW_START,
-	EDIT_REVIEW_SUCCESS
+	EDIT_REVIEW_SUCCESS,
+	DELETE_REVIEW_START,
+	DELETE_REVIEW_SUCCESS,
+	DELETE_REVIEW_FAILURE
 } from '../types';
 
 // ============ GET ALL REVIEWS ===========
@@ -22,7 +25,7 @@ import {
 export const getReview = () => dispatch => {
 	dispatch({ type: FETCH_REVIEWS_START });
 	axiosWithAuth()
-		.get('/reviews')
+		.get('/interview-reviews')
 		.then(res => {
 			dispatch({ type: FETCH_REVIEWS_SUCCESS, payload: res.data });
 		})
@@ -33,10 +36,10 @@ export const getReview = () => dispatch => {
 
 // ============ GET REVIEW BY ID ===========
 
-export const getReviewById = id => dispatch => {
+export const getReviewById = userId => dispatch => {
 	dispatch({ type: FETCH_REVIEW_BY_ID_START });
 	return axiosWithAuth()
-		.get(`/reviews/${id}`)
+		.get(`/interview-reviews/${userId}`)
 		.then(res => {
 			dispatch({ type: FETCH_REVIEW_BY_ID_SUCCESS, payload: res.data });
 		})
@@ -47,10 +50,10 @@ export const getReviewById = id => dispatch => {
 
 // ============ POST REVIEW ===========
 
-export const postReview = (id, newReview) => dispatch => {
+export const postReview = (userId, newReview) => dispatch => {
 	dispatch({ type: POST_REVIEW_START });
 	return axiosWithAuth()
-		.post(`/users/${id}/reviews`, newReview)
+		.post(`/users/${userId}/add-interview-review`, newReview)
 		.then(res => {
 			dispatch({ type: POST_REVIEW_SUCCESS, payload: res.data });
 		})
@@ -59,12 +62,10 @@ export const postReview = (id, newReview) => dispatch => {
 		});
 };
 
-// ============ EDIT REVIEW ===========
-
-export const editReview = (id, changes) => dispatch => {
+export const editReview = (userId, interviewId, changes) => dispatch => {
 	dispatch({ type: EDIT_REVIEW_START });
 	return axiosWithAuth()
-		.put(`/reviews/${id}`, changes)
+		.put(`/users/${userId}/interview-reviews/${interviewId}`, changes)
 		.then(res => {
 			dispatch({ type: EDIT_REVIEW_SUCCESS, payload: res.data });
 		})
@@ -73,10 +74,9 @@ export const editReview = (id, changes) => dispatch => {
 		});
 };
 
-// ============ POST COMPANY REVIEW ===========
+// =========== POST COMPANY REVIEW ===============
 
 export const postCompanyReview = (id, companyReview) => dispatch => {
-	console.log('FORM DATA', companyReview);
 	dispatch({ type: POST_COMPANY_REVIEW_START });
 	return axiosWithAuth()
 		.post(`/users/${id}/add-company-review`, companyReview)
@@ -85,5 +85,19 @@ export const postCompanyReview = (id, companyReview) => dispatch => {
 		})
 		.catch(err => {
 			dispatch({ type: POST_COMPANY_REVIEW_FAILURE, payload: err.response });
+		});
+};
+
+// ============ DELETE REVIEW ===========
+
+export const deleteReview = (userId, interviewId) => dispatch => {
+	dispatch({ type: DELETE_REVIEW_START });
+	return axiosWithAuth()
+		.delete(`/users/${userId}/interview-reviews/${interviewId}`)
+		.then(res => {
+			dispatch({ type: DELETE_REVIEW_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: DELETE_REVIEW_FAILURE, payload: err });
 		});
 };

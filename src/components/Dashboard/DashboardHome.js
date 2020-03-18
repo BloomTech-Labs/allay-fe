@@ -19,7 +19,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   // search state
   const [filteredReviews, setFilteredReviews] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [filters, setFilters] = useState();
+  const [trackFilters, setTrackFilters] = useState([]);
 
   // pull review data
   useEffect(() => {
@@ -35,77 +35,77 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
     setFilteredReviews(results);
   }, [searchResults]);
 
-  // ignacio's filter
+  // filter by track
   useEffect(() => {
-    const filteredResults = data.filter(
-      review => Number(review.job_rating) === Number(filters)
+    const filteredResults = data.filter(review =>
+      trackFilters.includes(review.job_rating)
     );
+
     // data = results;
     setFilteredReviews(filteredResults);
-  }, [filters]);
+  }, [trackFilters]);
 
-  // console.log('IGNACIO filteredReviews', filteredReviews.length);
+  console.log('ignacio', data);
 
   return (
     <>
       <Flex w='100%' minH='100vh' justify='center'>
-        <Flex maxW='1440px' w='100%' direction='column' wrap='wrap' mb='3%' mt='220px'>
+        <Flex
+          maxW='1440px'
+          w='100%'
+          direction='column'
+          wrap='wrap'
+          mb='3%'
+          mt='220px'
+        >
           <NavBar
             history={history}
             isLoading={isLoading}
             setSearchResults={setSearchResults}
-            filters={filters}
-            setFilters={setFilters}
+            trackFilters={trackFilters}
+            setTrackFilters={setTrackFilters}
           />
-          
-            <Flex
-              height='70%'
-              wrap='wrap'
-              // justify='space-between'
-            >
-              {isLoading ? (
-                <Flex w='100%' h='100%' justify='center' align='center'>
-                  <CustomSpinner/>
-                </Flex>
-              ) : filteredReviews.length >= 1 ? (
-                filteredReviews.map(review => (
-                  <ReviewCard
-                    key={review.id}
-                    review={review}
-                    history={history}
-                  />
-                ))
-              ) : searchResults.length > 0 || filters ? (
-                <Flex as='h3' w='100%' ml='6%' mt='5%' overflow='visible'>
-                  <Alert
-                    status='info'
-                    variant='subtle'
-                    flexDirection='column'
-                    justifyContent='center'
-                    textAlign='center'
-                    height='312px'
-                    width='625px'
-                    background='#F2F6FE'
-                    borderRadius='12px'
-                    mt='2%'
-                    wrap='nowrap'
-                  >
-                    {/* <AlertIcon size='40px' mr={0} /> */}
-                    <AlertDescription w='100%'>
-                      Sorry, no job reviews found.
-                    </AlertDescription>
-                  </Alert>
-                </Flex>
-              ) : (
-                data.map(review => (
-                  <ReviewCard
-                    key={review.id}
-                    review={review}
-                    history={history}
-                  />
-                ))
-              )}
-            </Flex>
+
+          <Flex
+            height='70%'
+            wrap='wrap'
+            // justify='space-between'
+          >
+            {isLoading ? (
+              <Flex w='100%' h='100%' justify='center' align='center'>
+                <CustomSpinner />
+              </Flex>
+            ) : filteredReviews.length >= 1 ? (
+              filteredReviews.map(review => (
+                <ReviewCard key={review.id} review={review} history={history} />
+              ))
+            ) : searchResults.length > 0 || trackFilters.length > 0 ? (
+              <Flex as='h3' w='100%' ml='6%' mt='5%' overflow='visible'>
+                <Alert
+                  status='info'
+                  variant='subtle'
+                  flexDirection='column'
+                  justifyContent='center'
+                  textAlign='center'
+                  height='312px'
+                  width='625px'
+                  background='#F2F6FE'
+                  borderRadius='12px'
+                  mt='2%'
+                  wrap='nowrap'
+                >
+                  {/* <AlertIcon size='40px' mr={0} /> */}
+                  <AlertDescription w='100%'>
+                    Sorry, no job reviews found.
+                  </AlertDescription>
+                </Alert>
+              </Flex>
+            ) : (
+              data.map(review => (
+                <ReviewCard key={review.id} review={review} history={history} />
+              ))
+            )}
+          </Flex>
         </Flex>
       </Flex>
     </>
