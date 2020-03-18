@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactGA from 'react-ga'; // for google analytics
 //styles
 import { Flex, Button, Avatar, Input, RadioButtonGroup } from '@chakra-ui/core';
@@ -8,9 +8,7 @@ export default function NavBar({
   isLoading,
   setSearchResults,
   filters,
-  setFilters,
-  selectedTracks,
-  setSelectedTracks
+  setFilters
 }) {
   // use to navigate to review form
   const navToReviewForm = () => {
@@ -35,30 +33,12 @@ export default function NavBar({
     { id: 5, prefix: 'AND' }
   ];
 
-  const [selectableTracks, setSelectableTracks] = useState(tracks);
-  // const [selectedTracks, setSelectedTracks] = useState([]);
-
-  useEffect(() => {
-    const newArray = tracks.map(track => ({ ...track, selected: false }));
-    setSelectableTracks(newArray);
-  }, []);
-
-  useEffect(() => {
-    const filteredArray = selectableTracks.filter(
-      track => track.selected === true
-    );
-    setSelectedTracks(filteredArray);
-  }, [filters]);
-
   const handleFilter = e => {
     filters.includes(e.id)
       ? setFilters(filters.filter(item => item !== e.id))
       : setFilters([...filters, e.id]);
     e.selected = !e.selected;
   };
-
-  // console.log('selectedTracks', selectedTracks);
-  console.log('filters', filters);
 
   return (
     <Flex
@@ -91,6 +71,8 @@ export default function NavBar({
         <RadioButtonGroup onChange={handleFilter} isInline>
           {tracks.map(track => (
             <Button
+              size='sm'
+              rounded='full'
               variantColor={filters.includes(track.id) ? 'blue' : 'gray'}
               value={track}
             >

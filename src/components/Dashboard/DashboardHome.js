@@ -13,7 +13,6 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   const [filteredReviews, setFilteredReviews] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [filters, setFilters] = useState([]);
-  const [selectedTracks, setSelectedTracks] = useState();
 
   // pull review data
   useEffect(() => {
@@ -29,22 +28,15 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
     setFilteredReviews(results);
   }, [searchResults]);
 
-  // ignacio's filter
+  // filter by track
   useEffect(() => {
-    // const filteredResults = data.filter(
-    //   review => Number(review.job_rating) === Number(filters)
-    // );
-
     const filteredResults = data.filter(review =>
       filters.includes(review.job_rating)
     );
-    console.log('filteredResults', filteredResults);
 
     // data = results;
     setFilteredReviews(filteredResults);
   }, [filters]);
-
-  // console.log('IGNACIO filteredReviews', filteredReviews.length);
 
   return (
     <>
@@ -56,8 +48,6 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             setSearchResults={setSearchResults}
             filters={filters}
             setFilters={setFilters}
-            selectedTracks={selectedTracks}
-            setSelectedTracks={setSelectedTracks}
           />
           <Flex mt='15%' direction='column'>
             <Flex height='100%' direction='column'>
