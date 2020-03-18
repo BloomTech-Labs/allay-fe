@@ -25,22 +25,28 @@ import {
   AlertDialogHeader,
   AlertDialogBody,
   AlertDialogOverlay,
-  AlertDialogFooter
+  AlertDialogFooter,
+  useToast
 } from '@chakra-ui/core';
 
 const SingleReview = ({
   review,
   getReviewById,
   editReview,
+  reviewEdited,
   match,
   history,
   isLoading
 }) => {
   const { register, handleSubmit, errors, formState } = useForm();
   const id = match.params.id;
+  const [reviewEdited2, setReviewEdited2] = useState(false);
   const [editValue, setEditValue] = useState({
     id: id
   });
+
+  //allows the use of toasts
+  const toast = useToast();
 
   // specifically for the cancel button functionality
   const [isOpen, setIsOpen] = useState();
@@ -60,8 +66,6 @@ const SingleReview = ({
     getReviewById(id);
   }, [id, getReviewById]);
 
-  console.log(editValue);
-
   if (isLoading) {
     return (
       <Flex justify='center' align='center' w='100vh' h='100vh'>
@@ -71,9 +75,35 @@ const SingleReview = ({
   }
 
   const submitEdits = () => {
-    editReview(review.id, editValue).then(() =>
+    editReview(review.id, editValue).then(() => {
       history.push('/dashboard')
-    );
+      toast({
+        title: `Review Edit Success!`,
+        description: `We've successfully edited your review for you`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true
+      })
+    })
+
+    // if (reviewEdited === true) {
+    //   toast({
+    //     title: `Review Edit Success!`,
+    //     description: `We've successfully edited your review for you`,
+    //     status: 'success',
+    //     duration: 5000,
+    //     isClosable: true
+    //   })
+    // } else {
+    //   toast({
+    //     title: `Review Edit Failed`,
+    //     description: `There was an error editing your review`,
+    //     status: 'error',
+    //     duration: 5000,
+    //     isClosable: true
+    //   });
+    // }
+
     ReactGA.event({
       category: 'Edit',
       action: `Submit edit`
@@ -309,9 +339,9 @@ const SingleReview = ({
 };
 
 const mapStateToProps = state => {
-  // console.log(state.review.dataById)
   return {
-    review: state.review.dataById
+    review: state.review.dataById,
+    reviewEdited: state.review.reviewEdited
   };
 };
 

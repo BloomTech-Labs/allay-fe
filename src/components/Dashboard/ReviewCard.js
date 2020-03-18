@@ -1,8 +1,11 @@
 // previously ReviewList
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
 // actions
 import getReview from '../../state/actions/index';
+import deleteReview from '../../state/actions/index';
+
 // icons
 import {
 	TiLocationOutline,
@@ -25,18 +28,76 @@ import {
 	Button,
 	Icon,
 	PseudoBox,
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogContent,
+	AlertDialogOverlay,
+	useToast,
 	useDisclosure
 } from '@chakra-ui/core';
 
-const ReviewCard = ({ review, history }) => {
+const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
+	//allows the use of toasts
+	const toast = useToast();
+
+	console.log();
+
+	//toggle to determine whether deleting worked
+	const [deleteSuccess, setDeleteSuccess] = useState(false);
+
 	// basic usage for the SingleReview modal
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const loginId = localStorage.getItem('userId');
+
+	// specifically for the cancel review delete button functionality
+	const [isOpen2, setIsOpen2] = useState();
+	const onClose2 = () => setIsOpen2(false);
+	const cancelRef = useRef();
 
 	//routes to single review
 	const navToEditRoute = () => {
 		history.push(`/dashboard/${review.id}`);
 	};
+
+	//deletes the review in question
+	const submitDelete = () => {
+		deleteReview(review.id).then(() => {
+			window.location.reload()
+			// history.push('/dashboard')
+			toast({
+				title: 'Review Deleted',
+				description: `We've successfully deleted your review for you`,
+				status: 'success',
+				duration: 5000,
+				isClosable: true
+			})
+		})
+
+		// if (reviewDeleted === true) {
+		// 	toast({
+		// 		title: 'Review Deleted',
+		// 		description: `We've successfully deleted your review for you`,
+		// 		status: 'success',
+		// 		duration: 5000,
+		// 		isClosable: true
+		// 	})
+		// } else {
+		// 	toast({
+		// 		title: 'Review Not Deleted',
+		// 		description: `There was an error deleting your review`,
+		// 		status: 'error',
+		// 		duration: 5000,
+		// 		isClosable: true
+		// 	});
+		// }
+
+		ReactGA.event({
+			category: 'Delete',
+			action: `Submit delete`
+		});
+	}
 
 	return (
 		<>
@@ -210,7 +271,7 @@ const ReviewCard = ({ review, history }) => {
 					</Flex>
 
 					<ModalFooter>
-						{loginId === '1' ? (
+						{Number(loginId) === Number(review.user_id) ? (
 							<Button
 								background='#344CD0'
 								color='#FFFFFF'
@@ -222,26 +283,49 @@ const ReviewCard = ({ review, history }) => {
 							>
 								Edit
 							</Button>
-						) : <Button
-							background='#344CD0'
-							color='#FFFFFF'
-							rounded='6px'
-							border='none'
-							size='lg'
-							mr='2%'
+						) : null}
+						{Number(loginId) === Number(review.user_id) ? (
+							<Button
+								background='#D31122'
+								color='#FFFFFF'
+								rounded='6px'
+								border='none'
+								size='lg'
+								mr='2%'
+								onClick={() => setIsOpen2(true)}
+							>
+								Delete
+							</Button>
+						) : null}
+						<AlertDialog
+							isOpen={isOpen2}
+							leastDestructiveRef={cancelRef}
+							onClose={onClose2}
 						>
-								NO EDITS FOR YOU!
-					</Button>}
-						<Button
-							background='#B90101'
-							color='#FFFFFF'
-							rounded='6px'
-							border='none'
-							size='lg'
-							mr='2%'
-						>
-							Delete
-						</Button>
+							<AlertDialogOverlay />
+							<AlertDialogContent>
+								<AlertDialogHeader fontSize="lg" fontWeight="bold">
+									Delete Review
+								</AlertDialogHeader>
+
+								<AlertDialogBody>
+									Are you sure? You can't undo this action afterwards.
+								</AlertDialogBody>
+
+								<AlertDialogFooter>
+									<Button ref={cancelRef} onClick={onClose2}>
+										Cancel
+									</Button>
+									<Button
+										variantColor="red"
+										ml={3}
+										onClick={submitDelete}
+									>
+										Delete
+									</Button>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialog>
 					</ModalFooter>
 				</ModalContent>
 			</Modal>
@@ -261,7 +345,7 @@ const ReviewCard = ({ review, history }) => {
 				display='flex'
 				justifyContent='center'
 				alignItems='center'
-				_hover={{ bg: 'blue.500', color: 'white' }}
+				_hover={{ bg: '#4EADF9', color: 'white' }}
 				onClick={onOpen}
 			>
 				{/* Review content container */}
@@ -283,7 +367,7 @@ const ReviewCard = ({ review, history }) => {
 								as='h2'
 								w='100%'
 								align='center'
-								wrap='nowrap'
+								wrap='wrap'
 								overflow='hidden'
 								isTruncated
 							>
@@ -300,7 +384,7 @@ const ReviewCard = ({ review, history }) => {
 											<Icon
 												name='star'
 												key={i}
-												color={i < review.interview_rating ? '#344CD0' : 'gray.300'}
+												color={i < review.job_rating ? '#344CD0' : 'gray.300'}
 											/>
 										))}
 								</Flex>
@@ -366,7 +450,7 @@ const ReviewCard = ({ review, history }) => {
 
 const mapStateToProps = state => {
 	return {
-		data: state.review.data
+		reviewDeleted: state.review.reviewDeleted
 	};
 };
-export default connect(mapStateToProps, getReview)(ReviewCard);
+export default connect(mapStateToProps, (getReview, deleteReview))(ReviewCard);

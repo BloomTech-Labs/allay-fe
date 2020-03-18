@@ -55,8 +55,6 @@ export default function NavBar({
     e.selected = !e.selected;
   };
 
-  console.log('filters', filters);
-
   return (
     <Flex
       maxW='1440px'
@@ -74,7 +72,6 @@ export default function NavBar({
           <Avatar mr='12%' size='xl' src='https://bit.ly/broken-link' />
           <h1> Allay </h1>
         </Flex>
-        <PlacesAutocomplete />
       </Flex>
       <Flex align='center' justify='space-between' pt='2%'>
         <InputGroup w='40%'>
