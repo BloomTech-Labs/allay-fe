@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 // action
 import getReview from '../../state/actions/index';
+import getCompanyReview from '../../state/actions/index';
 // component
 import NavBar from './NavBar';
 import ReviewCard from './ReviewCard';
+import CompanyReviewCard from './CompanyReviewCard';
 // styles
 import {
   Flex,
@@ -15,16 +17,20 @@ import {
 } from '@chakra-ui/core';
 import CustomSpinner from '../CustomSpinner.js';
 
-const DashboardHome = ({ data, getReview, history, isLoading }) => {
+const DashboardHome = ({ data, getReview, getCompanyReview, history, isLoading }) => {
   // search state
   const [filteredReviews, setFilteredReviews] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [trackFilters, setTrackFilters] = useState([]);
 
   // pull review data
+  // useEffect(() => {
+  //   getReview();
+  // }, [getReview]);
+
   useEffect(() => {
-    getReview();
-  }, [getReview]);
+    getCompanyReview();
+  }, [getCompanyReview]);
 
   // filter searchbar by company name
   useEffect(() => {
@@ -44,8 +50,6 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
     // data = results;
     setFilteredReviews(filteredResults);
   }, [trackFilters]);
-
-  console.log('ignacio', data);
 
   return (
     <>
@@ -69,7 +73,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
           <Flex
             height='70%'
             wrap='wrap'
-            // justify='space-between'
+          // justify='space-between'
           >
             {isLoading ? (
               <Flex w='100%' h='100%' justify='center' align='center'>
@@ -77,7 +81,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
               </Flex>
             ) : filteredReviews.length >= 1 ? (
               filteredReviews.map(review => (
-                <ReviewCard key={review.id} review={review} history={history} />
+                <CompanyReviewCard key={review.id} review={review} history={history} />
               ))
             ) : searchResults.length > 0 || trackFilters.length > 0 ? (
               <Flex as='h3' w='100%' ml='6%' mt='5%' overflow='visible'>
@@ -101,10 +105,10 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
                 </Alert>
               </Flex>
             ) : (
-              data.map(review => (
-                <ReviewCard key={review.id} review={review} history={history} />
-              ))
-            )}
+                    data.map(review => (
+                      <CompanyReviewCard key={review.id} review={review} history={history} />
+                    ))
+                  )}
           </Flex>
         </Flex>
       </Flex>
@@ -118,4 +122,4 @@ const mapStateToProps = state => {
     data: state.review.data
   };
 };
-export default connect(mapStateToProps, getReview)(DashboardHome);
+export default connect(mapStateToProps, (getReview, getCompanyReview))(DashboardHome);
