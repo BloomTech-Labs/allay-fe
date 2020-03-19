@@ -6,6 +6,7 @@ import getCompanyReview from '../../state/actions/index';
 // component
 import NavBar from './NavBar';
 import ReviewCard from './ReviewCard';
+import CompanyReviewCard from './CompanyReviewCard';
 // styles
 import {
   Flex,
@@ -80,7 +81,7 @@ const DashboardHome = ({ data, getReview, getCompanyReview, history, isLoading }
               </Flex>
             ) : filteredReviews.length >= 1 ? (
               filteredReviews.map(review => (
-                <ReviewCard key={review.id} review={review} history={history} />
+                <CompanyReviewCard key={review.id} review={review} history={history} />
               ))
             ) : searchResults.length > 0 || trackFilters.length > 0 ? (
               <Flex as='h3' w='100%' ml='6%' mt='5%' overflow='visible'>
@@ -105,7 +106,7 @@ const DashboardHome = ({ data, getReview, getCompanyReview, history, isLoading }
               </Flex>
             ) : (
                     data.map(review => (
-                      <ReviewCard key={review.id} review={review} history={history} />
+                      <CompanyReviewCard key={review.id} review={review} history={history} />
                     ))
                   )}
           </Flex>
