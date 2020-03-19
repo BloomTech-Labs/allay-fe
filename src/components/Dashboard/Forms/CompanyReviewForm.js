@@ -27,11 +27,11 @@ import {
 } from '@chakra-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import ReviewFormInput from '../../Reusable/InputFields/ReviewFormInput';
+import CustomSpinner from '../../CustomSpinner';
 
 const ReviewForm2 = ({
 	history,
-	isLoading,
+	loadingCompanies,
 	companies,
 	getCompanies,
 	postCompanyReview
@@ -287,29 +287,39 @@ const ReviewForm2 = ({
 									data-aos-once='true'
 								>
 									<FormLabel>1. Company name</FormLabel>
-									<Input
-										h='56px'
-										mb='1'
-										variant='filled'
-										rounded='6px'
-										autoCapitalize='none'
-										type='text'
-										label='company_name'
-										name='company_name'
-										list='company_name'
-										ref={register}
-										onChange={e => setSearchTerm(e.target.value)}
-									/>
-									<datalist id='company_name'>
-										{searchResults.map(company => (
-											<option value={company.company_name} key={company.id}>
-												{company.company_name}
-											</option>
-										))}
-									</datalist>
-									<Link mb='4' color='grey' href='/add-company'>
-										Can't find a company?
-									</Link>
+									{loadingCompanies ? (
+										<>
+											<Flex justify='center' w='100%'>
+												<CustomSpinner />
+											</Flex>
+										</>
+									) : (
+										<>
+											{' '}
+											<Input
+												h='56px'
+												variant='filled'
+												rounded='6px'
+												autoCapitalize='none'
+												type='text'
+												label='company_name'
+												name='company_name'
+												list='company_name'
+												ref={register}
+												onChange={e => setSearchTerm(e.target.value)}
+											/>
+											<datalist id='company_name'>
+												{searchResults.map(company => (
+													<option value={company.company_name} key={company.id}>
+														{company.company_name}
+													</option>
+												))}
+											</datalist>
+											<Link mb='2' color='grey' href='/add-company'>
+												Can't find a company?
+											</Link>
+										</>
+									)}
 									<FormLabel>2. Status at the company</FormLabel>
 									<Select
 										h='56px'
@@ -389,21 +399,25 @@ const ReviewForm2 = ({
 											<FormLabel>1. Job Title</FormLabel>
 											<Input
 												h='56px'
-												mb='6'
+												mb='5'
 												variant='filled'
 												rounded='6px'
 												autoCapitalize='none'
 												type='text'
 												label='job_title'
 												name='job_title'
+												list='job_title'
 												ref={register}
 											/>
 											<FormLabel>2. Length of position</FormLabel>
 											<Flex w='100%' justify='space-between'>
-												<ReviewFormInput
+												<Input
 													type='number'
 													min='1970'
 													max='2030'
+													h='56px'
+													variant='filled'
+													rounded='6px'
 													w='45%'
 													mr='2%'
 													label='start_date'
@@ -414,7 +428,6 @@ const ReviewForm2 = ({
 
 												<Input
 													h='56px'
-													mb='6'
 													variant='filled'
 													rounded='6px'
 													autoCapitalize='none'
@@ -839,6 +852,8 @@ const ReviewForm2 = ({
 											h='136px'
 											mb='8%'
 											p='6'
+											justify='center'
+											align='center'
 											border='1px solid #BBBDC6'
 											rounded='6px'
 											flexDir='column'
@@ -850,7 +865,17 @@ const ReviewForm2 = ({
 											data-aos-mirror='true'
 											data-aos-once='true'
 										>
-											<Button type='submit'> Submit </Button>
+											<Button
+												bg='#344CD0'
+												color='white'
+												type='submit'
+												isLoading={formState.isSubmitting}
+												rounded='6x'
+												border='none'
+											>
+												{' '}
+												Submit{' '}
+											</Button>
 										</Flex>
 										{/* avatar */}
 										<Flex
@@ -880,7 +905,7 @@ const ReviewForm2 = ({
 
 const mapStateToProps = state => {
 	return {
-		isLoading: state.review.fetchingData,
+		loadingCompanies: state.company.isLoading,
 		companies: state.company.data
 	};
 };
