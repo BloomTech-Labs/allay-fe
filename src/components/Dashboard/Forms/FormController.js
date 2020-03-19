@@ -5,7 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 //components
 import InterviewForm from './InterviewForm';
-import ReviewForm2 from './ReviewForm2';
+import CompanyReviewForm from './CompanyReviewForm';
 
 const FormController = ({ history }) => {
 	// initialize AOS
@@ -99,8 +99,32 @@ const FormController = ({ history }) => {
 							data-aos-once='false'
 						>
 							<p>
-								Hello there! Thank you for choosing to post. Your reviews help
-								Lambda students and alumni tremendously.
+								Hi John,{' '}
+								<span role='img' aria-label='smile'>
+									🙂
+								</span>{' '}
+								Thank you for choosing to post.
+							</p>
+						</Flex>
+						<Flex
+							align='center'
+							p='1%'
+							ml='2%'
+							w='416px'
+							mb='2%'
+							bg='#F2F6FE'
+							rounded='20px'
+							data-aos='fade-right'
+							data-aos-offset='200'
+							data-aos-delay='1000'
+							data-aos-duration='1000'
+							data-aos-easing='ease-in-out'
+							data-aos-mirror='true'
+							data-aos-once='false'
+						>
+							<p>
+								Sharing your experience through your posts encourages others to
+								do the same and promotes the exchange of helpful information
 							</p>
 						</Flex>
 						<Flex
@@ -113,7 +137,7 @@ const FormController = ({ history }) => {
 							rounded='20px'
 							data-aos='fade-right'
 							data-aos-offset='200'
-							data-aos-delay='2000'
+							data-aos-delay='2500'
 							data-aos-duration='1000'
 							data-aos-easing='ease-in-out'
 							data-aos-mirror='true'
@@ -194,7 +218,7 @@ const FormController = ({ history }) => {
 						</Flex>
 						{showInterview ? <InterviewForm history={history} /> : null}
 
-						{showCompanyReview ? <ReviewForm2 history={history} /> : null}
+						{showCompanyReview ? <CompanyReviewForm history={history} /> : null}
 					</Flex>
 
 					{/* blank space container */}
