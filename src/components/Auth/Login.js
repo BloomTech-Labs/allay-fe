@@ -14,9 +14,12 @@ import {
   FormLabel,
   FormErrorMessage,
   Flex,
+  Box,
   Text,
   InputGroup,
-  InputRightElement
+  InputRightElement,
+  Image,
+  Stack
 } from '@chakra-ui/core';
 
 const Login = ({ login, isLoading, history }) => {
@@ -71,15 +74,29 @@ const Login = ({ login, isLoading, history }) => {
   }
 
   return (
-    <Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
+    <Flex className='LoginSplash' w='100%' minH='100vh' justify='center'>
       <Flex maxW='1440px' w='100%'>
-        <Flex w='40%' justify='center' align='center'>
-          <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
-            Allay - <br />
-            Together, we are <br />
-            stronger.
+        <Stack
+          wrap='wrap'
+          w='60%'
+          ml='6.5%'
+          mb='15%'
+          justify='center'
+          align='center'
+        >
+          <Text
+            as='h1'
+            w='100%'
+            fontFamily='Poppins'
+            fontSize='80px'
+            fontWeight='bold'
+          >
+            Allay
           </Text>
-        </Flex>
+          <Text w='100%' fontFamily='Poppins' fontSize='52px' fontWeight='bold'>
+            We're stronger together. <br />
+          </Text>
+        </Stack>
         <Flex w='60%' justify='center' align='center'>
           <form onSubmit={handleSubmit(submitForm)}>
             <Flex

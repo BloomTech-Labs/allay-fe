@@ -102,10 +102,10 @@ const Signup = ({ signup, isLoading, history }) => {
   }
 
   return (
-    <Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
+    <Flex className='RegisterSplash' w='100%' minH='100vh' justify='center'>
       <Flex maxW='1440px' w='100%'>
         <Flex w='40%' justify='center' align='center'>
-          <Text fontSize='64px' fontWeight='600' lineHeight='92px'>
+          <Text fontSize='64px' fontWeight='400' lineHeight='92px'>
             Allay - <br />
             Together, we are <br />
             stronger.
