@@ -26,6 +26,7 @@ import {
 } from '@chakra-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ReviewFormInput from '../../Reusable/InputFields/ReviewFormInput';
 
 const ReviewForm2 = ({
 	history,
@@ -78,6 +79,7 @@ const ReviewForm2 = ({
 			const results = companies.filter(company =>
 				company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
 			);
+			console.log(results);
 			setSearchResults(results);
 		}
 	}, [searchTerm, companies]);
@@ -276,16 +278,10 @@ const ReviewForm2 = ({
 									data-aos-once='true'
 								>
 									<FormLabel>1. Company name</FormLabel>
-									<Input
-										variant='filled'
-										h='56px'
-										mb='6'
-										rounded='6px'
-										type='text'
+									<ReviewFormInput
 										label='company_name'
 										name='company_name'
 										list='company_name'
-										autoCapitalize='none'
 										ref={register}
 										onChange={e => setSearchTerm(e.target.value)}
 									/>
@@ -373,41 +369,30 @@ const ReviewForm2 = ({
 											data-aos-once='true'
 										>
 											<FormLabel>1. Job Title</FormLabel>
-											<Input
-												variant='filled'
-												h='56px'
-												mb='6'
-												rounded='6px'
-												type='text'
+											<ReviewFormInput
 												label='job_title'
 												name='job_title'
 												ref={register}
 											/>
 											<FormLabel>2. Length of position</FormLabel>
 											<Flex w='100%' justify='space-between'>
-												<Input
+												<ReviewFormInput
 													type='number'
 													min='1970'
 													max='2030'
-													h='56px'
 													w='45%'
 													mr='2%'
-													rounded='6px'
-													variant='filled'
 													label='start_date'
 													name='start_date'
 													placeholder='YYYY'
 													ref={register}
 												/>
 
-												<Input
+												<ReviewFormInput
 													type='number'
 													min='1970'
 													max='2030'
-													h='56px'
 													w='45%'
-													rounded='6px'
-													variant='filled'
 													label='end_date'
 													name='end_date'
 													placeholder='YYYY'
@@ -590,10 +575,6 @@ const ReviewForm2 = ({
 										>
 											<FormLabel>Working hours</FormLabel>
 											<Select
-												h='56px'
-												mb='6'
-												rounded='6px'
-												variant='filled'
 												label='typical_hours'
 												name='typical_hours'
 												placeholder='Select one'
@@ -678,14 +659,10 @@ const ReviewForm2 = ({
 													fontSize='1.2em'
 													children='$'
 												/>
-												<Input
-													h='56px'
-													rounded='6px'
+												<ReviewFormInput
 													type='number'
-													variant='filled'
 													label='salary'
 													name='salary'
-													autoCapitalize='none'
 													onChange={time5}
 													ref={register}
 												/>
