@@ -24,7 +24,8 @@ import {
 	Avatar,
 	RadioButtonGroup,
 	CheckboxGroup,
-	Progress
+	Progress,
+	Link
 } from '@chakra-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -221,18 +222,18 @@ const InterviewForm = () => {
 					px='2%'
 					w='70%'
 					h='108px'
-					background='#F2F6FE'
+					background='#344CD0'
 					top='0'
 					position='fixed'
 					overflow='hidden'
 					zIndex='999'
 					direction='column'
 				>
-					<Flex w='100%' color='#259BF8'>
+					<Flex w='100%' color='#FFFFFF'>
 						Your progress
 					</Flex>
 
-					<Flex w='100%' justify='space-between' mb='1%'>
+					<Flex w='100%' justify='space-between' mb='1%' color='#FFFFFF'>
 						{progress.prec === 100 ? (
 							<>
 								<Flex as='h4'>{progress.prec}% Completed!</Flex>{' '}
@@ -240,11 +241,19 @@ const InterviewForm = () => {
 						) : (
 							<>
 								<Flex as='h4'>{progress.prec}% not completed</Flex>
-								<Flex color='#259BF8'> {progress.mins} mins</Flex>
+								<Flex color='#FFFFFF'> {progress.mins} mins</Flex>
 							</>
 						)}
 					</Flex>
-					<Progress hasStripe isAnimated value={progress.prog} />
+					<Progress
+						color='white'
+						background='#344CD0'
+						hasStripe
+						isAnimated
+						rounded='6px'
+						border='1px solid #FFFFFF'
+						value={progress.prog}
+					/>
 				</Flex>
 
 				{/* form container */}
@@ -299,7 +308,7 @@ const InterviewForm = () => {
 									<Input
 										variant='filled'
 										h='56px'
-										mb='6'
+										mb='1'
 										rounded='6px'
 										type='text'
 										label='company_name'
@@ -315,6 +324,9 @@ const InterviewForm = () => {
 										<option>1</option>
 										<option>1</option>
 									</datalist>
+									<Link mb='4' color='grey' href='/add-company'>
+										Can't find a company?
+									</Link>
 									<FormLabel>2. Job title</FormLabel>
 									<Input
 										h='56px'

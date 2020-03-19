@@ -11,6 +11,7 @@ import postCompany from '../../../state/actions';
 import BeautyStars from 'beauty-stars';
 import {
 	FormControl,
+	Input,
 	Flex,
 	Select,
 	Textarea,
@@ -21,7 +22,8 @@ import {
 	InputGroup,
 	InputLeftElement,
 	Avatar,
-	Progress
+	Progress,
+	Link
 } from '@chakra-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -196,7 +198,7 @@ const ReviewForm2 = ({
 
 	return (
 		// main container
-		<Flex background='#E5E5E5' w='100%' justify='center'>
+		<Flex w='100%' justify='center'>
 			{/* max size */}
 			<Flex maxW='1440px' w='100%'>
 				{/* progress header */}
@@ -205,18 +207,18 @@ const ReviewForm2 = ({
 					px='2%'
 					w='70%'
 					h='108px'
-					background='#F2F6FE'
+					background='#344CD0'
 					top='0'
 					position='fixed'
 					overflow='hidden'
 					zIndex='999'
 					direction='column'
 				>
-					<Flex w='100%' color='#259BF8'>
+					<Flex w='100%' color='#FFFFFF'>
 						Your progress
 					</Flex>
 
-					<Flex w='100%' justify='space-between' mb='1%'>
+					<Flex w='100%' justify='space-between' mb='1%' color='#FFFFFF'>
 						{progress.prec === 100 ? (
 							<>
 								<Flex as='h4'>{progress.prec}% Completed!</Flex>{' '}
@@ -224,11 +226,19 @@ const ReviewForm2 = ({
 						) : (
 							<>
 								<Flex as='h4'>{progress.prec}% not completed</Flex>
-								<Flex color='#259BF8'> {progress.mins} mins</Flex>
+								<Flex color='#FFFFFF'> {progress.mins} mins</Flex>
 							</>
 						)}
 					</Flex>
-					<Progress hasStripe isAnimated value={progress.prog} />
+					<Progress
+						color='white'
+						background='#344CD0'
+						hasStripe
+						isAnimated
+						rounded='6px'
+						border='1px solid #FFFFFF'
+						value={progress.prog}
+					/>
 				</Flex>
 				{/* form container */}
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='5%'>
@@ -277,7 +287,13 @@ const ReviewForm2 = ({
 									data-aos-once='true'
 								>
 									<FormLabel>1. Company name</FormLabel>
-									<ReviewFormInput
+									<Input
+										h='56px'
+										mb='1'
+										variant='filled'
+										rounded='6px'
+										autoCapitalize='none'
+										type='text'
 										label='company_name'
 										name='company_name'
 										list='company_name'
@@ -291,6 +307,9 @@ const ReviewForm2 = ({
 											</option>
 										))}
 									</datalist>
+									<Link mb='4' color='grey' href='/add-company'>
+										Can't find a company?
+									</Link>
 									<FormLabel>2. Status at the company</FormLabel>
 									<Select
 										h='56px'
@@ -368,7 +387,13 @@ const ReviewForm2 = ({
 											data-aos-once='true'
 										>
 											<FormLabel>1. Job Title</FormLabel>
-											<ReviewFormInput
+											<Input
+												h='56px'
+												mb='6'
+												variant='filled'
+												rounded='6px'
+												autoCapitalize='none'
+												type='text'
 												label='job_title'
 												name='job_title'
 												ref={register}
@@ -387,7 +412,12 @@ const ReviewForm2 = ({
 													ref={register}
 												/>
 
-												<ReviewFormInput
+												<Input
+													h='56px'
+													mb='6'
+													variant='filled'
+													rounded='6px'
+													autoCapitalize='none'
 													type='number'
 													min='1970'
 													max='2030'
@@ -658,7 +688,12 @@ const ReviewForm2 = ({
 													fontSize='1.2em'
 													children='$'
 												/>
-												<ReviewFormInput
+												<Input
+													h='56px'
+													mb='6'
+													variant='filled'
+													rounded='6px'
+													autoCapitalize='none'
 													type='number'
 													label='salary'
 													name='salary'
