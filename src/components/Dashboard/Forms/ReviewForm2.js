@@ -307,10 +307,10 @@ const ReviewForm2 = ({
 										onChange={time1}
 										ref={register}
 									>
-										<option value='Current employee'>Current employee </option>
-										<option value='Former employee'>Former employee</option>
-										<option value='Full time'>Full time</option>
-										<option value='Part time'>Part time</option>
+										<option value='Current Employee'>Current Employee</option>
+										<option value='Former Employee'>Former Employee</option>
+										<option value='Full Time'>Full Time</option>
+										<option value='Part Time'>Part Time</option>
 										<option value='Intern<'>Intern</option>
 									</Select>
 								</Flex>
