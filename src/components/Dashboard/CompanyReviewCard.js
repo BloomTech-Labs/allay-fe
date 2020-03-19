@@ -117,12 +117,12 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
           <ModalCloseButton background='none' border='none' />
 
           {/* Basic info container */}
-          <Flex align='center' mx='8%'>
+          <Flex flexDir={{ lg: 'row', sm: 'column' }} align='center' mx='8%'>
             <Flex align='center'>
               <Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
             </Flex>
-            <Flex flexDir='column' pl='8%' width='100%'>
-              <Flex as='h2' w='100%' align='center' wrap='nowrap'>
+            <Flex flexDir='column' pl={{lg: '8%', sm: '0%'}} width='100%'>
+              <Flex as='h2' w='100%' align='center' justify={{ lg: 'flex-start', sm: 'center' }} wrap='nowrap'>
                 {review.company_name}
               </Flex>
               <Flex justify='space-between'>
@@ -324,7 +324,6 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
           "100%", // 768px upwards
           "45%" // 992px upwards
         ]}
-        // h='50%'
         mt='3%'
         mx='2.5%'
         px='4%'
@@ -390,7 +389,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
             </Flex>
 
 
-            
+
           </Flex>
 
           {/* Second main container */}
