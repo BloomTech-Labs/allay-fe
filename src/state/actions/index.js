@@ -8,7 +8,9 @@ import {
   editReview,
   getCompanyReview,
   getCompanyReviewById,
-	postCompanyReview
+  postCompanyReview,
+  editCompanyReview,
+  deleteCompanyReview,
 } from './interviewReviewActions';
 import { getCompanies, postCompany } from './companyActions';
 
@@ -23,5 +25,7 @@ export default {
   postCompany,
   getCompanyReview,
   getCompanyReviewById,
-	postCompanyReview
+  postCompanyReview,
+  editCompanyReview,
+  deleteCompanyReview,
 };

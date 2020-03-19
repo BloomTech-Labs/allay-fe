@@ -145,3 +145,31 @@ export const postCompanyReview = (id, companyReview) => dispatch => {
       dispatch({ type: POST_COMPANY_REVIEW_FAILURE, payload: err.response });
     });
 };
+
+// ============ EDIT REVIEW ===========
+
+export const editCompanyReview = (userId, companyReviewId, changes) => dispatch => {
+  dispatch({ type: EDIT_REVIEW_START });
+  return axiosWithAuth()
+    .put(`/users/${userId}/company-reviews/${companyReviewId}`, changes)
+    .then(res => {
+      dispatch({ type: EDIT_REVIEW_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: EDIT_REVIEW_FAILURE, payload: err.response });
+    });
+};
+
+// ============ DELETE REVIEW ===========
+
+export const deleteCompanyReview = (userId, companyReviewId) => dispatch => {
+  dispatch({ type: DELETE_REVIEW_START });
+  return axiosWithAuth()
+    .delete(`/users/${userId}/company-reviews/${companyReviewId}`)
+    .then(res => {
+      dispatch({ type: DELETE_REVIEW_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_REVIEW_FAILURE, payload: err });
+    });
+};
