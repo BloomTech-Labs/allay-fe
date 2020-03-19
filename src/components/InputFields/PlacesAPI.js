@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import Autocomplete from 'react-google-autocomplete';
-
 const CustomAutocomplete = () => {
+  // let [city, setCity] = useState('');
+  // let [state, setState] = useState('');
   return (
     <Autocomplete
       style={{
@@ -13,9 +14,11 @@ const CustomAutocomplete = () => {
         backgroundColor: '#F2F6FE'
       }}
       onPlaceSelected={place => {
-        let city = place.address_components[0].long_name;
-        let state = place.address_components[2].short_name;
+        city = place.address_components[0].long_name;
+        state = place.address_components[2].short_name;
         console.log(city, state, 'line 14');
+        setCity = { city };
+        setState = { state };
       }}
     />
   );

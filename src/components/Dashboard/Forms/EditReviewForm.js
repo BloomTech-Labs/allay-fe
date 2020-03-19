@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import getReviewById from '../../../state/actions/index.js';
 import editReview from '../../../state/actions/index.js';
 import ReactGA from 'react-ga';
-import CustomAutocomplete from '../../InputFields/PlacesAPI.js';
+import Autocomplete from 'react-google-autocomplete';
 import { useForm } from 'react-hook-form';
 
 //imported styles
@@ -168,17 +168,31 @@ const SingleReview = ({
               <FormLabel fontSize='15px' color='#525252'>
                 Job Location
               </FormLabel>
-              <CustomAutocomplete
+              <Autocomplete
+                style={{
+                  width: '100%',
+                  height: '56px',
+                  marginBottom: '24px',
+                  borderRadius: '6px',
+                  border: 'none',
+                  backgroundColor: '#F2F6FE'
+                }}
+                type='input'
                 name='job_location'
-                placeholder={review.job_location}
+                // placeholder={review.job_location}
                 ref={register}
-                value={editValue.job_location}
-                onChange={e =>
-                  setEditValue({
-                    ...editValue,
-                    [e.target.name]: e.target.value
-                  })
-                }
+                // value={editValue.job_location}
+                // onChange={e =>
+                //   setEditValue({
+                //     ...editValue,
+                //     [e.target.name]: e.target.value
+                //   })
+                // }
+                onPlaceSelected={place => {
+                  let city = place.address_components[0].long_name;
+                  let state = place.address_components[2].short_name;
+                  console.log(city, state, 'line 191');
+                }}
               />
               {/* <Input
                 mb='4'
