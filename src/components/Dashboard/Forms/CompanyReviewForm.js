@@ -28,6 +28,7 @@ import {
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import CustomSpinner from '../../CustomSpinner';
+import { ThinkingDots } from '../../Reusable/ThinkingDots';
 
 const ReviewForm2 = ({
 	history,
@@ -39,6 +40,11 @@ const ReviewForm2 = ({
 	//initialize animations
 	AOS.init();
 	const { register, handleSubmit, errors, formState } = useForm();
+	// thinking state
+	const [thinking, setThinking] = useState(false);
+	const dots = () => {
+		setThinking(true);
+	};
 	// search state
 	const [searchTerm, setSearchTerm] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
@@ -87,9 +93,12 @@ const ReviewForm2 = ({
 
 	// timers for moves
 	let timer = null;
+	let dotTimer = null;
 	// 2nd tag
 	const time1 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo2, 2000);
 	};
 
@@ -102,10 +111,13 @@ const ReviewForm2 = ({
 		});
 		const element = document.getElementById('Tag2');
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		setThinking(false);
 	};
 	// 3rd tag
 	const time2 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 800);
 		timer = setTimeout(routeTo3, 2000);
 	};
 
@@ -118,11 +130,14 @@ const ReviewForm2 = ({
 		});
 		const element = document.getElementById('Tag3');
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		setThinking(false);
 	};
 	//4th tag
 	const time3 = () => {
 		clearTimeout(timer);
-		timer = setTimeout(routeTo4, 2000);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 2000);
+		timer = setTimeout(routeTo4, 4000);
 	};
 
 	const routeTo4 = () => {
@@ -134,10 +149,13 @@ const ReviewForm2 = ({
 		});
 		const element = document.getElementById('Tag4');
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		setThinking(false);
 	};
 	// 5th tag
 	const time4 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo5, 2000);
 	};
 
@@ -150,10 +168,13 @@ const ReviewForm2 = ({
 		});
 		const element = document.getElementById('Tag5');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		setThinking(false);
 	};
 	// 6th tag
 	const time5 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo6, 2000);
 	};
 
@@ -166,10 +187,13 @@ const ReviewForm2 = ({
 		});
 		const element = document.getElementById('Tag6');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		setThinking(false);
 	};
 	// 7th tag
 	const time6 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo7, 2000);
 	};
 
@@ -182,6 +206,7 @@ const ReviewForm2 = ({
 		});
 		const element = document.getElementById('Tag7');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		setThinking(false);
 	};
 
 	//submit handler
@@ -240,6 +265,20 @@ const ReviewForm2 = ({
 						value={progress.prog}
 					/>
 				</Flex>
+				{thinking ? (
+					<>
+						<Flex
+							bottom='0'
+							position='fixed'
+							overflow='hidden'
+							zIndex='999'
+							pt='5%'
+							pl='15%'
+						>
+							<ThinkingDots />
+						</Flex>
+					</>
+				) : null}
 				{/* form container */}
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='5%'>
 					{/* start of form  */}
@@ -272,7 +311,7 @@ const ReviewForm2 = ({
 								<Flex
 									w='459px'
 									h='257px'
-									mb='20%'
+									mb='8%'
 									px='6'
 									py='8'
 									border='1px solid #BBBDC6'
@@ -870,7 +909,7 @@ const ReviewForm2 = ({
 												color='white'
 												type='submit'
 												isLoading={formState.isSubmitting}
-												rounded='6x'
+												rounded='6px'
 												border='none'
 											>
 												{' '}
