@@ -117,12 +117,12 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
           <ModalCloseButton background='none' border='none' />
 
           {/* Basic info container */}
-          <Flex align='center' mx='8%'>
+          <Flex flexDir={{ lg: 'row', sm: 'column' }} align='center' mx='8%'>
             <Flex align='center'>
               <Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
             </Flex>
-            <Flex flexDir='column' pl='8%' width='100%'>
-              <Flex as='h2' w='100%' align='center' wrap='nowrap'>
+            <Flex flexDir='column' pl={{lg: '8%', sm: '0%'}} width='100%'>
+              <Flex as='h2' w='100%' align='center' justify={{ lg: 'flex-start', sm: 'center' }} wrap='nowrap'>
                 {review.company_name}
               </Flex>
               <Flex justify='space-between'>
@@ -318,13 +318,16 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
 
       {/* Review container */}
       <PseudoBox
-        w='45%'
-        // h='50%'
+        width={[
+          "100%", // base
+          "100%", // 480px upwards
+          "100%", // 768px upwards
+          "45%" // 992px upwards
+        ]}
         mt='3%'
         mx='2.5%'
         px='4%'
         py='2%'
-        wrap='nowrap'
         background='#FBFCFF'
         borderRadius='12px'
         display='flex'
@@ -345,14 +348,9 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
         </Flex>
 
         {/* Review content container */}
-        <Flex
-          w='100%'
-          wrap='wrap'
-          justify='right'
-          alignContent='center'
-        >
+        <Flex flexDir='column' >
           {/* headline line container  */}
-          <Flex w='100%' h='100px' mb='3%'>
+          <Flex w='100%' h='100px' >
             {/* avatar box */}
             <Box justify='center' align='center' h='88px' mr='36px'>
               <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
@@ -363,17 +361,16 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
                 as='h2'
                 w='100%'
                 align='center'
-                wrap='wrap'
                 overflow='hidden'
                 isTruncated
               >
                 {review.company_name} company review
 							</Flex>
               <Flex width='100%'>
-                <Flex as='h4' align='center' wrap='nowrap'>
+                <Flex as='h4' align='center'>
                   {review.job_rating}.0
 								</Flex>
-                <Flex align='center' wrap='nowrap' >
+                <Flex align='center'>
                   {Array(5)
                     .fill('')
                     .map((_, i) => (
@@ -386,38 +383,37 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
                     ))}
                 </Flex>
               </Flex>
-              {/* <Flex align='center' w='40%' wrap='nowrap'> */}
               <Flex as='p' w='100%' fontWeight='light'>
                 Position: {review.job_title}
               </Flex>
             </Flex>
-            {/* </Flex> */}
+
+
+
           </Flex>
 
-          {/* Company name & location container */}
+          {/* Second main container */}
           <Flex
             w='100%'
             font-size='18'
             fontWeight='light'
             justify='space-evenly'
             align='center'
-            wrap='nowrap'
             mb='1%'
-            mt=''
           >
-            <Flex align='center' wrap='nowrap'>
+            <Flex align='center'>
               <Box as={FaRegMoneyBillAlt} mr='10px'></Box>
               <Flex as='p' overflow='hidden'>
                 ${review.salary}
               </Flex>
             </Flex>
-            <Flex align='center' wrap='nowrap'>
+            <Flex align='center'>
               <Box as={GoLocation} mr='10px'></Box>
               <Flex as='p'>
                 MISSING LOCATION
               </Flex>
             </Flex>
-            <Flex align='center' wrap='nowrap'>
+            <Flex align='center'>
               <Box as={FaRegClock} mr='10px'></Box>
               <Flex as='p'>
                 {review.start_date}-{review.end_date}
