@@ -12,8 +12,8 @@ const customTheme = {
     }
   },
   fonts: {
-    body: 'Muli',
-    headings: 'Poppins'
+    body: 'Muli, sans-serif',
+    heading: 'Poppins, serif'
   }
 };
 export default customTheme;
