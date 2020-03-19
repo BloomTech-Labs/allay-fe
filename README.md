@@ -1,5 +1,7 @@
 # Allay Documentation
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/2f8112a7751e3db18cf2/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/allay-fe/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/2f8112a7751e3db18cf2/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/allay-fe/test_coverage)
+
 # Maintainability Score: https://codeclimate.com/github/Lambda-School-Labs/allay-fe/maintainability
 
 You can find the deployed project on [Heroku](https://allay-fe-production.herokuapp.com/).
