@@ -8,13 +8,20 @@ import deleteCompanyReview from '../../state/actions/index';
 
 // icons
 import {
+  TiCalendar,
   TiLocationOutline,
-  TiArchive,
-  TiThumbsUp,
-  TiThumbsDown,
-  TiGlobe
+  TiArchive
 } from 'react-icons/ti';
-import { GiWeightLiftingUp } from 'react-icons/gi';
+import {
+  FiThumbsUp
+} from 'react-icons/fi';
+import {
+  MdPerson
+} from 'react-icons/md';
+import {
+  FaDollarSign
+} from 'react-icons/fa';
+
 // styles
 import {
   Box,
@@ -101,139 +108,143 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
       {/* ------------------------------------------------------------------------------------------------ */}
       <Modal isOpen={isOpen} onClose={onClose} size='80%'>
         <ModalOverlay />
-        <ModalContent w='100%' px='12%' py='3%' wrap='nowrap'>
+        <ModalContent w='100%' py='3%' wrap='nowrap'>
           <ModalCloseButton background='none' border='none' />
 
           {/* Basic info container */}
-          {/* <SingleReview /> */}
-          <Flex align='center'>
+          <Flex align='center' mx='8%'>
             <Flex align='center'>
               <Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
             </Flex>
-            <Flex flexDir='column' pl='4%'>
-              <Flex as='h1' w='100%' align='center' wrap='nowrap'>
-                {review.company_name} Company Review
-							</Flex>
-              <Flex
-                as='h2'
-                fontSize='lg'
-                w='100%'
-                fontWeight='medium'
-                align='center'
-                wrap='nowrap'
-              >
-                <Flex>
-                  Job Review:
-								</Flex>
-                <Flex ml='2%'>
-                  {Array(5)
-                    .fill('')
-                    .map((_, i) => (
-                      <Icon
-                        name='star'
-                        key={i}
-                        color={i < review.job_rating ? 'black' : 'gray.300'}
-                      />
-                    ))}
-                </Flex>
+            <Flex flexDir='column' pl='8%' width='100%'>
+              <Flex as='h2' w='100%' align='center' wrap='nowrap'>
+                {review.company_name}
               </Flex>
-              <Flex as='p' fontSize='md' align='center' wrap='nowrap'>
-                Position: {review.job_title}
+              <Flex justify='space-between'>
+                <Flex flexDir='column'>
+                  <Flex fontSize='small' fontWeight='light' color='#9194A8'>
+                    Location
+                  </Flex>
+                  <Flex>
+                    Mountain View, CA
+                  </Flex>
+                </Flex>
+                <Flex flexDir='column'>
+                  <Flex fontSize='small' fontWeight='light' color='#9194A8'>
+                    Job Title
+                  </Flex>
+                  <Flex>
+                    {review.job_title}
+                  </Flex>
+                </Flex>
+                <Flex flexDir='column'>
+                  <Flex fontSize='small' fontWeight='light' color='#9194A8'>
+                    Rating
+                  </Flex>
+                  <Flex>
+                    Company Rating
+                    <Flex>
+                      {Array(5)
+                        .fill('')
+                        .map((_, i) => (
+                          <Icon
+                            name='star'
+                            key={i}
+                            color={i < review.job_rating ? 'black' : 'gray.300'}
+                            ml='5px'
+                          />
+                        ))}
+                    </Flex>
+                  </Flex>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
 
           {/* Secondary info container */}
-          <Flex w='100%' flexDir='column'>
-            <Flex w='100%' mt='1.5%' overflow='hidden' justify='space-between'>
+          <Flex w='100%' backgroundColor='#344CD0' color='white' mt='4%'>
+            <Flex w='100%' overflow='hidden' justify='space-evenly' align='center' py='1%'>
               <Flex align='center' wrap='nowrap'>
-                <Box as={TiLocationOutline} mr='5px'></Box>
-                <Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
-                  {review.typical_hours}
+                <Box as={FaDollarSign} size='2em' mr='5px'></Box>
+                <Flex flexDir='column'>
+                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                    ${review.salary}
+                  </Flex>
+                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                    Salary
+                  </Flex>
                 </Flex>
               </Flex>
               <Flex align='center' wrap='nowrap'>
-                <Box as={TiLocationOutline} mr='5px'></Box>
-                <Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
-                  {review.work_status}
+                <Box as={FiThumbsUp} size='2em' mr='5px'></Box>
+                <Flex flexDir='column'>
+                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                    {review.typical_hours} hrs week
+                  </Flex>
+                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                    Working Hours
+                  </Flex>
                 </Flex>
               </Flex>
               <Flex align='center' wrap='nowrap'>
-                <Box as={GiWeightLiftingUp} mr='5px'></Box>
-                <Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
-                  {review.start_date}
+                <Box as={MdPerson} size='2em' mr='5px'></Box>
+                <Flex flexDir='column'>
+                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                    {review.work_status}
+                  </Flex>
+                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                    Status
+                  </Flex>
                 </Flex>
               </Flex>
               <Flex align='center' wrap='nowrap'>
-                <Box as={TiGlobe} mr='5px'></Box>
-                <Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
-                  {review.end_date}
+                <Box as={TiCalendar} size='2em' mr='5px'></Box>
+                <Flex flexDir='column'>
+                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                    {review.start_date} - {review.end_date}
+                  </Flex>
+                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                    Date
+                  </Flex>
                 </Flex>
               </Flex>
             </Flex>
           </Flex>
 
-          {/* Types container */}
+          {/* Topics container */}
           <Flex
             as='h2'
             fontWeight='medium'
             fontSize='xl'
             w='100%'
-            mt='3%'
+            mt='2%'
             mb='1.5%'
+            px='8%'
             overflow='hidden'
           >
-            Job Description
+            Topics
 					</Flex>
-        
-          {/* Review container */}
-          <Flex as='p' w='100%' wrap='nowrap' overflow='hidden'>
-            {review.comment}
+          <Flex justify='space-between' wrap='wrap' whiteSpace='nowrap' mb='2%' px='8%'>
+            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+              Career Growth
+						</Flex>
+            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+              Benefits
+						</Flex>
+            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+              Salary
+						</Flex>
+            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+              Company Culture
+						</Flex>
+            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+              Another Cool Thing
+						</Flex>
           </Flex>
 
-          <Flex
-            w='100%'
-            mt='3%'
-            align='center'
-          >
-            <Flex
-              fontWeight='medium'
-              fontSize='xl'
-              wrap='nowrap'>
-              Overall Rating
-						</Flex>
-            <Flex ml='1.5%'>
-              {Array(5)
-                .fill('')
-                .map((_, i) => (
-                  <Icon
-                    name='star'
-                    key={i}
-                    color={i < review.job_rating ? 'black' : 'gray.300'}
-                  />
-                ))}
-            </Flex>
-          </Flex>
-          <Flex
-            as='h2'
-            w='100%'
-            wrap='nowrap'
-            overflow='hidden'
-            mt='1.5%'
-          >
-            <Flex
-              fontWeight='medium'
-              fontSize='xl'
-            >
-              Salary Offered
-						</Flex>
-            <Flex
-              ml='1.5%'
-              fontWeight='light'
-              fontSize='xl'
-            >
-              ${review.salary}
-            </Flex>
+          {/* Review container */}
+          <Flex as='p' w='100%' wrap='nowrap' overflow='hidden' px='8%' align='center'>
+            {review.comment}
           </Flex>
 
           <ModalFooter>
@@ -295,25 +306,39 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
           </ModalFooter>
         </ModalContent>
       </Modal>
+
       {/* ------------------------------------------------------------------------------------------------ */}
       {/* ---------------------------------------DashBoard Cards------------------------------------------ */}
       {/* ------------------------------------------------------------------------------------------------ */}
+
       {/* Review container */}
       <PseudoBox
         w='45%'
         // h='50%'
         mt='3%'
         mx='2.5%'
-        p='3.5%'
+        px='4%'
+        py='2%'
         wrap='nowrap'
-        background='#F2F6FE'
+        background='#FBFCFF'
         borderRadius='12px'
         display='flex'
+        flexDir='column'
         justifyContent='center'
         alignItems='center'
         _hover={{ bg: '#4EADF9', color: 'white' }}
         onClick={onOpen}
       >
+        {/* Review content container */}
+        <Flex
+          width='100%'
+          justifyContent='flex-end'
+        >
+          <Flex backgroundColor='#344CD0' color='white' px='5%' py='0.5%' borderRadius='20px'>
+            Web
+          </Flex>
+        </Flex>
+
         {/* Review content container */}
         <Flex
           w='100%'
