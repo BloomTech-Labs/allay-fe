@@ -19,8 +19,13 @@ import {
   MdPerson
 } from 'react-icons/md';
 import {
-  FaDollarSign
+  FaDollarSign,
+  FaRegClock,
+  FaRegMoneyBillAlt
 } from 'react-icons/fa';
+import {
+  GoLocation
+} from 'react-icons/go';
 
 // styles
 import {
@@ -401,19 +406,19 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
             mt=''
           >
             <Flex align='center' wrap='nowrap'>
-              <Box as={TiArchive} mr='10px'></Box>
+              <Box as={FaRegMoneyBillAlt} mr='10px'></Box>
               <Flex as='p' overflow='hidden'>
                 ${review.salary}
               </Flex>
             </Flex>
             <Flex align='center' wrap='nowrap'>
-              <Box as={TiLocationOutline} mr='10px'></Box>
+              <Box as={GoLocation} mr='10px'></Box>
               <Flex as='p'>
-                {review.work_status}
+                MISSING LOCATION
               </Flex>
             </Flex>
             <Flex align='center' wrap='nowrap'>
-              <Box as={TiLocationOutline} mr='10px'></Box>
+              <Box as={FaRegClock} mr='10px'></Box>
               <Flex as='p'>
                 {review.start_date}-{review.end_date}
               </Flex>
