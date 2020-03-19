@@ -28,6 +28,12 @@ export default function NavBar({
     });
   };
 
+  const logout = () => {
+    localStorage.clear('token');
+    localStorage.clear('userId');
+    history.push('/');
+  }
+
   const handleInputChange = event => {
     event.preventDefault();
     setSearchResults(event.target.value);
@@ -65,6 +71,19 @@ export default function NavBar({
         <Flex align='center'>
           <Avatar mr='12%' size='xl' src='https://bit.ly/broken-link' />
           <h1> Allay </h1>
+        </Flex>
+        <Flex>
+          <Button
+            background='#344CD0'
+            color='#FFFFFF'
+            rounded='6px'
+            border='none'
+            size='lg'
+            isLoading={isLoading}
+            onClick={logout}
+          >
+            Logout
+          </Button>
         </Flex>
       </Flex>
       <Flex align='center' justify='space-between' pt='2%'>
@@ -112,10 +131,10 @@ export default function NavBar({
             Recent Posts
           </Flex>
         ) : (
-          <Flex as='h2' mt='1%'>
-            Recent Posts
-          </Flex>
-        )}
+            <Flex as='h2' mt='1%'>
+              Recent Posts
+            </Flex>
+          )}
       </Flex>
     </Flex>
   );

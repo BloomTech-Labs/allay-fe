@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 // redux
 import { connect } from 'react-redux';
 // actions
@@ -27,7 +26,6 @@ import {
 	Progress,
 	Link
 } from '@chakra-ui/core';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const InterviewForm = () => {
