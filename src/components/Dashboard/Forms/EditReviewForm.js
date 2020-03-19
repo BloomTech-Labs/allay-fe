@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import getReviewById from '../../../state/actions/index.js';
-import editReview from '../../../state/actions/index.js';
+import getCompanyReviewById from '../../../state/actions/index.js';
+import editCompanyReview from '../../../state/actions/index.js';
 import ReactGA from 'react-ga';
 
 import { useForm } from 'react-hook-form';
@@ -31,8 +31,8 @@ import {
 
 const SingleReview = ({
   review,
-  getReviewById,
-  editReview,
+  getCompanyReviewById,
+  editCompanyReview,
   reviewEdited,
   match,
   history,
@@ -63,8 +63,8 @@ const SingleReview = ({
   }
 
   useEffect(() => {
-    getReviewById(id);
-  }, [id, getReviewById]);
+    getCompanyReviewById(id);
+  }, [id, getCompanyReviewById]);
 
   if (isLoading) {
     return (
@@ -75,7 +75,7 @@ const SingleReview = ({
   }
 
   const submitEdits = () => {
-    editReview(review.user_id, review.interview_review_id, editValue).then(() => {
+    editCompanyReview(review.user_id, review.company_review_id, editValue).then(() => {
       history.push('/dashboard')
       toast({
         title: `Review Edit Success!`,
@@ -120,29 +120,11 @@ const SingleReview = ({
         bg='white'
       >
         <Flex justify='center' align='start' flexDir='column'>
-          <h2> Edit Review</h2>
+          <h2> Edit Company Review</h2>
           <form onSubmit={handleSubmit(submitEdits)}>
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
-                Tag Line
-              </FormLabel>
-              <Input
-                mb='4'
-                h='56px'
-                variant='filled'
-                rounded='6px'
-                name='tagline'
-                type='text'
-                placeholder={review.tagline}
-                ref={register}
-                value={editValue.tagline}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel fontSize='15px' mt='4' color='#525252'>
                 Job Title
               </FormLabel>
               <Input
@@ -155,6 +137,60 @@ const SingleReview = ({
                 placeholder={review.job_title}
                 ref={register}
                 value={editValue.job_title}
+                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel fontSize='15px' color='#525252'>
+                Tag Line
+              </FormLabel>
+              <Input
+                mb='4'
+                h='56px'
+                variant='filled'
+                rounded='6px'
+                name='start_date'
+                type='text'
+                placeholder={review.start_date}
+                ref={register}
+                value={editValue.start_date}
+                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel fontSize='15px' color='#525252'>
+                Tag Line
+              </FormLabel>
+              <Input
+                mb='4'
+                h='56px'
+                variant='filled'
+                rounded='6px'
+                name='end_date'
+                type='text'
+                placeholder={review.end_date}
+                ref={register}
+                value={editValue.end_date}
+                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel fontSize='15px' color='#525252'>
+                Tag Line
+              </FormLabel>
+              <Input
+                mb='4'
+                h='56px'
+                variant='filled'
+                rounded='6px'
+                name='typical_hours'
+                type='text'
+                placeholder={review.typical_hours}
+                ref={register}
+                value={editValue.typical_hours}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               />
             </FormControl>
@@ -213,31 +249,6 @@ const SingleReview = ({
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
-                Interview Difficulty
-              </FormLabel>
-              {/* // change to dropdown */}
-              <Select
-                h='56px'
-                mb='6'
-                rounded='6px'
-                variant='filled'
-                label=''
-                name='interview_rating'
-                placeholder={review.interview_rating}
-                value={editValue.interview_rating}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-              >
-                <option value={5}>5 - Great</option>
-                <option value={4}>4 - Good</option>
-                <option value={3}>3 - Ok </option>
-                <option value={2}>2 - Poor </option>
-                <option value={1}>1 - Very Poor </option>
-              </Select>
-
-            </FormControl>
-
-            <FormControl>
-              <FormLabel fontSize='15px' color='#525252'>
                 Job Review
               </FormLabel>
               <Textarea
@@ -247,11 +258,11 @@ const SingleReview = ({
                 rounded='6px'
                 h='200px'
                 rowsMax={6}
-                name='job_review'
+                name='comment'
                 type='text'
-                placeholder={review.job_review}
+                placeholder={review.comment}
                 ref={register}
-                value={editValue.job_review}
+                value={editValue.comment}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               />
             </FormControl>
@@ -267,10 +278,7 @@ const SingleReview = ({
                 variant='filled'
                 rounded='6px'
                 name='job_rating'
-                // id='job_rating'
-                // placeholder={review.job_rating}
                 ref={register}
-                // value={editValue.job_rating}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               >
                 <option value={5}>5 - Great</option>
@@ -347,5 +355,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  (getReviewById, editReview))
+  (getCompanyReviewById, editCompanyReview))
   (SingleReview);

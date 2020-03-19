@@ -41,7 +41,6 @@ import {
 const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => {
   //allows the use of toasts
   const toast = useToast();
-  console.log(review);
 
   // basic usage for the SingleReview modal
   const { isOpen, onOpen, onClose } = useDisclosure();
