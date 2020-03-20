@@ -35,8 +35,8 @@ const DashboardHome = ({
   // }, [getReview]);
 
   useEffect(() => {
-    getCompanyReview();
-  }, [getCompanyReview]);
+    getReview();
+  }, [getReview]);
 
   // filter searchbar by company name
   useEffect(() => {

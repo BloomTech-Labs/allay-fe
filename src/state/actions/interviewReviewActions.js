@@ -35,7 +35,7 @@ import {
 export const getReview = () => dispatch => {
 	dispatch({ type: FETCH_REVIEWS_START });
 	axiosWithAuth()
-		.get('/interview-reviews')
+		.get('/company-reviews')
 		.then(res => {
 			dispatch({ type: FETCH_REVIEWS_SUCCESS, payload: res.data });
 		})
@@ -46,10 +46,10 @@ export const getReview = () => dispatch => {
 
 // ============ GET REVIEW BY ID ===========
 
-export const getReviewById = interviewId => dispatch => {
+export const getReviewById = reviewId => dispatch => {
 	dispatch({ type: FETCH_REVIEW_BY_ID_START });
 	return axiosWithAuth()
-		.get(`/interview-reviews/${interviewId}`)
+		.get(`/company-reviews/${reviewId}`)
 		.then(res => {
 			dispatch({ type: FETCH_REVIEW_BY_ID_SUCCESS, payload: res.data });
 		})
@@ -63,7 +63,7 @@ export const getReviewById = interviewId => dispatch => {
 export const postReview = (userId, newReview) => dispatch => {
 	dispatch({ type: POST_REVIEW_START });
 	return axiosWithAuth()
-		.post(`/users/${userId}/add-interview-review`, newReview)
+		.post(`/users/${userId}/add-company-review`, newReview)
 		.then(res => {
 			dispatch({ type: POST_REVIEW_SUCCESS, payload: res.data });
 		})
@@ -74,10 +74,10 @@ export const postReview = (userId, newReview) => dispatch => {
 
 // ============ EDIT REVIEW ===========
 
-export const editReview = (userId, interviewId, changes) => dispatch => {
+export const editReview = (userId, reviewId, changes) => dispatch => {
 	dispatch({ type: EDIT_REVIEW_START });
 	return axiosWithAuth()
-		.put(`/users/${userId}/interview-reviews/${interviewId}`, changes)
+		.put(`/users/${userId}/company-reviews/${reviewId}`, changes)
 		.then(res => {
 			dispatch({ type: EDIT_REVIEW_SUCCESS, payload: res.data });
 		})
@@ -88,10 +88,10 @@ export const editReview = (userId, interviewId, changes) => dispatch => {
 
 // ============ DELETE REVIEW ===========
 
-export const deleteReview = (userId, interviewId) => dispatch => {
+export const deleteReview = (userId, reviewId) => dispatch => {
 	dispatch({ type: DELETE_REVIEW_START });
 	return axiosWithAuth()
-		.delete(`/users/${userId}/interview-reviews/${interviewId}`)
+		.delete(`/users/${userId}/company-reviews/${reviewId}`)
 		.then(res => {
 			dispatch({ type: DELETE_REVIEW_SUCCESS, payload: res.data });
 		})
