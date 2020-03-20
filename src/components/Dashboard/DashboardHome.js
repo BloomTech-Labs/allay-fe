@@ -17,7 +17,13 @@ import {
 } from '@chakra-ui/core';
 import CustomSpinner from '../CustomSpinner.js';
 
-const DashboardHome = ({ data, getReview, getCompanyReview, history, isLoading }) => {
+const DashboardHome = ({
+  data,
+  getReview,
+  getCompanyReview,
+  history,
+  isLoading
+}) => {
   // search state
   const [filteredReviews, setFilteredReviews] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -70,17 +76,18 @@ const DashboardHome = ({ data, getReview, getCompanyReview, history, isLoading }
             setTrackFilters={setTrackFilters}
           />
 
-          <Flex
-            height='70%'
-            wrap='wrap'
-          >
+          <Flex height='70%' wrap='wrap'>
             {isLoading ? (
               <Flex w='100%' h='100%' justify='center' align='center'>
                 <CustomSpinner />
               </Flex>
             ) : filteredReviews.length >= 1 ? (
               filteredReviews.map(review => (
-                <CompanyReviewCard key={review.id} review={review} history={history} />
+                <CompanyReviewCard
+                  key={review.id}
+                  review={review}
+                  history={history}
+                />
               ))
             ) : searchResults.length > 0 || trackFilters.length > 0 ? (
               <Flex as='h3' w='100%' ml='6%' mt='5%' overflow='visible'>
@@ -104,10 +111,14 @@ const DashboardHome = ({ data, getReview, getCompanyReview, history, isLoading }
                 </Alert>
               </Flex>
             ) : (
-                    data.map(review => (
-                      <CompanyReviewCard key={review.id} review={review} history={history} />
-                    ))
-                  )}
+              data.map(review => (
+                <CompanyReviewCard
+                  key={review.id}
+                  review={review}
+                  history={history}
+                />
+              ))
+            )}
           </Flex>
         </Flex>
       </Flex>
@@ -121,4 +132,7 @@ const mapStateToProps = state => {
     data: state.review.data
   };
 };
-export default connect(mapStateToProps, (getReview, getCompanyReview))(DashboardHome);
+export default connect(
+  mapStateToProps,
+  (getReview, getCompanyReview)
+)(DashboardHome);

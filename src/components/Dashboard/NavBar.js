@@ -32,7 +32,7 @@ export default function NavBar({
     localStorage.clear('token');
     localStorage.clear('userId');
     history.push('/');
-  }
+  };
 
   const handleInputChange = event => {
     event.preventDefault();
@@ -131,10 +131,10 @@ export default function NavBar({
             Recent Posts
           </Flex>
         ) : (
-            <Flex as='h2' mt='1%'>
-              Recent Posts
-            </Flex>
-          )}
+          <Flex as='h2' mt='1%'>
+            Recent Posts
+          </Flex>
+        )}
       </Flex>
     </Flex>
   );

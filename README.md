@@ -4,7 +4,7 @@
 
 # Maintainability Score: https://codeclimate.com/github/Lambda-School-Labs/allay-fe/maintainability
 
-You can find the deployed project on [Heroku](https://allay-fe-production.herokuapp.com/).
+You can find the deployed project on [Heroku](https://labs21-allay-fe.herokuapp.com/).
 
 ## Contributors
 
@@ -17,12 +17,10 @@ You can find the deployed project on [Heroku](https://allay-fe-production.heroku
 <br>
 <br>
 
-🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
+🚫 Optional examples of using images with links for your tech stack, make sure to change these to fit your project
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
-![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](netlify link goes in these parenthesis)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 🚫 more info on using badges [here](https://github.com/badges/shields)
@@ -39,7 +37,7 @@ Welcome to Allay! We are a platform that aims to relieve stress for students by 
 
 Allay is a job portal for Lambda students and alumni to network and talk about their place of employment, hiring process, and salary range.
 
-### 4️⃣ Key Features
+### Key Features
 
 - feature one
 - feature two
@@ -47,7 +45,7 @@ Allay is a job portal for Lambda students and alumni to network and talk about t
 - feature four
 - feature five
 
-## 1️⃣ Tech Stack
+## Tech Stack
 
 ### Front end built using:
 
@@ -55,9 +53,9 @@ Allay is a job portal for Lambda students and alumni to network and talk about t
 - [Redux](https://redux.js.org/): Centralizes our application's state and logic, easy to test/debug, works with any UI layer
 - [Chakra](https://chakra-ui.com/): Chakra UI is accessible abd themeable component library. Simple to implement and build beautiful looking apps fast.
 
-#### Front end deployed to [Heroku](https://allay-fe-production.herokuapp.com/).
+#### Front end deployed to [Heroku](https://labs21-allay-fe.herokuapp.com/).
 
-#### [Back end](https://github.com/Lambda-School-Labs/allay-be) built using:
+### [Back end](https://github.com/Lambda-School-Labs/allay-be) built using:
 
 - NodeJS
 - Express
@@ -68,42 +66,32 @@ Allay is a job portal for Lambda students and alumni to network and talk about t
 
 # APIs
 
-## 2️⃣ Authentication API here
+## Authentication API here
 
 🚫Replace text below with a description of the API
 
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+Supposed to be Okta.
 
-## 2️⃣ Payment API here
-
-🚫Replace text below with a description of the API
-
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
-
-## 3️⃣ Misc API here
+## Misc API here
 
 🚫Replace text below with a description of the API
 
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
+Google places API for autocomplete of city/state on the forms.
 
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
-
-## 3️⃣ Misc API here
+## Misc API here
 
 🚫Replace text below with a description of the API
 
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
+Companies Logo API for loading the company logos on the dashboard and forms.
 
-# 3️⃣ Environment Variables
+# Environment Variables
 
-In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
+In order for the app to function correctly, the user must set up their own environment variables.
+create a .env.local file that includes the following:
 
-    *  REACT_APP_databaseURL - URL to API
-    *  REACT_APP_ENV - set to production
+\_ REACT_APP - Notates the enviroment for the database.
+
+    *  REACT_APP_databaseURL=https://labs21-allay-be.herokuapp.com/api
 
 # 5️⃣ Content Licenses
 
@@ -114,22 +102,18 @@ In order for the app to function correctly, the user must set up their own envir
 | doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
 | rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
 
-# 4️⃣ Testing
+# Testing
 
 🚫Document what you used for testing and why
+Jest
 
-# 4️⃣ Installation Instructions
+# Installation Instructions
 
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+To get the server running locally:
 
-## Other Scripts
-
-🚫replace these examples with your own
-
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+- Clone this repo
+- **npm install** to install all required dependencies
+- **npm start** to start the local server
 
 # Contributing
 
