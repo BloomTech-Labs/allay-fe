@@ -8,9 +8,7 @@ import deleteCompanyReview from '../../state/actions/index';
 
 // icons
 import {
-  TiCalendar,
-  TiLocationOutline,
-  TiArchive
+  TiCalendar
 } from 'react-icons/ti';
 import {
   FiThumbsUp
@@ -39,6 +37,7 @@ import {
   ModalCloseButton,
   Button,
   Icon,
+  Badge,
   PseudoBox,
   AlertDialog,
   AlertDialogBody,
@@ -121,7 +120,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
             <Flex align='center'>
               <Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
             </Flex>
-            <Flex flexDir='column' pl={{lg: '8%', sm: '0%'}} width='100%'>
+            <Flex flexDir='column' pl={{ lg: '8%', sm: '0%' }} width='100%'>
               <Flex as='h2' w='100%' align='center' justify={{ lg: 'flex-start', sm: 'center' }} wrap='nowrap'>
                 {review.company_name}
               </Flex>
@@ -342,9 +341,17 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
           width='100%'
           justifyContent='flex-end'
         >
-          <Flex backgroundColor='#344CD0' color='white' px='5%' py='0.5%' borderRadius='20px'>
+          <Badge
+            backgroundColor='#344CD0'
+            color='white'
+            fontSize='1em'
+            fontWeight='light'
+            rounded="full"
+            px='15px'
+            overflow='hidden'
+          >
             Web
-          </Flex>
+          </Badge>
         </Flex>
 
         {/* Review content container */}
