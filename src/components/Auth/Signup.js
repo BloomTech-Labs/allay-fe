@@ -149,7 +149,7 @@ const Signup = ({ signup, isLoading, history }) => {
                     type='email'
                     name='email'
                     label='email'
-                    placeholder='john@jane.com'
+                    placeholder='allay@lambda.com'
                     autoCapitalize='none'
                     ref={register({ validate: validateEmail })}
                   />
@@ -167,7 +167,7 @@ const Signup = ({ signup, isLoading, history }) => {
                     type='text'
                     name='username'
                     label='username'
-                    placeholder='john1212'
+                    placeholder='lambda1'
                     autoCapitalize='none'
                     ref={register({ validate: validateUsername })}
                   />
@@ -240,8 +240,8 @@ const Signup = ({ signup, isLoading, history }) => {
                     </InputRightElement>
                   </InputGroup>
 
-                  <FormHelperText>
-                    Must be longer than 8 characters
+                  <FormHelperText color='rgba(72, 72, 72, 0.2)'>
+                    Must be at least 8 characters
                   </FormHelperText>
                   <FormErrorMessage>
                     {errors.password && errors.password.message}

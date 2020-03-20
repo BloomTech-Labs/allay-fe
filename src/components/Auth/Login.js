@@ -29,8 +29,8 @@ const Login = ({ login, isLoading, history }) => {
     let error;
     if (!value) {
       error = 'Username is required';
-    } else if (value.length < 8) {
-      error = 'Username must be at least 8 characters';
+    } else if (value.length < 5) {
+      error = 'Username must be at least 5 characters';
     }
     return error || true;
   }
@@ -130,7 +130,7 @@ const Login = ({ login, isLoading, history }) => {
                     type='text'
                     name='username'
                     label='username'
-                    placeholder='john@jane.com'
+                    placeholder='lambda1'
                     autoCapitalize='none'
                     ref={register({ validate: validateUsername })}
                   />

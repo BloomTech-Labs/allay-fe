@@ -7,25 +7,11 @@ import getCompanyReview from '../../state/actions/index';
 import deleteCompanyReview from '../../state/actions/index';
 
 // icons
-import {
-  TiCalendar,
-  TiLocationOutline,
-  TiArchive
-} from 'react-icons/ti';
-import {
-  FiThumbsUp
-} from 'react-icons/fi';
-import {
-  MdPerson
-} from 'react-icons/md';
-import {
-  FaDollarSign,
-  FaRegClock,
-  FaRegMoneyBillAlt
-} from 'react-icons/fa';
-import {
-  GoLocation
-} from 'react-icons/go';
+import { TiCalendar } from 'react-icons/ti';
+import { FiThumbsUp } from 'react-icons/fi';
+import { MdPerson } from 'react-icons/md';
+import { FaDollarSign, FaRegClock, FaRegMoneyBillAlt } from 'react-icons/fa';
+import { GoLocation } from 'react-icons/go';
 
 // styles
 import {
@@ -39,6 +25,7 @@ import {
   ModalCloseButton,
   Button,
   Icon,
+  Badge,
   PseudoBox,
   AlertDialog,
   AlertDialogBody,
@@ -50,7 +37,12 @@ import {
   useDisclosure
 } from '@chakra-ui/core';
 
-const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => {
+const ReviewCard = ({
+  review,
+  reviewDeleted,
+  history,
+  deleteCompanyReview
+}) => {
   //allows the use of toasts
   const toast = useToast();
 
@@ -71,7 +63,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
   //deletes the review in question
   const submitDelete = () => {
     deleteCompanyReview(review.user_id, review.company_review_id).then(() => {
-      window.location.reload()
+      window.location.reload();
       // history.push('/dashboard')
       toast({
         title: 'Review Deleted',
@@ -79,8 +71,8 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
         status: 'success',
         duration: 5000,
         isClosable: true
-      })
-    })
+      });
+    });
 
     // if (reviewDeleted === true) {
     // 	toast({
@@ -104,7 +96,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
       category: 'Delete',
       action: `Submit delete`
     });
-  }
+  };
 
   return (
     <>
@@ -121,8 +113,14 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
             <Flex align='center'>
               <Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
             </Flex>
-            <Flex flexDir='column' pl={{lg: '8%', sm: '0%'}} width='100%'>
-              <Flex as='h2' w='100%' align='center' justify={{ lg: 'flex-start', sm: 'center' }} wrap='nowrap'>
+            <Flex flexDir='column' pl={{ lg: '8%', sm: '0%' }} width='100%'>
+              <Flex
+                as='h2'
+                w='100%'
+                align='center'
+                justify={{ lg: 'flex-start', sm: 'center' }}
+                wrap='nowrap'
+              >
                 {review.company_name}
               </Flex>
               <Flex justify='space-between'>
@@ -130,17 +128,13 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
                   <Flex fontSize='small' fontWeight='light' color='#9194A8'>
                     Location
                   </Flex>
-                  <Flex>
-                    Mountain View, CA
-                  </Flex>
+                  <Flex>Mountain View, CA</Flex>
                 </Flex>
                 <Flex flexDir='column'>
                   <Flex fontSize='small' fontWeight='light' color='#9194A8'>
                     Job Title
                   </Flex>
-                  <Flex>
-                    {review.job_title}
-                  </Flex>
+                  <Flex>{review.job_title}</Flex>
                 </Flex>
                 <Flex flexDir='column'>
                   <Flex fontSize='small' fontWeight='light' color='#9194A8'>
@@ -168,7 +162,13 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
 
           {/* Secondary info container */}
           <Flex w='100%' backgroundColor='#344CD0' color='white' mt='4%'>
-            <Flex w='100%' overflow='hidden' justify='space-evenly' align='center' py='1%'>
+            <Flex
+              w='100%'
+              overflow='hidden'
+              justify='space-evenly'
+              align='center'
+              py='1%'
+            >
               <Flex align='center' wrap='nowrap'>
                 <Box as={FaDollarSign} size='2em' mr='5px'></Box>
                 <Flex flexDir='column'>
@@ -228,27 +228,40 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
             overflow='hidden'
           >
             Topics
-					</Flex>
-          <Flex justify='space-between' wrap='wrap' whiteSpace='nowrap' mb='2%' px='8%'>
+          </Flex>
+          <Flex
+            justify='space-between'
+            wrap='wrap'
+            whiteSpace='nowrap'
+            mb='2%'
+            px='8%'
+          >
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
               Career Growth
-						</Flex>
+            </Flex>
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
               Benefits
-						</Flex>
+            </Flex>
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
               Salary
-						</Flex>
+            </Flex>
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
               Company Culture
-						</Flex>
+            </Flex>
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
               Another Cool Thing
-						</Flex>
+            </Flex>
           </Flex>
 
           {/* Review container */}
-          <Flex as='p' w='100%' wrap='nowrap' overflow='hidden' px='8%' align='center'>
+          <Flex
+            as='p'
+            w='100%'
+            wrap='nowrap'
+            overflow='hidden'
+            px='8%'
+            align='center'
+          >
             {review.comment}
           </Flex>
 
@@ -286,25 +299,21 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
             >
               <AlertDialogOverlay />
               <AlertDialogContent>
-                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
                   Delete Review
-								</AlertDialogHeader>
+                </AlertDialogHeader>
 
                 <AlertDialogBody>
                   Are you sure? You can't undo this action afterwards.
-								</AlertDialogBody>
+                </AlertDialogBody>
 
                 <AlertDialogFooter>
                   <Button ref={cancelRef} onClick={onClose2}>
                     Cancel
-									</Button>
-                  <Button
-                    variantColor="red"
-                    ml={3}
-                    onClick={submitDelete}
-                  >
+                  </Button>
+                  <Button variantColor='red' ml={3} onClick={submitDelete}>
                     Delete
-									</Button>
+                  </Button>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -319,10 +328,10 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
       {/* Review container */}
       <PseudoBox
         width={[
-          "100%", // base
-          "100%", // 480px upwards
-          "100%", // 768px upwards
-          "45%" // 992px upwards
+          '100%', // base
+          '100%', // 480px upwards
+          '100%', // 768px upwards
+          '45%' // 992px upwards
         ]}
         mt='3%'
         mx='2.5%'
@@ -338,19 +347,24 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
         onClick={onOpen}
       >
         {/* Review content container */}
-        <Flex
-          width='100%'
-          justifyContent='flex-end'
-        >
-          <Flex backgroundColor='#344CD0' color='white' px='5%' py='0.5%' borderRadius='20px'>
+        <Flex width='100%' justifyContent='flex-end'>
+          <Badge
+            backgroundColor='#344CD0'
+            color='white'
+            fontSize='1em'
+            fontWeight='light'
+            rounded='full'
+            px='15px'
+            overflow='hidden'
+          >
             Web
-          </Flex>
+          </Badge>
         </Flex>
 
         {/* Review content container */}
-        <Flex flexDir='column' >
+        <Flex flexDir='column'>
           {/* headline line container  */}
-          <Flex w='100%' h='100px' >
+          <Flex w='100%' h='100px'>
             {/* avatar box */}
             <Box justify='center' align='center' h='88px' mr='36px'>
               <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
@@ -365,11 +379,11 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
                 isTruncated
               >
                 {review.company_name} company review
-							</Flex>
+              </Flex>
               <Flex width='100%'>
                 <Flex as='h4' align='center'>
                   {review.job_rating}.0
-								</Flex>
+                </Flex>
                 <Flex align='center'>
                   {Array(5)
                     .fill('')
@@ -387,9 +401,6 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
                 Position: {review.job_title}
               </Flex>
             </Flex>
-
-
-
           </Flex>
 
           {/* Second main container */}
@@ -409,9 +420,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => 
             </Flex>
             <Flex align='center'>
               <Box as={GoLocation} mr='10px'></Box>
-              <Flex as='p'>
-                MISSING LOCATION
-              </Flex>
+              <Flex as='p'>MISSING LOCATION</Flex>
             </Flex>
             <Flex align='center'>
               <Box as={FaRegClock} mr='10px'></Box>
