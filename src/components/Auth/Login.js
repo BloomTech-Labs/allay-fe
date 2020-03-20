@@ -113,6 +113,7 @@ const Login = ({ login, isLoading, history }) => {
             >
               <Flex
                 as='h2'
+                fontSize='32px'
                 fontFamily='Poppins'
                 justify='center'
                 mx='1'
@@ -120,11 +121,12 @@ const Login = ({ login, isLoading, history }) => {
               >
                 Welcome back!
               </Flex>
+
               <Flex wrap='wrap' w='411px%' justify='center'>
                 <FormControl isInvalid={errors.username}>
                   <FormLabel>Username</FormLabel>
                   <SignupLoginInput
-                    mb='10px'
+                    mb='30px'
                     type='text'
                     name='username'
                     label='username'
@@ -137,11 +139,11 @@ const Login = ({ login, isLoading, history }) => {
                   </FormErrorMessage>
                 </FormControl>
                 <FormControl isInvalid={errors.password}>
-                  <Flex mx='1%' my='4%' flexDir='column'>
+                  <Flex flexDir='column'>
                     <FormLabel>Password</FormLabel>
                     <InputGroup>
                       <SignupLoginInput
-                        mb='20px'
+                        mb='30px'
                         type={show ? 'text' : 'password'}
                         name='password'
                         label='Password'
@@ -156,6 +158,7 @@ const Login = ({ login, isLoading, history }) => {
                           color='rgba(72, 72, 72, 0.1)'
                           border='none'
                           size='sm'
+                          backgroundColor='#FDFDFF'
                           onClick={handleClick}
                         >
                           {show ? 'Hide' : 'Show'}
@@ -169,6 +172,7 @@ const Login = ({ login, isLoading, history }) => {
                 </FormControl>
                 <Flex w='100%' justify='center'>
                   <Button
+                    mb='30px'
                     border='none'
                     h='58px'
                     w='404px'
@@ -187,8 +191,8 @@ const Login = ({ login, isLoading, history }) => {
                 <Text>
                   Don't have an account?{' '}
                   <Link
-                    color='black'
                     to='/signup'
+                    color='black'
                     onClick={gaSignup}
                     fontColor='black'
                     fontWeight='bold'
