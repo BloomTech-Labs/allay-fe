@@ -73,7 +73,6 @@ const DashboardHome = ({ data, getReview, getCompanyReview, history, isLoading }
           <Flex
             height='70%'
             wrap='wrap'
-          // justify='space-between'
           >
             {isLoading ? (
               <Flex w='100%' h='100%' justify='center' align='center'>

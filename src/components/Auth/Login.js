@@ -7,7 +7,7 @@ import ReactGA from 'react-ga'; // for google analytics
 import login from '../../state/actions/index';
 // styles
 import CustomSpinner from '../CustomSpinner.js';
-import SignupLoginInput from '../InputFields/SignupLoginInput.js';
+import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
 import {
   Button,
   FormControl,

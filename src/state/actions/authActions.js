@@ -29,6 +29,7 @@ export const signup = creds => dispatch => {
 		.then(res => {
 			localStorage.setItem('token', res.data.token);
 			localStorage.setItem('userId', res.data.newUser.id);
+			localStorage.setItem('username', res.data.newUser.username);
 			dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
 		})
 		.catch(err => {

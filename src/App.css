@@ -1,5 +1,4 @@
 /* modern css reset from https://dev.to/hankchizljaw/a-modern-css-reset-6p3*/
-
 *,
 *::before,
 *::after {
@@ -173,4 +172,12 @@ p {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.Splash {
+	background-image: url(Register.png);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
