@@ -6,7 +6,6 @@ import getCompanyReview from '../../state/actions/index';
 // component
 import NavBar from './NavBar';
 import ReviewCard from './ReviewCard';
-import CompanyReviewCard from './CompanyReviewCard';
 // styles
 import {
   Flex,
@@ -83,7 +82,7 @@ const DashboardHome = ({
               </Flex>
             ) : filteredReviews.length >= 1 ? (
               filteredReviews.map(review => (
-                <CompanyReviewCard
+                <ReviewCard
                   key={review.id}
                   review={review}
                   history={history}
@@ -112,7 +111,7 @@ const DashboardHome = ({
               </Flex>
             ) : (
               data.map(review => (
-                <CompanyReviewCard
+                <ReviewCard
                   key={review.id}
                   review={review}
                   history={history}
