@@ -110,7 +110,7 @@ const ReviewCard = ({
           {/* Basic info container */}
           <Flex flexDir={{ lg: 'row', sm: 'column' }} align='center' mx='8%'>
             <Flex align='center'>
-              <Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
+              <Avatar size='2xl' src={`//logo.clearbit.com/${review.logo}`} />
             </Flex>
             <Flex flexDir='column' pl={{ lg: '8%', sm: '0%' }} width='100%'>
               <Flex
@@ -127,7 +127,7 @@ const ReviewCard = ({
                   <Flex fontSize='small' fontWeight='light' color='#9194A8'>
                     Location
                   </Flex>
-                  <Flex>Mountain View, CA</Flex>
+                  <Flex>{review.city}, {review.state_name}</Flex>
                 </Flex>
                 <Flex flexDir='column'>
                   <Flex fontSize='small' fontWeight='light' color='#9194A8'>
@@ -148,7 +148,7 @@ const ReviewCard = ({
                           <Icon
                             name='star'
                             key={i}
-                            color={i < review.job_rating ? 'black' : 'gray.300'}
+                            color={i < review.overall_rating ? 'black' : 'gray.300'}
                             ml='5px'
                           />
                         ))}
@@ -348,6 +348,17 @@ const ReviewCard = ({
         {/* Review content container */}
         <Flex width='100%' justifyContent='flex-end'>
           <Badge
+            backgroundColor='#95C8D8'
+            color='white'
+            fontSize='1em'
+            fontWeight='light'
+            rounded='full'
+            px='15px'
+            overflow='hidden'
+          >
+            {review.review_type}
+          </Badge>
+          <Badge
             backgroundColor='#344CD0'
             color='white'
             fontSize='1em'
@@ -355,6 +366,7 @@ const ReviewCard = ({
             rounded='full'
             px='15px'
             overflow='hidden'
+            ml='10px'
           >
             Web
           </Badge>
@@ -366,7 +378,7 @@ const ReviewCard = ({
           <Flex w='100%' h='100px'>
             {/* avatar box */}
             <Box justify='center' align='center' h='88px' mr='36px'>
-              <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
+              <Avatar size='xl' src={`//logo.clearbit.com/${review.logo}`} />
             </Box>
             {/* tag container */}
             <Flex w='100%' h='32px' wrap='wrap'>
@@ -377,11 +389,11 @@ const ReviewCard = ({
                 overflow='hidden'
                 isTruncated
               >
-                {review.company_name} company review
+                {review.company_name}
               </Flex>
               <Flex width='100%'>
                 <Flex as='h4' align='center'>
-                  {review.job_rating}.0
+                  {review.overall_rating}.0
                 </Flex>
                 <Flex align='center'>
                   {Array(5)
@@ -390,7 +402,7 @@ const ReviewCard = ({
                       <Icon
                         name='star'
                         key={i}
-                        color={i < review.job_rating ? '#344CD0' : 'gray.300'}
+                        color={i < review.overall_rating ? '#344CD0' : 'gray.300'}
                         ml='8%'
                       />
                     ))}
@@ -419,7 +431,9 @@ const ReviewCard = ({
             </Flex>
             <Flex align='center'>
               <Box as={GoLocation} mr='10px'></Box>
-              <Flex as='p'>MISSING LOCATION</Flex>
+              <Flex as='p'>
+                {review.city}, {review.state_name}
+              </Flex>
             </Flex>
             <Flex align='center'>
               <Box as={FaRegClock} mr='10px'></Box>
