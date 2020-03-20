@@ -7,6 +7,7 @@ const SignupLoginInput = React.forwardRef(({ ...props }, ref) => {
       w='404px'
       h='58px'
       py='32px'
+      mb={props.mb}
       variant='outline'
       bgColor='#FDFDFF'
       rounded='3px'

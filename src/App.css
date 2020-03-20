@@ -159,7 +159,7 @@ p {
 }
 
 .RegisterSplash {
-  background-image: url(register.png);
+  background-image: url(Register.png);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -167,7 +167,7 @@ p {
 }
 
 .LoginSplash {
-  background-image: url(sign_in.png);
+  background-image: url(Sign_in.png);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -175,9 +175,9 @@ p {
 }
 
 .Splash {
-	background-image: url(Register.png);
-	background-size: cover;
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+  background-image: url(Register.png);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }

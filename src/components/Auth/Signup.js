@@ -18,7 +18,8 @@ import {
   Text,
   InputGroup,
   InputRightElement,
-  Select
+  Select,
+  Stack
 } from '@chakra-ui/core';
 
 const Signup = ({ signup, isLoading, history }) => {
@@ -104,13 +105,20 @@ const Signup = ({ signup, isLoading, history }) => {
   return (
     <Flex className='RegisterSplash' w='100%' minH='100vh' justify='center'>
       <Flex maxW='1440px' w='100%'>
-        <Flex w='40%' justify='center' align='center'>
-          <Text fontSize='64px' fontWeight='700' lineHeight='92px'>
-            Allay - <br />
-            Together, we are <br />
-            stronger.
+        <Stack wrap='wrap' w='60%' ml='6.5%' justify='center' align='center'>
+          <Text
+            as='h1'
+            w='100%'
+            fontFamily='Poppins'
+            fontSize='80px'
+            fontWeight='bold'
+          >
+            Allay
           </Text>
-        </Flex>
+          <Text w='100%' fontFamily='Poppins' fontSize='52px' fontWeight='bold'>
+            We're stronger together.
+          </Text>
+        </Stack>
         <Flex w='60%' justify='center' align='center'>
           <form onSubmit={handleSubmit(submitForm)}>
             <Flex
@@ -118,8 +126,7 @@ const Signup = ({ signup, isLoading, history }) => {
               h='40%'
               p='6'
               flexDir='column'
-              background='#FFFFFF'
-              rounded='6px'
+              background='#FDFDFF'
               justify='center'
             >
               <FormControl isRequired isInvalid={errors.email}>

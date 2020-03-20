@@ -14,11 +14,9 @@ import {
   FormLabel,
   FormErrorMessage,
   Flex,
-  Box,
   Text,
   InputGroup,
   InputRightElement,
-  Image,
   Stack
 } from '@chakra-ui/core';
 
@@ -97,7 +95,14 @@ const Login = ({ login, isLoading, history }) => {
             We're stronger together.
           </Text>
         </Stack>
-        <Flex w='40%' justify='center' align='center' flexDir='column'>
+        <Flex
+          w='40%'
+          mb='10%'
+          mr='8%'
+          justify='center'
+          align='center'
+          flexDir='column'
+        >
           <form onSubmit={handleSubmit(submitForm)}>
             <Flex
               w='473px'
@@ -115,10 +120,11 @@ const Login = ({ login, isLoading, history }) => {
               >
                 Welcome back!
               </Flex>
-              <Flex wrap='wrap' flexDir='column'>
+              <Flex wrap='wrap' w='411px%' justify='center'>
                 <FormControl isInvalid={errors.username}>
                   <FormLabel>Username</FormLabel>
                   <SignupLoginInput
+                    mb='10px'
                     type='text'
                     name='username'
                     label='username'
@@ -135,6 +141,7 @@ const Login = ({ login, isLoading, history }) => {
                     <FormLabel>Password</FormLabel>
                     <InputGroup>
                       <SignupLoginInput
+                        mb='20px'
                         type={show ? 'text' : 'password'}
                         name='password'
                         label='Password'
@@ -144,6 +151,7 @@ const Login = ({ login, isLoading, history }) => {
                       />
                       <InputRightElement width='4.5rem' py='32px'>
                         <Button
+                          // position='fixed'
                           h='1.75rem'
                           color='rgba(72, 72, 72, 0.1)'
                           border='none'
@@ -164,8 +172,7 @@ const Login = ({ login, isLoading, history }) => {
                     border='none'
                     h='58px'
                     w='404px'
-                    // mx='1%'
-                    // my='5%'
+                    my='2%'
                     size='lg'
                     color='white'
                     backgroundColor='#344CD0'
