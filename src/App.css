@@ -36,6 +36,11 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   margin: 0 auto;
+<<<<<<< HEAD
+=======
+  font-family: 'Poppins', sans-serif;
+  font-family: 'Muli', sans-serif;
+>>>>>>> ffe7ffbe58b3ec94b9bbbf7b463a836ba7a51c5f
 }
 
 /* Remove list styles on ul, ol elements with a class attribute */
@@ -96,9 +101,17 @@ select {
 /* FontSize */
 h1 {
   font-size: 32px;
+<<<<<<< HEAD
 }
 h2 {
   font-size: 24px;
+=======
+  font-family: 'Poppins';
+}
+h2 {
+  font-size: 24px;
+  font-family: 'Poppins';
+>>>>>>> ffe7ffbe58b3ec94b9bbbf7b463a836ba7a51c5f
 }
 h3 {
   font-size: 22px;
@@ -108,12 +121,24 @@ h4 {
 }
 h5 {
   font-size: 18px;
+<<<<<<< HEAD
 }
 h6 {
   font-size: 16px;
 }
 p {
   font-size: 16px;
+=======
+  font-family: 'Muli';
+}
+h6 {
+  font-size: 16px;
+  font-family: 'Muli';
+}
+p {
+  font-size: 16px;
+  font-family: 'Muli';
+>>>>>>> ffe7ffbe58b3ec94b9bbbf7b463a836ba7a51c5f
 }
 
 .Multi {
@@ -149,6 +174,22 @@ p {
   30% {
     transform: translateY(-15px);
   }
+}
+
+.RegisterSplash {
+  background-image: url(Register.png);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.LoginSplash {
+  background-image: url(Sign_in.png);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .Splash {
