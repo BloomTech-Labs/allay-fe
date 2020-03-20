@@ -6,19 +6,23 @@ import ReactGA from 'react-ga'; // for google analytics
 // actions
 import login from '../../state/actions/index';
 // styles
+import CustomSpinner from '../CustomSpinner.js';
+import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
 import {
 	Button,
-	Input,
 	FormControl,
 	FormLabel,
 	FormErrorMessage,
 	Flex,
-	Spinner,
-	Text
+	Text,
+	InputGroup,
+	InputRightElement
 } from '@chakra-ui/core';
 
 const Login = ({ login, isLoading, history }) => {
 	const { handleSubmit, errors, register, formState } = useForm();
+	const [show, setShow] = React.useState(false);
+	const handleClick = () => setShow(!show);
 
 	function validateUsername(value) {
 		let error;
@@ -60,13 +64,7 @@ const Login = ({ login, isLoading, history }) => {
 		return (
 			<Flex justify='center' align='center' w='100%' h='100vh'>
 				<Flex>
-					<Spinner
-						thickness='4px'
-						speed='0.65s'
-						emptyColor='gray.200'
-						color='blue.500'
-						size='xl'
-					/>
+					<CustomSpinner />
 				</Flex>
 			</Flex>
 		);
@@ -99,13 +97,10 @@ const Login = ({ login, isLoading, history }) => {
 								</Flex>
 								<Flex mx='1%' my='4%' flexDir='column'>
 									<FormLabel>Username</FormLabel>
-									<Input
-										py='32px'
-										rounded='6px'
+									<SignupLoginInput
 										type='text'
-										variant='filled'
-										label='Username'
 										name='username'
+										label='Username'
 										autoCapitalize='none'
 										ref={register({ validate: validateUsername })}
 									/>
@@ -117,16 +112,26 @@ const Login = ({ login, isLoading, history }) => {
 							<FormControl isInvalid={errors.password}>
 								<Flex mx='1%' my='4%' flexDir='column'>
 									<FormLabel>Password</FormLabel>
-									<Input
-										py='32px'
-										rounded='6px'
-										type='password'
-										variant='filled'
-										label='Password'
-										name='password'
-										autoCapitalize='none'
-										ref={register({ validate: validatePassword })}
-									/>
+									<InputGroup>
+										<SignupLoginInput
+											type={show ? 'text' : 'password'}
+											name='password'
+											label='Password'
+											autoCapitalize='none'
+											ref={register({ validate: validatePassword })}
+										/>
+										<InputRightElement width='4.5rem' py='32px'>
+											<Button
+												h='1.75rem'
+												color='rgba(72, 72, 72, 0.1)'
+												border='none'
+												size='sm'
+												onClick={handleClick}
+											>
+												{show ? 'Hide' : 'Show'}
+											</Button>
+										</InputRightElement>
+									</InputGroup>
 									<FormErrorMessage>
 										{errors.password && errors.password.message}
 									</FormErrorMessage>

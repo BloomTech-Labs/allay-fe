@@ -6,18 +6,19 @@ import ReactGA from 'react-ga'; // for google analytics
 //actions
 import signup from '../../state/actions/index';
 //styles
+import CustomSpinner from '../CustomSpinner.js';
+import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
 import {
 	Button,
-	Input,
 	FormControl,
 	FormLabel,
 	FormHelperText,
 	FormErrorMessage,
 	Flex,
 	Text,
-	Spinner,
 	InputGroup,
-	InputRightElement
+	InputRightElement,
+	Select
 } from '@chakra-ui/core';
 
 const Signup = ({ signup, isLoading, history }) => {
@@ -46,6 +47,14 @@ const Signup = ({ signup, isLoading, history }) => {
 		return error || true;
 	}
 
+	function validateTrack(value) {
+		let error;
+		if (!value) {
+			error = 'Lambda track is required';
+		}
+		return error || true;
+	}
+
 	function validatePassword(value) {
 		let error;
 		if (!value) {
@@ -62,7 +71,8 @@ const Signup = ({ signup, isLoading, history }) => {
 			signup({
 				username: creds.username,
 				email: creds.email,
-				password: creds.password
+				password: creds.password,
+				track_name: creds.track_name
 			}).then(() => history.push('/dashboard'));
 		} else {
 			console.log('form NOT submitted');
@@ -85,13 +95,7 @@ const Signup = ({ signup, isLoading, history }) => {
 		return (
 			<Flex justify='center' align='center' w='100vh' h='100vh'>
 				<Flex>
-					<Spinner
-						thickness='4px'
-						speed='0.65s'
-						emptyColor='gray.200'
-						color='blue.500'
-						size='xl'
-					/>
+					<CustomSpinner />
 				</Flex>
 			</Flex>
 		);
@@ -124,12 +128,11 @@ const Signup = ({ signup, isLoading, history }) => {
 								</Flex>
 								<Flex mx='1%' my='4%' flexDir='column'>
 									<FormLabel>Email</FormLabel>
-									<Input
-										py='32px'
-										variant='filled'
+									<SignupLoginInput
 										type='email'
-										label='email'
 										name='email'
+										label='email'
+										placeholder='someone@somedomain.com'
 										autoCapitalize='none'
 										ref={register({ validate: validateEmail })}
 									/>
@@ -142,12 +145,10 @@ const Signup = ({ signup, isLoading, history }) => {
 							<FormControl isRequired isInvalid={errors.username}>
 								<Flex mx='1%' my='4%' flexDir='column'>
 									<FormLabel>Username</FormLabel>
-									<Input
-										py='32px'
-										variant='filled'
+									<SignupLoginInput
 										type='text'
-										label='username'
 										name='username'
+										label='username'
 										autoCapitalize='none'
 										ref={register({ validate: validateUsername })}
 									/>
@@ -157,16 +158,48 @@ const Signup = ({ signup, isLoading, history }) => {
 								</Flex>
 							</FormControl>
 
+							<FormControl isRequired isInvalid={errors.track_name}>
+								<Flex mx='1%' my='4%' flexDir='column'>
+									<FormLabel>Lambda Track</FormLabel>
+									<Select
+										h='70px'
+										variant='filled'
+										rounded='6px'
+										name='track_name'
+										label='track_name'
+										placeholder='Select Your Lambda Track'
+										ref={register({ validate: validateTrack })}
+									>
+										<option id='1' value='Android Development'>
+											Android Development
+										</option>
+										<option id='2' value='Data Science'>
+											Data Science
+										</option>
+										<option id='3' value='Full Stack Web Development'>
+											Full Stack Web Development
+										</option>
+										<option id='4' value='iOS Development'>
+											iOS Development{' '}
+										</option>
+										<option id='5' value='UX Design'>
+											UX Design
+										</option>
+									</Select>
+									<FormErrorMessage>
+										{errors.track_name && errors.track_name.message}
+									</FormErrorMessage>
+								</Flex>
+							</FormControl>
+
 							<FormControl isRequired isInvalid={errors.password}>
 								<Flex mx='1%' my='4%' flexDir='column'>
 									<FormLabel>Password</FormLabel>
 									<InputGroup>
-										<Input
-											py='32px'
-											variant='filled'
+										<SignupLoginInput
 											type={show ? 'text' : 'password'}
-											label='Password'
 											name='password'
+											label='Password'
 											autoCapitalize='none'
 											ref={register({ validate: validatePassword })}
 										/>
@@ -194,15 +227,26 @@ const Signup = ({ signup, isLoading, history }) => {
 							<FormControl isRequired>
 								<Flex mx='1%' my='4%' flexDir='column'>
 									<FormLabel>Confirm Password</FormLabel>
-									<Input
-										py='32px'
-										variant='filled'
-										type={show ? 'text' : 'password'}
-										label='Confirm Password'
-										name='confirmPassword'
-										autoCapitalize='none'
-										ref={register}
-									/>
+									<InputGroup>
+										<SignupLoginInput
+											type={show ? 'text' : 'password'}
+											name='confirmPassword'
+											label='Confirm Password'
+											autoCapitalize='none'
+											ref={register}
+										/>
+										<InputRightElement width='4.5rem' py='32px'>
+											<Button
+												h='1.75rem'
+												color='rgba(72, 72, 72, 0.1)'
+												border='none'
+												size='sm'
+												onClick={handleClick}
+											>
+												{show ? 'Hide' : 'Show'}
+											</Button>
+										</InputRightElement>
+									</InputGroup>
 								</Flex>
 							</FormControl>
 							<Button

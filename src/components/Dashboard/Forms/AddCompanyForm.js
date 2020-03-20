@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import postCompany from '../../state/actions';
+import postCompany from '../../../state/actions';
 import { useForm } from 'react-hook-form';
 
 // styles
+import CustomSpinner from '../../CustomSpinner.js';
+import OnboardingInput from '../../Reusable/InputFields/OnboardingInput.js';
 import {
-	Input,
 	Button,
 	ButtonGroup,
 	Flex,
@@ -17,8 +18,7 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogBody,
-	AlertDialogFooter,
-	Spinner
+	AlertDialogFooter
 } from '@chakra-ui/core';
 
 const AddCompanyForm = ({ isLoading, postCompany, history }) => {
@@ -46,13 +46,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
 	if (isLoading) {
 		return (
 			<Flex justify='center' align='center' w='100vh' h='100vh'>
-				<Spinner
-					thickness='4px'
-					speed='0.65s'
-					emptyColor='gray.200'
-					color='blue.500'
-					size='xl'
-				/>
+				<CustomSpinner />
 			</Flex>
 		);
 	}
@@ -72,24 +66,14 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
 						<FormControl isRequired isInvalid={errors.hq_state}>
 							<h2> Add a Company</h2>
 							<FormLabel color='#525252'>Company Name</FormLabel>
-							<Input
-								mb='1rem'
-								py='32px'
-								variant='filled'
-								borderRadius='none'
-								type='text'
+							<OnboardingInput
 								name='name'
 								label='Company Name'
 								placeholder='e.g. UPS'
 								ref={register}
 							/>
 							<FormLabel color='#525252'>City</FormLabel>
-							<Input
-								mb='1rem'
-								py='32px'
-								variant='filled'
-								borderRadius='none'
-								type='text'
+							<OnboardingInput
 								name='hq_city'
 								label='City'
 								placeholder='e.g. Los Angeles'
@@ -97,14 +81,9 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
 							/>
 
 							<FormLabel color='#525252'>State</FormLabel>
-							<Input
-								mb='1rem'
-								py='32px'
-								borderRadius='none'
-								variant='filled'
-								label='State'
-								type='text'
+							<OnboardingInput
 								name='hq_state'
+								label='State'
 								placeholder='e.g. CA'
 								ref={register({ validate: validateCompanyState })}
 							/>

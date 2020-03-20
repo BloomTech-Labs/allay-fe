@@ -3,18 +3,30 @@ import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
 // actions
-import getReview from '../../state/actions/index';
-import deleteReview from '../../state/actions/index';
+import getCompanyReview from '../../state/actions/index';
+import deleteCompanyReview from '../../state/actions/index';
 
 // icons
 import {
+  TiCalendar,
   TiLocationOutline,
-  TiArchive,
-  TiThumbsUp,
-  TiThumbsDown,
-  TiGlobe
+  TiArchive
 } from 'react-icons/ti';
-import { GiWeightLiftingUp } from 'react-icons/gi';
+import {
+  FiThumbsUp
+} from 'react-icons/fi';
+import {
+  MdPerson
+} from 'react-icons/md';
+import {
+  FaDollarSign,
+  FaRegClock,
+  FaRegMoneyBillAlt
+} from 'react-icons/fa';
+import {
+  GoLocation
+} from 'react-icons/go';
+
 // styles
 import {
   Box,
@@ -38,12 +50,9 @@ import {
   useDisclosure
 } from '@chakra-ui/core';
 
-const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
+const ReviewCard = ({ review, reviewDeleted, history, deleteCompanyReview }) => {
   //allows the use of toasts
   const toast = useToast();
-
-  //toggle to determine whether deleting worked
-  const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   // basic usage for the SingleReview modal
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -56,13 +65,13 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 
   //routes to single review
   const navToEditRoute = () => {
-    history.push(`/dashboard/${review.interview_review_id}`);
+    history.push(`/dashboard/${review.company_review_id}`);
   };
 
   //deletes the review in question
   const submitDelete = () => {
-    deleteReview(review.user_id, review.interview_review_id).then(() => {
-      window.location.reload();
+    deleteCompanyReview(review.user_id, review.company_review_id).then(() => {
+      window.location.reload()
       // history.push('/dashboard')
       toast({
         title: 'Review Deleted',
@@ -70,8 +79,8 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
         status: 'success',
         duration: 5000,
         isClosable: true
-      });
-    });
+      })
+    })
 
     // if (reviewDeleted === true) {
     // 	toast({
@@ -95,7 +104,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
       category: 'Delete',
       action: `Submit delete`
     });
-  };
+  }
 
   return (
     <>
@@ -104,148 +113,143 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
       {/* ------------------------------------------------------------------------------------------------ */}
       <Modal isOpen={isOpen} onClose={onClose} size='80%'>
         <ModalOverlay />
-        <ModalContent w='100%' px='12%' py='3%' wrap='nowrap'>
+        <ModalContent w='100%' py='3%' wrap='nowrap'>
           <ModalCloseButton background='none' border='none' />
 
           {/* Basic info container */}
-          {/* <SingleReview /> */}
-          <Flex align='center'>
+          <Flex flexDir={{ lg: 'row', sm: 'column' }} align='center' mx='8%'>
             <Flex align='center'>
               <Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
             </Flex>
-            <Flex flexDir='column' pl='4%'>
-              <Flex as='h1' w='100%' align='center' wrap='nowrap'>
-                {review.company_name} Interview Review
+            <Flex flexDir='column' pl={{lg: '8%', sm: '0%'}} width='100%'>
+              <Flex as='h2' w='100%' align='center' justify={{ lg: 'flex-start', sm: 'center' }} wrap='nowrap'>
+                {review.company_name}
               </Flex>
-              <Flex
-                as='h2'
-                fontSize='lg'
-                w='100%'
-                fontWeight='medium'
-                align='center'
-                wrap='nowrap'
-              >
-                <Flex>Interview Review:</Flex>
-                <Flex ml='2%'>
-                  {Array(5)
-                    .fill('')
-                    .map((_, i) => (
-                      <Icon
-                        name='star'
-                        key={i}
-                        color={
-                          i < review.interview_rating ? 'black' : 'gray.300'
-                        }
-                      />
-                    ))}
+              <Flex justify='space-between'>
+                <Flex flexDir='column'>
+                  <Flex fontSize='small' fontWeight='light' color='#9194A8'>
+                    Location
+                  </Flex>
+                  <Flex>
+                    Mountain View, CA
+                  </Flex>
                 </Flex>
-              </Flex>
-              <Flex as='p' fontSize='md' align='center' wrap='nowrap'>
-                Position: {review.job_title}
+                <Flex flexDir='column'>
+                  <Flex fontSize='small' fontWeight='light' color='#9194A8'>
+                    Job Title
+                  </Flex>
+                  <Flex>
+                    {review.job_title}
+                  </Flex>
+                </Flex>
+                <Flex flexDir='column'>
+                  <Flex fontSize='small' fontWeight='light' color='#9194A8'>
+                    Rating
+                  </Flex>
+                  <Flex>
+                    Company Rating
+                    <Flex>
+                      {Array(5)
+                        .fill('')
+                        .map((_, i) => (
+                          <Icon
+                            name='star'
+                            key={i}
+                            color={i < review.job_rating ? 'black' : 'gray.300'}
+                            ml='5px'
+                          />
+                        ))}
+                    </Flex>
+                  </Flex>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
 
           {/* Secondary info container */}
-          <Flex w='100%' flexDir='column'>
-            <Flex w='100%' mt='1.5%' overflow='hidden' justify='space-between'>
+          <Flex w='100%' backgroundColor='#344CD0' color='white' mt='4%'>
+            <Flex w='100%' overflow='hidden' justify='space-evenly' align='center' py='1%'>
               <Flex align='center' wrap='nowrap'>
-                <Box as={TiLocationOutline} mr='5px'></Box>
-                <Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
-                  {review.job_location}
+                <Box as={FaDollarSign} size='2em' mr='5px'></Box>
+                <Flex flexDir='column'>
+                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                    ${review.salary}
+                  </Flex>
+                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                    Salary
+                  </Flex>
                 </Flex>
               </Flex>
               <Flex align='center' wrap='nowrap'>
-                {review.offer_received ? (
-                  <>
-                    <Box as={TiThumbsUp} mr='5px'></Box>
-                    <Flex as='h3' fontWeight='light' fontSize='lg'>
-                      Received 0ffer
-                    </Flex>{' '}
-                  </>
-                ) : (
-                  <>
-                    {' '}
-                    <Box as={TiThumbsDown} mr='5px'></Box>
-                    <Flex as='h3' fontWeight='light' fontSize='lg'>
-                      No Offer
-                    </Flex>{' '}
-                  </>
-                )}
-              </Flex>
-              <Flex align='center' wrap='nowrap'>
-                <Box as={GiWeightLiftingUp} mr='5px'></Box>
-                <Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
-                  Difficult
+                <Box as={FiThumbsUp} size='2em' mr='5px'></Box>
+                <Flex flexDir='column'>
+                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                    {review.typical_hours} hrs week
+                  </Flex>
+                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                    Working Hours
+                  </Flex>
                 </Flex>
               </Flex>
               <Flex align='center' wrap='nowrap'>
-                <Box as={TiGlobe} mr='5px'></Box>
-                <Flex as='h3' fontWeight='light' fontSize='lg' isTruncated>
-                  4 Rounds
+                <Box as={MdPerson} size='2em' mr='5px'></Box>
+                <Flex flexDir='column'>
+                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                    {review.work_status}
+                  </Flex>
+                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                    Status
+                  </Flex>
+                </Flex>
+              </Flex>
+              <Flex align='center' wrap='nowrap'>
+                <Box as={TiCalendar} size='2em' mr='5px'></Box>
+                <Flex flexDir='column'>
+                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                    {review.start_date} - {review.end_date}
+                  </Flex>
+                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                    Date
+                  </Flex>
                 </Flex>
               </Flex>
             </Flex>
           </Flex>
 
-          {/* Types container */}
+          {/* Topics container */}
           <Flex
             as='h2'
             fontWeight='medium'
             fontSize='xl'
             w='100%'
-            mt='3%'
+            mt='2%'
             mb='1.5%'
+            px='8%'
             overflow='hidden'
           >
-            Interview Types
-          </Flex>
-          <Flex justify='space-between' wrap='wrap' whiteSpace='nowrap' mb='2%'>
+            Topics
+					</Flex>
+          <Flex justify='space-between' wrap='wrap' whiteSpace='nowrap' mb='2%' px='8%'>
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Phone screening
-            </Flex>
+              Career Growth
+						</Flex>
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Online coding test
-            </Flex>
+              Benefits
+						</Flex>
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Behavioral questions
-            </Flex>
+              Salary
+						</Flex>
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Case interviews
-            </Flex>
+              Company Culture
+						</Flex>
             <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Whiteboarding
-            </Flex>
+              Another Cool Thing
+						</Flex>
           </Flex>
 
           {/* Review container */}
-          <Flex as='p' w='100%' wrap='nowrap' overflow='hidden'>
-            {review.job_review}
-          </Flex>
-
-          <Flex w='100%' mt='3%' align='center'>
-            <Flex fontWeight='medium' fontSize='xl' wrap='nowrap'>
-              Overall Rating
-            </Flex>
-            <Flex ml='1.5%'>
-              {Array(5)
-                .fill('')
-                .map((_, i) => (
-                  <Icon
-                    name='star'
-                    key={i}
-                    color={i < review.job_rating ? 'black' : 'gray.300'}
-                  />
-                ))}
-            </Flex>
-          </Flex>
-          <Flex as='h2' w='100%' wrap='nowrap' overflow='hidden' mt='1.5%'>
-            <Flex fontWeight='medium' fontSize='xl'>
-              Salary Offered
-            </Flex>
-            <Flex ml='1.5%' fontWeight='light' fontSize='xl'>
-              ${review.salary}
-            </Flex>
+          <Flex as='p' w='100%' wrap='nowrap' overflow='hidden' px='8%' align='center'>
+            {review.comment}
           </Flex>
 
           <ModalFooter>
@@ -282,50 +286,71 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
             >
               <AlertDialogOverlay />
               <AlertDialogContent>
-                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
                   Delete Review
-                </AlertDialogHeader>
+								</AlertDialogHeader>
 
                 <AlertDialogBody>
                   Are you sure? You can't undo this action afterwards.
-                </AlertDialogBody>
+								</AlertDialogBody>
 
                 <AlertDialogFooter>
                   <Button ref={cancelRef} onClick={onClose2}>
                     Cancel
-                  </Button>
-                  <Button variantColor='red' ml={3} onClick={submitDelete}>
+									</Button>
+                  <Button
+                    variantColor="red"
+                    ml={3}
+                    onClick={submitDelete}
+                  >
                     Delete
-                  </Button>
+									</Button>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
           </ModalFooter>
         </ModalContent>
       </Modal>
+
       {/* ------------------------------------------------------------------------------------------------ */}
       {/* ---------------------------------------DashBoard Cards------------------------------------------ */}
       {/* ------------------------------------------------------------------------------------------------ */}
+
       {/* Review container */}
       <PseudoBox
-        w='45%'
-        // h='50%'
+        width={[
+          "100%", // base
+          "100%", // 480px upwards
+          "100%", // 768px upwards
+          "45%" // 992px upwards
+        ]}
         mt='3%'
         mx='2.5%'
-        p='3.5%'
-        wrap='nowrap'
-        background='#F2F6FE'
+        px='4%'
+        py='2%'
+        background='#FBFCFF'
         borderRadius='12px'
         display='flex'
+        flexDir='column'
         justifyContent='center'
         alignItems='center'
         _hover={{ bg: '#4EADF9', color: 'white' }}
         onClick={onOpen}
       >
         {/* Review content container */}
-        <Flex w='100%' wrap='wrap' justify='right' alignContent='center'>
+        <Flex
+          width='100%'
+          justifyContent='flex-end'
+        >
+          <Flex backgroundColor='#344CD0' color='white' px='5%' py='0.5%' borderRadius='20px'>
+            Web
+          </Flex>
+        </Flex>
+
+        {/* Review content container */}
+        <Flex flexDir='column' >
           {/* headline line container  */}
-          <Flex w='100%' h='100px' mb='3%'>
+          <Flex w='100%' h='100px' >
             {/* avatar box */}
             <Box justify='center' align='center' h='88px' mr='36px'>
               <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
@@ -336,94 +361,69 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                 as='h2'
                 w='100%'
                 align='center'
-                wrap='wrap'
                 overflow='hidden'
                 isTruncated
               >
-                {review.company_name} interview review
-              </Flex>
+                {review.company_name} company review
+							</Flex>
               <Flex width='100%'>
-                <Flex as='h4' align='center' wrap='nowrap'>
-                  {review.overall_rating}.0
-                </Flex>
-                <Flex align='center' wrap='nowrap'>
+                <Flex as='h4' align='center'>
+                  {review.job_rating}.0
+								</Flex>
+                <Flex align='center'>
                   {Array(5)
                     .fill('')
                     .map((_, i) => (
                       <Icon
                         name='star'
                         key={i}
-                        color={
-                          i < review.overall_rating ? '#344CD0' : 'gray.300'
-                        }
+                        color={i < review.job_rating ? '#344CD0' : 'gray.300'}
                         ml='8%'
                       />
                     ))}
                 </Flex>
               </Flex>
-              {/* <Flex align='center' w='40%' wrap='nowrap'> */}
               <Flex as='p' w='100%' fontWeight='light'>
                 Position: {review.job_title}
               </Flex>
             </Flex>
-            {/* </Flex> */}
+
+
+
           </Flex>
 
-          {/* Company name & location container */}
+          {/* Second main container */}
           <Flex
-            justify='flex-start'
             w='100%'
             font-size='18'
             fontWeight='light'
             justify='space-evenly'
             align='center'
-            wrap='nowrap'
             mb='1%'
-            mt=''
           >
-            <Flex align='center' wrap='nowrap'>
-              <Box as={TiArchive} mr='10px'></Box>
+            <Flex align='center'>
+              <Box as={FaRegMoneyBillAlt} mr='10px'></Box>
               <Flex as='p' overflow='hidden'>
                 ${review.salary}
               </Flex>
             </Flex>
-            <Flex align='center' wrap='nowrap'>
-              <Box as={TiLocationOutline} mr='10px'></Box>
+            <Flex align='center'>
+              <Box as={GoLocation} mr='10px'></Box>
               <Flex as='p'>
-                {review.city}, {review.abbreviation}
+                MISSING LOCATION
               </Flex>
             </Flex>
-            <Flex align='center' wrap='nowrap'>
-              {review.offer_status ? (
-                <>
-                  <Box as={TiThumbsUp} mr='10px'></Box>
-                  <Flex as='p'>Received Offer</Flex>{' '}
-                </>
-              ) : (
-                <>
-                  {' '}
-                  <Box as={TiThumbsDown} mr='10px'></Box>
-                  <Flex as='p' mr='10px'>
-                    No Offer
-                  </Flex>{' '}
-                </>
-              )}
+            <Flex align='center'>
+              <Box as={FaRegClock} mr='10px'></Box>
+              <Flex as='p'>
+                {review.start_date}-{review.end_date}
+              </Flex>
             </Flex>
           </Flex>
-          {/* headline line container  */}
-          <Flex w='100%' align='center' wrap='nowrap' pl='1%' mt='1%'>
-            <h2>{review.tagline}</h2>
-          </Flex>
+
           {/* summary container */}
-          <Flex
-            w='100%'
-            h='50%'
-            wrap='nowrap'
-            overflow='hidden'
-            pl='1%'
-            mt='0.5%'
-          >
-            <p>{review.job_review}</p>
+          <Flex w='100%' h='95px' overflow='hidden'>
+            <p>{review.comment}</p>
           </Flex>
         </Flex>
       </PseudoBox>
@@ -436,4 +436,4 @@ const mapStateToProps = state => {
     reviewDeleted: state.review.reviewDeleted
   };
 };
-export default connect(mapStateToProps, (getReview, deleteReview))(ReviewCard);
+export default connect(mapStateToProps, deleteCompanyReview)(ReviewCard);
