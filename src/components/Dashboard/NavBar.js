@@ -17,7 +17,9 @@ export default function NavBar({
   isLoading,
   setSearchResults,
   trackFilters,
-  setTrackFilters
+  setTrackFilters,
+  typeFilters,
+  setTypeFilters
 }) {
   // use to navigate to review form
   const navToReviewForm = () => {
@@ -40,6 +42,12 @@ export default function NavBar({
   };
 
   // temporary object until setup in db
+  const reviewTypes = [
+    { id: 1, name: 'Interview' },
+    { id: 2, name: 'Company' },
+    { id: 3, name: 'Other' }
+  ];
+
   const tracks = [
     { id: 1, prefix: 'WEB' },
     { id: 2, prefix: 'UX' },
@@ -48,10 +56,17 @@ export default function NavBar({
     { id: 5, prefix: 'AND' }
   ];
 
-  const handleFilter = e => {
+  const handleTracks = e => {
     trackFilters.includes(e.id)
       ? setTrackFilters(trackFilters.filter(item => item !== e.id))
       : setTrackFilters([...trackFilters, e.id]);
+    e.selected = !e.selected;
+  };
+
+  const handleTypes = e => {
+    trackFilters.includes(e.id)
+      ? setTypeFilters(typeFilters.filter(item => item !== e.id))
+      : setTypeFilters([...typeFilters, e.id]);
     e.selected = !e.selected;
   };
 
@@ -101,18 +116,6 @@ export default function NavBar({
             onChange={handleInputChange}
           />
         </InputGroup>
-        <RadioButtonGroup onChange={handleFilter} isInline>
-          {tracks.map(track => (
-            <Button
-              size='sm'
-              rounded='full'
-              variantColor={trackFilters.includes(track.id) ? 'blue' : 'gray'}
-              value={track}
-            >
-              {track.prefix}
-            </Button>
-          ))}
-        </RadioButtonGroup>
         <Button
           background='#344CD0'
           color='#FFFFFF'
@@ -124,6 +127,41 @@ export default function NavBar({
         >
           Add Review
         </Button>
+      </Flex>
+
+      <Flex align='center' justify='space-around' pt='2%'>
+        <Flex
+          align='center'
+          justify='space-between'
+          width='80%'
+          // onChange={handleTracks}
+          // spacing={50}
+          // display='flex'
+          // width='100%'
+          // justify-content='space-around'
+        >
+          {reviewTypes.map(type => (
+            <Button
+              size='sm'
+              rounded='full'
+              padding='0 4%'
+              // // variantColor={typeFilters.includes(type.id) ? 'blue' : 'gray'}
+              value={type}
+            >
+              {type.name}
+            </Button>
+          ))}
+          {tracks.map(track => (
+            <Button
+              size='sm'
+              rounded='full'
+              variantColor={trackFilters.includes(track.id) ? 'blue' : 'gray'}
+              value={track}
+            >
+              {track.prefix}
+            </Button>
+          ))}
+        </Flex>
       </Flex>
       <Flex align='center' justify='flex-start'>
         {window.location.href.includes('dashboard/') ? (

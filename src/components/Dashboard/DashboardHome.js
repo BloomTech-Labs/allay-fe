@@ -28,6 +28,7 @@ const DashboardHome = ({
   const [filteredReviews, setFilteredReviews] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [trackFilters, setTrackFilters] = useState([]);
+  const [typeFilters, setTypeFilters] = useState([]);
 
   // pull review data
   // useEffect(() => {
