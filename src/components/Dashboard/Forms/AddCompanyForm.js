@@ -6,7 +6,7 @@ import Autocomplete from 'react-google-autocomplete';
 
 // styles
 import CustomSpinner from '../../CustomSpinner.js';
-import OnboardingInput from '../../InputFields/OnboardingInput.js';
+import OnboardingInput from '../../Reusable/InputFields/OnboardingInput.js';
 import {
   Button,
   ButtonGroup,
@@ -73,39 +73,13 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
                 placeholder='e.g. UPS'
                 ref={register}
               />
-              <FormLabel color='#525252'>City, St</FormLabel>
-              <Autocomplete
-                style={{
-                  width: '100%',
-                  height: '56px',
-                  marginBottom: '24px',
-                  borderRadius: '6px',
-                  border: 'none',
-                  backgroundColor: '#F2F6FE'
-                }}
-                type='input'
-                name='job_location'
-                // placeholder={review.job_location}
-                ref={register}
-                // value={editValue.job_location}
-                // onChange={e =>
-                //   setEditValue({
-                //     ...editValue,
-                //     [e.target.name]: e.target.value
-                //   })
-                // }
-                onPlaceSelected={place => {
-                  let city = place.address_components[0].long_name;
-                  let state = place.address_components[2].short_name;
-                  console.log(city, state, 'line 191');
-                }}
-              />
-              {/* <OnboardingInput
+              <FormLabel color='#525252'>City</FormLabel>
+              <OnboardingInput
                 name='hq_city'
                 label='City'
                 placeholder='e.g. Los Angeles'
                 ref={register}
-              /> */}
+              />
 
               <FormLabel color='#525252'>State</FormLabel>
               <OnboardingInput
