@@ -13,16 +13,7 @@ import {
 	EDIT_REVIEW_SUCCESS,
 	DELETE_REVIEW_START,
 	DELETE_REVIEW_SUCCESS,
-	DELETE_REVIEW_FAILURE,
-	POST_COMPANY_REVIEW_START,
-	POST_COMPANY_REVIEW_SUCCESS,
-	POST_COMPANY_REVIEW_FAILURE,
-	FETCH_COMPANY_REVIEWS_START,
-	FETCH_COMPANY_REVIEWS_SUCCESS,
-	FETCH_COMPANY_REVIEWS_FAILURE,
-	FETCH_COMPANY_REVIEW_BY_ID_START,
-	FETCH_COMPANY_REVIEW_BY_ID_SUCCESS,
-	FETCH_COMPANY_REVIEW_BY_ID_FAILURE
+	DELETE_REVIEW_FAILURE
 } from '../types';
 
 const initialState = {
@@ -159,75 +150,6 @@ const reviewReducer = (state = initialState, action) => {
 				isDeleting: false,
 				deleteFail: true,
 				reviewDeleted: false,
-				error: action.payload
-			};
-		}
-		case POST_COMPANY_REVIEW_START: {
-			return {
-				...state,
-				fetchingData: true,
-				isLoading: true
-			};
-		}
-		case POST_COMPANY_REVIEW_SUCCESS: {
-			return {
-				...state,
-				fetchingData: false,
-				isLoading: false,
-				reviewAdded: true
-			};
-		}
-		case POST_COMPANY_REVIEW_FAILURE: {
-			return {
-				...state,
-				fetchingData: false,
-				isLoading: false,
-				error: action.payload
-			};
-		}
-		case FETCH_COMPANY_REVIEWS_START: {
-			return {
-				...state,
-				fetchingData: true,
-				isLoading: true
-			};
-		}
-		case FETCH_COMPANY_REVIEWS_SUCCESS: {
-			return {
-				...state,
-				fetchingData: false,
-				isLoading: false,
-				data: action.payload
-			};
-		}
-		case FETCH_COMPANY_REVIEWS_FAILURE: {
-			return {
-				...state,
-				fetchingData: false,
-				isLoading: false,
-				error: action.payload
-			};
-		}
-		case FETCH_COMPANY_REVIEW_BY_ID_START: {
-			return {
-				...state,
-				fetchingData: true,
-				isLoading: true
-			};
-		}
-		case FETCH_COMPANY_REVIEW_BY_ID_SUCCESS: {
-			return {
-				...state,
-				fetchingData: false,
-				isLoading: false,
-				dataById: action.payload
-			};
-		}
-		case FETCH_COMPANY_REVIEW_BY_ID_FAILURE: {
-			return {
-				...state,
-				fetchingData: false,
-				isLoading: false,
 				error: action.payload
 			};
 		}
