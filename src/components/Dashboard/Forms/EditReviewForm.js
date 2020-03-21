@@ -271,7 +271,6 @@ const SingleReview = ({
               <FormLabel fontSize='15px' color='#525252'>
                 Job Rating
               </FormLabel>
-              {/* // change to dropdown */}
               <Select
                 mb='4'
                 h='56px'

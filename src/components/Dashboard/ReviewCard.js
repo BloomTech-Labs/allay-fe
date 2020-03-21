@@ -313,102 +313,63 @@ const ReviewCard = ({
           ) : null}
 
           {/* Middle container */}
-          {review.review_type === 'Company' ? (
+          {review.review_type === 'Interview' ? (
             <Flex
               as='h2'
               fontWeight='medium'
               fontSize='xl'
               w='100%'
               mt='2%'
-              mb='1.5%'
-              px='8%'
-              overflow='hidden'
-            >
-              Topics
-            </Flex>
-          ) : review.review_type === 'Interview' ? (
-            <Flex
-              as='h2'
-              fontWeight='medium'
-              fontSize='xl'
-              w='100%'
-              mt='2%'
-              mb='1.5%'
               px='8%'
               overflow='hidden'
             >
               Interviews
             </Flex>
           ) : null}
-          {review.review_type === 'Company' ? (
+          {review.review_type === 'Interview' ? (
             <Flex
               justify='space-between'
               wrap='wrap'
               whiteSpace='nowrap'
-              mb='2%'
-              px='8%'
-            >
-              <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-                Career Growth
-              </Flex>
-              <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-                Benefits
-              </Flex>
-              <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-                Salary
-              </Flex>
-              <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-                Company Culture
-              </Flex>
-              <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-                Another Cool Thing
-              </Flex>
-            </Flex>
-          ) : review.review_type === 'Interview' ? (
-            <Flex
-              justify='space-between'
-              wrap='wrap'
-              whiteSpace='nowrap'
-              mb='2%'
               px='8%'
             >
               {review.phone_interview ? (
-                <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
                   Phone Screening
                 </Flex>
               ) : null}
               {review.resume_review ? (
-                <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
                   Resume Review
                 </Flex>
               ) : null}
               {review.take_home_assignments ? (
-                <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
                   Take Home Assignments
                 </Flex>
               ) : null}
               {review.online_coding_assignments ? (
-                <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
                   Online Coding Assignments
                 </Flex>
               ) : null}
               {review.portfolio_review ? (
-                <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
                   Portfolio Review
                 </Flex>
               ) : null}
               {review.screen_share ? (
-                <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
                   Screen Share
                 </Flex>
               ) : null}
               {review.open_source_contribution ? (
-                <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
                   Open Source Contribution
                 </Flex>
               ) : null}
               {review.side_projects ? (
-                <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
                   Side Projects
                 </Flex>
               ) : null}
@@ -421,6 +382,7 @@ const ReviewCard = ({
             w='100%'
             wrap='nowrap'
             overflow='hidden'
+            pt='2%'
             px='8%'
             align='center'
           >
