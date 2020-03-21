@@ -56,12 +56,12 @@ const ReviewCard = ({
 
   //routes to single review
   const navToEditRoute = () => {
-    history.push(`/dashboard/${review.company_review_id}`);
+    history.push(`/dashboard/${review.review_id}`);
   };
 
   //deletes the review in question
   const submitDelete = () => {
-    deleteReview(review.user_id, review.company_review_id).then(() => {
+    deleteReview(review.user_id, review.review_id).then(() => {
       window.location.reload();
       // history.push('/dashboard')
       toast({

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import getCompanyReviewById from '../../../state/actions/index.js';
-import editCompanyReview from '../../../state/actions/index.js';
+import getReviewById from '../../../state/actions/index.js';
+import editReview from '../../../state/actions/index.js';
 import ReactGA from 'react-ga';
 
 import { useForm } from 'react-hook-form';
@@ -31,8 +31,8 @@ import {
 
 const SingleReview = ({
   review,
-  getCompanyReviewById,
-  editCompanyReview,
+  getReviewById,
+  editReview,
   reviewEdited,
   match,
   history,
@@ -63,8 +63,8 @@ const SingleReview = ({
   }
 
   useEffect(() => {
-    getCompanyReviewById(id);
-  }, [id, getCompanyReviewById]);
+    getReviewById(id);
+  }, [id, getReviewById]);
 
   if (isLoading) {
     return (
@@ -75,7 +75,7 @@ const SingleReview = ({
   }
 
   const submitEdits = () => {
-    editCompanyReview(review.user_id, review.company_review_id, editValue).then(() => {
+    editReview(review.user_id, review.review_id, editValue).then(() => {
       history.push('/dashboard')
       toast({
         title: `Review Edit Success!`,
@@ -355,5 +355,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  (getCompanyReviewById, editCompanyReview))
+  (getReviewById, editReview))
   (SingleReview);
