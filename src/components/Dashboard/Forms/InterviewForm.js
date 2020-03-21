@@ -53,7 +53,8 @@ const InterviewForm = ({
 	const [searchResults, setSearchResults] = useState([]);
 	// star rating
 	const [starState, setStarState] = useState(0);
-
+	// custom radio button state offer status
+	const [offer, setOffer] = useState(1);
 	//progress bar
 	const [progress, setProgress] = useState({
 		prec: 99,
@@ -281,9 +282,6 @@ const InterviewForm = ({
 		const { isChecked, isDisabled, value, ...rest } = props;
 		return (
 			<Button
-				value={value}
-				label='offer_status_id'
-				name='offer_status_id'
 				ref={ref}
 				variantColor={isChecked ? 'blue' : 'gray'}
 				aria-checked={isChecked}
@@ -299,7 +297,8 @@ const InterviewForm = ({
 		postReview(localStorage.getItem('userId'), {
 			...data,
 			review_type_id: 2,
-			overall_rating: starState
+			overall_rating: starState,
+			offer_status_id: offer
 		}).then(() => history.push('/dashboard'));
 		ReactGA.event({
 			category: 'Review',
@@ -484,7 +483,7 @@ const InterviewForm = ({
 											onChange={time1}
 										>
 											{states.map(i => (
-												<option id={i.id} value={i.id}>
+												<option key={i.id} value={i.id}>
 													{i.state_name}
 												</option>
 											))}
@@ -999,36 +998,18 @@ const InterviewForm = ({
 													display='flex'
 													flexDir='column'
 													spacing={0}
-													onChange={time6}
 													label='offer_status_id'
 													name='offer_status_id'
+													defaultValue='1'
+													onChange={val => {
+														setOffer(val);
+														time6();
+													}}
+													ref={register}
 												>
-													<CustomRadio
-														value={1}
-														h='42px'
-														w='411px'
-														label='offer_status_id'
-														name='offer_status_id'
-														ref={register}
-													>
-														No offer
-													</CustomRadio>
-													<CustomRadio
-														value={2}
-														label='offer_status_id'
-														name='offer_status_id'
-														ref={register}
-													>
-														Accepted
-													</CustomRadio>
-													<CustomRadio
-														value={3}
-														label='offer_status_id'
-														name='offer_status_id'
-														ref={register}
-													>
-														Declined
-													</CustomRadio>
+													<CustomRadio value='1'>No offer</CustomRadio>
+													<CustomRadio value='2'>Accepted</CustomRadio>
+													<CustomRadio value='3'>Declined</CustomRadio>
 												</RadioButtonGroup>
 											</Flex>
 										</Flex>
