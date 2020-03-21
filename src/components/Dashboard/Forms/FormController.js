@@ -99,7 +99,7 @@ const FormController = ({ history }) => {
 							data-aos-once='false'
 						>
 							<p>
-								Hi John,{' '}
+								Hi {localStorage.getItem('username')},{' '}
 								<span role='img' aria-label='smile'>
 									🙂
 								</span>{' '}

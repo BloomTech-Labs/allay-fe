@@ -163,9 +163,9 @@ const ReviewForm2 = ({
 	const routeTo5 = () => {
 		setTag5(true);
 		setProgress({
-			prec: 30,
-			mins: 3,
-			prog: 75
+			prec: 20,
+			mins: 1,
+			prog: 80
 		});
 		const element = document.getElementById('Tag5');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -182,9 +182,9 @@ const ReviewForm2 = ({
 	const routeTo6 = () => {
 		setTag6(true);
 		setProgress({
-			prec: 10,
-			mins: 1,
-			prog: 85
+			prec: 100,
+			mins: 0,
+			prog: 100
 		});
 		const element = document.getElementById('Tag6');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });

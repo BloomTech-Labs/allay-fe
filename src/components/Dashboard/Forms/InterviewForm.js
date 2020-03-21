@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import ReactGA from 'react-ga'; // for google analytics
+import { states } from '../../Reusable/statesData';
 // redux
 import { connect } from 'react-redux';
 // actions
@@ -7,6 +10,7 @@ import getCompanies from '../../../state/actions';
 import postCompany from '../../../state/actions';
 // styles
 import BeautyStars from 'beauty-stars';
+import { ThinkingDots } from '../../Reusable/ThinkingDots';
 import {
 	FormControl,
 	Flex,
@@ -26,9 +30,27 @@ import {
 	Progress,
 	Link
 } from '@chakra-ui/core';
+import AOS from 'aos';
 import 'aos/dist/aos.css';
+import CustomSpinner from '../../CustomSpinner';
 
-const InterviewForm = () => {
+const InterviewForm = ({
+	loadingCompanies,
+	getCompanies,
+	companies,
+	postReview,
+	history
+}) => {
+	AOS.init();
+	const { register, handleSubmit, errors, formState } = useForm();
+	// thinking state
+	const [thinking, setThinking] = useState(false);
+	const dots = () => {
+		setThinking(true);
+	};
+	// search state
+	const [searchTerm, setSearchTerm] = useState('');
+	const [searchResults, setSearchResults] = useState([]);
 	// star rating
 	const [starState, setStarState] = useState(0);
 
@@ -39,8 +61,15 @@ const InterviewForm = () => {
 		prog: 2
 	});
 
-	// thinking animation
-	const [thinking, setThinking] = useState(false);
+	// company search function
+	useEffect(() => {
+		if (searchTerm.length >= 3) {
+			const results = companies.filter(company =>
+				company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
+			);
+			setSearchResults(results);
+		}
+	}, [searchTerm, companies]);
 
 	// state for visibility
 	const [Tag2, setTag2] = useState(false);
@@ -54,20 +83,27 @@ const InterviewForm = () => {
 
 	// brings to top on render
 	useEffect(() => {
+		getCompanies();
 		setProgress({
 			prec: 95,
 			mins: 8,
 			prog: 5
 		});
 		const element = document.getElementById('Tag1');
-		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		element.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
 	}, []);
 
 	// timers for moves
 	let timer = null;
+	let dotTimer = null;
 	// 2nd tag
 	const time1 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo2, 2000);
 	};
 
@@ -79,11 +115,17 @@ const InterviewForm = () => {
 			prog: 20
 		});
 		const element = document.getElementById('Tag2');
-		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		element.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+		setThinking(false);
 	};
 	// 3rd tag
 	const time2 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo3, 2000);
 	};
 
@@ -95,11 +137,17 @@ const InterviewForm = () => {
 			prog: 30
 		});
 		const element = document.getElementById('Tag3');
-		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		element.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center'
+		});
+		setThinking(false);
 	};
 	//4th tag
 	const time3 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo4, 2000);
 	};
 
@@ -111,11 +159,17 @@ const InterviewForm = () => {
 			prog: 40
 		});
 		const element = document.getElementById('Tag4');
-		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		element.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+		setThinking(false);
 	};
 	// 5th tag
 	const time4 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo5, 2000);
 	};
 
@@ -127,11 +181,17 @@ const InterviewForm = () => {
 			prog: 50
 		});
 		const element = document.getElementById('Tag5');
-		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		element.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center'
+		});
+		setThinking(false);
 	};
 	// 6th tag
 	const time5 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo6, 2000);
 	};
 
@@ -143,11 +203,17 @@ const InterviewForm = () => {
 			prog: 60
 		});
 		const element = document.getElementById('Tag6');
-		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		element.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center'
+		});
+		setThinking(false);
 	};
 	// 7th tag
 	const time6 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo7, 2000);
 	};
 
@@ -159,11 +225,17 @@ const InterviewForm = () => {
 			prog: 70
 		});
 		const element = document.getElementById('Tag7');
-		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		element.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center'
+		});
+		setThinking(false);
 	};
 	// 8th tag
 	const time7 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo8, 2000);
 	};
 
@@ -175,11 +247,17 @@ const InterviewForm = () => {
 			prog: 85
 		});
 		const element = document.getElementById('Tag8');
-		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		element.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center'
+		});
+		setThinking(false);
 	};
 	// 9th tag
 	const time8 = () => {
 		clearTimeout(timer);
+		clearTimeout(dotTimer);
+		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo9, 2000);
 	};
 
@@ -191,7 +269,11 @@ const InterviewForm = () => {
 			prog: 100
 		});
 		const element = document.getElementById('Tag9');
-		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		element.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+		setThinking(false);
 	};
 
 	// custom select for offer accepted
@@ -199,6 +281,9 @@ const InterviewForm = () => {
 		const { isChecked, isDisabled, value, ...rest } = props;
 		return (
 			<Button
+				value={value}
+				label='offer_status_id'
+				name='offer_status_id'
 				ref={ref}
 				variantColor={isChecked ? 'blue' : 'gray'}
 				aria-checked={isChecked}
@@ -208,6 +293,19 @@ const InterviewForm = () => {
 			/>
 		);
 	});
+
+	//submit handler
+	const submitForm = data => {
+		postReview(localStorage.getItem('userId'), {
+			...data,
+			review_type_id: 2,
+			overall_rating: starState
+		}).then(() => history.push('/dashboard'));
+		ReactGA.event({
+			category: 'Review',
+			action: `Submit review`
+		});
+	};
 
 	return (
 		// main container
@@ -253,11 +351,24 @@ const InterviewForm = () => {
 						value={progress.prog}
 					/>
 				</Flex>
-
+				{thinking ? (
+					<>
+						<Flex
+							bottom='0'
+							position='fixed'
+							overflow='hidden'
+							zIndex='999'
+							pt='5%'
+							pl='15%'
+						>
+							<ThinkingDots />
+						</Flex>
+					</>
+				) : null}
 				{/* form container */}
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
 					{/*--------------- start of form ---------------  */}
-					<form>
+					<form onSubmit={handleSubmit(submitForm)}>
 						<FormControl>
 							{/* first prompt */}
 							<Flex
@@ -267,7 +378,6 @@ const InterviewForm = () => {
 								p='1%'
 								w='416px'
 								mb='8%'
-								// mt='10%'
 								bg='#F2F6FE'
 								rounded='20px'
 								data-aos='fade-up'
@@ -303,28 +413,39 @@ const InterviewForm = () => {
 									data-aos-anchor='#Tag1'
 								>
 									<FormLabel>1. Company name</FormLabel>
-									<Input
-										variant='filled'
-										h='56px'
-										mb='1'
-										rounded='6px'
-										type='text'
-										label='company_name'
-										name='company_name'
-										list='company_name'
-										autoCapitalize='none'
-									/>
-									<datalist id='company_name'>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>1</option>
-										<option>1</option>
-									</datalist>
-									<Link mb='4' color='grey' href='/add-company'>
-										Can't find a company?
-									</Link>
+									{loadingCompanies ? (
+										<>
+											<Flex justify='center' w='100%'>
+												<CustomSpinner />
+											</Flex>
+										</>
+									) : (
+										<>
+											{' '}
+											<Input
+												h='56px'
+												variant='filled'
+												rounded='6px'
+												autoCapitalize='none'
+												type='text'
+												label='company_name'
+												name='company_name'
+												list='company_name'
+												ref={register}
+												onChange={e => setSearchTerm(e.target.value)}
+											/>
+											<datalist id='company_name'>
+												{searchResults.map(company => (
+													<option value={company.company_name} key={company.id}>
+														{company.company_name}
+													</option>
+												))}
+											</datalist>
+											<Link mb='2' color='grey' href='/add-company'>
+												Can't find a company?
+											</Link>
+										</>
+									)}
 									<FormLabel>2. Job title</FormLabel>
 									<Input
 										h='56px'
@@ -335,18 +456,40 @@ const InterviewForm = () => {
 										label='job_title'
 										name='job_title'
 										autoCapitalize='none'
+										ref={register}
 									/>
 									<FormLabel>3. Place of interview</FormLabel>
-									<Input
-										h='56px'
-										rounded='6px'
-										type='text'
-										variant='filled'
-										label='job_title'
-										name='job_title'
-										autoCapitalize='none'
-										onKeyPress={time1}
-									/>
+									<Flex>
+										<Input
+											h='56px'
+											mr='1%'
+											variant='filled'
+											rounded='6px'
+											autoCapitalize='none'
+											type='text'
+											label='city'
+											name='city'
+											list='city'
+											placeholder='ex: Nashville '
+											ref={register}
+										/>
+										<Select
+											h='56px'
+											rounded='6px'
+											variant='filled'
+											label='state_id'
+											name='state_id'
+											placeholder='Select one'
+											ref={register}
+											onChange={time1}
+										>
+											{states.map(i => (
+												<option id={i.id} value={i.id}>
+													{i.state_name}
+												</option>
+											))}
+										</Select>
+									</Flex>
 								</Flex>
 								{/* avatar */}
 								<Flex
@@ -408,7 +551,8 @@ const InterviewForm = () => {
 										<p>
 											For the quality of your review I will ask you some in
 											depth questions. Let’s begin with how many rounds of
-											interviews you had?
+											interviews you had? Please include phone interviews and
+											onsite interviews.
 										</p>
 									</Flex>
 									{/* rounds container  */}
@@ -437,18 +581,18 @@ const InterviewForm = () => {
 												mb='6'
 												rounded='6px'
 												variant='filled'
-												label=''
-												name=''
+												label='interview_rounds'
+												name='interview_rounds'
 												placeholder='Select one'
 												onChange={time2}
 											>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-												<option>6</option>
-												<option>7+</option>
+												<option value={1}>1</option>
+												<option value={2}>2</option>
+												<option value={3}>3</option>
+												<option value={4}>4</option>
+												<option value={5}>5</option>
+												<option value={6}>6</option>
+												<option value={7}>7+</option>
 											</Select>
 										</Flex>
 										{/* avatar */}
@@ -522,31 +666,67 @@ const InterviewForm = () => {
 														<Checkbox
 															size='md'
 															border='rgba(72, 72, 72, 0.1)'
-															name='offer_accepted'
+															name='phone_interview'
+															ref={register}
 														>
 															Phone interview
 														</Checkbox>
-														<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+														<Checkbox
+															size='md'
+															border='rgba(72, 72, 72, 0.1)'
+															name='resume_review'
+															ref={register}
+														>
 															Resume review
 														</Checkbox>
-														<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+														<Checkbox
+															size='md'
+															border='rgba(72, 72, 72, 0.1)'
+															name='take_home_assignments'
+															ref={register}
+														>
 															Take home assignments
 														</Checkbox>
-														<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+														<Checkbox
+															size='md'
+															border='rgba(72, 72, 72, 0.1)'
+															name='online_coding_assignments'
+															ref={register}
+														>
 															Online coding tests
 														</Checkbox>
 													</Flex>
 													<Flex direction='column'>
-														<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+														<Checkbox
+															size='md'
+															border='rgba(72, 72, 72, 0.1)'
+															name='portfolio_review'
+															ref={register}
+														>
 															Portfolio review
 														</Checkbox>
-														<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+														<Checkbox
+															size='md'
+															border='rgba(72, 72, 72, 0.1)'
+															name='screen_share'
+															ref={register}
+														>
 															Screen share
 														</Checkbox>
-														<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+														<Checkbox
+															size='md'
+															border='rgba(72, 72, 72, 0.1)'
+															name='open_source_contribution'
+															ref={register}
+														>
 															Open source contribution
 														</Checkbox>
-														<Checkbox size='md' border='rgba(72, 72, 72, 0.1)'>
+														<Checkbox
+															size='md'
+															border='rgba(72, 72, 72, 0.1)'
+															name='side_projects'
+															ref={register}
+														>
 															Side projects
 														</Checkbox>
 													</Flex>
@@ -640,7 +820,7 @@ const InterviewForm = () => {
 												h='144px'
 												rowsMax={6}
 												type='text'
-												name='interview_review'
+												name='comment'
 												placeholder='What questions came up? What did you discuss? What did you come away with from this interview? '
 												rounded='6px'
 												onKeyUp={time4}
@@ -737,13 +917,17 @@ const InterviewForm = () => {
 												mb='6'
 												rounded='6px'
 												variant='filled'
-												label=''
-												name=''
+												label='difficulty_rating'
+												name='difficulty_rating'
 												placeholder='Select one'
 												onChange={time5}
+												ref={register}
 											>
-												<option>Hard</option>
-												<option>Not so hard</option>
+												<option value={5}>Very hard</option>
+												<option value={4}>Somewhat hard</option>
+												<option value={3}>Somewhat easy</option>
+												<option value={2}>Easy</option>
+												<option value={1}>Very easy</option>
 											</Select>
 										</Flex>
 										{/* avatar */}
@@ -816,12 +1000,35 @@ const InterviewForm = () => {
 													flexDir='column'
 													spacing={0}
 													onChange={time6}
+													label='offer_status_id'
+													name='offer_status_id'
 												>
-													<CustomRadio value='rad1' h='42px' w='411px'>
+													<CustomRadio
+														value={1}
+														h='42px'
+														w='411px'
+														label='offer_status_id'
+														name='offer_status_id'
+														ref={register}
+													>
 														No offer
 													</CustomRadio>
-													<CustomRadio value='rad2'>Accepted</CustomRadio>
-													<CustomRadio value='rad3'>Declined</CustomRadio>
+													<CustomRadio
+														value={2}
+														label='offer_status_id'
+														name='offer_status_id'
+														ref={register}
+													>
+														Accepted
+													</CustomRadio>
+													<CustomRadio
+														value={3}
+														label='offer_status_id'
+														name='offer_status_id'
+														ref={register}
+													>
+														Declined
+													</CustomRadio>
 												</RadioButtonGroup>
 											</Flex>
 										</Flex>
@@ -922,10 +1129,11 @@ const InterviewForm = () => {
 													rounded='6px'
 													type='number'
 													variant='filled'
-													label='job_title'
-													name='job_title'
+													label='salary"'
+													name='salary"'
 													autoCapitalize='none'
 													onKeyUp={time7}
+													ref={register}
 												/>
 											</InputGroup>
 										</Flex>
@@ -1068,6 +1276,8 @@ const InterviewForm = () => {
 											h='136px'
 											mb='8%'
 											p='6'
+											justify='center'
+											align='center'
 											border='1px solid #BBBDC6'
 											rounded='6px'
 											flexDir='column'
@@ -1079,7 +1289,17 @@ const InterviewForm = () => {
 											data-aos-mirror='true'
 											data-aos-once='true'
 										>
-											<Button> Submit </Button>
+											<Button
+												bg='#344CD0'
+												color='white'
+												type='submit'
+												isLoading={formState.isSubmitting}
+												rounded='6px'
+												border='none'
+											>
+												{' '}
+												Submit{' '}
+											</Button>
 										</Flex>
 										{/* avatar */}
 										<Flex
@@ -1111,7 +1331,7 @@ const InterviewForm = () => {
 
 const mapStateToProps = state => {
 	return {
-		isLoading: state.review.fetchingData,
+		loadingCompanies: state.company.isLoading,
 		companies: state.company.data
 	};
 };
