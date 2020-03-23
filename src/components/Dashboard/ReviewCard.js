@@ -6,10 +6,10 @@ import ReactGA from 'react-ga';
 import deleteReview from '../../state/actions/index';
 
 // icons
-import { TiCalendar } from 'react-icons/ti';
-import { FiThumbsUp } from 'react-icons/fi';
+import { TiCalendar, TiGlobeOutline } from 'react-icons/ti';
 import { MdPerson } from 'react-icons/md';
-import { FaDollarSign, FaRegClock, FaRegMoneyBillAlt } from 'react-icons/fa';
+import { FaDollarSign, FaRegClock, FaRegMoneyBillAlt, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+import { GiWeightLiftingUp } from 'react-icons/gi';
 import { GoLocation } from 'react-icons/go';
 
 // styles
@@ -56,12 +56,12 @@ const ReviewCard = ({
 
   //routes to single review
   const navToEditRoute = () => {
-    history.push(`/dashboard/${review.company_review_id}`);
+    history.push(`/dashboard/${review.review_id}`);
   };
 
   //deletes the review in question
   const submitDelete = () => {
-    deleteReview(review.user_id, review.company_review_id).then(() => {
+    deleteReview(review.user_id, review.review_id).then(() => {
       window.location.reload();
       // history.push('/dashboard')
       toast({
@@ -110,7 +110,7 @@ const ReviewCard = ({
           {/* Basic info container */}
           <Flex flexDir={{ lg: 'row', sm: 'column' }} align='center' mx='8%'>
             <Flex align='center'>
-              <Avatar size='2xl' src={`//logo.clearbit.com/${review.domain}`} />
+              <Avatar size='2xl' src={`//logo.clearbit.com/${review.logo}`} />
             </Flex>
             <Flex flexDir='column' pl={{ lg: '8%', sm: '0%' }} width='100%'>
               <Flex
@@ -127,7 +127,7 @@ const ReviewCard = ({
                   <Flex fontSize='small' fontWeight='light' color='#9194A8'>
                     Location
                   </Flex>
-                  <Flex>Mountain View, CA</Flex>
+                  <Flex>{review.city}, {review.state_name}</Flex>
                 </Flex>
                 <Flex flexDir='column'>
                   <Flex fontSize='small' fontWeight='light' color='#9194A8'>
@@ -135,12 +135,12 @@ const ReviewCard = ({
                   </Flex>
                   <Flex>{review.job_title}</Flex>
                 </Flex>
-                <Flex flexDir='column'>
-                  <Flex fontSize='small' fontWeight='light' color='#9194A8'>
-                    Rating
-                  </Flex>
-                  <Flex>
-                    Company Rating
+
+                {review.review_type === 'Company' ? (
+                  <Flex flexDir='column'>
+                    <Flex fontSize='small' fontWeight='light' color='#9194A8'>
+                      Company Rating
+                    </Flex>
                     <Flex>
                       {Array(5)
                         .fill('')
@@ -148,109 +148,233 @@ const ReviewCard = ({
                           <Icon
                             name='star'
                             key={i}
-                            color={i < review.job_rating ? 'black' : 'gray.300'}
-                            ml='5px'
+                            color={i < review.overall_rating ? '#344CD0' : 'gray.300'}
+                            ml='4px'
                           />
                         ))}
                     </Flex>
                   </Flex>
-                </Flex>
+                ) : review.review_type === 'Interview' ? (
+                  <Flex flexDir='column'>
+                    <Flex fontSize='small' fontWeight='light' color='#9194A8'>
+                      Overall Experience
+                    </Flex>
+                    <Flex>
+                      {Array(5)
+                        .fill('')
+                        .map((_, i) => (
+                          <Icon
+                            name='star'
+                            key={i}
+                            color={i < review.overall_rating ? '#344CD0' : 'gray.300'}
+                            ml='4px'
+                          />
+                        ))}
+                    </Flex>
+                  </Flex>
+                ) : null}
               </Flex>
             </Flex>
           </Flex>
 
           {/* Secondary info container */}
-          <Flex w='100%' backgroundColor='#344CD0' color='white' mt='4%'>
-            <Flex
-              w='100%'
-              overflow='hidden'
-              justify='space-evenly'
-              align='center'
-              py='1%'
-            >
-              <Flex align='center' wrap='nowrap'>
-                <Box as={FaDollarSign} size='2em' mr='5px'></Box>
-                <Flex flexDir='column'>
-                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                    ${review.salary}
+          {review.review_type === 'Company' ? (
+            <Flex w='100%' backgroundColor='#344CD0' color='white' mt='4%'>
+              <Flex
+                w='100%'
+                overflow='hidden'
+                justify='space-evenly'
+                align='center'
+                py='1%'
+              >
+                <Flex align='center' wrap='nowrap'>
+                  <Box as={FaDollarSign} size='2em' mr='5px'></Box>
+                  <Flex flexDir='column'>
+                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                      ${review.salary}
+                    </Flex>
+                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                      Salary
                   </Flex>
-                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                    Salary
-                  </Flex>
-                </Flex>
-              </Flex>
-              <Flex align='center' wrap='nowrap'>
-                <Box as={FiThumbsUp} size='2em' mr='5px'></Box>
-                <Flex flexDir='column'>
-                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                    {review.typical_hours} hrs week
-                  </Flex>
-                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                    Working Hours
                   </Flex>
                 </Flex>
-              </Flex>
-              <Flex align='center' wrap='nowrap'>
-                <Box as={MdPerson} size='2em' mr='5px'></Box>
-                <Flex flexDir='column'>
-                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                    {review.work_status}
+                <Flex align='center' wrap='nowrap'>
+                  <Box as={FaRegClock} size='2em' mr='5px'></Box>
+                  <Flex flexDir='column'>
+                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                      {review.typical_hours} hrs week
                   </Flex>
-                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                    Status
+                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                      Working Hours
+                  </Flex>
                   </Flex>
                 </Flex>
-              </Flex>
-              <Flex align='center' wrap='nowrap'>
-                <Box as={TiCalendar} size='2em' mr='5px'></Box>
-                <Flex flexDir='column'>
-                  <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                    {review.start_date} - {review.end_date}
+                <Flex align='center' wrap='nowrap'>
+                  <Box as={MdPerson} size='2em' mr='5px'></Box>
+                  <Flex flexDir='column'>
+                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                      {review.work_status}
+                    </Flex>
+                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                      Status
                   </Flex>
-                  <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                    Date
+                  </Flex>
+                </Flex>
+                <Flex align='center' wrap='nowrap'>
+                  <Box as={TiCalendar} size='2em' mr='5px'></Box>
+                  <Flex flexDir='column'>
+                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                      {review.start_date} - {review.end_date}
+                    </Flex>
+                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                      Date
+                  </Flex>
                   </Flex>
                 </Flex>
               </Flex>
             </Flex>
-          </Flex>
+          ) : review.review_type === 'Interview' ? (
+            <Flex w='100%' backgroundColor='#344CD0' color='white' mt='4%'>
+              <Flex
+                w='100%'
+                overflow='hidden'
+                justify='space-evenly'
+                align='center'
+                py='1%'
+              >
+                <Flex align='center' wrap='nowrap'>
+                  <Box as={GiWeightLiftingUp} size='2em' mr='5px'></Box>
+                  <Flex flexDir='column'>
+                    {review.difficulty_rating === 5 ? (
+                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                        Very Difficult
+                      </Flex>
+                    ) : review.difficulty_rating === 4 ? (
+                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                        Difficult
+                      </Flex>
+                    ) : review.difficulty_rating === 3 ? (
+                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                        Moderate
+                      </Flex>
+                    ) : review.difficulty_rating === 2 ? (
+                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                        Easy
+                      </Flex>
+                    ) : review.difficulty_rating === 1 ? (
+                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                        Very Easy
+                      </Flex>
+                    ) : null}
+                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                      Interview Hardness
+                  </Flex>
+                  </Flex>
+                </Flex>
+                <Flex align='center' wrap='nowrap'>
+                  <Box as={FaDollarSign} size='2em' mr='5px'></Box>
+                  <Flex flexDir='column'>
+                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                      ${review.salary}
+                    </Flex>
+                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                      Salary
+                  </Flex>
+                  </Flex>
+                </Flex>
+                <Flex align='center' wrap='nowrap'>
+                  {review.offer_status === 'Offer Accepted' ? (
+                    <Box as={FaThumbsUp} size='2em' mr='5px'></Box>
+                  ) : review.offer_status === 'Offer Declined' || 'No Offer' ? (
+                    <Box as={FaThumbsDown} size='2em' mr='5px'></Box>
+                  ) : null}
+                  <Flex flexDir='column'>
+                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                      {review.offer_status}
+                    </Flex>
+                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                      Job Offer
+                  </Flex>
+                  </Flex>
+                </Flex>
+                <Flex align='center' wrap='nowrap'>
+                  <Box as={TiGlobeOutline} size='2em' mr='5px'></Box>
+                  <Flex flexDir='column'>
+                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                      {review.interview_rounds} Rounds
+                    </Flex>
+                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                      Interview Rounds
+                  </Flex>
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Flex>
+          ) : null}
 
-          {/* Topics container */}
-          <Flex
-            as='h2'
-            fontWeight='medium'
-            fontSize='xl'
-            w='100%'
-            mt='2%'
-            mb='1.5%'
-            px='8%'
-            overflow='hidden'
-          >
-            Topics
-          </Flex>
-          <Flex
-            justify='space-between'
-            wrap='wrap'
-            whiteSpace='nowrap'
-            mb='2%'
-            px='8%'
-          >
-            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Career Growth
+          {/* Middle container */}
+          {review.review_type === 'Interview' ? (
+            <Flex
+              as='h2'
+              fontWeight='medium'
+              fontSize='xl'
+              w='100%'
+              mt='2%'
+              px='8%'
+              overflow='hidden'
+            >
+              Interviews
             </Flex>
-            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Benefits
+          ) : null}
+          {review.review_type === 'Interview' ? (
+            <Flex
+              justify='space-between'
+              wrap='wrap'
+              whiteSpace='nowrap'
+              px='8%'
+            >
+              {review.phone_interview ? (
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
+                  Phone Screening
+                </Flex>
+              ) : null}
+              {review.resume_review ? (
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
+                  Resume Review
+                </Flex>
+              ) : null}
+              {review.take_home_assignments ? (
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
+                  Take Home Assignments
+                </Flex>
+              ) : null}
+              {review.online_coding_assignments ? (
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
+                  Online Coding Assignments
+                </Flex>
+              ) : null}
+              {review.portfolio_review ? (
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
+                  Portfolio Review
+                </Flex>
+              ) : null}
+              {review.screen_share ? (
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
+                  Screen Share
+                </Flex>
+              ) : null}
+              {review.open_source_contribution ? (
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
+                  Open Source Contribution
+                </Flex>
+              ) : null}
+              {review.side_projects ? (
+                <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%'>
+                  Side Projects
+                </Flex>
+              ) : null}
             </Flex>
-            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Salary
-            </Flex>
-            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Company Culture
-            </Flex>
-            <Flex as='p' bg='#F2F6FE' px='1%' mb='1.5%'>
-              Another Cool Thing
-            </Flex>
-          </Flex>
+          ) : null}
 
           {/* Review container */}
           <Flex
@@ -258,6 +382,7 @@ const ReviewCard = ({
             w='100%'
             wrap='nowrap'
             overflow='hidden'
+            pt='2%'
             px='8%'
             align='center'
           >
@@ -346,7 +471,18 @@ const ReviewCard = ({
         onClick={onOpen}
       >
         {/* Review content container */}
-        <Flex width='100%' justifyContent='flex-end'>
+        <Flex width='100%' justifyContent='flex-end' mb='2%'>
+          <Badge
+            backgroundColor='#95C8D8'
+            color='white'
+            fontSize='1em'
+            fontWeight='light'
+            rounded='full'
+            px='15px'
+            overflow='hidden'
+          >
+            {review.review_type}
+          </Badge>
           <Badge
             backgroundColor='#344CD0'
             color='white'
@@ -355,8 +491,9 @@ const ReviewCard = ({
             rounded='full'
             px='15px'
             overflow='hidden'
+            ml='10px'
           >
-            Web
+            {review.track_name}
           </Badge>
         </Flex>
 
@@ -366,7 +503,7 @@ const ReviewCard = ({
           <Flex w='100%' h='100px'>
             {/* avatar box */}
             <Box justify='center' align='center' h='88px' mr='36px'>
-              <Avatar size='xl' src={`//logo.clearbit.com/${review.domain}`} />
+              <Avatar size='xl' src={`//logo.clearbit.com/${review.logo}`} />
             </Box>
             {/* tag container */}
             <Flex w='100%' h='32px' wrap='wrap'>
@@ -377,11 +514,11 @@ const ReviewCard = ({
                 overflow='hidden'
                 isTruncated
               >
-                {review.company_name} company review
+                {review.company_name}
               </Flex>
               <Flex width='100%'>
                 <Flex as='h4' align='center'>
-                  {review.job_rating}.0
+                  {review.overall_rating}.0
                 </Flex>
                 <Flex align='center'>
                   {Array(5)
@@ -390,7 +527,7 @@ const ReviewCard = ({
                       <Icon
                         name='star'
                         key={i}
-                        color={i < review.job_rating ? '#344CD0' : 'gray.300'}
+                        color={i < review.overall_rating ? '#344CD0' : 'gray.300'}
                         ml='8%'
                       />
                     ))}
@@ -419,20 +556,36 @@ const ReviewCard = ({
             </Flex>
             <Flex align='center'>
               <Box as={GoLocation} mr='10px'></Box>
-              <Flex as='p'>MISSING LOCATION</Flex>
-            </Flex>
-            <Flex align='center'>
-              <Box as={FaRegClock} mr='10px'></Box>
               <Flex as='p'>
-                {review.start_date}-{review.end_date}
+                {review.city}, {review.state_name}
               </Flex>
             </Flex>
-          </Flex>
 
-          {/* summary container */}
-          <Flex w='100%' h='95px' overflow='hidden'>
-            <p>{review.comment}</p>
+            {review.review_type === 'Company' ? (
+              <Flex align='center'>
+                <Box as={FaRegClock} mr='10px'></Box>
+                <Flex as='p'>
+                  {review.start_date}-{review.end_date}
+                </Flex>
+              </Flex>
+            ) : review.review_type === 'Interview' ? (
+              <Flex align='center'>
+                {review.offer_status === 'Offer Accepted' ? (
+                  <Box as={FaThumbsUp} mr='10px'></Box>
+                ) : review.offer_status === 'Offer Declined' || 'No Offer' ? (
+                  <Box as={FaThumbsDown} mr='10px'></Box>
+                ) : null}
+                <Flex as='p'>
+                  {review.offer_status}
+                </Flex>
+              </Flex>
+            ) : null}
           </Flex>
+        </Flex>
+
+        {/* summary container */}
+        <Flex w='100%' h='95px' overflow='hidden'>
+          <p>{review.comment}</p>
         </Flex>
       </PseudoBox>
     </>
