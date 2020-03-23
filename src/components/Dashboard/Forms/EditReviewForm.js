@@ -141,12 +141,46 @@ const SingleReview = ({
               <FormLabel fontSize='15px' color='#525252'>
                 Job Location
               </FormLabel>
-              <EditReviewInput
-                name='job_location'
-                placeholder={review.job_location}
-                value={editValue.job_location}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-              />
+              <Flex>
+                <EditReviewInput
+                  name='city'
+                  placeholder={review.city}
+                  value={editValue.city}
+                  onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                />
+
+                <Flex p='3%' />
+
+                <Select
+                  mb='4'
+                  h='58px'
+                  // py='32px'
+                  rounded='3px'
+                  borderColor='#ECF1FE'
+                  name='state_id'
+                  ref={register}
+                  onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                >
+                  {states.map(i => (
+                    <option key={i.id} value={i.id}>
+                      {i.state_name}
+                    </option>
+                  ))}
+                  {/* <option value={0}>{review.state_name}</option>
+                  <option value={1}>Alabama</option>
+                  <option value={2}>Alaska</option>
+                  <option value={3}>Arizona</option>
+                  <option value={4}>Arkansas</option>
+                  <option value={5}>California</option> */}
+                </Select>
+
+                {/* <EditReviewInput
+                  name='state_name'
+                  placeholder={review.state_name}
+                  value={editValue.state_id}
+                  onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                /> */}
+              </Flex>
             </FormControl>
 
             <FormControl isInvalid={errors.salary}>
