@@ -105,15 +105,12 @@ const ReviewCard = ({
       {/* ------------------------------------------------------------------------------------------------ */}
       <Modal isOpen={isOpen} onClose={onClose} size='80%'>
         <ModalOverlay />
-        <ModalContent w='100%' py='3%' wrap='nowrap'>
+        <ModalContent w='100%' wrap='nowrap'>
           <ModalCloseButton background='none' border='none' />
 
           {/* Basic info container */}
-          <Flex flexDir={{ lg: 'row', sm: 'column' }} align='center' mx='8%'>
-            <Flex align='center'>
-              <Avatar size='2xl' src={`//logo.clearbit.com/${review.logo}`} />
-            </Flex>
-            <Flex flexDir='column' pl={{ lg: '8%', sm: '0%' }} width='100%'>
+          <Flex flexDir={{ lg: 'row', sm: 'column' }} align='center' mx='8%' mt='56px'>
+            <Flex flexDir='column' width='100%'>
               <Flex
                 as='h2'
                 w='100%'
@@ -176,11 +173,14 @@ const ReviewCard = ({
                 ) : null}
               </Flex>
             </Flex>
+            <Flex align='center' ml='8%' mr='20%'>
+              <Avatar size='md' src={`//logo.clearbit.com/${review.logo}`} />
+            </Flex>
           </Flex>
 
           {/* Secondary info container */}
           {review.review_type === 'Company' ? (
-            <Flex w='100%' backgroundColor='#344CD0' color='white' mt='4%'>
+            <Flex w='100%' backgroundColor='#344CD0' color='white' mt='56px'>
               <Flex
                 w='100%'
                 overflow='hidden'
