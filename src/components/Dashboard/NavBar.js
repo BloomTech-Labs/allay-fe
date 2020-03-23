@@ -17,7 +17,9 @@ export default function NavBar({
   isLoading,
   setSearchResults,
   trackFilters,
-  setTrackFilters
+  setTrackFilters,
+  typeFilters,
+  setTypeFilters
 }) {
   // use to navigate to review form
   const navToReviewForm = () => {
@@ -39,19 +41,31 @@ export default function NavBar({
     setSearchResults(event.target.value);
   };
 
-  // temporary object until setup in db
-  const tracks = [
-    { id: 1, prefix: 'WEB' },
-    { id: 2, prefix: 'UX' },
-    { id: 3, prefix: 'DS' },
-    { id: 4, prefix: 'IOS' },
-    { id: 5, prefix: 'AND' }
+  // We could get this fronm the DB if we had endpoints
+  const types = [
+    { id: 1, name: 'Interview' },
+    { id: 2, name: 'Company' }
   ];
 
-  const handleFilter = e => {
-    trackFilters.includes(e.id)
-      ? setTrackFilters(trackFilters.filter(item => item !== e.id))
-      : setTrackFilters([...trackFilters, e.id]);
+  const tracks = [
+    { id: 1, name: 'WEB' },
+    { id: 2, name: 'UX' },
+    { id: 3, name: 'DS' },
+    { id: 4, name: 'IOS' },
+    { id: 5, name: 'AND' }
+  ];
+
+  const handleTracks = e => {
+    trackFilters.includes(e.name)
+      ? setTrackFilters(trackFilters.filter(item => item !== e.name))
+      : setTrackFilters([...trackFilters, e.name]);
+    e.selected = !e.selected;
+  };
+
+  const handleTypes = e => {
+    typeFilters.includes(e.name)
+      ? setTypeFilters(typeFilters.filter(item => item !== e.name))
+      : setTypeFilters([...typeFilters, e.name]);
     e.selected = !e.selected;
   };
 
@@ -101,18 +115,6 @@ export default function NavBar({
             onChange={handleInputChange}
           />
         </InputGroup>
-        <RadioButtonGroup onChange={handleFilter} isInline>
-          {tracks.map(track => (
-            <Button
-              size='sm'
-              rounded='full'
-              variantColor={trackFilters.includes(track.id) ? 'blue' : 'gray'}
-              value={track}
-            >
-              {track.prefix}
-            </Button>
-          ))}
-        </RadioButtonGroup>
         <Button
           background='#344CD0'
           color='#FFFFFF'
@@ -124,6 +126,47 @@ export default function NavBar({
         >
           Add Review
         </Button>
+      </Flex>
+
+      <Flex align='center' justify='space-around' pt='2%'>
+        <RadioButtonGroup
+          align='center'
+          justify='space-between'
+          width='80%'
+          onChange={handleTypes}
+        >
+          {types.map(type => (
+            <Button
+              key={type.id}
+              size='sm'
+              rounded='full'
+              marginBottom='10px'
+              variantColor={typeFilters.includes(type.name) ? 'blue' : 'gray'}
+              value={type}
+            >
+              {type.name}
+            </Button>
+          ))}
+        </RadioButtonGroup>
+        <RadioButtonGroup
+          align='center'
+          justify='space-between'
+          width='80%'
+          onChange={handleTracks}
+        >
+          {tracks.map(track => (
+            <Button
+              key={track.id}
+              size='sm'
+              rounded='full'
+              marginBottom='10px'
+              variantColor={trackFilters.includes(track.name) ? 'blue' : 'gray'}
+              value={track}
+            >
+              {track.name}
+            </Button>
+          ))}
+        </RadioButtonGroup>
       </Flex>
       <Flex align='center' justify='flex-start'>
         {window.location.href.includes('dashboard/') ? (
