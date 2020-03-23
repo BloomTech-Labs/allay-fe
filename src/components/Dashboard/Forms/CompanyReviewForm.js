@@ -103,7 +103,7 @@ const ReviewForm2 = ({
 			}
 		}
 	}, [searchTerm, companies]);
-	console.log(autoLocation);
+
 	// timers for moves
 	let timer = null;
 	let dotTimer = null;
