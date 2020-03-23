@@ -251,18 +251,7 @@ const ReviewForm2 = ({
 						</Flex>
 					</>
 				) : null}
-				{/* bottom nav bar */}
-				<Flex
-					w='70%'
-					pb='1%'
-					justify='flex-end'
-					bottom='0'
-					position='fixed'
-					overflow='hidden'
-					zIndex='999'
-				>
-					<Button>Cancel</Button>
-				</Flex>
+
 				{/* form container */}
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='5%'>
 					{/* start of form  */}
