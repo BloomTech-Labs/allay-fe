@@ -18,7 +18,6 @@ import {
 	Input,
 	Textarea,
 	Button,
-	Spinner,
 	FormErrorMessage,
 	FormLabel,
 	Checkbox,
@@ -95,7 +94,7 @@ const InterviewForm = ({
 			behavior: 'smooth',
 			block: 'start'
 		});
-	}, []);
+	}, [getCompanies]);
 
 	// timers for moves
 	let timer = null;
@@ -368,7 +367,7 @@ const InterviewForm = ({
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
 					{/*--------------- start of form ---------------  */}
 					<form onSubmit={handleSubmit(submitForm)}>
-						<FormControl>
+						<FormControl isRequired>
 							{/* first prompt */}
 							<Flex
 								id='Tag1'
@@ -1005,7 +1004,6 @@ const InterviewForm = ({
 														setOffer(val);
 														time6();
 													}}
-													ref={register}
 												>
 													<CustomRadio value='1'>No offer</CustomRadio>
 													<CustomRadio value='2'>Accepted</CustomRadio>
@@ -1110,8 +1108,8 @@ const InterviewForm = ({
 													rounded='6px'
 													type='number'
 													variant='filled'
-													label='salary"'
-													name='salary"'
+													label='salary'
+													name='salary'
 													autoCapitalize='none'
 													onKeyUp={time7}
 													ref={register}
