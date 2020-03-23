@@ -9,6 +9,7 @@ import postReview from '../../../state/actions';
 import getCompanies from '../../../state/actions';
 import postCompany from '../../../state/actions';
 // styles
+import ProgressBar from '../../Reusable/ProgressBar.js';
 import BeautyStars from 'beauty-stars';
 import { ThinkingDots } from '../../Reusable/ThinkingDots';
 import {
@@ -25,7 +26,6 @@ import {
 	Avatar,
 	RadioButtonGroup,
 	CheckboxGroup,
-	Progress,
 	Link
 } from '@chakra-ui/core';
 import AOS from 'aos';
@@ -338,15 +338,7 @@ const InterviewForm = ({
 							</>
 						)}
 					</Flex>
-					<Progress
-						color='white'
-						background='#344CD0'
-						hasStripe
-						isAnimated
-						rounded='6px'
-						border='1px solid #FFFFFF'
-						value={progress.prog}
-					/>
+					<ProgressBar value={progress.prog} />
 				</Flex>
 				{thinking ? (
 					<>
