@@ -42,10 +42,9 @@ export default function NavBar({
   };
 
   // temporary object until setup in db
-  const reviewTypes = [
-    { id: 1, name: 'Interview' },
-    { id: 2, name: 'Company' },
-    { id: 3, name: 'Other' }
+  const types = [
+    { id: 1, prefix: 'Interview' },
+    { id: 2, prefix: 'Company' }
   ];
 
   const tracks = [
@@ -64,13 +63,11 @@ export default function NavBar({
   };
 
   const handleTypes = e => {
-    trackFilters.includes(e.id)
-      ? setTypeFilters(typeFilters.filter(item => item !== e.id))
-      : setTypeFilters([...typeFilters, e.id]);
+    typeFilters.includes(e.prefix)
+      ? setTypeFilters(typeFilters.filter(item => item !== e.prefix))
+      : setTypeFilters([...typeFilters, e.prefix]);
     e.selected = !e.selected;
   };
-
-  console.log('trackFilters', trackFilters);
 
   return (
     <Flex
@@ -136,25 +133,29 @@ export default function NavBar({
           align='center'
           justify='space-between'
           width='80%'
-          onChange={handleTracks}
-          // spacing={50}
-          // display='flex'
-          // width='100%'
-          // justify-content='space-around'
+          onChange={handleTypes}
         >
-          {reviewTypes.map(type => (
+          {types.map(type => (
             <Button
+              key={type.id}
               size='sm'
               rounded='full'
-              padding='0 4%'
-              // // variantColor={typeFilters.includes(type.id) ? 'blue' : 'gray'}
+              variantColor={typeFilters.includes(type.prefix) ? 'blue' : 'gray'}
               value={type}
             >
-              {type.name}
+              {type.prefix}
             </Button>
           ))}
+        </RadioButtonGroup>
+        <RadioButtonGroup
+          align='center'
+          justify='space-between'
+          width='80%'
+          onChange={handleTracks}
+        >
           {tracks.map(track => (
             <Button
+              key={track.id}
               size='sm'
               rounded='full'
               variantColor={

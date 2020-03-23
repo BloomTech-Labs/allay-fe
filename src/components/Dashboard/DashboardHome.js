@@ -24,16 +24,12 @@ const DashboardHome = ({
   isLoading
 }) => {
   // search state
-  const [filteredReviews, setFilteredReviews] = useState('');
+  const [filteredReviews, setFilteredReviews] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [trackFilters, setTrackFilters] = useState([]);
   const [typeFilters, setTypeFilters] = useState([]);
 
   // pull review data
-  // useEffect(() => {
-  //   getReview();
-  // }, [getReview]);
-
   useEffect(() => {
     getReview();
   }, [getReview]);
@@ -47,17 +43,21 @@ const DashboardHome = ({
     setFilteredReviews(results);
   }, [searchResults]);
 
-  // filter by track
+  // filter by track and review type
   useEffect(() => {
     const filteredResults = data.filter(review =>
-      trackFilters.includes(review.track_name)
+      trackFilters.length > 0 && typeFilters.length > 0
+        ? trackFilters.includes(review.track_name) &&
+          typeFilters.includes(review.review_type)
+        : trackFilters.length > 0
+        ? trackFilters.includes(review.track_name)
+        : typeFilters.includes(review.review_type)
     );
-
-    // data = results;
     setFilteredReviews(filteredResults);
-  }, [trackFilters]);
+  }, [trackFilters, typeFilters]);
 
   console.log('ignacio', data);
+  console.log('filteredReviews', filteredReviews);
 
   return (
     <>
@@ -76,6 +76,8 @@ const DashboardHome = ({
             setSearchResults={setSearchResults}
             trackFilters={trackFilters}
             setTrackFilters={setTrackFilters}
+            typeFilters={typeFilters}
+            setTypeFilters={setTypeFilters}
           />
 
           <Flex height='70%' wrap='wrap'>
@@ -87,7 +89,9 @@ const DashboardHome = ({
               filteredReviews.map(review => (
                 <ReviewCard key={review.id} review={review} history={history} />
               ))
-            ) : searchResults.length > 0 || trackFilters.length > 0 ? (
+            ) : searchResults.length > 0 ||
+              trackFilters.length > 0 ||
+              typeFilters.length > 0 ? (
               <Flex as='h3' w='100%' ml='6%' mt='5%' overflow='visible'>
                 <Alert
                   status='info'
