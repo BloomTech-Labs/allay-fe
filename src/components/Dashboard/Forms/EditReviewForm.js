@@ -4,6 +4,8 @@ import getReviewById from '../../../state/actions/index.js';
 import editReview from '../../../state/actions/index.js';
 import ReactGA from 'react-ga';
 
+import EditReviewInput from '../../Reusable/InputFields/EditReviewInput';
+
 import { useForm } from 'react-hook-form';
 
 //imported styles
@@ -124,73 +126,13 @@ const SingleReview = ({
           <form onSubmit={handleSubmit(submitEdits)}>
 
             <FormControl>
-              <FormLabel fontSize='15px' color='#525252'>
+              <FormLabel fontSize='15px' color='#525252' mt='3'>
                 Job Title
               </FormLabel>
-              <Input
-                mb='4'
-                h='56px'
-                variant='filled'
-                rounded='6px'
+              <EditReviewInput
                 name='job_title'
-                type='text'
                 placeholder={review.job_title}
-                ref={register}
                 value={editValue.job_title}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel fontSize='15px' color='#525252'>
-                Tag Line
-              </FormLabel>
-              <Input
-                mb='4'
-                h='56px'
-                variant='filled'
-                rounded='6px'
-                name='start_date'
-                type='text'
-                placeholder={review.start_date}
-                ref={register}
-                value={editValue.start_date}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel fontSize='15px' color='#525252'>
-                Tag Line
-              </FormLabel>
-              <Input
-                mb='4'
-                h='56px'
-                variant='filled'
-                rounded='6px'
-                name='end_date'
-                type='text'
-                placeholder={review.end_date}
-                ref={register}
-                value={editValue.end_date}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormLabel fontSize='15px' color='#525252'>
-                Tag Line
-              </FormLabel>
-              <Input
-                mb='4'
-                h='56px'
-                variant='filled'
-                rounded='6px'
-                name='typical_hours'
-                type='text'
-                placeholder={review.typical_hours}
-                ref={register}
-                value={editValue.typical_hours}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               />
             </FormControl>
@@ -199,15 +141,9 @@ const SingleReview = ({
               <FormLabel fontSize='15px' color='#525252'>
                 Job Location
               </FormLabel>
-              <Input
-                mb='4'
-                h='56px'
-                variant='filled'
-                rounded='6px'
+              <EditReviewInput
                 name='job_location'
-                type='text'
                 placeholder={review.job_location}
-                ref={register}
                 value={editValue.job_location}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               />
@@ -220,16 +156,19 @@ const SingleReview = ({
               <InputGroup>
                 <InputLeftElement
                   mb='4'
-                  h='56px'
+                  h='58px'
+                  py='32px'
+                  borderColor='#ECF1FE'
                   color='gray.300'
                   fontSize='1.2em'
                   children='$'
                 />
                 <Input
                   mb='4'
-                  h='56px'
-                  variant='filled'
-                  rounded='6px'
+                  h='58px'
+                  py='32px'
+                  borderColor='#ECF1FE'
+                  rounded='3px'
                   name='salary'
                   type='number'
                   placeholder={review.salary}
@@ -243,9 +182,53 @@ const SingleReview = ({
               </FormErrorMessage>
             </FormControl>
 
-            <Flex as='h3' mb='3'>
-              Overall Job Review
-              </Flex>
+            <FormControl>
+              <FormLabel fontSize='15px' color='#525252'>
+                Status
+              </FormLabel>
+              <EditReviewInput
+                name='end_date'
+                placeholder={review.end_date}
+                value={editValue.end_date}
+                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel fontSize='15px' color='#525252'>
+                Start Date
+              </FormLabel>
+              <EditReviewInput
+                name='start_date'
+                placeholder={review.start_date}
+                value={editValue.start_date}
+                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel fontSize='15px' color='#525252'>
+                End Date
+              </FormLabel>
+              <EditReviewInput
+                name='end_date'
+                placeholder={review.end_date}
+                value={editValue.end_date}
+                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel fontSize='15px' color='#525252'>
+                Working Hours
+              </FormLabel>
+              <EditReviewInput
+                name='typical_hours'
+                placeholder={review.typical_hours}
+                value={editValue.typical_hours}
+                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+              />
+            </FormControl>
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
@@ -254,9 +237,8 @@ const SingleReview = ({
               <Textarea
                 mb='4'
                 h='144px'
-                variant='filled'
-                rounded='6px'
-                h='200px'
+                rounded='3px'
+                borderColor='#ECF1FE'
                 rowsMax={6}
                 name='comment'
                 type='text'
@@ -273,9 +255,9 @@ const SingleReview = ({
               </FormLabel>
               <Select
                 mb='4'
-                h='56px'
-                variant='filled'
-                rounded='6px'
+                h='58px'
+                rounded='3px'
+                borderColor='#ECF1FE'
                 name='job_rating'
                 ref={register}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
@@ -293,12 +275,10 @@ const SingleReview = ({
                 w='500px'
                 h='56px'
                 type='submit'
-                _hover={{ bg: '#979797' }}
-                _active={{ bg: '#979797' }}
-                bg='#615E5E'
+                bg='#344CD0'
                 color='white'
                 isLoading={formState.isSubmitting}
-                rounded='6x'
+                rounded='10px'
                 border='none'
               >
                 Edit Review
