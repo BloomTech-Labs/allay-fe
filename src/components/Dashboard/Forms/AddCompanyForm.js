@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import postCompany from '../../../state/actions';
 import { useForm } from 'react-hook-form';
@@ -13,7 +13,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  FormErrorMessage,
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
@@ -23,22 +22,32 @@ import {
 } from '@chakra-ui/core';
 
 const AddCompanyForm = ({ isLoading, postCompany, history }) => {
+  const { register, handleSubmit, errors, formState } = useForm();
   const [state, setState] = useState({});
   const stateHelper = value => {
     setState(value);
   };
-  console.log(state, 'state 30');
-  const { register, handleSubmit, errors, formState } = useForm();
 
-  function validateCompanyState(value) {
-    let error;
-    if (!value) {
-      error = 'Company name is required';
-    } else if (value.length !== 2) {
-      error = 'Must abbreviate state';
+  // function validateCompanyState(value) {
+  //   let error;
+  //   if (!value) {
+  //     error = 'Company name is required';
+  //   } else if (value.length !== 2) {
+  //     error = 'Must abbreviate state';
+  //   }
+  //   return error || true;
+  // }
+
+  // state confirmation search function
+
+  useEffect(() => {
+    if (location.myState) {
+      const stateId = states.filter(i =>
+        i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
+      );
+      setNewLocation({ ...location, myState: stateId[0].id });
     }
-    return error || true;
-  }
+  }, [location]);
 
   const submitForm = newCompany => {
     postCompany(newCompany).then(() => history.push('/dashboard/add-review'));
@@ -56,8 +65,6 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
       </Flex>
     );
   }
-
-  // let searchValue = document.getElementById('searchText');
 
   return (
     <Flex bg='rgba(72, 72, 72, 0.1)' w='100%' minH='100vh'>
@@ -98,7 +105,31 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
                 placeholder='e.g. lambdaschool.com'
                 ref={register}
               />
+              <FormLabel color='#525252'>Company Size</FormLabel>
+              <FormLabel>Track</FormLabel>
+              <Select
+                mb='30px'
+                h='70px'
+                w='404px'
+                rounded='3px'
+                variant='outline'
+                backgroundColor='#FDFDFF'
+                name='size_range'
+                label='size_range'
+                placeholder='Select Company Size'
+                ref={register({ validate: validateTrack })}
+              >
+                <option value={1}>1-10</option>
+                <option value={2}>11-50</option>
+                <option value={3}>51-200</option>
+                <option value={4}>201-500</option>
+                <option value={5}>501-1000</option>
+                <option value={6}>1001-5000</option>
+                <option value={7}>5001-10,000</option>
+                <option value={8}>10,001+</option>
+              </Select>
             </FormControl>
+
             <ButtonGroup mt='1rem' spacing={2}>
               <Button
                 bg='#615E5E'
