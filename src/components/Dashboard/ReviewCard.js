@@ -24,6 +24,7 @@ import {
   ModalCloseButton,
   Button,
   Icon,
+  Image,
   Badge,
   PseudoBox,
   AlertDialog,
@@ -221,7 +222,7 @@ const ReviewCard = ({
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Box as={TiCalendar} size='2em' mr='5px'></Box>
+                  <Image src={require('../../icons/calendar.png')} size='2em' mr='5px'/>
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       {review.start_date} - {review.end_date}
