@@ -57,7 +57,11 @@ const ReviewCard = ({
 
   //routes to single review
   const navToEditRoute = () => {
-    history.push(`/dashboard/${review.review_id}`);
+    if (review.review_type === 'Company') {
+      history.push(`/dashboard/review/${review.review_id}`);
+    } else {
+      history.push(`/dashboard/interview/${review.review_id}`);
+    }
   };
 
   //deletes the review in question
@@ -248,15 +252,15 @@ const ReviewCard = ({
                   <Flex flexDir='column'>
                     {review.difficulty_rating === 5 ? (
                       <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Very Difficult
+                        Very Hard
                       </Flex>
                     ) : review.difficulty_rating === 4 ? (
                       <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Difficult
+                        Somewhat Hard
                       </Flex>
                     ) : review.difficulty_rating === 3 ? (
                       <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Moderate
+                        Somewhat Easy
                       </Flex>
                     ) : review.difficulty_rating === 2 ? (
                       <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>

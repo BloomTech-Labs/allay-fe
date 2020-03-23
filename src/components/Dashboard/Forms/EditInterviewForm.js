@@ -202,64 +202,51 @@ const EditInterviewForm = ({
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
-                Work Status
+                Job Offer
               </FormLabel>
               <Select
                 mb='4'
                 h='65px'
                 rounded='3px'
                 borderColor='#ECF1FE'
-                name='work_status_id'
+                name='offer_status_id'
                 ref={register}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               >
-                <option value={0}>{review.work_status}</option>
-                <option value={1}>Current Employee</option>
-                <option value={2}>Former Employee</option>
-                <option value={3}>Full Time</option>
-                <option value={4}>Part Time</option>
-                <option value={5}>Intern</option>
+                <option value={0}>{review.offer_status}</option>
+                <option value={1}>No Offer</option>
+                <option value={2}>Offer Accepted</option>
+                <option value={3}>Offer Declined</option>
                 ))}
               </Select>
             </FormControl>
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
-                Years of Employment
+                Interview Difficulty
               </FormLabel>
-              <Flex justify='space-between' wrap='nowrap'>
-                <Input
-                  mb='4'
-                  w='48%'
-                  h='58px'
-                  py='32px'
-                  borderColor='#ECF1FE'
-                  rounded='3px'
-                  name='start_date'
-                  type='number'
-                  placeholder={`Start - ${review.start_date}`}
-                  value={editValue.start_date}
-                  onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-                />
-                <Input
-                  mb='4'
-                  w='48%'
-                  h='58px'
-                  py='32px'
-                  borderColor='#ECF1FE'
-                  rounded='3px'
-                  name='end_date'
-                  type='number'
-                  placeholder={`End - ${review.end_date}`}
-                  value={editValue.end_date}
-                  onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-                />
-              </Flex>
+              <Select
+                mb='4'
+                h='65px'
+                rounded='3px'
+                borderColor='#ECF1FE'
+                name='difficulty_rating'
+                ref={register}
+                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+              >
+                <option value={0}>{review.difficulty_rating}</option>
+                <option value={5}>5 - Very Hard</option>
+                <option value={4}>4 - Somewhat Hard</option>
+                <option value={3}>3 - Somewhat Easy</option>
+                <option value={2}>2 - Easy</option>
+                <option value={1}>1 - Very Easy</option>
+                ))}
+              </Select>
             </FormControl>
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
-                Working Hours
+                Interview Rounds
               </FormLabel>
               <EditReviewInput
                 name='typical_hours'
