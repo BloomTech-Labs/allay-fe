@@ -27,6 +27,8 @@ import {
   AlertDialogBody,
   AlertDialogOverlay,
   AlertDialogFooter,
+  CheckboxGroup,
+  Checkbox,
   useToast
 } from '@chakra-ui/core';
 
@@ -249,13 +251,113 @@ const EditInterviewForm = ({
                 Interview Rounds
               </FormLabel>
               <EditReviewInput
-                name='typical_hours'
+                name='interview_rounds'
                 type='number'
-                placeholder={review.typical_hours}
-                value={editValue.typical_hours}
+                placeholder={review.interview_rounds}
+                value={editValue.interview_rounds}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               />
             </FormControl>
+
+            <FormLabel mb='2' >Types of Interview </FormLabel>
+            <CheckboxGroup defaultValue={[review.phone_interview, review.resume_review]} mb='4'>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='phone_interview'
+                value={review.phone_interview}
+                onClick={() => review.phone_interview
+                  ? setEditValue({ ...editValue, phone_interview: false })
+                  : setEditValue({ ...editValue, phone_interview: true })
+                }
+              >
+                Phone Screening
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='resume_review'
+                value={review.resume_review}
+                onClick={() => review.resume_review
+                  ? setEditValue({ ...editValue, resume_review: false })
+                  : setEditValue({ ...editValue, resume_review: true })
+                }
+              >
+                Resume Review
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='take_home_assignments'
+                value={review.take_home_assignments}
+                onClick={() => review.take_home_assignments
+                  ? setEditValue({ ...editValue, take_home_assignments: false })
+                  : setEditValue({ ...editValue, take_home_assignments: true })
+                }
+              >
+                Take Home Assignments
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='online_coding_assignments'
+                value={review.online_coding_assignments}
+                onClick={() => review.online_coding_assignments
+                  ? setEditValue({ ...editValue, online_coding_assignments: false })
+                  : setEditValue({ ...editValue, online_coding_assignments: true })
+                }
+              >
+                Online Coding Assignments
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='portfolio_review'
+                value={review.portfolio_review}
+                onClick={() => review.portfolio_review
+                  ? setEditValue({ ...editValue, portfolio_review: false })
+                  : setEditValue({ ...editValue, portfolio_review: true })
+                }
+              >
+                Portfoilio Review
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='screen_share'
+                value={review.screen_share}
+                onClick={() => review.screen_share
+                  ? setEditValue({ ...editValue, screen_share: false })
+                  : setEditValue({ ...editValue, screen_share: true })
+                }
+              >
+                Screen Share
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='open_source_contribution'
+                value={review.open_source_contribution}
+                onClick={() => review.open_source_contribution
+                  ? setEditValue({ ...editValue, open_source_contribution: false })
+                  : setEditValue({ ...editValue, open_source_contribution: true })
+                }
+              >
+                Open Source Contribution
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='side_projects'
+                value={review.side_projects}
+                onClick={() => review.side_projects
+                  ? setEditValue({ ...editValue, side_projects: false })
+                  : setEditValue({ ...editValue, side_projects: true })
+                }
+              >
+                Side Projects
+							</Checkbox>
+            </CheckboxGroup>
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
@@ -363,9 +465,9 @@ const EditInterviewForm = ({
               </AlertDialog>
             </ButtonGroup>
           </form>
-        </Flex>
-      </Flex>
-    </Flex>
+        </Flex >
+      </Flex >
+    </Flex >
   );
 };
 
