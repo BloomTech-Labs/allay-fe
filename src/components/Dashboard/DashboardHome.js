@@ -50,12 +50,14 @@ const DashboardHome = ({
   // filter by track
   useEffect(() => {
     const filteredResults = data.filter(review =>
-      trackFilters.includes(review.job_rating)
+      trackFilters.includes(review.track_name)
     );
 
     // data = results;
     setFilteredReviews(filteredResults);
   }, [trackFilters]);
+
+  console.log('ignacio', data);
 
   return (
     <>
@@ -83,11 +85,7 @@ const DashboardHome = ({
               </Flex>
             ) : filteredReviews.length >= 1 ? (
               filteredReviews.map(review => (
-                <ReviewCard
-                  key={review.id}
-                  review={review}
-                  history={history}
-                />
+                <ReviewCard key={review.id} review={review} history={history} />
               ))
             ) : searchResults.length > 0 || trackFilters.length > 0 ? (
               <Flex as='h3' w='100%' ml='6%' mt='5%' overflow='visible'>
@@ -112,11 +110,7 @@ const DashboardHome = ({
               </Flex>
             ) : (
               data.map(review => (
-                <ReviewCard
-                  key={review.id}
-                  review={review}
-                  history={history}
-                />
+                <ReviewCard key={review.id} review={review} history={history} />
               ))
             )}
           </Flex>

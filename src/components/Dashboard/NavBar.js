@@ -57,9 +57,9 @@ export default function NavBar({
   ];
 
   const handleTracks = e => {
-    trackFilters.includes(e.id)
-      ? setTrackFilters(trackFilters.filter(item => item !== e.id))
-      : setTrackFilters([...trackFilters, e.id]);
+    trackFilters.includes(e.prefix)
+      ? setTrackFilters(trackFilters.filter(item => item !== e.prefix))
+      : setTrackFilters([...trackFilters, e.prefix]);
     e.selected = !e.selected;
   };
 
@@ -69,6 +69,8 @@ export default function NavBar({
       : setTypeFilters([...typeFilters, e.id]);
     e.selected = !e.selected;
   };
+
+  console.log('trackFilters', trackFilters);
 
   return (
     <Flex
@@ -130,11 +132,11 @@ export default function NavBar({
       </Flex>
 
       <Flex align='center' justify='space-around' pt='2%'>
-        <Flex
+        <RadioButtonGroup
           align='center'
           justify='space-between'
           width='80%'
-          // onChange={handleTracks}
+          onChange={handleTracks}
           // spacing={50}
           // display='flex'
           // width='100%'
@@ -155,13 +157,15 @@ export default function NavBar({
             <Button
               size='sm'
               rounded='full'
-              variantColor={trackFilters.includes(track.id) ? 'blue' : 'gray'}
+              variantColor={
+                trackFilters.includes(track.prefix) ? 'blue' : 'gray'
+              }
               value={track}
             >
               {track.prefix}
             </Button>
           ))}
-        </Flex>
+        </RadioButtonGroup>
       </Flex>
       <Flex align='center' justify='flex-start'>
         {window.location.href.includes('dashboard/') ? (
