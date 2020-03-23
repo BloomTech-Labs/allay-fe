@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactGA from 'react-ga'; // for google analytics
+import { states } from '../../Reusable/statesData';
 // redux
 import { connect } from 'react-redux';
 // actions
-import postCompanyReview from '../../../state/actions';
+import postReview from '../../../state/actions';
 import getCompanies from '../../../state/actions';
 import postCompany from '../../../state/actions';
 // styles
+import ProgressBar from '../../Reusable/ProgressBar.js';
 import BeautyStars from 'beauty-stars';
 import {
 	FormControl,
@@ -16,13 +18,10 @@ import {
 	Select,
 	Textarea,
 	Button,
-	Spinner,
-	FormErrorMessage,
 	FormLabel,
 	InputGroup,
 	InputLeftElement,
 	Avatar,
-	Progress,
 	Link
 } from '@chakra-ui/core';
 import AOS from 'aos';
@@ -35,11 +34,11 @@ const ReviewForm2 = ({
 	loadingCompanies,
 	companies,
 	getCompanies,
-	postCompanyReview
+	postReview
 }) => {
 	//initialize animations
 	AOS.init();
-	const { register, handleSubmit, errors, formState } = useForm();
+	const { register, handleSubmit, formState } = useForm();
 	// thinking state
 	const [thinking, setThinking] = useState(false);
 	const dots = () => {
@@ -48,6 +47,11 @@ const ReviewForm2 = ({
 	// search state
 	const [searchTerm, setSearchTerm] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
+	//auto location
+	const [autoLocation, setAutoLocation] = useState({
+		myCity: '',
+		myState: ''
+	});
 	// star rating
 	const [starState, setStarState] = useState(0);
 	//progress bar
@@ -63,7 +67,6 @@ const ReviewForm2 = ({
 	const [Tag4, setTag4] = useState(false);
 	const [Tag5, setTag5] = useState(false);
 	const [Tag6, setTag6] = useState(false);
-	const [Tag7, setTag7] = useState(false);
 
 	// brings to top on render
 	useEffect(() => {
@@ -76,9 +79,9 @@ const ReviewForm2 = ({
 		const element = document.getElementById('Tag1');
 		element.scrollIntoView({
 			behavior: 'smooth',
-			block: 'start'
+			block: 'center'
 		});
-	}, []);
+	}, [getCompanies]);
 
 	// company search function
 	useEffect(() => {
@@ -86,8 +89,18 @@ const ReviewForm2 = ({
 			const results = companies.filter(company =>
 				company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
 			);
-			console.log(results);
 			setSearchResults(results);
+			if (results.length <= 1) {
+				setAutoLocation({
+					myCity: results[0].hq_city,
+					myState: results[0].state_id
+				});
+			} else {
+				setAutoLocation({
+					myCity: '',
+					myState: ''
+				});
+			}
 		}
 	}, [searchTerm, companies]);
 
@@ -162,9 +175,9 @@ const ReviewForm2 = ({
 	const routeTo5 = () => {
 		setTag5(true);
 		setProgress({
-			prec: 30,
-			mins: 3,
-			prog: 75
+			prec: 20,
+			mins: 1,
+			prog: 80
 		});
 		const element = document.getElementById('Tag5');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -181,39 +194,21 @@ const ReviewForm2 = ({
 	const routeTo6 = () => {
 		setTag6(true);
 		setProgress({
-			prec: 10,
-			mins: 1,
-			prog: 85
-		});
-		const element = document.getElementById('Tag6');
-		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-		setThinking(false);
-	};
-	// 7th tag
-	const time6 = () => {
-		clearTimeout(timer);
-		clearTimeout(dotTimer);
-		dotTimer = setTimeout(dots, 500);
-		timer = setTimeout(routeTo7, 2000);
-	};
-
-	const routeTo7 = () => {
-		setTag7(true);
-		setProgress({
 			prec: 100,
 			mins: 0,
 			prog: 100
 		});
-		const element = document.getElementById('Tag7');
+		const element = document.getElementById('Tag6');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		setThinking(false);
 	};
 
 	//submit handler
 	const submitForm = data => {
-		postCompanyReview(localStorage.getItem('userId'), {
+		postReview(localStorage.getItem('userId'), {
 			...data,
-			job_rating: starState
+			review_type_id: 1,
+			overall_rating: starState
 		}).then(() => history.push('/dashboard'));
 		ReactGA.event({
 			category: 'Review',
@@ -255,15 +250,7 @@ const ReviewForm2 = ({
 							</>
 						)}
 					</Flex>
-					<Progress
-						color='white'
-						background='#344CD0'
-						hasStripe
-						isAnimated
-						rounded='6px'
-						border='1px solid #FFFFFF'
-						value={progress.prog}
-					/>
+					<ProgressBar value={progress.prog} />
 				</Flex>
 				{thinking ? (
 					<>
@@ -279,11 +266,12 @@ const ReviewForm2 = ({
 						</Flex>
 					</>
 				) : null}
+
 				{/* form container */}
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='5%'>
 					{/* start of form  */}
 					<form onSubmit={handleSubmit(submitForm)}>
-						<FormControl>
+						<FormControl isRequired>
 							{/* first prompt */}
 							<Flex
 								id='Tag1'
@@ -310,7 +298,7 @@ const ReviewForm2 = ({
 								{/* company box */}
 								<Flex
 									w='459px'
-									h='257px'
+									h='600px'
 									mb='8%'
 									px='6'
 									py='8'
@@ -362,24 +350,104 @@ const ReviewForm2 = ({
 									<FormLabel>2. Status at the company</FormLabel>
 									<Select
 										h='56px'
+										mb='6'
 										rounded='6px'
 										variant='filled'
-										label='work_status'
-										name='work_status'
+										label='work_status_id'
+										name='work_status_id'
 										placeholder='Select one'
-										onChange={time1}
 										ref={register}
 									>
-										<option value='Current Employee'>Current Employee</option>
-										<option value='Former Employee'>Former Employee</option>
-										<option value='Full Time'>Full Time</option>
-										<option value='Part Time'>Part Time</option>
-										<option value='Intern<'>Intern</option>
+										<option value={1}>Current Employee</option>
+										<option value={2}>Former Employee</option>
+										<option value={3}>Full Time</option>
+										<option value={4}>Part Time</option>
+										<option value={5}>Intern</option>
 									</Select>
+									<FormLabel>3. Job Title</FormLabel>
+									<Input
+										h='56px'
+										mb='6'
+										variant='filled'
+										rounded='6px'
+										autoCapitalize='none'
+										type='text'
+										label='job_title'
+										name='job_title'
+										list='job_title'
+										ref={register}
+									/>
+									<FormLabel>3. Location of company</FormLabel>
+									<Flex>
+										<Input
+											h='56px'
+											mb='6'
+											mr='1%'
+											variant='filled'
+											rounded='6px'
+											autoCapitalize='none'
+											type='text'
+											label='city'
+											name='city'
+											list='city'
+											placeholder='ex: Nashville '
+											ref={register}
+											value={autoLocation.myCity}
+										/>
+										<Select
+											h='56px'
+											rounded='6px'
+											variant='filled'
+											label='state_id'
+											name='state_id'
+											placeholder='Select one'
+											ref={register}
+											value={autoLocation.myState}
+										>
+											{states.map(i => (
+												<option key={i.id} value={i.id}>
+													{i.state_name}
+												</option>
+											))}
+										</Select>
+									</Flex>
+									<FormLabel>5. Length of position</FormLabel>
+									<Flex w='100%' justify='space-between'>
+										<Input
+											type='number'
+											min='1970'
+											max='2030'
+											h='56px'
+											variant='filled'
+											rounded='6px'
+											w='45%'
+											mr='2%'
+											label='start_date'
+											name='start_date'
+											placeholder='YYYY'
+											ref={register}
+										/>
+
+										<Input
+											h='56px'
+											variant='filled'
+											rounded='6px'
+											autoCapitalize='none'
+											type='number'
+											min='1970'
+											max='2030'
+											w='45%'
+											label='end_date'
+											name='end_date'
+											placeholder='YYYY'
+											onKeyUp={time1}
+											ref={register}
+										/>
+									</Flex>
 								</Flex>
 								{/* avatar */}
 								<Flex
-									h='257px'
+									h='600px'
 									align='flex-end'
 									ml='1%'
 									data-aos='fade-in'
@@ -398,113 +466,6 @@ const ReviewForm2 = ({
 								<>
 									<Flex
 										id='Tag2'
-										align='center'
-										h='5%'
-										p='1%'
-										w='416px'
-										mb='8%'
-										bg='#F2F6FE'
-										rounded='20px'
-										data-aos='fade-right'
-										data-aos-offset='200'
-										data-aos-delay='50'
-										data-aos-duration='1000'
-										data-aos-easing='ease-in-out'
-										data-aos-mirror='true'
-										data-aos-once='true'
-									>
-										<p>I need a little more detail still</p>
-									</Flex>
-									{/* form container  */}
-									<Flex w='100%' justify='flex-end'>
-										{/* job title box */}
-										<Flex
-											w='459px'
-											h='257px'
-											mb='8%'
-											px='6'
-											py='8'
-											border='1px solid #BBBDC6'
-											rounded='6px'
-											flexDir='column'
-											data-aos='fade-in'
-											data-aos-offset='200'
-											data-aos-delay='1000'
-											data-aos-duration='1500'
-											data-aos-easing='ease-in-out'
-											data-aos-mirror='true'
-											data-aos-once='true'
-										>
-											<FormLabel>1. Job Title</FormLabel>
-											<Input
-												h='56px'
-												mb='5'
-												variant='filled'
-												rounded='6px'
-												autoCapitalize='none'
-												type='text'
-												label='job_title'
-												name='job_title'
-												list='job_title'
-												ref={register}
-											/>
-											<FormLabel>2. Length of position</FormLabel>
-											<Flex w='100%' justify='space-between'>
-												<Input
-													type='number'
-													min='1970'
-													max='2030'
-													h='56px'
-													variant='filled'
-													rounded='6px'
-													w='45%'
-													mr='2%'
-													label='start_date'
-													name='start_date'
-													placeholder='YYYY'
-													ref={register}
-												/>
-
-												<Input
-													h='56px'
-													variant='filled'
-													rounded='6px'
-													autoCapitalize='none'
-													type='number'
-													min='1970'
-													max='2030'
-													w='45%'
-													label='end_date'
-													name='end_date'
-													placeholder='YYYY'
-													onKeyUp={time2}
-													ref={register}
-												/>
-											</Flex>
-										</Flex>
-										{/* avatar */}
-										<Flex
-											h='257px'
-											align='flex-end'
-											ml='1%'
-											data-aos='fade-in'
-											data-aos-offset='200'
-											data-aos-delay='1000'
-											data-aos-duration='1500'
-											data-aos-easing='ease-in-out'
-											data-aos-mirror='true'
-											data-aos-once='true'
-										>
-											<Avatar size='md' src='https://bit.ly/broken-link' />
-										</Flex>
-									</Flex>
-								</>
-							) : null}
-							{/* third prompt */}
-							{Tag3 ? (
-								<>
-									<Flex
-										id='Tag3'
 										align='center'
 										p='1%'
 										mb='2%'
@@ -573,7 +534,7 @@ const ReviewForm2 = ({
 												type='text'
 												name='comment'
 												rounded='6px'
-												onKeyUp={time3}
+												onKeyUp={time2}
 												ref={register}
 											/>
 										</Flex>
@@ -596,10 +557,10 @@ const ReviewForm2 = ({
 								</>
 							) : null}
 							{/* 4th prompt */}
-							{Tag4 ? (
+							{Tag3 ? (
 								<>
 									<Flex
-										id='Tag4'
+										id='Tag3'
 										align='center'
 										h='5%'
 										p='1%'
@@ -656,10 +617,13 @@ const ReviewForm2 = ({
 										>
 											<FormLabel>Working hours</FormLabel>
 											<Select
+												h='56px'
+												rounded='6px'
+												variant='filled'
 												label='typical_hours'
 												name='typical_hours'
 												placeholder='Select one'
-												onChange={time4}
+												onChange={time3}
 												ref={register}
 											>
 												<option value={29}>29 hours or less</option>
@@ -688,10 +652,10 @@ const ReviewForm2 = ({
 								</>
 							) : null}
 							{/* 5th prompt */}
-							{Tag5 ? (
+							{Tag4 ? (
 								<>
 									<Flex
-										id='Tag5'
+										id='Tag4'
 										align='center'
 										h='5%'
 										p='1%'
@@ -749,7 +713,7 @@ const ReviewForm2 = ({
 													type='number'
 													label='salary'
 													name='salary'
-													onChange={time5}
+													onKeyUp={time4}
 													ref={register}
 												/>
 											</InputGroup>
@@ -773,10 +737,10 @@ const ReviewForm2 = ({
 								</>
 							) : null}
 							{/* 6th prompt */}
-							{Tag6 ? (
+							{Tag5 ? (
 								<>
 									<Flex
-										id='Tag6'
+										id='Tag5'
 										align='center'
 										h='5%'
 										w='416px'
@@ -838,7 +802,7 @@ const ReviewForm2 = ({
 													activeColor='blue'
 													onChange={value => {
 														setStarState(value);
-														time6();
+														time5();
 													}}
 												/>
 											</Flex>
@@ -861,10 +825,10 @@ const ReviewForm2 = ({
 									</Flex>
 								</>
 							) : null}
-							{Tag7 ? (
+							{Tag6 ? (
 								<>
 									<Flex
-										id='Tag7'
+										id='Tag6'
 										align='center'
 										p='1%'
 										h='5%'
@@ -951,5 +915,5 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	(postCompanyReview, getCompanies, postCompany)
+	(postReview, getCompanies, postCompany)
 )(ReviewForm2);

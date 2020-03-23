@@ -52,6 +52,7 @@ export const getReviewById = reviewId => dispatch => {
 // ============ POST REVIEW ===========
 
 export const postReview = (userId, newReview) => dispatch => {
+	console.log('FORM DATA', newReview);
 	dispatch({ type: POST_REVIEW_START });
 	return axiosWithAuth()
 		.post(`/users/${userId}/add-review`, newReview)
