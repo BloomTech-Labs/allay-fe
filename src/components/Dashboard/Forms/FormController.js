@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //styles
-import { Flex, Avatar } from '@chakra-ui/core';
+import { Flex, Avatar, Button } from '@chakra-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ProgressBar from '../../Reusable/ProgressBar.js';
@@ -68,6 +68,23 @@ const FormController = ({ history }) => {
 								)}
 							</Flex>
 							<ProgressBar value={progress.prog} />
+						</Flex>
+						<Flex
+							w='70%'
+							pb='1%'
+							justify='flex-end'
+							bottom='0'
+							position='fixed'
+							overflow='hidden'
+							zIndex='999'
+						>
+							<Button
+								onClick={() => {
+									history.push('/dashboard');
+								}}
+							>
+								Cancel
+							</Button>
 						</Flex>
 						{/* Start of messenger  */}
 						<Flex

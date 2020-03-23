@@ -47,6 +47,11 @@ const ReviewForm2 = ({
 	// search state
 	const [searchTerm, setSearchTerm] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
+	//auto location
+	const [autoLocation, setAutoLocation] = useState({
+		myCity: '',
+		myState: ''
+	});
 	// star rating
 	const [starState, setStarState] = useState(0);
 	//progress bar
@@ -84,8 +89,18 @@ const ReviewForm2 = ({
 			const results = companies.filter(company =>
 				company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
 			);
-			console.log(results);
 			setSearchResults(results);
+			if (results.length <= 1) {
+				setAutoLocation({
+					myCity: results[0].hq_city,
+					myState: results[0].state_id
+				});
+			} else {
+				setAutoLocation({
+					myCity: '',
+					myState: ''
+				});
+			}
 		}
 	}, [searchTerm, companies]);
 
@@ -251,18 +266,7 @@ const ReviewForm2 = ({
 						</Flex>
 					</>
 				) : null}
-				{/* bottom nav bar */}
-				<Flex
-					w='70%'
-					pb='1%'
-					justify='flex-end'
-					bottom='0'
-					position='fixed'
-					overflow='hidden'
-					zIndex='999'
-				>
-					<Button>Cancel</Button>
-				</Flex>
+
 				{/* form container */}
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='5%'>
 					{/* start of form  */}
@@ -388,6 +392,7 @@ const ReviewForm2 = ({
 											list='city'
 											placeholder='ex: Nashville '
 											ref={register}
+											value={autoLocation.myCity}
 										/>
 										<Select
 											h='56px'
@@ -397,9 +402,12 @@ const ReviewForm2 = ({
 											name='state_id'
 											placeholder='Select one'
 											ref={register}
+											value={autoLocation.myState}
 										>
 											{states.map(i => (
-												<option value={i.id}>{i.state_name}</option>
+												<option key={i.id} value={i.id}>
+													{i.state_name}
+												</option>
 											))}
 										</Select>
 									</Flex>

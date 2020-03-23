@@ -375,18 +375,7 @@ const InterviewForm = ({
 						</Flex>
 					</>
 				) : null}
-				{/* bottom nav bar */}
-				<Flex
-					w='70%'
-					pb='1%'
-					justify='flex-end'
-					bottom='0'
-					position='fixed'
-					overflow='hidden'
-					zIndex='999'
-				>
-					<Button>Cancel</Button>
-				</Flex>
+
 				{/* form container */}
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
 					{/*--------------- start of form ---------------  */}
@@ -489,37 +478,6 @@ const InterviewForm = ({
 										placeholder='e.g. Los Angeles, CA'
 										onChange={time1}
 									/>
-									{/* <Flex>
-										<Input
-											h='56px'
-											mr='1%'
-											variant='filled'
-											rounded='6px'
-											autoCapitalize='none'
-											type='text'
-											label='city'
-											name='city'
-											list='city'
-											placeholder='ex: Nashville '
-											ref={register}
-										/>
-										<Select
-											h='56px'
-											rounded='6px'
-											variant='filled'
-											label='state_id'
-											name='state_id'
-											placeholder='Select one'
-											ref={register}
-											onChange={time1}
-										>
-											{states.map(i => (
-												<option key={i.id} value={i.id}>
-													{i.state_name}
-												</option>
-											))}
-										</Select>
-									</Flex> */}
 								</Flex>
 								{/* avatar */}
 								<Flex
