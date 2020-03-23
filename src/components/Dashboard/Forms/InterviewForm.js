@@ -10,6 +10,7 @@ import getCompanies from '../../../state/actions';
 import postCompany from '../../../state/actions';
 // styles
 import ProgressBar from '../../Reusable/ProgressBar.js';
+import CustomAutoComplete from '../../Reusable/InputFields/Autocomplete';
 import BeautyStars from 'beauty-stars';
 import { ThinkingDots } from '../../Reusable/ThinkingDots';
 import {
@@ -41,6 +42,13 @@ const InterviewForm = ({
 }) => {
 	AOS.init();
 	const { register, handleSubmit, formState } = useForm();
+	// state "state"
+	const [location, setLocation] = useState({});
+	const [newLocation, setNewLocation] = useState({});
+	const stateSelectorHelper = value => {
+		setLocation(value);
+	};
+	// console.log(location);
 	// thinking state
 	const [thinking, setThinking] = useState(false);
 	const dots = () => {
@@ -69,6 +77,18 @@ const InterviewForm = ({
 			setSearchResults(results);
 		}
 	}, [searchTerm, companies]);
+
+	// state confirmation search function
+
+	useEffect(() => {
+		if (location.myState) {
+			const stateId = states.filter(i =>
+				i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
+			);
+			setNewLocation({ ...location, myState: stateId[0].id });
+		}
+	}, [location]);
+	console.log('newLocation', newLocation);
 
 	// state for visibility
 	const [Tag2, setTag2] = useState(false);
@@ -296,7 +316,9 @@ const InterviewForm = ({
 			...data,
 			review_type_id: 2,
 			overall_rating: starState,
-			offer_status_id: offer
+			offer_status_id: offer,
+			city: newLocation.myCity,
+			state_id: newLocation.myState
 		}).then(() => history.push('/dashboard'));
 		ReactGA.event({
 			category: 'Review',
@@ -460,7 +482,15 @@ const InterviewForm = ({
 										ref={register}
 									/>
 									<FormLabel>3. Place of interview</FormLabel>
-									<Flex>
+									<CustomAutoComplete
+										stateHelper={stateSelectorHelper}
+										id='Company Headquarters'
+										name='Company Headquarters'
+										label='Company Headquarters'
+										placeholder='e.g. Los Angeles, CA'
+										onChange={time1}
+									/>
+									{/* <Flex>
 										<Input
 											h='56px'
 											mr='1%'
@@ -490,7 +520,7 @@ const InterviewForm = ({
 												</option>
 											))}
 										</Select>
-									</Flex>
+									</Flex> */}
 								</Flex>
 								{/* avatar */}
 								<Flex
@@ -824,6 +854,7 @@ const InterviewForm = ({
 												name='comment'
 												placeholder='What questions came up? What did you discuss? What did you come away with from this interview? '
 												rounded='6px'
+												ref={register}
 												onKeyUp={time4}
 											/>
 										</Flex>
