@@ -47,6 +47,11 @@ const ReviewForm2 = ({
 	// search state
 	const [searchTerm, setSearchTerm] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
+	//auto location
+	const [autoLocation, setAutoLocation] = useState({
+		myCity: '',
+		myState: ''
+	});
 	// star rating
 	const [starState, setStarState] = useState(0);
 	//progress bar
@@ -84,11 +89,21 @@ const ReviewForm2 = ({
 			const results = companies.filter(company =>
 				company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
 			);
-			console.log(results);
 			setSearchResults(results);
+			if (results.length <= 1) {
+				setAutoLocation({
+					myCity: results[0].hq_city,
+					myState: results[0].state_id
+				});
+			} else {
+				setAutoLocation({
+					myCity: '',
+					myState: ''
+				});
+			}
 		}
 	}, [searchTerm, companies]);
-
+	console.log(autoLocation);
 	// timers for moves
 	let timer = null;
 	let dotTimer = null;
@@ -377,6 +392,7 @@ const ReviewForm2 = ({
 											list='city'
 											placeholder='ex: Nashville '
 											ref={register}
+											value={autoLocation.myCity}
 										/>
 										<Select
 											h='56px'
@@ -386,9 +402,12 @@ const ReviewForm2 = ({
 											name='state_id'
 											placeholder='Select one'
 											ref={register}
+											value={autoLocation.myState}
 										>
 											{states.map(i => (
-												<option value={i.id}>{i.state_name}</option>
+												<option key={i.id} value={i.id}>
+													{i.state_name}
+												</option>
 											))}
 										</Select>
 									</Flex>
