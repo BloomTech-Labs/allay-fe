@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import postCompany from '../../../state/actions';
 import { useForm } from 'react-hook-form';
-import Autocomplete from 'react-google-autocomplete';
+import CustomAutocomplete from '../../Reusable/InputFields/Autocomplete.js';
 
 // styles
 import CustomSpinner from '../../CustomSpinner.js';
@@ -52,6 +52,8 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
     );
   }
 
+  // let searchValue = document.getElementById('searchText');
+
   return (
     <Flex bg='rgba(72, 72, 72, 0.1)' w='100%' minH='100vh'>
       <Flex
@@ -73,24 +75,23 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
                 placeholder='e.g. UPS'
                 ref={register}
               />
-              <FormLabel color='#525252'>City</FormLabel>
-              <OnboardingInput
-                name='hq_city'
-                label='City'
-                placeholder='e.g. Los Angeles'
+              <FormLabel color='#525252'>
+                Company Headquarters Location
+              </FormLabel>
+              <CustomAutocomplete
+                id='Company Headquarters'
+                name='Company Headquarters'
+                label='Company Headquarters'
+                placeholder='e.g. Los Angeles, CA'
                 ref={register}
               />
-
-              <FormLabel color='#525252'>State</FormLabel>
+              <FormLabel color='#525252'>Company Website</FormLabel>
               <OnboardingInput
-                name='hq_state'
-                label='State'
-                placeholder='e.g. CA'
-                ref={register({ validate: validateCompanyState })}
+                name='domain'
+                label='domain'
+                placeholder='e.g. lambdaschool.com'
+                ref={register}
               />
-              <FormErrorMessage>
-                {errors.hq_state && errors.hq_state.message}
-              </FormErrorMessage>
             </FormControl>
             <ButtonGroup mt='1rem' spacing={2}>
               <Button
