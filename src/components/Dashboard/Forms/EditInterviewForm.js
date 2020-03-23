@@ -30,7 +30,7 @@ import {
   useToast
 } from '@chakra-ui/core';
 
-const EditReviewForm = ({
+const EditInterviewForm = ({
   review,
   getReviewById,
   editReview,
@@ -115,7 +115,7 @@ const EditReviewForm = ({
     <Flex w='100%' bg='rgba(72, 72, 72, 0.1)'>
       <Flex w='100%' justify='center' py='3rem' px='15rem' bg='#F2F6FE'>
         <Flex justify='center' align='start' flexDir='column'>
-          <h2> Edit Company Review</h2>
+          <h2> Edit Interview Review</h2>
           <form onSubmit={handleSubmit(submitEdits)}>
             <FormControl>
               <FormLabel fontSize='15px' color='#525252' mt='3'>
@@ -392,4 +392,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   (getReviewById, editReview)
-)(EditReviewForm);
+)(EditInterviewForm);

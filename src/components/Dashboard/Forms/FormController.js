@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 //styles
-import { Flex, Avatar, Progress } from '@chakra-ui/core';
+import { Flex, Avatar } from '@chakra-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ProgressBar from '../../Reusable/ProgressBar.js';
 //components
 import InterviewForm from './InterviewForm';
 import CompanyReviewForm from './CompanyReviewForm';
@@ -66,15 +67,7 @@ const FormController = ({ history }) => {
 									</>
 								)}
 							</Flex>
-							<Progress
-								color='white'
-								background='#344CD0'
-								hasStripe
-								isAnimated
-								rounded='6px'
-								border='1px solid #FFFFFF'
-								value={progress.prog}
-							/>
+							<ProgressBar value={progress.prog} />
 						</Flex>
 						{/* Start of messenger  */}
 						<Flex
@@ -99,7 +92,7 @@ const FormController = ({ history }) => {
 							data-aos-once='false'
 						>
 							<p>
-								Hi John,{' '}
+								Hi {localStorage.getItem('username')},{' '}
 								<span role='img' aria-label='smile'>
 									🙂
 								</span>{' '}
