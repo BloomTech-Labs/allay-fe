@@ -17,7 +17,6 @@ import {
 	Select,
 	Textarea,
 	Button,
-	FormErrorMessage,
 	FormLabel,
 	InputGroup,
 	InputLeftElement,
@@ -39,7 +38,7 @@ const ReviewForm2 = ({
 }) => {
 	//initialize animations
 	AOS.init();
-	const { register, handleSubmit, errors, formState } = useForm();
+	const { register, handleSubmit, formState } = useForm();
 	// thinking state
 	const [thinking, setThinking] = useState(false);
 	const dots = () => {
@@ -63,7 +62,6 @@ const ReviewForm2 = ({
 	const [Tag4, setTag4] = useState(false);
 	const [Tag5, setTag5] = useState(false);
 	const [Tag6, setTag6] = useState(false);
-	const [Tag7, setTag7] = useState(false);
 
 	// brings to top on render
 	useEffect(() => {
@@ -78,7 +76,7 @@ const ReviewForm2 = ({
 			behavior: 'smooth',
 			block: 'center'
 		});
-	}, []);
+	}, [getCompanies]);
 
 	// company search function
 	useEffect(() => {
@@ -186,25 +184,6 @@ const ReviewForm2 = ({
 			prog: 100
 		});
 		const element = document.getElementById('Tag6');
-		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-		setThinking(false);
-	};
-	// 7th tag
-	const time6 = () => {
-		clearTimeout(timer);
-		clearTimeout(dotTimer);
-		dotTimer = setTimeout(dots, 500);
-		timer = setTimeout(routeTo7, 2000);
-	};
-
-	const routeTo7 = () => {
-		setTag7(true);
-		setProgress({
-			prec: 100,
-			mins: 0,
-			prog: 100
-		});
-		const element = document.getElementById('Tag7');
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		setThinking(false);
 	};
