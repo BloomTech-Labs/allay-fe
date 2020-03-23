@@ -83,7 +83,7 @@ export default function NavBar({
 		>
 			<Flex align='center' justify='space-between' pt='2%'>
 				<Flex align='center'>
-					<Avatar mr='12%' size='xl' src='https://bit.ly/broken-link' />
+					<Avatar mr='12%' size='md' src='https://bit.ly/broken-link' />
 					<h1> Allay </h1>
 				</Flex>
 				<Flex>
