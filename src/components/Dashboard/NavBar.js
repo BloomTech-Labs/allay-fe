@@ -41,31 +41,31 @@ export default function NavBar({
     setSearchResults(event.target.value);
   };
 
-  // temporary object until setup in db
+  // We could get this fronm the DB if we had endpoints
   const types = [
-    { id: 1, prefix: 'Interview' },
-    { id: 2, prefix: 'Company' }
+    { id: 1, name: 'Interview' },
+    { id: 2, name: 'Company' }
   ];
 
   const tracks = [
-    { id: 1, prefix: 'WEB' },
-    { id: 2, prefix: 'UX' },
-    { id: 3, prefix: 'DS' },
-    { id: 4, prefix: 'IOS' },
-    { id: 5, prefix: 'AND' }
+    { id: 1, name: 'WEB' },
+    { id: 2, name: 'UX' },
+    { id: 3, name: 'DS' },
+    { id: 4, name: 'IOS' },
+    { id: 5, name: 'AND' }
   ];
 
   const handleTracks = e => {
-    trackFilters.includes(e.prefix)
-      ? setTrackFilters(trackFilters.filter(item => item !== e.prefix))
-      : setTrackFilters([...trackFilters, e.prefix]);
+    trackFilters.includes(e.name)
+      ? setTrackFilters(trackFilters.filter(item => item !== e.name))
+      : setTrackFilters([...trackFilters, e.name]);
     e.selected = !e.selected;
   };
 
   const handleTypes = e => {
-    typeFilters.includes(e.prefix)
-      ? setTypeFilters(typeFilters.filter(item => item !== e.prefix))
-      : setTypeFilters([...typeFilters, e.prefix]);
+    typeFilters.includes(e.name)
+      ? setTypeFilters(typeFilters.filter(item => item !== e.name))
+      : setTypeFilters([...typeFilters, e.name]);
     e.selected = !e.selected;
   };
 
@@ -140,10 +140,11 @@ export default function NavBar({
               key={type.id}
               size='sm'
               rounded='full'
-              variantColor={typeFilters.includes(type.prefix) ? 'blue' : 'gray'}
+              marginBottom='10px'
+              variantColor={typeFilters.includes(type.name) ? 'blue' : 'gray'}
               value={type}
             >
-              {type.prefix}
+              {type.name}
             </Button>
           ))}
         </RadioButtonGroup>
@@ -158,12 +159,11 @@ export default function NavBar({
               key={track.id}
               size='sm'
               rounded='full'
-              variantColor={
-                trackFilters.includes(track.prefix) ? 'blue' : 'gray'
-              }
+              marginBottom='10px'
+              variantColor={trackFilters.includes(track.name) ? 'blue' : 'gray'}
               value={track}
             >
-              {track.prefix}
+              {track.name}
             </Button>
           ))}
         </RadioButtonGroup>

@@ -56,9 +56,6 @@ const DashboardHome = ({
     setFilteredReviews(filteredResults);
   }, [trackFilters, typeFilters]);
 
-  console.log('ignacio', data);
-  console.log('filteredReviews', filteredReviews);
-
   return (
     <>
       <Flex w='100%' minH='100vh' justify='center'>
