@@ -8,7 +8,6 @@ import { Input } from '@chakra-ui/core';
 function CustomAutocomplete({ ...props }, ref) {
 	let autocomplete = null;
 	let [state, setState] = useState({ myCity: '', myState: '' });
-	console.log(state, 'line 11');
 
 	useEffect(() => {
 		props.stateHelper(state);

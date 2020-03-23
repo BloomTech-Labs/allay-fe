@@ -88,7 +88,6 @@ const InterviewForm = ({
 			setNewLocation({ ...location, myState: stateId[0].id });
 		}
 	}, [location]);
-	console.log('newLocation', newLocation);
 
 	// state for visibility
 	const [Tag2, setTag2] = useState(false);
