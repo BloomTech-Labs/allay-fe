@@ -193,7 +193,7 @@ const ReviewCard = ({
                 py='1%'
               >
                 <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/clock.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                  <Image src={require('../../icons/clock-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       {review.typical_hours} hrs week
@@ -204,7 +204,7 @@ const ReviewCard = ({
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/dollar-sign.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                  <Image src={require('../../icons/dollar-sign-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       ${review.salary}
@@ -215,7 +215,7 @@ const ReviewCard = ({
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/user-check.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                  <Image src={require('../../icons/user-check-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       {review.work_status}
@@ -226,7 +226,7 @@ const ReviewCard = ({
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/calendar.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                  <Image src={require('../../icons/calendar-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       {review.start_date} - {review.end_date}
@@ -248,7 +248,7 @@ const ReviewCard = ({
                 py='1%'
               >
                 <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/difficulty.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                  <Image src={require('../../icons/difficulty-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     {review.difficulty_rating === 5 ? (
                       <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
@@ -277,7 +277,7 @@ const ReviewCard = ({
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/dollar-sign.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                  <Image src={require('../../icons/dollar-sign-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       ${review.salary}
@@ -289,9 +289,9 @@ const ReviewCard = ({
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
                   {review.offer_status === 'Offer Accepted' ? (
-                    <Image src={require('../../icons/thumbs-up.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                    <Image src={require('../../icons/thumbs-up-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   ) : review.offer_status === 'Offer Declined' || 'No Offer' ? (
-                    <Image src={require('../../icons/thumbs-down.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                    <Image src={require('../../icons/thumbs-down-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   ) : null}
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
@@ -303,7 +303,7 @@ const ReviewCard = ({
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/rounds.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                  <Image src={require('../../icons/rounds-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       {review.interview_rounds} Rounds
@@ -462,7 +462,7 @@ const ReviewCard = ({
           '100%', // 768px upwards
           '45%' // 992px upwards
         ]}
-        mt='3%'
+        mb='3%'
         mx='2.5%'
         px='4%'
         py='2%'
@@ -551,16 +551,17 @@ const ReviewCard = ({
             fontWeight='light'
             justify='space-evenly'
             align='center'
-            mb='1%'
+            my='4%'
           >
             <Flex align='center'>
-              <Box as={FaRegMoneyBillAlt} mr='10px'></Box>
+              <Image src={require('../../icons/dollar-sign.png')} size='1.5em' />
               <Flex as='p' overflow='hidden'>
-                ${review.salary}
+                {review.salary}
               </Flex>
             </Flex>
+
             <Flex align='center'>
-              <Box as={GoLocation} mr='10px'></Box>
+              <Image src={require('../../icons/map-pin.png')} size='1.5em' mr='5px' />
               <Flex as='p'>
                 {review.city}, {review.state_name}
               </Flex>
@@ -568,7 +569,7 @@ const ReviewCard = ({
 
             {review.review_type === 'Company' ? (
               <Flex align='center'>
-                <Box as={FaRegClock} mr='10px'></Box>
+                <Image src={require('../../icons/clock.png')} size='1.5em' mr='5px' />
                 <Flex as='p'>
                   {review.start_date}-{review.end_date}
                 </Flex>
@@ -576,9 +577,9 @@ const ReviewCard = ({
             ) : review.review_type === 'Interview' ? (
               <Flex align='center'>
                 {review.offer_status === 'Offer Accepted' ? (
-                  <Box as={FaThumbsUp} mr='10px'></Box>
+                  <Image src={require('../../icons/thumbs-up.png')} size='1.5em' mr='5px' />
                 ) : review.offer_status === 'Offer Declined' || 'No Offer' ? (
-                  <Box as={FaThumbsDown} mr='10px'></Box>
+                  <Image src={require('../../icons/thumbs-down.png')} size='1.5em' mr='5px' />
                 ) : null}
                 <Flex as='p'>
                   {review.offer_status}
