@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import postCompany from '../../../state/actions';
 import { useForm } from 'react-hook-form';
 import CustomAutocomplete from '../../Reusable/InputFields/Autocomplete.js';
+import { states } from '../../Reusable/statesData.js';
 
 // styles
 import CustomSpinner from '../../CustomSpinner.js';
@@ -18,15 +19,17 @@ import {
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogBody,
-  AlertDialogFooter
+  AlertDialogFooter,
+  Select
 } from '@chakra-ui/core';
 
 const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   const { register, handleSubmit, errors, formState } = useForm();
-  const [state, setState] = useState({});
-  const stateHelper = value => {
-    setState(value);
-  };
+  const [location, setLocation] = useState({});
+	const [newLocation, setNewLocation] = useState({});
+	const stateSelectorHelper = value => {
+		setLocation(value);
+	};
 
   // function validateCompanyState(value) {
   //   let error;
@@ -38,20 +41,31 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   //   return error || true;
   // }
 
-  // state confirmation search function
-
+  // confirm myState and replace with matching state ID
   useEffect(() => {
     if (location.myState) {
       const stateId = states.filter(i =>
         i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
       );
-      setNewLocation({ ...location, myState: stateId[0].id });
+      const setNewLocation = { ...location, myState: stateId[0].id };
     }
   }, [location]);
 
-  const submitForm = newCompany => {
-    postCompany(newCompany).then(() => history.push('/dashboard/add-review'));
-  };
+  // const submitForm = newCompany => {
+  //   postCompany(newCompany).then(() => history.push('/dashboard/add-review'));
+  // };
+
+  //submit handler
+	const submitForm = newCompany => {
+		postCompany(newCompany) {
+			name:name,
+			city: newLocation.myCity,
+      state_id: newLocation.myState,
+      domain:domain
+    })
+    .then(() => history.push('/dashboard/add-review'));
+		
+	};
 
   // specifically for the cancel button functionality
   const [isOpen, setIsOpen] = useState();
@@ -92,9 +106,9 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
               </FormLabel>
               <CustomAutocomplete
                 stateHelper={stateHelper}
-                id='Company Headquarters'
-                name='Company Headquarters'
-                label='Company Headquarters'
+                id='hq_city'
+                name='hq_city'
+                label='hq_city'
                 placeholder='e.g. Los Angeles, CA'
                 ref={register}
               />
@@ -106,27 +120,26 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
                 ref={register}
               />
               <FormLabel color='#525252'>Company Size</FormLabel>
-              <FormLabel>Track</FormLabel>
               <Select
                 mb='30px'
                 h='70px'
-                w='404px'
+                // w='404px'
                 rounded='3px'
                 variant='outline'
                 backgroundColor='#FDFDFF'
                 name='size_range'
                 label='size_range'
                 placeholder='Select Company Size'
-                ref={register({ validate: validateTrack })}
+                ref={register}
               >
-                <option value={1}>1-10</option>
-                <option value={2}>11-50</option>
-                <option value={3}>51-200</option>
-                <option value={4}>201-500</option>
-                <option value={5}>501-1000</option>
-                <option value={6}>1001-5000</option>
-                <option value={7}>5001-10,000</option>
-                <option value={8}>10,001+</option>
+                <option value='1-10'>1-10</option>
+                <option value='11-50'>11-50</option>
+                <option value='51-200'>51-200</option>
+                <option value='201-500'>201-500</option>
+                <option value='501-1000'>501-1000</option>
+                <option value='1001-5000'>1001-5000</option>
+                <option value='5001-10,000'>5001-10,000</option>
+                <option value='10,001+'>10,001+</option>
               </Select>
             </FormControl>
 
