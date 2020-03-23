@@ -18,7 +18,6 @@ import {
 	Input,
 	Textarea,
 	Button,
-	FormErrorMessage,
 	FormLabel,
 	Checkbox,
 	InputGroup,
@@ -41,7 +40,7 @@ const InterviewForm = ({
 	history
 }) => {
 	AOS.init();
-	const { register, handleSubmit, errors, formState } = useForm();
+	const { register, handleSubmit, formState } = useForm();
 	// thinking state
 	const [thinking, setThinking] = useState(false);
 	const dots = () => {
@@ -363,6 +362,18 @@ const InterviewForm = ({
 						</Flex>
 					</>
 				) : null}
+				{/* bottom nav bar */}
+				<Flex
+					w='70%'
+					pb='1%'
+					justify='flex-end'
+					bottom='0'
+					position='fixed'
+					overflow='hidden'
+					zIndex='999'
+				>
+					<Button>Cancel</Button>
+				</Flex>
 				{/* form container */}
 				<Flex w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
 					{/*--------------- start of form ---------------  */}
