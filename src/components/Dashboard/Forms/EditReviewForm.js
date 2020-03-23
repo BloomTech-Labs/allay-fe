@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import getReviewById from '../../../state/actions/index.js';
 import editReview from '../../../state/actions/index.js';
 import ReactGA from 'react-ga';
-
+import Autocomplete from 'react-google-autocomplete';
 import { useForm } from 'react-hook-form';
 
 //imported styles
@@ -75,6 +75,7 @@ const SingleReview = ({
   }
 
   const submitEdits = () => {
+<<<<<<< HEAD
     editReview(review.user_id, review.review_id, editValue).then(() => {
       history.push('/dashboard')
       toast({
@@ -85,6 +86,20 @@ const SingleReview = ({
         isClosable: true
       })
     })
+=======
+    editCompanyReview(review.user_id, review.company_review_id, editValue).then(
+      () => {
+        history.push('/dashboard');
+        toast({
+          title: `Review Edit Success!`,
+          description: `We've successfully edited your review for you`,
+          status: 'success',
+          duration: 5000,
+          isClosable: true
+        });
+      }
+    );
+>>>>>>> 1d2d7ad5d230b2c6d53878b44dba3a28ec33dff8
 
     // if (reviewEdited === true) {
     //   toast({
@@ -112,17 +127,10 @@ const SingleReview = ({
 
   return (
     <Flex w='100%' bg='rgba(72, 72, 72, 0.1)'>
-      <Flex
-        w='100%'
-        justify='center'
-        py='6rem'
-        px='15rem'
-        bg='white'
-      >
+      <Flex w='100%' justify='center' py='6rem' px='15rem' bg='white'>
         <Flex justify='center' align='start' flexDir='column'>
           <h2> Edit Company Review</h2>
           <form onSubmit={handleSubmit(submitEdits)}>
-
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
                 Job Title
@@ -137,7 +145,12 @@ const SingleReview = ({
                 placeholder={review.job_title}
                 ref={register}
                 value={editValue.job_title}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                onChange={e =>
+                  setEditValue({
+                    ...editValue,
+                    [e.target.name]: e.target.value
+                  })
+                }
               />
             </FormControl>
 
@@ -155,7 +168,12 @@ const SingleReview = ({
                 placeholder={review.start_date}
                 ref={register}
                 value={editValue.start_date}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                onChange={e =>
+                  setEditValue({
+                    ...editValue,
+                    [e.target.name]: e.target.value
+                  })
+                }
               />
             </FormControl>
 
@@ -173,7 +191,12 @@ const SingleReview = ({
                 placeholder={review.end_date}
                 ref={register}
                 value={editValue.end_date}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                onChange={e =>
+                  setEditValue({
+                    ...editValue,
+                    [e.target.name]: e.target.value
+                  })
+                }
               />
             </FormControl>
 
@@ -191,7 +214,12 @@ const SingleReview = ({
                 placeholder={review.typical_hours}
                 ref={register}
                 value={editValue.typical_hours}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                onChange={e =>
+                  setEditValue({
+                    ...editValue,
+                    [e.target.name]: e.target.value
+                  })
+                }
               />
             </FormControl>
 
@@ -199,7 +227,33 @@ const SingleReview = ({
               <FormLabel fontSize='15px' color='#525252'>
                 Job Location
               </FormLabel>
-              <Input
+              <Autocomplete
+                style={{
+                  width: '100%',
+                  height: '56px',
+                  marginBottom: '24px',
+                  borderRadius: '6px',
+                  border: 'none',
+                  backgroundColor: '#F2F6FE'
+                }}
+                type='input'
+                name='job_location'
+                // placeholder={review.job_location}
+                ref={register}
+                // value={editValue.job_location}
+                // onChange={e =>
+                //   setEditValue({
+                //     ...editValue,
+                //     [e.target.name]: e.target.value
+                //   })
+                // }
+                onPlaceSelected={place => {
+                  let city = place.address_components[0].long_name;
+                  let state = place.address_components[2].short_name;
+                  console.log(city, state, 'line 191');
+                }}
+              />
+              {/* <Input
                 mb='4'
                 h='56px'
                 variant='filled'
@@ -209,8 +263,13 @@ const SingleReview = ({
                 placeholder={review.job_location}
                 ref={register}
                 value={editValue.job_location}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-              />
+                onChange={e =>
+                  setEditValue({
+                    ...editValue,
+                    [e.target.name]: e.target.value
+                  })
+                }
+              /> */}
             </FormControl>
 
             <FormControl isInvalid={errors.salary}>
@@ -235,7 +294,12 @@ const SingleReview = ({
                   placeholder={review.salary}
                   ref={register({ validate: validateSalary })}
                   value={editValue.salary}
-                  onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                  onChange={e =>
+                    setEditValue({
+                      ...editValue,
+                      [e.target.name]: e.target.value
+                    })
+                  }
                 />
               </InputGroup>
               <FormErrorMessage>
@@ -245,7 +309,7 @@ const SingleReview = ({
 
             <Flex as='h3' mb='3'>
               Overall Job Review
-              </Flex>
+            </Flex>
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
@@ -263,7 +327,12 @@ const SingleReview = ({
                 placeholder={review.comment}
                 ref={register}
                 value={editValue.comment}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                onChange={e =>
+                  setEditValue({
+                    ...editValue,
+                    [e.target.name]: e.target.value
+                  })
+                }
               />
             </FormControl>
 
@@ -278,7 +347,12 @@ const SingleReview = ({
                 rounded='6px'
                 name='job_rating'
                 ref={register}
-                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+                onChange={e =>
+                  setEditValue({
+                    ...editValue,
+                    [e.target.name]: e.target.value
+                  })
+                }
               >
                 <option value={5}>5 - Great</option>
                 <option value={4}>4 - Good</option>
@@ -341,7 +415,7 @@ const SingleReview = ({
           </form>
         </Flex>
       </Flex>
-    </Flex >
+    </Flex>
   );
 };
 
@@ -354,5 +428,10 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
+<<<<<<< HEAD
   (getReviewById, editReview))
   (SingleReview);
+=======
+  (getCompanyReviewById, editCompanyReview)
+)(SingleReview);
+>>>>>>> 1d2d7ad5d230b2c6d53878b44dba3a28ec33dff8
