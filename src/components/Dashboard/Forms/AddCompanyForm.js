@@ -23,6 +23,11 @@ import {
 } from '@chakra-ui/core';
 
 const AddCompanyForm = ({ isLoading, postCompany, history }) => {
+  const [state, setState] = useState({});
+  const stateHelper = value => {
+    setState(value);
+  };
+  console.log(state, 'state 30');
   const { register, handleSubmit, errors, formState } = useForm();
 
   function validateCompanyState(value) {
@@ -79,6 +84,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
                 Company Headquarters Location
               </FormLabel>
               <CustomAutocomplete
+                stateHelper={stateHelper}
                 id='Company Headquarters'
                 name='Company Headquarters'
                 label='Company Headquarters'

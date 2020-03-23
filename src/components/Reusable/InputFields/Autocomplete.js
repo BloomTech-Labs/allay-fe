@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Script from 'react-load-script';
 import { Input } from '@chakra-ui/core';
 
@@ -9,6 +9,10 @@ function CustomAutocomplete({ ...props }, ref) {
   let autocomplete = null;
   let [state, setState] = useState({ myCity: '', myState: '' });
   console.log(state, 'line 11');
+
+  useEffect(() => {
+    props.stateHelper(state);
+  }, [state]);
 
   const handleScriptLoad = () => {
     // Declare Options For Autocomplete
