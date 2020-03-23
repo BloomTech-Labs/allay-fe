@@ -26,11 +26,11 @@ import {
 const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   const { register, handleSubmit, errors, formState } = useForm();
   const [location, setLocation] = useState({});
-	const [newLocation, setNewLocation] = useState({});
-	const stateSelectorHelper = value => {
-		setLocation(value);
-	};
-
+  const [newLocation, setNewLocation] = useState({});
+  const stateHelper = value => {
+    setLocation(value);
+  };
+  console.log(location);
   // function validateCompanyState(value) {
   //   let error;
   //   if (!value) {
@@ -47,7 +47,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
       const stateId = states.filter(i =>
         i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
       );
-      const setNewLocation = { ...location, myState: stateId[0].id };
+      setNewLocation({ ...location, myState: stateId[0].id });
     }
   }, [location]);
 
@@ -56,16 +56,13 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   // };
 
   //submit handler
-	const submitForm = newCompany => {
-		postCompany(newCompany) {
-			name:name,
-			city: newLocation.myCity,
-      state_id: newLocation.myState,
-      domain:domain
-    })
-    .then(() => history.push('/dashboard/add-review'));
-		
-	};
+  const submitForm = newCompany => {
+    postCompany({
+      ...newCompany,
+      hq_city: newLocation.myCity,
+      state_id: newLocation.myState
+    }).then(() => history.push('/dashboard/add-review'));
+  };
 
   // specifically for the cancel button functionality
   const [isOpen, setIsOpen] = useState();
@@ -96,7 +93,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
               <h2> Add a Company</h2>
               <FormLabel color='#525252'>Company Name</FormLabel>
               <OnboardingInput
-                name='name'
+                name='company_name'
                 label='Company Name'
                 placeholder='e.g. UPS'
                 ref={register}
@@ -110,7 +107,6 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
                 name='hq_city'
                 label='hq_city'
                 placeholder='e.g. Los Angeles, CA'
-                ref={register}
               />
               <FormLabel color='#525252'>Company Website</FormLabel>
               <OnboardingInput
