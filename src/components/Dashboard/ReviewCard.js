@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
 // actions
 import deleteReview from '../../state/actions/index';
+
 // styles
 import {
 	Box,
@@ -48,6 +49,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 			setNewTag(false);
 		}
 	}, [newTag, serverDay, today]);
+
 	// basic usage for the SingleReview modal
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const loginId = localStorage.getItem('userId');
@@ -79,6 +81,24 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 				isClosable: true
 			});
 		});
+
+		// if (reviewDeleted === true) {
+		// 	toast({
+		// 		title: 'Review Deleted',
+		// 		description: `We've successfully deleted your review for you`,
+		// 		status: 'success',
+		// 		duration: 5000,
+		// 		isClosable: true
+		// 	})
+		// } else {
+		// 	toast({
+		// 		title: 'Review Not Deleted',
+		// 		description: `There was an error deleting your review`,
+		// 		status: 'error',
+		// 		duration: 5000,
+		// 		isClosable: true
+		// 	});
+		// }
 
 		ReactGA.event({
 			category: 'Delete',
@@ -173,190 +193,9 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 							</Flex>
 						</Flex>
 						<Flex align='center' ml='8%' mr='20%'>
-							<Avatar size='md' src={`//logo.clearbit.com/${review.logo}`} />
+							<Avatar size='lrg' src={`//logo.clearbit.com/${review.logo}`} />
 						</Flex>
 					</Flex>
-          <Flex>
-            <Flex>
-                            <Flex>
-                {review.review_type === 'Company' ? (
-                  <Flex flexDir='column'>
-                    <Flex fontSize='small' fontWeight='light' color='#9194A8'>
-                      Company Rating
-                    </Flex>
-                    <Flex>
-                      {Array(5)
-                        .fill('')
-                        .map((_, i) => (
-                          <Icon
-                            name='star'
-                            key={i}
-                            color={i < review.overall_rating ? '#344CD0' : 'gray.300'}
-                            ml='4px'
-                          />
-                        ))}
-                    </Flex>
-                  </Flex>
-                ) : review.review_type === 'Interview' ? (
-                  <Flex flexDir='column'>
-                    <Flex fontSize='small' fontWeight='light' color='#9194A8'>
-                      Overall Experience
-                    </Flex>
-                    <Flex>
-                      {Array(5)
-                        .fill('')
-                        .map((_, i) => (
-                          <Icon
-                            name='star'
-                            key={i}
-                            color={i < review.overall_rating ? '#344CD0' : 'gray.300'}
-                            ml='4px'
-                          />
-                        ))}
-                    </Flex>
-                  </Flex>
-                ) : null}
-              </Flex>
-            </Flex>
-            <Flex align='center' ml='8%' mr='20%'>
-              <Avatar size='lrg' src={`//logo.clearbit.com/${review.logo}`} />
-            </Flex>
-          </Flex>
-
-          {/* Secondary info container */}
-          {review.review_type === 'Company' ? (
-            <Flex w='100%' backgroundColor='#344CD0' color='white' mt='56px'>
-              <Flex
-                w='100%'
-                overflow='hidden'
-                justify='space-evenly'
-                align='center'
-                py='1%'
-              >
-                <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/clock-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
-                  <Flex flexDir='column'>
-                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      {review.typical_hours} hrs week
-                  </Flex>
-                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Working Hours
-                    </Flex>
-                  </Flex>
-                </Flex>
-                <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/dollar-sign-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
-                  <Flex flexDir='column'>
-                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      ${review.salary}.00
-                    </Flex>
-                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Salary
-                    </Flex>
-                  </Flex>
-                </Flex>
-                <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/user-check-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
-                  <Flex flexDir='column'>
-                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      {review.work_status}
-                    </Flex>
-                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Status
-                    </Flex>
-                  </Flex>
-                </Flex>
-                <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/calendar-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
-                  <Flex flexDir='column'>
-                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      {review.start_date} - {review.end_date}
-                    </Flex>
-                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Date
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </Flex>
-          ) : review.review_type === 'Interview' ? (
-            <Flex w='100%' backgroundColor='#344CD0' color='white' mt='4%'>
-              <Flex
-                w='100%'
-                overflow='hidden'
-                justify='space-evenly'
-                align='center'
-                py='1%'
-              >
-                <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/difficulty-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
-                  <Flex flexDir='column'>
-                    {review.difficulty_rating === 5 ? (
-                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Very Hard
-                      </Flex>
-                    ) : review.difficulty_rating === 4 ? (
-                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Somewhat Hard
-                      </Flex>
-                    ) : review.difficulty_rating === 3 ? (
-                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Somewhat Easy
-                      </Flex>
-                    ) : review.difficulty_rating === 2 ? (
-                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Easy
-                      </Flex>
-                    ) : review.difficulty_rating === 1 ? (
-                      <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Very Easy
-                      </Flex>
-                    ) : null}
-                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Interview Hardness
-                  </Flex>
-                  </Flex>
-                </Flex>
-                <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/dollar-sign-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
-                  <Flex flexDir='column'>
-                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      ${review.salary}.00
-                    </Flex>
-                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Salary
-                  </Flex>
-                  </Flex>
-                </Flex>
-                <Flex align='center' wrap='nowrap'>
-                  {review.offer_status === 'Offer Accepted' ? (
-                    <Image src={require('../../icons/thumbs-up-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
-                  ) : review.offer_status === 'Offer Declined' || 'No Offer' ? (
-                    <Image src={require('../../icons/thumbs-down-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
-                  ) : null}
-                  <Flex flexDir='column'>
-                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      {review.offer_status}
-                    </Flex>
-                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Job Offer
-                  </Flex>
-                  </Flex>
-                </Flex>
-                <Flex align='center' wrap='nowrap'>
-                  <Image src={require('../../icons/rounds-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
-                  <Flex flexDir='column'>
-                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      {review.interview_rounds} Rounds
-                    </Flex>
-                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Interview Rounds
-                  </Flex>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </Flex>
-          ) : null}
 
 					{/* Secondary info container */}
 					{review.review_type === 'Company' ? (
@@ -397,7 +236,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 									/>
 									<Flex flexDir='column'>
 										<Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-											${review.salary}
+											${review.salary}.00
 										</Flex>
 										<Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
 											Salary
@@ -523,7 +362,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 									/>
 									<Flex flexDir='column'>
 										<Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-											${review.salary}
+											${review.salary}.00
 										</Flex>
 										<Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
 											Salary
@@ -644,24 +483,6 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 							) : null}
 						</Flex>
 					) : null}
-          {/* Edit/Delete container */}
-          <Flex justify='flex-end' mt='2%' px='8%'>
-            {Number(loginId) === Number(review.user_id) ? (
-              <Image src={require('../../icons/edit.png')} onClick={navToEditRoute} cursor='pointer' size='1.5em' mr='12px' />
-            ) : null}
-            {Number(loginId) === Number(review.user_id) ? (
-              <Image src={require('../../icons/trash.png')} onClick={() => setIsOpen2(true)} cursor='pointer' size='1.5em' />
-            ) : null}
-            <AlertDialog
-              isOpen={isOpen2}
-              leastDestructiveRef={cancelRef}
-              onClose={onClose2}
-            >
-              <AlertDialogOverlay />
-              <AlertDialogContent>
-                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                  Delete Review
-                </AlertDialogHeader>
 
 					{/* Edit/Delete container */}
 					<Flex justify='flex-end' mt='2%' px='8%'>
@@ -669,6 +490,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 							<Image
 								src={require('../../icons/edit.png')}
 								onClick={navToEditRoute}
+								cursor='pointer'
 								size='1.5em'
 								mr='12px'
 							/>
@@ -677,6 +499,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 							<Image
 								src={require('../../icons/trash.png')}
 								onClick={() => setIsOpen2(true)}
+								cursor='pointer'
 								size='1.5em'
 							/>
 						) : null}
@@ -744,60 +567,69 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 			{/* ---------------------------------------DashBoard Cards------------------------------------------ */}
 			{/* ------------------------------------------------------------------------------------------------ */}
 
-      {/* Review container */}
-      <PseudoBox
-        width={[
-          '100%', // base
-          '100%', // 480px upwards
-          '100%', // 768px upwards
-          '45%' // 992px upwards
-        ]}
-        mb='3%'
-        mx='2.5%'
-        px='4%'
-        py='2%'
-        background='#F2F6FE'
-        borderRadius='12px'
-        display='flex'
-        flexDir='column'
-        justifyContent='center'
-        alignItems='center'
-        _hover={{ bg: '#E9F0FF' }}
-        onClick={onOpen}
-      >
-        {/* Review content container */}
-        <Flex width='100%' justifyContent='flex-end' mb='2%'>
-          					{newTag ? (
+			{/* Review container */}
+			<PseudoBox
+				width={[
+					'100%', // base
+					'100%', // 480px upwards
+					'100%', // 768px upwards
+					'45%' // 992px upwards
+				]}
+				mb='3%'
+				mx='2.5%'
+				px='4%'
+				py='2%'
+				background='#F2F6FE'
+				borderRadius='12px'
+				display='flex'
+				flexDir='column'
+				justifyContent='center'
+				alignItems='center'
+				_hover={{ bg: '#E9F0FF' }}
+				onClick={onOpen}
+			>
+				{/* Review content container */}
+				<Flex width='100%' justifyContent='flex-end' mb='2%'>
+					{newTag ? (
 						<>
-							<Badge rounded='full' px='2' variantColor='teal'>
+							<Badge
+								rounded='full'
+								color='#494B5B'
+								fontSize='1em'
+								fontWeight='light'
+								px='15px'
+								overflow='hidden'
+								variantColor='teal'
+							>
 								New
 							</Badge>
 						</>
 					) : null}
-          <Badge
-            backgroundColor='#95C8D8'
-            color='white'
-            fontSize='1em'
-            fontWeight='light'
-            rounded='full'
-            px='15px'
-            overflow='hidden'
-          >
-            {review.review_type}
-          </Badge>
-          <Badge
-            backgroundColor='#344CD0'
-            color='white'
-            fontSize='1em'
-            fontWeight='light'
-            rounded='full'
-            px='15px'
-            overflow='hidden'
-            ml='10px'
-          >
-            {review.track_name}
-          </Badge>
-        </Flex>
+					<Badge
+						backgroundColor='#95C8D8'
+						color='white'
+						fontSize='1em'
+						fontWeight='light'
+						rounded='full'
+						px='15px'
+						ml='10px'
+						overflow='hidden'
+					>
+						{review.review_type}
+					</Badge>
+					<Badge
+						backgroundColor='#344CD0'
+						color='white'
+						fontSize='1em'
+						fontWeight='light'
+						rounded='full'
+						px='15px'
+						overflow='hidden'
+						ml='10px'
+					>
+						{review.track_name}
+					</Badge>
+				</Flex>
 
 				{/* Review content container */}
 				<Flex flexDir='column'>
@@ -843,21 +675,24 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 						</Flex>
 					</Flex>
 
-          {/* Second main container */}
-          <Flex
-            w='100%'
-            font-size='18'
-            fontWeight='light'
-            justify='space-evenly'
-            align='center'
-            my='4%'
-          >
-            <Flex align='center'>
-              <Image src={require('../../icons/dollar-sign.png')} size='1.5em' />
-              <Flex as='p' overflow='hidden'>
-                {review.salary}.00
-              </Flex>
-            </Flex>
+					{/* Second main container */}
+					<Flex
+						w='100%'
+						font-size='18'
+						fontWeight='light'
+						justify='space-evenly'
+						align='center'
+						my='4%'
+					>
+						<Flex align='center'>
+							<Image
+								src={require('../../icons/dollar-sign.png')}
+								size='1.5em'
+							/>
+							<Flex as='p' overflow='hidden'>
+								{review.salary}.00
+							</Flex>
+						</Flex>
 
 						<Flex align='center'>
 							<Image
