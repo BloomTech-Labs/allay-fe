@@ -53,7 +53,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
           direction='column'
           wrap='wrap'
           mb='3%'
-          mt='220px'
+          mt='190px'
         >
           <NavBar
             history={history}
@@ -65,8 +65,8 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             setTypeFilters={setTypeFilters}
           />
 
-          <Flex align='center' justify='flex-start'>
-            <Flex as='h2' mt='1%'>
+          <Flex align='center' justify='flex-start' mb='1%' ml='2.5%'>
+            <Flex as='h2'>
               Recent Posts
             </Flex>
           </Flex>

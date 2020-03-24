@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import ReactGA from 'react-ga'; // for google analytics
 //styles
 import {
   Flex,
   Button,
-  Avatar,
   Text,
   Image,
   Input,
@@ -13,8 +12,6 @@ import {
   Icon,
   RadioButtonGroup,
   Drawer,
-  DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
@@ -75,8 +72,8 @@ export default function NavBar({
         ? setTypeFilters(typeFilters.filter(item => item !== e.name))
         : setTypeFilters([...typeFilters, e.name])
       : trackFilters.includes(e.name)
-      ? setTrackFilters(trackFilters.filter(item => item !== e.name))
-      : setTrackFilters([...trackFilters, e.name]);
+        ? setTrackFilters(trackFilters.filter(item => item !== e.name))
+        : setTrackFilters([...trackFilters, e.name]);
     e.selected = !e.selected;
   };
 
@@ -97,6 +94,7 @@ export default function NavBar({
           <h1> Allay </h1>
         </Flex>
         <Flex>
+
           {/* Hamburger Menu */}
           <Box ref={btnRef} cursor='pointer' onClick={onOpen}>
             <Image
@@ -189,6 +187,7 @@ export default function NavBar({
         </Button>
       </Flex>
 
+      {/* Filtered Search Buttons */}
       <Flex
         align='space-around'
         justify='space-around'
@@ -207,29 +206,32 @@ export default function NavBar({
           {types.map(type => (
             <Button
               key={type.id}
-              size='sm'
+              size='lrg'
               rounded='full'
-              padding='0.5% 3%'
-              color='#17171B'
-              variantColor={
-                typeFilters.includes(type.name) ? 'selected' : 'unselected'
-              }
+              border='none'
+              borderRadius='30px'
+              color={typeFilters.includes(type.name) ? 'white' : 'black'}
+              py='1%'
+              px='3%'
+              fontWeight='light'
+              background={typeFilters.includes(type.name) ? '#259BF8' : '#FDFDFF'}
               value={type}
             >
               {type.name}
             </Button>
           ))}
-
           {tracks.map(track => (
             <Button
               key={track.id}
-              size='sm'
+              size='lrg'
               rounded='full'
-              padding='0.5% 3%'
-              color='#17171B'
-              variantColor={
-                trackFilters.includes(track.name) ? 'selected' : 'unselected'
-              }
+              border='none'
+              borderRadius='30px'
+              color={trackFilters.includes(track.name) ? 'white' : 'black'}
+              py='1%'
+              px='3%'
+              fontWeight='light'
+              background={trackFilters.includes(track.name) ? '#259BF8' : '#FDFDFF'}
               value={track}
             >
               {track.name}
