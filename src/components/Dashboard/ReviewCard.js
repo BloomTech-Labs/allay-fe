@@ -4,20 +4,6 @@ import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
 // actions
 import deleteReview from '../../state/actions/index';
-
-// icons
-import { TiCalendar, TiGlobeOutline } from 'react-icons/ti';
-import { MdPerson } from 'react-icons/md';
-import {
-	FaDollarSign,
-	FaRegClock,
-	FaRegMoneyBillAlt,
-	FaThumbsUp,
-	FaThumbsDown
-} from 'react-icons/fa';
-import { GiWeightLiftingUp } from 'react-icons/gi';
-import { GoLocation } from 'react-icons/go';
-
 // styles
 import {
 	Box,
@@ -39,7 +25,6 @@ import {
 	AlertDialogHeader,
 	AlertDialogContent,
 	AlertDialogOverlay,
-	Tooltip,
 	useToast,
 	useDisclosure
 } from '@chakra-ui/core';
@@ -94,24 +79,6 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 				isClosable: true
 			});
 		});
-
-		// if (reviewDeleted === true) {
-		// 	toast({
-		// 		title: 'Review Deleted',
-		// 		description: `We've successfully deleted your review for you`,
-		// 		status: 'success',
-		// 		duration: 5000,
-		// 		isClosable: true
-		// 	})
-		// } else {
-		// 	toast({
-		// 		title: 'Review Not Deleted',
-		// 		description: `There was an error deleting your review`,
-		// 		status: 'error',
-		// 		duration: 5000,
-		// 		isClosable: true
-		// 	});
-		// }
 
 		ReactGA.event({
 			category: 'Delete',
