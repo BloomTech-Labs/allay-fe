@@ -48,6 +48,8 @@ const ReviewForm2 = ({
 	// search state
 	const [searchTerm, setSearchTerm] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
+	// no company state
+	const [noCompany, setNoCompany] = useState(false);
 	// location "state"
 	const [location, setLocation] = useState({});
 	const [newLocation, setNewLocation] = useState({});
@@ -92,6 +94,11 @@ const ReviewForm2 = ({
 				company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
 			);
 			setSearchResults(results);
+			if (results.length === 0) {
+				setNoCompany(true);
+			} else {
+				setNoCompany(false);
+			}
 		}
 	}, [searchTerm, companies]);
 
@@ -346,9 +353,15 @@ const ReviewForm2 = ({
 													</option>
 												))}
 											</datalist>
-											<Link mb='2' color='grey' href='/add-company'>
-												Can't find a company?
-											</Link>
+											{noCompany ? (
+												<>
+													<Link mb='3' color='grey' href='/add-company'>
+														Oops, you need to add that company!
+													</Link>
+												</>
+											) : (
+												<Flex mb='6' />
+											)}
 										</>
 									)}
 									<FormLabel>2. Status at the company</FormLabel>

@@ -56,6 +56,8 @@ const InterviewForm = ({
 	// search state
 	const [searchTerm, setSearchTerm] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
+	// no company state
+	const [noCompany, setNoCompany] = useState(false);
 	// star rating
 	const [starState, setStarState] = useState(0);
 	// custom radio button state offer status
@@ -74,6 +76,11 @@ const InterviewForm = ({
 				company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
 			);
 			setSearchResults(results);
+			if (results.length === 0) {
+				setNoCompany(true);
+			} else {
+				setNoCompany(false);
+			}
 		}
 	}, [searchTerm, companies]);
 
@@ -451,9 +458,15 @@ const InterviewForm = ({
 													</option>
 												))}
 											</datalist>
-											<Link mb='2' color='grey' href='/add-company'>
-												Can't find a company?
-											</Link>
+											{noCompany ? (
+												<>
+													<Link mb='3' color='grey' href='/add-company'>
+														Oops, you need to add that company!
+													</Link>
+												</>
+											) : (
+												<Flex mb='6' />
+											)}
 										</>
 									)}
 									<FormLabel>2. Job title</FormLabel>
