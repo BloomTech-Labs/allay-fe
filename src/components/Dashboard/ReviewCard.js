@@ -24,6 +24,7 @@ import {
   ModalCloseButton,
   Button,
   Icon,
+  Image,
   Badge,
   PseudoBox,
   AlertDialog,
@@ -32,8 +33,9 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  Tooltip,
   useToast,
-  useDisclosure
+  useDisclosure,
 } from '@chakra-ui/core';
 
 const ReviewCard = ({
@@ -56,7 +58,11 @@ const ReviewCard = ({
 
   //routes to single review
   const navToEditRoute = () => {
-    history.push(`/dashboard/${review.review_id}`);
+    if (review.review_type === 'Company') {
+      history.push(`/dashboard/review/${review.review_id}`);
+    } else {
+      history.push(`/dashboard/interview/${review.review_id}`);
+    }
   };
 
   //deletes the review in question
@@ -104,15 +110,12 @@ const ReviewCard = ({
       {/* ------------------------------------------------------------------------------------------------ */}
       <Modal isOpen={isOpen} onClose={onClose} size='80%'>
         <ModalOverlay />
-        <ModalContent w='100%' py='3%' wrap='nowrap'>
+        <ModalContent w='100%' wrap='nowrap'>
           <ModalCloseButton background='none' border='none' />
 
           {/* Basic info container */}
-          <Flex flexDir={{ lg: 'row', sm: 'column' }} align='center' mx='8%'>
-            <Flex align='center'>
-              <Avatar size='2xl' src={`//logo.clearbit.com/${review.logo}`} />
-            </Flex>
-            <Flex flexDir='column' pl={{ lg: '8%', sm: '0%' }} width='100%'>
+          <Flex flexDir={{ lg: 'row', sm: 'column' }} align='center' mx='8%' mt='56px'>
+            <Flex flexDir='column' width='100%'>
               <Flex
                 as='h2'
                 w='100%'
@@ -175,11 +178,14 @@ const ReviewCard = ({
                 ) : null}
               </Flex>
             </Flex>
+            <Flex align='center' ml='8%' mr='20%'>
+              <Avatar size='md' src={`//logo.clearbit.com/${review.logo}`} />
+            </Flex>
           </Flex>
 
           {/* Secondary info container */}
           {review.review_type === 'Company' ? (
-            <Flex w='100%' backgroundColor='#344CD0' color='white' mt='4%'>
+            <Flex w='100%' backgroundColor='#344CD0' color='white' mt='56px'>
               <Flex
                 w='100%'
                 overflow='hidden'
@@ -188,47 +194,47 @@ const ReviewCard = ({
                 py='1%'
               >
                 <Flex align='center' wrap='nowrap'>
-                  <Box as={FaDollarSign} size='2em' mr='5px'></Box>
-                  <Flex flexDir='column'>
-                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      ${review.salary}
-                    </Flex>
-                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Salary
-                  </Flex>
-                  </Flex>
-                </Flex>
-                <Flex align='center' wrap='nowrap'>
-                  <Box as={FaRegClock} size='2em' mr='5px'></Box>
+                  <Image src={require('../../icons/clock-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       {review.typical_hours} hrs week
                   </Flex>
                     <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
                       Working Hours
-                  </Flex>
+                    </Flex>
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Box as={MdPerson} size='2em' mr='5px'></Box>
+                  <Image src={require('../../icons/dollar-sign-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
+                  <Flex flexDir='column'>
+                    <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
+                      ${review.salary}
+                    </Flex>
+                    <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
+                      Salary
+                    </Flex>
+                  </Flex>
+                </Flex>
+                <Flex align='center' wrap='nowrap'>
+                  <Image src={require('../../icons/user-check-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       {review.work_status}
                     </Flex>
                     <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
                       Status
-                  </Flex>
+                    </Flex>
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Box as={TiCalendar} size='2em' mr='5px'></Box>
+                  <Image src={require('../../icons/calendar-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       {review.start_date} - {review.end_date}
                     </Flex>
                     <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
                       Date
-                  </Flex>
+                    </Flex>
                   </Flex>
                 </Flex>
               </Flex>
@@ -243,19 +249,19 @@ const ReviewCard = ({
                 py='1%'
               >
                 <Flex align='center' wrap='nowrap'>
-                  <Box as={GiWeightLiftingUp} size='2em' mr='5px'></Box>
+                  <Image src={require('../../icons/difficulty-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     {review.difficulty_rating === 5 ? (
                       <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Very Difficult
+                        Very Hard
                       </Flex>
                     ) : review.difficulty_rating === 4 ? (
                       <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Difficult
+                        Somewhat Hard
                       </Flex>
                     ) : review.difficulty_rating === 3 ? (
                       <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                        Moderate
+                        Somewhat Easy
                       </Flex>
                     ) : review.difficulty_rating === 2 ? (
                       <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
@@ -272,7 +278,7 @@ const ReviewCard = ({
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Box as={FaDollarSign} size='2em' mr='5px'></Box>
+                  <Image src={require('../../icons/dollar-sign-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       ${review.salary}
@@ -284,9 +290,9 @@ const ReviewCard = ({
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
                   {review.offer_status === 'Offer Accepted' ? (
-                    <Box as={FaThumbsUp} size='2em' mr='5px'></Box>
+                    <Image src={require('../../icons/thumbs-up-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   ) : review.offer_status === 'Offer Declined' || 'No Offer' ? (
-                    <Box as={FaThumbsDown} size='2em' mr='5px'></Box>
+                    <Image src={require('../../icons/thumbs-down-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   ) : null}
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
@@ -298,7 +304,7 @@ const ReviewCard = ({
                   </Flex>
                 </Flex>
                 <Flex align='center' wrap='nowrap'>
-                  <Box as={TiGlobeOutline} size='2em' mr='5px'></Box>
+                  <Image src={require('../../icons/rounds-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
                       {review.interview_rounds} Rounds
@@ -376,45 +382,13 @@ const ReviewCard = ({
             </Flex>
           ) : null}
 
-          {/* Review container */}
-          <Flex
-            as='p'
-            w='100%'
-            wrap='nowrap'
-            overflow='hidden'
-            pt='2%'
-            px='8%'
-            align='center'
-          >
-            {review.comment}
-          </Flex>
-
-          <ModalFooter>
+          {/* Edit/Delete container */}
+          <Flex justify='flex-end' mt='2%' px='8%'>
             {Number(loginId) === Number(review.user_id) ? (
-              <Button
-                background='#344CD0'
-                color='#FFFFFF'
-                rounded='6px'
-                border='none'
-                size='lg'
-                mr='2%'
-                onClick={navToEditRoute}
-              >
-                Edit
-              </Button>
+              <Image src={require('../../icons/edit.png')} onClick={navToEditRoute} size='1.5em' mr='12px' />
             ) : null}
             {Number(loginId) === Number(review.user_id) ? (
-              <Button
-                background='#D31122'
-                color='#FFFFFF'
-                rounded='6px'
-                border='none'
-                size='lg'
-                mr='2%'
-                onClick={() => setIsOpen2(true)}
-              >
-                Delete
-              </Button>
+              <Image src={require('../../icons/trash.png')} onClick={() => setIsOpen2(true)} size='1.5em' />
             ) : null}
             <AlertDialog
               isOpen={isOpen2}
@@ -432,15 +406,48 @@ const ReviewCard = ({
                 </AlertDialogBody>
 
                 <AlertDialogFooter>
-                  <Button ref={cancelRef} onClick={onClose2}>
+                  <Button
+                    h='56px'
+                    rounded='10px'
+                    bg='#344CD0'
+                    border='none'
+                    color='white'
+                    ref={cancelRef}
+                    onClick={onClose2}
+                  >
                     Cancel
                   </Button>
-                  <Button variantColor='red' ml={3} onClick={submitDelete}>
+                  <Button
+                    h='56px'
+                    rounded='10px'
+                    border='none'
+                    color='white'
+                    variantColor='red'
+                    ml={3}
+                    onClick={submitDelete}
+                  >
                     Delete
                   </Button>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
+          </Flex>
+
+          {/* Review container */}
+          <Flex
+            as='p'
+            w='100%'
+            wrap='nowrap'
+            overflow='hidden'
+            pt='2%'
+            px='8%'
+            align='center'
+          >
+            {review.comment}
+          </Flex>
+
+          <ModalFooter>
+
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -457,11 +464,11 @@ const ReviewCard = ({
           '100%', // 768px upwards
           '45%' // 992px upwards
         ]}
-        mt='3%'
+        mb='3%'
         mx='2.5%'
         px='4%'
         py='2%'
-        background='#FBFCFF'
+        background='#F2F6FE'
         borderRadius='12px'
         display='flex'
         flexDir='column'
@@ -546,16 +553,17 @@ const ReviewCard = ({
             fontWeight='light'
             justify='space-evenly'
             align='center'
-            mb='1%'
+            my='4%'
           >
             <Flex align='center'>
-              <Box as={FaRegMoneyBillAlt} mr='10px'></Box>
+              <Image src={require('../../icons/dollar-sign.png')} size='1.5em' />
               <Flex as='p' overflow='hidden'>
-                ${review.salary}
+                {review.salary}
               </Flex>
             </Flex>
+
             <Flex align='center'>
-              <Box as={GoLocation} mr='10px'></Box>
+              <Image src={require('../../icons/map-pin.png')} size='1.5em' mr='5px' />
               <Flex as='p'>
                 {review.city}, {review.state_name}
               </Flex>
@@ -563,7 +571,7 @@ const ReviewCard = ({
 
             {review.review_type === 'Company' ? (
               <Flex align='center'>
-                <Box as={FaRegClock} mr='10px'></Box>
+                <Image src={require('../../icons/clock.png')} size='1.5em' mr='5px' />
                 <Flex as='p'>
                   {review.start_date}-{review.end_date}
                 </Flex>
@@ -571,9 +579,9 @@ const ReviewCard = ({
             ) : review.review_type === 'Interview' ? (
               <Flex align='center'>
                 {review.offer_status === 'Offer Accepted' ? (
-                  <Box as={FaThumbsUp} mr='10px'></Box>
+                  <Image src={require('../../icons/thumbs-up.png')} size='1.5em' mr='5px' />
                 ) : review.offer_status === 'Offer Declined' || 'No Offer' ? (
-                  <Box as={FaThumbsDown} mr='10px'></Box>
+                  <Image src={require('../../icons/thumbs-down.png')} size='1.5em' mr='5px' />
                 ) : null}
                 <Flex as='p'>
                   {review.offer_status}

@@ -11,6 +11,7 @@ import Signup from './components/Auth/Signup';
 import FormController from './components/Dashboard/Forms/FormController';
 import PrivateRoute from './utils/PrivateRoute';
 import EditReviewForm from './components/Dashboard/Forms/EditReviewForm';
+import EditInterviewForm from './components/Dashboard/Forms/EditInterviewForm';
 import DashboardHome from './components/Dashboard/DashboardHome';
 import AddCompanyForm from './components/Dashboard/Forms/AddCompanyForm';
 // google analytics
@@ -43,7 +44,8 @@ const App = () => {
 						path='/dashboard/add-review'
 						component={FormController}
 					/>
-					<PrivateRoute path='/dashboard/:id' component={EditReviewForm} />
+					<PrivateRoute path='/dashboard/review/:id' component={EditReviewForm} />
+					<PrivateRoute path='/dashboard/interview/:id' component={EditInterviewForm} />
 					<PrivateRoute path='/add-company' component={AddCompanyForm} />
 				</Switch>
 			</div>
