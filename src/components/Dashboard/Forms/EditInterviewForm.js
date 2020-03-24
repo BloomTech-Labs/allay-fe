@@ -27,10 +27,12 @@ import {
   AlertDialogBody,
   AlertDialogOverlay,
   AlertDialogFooter,
+  CheckboxGroup,
+  Checkbox,
   useToast
 } from '@chakra-ui/core';
 
-const EditReviewForm = ({
+const EditInterviewForm = ({
   review,
   getReviewById,
   editReview,
@@ -115,7 +117,7 @@ const EditReviewForm = ({
     <Flex w='100%' bg='rgba(72, 72, 72, 0.1)'>
       <Flex w='100%' justify='center' py='3rem' px='15rem' bg='#F2F6FE'>
         <Flex justify='center' align='start' flexDir='column'>
-          <h2> Edit Company Review</h2>
+          <h2> Edit Interview Review</h2>
           <form onSubmit={handleSubmit(submitEdits)}>
             <FormControl>
               <FormLabel fontSize='15px' color='#525252' mt='3'>
@@ -202,73 +204,160 @@ const EditReviewForm = ({
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
-                Work Status
+                Job Offer
               </FormLabel>
               <Select
                 mb='4'
                 h='65px'
                 rounded='3px'
                 borderColor='#ECF1FE'
-                name='work_status_id'
+                name='offer_status_id'
                 ref={register}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               >
-                <option value={0}>{review.work_status}</option>
-                <option value={1}>Current Employee</option>
-                <option value={2}>Former Employee</option>
-                <option value={3}>Full Time</option>
-                <option value={4}>Part Time</option>
-                <option value={5}>Intern</option>
+                <option value={0}>{review.offer_status}</option>
+                <option value={1}>No Offer</option>
+                <option value={2}>Offer Accepted</option>
+                <option value={3}>Offer Declined</option>
                 ))}
               </Select>
             </FormControl>
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
-                Years of Employment
+                Interview Difficulty
               </FormLabel>
-              <Flex justify='space-between' wrap='nowrap'>
-                <Input
-                  mb='4'
-                  w='48%'
-                  h='58px'
-                  py='32px'
-                  borderColor='#ECF1FE'
-                  rounded='3px'
-                  name='start_date'
-                  type='number'
-                  placeholder={`Start - ${review.start_date}`}
-                  value={editValue.start_date}
-                  onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-                />
-                <Input
-                  mb='4'
-                  w='48%'
-                  h='58px'
-                  py='32px'
-                  borderColor='#ECF1FE'
-                  rounded='3px'
-                  name='end_date'
-                  type='number'
-                  placeholder={`End - ${review.end_date}`}
-                  value={editValue.end_date}
-                  onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
-                />
-              </Flex>
+              <Select
+                mb='4'
+                h='65px'
+                rounded='3px'
+                borderColor='#ECF1FE'
+                name='difficulty_rating'
+                ref={register}
+                onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
+              >
+                <option value={0}>{review.difficulty_rating}</option>
+                <option value={5}>5 - Very Hard</option>
+                <option value={4}>4 - Somewhat Hard</option>
+                <option value={3}>3 - Somewhat Easy</option>
+                <option value={2}>2 - Easy</option>
+                <option value={1}>1 - Very Easy</option>
+                ))}
+              </Select>
             </FormControl>
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
-                Working Hours
+                Interview Rounds
               </FormLabel>
               <EditReviewInput
-                name='typical_hours'
+                name='interview_rounds'
                 type='number'
-                placeholder={review.typical_hours}
-                value={editValue.typical_hours}
+                placeholder={review.interview_rounds}
+                value={editValue.interview_rounds}
                 onChange={e => setEditValue({ ...editValue, [e.target.name]: e.target.value })}
               />
             </FormControl>
+
+            <FormLabel mb='2' >Types of Interview </FormLabel>
+            <CheckboxGroup defaultValue={[review.phone_interview, review.resume_review]} mb='4'>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='phone_interview'
+                value={review.phone_interview}
+                onClick={() => review.phone_interview
+                  ? setEditValue({ ...editValue, phone_interview: false })
+                  : setEditValue({ ...editValue, phone_interview: true })
+                }
+              >
+                Phone Screening
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='resume_review'
+                value={review.resume_review}
+                onClick={() => review.resume_review
+                  ? setEditValue({ ...editValue, resume_review: false })
+                  : setEditValue({ ...editValue, resume_review: true })
+                }
+              >
+                Resume Review
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='take_home_assignments'
+                value={review.take_home_assignments}
+                onClick={() => review.take_home_assignments
+                  ? setEditValue({ ...editValue, take_home_assignments: false })
+                  : setEditValue({ ...editValue, take_home_assignments: true })
+                }
+              >
+                Take Home Assignments
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='online_coding_assignments'
+                value={review.online_coding_assignments}
+                onClick={() => review.online_coding_assignments
+                  ? setEditValue({ ...editValue, online_coding_assignments: false })
+                  : setEditValue({ ...editValue, online_coding_assignments: true })
+                }
+              >
+                Online Coding Assignments
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='portfolio_review'
+                value={review.portfolio_review}
+                onClick={() => review.portfolio_review
+                  ? setEditValue({ ...editValue, portfolio_review: false })
+                  : setEditValue({ ...editValue, portfolio_review: true })
+                }
+              >
+                Portfoilio Review
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='screen_share'
+                value={review.screen_share}
+                onClick={() => review.screen_share
+                  ? setEditValue({ ...editValue, screen_share: false })
+                  : setEditValue({ ...editValue, screen_share: true })
+                }
+              >
+                Screen Share
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='open_source_contribution'
+                value={review.open_source_contribution}
+                onClick={() => review.open_source_contribution
+                  ? setEditValue({ ...editValue, open_source_contribution: false })
+                  : setEditValue({ ...editValue, open_source_contribution: true })
+                }
+              >
+                Open Source Contribution
+							</Checkbox>
+              <Checkbox
+                size='md'
+                border='rgba(72, 72, 72, 0.1)'
+                name='side_projects'
+                value={review.side_projects}
+                onClick={() => review.side_projects
+                  ? setEditValue({ ...editValue, side_projects: false })
+                  : setEditValue({ ...editValue, side_projects: true })
+                }
+              >
+                Side Projects
+							</Checkbox>
+            </CheckboxGroup>
 
             <FormControl>
               <FormLabel fontSize='15px' color='#525252'>
@@ -376,9 +465,9 @@ const EditReviewForm = ({
               </AlertDialog>
             </ButtonGroup>
           </form>
-        </Flex>
-      </Flex>
-    </Flex>
+        </Flex >
+      </Flex >
+    </Flex >
   );
 };
 
@@ -392,4 +481,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   (getReviewById, editReview)
-)(EditReviewForm);
+)(EditInterviewForm);
