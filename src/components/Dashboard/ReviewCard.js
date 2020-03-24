@@ -33,8 +33,9 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  Tooltip,
   useToast,
-  useDisclosure
+  useDisclosure,
 } from '@chakra-ui/core';
 
 const ReviewCard = ({
@@ -381,45 +382,13 @@ const ReviewCard = ({
             </Flex>
           ) : null}
 
-          {/* Review container */}
-          <Flex
-            as='p'
-            w='100%'
-            wrap='nowrap'
-            overflow='hidden'
-            pt='2%'
-            px='8%'
-            align='center'
-          >
-            {review.comment}
-          </Flex>
-
-          <ModalFooter>
+          {/* Edit/Delete container */}
+          <Flex justify='flex-end' mt='2%' px='8%'>
             {Number(loginId) === Number(review.user_id) ? (
-              <Button
-                background='#344CD0'
-                color='#FFFFFF'
-                rounded='6px'
-                border='none'
-                size='lg'
-                mr='2%'
-                onClick={navToEditRoute}
-              >
-                Edit
-              </Button>
+              <Image src={require('../../icons/edit.png')} onClick={navToEditRoute} size='1.5em' mr='12px' />
             ) : null}
             {Number(loginId) === Number(review.user_id) ? (
-              <Button
-                background='#D31122'
-                color='#FFFFFF'
-                rounded='6px'
-                border='none'
-                size='lg'
-                mr='2%'
-                onClick={() => setIsOpen2(true)}
-              >
-                Delete
-              </Button>
+              <Image src={require('../../icons/trash.png')} onClick={() => setIsOpen2(true)} size='1.5em' />
             ) : null}
             <AlertDialog
               isOpen={isOpen2}
@@ -437,15 +406,48 @@ const ReviewCard = ({
                 </AlertDialogBody>
 
                 <AlertDialogFooter>
-                  <Button ref={cancelRef} onClick={onClose2}>
+                  <Button
+                    h='56px'
+                    rounded='10px'
+                    bg='#344CD0'
+                    border='none'
+                    color='white'
+                    ref={cancelRef}
+                    onClick={onClose2}
+                  >
                     Cancel
                   </Button>
-                  <Button variantColor='red' ml={3} onClick={submitDelete}>
+                  <Button
+                    h='56px'
+                    rounded='10px'
+                    border='none'
+                    color='white'
+                    variantColor='red'
+                    ml={3}
+                    onClick={submitDelete}
+                  >
                     Delete
                   </Button>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
+          </Flex>
+
+          {/* Review container */}
+          <Flex
+            as='p'
+            w='100%'
+            wrap='nowrap'
+            overflow='hidden'
+            pt='2%'
+            px='8%'
+            align='center'
+          >
+            {review.comment}
+          </Flex>
+
+          <ModalFooter>
+
           </ModalFooter>
         </ModalContent>
       </Modal>
