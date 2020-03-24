@@ -5,6 +5,7 @@ import {
 	Flex,
 	Button,
 	Avatar,
+	Text,
 	Image,
 	Input,
 	InputGroup,
@@ -102,41 +103,41 @@ export default function NavBar({
 
 					{/* Hamburger Menu */}
 					<Box ref={btnRef} cursor='pointer' onClick={onOpen}>
-						<Image size='70px' src={require('../../icons/hamburger-blue.png')} />
+						<Image size='40px' src={require('../../icons/hamburger-blue.svg')} />
 					</Box>
 					<Drawer
 						isOpen={isOpen}
-						placement="right"
+						placement='right'
+						size='xs'
 						onClose={onClose}
 						finalFocusRef={btnRef}
 					>
 						<DrawerOverlay />
-						<DrawerContent>
-							<DrawerCloseButton />
+						<DrawerContent bg='#344CD0'>
+							<DrawerCloseButton color='white' border='none' bg='#344CD0' fontSize='2em' />
 							<DrawerHeader>
-								<Avatar mr='12%' size='md' src='https://bit.ly/broken-link' />
+								<Flex justifyContent='center' mt='15%'>
+									<Image size='150px' src={require('../../icons/user-logout.svg')} />
+								</Flex>
+								<Flex justifyContent='center' mt='5%' color='white' fontWeight='light' fontSize='1.5em' >
+									{localStorage.getItem('username')}
+								</Flex>
 							</DrawerHeader>
-
-							<DrawerBody>
-								<Button
-									background='#344CD0'
-									color='#FFFFFF'
-									rounded='6px'
+								<Flex
+									background='#FFFFFF'
+									mt='3%'
+									color='#494B5B'
 									border='none'
-									size='lg'
+									py='4%'
+									cursor='pointer'
+									align='center'
+									justifyContent='center'
 									isLoading={isLoading}
 									onClick={logout}
 								>
-									Logout
-								</Button>
-							</DrawerBody>
-
-							<DrawerFooter>
-								<Button variant="outline" mr={3} onClick={onClose}>
-									Cancel
-            </Button>
-								<Button color="blue">Save</Button>
-							</DrawerFooter>
+									<Image size='40px' mr='7%' src={require('../../icons/logout-gray.svg')} />
+									<Text fontSize='1.8em'>Sign out</Text>
+								</Flex>
 						</DrawerContent>
 					</Drawer>
 				</Flex>
