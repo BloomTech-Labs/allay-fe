@@ -10,6 +10,7 @@ import getCompanies from '../../../state/actions';
 import postCompany from '../../../state/actions';
 // styles
 import ProgressBar from '../../Reusable/ProgressBar.js';
+import CustomAutoComplete from '../../Reusable/InputFields/Autocomplete';
 import BeautyStars from 'beauty-stars';
 import {
 	FormControl,
@@ -47,11 +48,12 @@ const ReviewForm2 = ({
 	// search state
 	const [searchTerm, setSearchTerm] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
-	//auto location
-	const [autoLocation, setAutoLocation] = useState({
-		myCity: '',
-		myState: ''
-	});
+	// location "state"
+	const [location, setLocation] = useState({});
+	const [newLocation, setNewLocation] = useState({});
+	const stateSelectorHelper = value => {
+		setLocation(value);
+	};
 	// star rating
 	const [starState, setStarState] = useState(0);
 	//progress bar
@@ -90,19 +92,19 @@ const ReviewForm2 = ({
 				company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
 			);
 			setSearchResults(results);
-			if (results.length <= 1) {
-				setAutoLocation({
-					myCity: results[0].hq_city,
-					myState: results[0].state_id
-				});
-			} else {
-				setAutoLocation({
-					myCity: '',
-					myState: ''
-				});
-			}
 		}
 	}, [searchTerm, companies]);
+
+	// state confirmation search function
+
+	useEffect(() => {
+		if (location.myState) {
+			const stateId = states.filter(i =>
+				i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
+			);
+			setNewLocation({ ...location, myState: stateId[0].id });
+		}
+	}, [location]);
 
 	// timers for moves
 	let timer = null;
@@ -208,7 +210,9 @@ const ReviewForm2 = ({
 		postReview(localStorage.getItem('userId'), {
 			...data,
 			review_type_id: 1,
-			overall_rating: starState
+			overall_rating: starState,
+			city: newLocation.myCity,
+			state_id: newLocation.myState
 		}).then(() => history.push('/dashboard'));
 		ReactGA.event({
 			category: 'Review',
@@ -378,40 +382,14 @@ const ReviewForm2 = ({
 										ref={register}
 									/>
 									<FormLabel>3. Location of company</FormLabel>
-									<Flex>
-										<Input
-											h='56px'
-											mb='6'
-											mr='1%'
-											variant='filled'
-											rounded='6px'
-											autoCapitalize='none'
-											type='text'
-											label='city'
-											name='city'
-											list='city'
-											placeholder='ex: Nashville '
-											ref={register}
-											value={autoLocation.myCity}
-										/>
-										<Select
-											h='56px'
-											rounded='6px'
-											variant='filled'
-											label='state_id'
-											name='state_id'
-											placeholder='Select one'
-											ref={register}
-											value={autoLocation.myState}
-										>
-											{states.map(i => (
-												<option key={i.id} value={i.id}>
-													{i.state_name}
-												</option>
-											))}
-										</Select>
-									</Flex>
-									<FormLabel>5. Length of position</FormLabel>
+									<CustomAutoComplete
+										stateHelper={stateSelectorHelper}
+										id='Company Headquarters'
+										name='Company Headquarters'
+										label='Company Headquarters'
+										placeholder='e.g. Los Angeles, CA'
+									/>
+									<FormLabel mt='6'>5. Length of position</FormLabel>
 									<Flex w='100%' justify='space-between'>
 										<Input
 											type='number'
