@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 //styles
-import { Flex, Avatar, Button } from '@chakra-ui/core';
+import companyIcon from '../../../companyIcon.png';
+import interviewIcon from '../../../interviewIcon.png';
+import { Flex, Avatar, Button, Image } from '@chakra-ui/core';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ProgressBar from '../../Reusable/ProgressBar.js';
@@ -178,8 +180,8 @@ const FormController = ({ history }) => {
 							>
 								<Flex>
 									<Flex
-										border='1px solid black'
-										borderRadius='50%'
+										justify='center'
+										align='center'
 										w='100px'
 										h='100px'
 										mr='15%'
@@ -187,17 +189,21 @@ const FormController = ({ history }) => {
 											setShowInterview(true);
 											setShowCompanyReview(false);
 										}}
-									/>
+									>
+										<Image src={interviewIcon} alt='Company Review Icon' />
+									</Flex>
 									<Flex
-										border='1px solid black'
-										borderRadius='50%'
+										justify='center'
+										align='center'
 										w='100px'
 										h='100px'
 										onClick={() => {
 											setShowInterview(false);
 											setShowCompanyReview(true);
 										}}
-									/>
+									>
+										<Image src={companyIcon} alt='Company Review Icon' />
+									</Flex>
 								</Flex>
 
 								<Flex w='100%' pl='2%' mt='3%'>

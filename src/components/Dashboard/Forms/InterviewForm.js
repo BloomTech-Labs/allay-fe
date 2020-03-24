@@ -48,7 +48,6 @@ const InterviewForm = ({
 	const stateSelectorHelper = value => {
 		setLocation(value);
 	};
-	// console.log(location);
 	// thinking state
 	const [thinking, setThinking] = useState(false);
 	const dots = () => {
