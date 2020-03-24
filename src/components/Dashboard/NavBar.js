@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ReactGA from 'react-ga'; // for google analytics
 //styles
 import {
 	Flex,
 	Button,
 	Avatar,
+	Image,
 	Input,
 	InputGroup,
 	InputRightElement,
 	Icon,
-	RadioButtonGroup
+	RadioButtonGroup,
+	Drawer,
+	DrawerBody,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+	DrawerContent,
+	DrawerCloseButton,
+	Box,
+	useDisclosure
 } from '@chakra-ui/core';
 
 export default function NavBar({
@@ -21,6 +31,9 @@ export default function NavBar({
 	typeFilters,
 	setTypeFilters
 }) {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const btnRef = React.useRef();
+
 	// use to navigate to review form
 	const navToReviewForm = () => {
 		history.push('/dashboard/add-review');
@@ -83,23 +96,53 @@ export default function NavBar({
 		>
 			<Flex align='center' justify='space-between' pt='2%'>
 				<Flex align='center'>
-					<Avatar mr='12%' size='md' src='https://bit.ly/broken-link' />
 					<h1> Allay </h1>
 				</Flex>
 				<Flex>
-					<Button
-						background='#344CD0'
-						color='#FFFFFF'
-						rounded='6px'
-						border='none'
-						size='lg'
-						isLoading={isLoading}
-						onClick={logout}
+
+					{/* Hamburger Menu */}
+					<Box ref={btnRef} cursor='pointer' onClick={onOpen}>
+						<Image size='70px' src={require('../../icons/hamburger-blue.png')} />
+					</Box>
+					<Drawer
+						isOpen={isOpen}
+						placement="right"
+						onClose={onClose}
+						finalFocusRef={btnRef}
 					>
-						Logout
-					</Button>
+						<DrawerOverlay />
+						<DrawerContent>
+							<DrawerCloseButton />
+							<DrawerHeader>
+								<Avatar mr='12%' size='md' src='https://bit.ly/broken-link' />
+							</DrawerHeader>
+
+							<DrawerBody>
+								<Button
+									background='#344CD0'
+									color='#FFFFFF'
+									rounded='6px'
+									border='none'
+									size='lg'
+									isLoading={isLoading}
+									onClick={logout}
+								>
+									Logout
+								</Button>
+							</DrawerBody>
+
+							<DrawerFooter>
+								<Button variant="outline" mr={3} onClick={onClose}>
+									Cancel
+            </Button>
+								<Button color="blue">Save</Button>
+							</DrawerFooter>
+						</DrawerContent>
+					</Drawer>
 				</Flex>
 			</Flex>
+
+			{/* Search Bar */}
 			<Flex align='center' justify='space-between' pt='2%'>
 				<InputGroup w='40%'>
 					<InputRightElement
@@ -174,10 +217,10 @@ export default function NavBar({
 						Recent Posts
 					</Flex>
 				) : (
-					<Flex as='h2' mt='1%'>
-						Recent Posts
-					</Flex>
-				)}
+						<Flex as='h2' mt='1%'>
+							Recent Posts
+						</Flex>
+					)}
 			</Flex>
 		</Flex>
 	);

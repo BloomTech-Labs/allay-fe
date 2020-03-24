@@ -208,7 +208,7 @@ const ReviewCard = ({
                   <Image src={require('../../icons/dollar-sign-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      ${review.salary}
+                      ${review.salary}.00
                     </Flex>
                     <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
                       Salary
@@ -281,7 +281,7 @@ const ReviewCard = ({
                   <Image src={require('../../icons/dollar-sign-blue.png')} background='#F2F6FE' borderRadius='100%' p='6px' size='2.5em' mr='15px' />
                   <Flex flexDir='column'>
                     <Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
-                      ${review.salary}
+                      ${review.salary}.00
                     </Flex>
                     <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
                       Salary
@@ -385,10 +385,10 @@ const ReviewCard = ({
           {/* Edit/Delete container */}
           <Flex justify='flex-end' mt='2%' px='8%'>
             {Number(loginId) === Number(review.user_id) ? (
-              <Image src={require('../../icons/edit.png')} onClick={navToEditRoute} size='1.5em' mr='12px' />
+              <Image src={require('../../icons/edit.png')} onClick={navToEditRoute} cursor='pointer' size='1.5em' mr='12px' />
             ) : null}
             {Number(loginId) === Number(review.user_id) ? (
-              <Image src={require('../../icons/trash.png')} onClick={() => setIsOpen2(true)} size='1.5em' />
+              <Image src={require('../../icons/trash.png')} onClick={() => setIsOpen2(true)} cursor='pointer' size='1.5em' />
             ) : null}
             <AlertDialog
               isOpen={isOpen2}
@@ -558,7 +558,7 @@ const ReviewCard = ({
             <Flex align='center'>
               <Image src={require('../../icons/dollar-sign.png')} size='1.5em' />
               <Flex as='p' overflow='hidden'>
-                {review.salary}
+                {review.salary}.00
               </Flex>
             </Flex>
 
