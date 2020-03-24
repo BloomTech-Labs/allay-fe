@@ -10,7 +10,6 @@ import CustomSpinner from '../../CustomSpinner.js';
 import OnboardingInput from '../../Reusable/InputFields/OnboardingInput.js';
 import {
   Button,
-  ButtonGroup,
   Flex,
   FormControl,
   FormLabel,
@@ -30,16 +29,6 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   const stateHelper = value => {
     setLocation(value);
   };
-  console.log(location);
-  // function validateCompanyState(value) {
-  //   let error;
-  //   if (!value) {
-  //     error = 'Company name is required';
-  //   } else if (value.length !== 2) {
-  //     error = 'Must abbreviate state';
-  //   }
-  //   return error || true;
-  // }
 
   // confirm myState and replace with matching state ID
   useEffect(() => {
@@ -50,10 +39,6 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
       setNewLocation({ ...location, myState: stateId[0].id });
     }
   }, [location]);
-
-  // const submitForm = newCompany => {
-  //   postCompany(newCompany).then(() => history.push('/dashboard/add-review'));
-  // };
 
   //submit handler
   const submitForm = newCompany => {
@@ -78,21 +63,25 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
   }
 
   return (
-    <Flex bg='rgba(72, 72, 72, 0.1)' w='100%' minH='100vh'>
-      <Flex
-        justify='flexStart'
-        maxW='1100px'
-        w='100%'
-        py='6rem'
-        px='15rem'
-        bg='white'
-      >
-        <Flex justify='center' flexDir='column'>
+    <Flex justify='flexStart' w='100%' bg='#F2F6FE'>
+      <Flex className='RegisterSplash' justify='center' w='100%' minH='100vh'>
+        <Flex
+          bg='white'
+          w='45%'
+          mt='15%'
+          mb='5%'
+          px='4%'
+          justify='center'
+          flexDir='column'
+        >
           <form onSubmit={handleSubmit(submitForm)}>
             <FormControl isRequired isInvalid={errors.hq_state}>
-              <h2> Add a Company</h2>
+              <h2 color='#525252' align='center'>
+                Add a Company
+              </h2>
               <FormLabel color='#525252'>Company Name</FormLabel>
               <OnboardingInput
+                mb='30px'
                 name='company_name'
                 label='Company Name'
                 placeholder='e.g. UPS'
@@ -103,6 +92,9 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
               </FormLabel>
               <CustomAutocomplete
                 stateHelper={stateHelper}
+                h='72px'
+                mb='30px'
+                variant='outline'
                 id='hq_city'
                 name='hq_city'
                 label='hq_city'
@@ -110,6 +102,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
               />
               <FormLabel color='#525252'>Company Website</FormLabel>
               <OnboardingInput
+                mb='30px'
                 name='domain'
                 label='domain'
                 placeholder='e.g. lambdaschool.com'
@@ -117,7 +110,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
               />
               <FormLabel color='#525252'>Company Size</FormLabel>
               <Select
-                mb='30px'
+                mb='45px'
                 h='70px'
                 // w='404px'
                 rounded='3px'
@@ -139,30 +132,26 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
               </Select>
             </FormControl>
 
-            <ButtonGroup mt='1rem' spacing={2}>
+            <Flex mt='1rem' w='100%' justify='space-between'>
               <Button
-                bg='#615E5E'
+                bg='#344CD0'
                 color='white'
-                _hover={{ bg: '#979797' }}
-                _active={{
-                  bg: '#979797'
-                }}
                 isLoading={formState.isSubmitting}
                 type='submit'
-                size='md'
-                w='500px'
-                h='64px'
+                w='65%'
+                h='72px'
+                fontSize='18px'
               >
                 Add
               </Button>
               <Button
                 isloading
-                size='md'
-                height='64px'
-                width='100px'
-                border='2px solid #615E5E'
+                height='72px'
+                width='30%'
+                border='none'
                 bg='none'
                 color='#615E5E'
+                fontSize='18px'
                 onClick={() => setIsOpen(true)}
               >
                 Cancel
@@ -194,7 +183,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-            </ButtonGroup>
+            </Flex>
           </form>
         </Flex>
       </Flex>
