@@ -162,11 +162,11 @@ const FormController = ({ history }) => {
 							{/* company box */}
 
 							<Flex
-								w='459px'
+								w='465px'
 								h='234px'
 								mb='8%'
 								px='6'
-								py='10'
+								py='5'
 								border='1px solid #BBBDC6'
 								rounded='6px'
 								flexDir='column'
@@ -178,13 +178,21 @@ const FormController = ({ history }) => {
 								data-aos-mirror='true'
 								data-aos-once='false'
 							>
-								<Flex>
+								<Flex
+									w='100%'
+									color='#494B5B'
+									fontSize='20px'
+									fontWeight='light'
+								>
+									Choose a topic
+								</Flex>
+								<Flex justify='space-evenly' mt='3%'>
 									<Flex
 										justify='center'
 										align='center'
 										w='100px'
 										h='100px'
-										mr='15%'
+										// mr='15%'
 										onClick={() => {
 											setShowInterview(true);
 											setShowCompanyReview(false);
@@ -206,11 +214,27 @@ const FormController = ({ history }) => {
 									</Flex>
 								</Flex>
 
-								<Flex w='100%' pl='2%' mt='3%'>
-									<Flex as='h4' w='15%' mr='24%' textAlign='center'>
+								<Flex w='100%' mt='1%' justify='space-evenly'>
+									<Flex
+										as='h4'
+										w='96px'
+										h='44px'
+										textAlign='center'
+										color='#494B5B'
+										fontWeight='light'
+										fontSize='16px'
+									>
 										Interview Review
 									</Flex>
-									<Flex as='h4' w='15%' textAlign='center'>
+									<Flex
+										as='h4'
+										w='96px'
+										h='44px'
+										textAlign='center'
+										color='#494B5B'
+										fontWeight='light'
+										fontSize='16px'
+									>
 										Company Review
 									</Flex>
 								</Flex>
