@@ -592,7 +592,10 @@ const InterviewForm = ({
 												<option value={4}>4</option>
 												<option value={5}>5</option>
 												<option value={6}>6</option>
-												<option value={7}>7+</option>
+												<option value={7}>7</option>
+												<option value={8}>8</option>
+												<option value={9}>9</option>
+												<option value={10}>10</option>
 											</Select>
 										</Flex>
 										{/* avatar */}
@@ -924,9 +927,9 @@ const InterviewForm = ({
 												onChange={time5}
 												ref={register}
 											>
-												<option value={5}>Very hard</option>
-												<option value={4}>Somewhat hard</option>
-												<option value={3}>Somewhat easy</option>
+												<option value={5}>Very difficult</option>
+												<option value={4}>Difficult</option>
+												<option value={3}>Average</option>
 												<option value={2}>Easy</option>
 												<option value={1}>Very easy</option>
 											</Select>
@@ -1008,9 +1011,15 @@ const InterviewForm = ({
 														time6();
 													}}
 												>
-													<CustomRadio value='1'>No offer</CustomRadio>
-													<CustomRadio value='2'>Accepted</CustomRadio>
-													<CustomRadio value='3'>Declined</CustomRadio>
+													<CustomRadio value='1' w='411px'>
+														No offer
+													</CustomRadio>
+													<CustomRadio value='2' w='411px'>
+														Accepted
+													</CustomRadio>
+													<CustomRadio value='3' w='411px'>
+														Declined
+													</CustomRadio>
 												</RadioButtonGroup>
 											</Flex>
 										</Flex>
