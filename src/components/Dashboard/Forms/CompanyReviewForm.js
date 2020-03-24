@@ -116,6 +116,7 @@ const ReviewForm2 = ({
 	// timers for moves
 	let timer = null;
 	let dotTimer = null;
+
 	// 2nd tag
 	const time1 = () => {
 		clearTimeout(timer);
@@ -123,7 +124,6 @@ const ReviewForm2 = ({
 		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo2, 2000);
 	};
-
 	const routeTo2 = () => {
 		setTag2(true);
 		setProgress({
@@ -135,6 +135,7 @@ const ReviewForm2 = ({
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		setThinking(false);
 	};
+
 	// 3rd tag
 	const time2 = () => {
 		clearTimeout(timer);
@@ -142,7 +143,6 @@ const ReviewForm2 = ({
 		dotTimer = setTimeout(dots, 800);
 		timer = setTimeout(routeTo3, 2000);
 	};
-
 	const routeTo3 = () => {
 		setTag3(true);
 		setProgress({
@@ -154,6 +154,7 @@ const ReviewForm2 = ({
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		setThinking(false);
 	};
+
 	//4th tag
 	const time3 = () => {
 		clearTimeout(timer);
@@ -161,7 +162,6 @@ const ReviewForm2 = ({
 		dotTimer = setTimeout(dots, 2000);
 		timer = setTimeout(routeTo4, 4000);
 	};
-
 	const routeTo4 = () => {
 		setTag4(true);
 		setProgress({
@@ -173,6 +173,7 @@ const ReviewForm2 = ({
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		setThinking(false);
 	};
+
 	// 5th tag
 	const time4 = () => {
 		clearTimeout(timer);
@@ -180,7 +181,6 @@ const ReviewForm2 = ({
 		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo5, 2000);
 	};
-
 	const routeTo5 = () => {
 		setTag5(true);
 		setProgress({
@@ -192,6 +192,7 @@ const ReviewForm2 = ({
 		element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		setThinking(false);
 	};
+
 	// 6th tag
 	const time5 = () => {
 		clearTimeout(timer);
@@ -199,7 +200,6 @@ const ReviewForm2 = ({
 		dotTimer = setTimeout(dots, 500);
 		timer = setTimeout(routeTo6, 2000);
 	};
-
 	const routeTo6 = () => {
 		setTag6(true);
 		setProgress({
@@ -472,7 +472,7 @@ const ReviewForm2 = ({
 										data-aos-mirror='true'
 										data-aos-once='true'
 									>
-										<p>Thank you for that information</p>
+										<p>Thank you for that information.</p>
 									</Flex>
 									<Flex
 										id='commentTag'
@@ -492,9 +492,9 @@ const ReviewForm2 = ({
 										data-aos-once='true'
 									>
 										<p>
-											Please write your comment below. Some topics you can
-											discuss are company culture, work environment, career
-											growth, salary etc.
+											Please add some comments below. Helpful comments include
+											information about company culture, work environment,
+											career growth, salary, etc.
 										</p>
 									</Flex>
 									<Flex w='100%' justify='flex-end'>
@@ -520,6 +520,7 @@ const ReviewForm2 = ({
 											<FormLabel>Comments</FormLabel>
 											<Textarea
 												variant='filled'
+												resize='none'
 												h='144px'
 												rowsMax={6}
 												type='text'
@@ -567,7 +568,7 @@ const ReviewForm2 = ({
 										data-aos-mirror='true'
 										data-aos-once='true'
 									>
-										<p>Thank you for sharing that</p>
+										<p>Thank you for sharing that.</p>
 									</Flex>
 									<Flex
 										align='center'
@@ -585,7 +586,10 @@ const ReviewForm2 = ({
 										data-aos-mirror='true'
 										data-aos-once='true'
 									>
-										<p>To understand better can you please add some details</p>
+										<p>
+											To better understand company culture, would you please add
+											a few more details?
+										</p>
 									</Flex>
 									{/* hours container  */}
 									<Flex w='100%' justify='flex-end'>
@@ -617,10 +621,10 @@ const ReviewForm2 = ({
 												onChange={time3}
 												ref={register}
 											>
-												<option value={29}>29 hours or less</option>
-												<option value={30}>30 hours</option>
-												<option value={40}>40 hours</option>
-												<option value={50}>50 hours</option>
+												<option value={29}>Less than 30 hours</option>
+												<option value={30}>30 hours+</option>
+												<option value={40}>40 hours+</option>
+												<option value={50}>50 hours+</option>
 												<option value={60}>60 hours+</option>
 											</Select>
 										</Flex>
@@ -639,7 +643,7 @@ const ReviewForm2 = ({
 										>
 											<Avatar size='md' src='https://bit.ly/broken-link' />
 										</Flex>
-									</Flex>{' '}
+									</Flex>
 								</>
 							) : null}
 							{/* 5th prompt */}
@@ -663,8 +667,8 @@ const ReviewForm2 = ({
 										data-aos-once='true'
 									>
 										<p>
-											Posting your salary helps many job-seekers negotiate for
-											fair salaries
+											Posting your hiring salary helps many job-seekers
+											negotiate fair salaries.
 										</p>
 									</Flex>
 									{/* salary container  */}
@@ -686,7 +690,7 @@ const ReviewForm2 = ({
 											data-aos-mirror='true'
 											data-aos-once='true'
 										>
-											<FormLabel>Salary</FormLabel>
+											<FormLabel>Hiring salary</FormLabel>
 											<InputGroup>
 												<InputLeftElement
 													mb='4'
@@ -724,7 +728,7 @@ const ReviewForm2 = ({
 										>
 											<Avatar size='md' src='https://bit.ly/broken-link' />
 										</Flex>
-									</Flex>{' '}
+									</Flex>
 								</>
 							) : null}
 							{/* 6th prompt */}
@@ -765,7 +769,7 @@ const ReviewForm2 = ({
 										data-aos-mirror='true'
 										data-aos-once='true'
 									>
-										<p>One last question</p>
+										<p>One last question.</p>
 									</Flex>
 									{/* overall container  */}
 									<Flex w='100%' justify='flex-end'>
@@ -786,7 +790,9 @@ const ReviewForm2 = ({
 											data-aos-mirror='true'
 											data-aos-once='true'
 										>
-											<FormLabel mb='4'>Rate overall experience</FormLabel>
+											<FormLabel mb='4'>
+												Please rate your overall experience.
+											</FormLabel>
 											<Flex justify='center' w='100%'>
 												<BeautyStars
 													value={starState}
@@ -836,7 +842,7 @@ const ReviewForm2 = ({
 										data-aos-once='true'
 										data-aos-anchor='#ratingTag'
 									>
-										<p>Thank you! Don’t forget to hit submit </p>
+										<p>Thank you! Don’t forget to hit submit. </p>
 									</Flex>
 									{/* submit container  */}
 									<Flex w='100%' justify='flex-end'>
@@ -867,8 +873,7 @@ const ReviewForm2 = ({
 												rounded='6px'
 												border='none'
 											>
-												{' '}
-												Submit{' '}
+												Submit
 											</Button>
 										</Flex>
 										{/* avatar */}

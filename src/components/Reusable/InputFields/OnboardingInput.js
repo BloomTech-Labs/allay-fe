@@ -4,10 +4,13 @@ import { Input } from '@chakra-ui/core';
 function OnboardingInput({ ...props }, ref) {
   return (
     <Input
-      mb='1rem'
+      w='100%'
+      h='58px'
       py='32px'
-      variant='filled'
-      borderRadius='6px'
+      rounded='3px'
+      variant='outline'
+      bgColor='#FDFDFF'
+      mb={props.mb}
       type={props.type ? props.type : 'text'}
       name={props.name}
       label={props.label}

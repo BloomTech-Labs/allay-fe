@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ReactGA from 'react-ga'; // for google analytics
 //styles
 import {
 	Flex,
 	Button,
 	Avatar,
+	Text,
+	Image,
 	Input,
 	InputGroup,
 	InputRightElement,
 	Icon,
-	RadioButtonGroup
+	RadioButtonGroup,
+	Drawer,
+	DrawerBody,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+	DrawerContent,
+	DrawerCloseButton,
+	Box,
+	useDisclosure
 } from '@chakra-ui/core';
 
 export default function NavBar({
@@ -21,6 +32,9 @@ export default function NavBar({
 	typeFilters,
 	setTypeFilters
 }) {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const btnRef = React.useRef();
+
 	// use to navigate to review form
 	const navToReviewForm = () => {
 		history.push('/dashboard/add-review');
@@ -83,23 +97,53 @@ export default function NavBar({
 		>
 			<Flex align='center' justify='space-between' pt='2%'>
 				<Flex align='center'>
-					<Avatar mr='12%' size='md' src='https://bit.ly/broken-link' />
 					<h1> Allay </h1>
 				</Flex>
 				<Flex>
-					<Button
-						background='#344CD0'
-						color='#FFFFFF'
-						rounded='6px'
-						border='none'
-						size='lg'
-						isLoading={isLoading}
-						onClick={logout}
+
+					{/* Hamburger Menu */}
+					<Box ref={btnRef} cursor='pointer' onClick={onOpen}>
+						<Image size='40px' src={require('../../icons/hamburger-blue.svg')} />
+					</Box>
+					<Drawer
+						isOpen={isOpen}
+						placement='right'
+						size='xs'
+						onClose={onClose}
+						finalFocusRef={btnRef}
 					>
-						Logout
-					</Button>
+						<DrawerOverlay />
+						<DrawerContent bg='#344CD0'>
+							<DrawerCloseButton color='white' border='none' bg='#344CD0' fontSize='2em' />
+							<DrawerHeader>
+								<Flex justifyContent='center' mt='15%'>
+									<Image size='150px' src={require('../../icons/user-logout.svg')} />
+								</Flex>
+								<Flex justifyContent='center' mt='5%' color='white' fontWeight='light' fontSize='1.5em' >
+									{localStorage.getItem('username')}
+								</Flex>
+							</DrawerHeader>
+								<Flex
+									background='#FFFFFF'
+									mt='3%'
+									color='#494B5B'
+									border='none'
+									py='4%'
+									cursor='pointer'
+									align='center'
+									justifyContent='center'
+									isLoading={isLoading}
+									onClick={logout}
+								>
+									<Image size='40px' mr='7%' src={require('../../icons/logout-gray.svg')} />
+									<Text fontSize='1.8em'>Sign out</Text>
+								</Flex>
+						</DrawerContent>
+					</Drawer>
 				</Flex>
 			</Flex>
+
+			{/* Search Bar */}
 			<Flex align='center' justify='space-between' pt='2%'>
 				<InputGroup w='40%'>
 					<InputRightElement
@@ -174,10 +218,10 @@ export default function NavBar({
 						Recent Posts
 					</Flex>
 				) : (
-					<Flex as='h2' mt='1%'>
-						Recent Posts
-					</Flex>
-				)}
+						<Flex as='h2' mt='1%'>
+							Recent Posts
+						</Flex>
+					)}
 			</Flex>
 		</Flex>
 	);
