@@ -179,7 +179,7 @@ const ReviewCard = ({
               </Flex>
             </Flex>
             <Flex align='center' ml='8%' mr='20%'>
-              <Avatar size='md' src={`//logo.clearbit.com/${review.logo}`} />
+              <Avatar size='lrg' src={`//logo.clearbit.com/${review.logo}`} />
             </Flex>
           </Flex>
 
@@ -474,7 +474,7 @@ const ReviewCard = ({
         flexDir='column'
         justifyContent='center'
         alignItems='center'
-        _hover={{ bg: '#4EADF9', color: 'white' }}
+        _hover={{ bg: '#E9F0FF' }}
         onClick={onOpen}
       >
         {/* Review content container */}
