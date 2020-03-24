@@ -398,7 +398,7 @@ const InterviewForm = ({
                 data-aos-mirror='true'
                 data-aos-once='true'
               >
-                <p>Great! I will need some general detail to get started</p>
+                <p>Great! I will need some general details to get started.</p>
               </Flex>
               {/* company container  */}
 
@@ -452,7 +452,7 @@ const InterviewForm = ({
                         ))}
                       </datalist>
                       <Link mb='2' color='grey' href='/add-company'>
-                        Can't find a company?
+                        Company not in this list? Add your company here.
                       </Link>
                     </>
                   )}
@@ -536,10 +536,10 @@ const InterviewForm = ({
                     data-aos-once='true'
                   >
                     <p>
-                      For the quality of your review I will ask you some in
-                      depth questions. Let’s begin with how many rounds of
-                      interviews you had? Please include phone interviews and
-                      onsite interviews.
+                      For the quality of this review I will ask some in depth
+                      questions. Let’s begin with how many rounds of interviews
+                      you had? Please include phone interviews and onsite
+                      interviews.
                     </p>
                   </Flex>
                   {/* rounds container  */}
@@ -562,7 +562,7 @@ const InterviewForm = ({
                       data-aos-once='true'
                       data-aos-anchor='#roundsTag'
                     >
-                      <FormLabel>Select rounds of interview</FormLabel>
+                      <FormLabel>Select rounds of interviews</FormLabel>
                       <Select
                         h='56px'
                         mb='6'
@@ -622,9 +622,10 @@ const InterviewForm = ({
                     data-aos-once='true'
                   >
                     <p>
-                      To assist you better there are types of interview to
-                      choose from. Select the options that best describes the
-                      process you went through
+                      To better assist you I have included several different
+                      interview types to choose from. Please select all types
+                      that best describes the interview process you went
+                      through.
                     </p>
                   </Flex>
                   <Flex w='100%' justify='flex-end'>
@@ -646,7 +647,7 @@ const InterviewForm = ({
                       data-aos-mirror='true'
                       data-aos-once='true'
                     >
-                      <FormLabel>Select types of interview </FormLabel>
+                      <FormLabel>Select types of interviews </FormLabel>
                       <CheckboxGroup onChange={time3}>
                         <Flex>
                           <Flex direction='column' pr='0.5%'>
@@ -777,9 +778,8 @@ const InterviewForm = ({
                     data-aos-once='true'
                   >
                     <p>
-                      Use this section to describe your interview experience.
-                      You can choose the options you selected above to recount
-                      them in detail
+                      Use this section to describe your interview experience
+                      using the options selected above for reference.
                     </p>
                   </Flex>
                   <Flex w='100%' justify='flex-end'>
@@ -853,8 +853,8 @@ const InterviewForm = ({
                     data-aos-once='true'
                   >
                     <p>
-                      Thanks. Your opinion is very valuable and helps
-                      job-seekers prepare better
+                      Thanks! Your opinion is very valuable and helps Lambda
+                      job-seekers be better prepared.
                     </p>
                   </Flex>
                   <Flex
@@ -875,8 +875,8 @@ const InterviewForm = ({
                     data-aos-once='true'
                   >
                     <p>
-                      Give a difficulty rating to your interview. How easy or
-                      hard was the interview?
+                      Please provide a difficulty rating for your interview. How
+                      easy or hard was the interview?
                     </p>
                   </Flex>
                   {/* diff container  */}
@@ -1039,7 +1039,7 @@ const InterviewForm = ({
                     data-aos-mirror='true'
                     data-aos-once='true'
                   >
-                    <p>Thank you for that information</p>
+                    <p>Thank you for that information.</p>
                   </Flex>
                   <Flex
                     id='salaryTag'
@@ -1059,9 +1059,9 @@ const InterviewForm = ({
                     data-aos-once='true'
                   >
                     <p>
-                      If you were offered, asked or negotiated a salary,
+                      If you were offered, asked, or negotiated a salary,
                       including it in your review increases the helpfulness of
-                      your post.
+                      this post.
                     </p>
                   </Flex>
                   {/* salary container  */}
@@ -1164,7 +1164,10 @@ const InterviewForm = ({
                     data-aos-mirror='true'
                     data-aos-once='true'
                   >
-                    <p>Tell me how did you find the overall experience </p>
+                    <p>
+                      Last question. How would you rate your overall interview
+                      experience?
+                    </p>
                   </Flex>
                   {/* overall container  */}
                   <Flex w='100%' justify='flex-end'>
@@ -1235,7 +1238,7 @@ const InterviewForm = ({
                     data-aos-once='true'
                     data-aos-anchor='#ratingTag'
                   >
-                    <p>Thank you! Don’t forget to hit submit </p>
+                    <p>Thank you! Don’t forget to hit submit.</p>
                   </Flex>
                   {/* submit container  */}
                   <Flex w='100%' justify='flex-end'>
