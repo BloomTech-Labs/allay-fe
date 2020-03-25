@@ -182,7 +182,7 @@ const Login = ({ login, isLoading, history }) => {
 										backgroundColor='#344CD0'
 										isLoading={formState.isSubmitting}
 										type='submit'
-										data-cy='submit'
+										data-cy='loginSubmit'
 									>
 										Login
 									</Button>
@@ -197,6 +197,7 @@ const Login = ({ login, isLoading, history }) => {
 										onClick={gaSignup}
 										fontWeight='bold'
 										underline='none'
+										data-cy='signupLink'
 									>
 										Sign up here!
 									</Link>
