@@ -78,7 +78,7 @@ const FormController = ({ history }) => {
 							bottom='0'
 							position='fixed'
 							overflow='hidden'
-							zIndex='999'
+							zIndex='997'
 						>
 							<Button
 								onClick={() => {
