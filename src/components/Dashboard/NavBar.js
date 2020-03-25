@@ -95,7 +95,7 @@ export default function NavBar({
         </Flex>
         <Flex>
           {/* Hamburger Menu */}
-          <Box ref={btnRef} cursor='pointer' onClick={onOpen}>
+          <Box ref={btnRef} cursor='pointer' onClick={onOpen} data-cy='hamburger'>
             <Image
               size='40px'
               src={require('../../icons/hamburger-blue.svg')}
@@ -144,6 +144,7 @@ export default function NavBar({
                 justifyContent='center'
                 isLoading={isLoading}
                 onClick={logout}
+                data-cy='signOut'
               >
                 <Image
                   size='40px'
