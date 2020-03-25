@@ -29,7 +29,7 @@ import {
   useDisclosure
 } from '@chakra-ui/core';
 
-const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
+const ReviewCard = ({ review, history, deleteReview }) => {
   //allows the use of toasts
   const toast = useToast();
   // NEW post tag logic
@@ -79,27 +79,8 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
         isClosable: true
       });
     });
-
-    // if (reviewDeleted === true) {
-    // 	toast({
-    // 		title: 'Review Deleted',
-    // 		description: `We've successfully deleted your review for you`,
-    // 		status: 'success',
-    // 		duration: 5000,
-    // 		isClosable: true
-    // 	})
-    // } else {
-    // 	toast({
-    // 		title: 'Review Not Deleted',
-    // 		description: `There was an error deleting your review`,
-    // 		status: 'error',
-    // 		duration: 5000,
-    // 		isClosable: true
-    // 	});
-    // }
-
     ReactGA.event({
-      category: 'Delete',
+      category: 'Review Delete',
       action: `Submit delete`
     });
   };

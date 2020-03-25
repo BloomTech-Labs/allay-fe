@@ -85,7 +85,7 @@ const EditInterviewForm = ({
       });
     });
     ReactGA.event({
-      category: 'Edit',
+      category: 'Interview Review Edit',
       action: `Submit edit`
     });
   };
@@ -286,7 +286,7 @@ const EditInterviewForm = ({
                   }
                 >
                   Phone Screening
-							</Checkbox>
+							  </Checkbox>
                 <Checkbox
                   size='md'
                   border='rgba(72, 72, 72, 0.1)'
@@ -298,7 +298,7 @@ const EditInterviewForm = ({
                   }
                 >
                   Resume Review
-							</Checkbox>
+							  </Checkbox>
                 <Checkbox
                   size='md'
                   border='rgba(72, 72, 72, 0.1)'
@@ -310,7 +310,7 @@ const EditInterviewForm = ({
                   }
                 >
                   Take Home Assignments
-							</Checkbox>
+							  </Checkbox>
                 <Checkbox
                   size='md'
                   border='rgba(72, 72, 72, 0.1)'
@@ -322,7 +322,7 @@ const EditInterviewForm = ({
                   }
                 >
                   Online Coding Assignments
-							</Checkbox>
+							  </Checkbox>
               </CheckboxGroup>
             </Flex>
             <Flex>
@@ -516,7 +516,6 @@ const EditInterviewForm = ({
 const mapStateToProps = state => {
   return {
     review: state.review.dataById,
-    reviewEdited: state.review.reviewEdited
   };
 };
 
