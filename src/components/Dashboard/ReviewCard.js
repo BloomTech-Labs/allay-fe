@@ -564,6 +564,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
         alignItems='center'
         _hover={{ bg: '#E9F0FF' }}
         onClick={onOpen}
+        data-cy='modalCard'
       >
         {/* Review content container */}
         <Flex width='100%' justifyContent='flex-end' mb='2%'>

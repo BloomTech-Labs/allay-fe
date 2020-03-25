@@ -167,6 +167,7 @@ export default function NavBar({
           <Input
             width='100%'
             placeholder='Search by company'
+            name='searchbar'
             type='text'
             rounded='20px'
             borderColor='rgba(149, 149, 149, 0.2)'
