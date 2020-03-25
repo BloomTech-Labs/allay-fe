@@ -182,6 +182,7 @@ const Login = ({ login, isLoading, history }) => {
 										backgroundColor='#344CD0'
 										isLoading={formState.isSubmitting}
 										type='submit'
+										data-cy='submit'
 									>
 										Login
 									</Button>
