@@ -4,7 +4,6 @@ import ReactGA from 'react-ga'; // for google analytics
 import {
 	Flex,
 	Button,
-	Avatar,
 	Text,
 	Image,
 	Input,
@@ -13,8 +12,6 @@ import {
 	Icon,
 	RadioButtonGroup,
 	Drawer,
-	DrawerBody,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerOverlay,
 	DrawerContent,
@@ -57,29 +54,26 @@ export default function NavBar({
 
 	// We could get this fronm the DB if we had endpoints
 	const types = [
-		{ id: 1, name: 'Interview' },
-		{ id: 2, name: 'Company' }
+    { id: 1, criteria: 'type', name: 'Interview' },
+    { id: 2, criteria: 'type', name: 'Company' }
 	];
 
 	const tracks = [
-		{ id: 1, name: 'WEB' },
-		{ id: 2, name: 'UX' },
-		{ id: 3, name: 'DS' },
-		{ id: 4, name: 'IOS' },
-		{ id: 5, name: 'AND' }
+    { id: 1, criteria: 'track', name: 'WEB' },
+    { id: 2, criteria: 'track', name: 'UX' },
+    { id: 3, criteria: 'track', name: 'DS' },
+    { id: 4, criteria: 'track', name: 'IOS' },
+    { id: 5, criteria: 'track', name: 'AND' }
 	];
 
-	const handleTracks = e => {
-		trackFilters.includes(e.name)
+  const handleFilter = e => {
+    e.criteria === 'type'
+      ? typeFilters.includes(e.name)
+        ? setTypeFilters(typeFilters.filter(item => item !== e.name))
+        : setTypeFilters([...typeFilters, e.name])
+      : trackFilters.includes(e.name)
 			? setTrackFilters(trackFilters.filter(item => item !== e.name))
 			: setTrackFilters([...trackFilters, e.name]);
-		e.selected = !e.selected;
-	};
-
-	const handleTypes = e => {
-		typeFilters.includes(e.name)
-			? setTypeFilters(typeFilters.filter(item => item !== e.name))
-			: setTypeFilters([...typeFilters, e.name]);
 		e.selected = !e.selected;
 	};
 
@@ -95,7 +89,7 @@ export default function NavBar({
 			zIndex='999'
 			direction='column'
 		>
-			<Flex align='center' justify='space-between' pt='2%'>
+      <Flex align='center' justify='space-between' pt='1%'>
 				<Flex align='center'>
 					<h1> Allay </h1>
 				</Flex>
@@ -144,8 +138,8 @@ export default function NavBar({
 			</Flex>
 
 			{/* Search Bar */}
-			<Flex align='center' justify='space-between' pt='2%'>
-				<InputGroup w='40%'>
+      <Flex align='center' justify='space-between' pt='1%'>
+        <InputGroup w='30%'>
 					<InputRightElement
 						children={<Icon name='search-2' color='#344CD0' />}
 					/>
@@ -172,56 +166,57 @@ export default function NavBar({
 				</Button>
 			</Flex>
 
-			<Flex align='center' justify='space-around' pt='2%'>
+      {/* Filtered Search Buttons */}
+      <Flex
+        align='space-around'
+        justify='space-around'
+        p='1%'
+        width='100%'
+        margin='0 auto'
+      >
 				<RadioButtonGroup
+          display='flex'
 					align='center'
-					justify='space-between'
-					width='80%'
-					onChange={handleTypes}
+          justifyContent='center'
+          spacing={12}
+          isInline
+          onChange={handleFilter}
 				>
 					{types.map(type => (
 						<Button
 							key={type.id}
-							size='sm'
+              size='lrg'
 							rounded='full'
-							marginBottom='10px'
-							variantColor={typeFilters.includes(type.name) ? 'blue' : 'gray'}
+              border='none'
+              borderRadius='30px'
+              color={typeFilters.includes(type.name) ? 'white' : 'black'}
+              py='1%'
+              px='3%'
+              fontWeight='light'
+              background={typeFilters.includes(type.name) ? '#259BF8' : '#FDFDFF'}
 							value={type}
 						>
 							{type.name}
 						</Button>
 					))}
-				</RadioButtonGroup>
-				<RadioButtonGroup
-					align='center'
-					justify='space-between'
-					width='80%'
-					onChange={handleTracks}
-				>
 					{tracks.map(track => (
 						<Button
 							key={track.id}
-							size='sm'
+              size='lrg'
 							rounded='full'
-							marginBottom='10px'
-							variantColor={trackFilters.includes(track.name) ? 'blue' : 'gray'}
+              border='none'
+              borderRadius='30px'
+              color={trackFilters.includes(track.name) ? 'white' : 'black'}
+              py='1%'
+              px='3%'
+              fontWeight='light'
+              background={trackFilters.includes(track.name) ? '#259BF8' : '#FDFDFF'}
 							value={track}
 						>
 							{track.name}
 						</Button>
 					))}
 				</RadioButtonGroup>
-			</Flex>
-			<Flex align='center' justify='flex-start'>
-				{window.location.href.includes('dashboard/') ? (
-					<Flex as='h2' my='1%' display='none'>
-						Recent Posts
-					</Flex>
-				) : (
-						<Flex as='h2' mt='1%'>
-							Recent Posts
-						</Flex>
-					)}
 			</Flex>
 		</Flex>
 	);
