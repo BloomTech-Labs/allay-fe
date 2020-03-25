@@ -40,7 +40,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "coverage": "CI=true yarn test --coverage || true"
+    "coverage": "CI=true yarn test --coverage || true",
+    "cypress:open": "cypress open"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -68,6 +69,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^10.0.0"
+    "@testing-library/user-event": "^10.0.0",
+    "cypress": "^4.2.0"
   }
 }
