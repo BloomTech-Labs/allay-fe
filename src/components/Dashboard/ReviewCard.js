@@ -143,7 +143,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                 </Flex>
                 <Flex flexDir='column'>
                   <Flex fontSize='small' fontWeight='light' color='#9194A8'>
-                    Job Title
+                    Job title
                   </Flex>
                   <Flex>{review.job_title}</Flex>
                 </Flex>
@@ -151,7 +151,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                 {review.review_type === 'Company' ? (
                   <Flex flexDir='column'>
                     <Flex fontSize='small' fontWeight='light' color='#9194A8'>
-                      Company Rating
+                      Company rating
                     </Flex>
                     <Flex>
                       {Array(5)
@@ -171,7 +171,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                 ) : review.review_type === 'Interview' ? (
                   <Flex flexDir='column'>
                     <Flex fontSize='small' fontWeight='light' color='#9194A8'>
-                      Overall Experience
+                      Overall experience
                     </Flex>
                     <Flex>
                       {Array(5)
@@ -220,7 +220,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                       {review.typical_hours} hrs week
                     </Flex>
                     <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Working Hours
+                      Working hours
                     </Flex>
                   </Flex>
                 </Flex>
@@ -306,7 +306,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                         fontSize='md'
                         isTruncated
                       >
-                        Very Hard
+                        Very hard
                       </Flex>
                     ) : review.difficulty_rating === 4 ? (
                       <Flex
@@ -315,7 +315,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                         fontSize='md'
                         isTruncated
                       >
-                        Somewhat Hard
+                        Somewhat hard
                       </Flex>
                     ) : review.difficulty_rating === 3 ? (
                       <Flex
@@ -324,7 +324,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                         fontSize='md'
                         isTruncated
                       >
-                        Somewhat Easy
+                        Somewhat easy
                       </Flex>
                     ) : review.difficulty_rating === 2 ? (
                       <Flex
@@ -342,11 +342,11 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                         fontSize='md'
                         isTruncated
                       >
-                        Very Easy
+                        Very easy
                       </Flex>
                     ) : null}
                     <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Interview Hardness
+                      Interview difficulty
                     </Flex>
                   </Flex>
                 </Flex>
@@ -393,7 +393,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                       {review.offer_status}
                     </Flex>
                     <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Job Offer
+                      Job offer
                     </Flex>
                   </Flex>
                 </Flex>
@@ -411,7 +411,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                       {review.interview_rounds} Rounds
                     </Flex>
                     <Flex as='h3' fontWeight='light' fontSize='sm' isTruncated>
-                      Interview Rounds
+                      Interview rounds
                     </Flex>
                   </Flex>
                 </Flex>
@@ -437,42 +437,42 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
             <Flex justify='flex-start' wrap='wrap' whiteSpace='nowrap' px='8%'>
               {review.phone_interview ? (
                 <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%' mr='3%'>
-                  Phone Screening
+                  Phone screening
                 </Flex>
               ) : null}
               {review.resume_review ? (
                 <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%' mr='3%'>
-                  Resume Review
+                  Resume review
                 </Flex>
               ) : null}
               {review.take_home_assignments ? (
                 <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%' mr='3%'>
-                  Take Home Assignments
+                  Take home assignments
                 </Flex>
               ) : null}
               {review.online_coding_assignments ? (
                 <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%' mr='3%'>
-                  Online Coding Assignments
+                  Online coding assignments
                 </Flex>
               ) : null}
               {review.portfolio_review ? (
                 <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%' mr='3%'>
-                  Portfolio Review
+                  Portfolio review
                 </Flex>
               ) : null}
               {review.screen_share ? (
                 <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%' mr='3%'>
-                  Screen Share
+                  Screen share
                 </Flex>
               ) : null}
               {review.open_source_contribution ? (
                 <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%' mr='3%'>
-                  Open Source Contribution
+                  Open source contribution
                 </Flex>
               ) : null}
               {review.side_projects ? (
                 <Flex as='p' bg='#F2F6FE' px='1%' mt='1.5%' mr='3%'>
-                  Side Projects
+                  Side projects
                 </Flex>
               ) : null}
             </Flex>
@@ -505,7 +505,7 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
               <AlertDialogOverlay />
               <AlertDialogContent>
                 <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                  Delete Review
+                  Delete review
                 </AlertDialogHeader>
 
                 <AlertDialogBody>
@@ -513,17 +513,19 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
                 </AlertDialogBody>
 
                 <AlertDialogFooter>
-                  <Button
-                    h='56px'
-                    rounded='10px'
-                    bg='#344CD0'
-                    border='none'
-                    color='white'
+                  <Flex
+                    align='center'
+                    justify='center'
+                    height='56px'
+                    width='30%'
+                    color='#344CD0'
+                    fontSize='16px'
+                    fontWeight='bold'
                     ref={cancelRef}
                     onClick={onClose2}
                   >
                     Cancel
-                  </Button>
+                  </Flex>
                   <Button
                     h='56px'
                     rounded='10px'
@@ -627,17 +629,17 @@ const ReviewCard = ({ review, reviewDeleted, history, deleteReview }) => {
 
         {/* Review content container */}
         <Flex flexDir='column'>
-          {/* headline line container  */}
-          <Flex w='100%' h='100px'>
+          {/* headline container  */}
+          <Flex maxW='530px' h='100px'>
             {/* avatar box */}
-            <Box justify='center' align='center' h='88px' mr='36px'>
+            <Box justify='center' align='center' h='88px' mr='40px'>
               <Avatar size='xl' src={`//logo.clearbit.com/${review.logo}`} />
             </Box>
             {/* tag container */}
-            <Flex w='100%' h='32px' wrap='wrap'>
+            <Flex maxW='391px' h='32px' wrap='wrap'>
               <Flex
                 as='h2'
-                w='100%'
+                maxW='400px'
                 align='center'
                 overflow='hidden'
                 isTruncated
