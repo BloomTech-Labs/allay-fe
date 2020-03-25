@@ -13,12 +13,22 @@ export const login = creds => dispatch => {
 	return axiosWithAuth()
 		.post('/auth/login', creds)
 		.then(res => {
+			console.log(res);
 			localStorage.setItem('token', res.data.token);
 			localStorage.setItem('userId', res.data.id);
-			dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+			localStorage.setItem('username', res.data.username);
+			dispatch({
+				type: LOGIN_SUCCESS,
+				payload: res.data,
+				status: res.status
+			});
 		})
 		.catch(err => {
-			dispatch({ type: LOGIN_FAIL, payload: err });
+			dispatch({
+				type: LOGIN_FAIL,
+				payload: err.response.data,
+				status: err.response.status
+			});
 		});
 };
 
@@ -28,10 +38,11 @@ export const signup = creds => dispatch => {
 		.post('/auth/register', creds)
 		.then(res => {
 			localStorage.setItem('token', res.data.token);
-			localStorage.setItem('userId', res.data.newUser.id);
+			localStorage.setItem('userId', res.data.id);
+			localStorage.setItem('username', res.data.username);
 			dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
 		})
 		.catch(err => {
-			dispatch({ type: SIGNUP_FAIL, payload: err });
+			dispatch({ type: SIGNUP_FAIL, payload: err.response.data });
 		});
 };

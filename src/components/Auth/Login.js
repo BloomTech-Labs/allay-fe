@@ -6,26 +6,31 @@ import ReactGA from 'react-ga'; // for google analytics
 // actions
 import login from '../../state/actions/index';
 // styles
+import CustomSpinner from '../CustomSpinner.js';
+import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
 import {
 	Button,
-	Input,
 	FormControl,
 	FormLabel,
 	FormErrorMessage,
 	Flex,
-	Spinner,
-	Text
+	Text,
+	InputGroup,
+	InputRightElement,
+	Stack
 } from '@chakra-ui/core';
 
 const Login = ({ login, isLoading, history }) => {
 	const { handleSubmit, errors, register, formState } = useForm();
+	const [show, setShow] = React.useState(false);
+	const handleClick = () => setShow(!show);
 
 	function validateUsername(value) {
 		let error;
 		if (!value) {
 			error = 'Username is required';
-		} else if (value.length < 8) {
-			error = 'Username must be at least 8 characters';
+		} else if (value.length < 5) {
+			error = 'Username must be at least 5 characters';
 		}
 		return error || true;
 	}
@@ -60,95 +65,141 @@ const Login = ({ login, isLoading, history }) => {
 		return (
 			<Flex justify='center' align='center' w='100%' h='100vh'>
 				<Flex>
-					<Spinner
-						thickness='4px'
-						speed='0.65s'
-						emptyColor='gray.200'
-						color='blue.500'
-						size='xl'
-					/>
+					<CustomSpinner />
 				</Flex>
 			</Flex>
 		);
 	}
 
 	return (
-		<Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
+		<Flex className='LoginSplash' w='100%' minH='100vh' justify='center'>
 			<Flex maxW='1440px' w='100%'>
-				<Flex w='40%' justify='center' align='center'>
-					<Text fontSize='64px' fontWeight='600' lineHeight='92px'>
-						Allay - <br />
-						Together, we are <br />
-						stronger.
+				<Stack
+					wrap='wrap'
+					w='60%'
+					ml='6.5%'
+					mb='15%'
+					justify='center'
+					align='center'
+				>
+					<Text
+						as='h1'
+						w='100%'
+						fontFamily='Poppins'
+						fontSize='80px'
+						fontWeight='bold'
+					>
+						Allay
 					</Text>
-				</Flex>
-				<Flex w='60%' justify='center' align='center'>
+					<Text w='100%' fontFamily='Poppins' fontSize='52px' fontWeight='bold'>
+						We're stronger together.
+					</Text>
+				</Stack>
+				<Flex
+					w='40%'
+					mb='10%'
+					mr='8%'
+					justify='center'
+					align='center'
+					flexDir='column'
+				>
 					<form onSubmit={handleSubmit(submitForm)}>
 						<Flex
-							w='487px'
-							//   h='40%'
-							p='5'
+							w='473px'
+							h='480px'
 							flexDir='column'
-							background='#FFFFFF'
-							rounded='6px'
+							background='#FDFDFF'
 							justify='center'
 						>
-							<FormControl isInvalid={errors.username}>
-								<Flex as='h2' mx='1' my='2%'>
-									Lets get started!
-								</Flex>
-								<Flex mx='1%' my='4%' flexDir='column'>
+							<Flex
+								as='h2'
+								fontSize='32px'
+								fontFamily='Poppins'
+								justify='center'
+								mx='1'
+								my='2%'
+							>
+								Welcome back!
+							</Flex>
+
+							<Flex wrap='wrap' w='411px%' justify='center'>
+								<FormControl isInvalid={errors.username}>
 									<FormLabel>Username</FormLabel>
-									<Input
-										py='32px'
-										rounded='6px'
+									<SignupLoginInput
+										mb='30px'
 										type='text'
-										variant='filled'
-										label='Username'
 										name='username'
+										label='username'
+										placeholder='lambda1'
 										autoCapitalize='none'
 										ref={register({ validate: validateUsername })}
 									/>
 									<FormErrorMessage>
 										{errors.username && errors.username.message}
 									</FormErrorMessage>
+								</FormControl>
+								<FormControl isInvalid={errors.password}>
+									<Flex flexDir='column'>
+										<FormLabel>Password</FormLabel>
+										<InputGroup>
+											<SignupLoginInput
+												mb='30px'
+												type={show ? 'text' : 'password'}
+												name='password'
+												label='Password'
+												placeholder='********'
+												autoCapitalize='none'
+												ref={register({ validate: validatePassword })}
+											/>
+											<InputRightElement width='4.5rem' py='32px'>
+												<Button
+													// position='fixed'
+													h='1.75rem'
+													color='rgba(72, 72, 72, 0.1)'
+													border='none'
+													size='sm'
+													backgroundColor='#FDFDFF'
+													onClick={handleClick}
+												>
+													{show ? 'Hide' : 'Show'}
+												</Button>
+											</InputRightElement>
+										</InputGroup>
+										<FormErrorMessage>
+											{errors.password && errors.password.message}
+										</FormErrorMessage>
+									</Flex>
+								</FormControl>
+								<Flex w='100%' justify='center'>
+									<Button
+										mb='30px'
+										border='none'
+										h='58px'
+										w='404px'
+										my='2%'
+										size='lg'
+										color='white'
+										backgroundColor='#344CD0'
+										isLoading={formState.isSubmitting}
+										type='submit'
+									>
+										Login
+									</Button>
 								</Flex>
-							</FormControl>
-							<FormControl isInvalid={errors.password}>
-								<Flex mx='1%' my='4%' flexDir='column'>
-									<FormLabel>Password</FormLabel>
-									<Input
-										py='32px'
-										rounded='6px'
-										type='password'
-										variant='filled'
-										label='Password'
-										name='password'
-										autoCapitalize='none'
-										ref={register({ validate: validatePassword })}
-									/>
-									<FormErrorMessage>
-										{errors.password && errors.password.message}
-									</FormErrorMessage>
-								</Flex>
-							</FormControl>
-							<Button
-								border='none'
-								h='64px'
-								mx='1%'
-								my='5%'
-								rounded='6px'
-								size='lg'
-								variantColor='teal'
-								isLoading={formState.isSubmitting}
-								type='submit'
-							>
-								Login
-							</Button>
+							</Flex>
 							<Flex m='15px' justify='center' fontWeight='light'>
-								<Link to='/signup' onClick={gaSignup}>
-									Don't have an account?
-								</Link>
+								<Text>
+									Don't have an account?{' '}
+									<Link
+										to='/signup'
+										color='black'
+										onClick={gaSignup}
+										fontWeight='bold'
+										underline='none'
+									>
+										Sign up here!
+									</Link>
+								</Text>
 							</Flex>
 						</Flex>
 					</form>

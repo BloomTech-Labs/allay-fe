@@ -6,18 +6,20 @@ import ReactGA from 'react-ga'; // for google analytics
 //actions
 import signup from '../../state/actions/index';
 //styles
+import CustomSpinner from '../CustomSpinner.js';
+import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
 import {
 	Button,
-	Input,
 	FormControl,
 	FormLabel,
 	FormHelperText,
 	FormErrorMessage,
 	Flex,
 	Text,
-	Spinner,
 	InputGroup,
-	InputRightElement
+	InputRightElement,
+	Select,
+	Stack
 } from '@chakra-ui/core';
 
 const Signup = ({ signup, isLoading, history }) => {
@@ -46,6 +48,14 @@ const Signup = ({ signup, isLoading, history }) => {
 		return error || true;
 	}
 
+	function validateTrack(value) {
+		let error;
+		if (!value) {
+			error = 'Lambda track is required';
+		}
+		return error || true;
+	}
+
 	function validatePassword(value) {
 		let error;
 		if (!value) {
@@ -62,7 +72,8 @@ const Signup = ({ signup, isLoading, history }) => {
 			signup({
 				username: creds.username,
 				email: creds.email,
-				password: creds.password
+				password: creds.password,
+				track_id: creds.track_id
 			}).then(() => history.push('/dashboard'));
 		} else {
 			console.log('form NOT submitted');
@@ -85,88 +96,123 @@ const Signup = ({ signup, isLoading, history }) => {
 		return (
 			<Flex justify='center' align='center' w='100vh' h='100vh'>
 				<Flex>
-					<Spinner
-						thickness='4px'
-						speed='0.65s'
-						emptyColor='gray.200'
-						color='blue.500'
-						size='xl'
-					/>
+					<CustomSpinner />
 				</Flex>
 			</Flex>
 		);
 	}
 
 	return (
-		<Flex background='#E5E5E5' w='100%' minH='100vh' justify='center'>
+		<Flex className='RegisterSplash' w='100%' minH='100vh' justify='center'>
 			<Flex maxW='1440px' w='100%'>
-				<Flex w='40%' justify='center' align='center'>
-					<Text fontSize='64px' fontWeight='600' lineHeight='92px'>
-						Allay - <br />
-						Together, we are <br />
-						stronger.
+				<Stack wrap='wrap' w='60%' ml='6.5%' justify='center' align='center'>
+					<Text
+						as='h1'
+						w='100%'
+						fontFamily='Poppins'
+						fontSize='80px'
+						fontWeight='bold'
+					>
+						Allay
 					</Text>
-				</Flex>
-				<Flex w='60%' justify='center' align='center'>
+					<Text w='100%' fontFamily='Poppins' fontSize='52px' fontWeight='bold'>
+						We're stronger together.
+					</Text>
+				</Stack>
+
+				<Flex w='40%' mr='8%' justify='center' align='center' flexDir='column'>
 					<form onSubmit={handleSubmit(submitForm)}>
 						<Flex
 							w='490px'
-							h='40%'
+							h='825px'
 							p='6'
 							flexDir='column'
-							background='#FFFFFF'
-							rounded='6px'
+							background='#FDFDFF'
 							justify='center'
 						>
-							<FormControl isRequired isInvalid={errors.email}>
-								<Flex as='h2' w='100%' mx='1' my='2%'>
-									Let's get started!
-								</Flex>
-								<Flex mx='1%' my='4%' flexDir='column'>
+							<Flex
+								as='h2'
+								fontSize='32px'
+								fontFamily='Poppins'
+								justify='center'
+								mx='1'
+								my='2%'
+							>
+								Let's get started!
+							</Flex>
+
+							<Flex wrap='wrap' w='411px%' justify='center'>
+								<FormControl isRequired isInvalid={errors.email}>
 									<FormLabel>Email</FormLabel>
-									<Input
-										py='32px'
-										variant='filled'
+									<SignupLoginInput
+										mb='30px'
 										type='email'
-										label='email'
 										name='email'
+										label='email'
+										placeholder='allay@lambda.com'
 										autoCapitalize='none'
 										ref={register({ validate: validateEmail })}
 									/>
 									<FormErrorMessage>
 										{errors.email && errors.email.message}
 									</FormErrorMessage>
-								</Flex>
-							</FormControl>
+								</FormControl>
+							</Flex>
 
-							<FormControl isRequired isInvalid={errors.username}>
-								<Flex mx='1%' my='4%' flexDir='column'>
+							<Flex wrap='wrap' w='411px%' justify='center'>
+								<FormControl isRequired isInvalid={errors.username}>
 									<FormLabel>Username</FormLabel>
-									<Input
-										py='32px'
-										variant='filled'
+									<SignupLoginInput
+										mb='30px'
 										type='text'
-										label='username'
 										name='username'
+										label='username'
+										placeholder='lambda1'
 										autoCapitalize='none'
 										ref={register({ validate: validateUsername })}
 									/>
 									<FormErrorMessage>
 										{errors.username && errors.username.message}
 									</FormErrorMessage>
-								</Flex>
-							</FormControl>
+								</FormControl>
+							</Flex>
 
-							<FormControl isRequired isInvalid={errors.password}>
-								<Flex mx='1%' my='4%' flexDir='column'>
+							<Flex wrap='wrap' w='411px%' justify='center'>
+								<FormControl isRequired isInvalid={errors.track_name}>
+									<FormLabel>Track</FormLabel>
+									<Select
+										mb='30px'
+										h='70px'
+										w='404px'
+										rounded='3px'
+										variant='outline'
+										backgroundColor='#FDFDFF'
+										name='track_id'
+										label='track_id'
+										placeholder='Select Your Lambda Track'
+										ref={register({ validate: validateTrack })}
+									>
+										<option value={1}>Android Development</option>
+										<option value={2}>Data Science</option>
+										<option value={3}>Full Stack Web Development</option>
+										<option value={4}>iOS Development </option>
+										<option value={5}>UX Design</option>
+									</Select>
+									<FormErrorMessage>
+										{errors.track_id && errors.track_id.message}
+									</FormErrorMessage>
+								</FormControl>
+							</Flex>
+
+							<Flex wrap='wrap' w='411px%' justify='center'>
+								<FormControl isRequired isInvalid={errors.password}>
 									<FormLabel>Password</FormLabel>
 									<InputGroup>
-										<Input
-											py='32px'
-											variant='filled'
+										<SignupLoginInput
 											type={show ? 'text' : 'password'}
-											label='Password'
 											name='password'
+											label='Password'
+											placeholder='********'
 											autoCapitalize='none'
 											ref={register({ validate: validatePassword })}
 										/>
@@ -176,6 +222,7 @@ const Signup = ({ signup, isLoading, history }) => {
 												color='rgba(72, 72, 72, 0.1)'
 												border='none'
 												size='sm'
+												backgroundColor='#FDFDFF'
 												onClick={handleClick}
 											>
 												{show ? 'Hide' : 'Show'}
@@ -183,45 +230,75 @@ const Signup = ({ signup, isLoading, history }) => {
 										</InputRightElement>
 									</InputGroup>
 
-									<FormHelperText>
-										Must be longer than 8 characters
+									<FormHelperText color='rgba(72, 72, 72, 0.2)'>
+										Must be at least 8 characters
 									</FormHelperText>
 									<FormErrorMessage>
 										{errors.password && errors.password.message}
 									</FormErrorMessage>
-								</Flex>
-							</FormControl>
-							<FormControl isRequired>
-								<Flex mx='1%' my='4%' flexDir='column'>
+								</FormControl>
+							</Flex>
+
+							<Flex wrap='wrap' w='411px%' justify='center'>
+								<FormControl isRequired>
 									<FormLabel>Confirm Password</FormLabel>
-									<Input
-										py='32px'
-										variant='filled'
-										type={show ? 'text' : 'password'}
-										label='Confirm Password'
-										name='confirmPassword'
-										autoCapitalize='none'
-										ref={register}
-									/>
-								</Flex>
-							</FormControl>
-							<Button
-								h='64px'
-								mx='1%'
-								my='6%'
-								rounded='6px'
-								border='none'
-								size='lg'
-								variantColor='teal'
-								isLoading={formState.isSubmitting}
-								type='submit'
-							>
-								Sign Up
-							</Button>
-							<Flex as='p' w='100%' justify='center'>
-								<Link to='/' onClick={gaLogin}>
-									Already have an account?
-								</Link>
+									<InputGroup>
+										<SignupLoginInput
+											mb='30px'
+											type={show ? 'text' : 'password'}
+											name='confirmPassword'
+											label='Confirm Password'
+											placeholder='********'
+											autoCapitalize='none'
+											ref={register}
+										/>
+										<InputRightElement width='4.5rem' py='32px'>
+											<Button
+												h='1.75rem'
+												color='rgba(72, 72, 72, 0.1)'
+												border='none'
+												size='sm'
+												backgroundColor='#FDFDFF'
+												onClick={handleClick}
+											>
+												{show ? 'Hide' : 'Show'}
+											</Button>
+										</InputRightElement>
+									</InputGroup>
+								</FormControl>
+							</Flex>
+
+							<Flex w='100%' justify='center'>
+								<Button
+									mb='30px'
+									border='none'
+									h='58px'
+									w='404px'
+									my='2%'
+									size='lg'
+									color='white'
+									backgroundColor='#344CD0'
+									isLoading={formState.isSubmitting}
+									type='submit'
+								>
+									Sign up
+								</Button>
+							</Flex>
+							<Flex m='15px' justify='center' fontWeight='light'>
+								<Text>
+									Already have an account?{' '}
+									<Link
+										to='/'
+										color='black'
+										onClick={gaLogin}
+										fontColor='black'
+										fontWeight='bold'
+										fontDecoration='none'
+										underline='none'
+									>
+										Sign in here!
+									</Link>
+								</Text>
 							</Flex>
 						</Flex>
 					</form>
