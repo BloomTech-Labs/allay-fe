@@ -64,14 +64,15 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
 
   return (
     <Flex justify='center' w='100%' minH='100vh' bg='#F2F6FE'>
-      {/* <Flex justify='center' w='100%' > */}
       <Flex w='45%' my='10%' px='4%' justify='center' flexDir='column'>
         <form onSubmit={handleSubmit(submitForm)}>
           <FormControl isRequired isInvalid={errors.hq_state}>
             <h2 color='#525252' align='center'>
               Add a company
             </h2>
-            <FormLabel color='#525252'>Company name</FormLabel>
+            <FormLabel color='#525252' mt='3'>
+              Company name
+            </FormLabel>
             <OnboardingInput
               mb='30px'
               name='company_name'
@@ -84,6 +85,7 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
               stateHelper={stateHelper}
               h='72px'
               mb='30px'
+              rounded='3px'
               variant='outline'
               id='hq_city'
               name='hq_city'
@@ -162,22 +164,40 @@ const AddCompanyForm = ({ isLoading, postCompany, history }) => {
                 </AlertDialogBody>
 
                 <AlertDialogFooter>
-                  <Button ref={cancelRef} onClick={onClose}>
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={() => history.push('/dashboard/add-review')}
-                    ml={3}
-                  >
-                    Yes I'm sure
-                  </Button>
+                  <Flex>
+                    <Flex
+                      align='center'
+                      justify='center'
+                      isloading
+                      height='56px'
+                      width='30%'
+                      mr='5%'
+                      color='#344CD0'
+                      fontSize='18px'
+                      fontWeight='bold'
+                      ref={cancelRef}
+                      onClick={onClose}
+                    >
+                      Cancel
+                    </Flex>
+                    <Button
+                      h='56px'
+                      rounded='10px'
+                      bg='#344CD0'
+                      border='none'
+                      color='white'
+                      onClick={() => history.push('/dashboard/add-review')}
+                      ml={3}
+                    >
+                      Yes I'm sure
+                    </Button>
+                  </Flex>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
           </Flex>
         </form>
       </Flex>
-      {/* </Flex> */}
     </Flex>
   );
 };
