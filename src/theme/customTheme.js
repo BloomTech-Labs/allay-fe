@@ -9,6 +9,12 @@ const customTheme = {
       900: '#1a365d',
       800: '#153e75',
       700: '#2a69ac'
+    },
+    selected: {
+      500: '#259BF8'
+    },
+    unselected: {
+      500: '#FDFDFF'
     }
   },
   fonts: {

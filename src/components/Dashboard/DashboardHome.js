@@ -53,7 +53,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
           direction='column'
           wrap='wrap'
           mb='3%'
-          mt='220px'
+          mt='190px'
         >
           <NavBar
             history={history}
@@ -64,6 +64,10 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             typeFilters={typeFilters}
             setTypeFilters={setTypeFilters}
           />
+
+          <Flex align='center' justify='flex-start' mb='1%' ml='2.5%'>
+            <Flex as='h2'>Recent Posts</Flex>
+          </Flex>
 
           <Flex height='70%' wrap='wrap'>
             {isLoading ? (
@@ -99,13 +103,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
               </Flex>
             ) : (
               data.map(review => (
-                <>
-                  <ReviewCard
-                    key={review.id}
-                    review={review}
-                    history={history}
-                  />
-                </>
+                <ReviewCard key={review.id} review={review} history={history} />
               ))
             )}
           </Flex>
