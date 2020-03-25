@@ -10,7 +10,7 @@ describe('Logs into the site', function() {
 		cy.get('input[name="password"]').as('passwordText');
 		cy.get('[data-cy=loginSubmit]').as('loginSubmit');
 		// interact with element
-		cy.get('@usernameText').type('spencerM');
+		cy.get('@usernameText').type('testuser1');
 		cy.get('@passwordText').type('12345678');
 		cy.get('@loginSubmit').click();
 		// wait until pushed to dashboard
