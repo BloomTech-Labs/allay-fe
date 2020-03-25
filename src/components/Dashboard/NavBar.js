@@ -201,6 +201,7 @@ export default function NavBar({
           spacing={12}
           isInline
           onChange={handleFilter}
+          boxShadow='none'
         >
           {types.map(type => (
             <Button
@@ -208,6 +209,16 @@ export default function NavBar({
               size='lrg'
               rounded='full'
               border='none'
+              _hover={
+                typeFilters.includes(type.name)
+                  ? 'none'
+                  : {
+                      bg: '#E2E8F0'
+                    }
+              }
+              _focus={{
+                boxShadow: 'none'
+              }}
               borderRadius='30px'
               color={typeFilters.includes(type.name) ? 'white' : 'black'}
               py='1%'
@@ -227,6 +238,20 @@ export default function NavBar({
               size='lrg'
               rounded='full'
               border='none'
+              _active={{
+                bg: '#259BF8 !important',
+                color: 'white'
+              }}
+              _hover={
+                trackFilters.includes(track.name)
+                  ? 'none'
+                  : {
+                      bg: '#E2E8F0'
+                    }
+              }
+              _focus={{
+                boxShadow: 'none'
+              }}
               borderRadius='30px'
               color={trackFilters.includes(track.name) ? 'white' : 'black'}
               py='1%'
