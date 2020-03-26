@@ -24,8 +24,7 @@ import {
 	AlertDialogHeader,
 	AlertDialogBody,
 	AlertDialogOverlay,
-	AlertDialogFooter,
-	useToast
+	AlertDialogFooter
 } from '@chakra-ui/core';
 
 const EditReviewForm = ({
@@ -41,9 +40,6 @@ const EditReviewForm = ({
 	const [editValue, setEditValue] = useState({
 		id: id
 	});
-
-	//allows the use of toasts
-	const toast = useToast();
 
 	// specifically for the cancel button functionality
 	const [isOpen, setIsOpen] = useState();
@@ -74,13 +70,6 @@ const EditReviewForm = ({
 	const submitEdits = () => {
 		editReview(review.user_id, review.review_id, editValue).then(() => {
 			history.push('/dashboard');
-			toast({
-				title: `Review Edit Success!`,
-				description: `We've successfully edited your review for you`,
-				status: 'success',
-				duration: 5000,
-				isClosable: true
-			});
 		});
 		ReactGA.event({
 			category: 'Company Review Edit',
@@ -238,7 +227,7 @@ const EditReviewForm = ({
 							/>
 							<EditReviewInput
 								w='48%'
-								name='start_date'
+								name='end_date'
 								type='number'
 								placeholder={`End - ${review.end_date}`}
 								value={editValue.end_date}
@@ -324,6 +313,7 @@ const EditReviewForm = ({
 							w='65%'
 							h='72px'
 							fontSize='18px'
+							data-cy='companyEditReviewSubmit'
 						>
 							Save changes
 						</Button>

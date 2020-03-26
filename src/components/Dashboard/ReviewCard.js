@@ -25,13 +25,10 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  useToast,
   useDisclosure
 } from '@chakra-ui/core';
 
 const ReviewCard = ({ review, history, deleteReview }) => {
-  //allows the use of toasts
-  const toast = useToast();
   // NEW post tag logic
   const [newTag, setNewTag] = useState(false);
   // get server time and set to readable
@@ -70,14 +67,6 @@ const ReviewCard = ({ review, history, deleteReview }) => {
   const submitDelete = () => {
     deleteReview(review.user_id, review.review_id).then(() => {
       window.location.reload();
-      // history.push('/dashboard')
-      toast({
-        title: 'Review Deleted',
-        description: `We've successfully deleted your review for you`,
-        status: 'success',
-        duration: 5000,
-        isClosable: true
-      });
     });
     ReactGA.event({
       category: 'Review Delete',
@@ -468,6 +457,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
                 cursor='pointer'
                 size='1.5em'
                 mr='12px'
+                data-cy='editModalReview'
               />
             ) : null}
             {Number(loginId) === Number(review.user_id) ? (
@@ -476,6 +466,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
                 onClick={() => setIsOpen2(true)}
                 cursor='pointer'
                 size='1.5em'
+                data-cy='deleteModalReview'
               />
             ) : null}
             <AlertDialog
@@ -515,6 +506,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
                     variantColor='red'
                     ml={3}
                     onClick={submitDelete}
+                    data-cy='confirmDeleteModalReview'
                   >
                     Delete
                   </Button>
@@ -528,6 +520,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
             as='p'
             w='100%'
             wrap='nowrap'
+            name='comment'
             overflow='hidden'
             pt='2%'
             px='8%'
