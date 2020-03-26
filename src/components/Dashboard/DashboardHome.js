@@ -103,7 +103,11 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
               </Flex>
             ) : (
               data.map(review => (
-                <ReviewCard key={review.id} review={review} history={history} />
+                <ReviewCard
+                  key={review.review_id}
+                  review={review}
+                  history={history}
+                />
               ))
             )}
           </Flex>

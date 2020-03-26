@@ -181,6 +181,7 @@ export default function NavBar({
           size='lg'
           isLoading={isLoading}
           onClick={navToReviewForm}
+          data-cy='addReviewButton'
         >
           Add Review
         </Button>
