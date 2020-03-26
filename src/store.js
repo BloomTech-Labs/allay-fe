@@ -1,7 +1,7 @@
 // configure redux
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+//import logger from 'redux-logger';
 // import mainReducer from './state/reducers';
 import { rootReducer } from './state/reducers/index';
 
