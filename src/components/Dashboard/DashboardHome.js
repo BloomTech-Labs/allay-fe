@@ -76,7 +76,11 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
               </Flex>
             ) : filteredReviews.length >= 1 ? (
               filteredReviews.map(review => (
-                <ReviewCard key={review.id} review={review} history={history} />
+                <ReviewCard
+                  key={review.review_id}
+                  review={review}
+                  history={history}
+                />
               ))
             ) : searchResults.length > 0 ||
               trackFilters.length > 0 ||

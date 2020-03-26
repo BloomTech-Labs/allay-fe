@@ -528,6 +528,7 @@ const ReviewForm2 = ({
 												rounded='6px'
 												onKeyUp={time2}
 												ref={register}
+												data-cy='companyComment'
 											/>
 										</Flex>
 										{/* avatar */}
@@ -801,6 +802,7 @@ const ReviewForm2 = ({
 														setStarState(value);
 														time5();
 													}}
+													name='companyOverall'
 												/>
 											</Flex>
 										</Flex>
@@ -872,6 +874,7 @@ const ReviewForm2 = ({
 												isLoading={formState.isSubmitting}
 												rounded='6px'
 												border='none'
+												data-cy='companyReviewSubmit'
 											>
 												Submit
 											</Button>
