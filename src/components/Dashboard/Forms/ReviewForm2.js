@@ -16,7 +16,6 @@ import {
   Input,
   Textarea,
   Button,
-  FormErrorMessage,
   FormLabel,
   InputGroup,
   InputLeftElement,
@@ -28,7 +27,6 @@ import 'aos/dist/aos.css';
 
 const ReviewForm2 = ({
   history,
-  isLoading,
   companies,
   getCompanies,
   postCompanyReview
@@ -872,7 +870,6 @@ const ReviewForm2 = ({
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.review.fetchingData,
     companies: state.company.data
   };
 };

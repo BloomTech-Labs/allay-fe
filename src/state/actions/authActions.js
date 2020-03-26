@@ -13,7 +13,6 @@ export const login = creds => dispatch => {
 	return axiosWithAuth()
 		.post('/auth/login', creds)
 		.then(res => {
-			console.log(res);
 			localStorage.setItem('token', res.data.token);
 			localStorage.setItem('userId', res.data.id);
 			localStorage.setItem('username', res.data.username);
