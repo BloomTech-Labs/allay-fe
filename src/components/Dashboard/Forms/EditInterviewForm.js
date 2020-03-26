@@ -431,6 +431,7 @@ const EditInterviewForm = ({
               w='65%'
               h='72px'
               fontSize='18px'
+              data-cy='companyEditInterviewSubmit'
             >
               Save changes
             </Button>
