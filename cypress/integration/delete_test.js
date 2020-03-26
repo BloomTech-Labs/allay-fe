@@ -1,10 +1,10 @@
-describe('Navs to edit review form and edits a review successfully', function () {
+describe('Creates and successfully deletes a review', function () {
   //Arrange
   it('Visits a new site', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
-  it('should navigate to edit review form and successfully edits review', function () {
+  it('should delete a review form after creation', function () {
     // select element and alias them
     cy.get('input[name="username"]').as('usernameText');
     cy.get('input[name="password"]').as('passwordText');
@@ -53,7 +53,7 @@ describe('Navs to edit review form and edits a review successfully', function ()
     cy.get('@endDateText').type('2000');
 
     cy.get('[data-cy=companyComment]').as('commentText');
-    cy.get('@commentText').type('TESTING VIA CYPRESS');
+    cy.get('@commentText').type('TESTING VIA CYPRESS DELETE');
 
     cy.get('select[name="typical_hours"]').as('hoursDropdown');
     cy.get('@hoursDropdown').select('30 hours+');
@@ -69,56 +69,12 @@ describe('Navs to edit review form and edits a review successfully', function ()
     // submit the form
     cy.get('[data-cy=companyReviewSubmit]').click();
 
-    // direct to edit review form
-    cy.contains('TESTING VIA CYPRESS').click();
-    cy.get('[data-cy=editModalReview]').click();
+    // delete the recently added review
+    cy.contains('TESTING VIA CYPRESS DELETE').click();
+    cy.get('[data-cy=deleteModalReview]').click();
+    cy.get('[data-cy=confirmDeleteModalReview]').click();
 
-    // successfully fills out the form and edits the review
-    cy.get('input[name="job_title"]').as('jobTitleText');
-    cy.get('@jobTitleText').type('New Cypress Engineer');
-
-    cy.get('input[name="city"]').as('cityText');
-    cy.get('@cityText').type('New York');
-    cy.wait(300);
-
-    cy.get('select[name="state_id"]')
-      .select('NY');
-
-    cy.get('input[name="salary"]').as('salaryText');
-    cy.get('@salaryText').type('78910');
-
-    cy.get('select[name="work_status_id"]').as('workStatusDropdown');
-    cy.get('@workStatusDropdown').select('Intern');
-
-    cy.get('input[name="start_date"]').as('startDateText');
-    cy.get('@startDateText').type('2001');
-
-    cy.get('input[name="end_date"]').as('endDateText');
-    cy.get('@endDateText').type('2002');
-
-    cy.get('input[name="typical_hours"]').as('hoursDropdown');
-    cy.get('@hoursDropdown').type('20');
-
-    cy.get('[name="comment"]').type('TESTING EVEN MORE VIA CYPRESS');
-
-    cy.get('select[name="overall_rating"]').as('companyOverall');
-    cy.get('@companyOverall')
-      .select('1');
-
-    // submit the edit review form
-    cy.get('[data-cy=companyEditReviewSubmit]').click();
-
-    // checks all elements of the dashboard card were changed
-    cy.contains('New Cypress Engineer');
-    cy.contains('78910.00');
-    cy.contains('New York, NY')
-    cy.contains('2001-2002')
-    cy.contains('TESTING EVEN MORE VIA CYPRESS');
-
-    // checks all elements of the modal card were changed
-    cy.contains('TESTING EVEN MORE VIA CYPRESS').click();
-    cy.contains('20 hrs week')
-    cy.contains('Intern');
-    // needs test for finding star changes (overall_rating)
+    // confirms review was deleted
+    // cy.window().should('not.include', 'TESTING VIA CYPRESS DELETE');
   });
 });

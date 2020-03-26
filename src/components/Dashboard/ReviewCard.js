@@ -466,6 +466,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
                 onClick={() => setIsOpen2(true)}
                 cursor='pointer'
                 size='1.5em'
+                data-cy='deleteModalReview'
               />
             ) : null}
             <AlertDialog
@@ -505,6 +506,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
                     variantColor='red'
                     ml={3}
                     onClick={submitDelete}
+                    data-cy='confirmDeleteModalReview'
                   >
                     Delete
                   </Button>
