@@ -76,7 +76,11 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
               </Flex>
             ) : filteredReviews.length >= 1 ? (
               filteredReviews.map(review => (
-                <ReviewCard key={review.review_id} review={review} history={history} />
+                <ReviewCard
+                  key={review.review_id}
+                  review={review}
+                  history={history}
+                />
               ))
             ) : searchResults.length > 0 ||
               trackFilters.length > 0 ||
@@ -103,7 +107,11 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
               </Flex>
             ) : (
               data.map(review => (
-                <ReviewCard key={review.review_id} review={review} history={history} />
+                <ReviewCard
+                  key={review.review_id}
+                  review={review}
+                  history={history}
+                />
               ))
             )}
           </Flex>
