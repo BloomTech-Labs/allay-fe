@@ -43,7 +43,7 @@ Allay is a job portal for Lambda students and alumni to network and talk about t
 
 - [React](https://reactjs.org/): Current industry standard for web applications, using React let us displaying large amounts of data effectively by implementing Components. It is also very scalable, perfect for large applications with huge growth potential.
 - [Redux](https://redux.js.org/): Centralizes our application's state and logic, easy to test/debug, works with any UI layer
-- [Chakra](https://chakra-ui.com/): Chakra UI is accessible abd themeable component library. Simple to implement and build beautiful looking apps fast.
+- [Chakra](https://chakra-ui.com/): Chakra UI is accessible and themeable component library. Simple to implement and build beautiful looking apps fast.
 - [Cypress](https://docs.cypress.io/): Fast, easy and reliable testing for anything that runs in a browser. Amazing UI tool for making setting up, writing, and running tests a breeze and easy to visualize.
 
 #### Front end deployed to [Heroku](https://labs21-allay-fe.herokuapp.com/).
@@ -66,11 +66,11 @@ Expects:
 
 ```json
 {
-  "id": 1,
-  "username": "yourusername",
-  "email": "youremail@youremail.com",
-  "track_id": 1,
-  "password": "password"
+	"id": 1,
+	"username": "yourusername",
+	"email": "youremail@youremail.com",
+	"track_id": 1,
+	"password": "password"
 }
 ```
 
@@ -78,11 +78,11 @@ Returns:
 
 ```json
 {
-  "id": 1,
-  "username": "yourusername",
-  "email": "youremail@youremail.com",
-  "track_id": 1,
-  "reviews": []
+	"id": 1,
+	"username": "yourusername",
+	"email": "youremail@youremail.com",
+	"track_id": 1,
+	"reviews": []
 }
 ```
 
@@ -170,7 +170,6 @@ To get the server running locally:
 
 - For testing
 - **npm run cypress:open** to run testing with cypress
-
 
 # Contributing
 
