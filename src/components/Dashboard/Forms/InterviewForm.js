@@ -53,7 +53,6 @@ const InterviewForm = ({
 	const dots = () => {
 		setThinking(true);
 	};
-	console.log(thinking);
 	// search state
 	const [searchTerm, setSearchTerm] = useState('');
 	const [searchResults, setSearchResults] = useState([]);

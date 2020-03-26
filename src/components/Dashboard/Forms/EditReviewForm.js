@@ -32,7 +32,6 @@ const EditReviewForm = ({
 	review,
 	getReviewById,
 	editReview,
-	reviewEdited,
 	match,
 	history,
 	isLoading
@@ -83,27 +82,8 @@ const EditReviewForm = ({
 				isClosable: true
 			});
 		});
-
-		// if (reviewEdited === true) {
-		//   toast({
-		//     title: `Review Edit Success!`,
-		//     description: `We've successfully edited your review for you`,
-		//     status: 'success',
-		//     duration: 5000,
-		//     isClosable: true
-		//   })
-		// } else {
-		//   toast({
-		//     title: `Review Edit Failed`,
-		//     description: `There was an error editing your review`,
-		//     status: 'error',
-		//     duration: 5000,
-		//     isClosable: true
-		//   });
-		// }
-
 		ReactGA.event({
-			category: 'Edit',
+			category: 'Company Review Edit',
 			action: `Submit edit`
 		});
 	};
@@ -418,7 +398,6 @@ const EditReviewForm = ({
 const mapStateToProps = state => {
 	return {
 		review: state.review.dataById,
-		reviewEdited: state.review.reviewEdited
 	};
 };
 
