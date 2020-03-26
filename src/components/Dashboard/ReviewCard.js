@@ -457,6 +457,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
                 cursor='pointer'
                 size='1.5em'
                 mr='12px'
+                data-cy='editModalReview'
               />
             ) : null}
             {Number(loginId) === Number(review.user_id) ? (
@@ -517,6 +518,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
             as='p'
             w='100%'
             wrap='nowrap'
+            name='comment'
             overflow='hidden'
             pt='2%'
             px='8%'

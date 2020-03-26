@@ -227,7 +227,7 @@ const EditReviewForm = ({
 							/>
 							<EditReviewInput
 								w='48%'
-								name='start_date'
+								name='end_date'
 								type='number'
 								placeholder={`End - ${review.end_date}`}
 								value={editValue.end_date}
@@ -313,6 +313,7 @@ const EditReviewForm = ({
 							w='65%'
 							h='72px'
 							fontSize='18px'
+							data-cy='companyEditReviewSubmit'
 						>
 							Save changes
 						</Button>
