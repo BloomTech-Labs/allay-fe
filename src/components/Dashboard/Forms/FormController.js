@@ -209,6 +209,7 @@ const FormController = ({ history }) => {
 											setShowInterview(false);
 											setShowCompanyReview(true);
 										}}
+										data-cy='companyReviewButton'
 									>
 										<Image src={companyIcon} alt='Company Review Icon' />
 									</Flex>
