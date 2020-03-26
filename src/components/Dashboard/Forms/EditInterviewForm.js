@@ -26,8 +26,7 @@ import {
   AlertDialogOverlay,
   AlertDialogFooter,
   CheckboxGroup,
-  Checkbox,
-  useToast
+  Checkbox
 } from '@chakra-ui/core';
 
 const EditInterviewForm = ({
@@ -43,9 +42,6 @@ const EditInterviewForm = ({
   const [editValue, setEditValue] = useState({
     id: id
   });
-
-  //allows the use of toasts
-  const toast = useToast();
 
   // specifically for the cancel button functionality
   const [isOpen, setIsOpen] = useState();
@@ -76,13 +72,6 @@ const EditInterviewForm = ({
   const submitEdits = () => {
     editReview(review.user_id, review.review_id, editValue).then(() => {
       history.push('/dashboard');
-      toast({
-        title: `Review Edit Success!`,
-        description: `We've successfully edited your review for you`,
-        status: 'success',
-        duration: 5000,
-        isClosable: true
-      });
     });
     ReactGA.event({
       category: 'Interview Review Edit',

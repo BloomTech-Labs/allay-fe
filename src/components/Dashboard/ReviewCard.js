@@ -25,13 +25,10 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  useToast,
   useDisclosure
 } from '@chakra-ui/core';
 
 const ReviewCard = ({ review, history, deleteReview }) => {
-  //allows the use of toasts
-  const toast = useToast();
   // NEW post tag logic
   const [newTag, setNewTag] = useState(false);
   // get server time and set to readable
@@ -70,14 +67,6 @@ const ReviewCard = ({ review, history, deleteReview }) => {
   const submitDelete = () => {
     deleteReview(review.user_id, review.review_id).then(() => {
       window.location.reload();
-      // history.push('/dashboard')
-      toast({
-        title: 'Review Deleted',
-        description: `We've successfully deleted your review for you`,
-        status: 'success',
-        duration: 5000,
-        isClosable: true
-      });
     });
     ReactGA.event({
       category: 'Review Delete',
