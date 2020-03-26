@@ -43,7 +43,8 @@ Allay is a job portal for Lambda students and alumni to network and talk about t
 
 - [React](https://reactjs.org/): Current industry standard for web applications, using React let us displaying large amounts of data effectively by implementing Components. It is also very scalable, perfect for large applications with huge growth potential.
 - [Redux](https://redux.js.org/): Centralizes our application's state and logic, easy to test/debug, works with any UI layer
-- [Chakra](https://chakra-ui.com/): Chakra UI is accessible abd themeable component library. Simple to implement and build beautiful looking apps fast.
+- [Chakra](https://chakra-ui.com/): Chakra UI is accessible and themeable component library. Simple to implement and build beautiful looking apps fast.
+- [Cypress](https://docs.cypress.io/): Fast, easy and reliable testing for anything that runs in a browser. Amazing UI tool for making setting up, writing, and running tests a breeze and easy to visualize.
 
 #### Front end deployed to [Heroku](https://labs21-allay-fe.herokuapp.com/).
 
@@ -53,7 +54,7 @@ Allay is a job portal for Lambda students and alumni to network and talk about t
 - Express
 - Knex
 - PostgreSQL
-- Jest
+- Cypress
 
 # APIs
 
@@ -65,11 +66,11 @@ Expects:
 
 ```json
 {
-  "id": 1,
-  "username": "yourusername",
-  "email": "youremail@youremail.com",
-  "track_id": 1,
-  "password": "password"
+	"id": 1,
+	"username": "yourusername",
+	"email": "youremail@youremail.com",
+	"track_id": 1,
+	"password": "password"
 }
 ```
 
@@ -77,11 +78,11 @@ Returns:
 
 ```json
 {
-  "id": 1,
-  "username": "yourusername",
-  "email": "youremail@youremail.com",
-  "track_id": 1,
-  "reviews": []
+	"id": 1,
+	"username": "yourusername",
+	"email": "youremail@youremail.com",
+	"track_id": 1,
+	"reviews": []
 }
 ```
 
@@ -157,7 +158,7 @@ create a .env.local file that includes the following:
 
 # Testing
 
-We chose [jest](https://jestjs.io/) for its flexibility in testing the front and back end with similar or same syntax.
+We chose [cypress](https://docs.cypress.io/) for its flexibility and ease of use. Cypress has amazing UI tools that lets us see our tests running in real time, which relieves a lot of headaches.
 
 # Installation Instructions
 
@@ -166,6 +167,9 @@ To get the server running locally:
 - Clone this repo
 - **npm i** to install all required dependencies
 - **npm start** to start the local server listening on [localhost:3000](http://localhost:3000)
+
+- For testing
+- **npm run cypress:open** to run testing with cypress
 
 # Contributing
 

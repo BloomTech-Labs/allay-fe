@@ -113,10 +113,10 @@ const Signup = ({ signup, isLoading, history }) => {
 						fontWeight='bold'
 					>
 						Allay
-          </Text>
+					</Text>
 					<Text w='100%' fontFamily='Poppins' fontSize='52px' fontWeight='bold'>
 						We're stronger together.
-          </Text>
+					</Text>
 				</Stack>
 
 				<Flex w='40%' mr='8%' justify='center' align='center' flexDir='column'>
@@ -138,7 +138,7 @@ const Signup = ({ signup, isLoading, history }) => {
 								my='2%'
 							>
 								Let's get started!
-              </Flex>
+							</Flex>
 
 							<Flex wrap='wrap' w='411px%' justify='center'>
 								<FormControl isRequired isInvalid={errors.email}>
@@ -231,7 +231,7 @@ const Signup = ({ signup, isLoading, history }) => {
 
 									<FormHelperText color='rgba(72, 72, 72, 0.2)'>
 										Must be at least 8 characters
-                  </FormHelperText>
+									</FormHelperText>
 									<FormErrorMessage>
 										{errors.password && errors.password.message}
 									</FormErrorMessage>
@@ -282,7 +282,7 @@ const Signup = ({ signup, isLoading, history }) => {
 									data-cy='registerSubmit'
 								>
 									Sign up
-                </Button>
+								</Button>
 							</Flex>
 							<Flex m='15px' justify='center' fontWeight='light'>
 								<Text>
@@ -297,7 +297,7 @@ const Signup = ({ signup, isLoading, history }) => {
 										underline='none'
 									>
 										Sign in here!
-                  </Link>
+									</Link>
 								</Text>
 							</Flex>
 						</Flex>
