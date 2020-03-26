@@ -826,8 +826,10 @@ const InterviewForm = ({
                         name='comment'
                         placeholder='What questions came up? What did you discuss? What did you come away with from this interview? '
                         rounded='6px'
+                        resize='none'
                         ref={register}
                         onKeyUp={time4}
+                        data-cy='interviewComment'
                       />
                     </Flex>
                     {/* avatar */}
@@ -1014,7 +1016,7 @@ const InterviewForm = ({
                           <CustomRadio value='1' w='411px'>
                             No offer
                           </CustomRadio>
-                          <CustomRadio value='2' w='411px'>
+                          <CustomRadio value='2' w='411px' data-cy='accepted'>
                             Accepted
                           </CustomRadio>
                           <CustomRadio value='3' w='411px'>
@@ -1211,8 +1213,9 @@ const InterviewForm = ({
                       data-aos-once='true'
                     >
                       <FormLabel mb='4'>Rate overall experience</FormLabel>
-                      <Flex id='stars' justify='center' w='100%'>
+                      <Flex justify='center' w='100%'>
                         <BeautyStars
+                          name='interviewRating'
                           value={starState}
                           activeColor='blue'
                           onChange={value => {

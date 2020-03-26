@@ -197,7 +197,7 @@ const FormController = ({ history }) => {
                       setShowInterview(true);
                       setShowCompanyReview(false);
                     }}
-                    data-cy='interviewReviewClick'
+                    data-cy='interviewReviewButton'
                   >
                     <Image src={interviewIcon} alt='Interview Review Icon' />
                   </Flex>
@@ -210,6 +210,7 @@ const FormController = ({ history }) => {
                       setShowInterview(false);
                       setShowCompanyReview(true);
                     }}
+                    data-cy='companyReviewButton'
                   >
                     <Image src={companyIcon} alt='Company Review Icon' />
                   </Flex>
