@@ -18,13 +18,13 @@ describe('Navs to company review form.', function() {
 		// nav to add review start
 		cy.get('[data-cy=addReviewButton]').as('addReviewButton');
 
-		cy.wait(3000);
+		cy.wait(500);
 
 		cy.get('@addReviewButton').click();
 		cy.url().should('include', 'add-review');
 		// click
 		cy.get('[data-cy=companyReviewButton]').as('companyReviewButton');
-		cy.wait(3000);
+		cy.wait(4500);
 		cy.get('@companyReviewButton').click();
 
 		//Successfully fills out the form and submits a new Company Review
@@ -40,7 +40,7 @@ describe('Navs to company review form.', function() {
 		cy.get('@jobTitleText').type('Cypress Engineer');
 
 		cy.get('input[name="Company Headquarters"]').as('locationText');
-		cy.get('@locationText').type('Atlanta, GA, USA');
+		cy.get('@locationText').type('Atlanta');
 
 		cy.get('input[name="start_date"]').as('startDateText');
 		cy.get('@startDateText').type('1999');
