@@ -89,6 +89,7 @@ const Login = ({ login, isLoading, history }) => {
 						fontSize='80px'
 						fontWeight='bold'
 					>
+						Testing Pipline
 						Allay
 					</Text>
 					<Text w='100%' fontFamily='Poppins' fontSize='52px' fontWeight='bold'>
