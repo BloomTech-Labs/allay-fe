@@ -92,7 +92,7 @@ const Login = ({ login, isLoading, history }) => {
             Allay
           </Text>
           <Text w="100%" fontFamily="Poppins" fontSize="52px" fontWeight="bold">
-            We're stronger together!
+            We're stronger together.
           </Text>
         </Stack>
         <Flex

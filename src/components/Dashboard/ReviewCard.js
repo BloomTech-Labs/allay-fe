@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
+import BlockButton from "./AdminButtons/BlockButton";
+import ContentButton from "./AdminButtons/ContentButton";
 import ReactGA from "react-ga";
 // actions
 import deleteReview from "../../state/actions/index";
@@ -529,7 +531,10 @@ const ReviewCard = ({ review, history, deleteReview }) => {
             {review.comment}
           </Flex>
 
-          <ModalFooter></ModalFooter>
+          <ModalFooter>
+            <BlockButton />
+            <ContentButton />
+          </ModalFooter>
         </ModalContent>
       </Modal>
 
@@ -712,6 +717,7 @@ const ReviewCard = ({ review, history, deleteReview }) => {
         <Flex w="100%" h="95px" overflow="hidden">
           <p>{review.comment}</p>
         </Flex>
+        {/* {admin action buttons} */}
       </PseudoBox>
     </>
   );

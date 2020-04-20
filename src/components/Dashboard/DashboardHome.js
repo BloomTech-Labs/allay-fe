@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 // action
-import getReview from '../../state/actions/index';
-import getCompanyReview from '../../state/actions/index';
+import getReview from "../../state/actions/index";
+import getCompanyReview from "../../state/actions/index";
 // component
-import NavBar from './NavBar';
-import ReviewCard from './ReviewCard';
+import NavBar from "./NavBar";
+import ReviewCard from "./ReviewCard";
 // styles
-import { Flex, Alert, AlertDescription } from '@chakra-ui/core';
-import CustomSpinner from '../CustomSpinner.js';
+import { Flex, Alert, AlertDescription } from "@chakra-ui/core";
+import CustomSpinner from "../CustomSpinner.js";
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
   // search state
@@ -46,14 +46,14 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 
   return (
     <>
-      <Flex w='100%' minH='100vh' justify='center'>
+      <Flex w="100%" minH="100vh" justify="center">
         <Flex
-          maxW='1440px'
-          w='100%'
-          direction='column'
-          wrap='wrap'
-          mb='3%'
-          mt='190px'
+          maxW="1440px"
+          w="100%"
+          direction="column"
+          wrap="wrap"
+          mb="3%"
+          mt="190px"
         >
           <NavBar
             history={history}
@@ -65,13 +65,13 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             setTypeFilters={setTypeFilters}
           />
 
-          <Flex align='center' justify='flex-start' mb='1%' ml='2.5%'>
-            <Flex as='h2'>Recent Posts</Flex>
+          <Flex align="center" justify="flex-start" mb="1%" ml="2.5%">
+            <Flex as="h2">Recent Posts</Flex>
           </Flex>
 
-          <Flex height='70%' wrap='wrap'>
+          <Flex height="70%" wrap="wrap">
             {isLoading ? (
-              <Flex w='100%' h='100%' justify='center' align='center'>
+              <Flex w="100%" h="100%" justify="center" align="center">
                 <CustomSpinner />
               </Flex>
             ) : filteredReviews.length >= 1 ? (
@@ -85,22 +85,22 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             ) : searchResults.length > 0 ||
               trackFilters.length > 0 ||
               typeFilters.length > 0 ? (
-              <Flex as='h3' w='100%' ml='6%' mt='5%' overflow='visible'>
+              <Flex as="h3" w="100%" ml="6%" mt="5%" overflow="visible">
                 <Alert
-                  status='info'
-                  variant='subtle'
-                  flexDirection='column'
-                  justifyContent='center'
-                  textAlign='center'
-                  height='312px'
-                  width='625px'
-                  background='#F2F6FE'
-                  borderRadius='12px'
-                  mt='2%'
-                  wrap='nowrap'
+                  status="info"
+                  variant="subtle"
+                  flexDirection="column"
+                  justifyContent="center"
+                  textAlign="center"
+                  height="312px"
+                  width="625px"
+                  background="#F2F6FE"
+                  borderRadius="12px"
+                  mt="2%"
+                  wrap="nowrap"
                 >
                   {/* <AlertIcon size='40px' mr={0} /> */}
-                  <AlertDescription w='100%'>
+                  <AlertDescription w="100%">
                     Sorry, no job reviews found.
                   </AlertDescription>
                 </Alert>
