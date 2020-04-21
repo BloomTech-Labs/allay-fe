@@ -36,6 +36,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={customTheme}>
 			<div className='App'>
+				{/* Our Routes */}
 				<Switch>
 					<Route exact path='/' component={Login} />
 					<Route path='/signup' component={Signup} />
