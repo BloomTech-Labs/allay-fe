@@ -5,43 +5,44 @@ import {
 	LOGIN_FAIL,
 	SIGNUP_START,
 	SIGNUP_SUCCESS,
-	SIGNUP_FAIL
+	SIGNUP_FAIL,
 } from '../types';
 
-export const login = creds => dispatch => {
+export const login = (creds) => (dispatch) => {
 	dispatch({ type: LOGIN_START });
 	return axiosWithAuth()
 		.post('/auth/login', creds)
-		.then(res => {
+		.then((res) => {
 			localStorage.setItem('token', res.data.token);
 			localStorage.setItem('userId', res.data.id);
 			localStorage.setItem('username', res.data.username);
+			localStorage.setItem('admin', res.data.admin);
 			dispatch({
 				type: LOGIN_SUCCESS,
 				payload: res.data,
-				status: res.status
+				status: res.status,
 			});
 		})
-		.catch(err => {
+		.catch((err) => {
 			dispatch({
 				type: LOGIN_FAIL,
 				payload: err.response.data,
-				status: err.response.status
+				status: err.response.status,
 			});
 		});
 };
 
-export const signup = creds => dispatch => {
+export const signup = (creds) => (dispatch) => {
 	dispatch({ type: SIGNUP_START });
 	return axiosWithAuth()
 		.post('/auth/register', creds)
-		.then(res => {
+		.then((res) => {
 			localStorage.setItem('token', res.data.token);
 			localStorage.setItem('userId', res.data.id);
 			localStorage.setItem('username', res.data.username);
 			dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
 		})
-		.catch(err => {
+		.catch((err) => {
 			dispatch({ type: SIGNUP_FAIL, payload: err.response.data });
 		});
 };

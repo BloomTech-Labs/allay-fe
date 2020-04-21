@@ -4,15 +4,16 @@ import {
 	LOGIN_FAIL,
 	SIGNUP_START,
 	SIGNUP_SUCCESS,
-	SIGNUP_FAIL
+	SIGNUP_FAIL,
 } from '../types';
 
 const initialState = {
 	isLoading: false,
 	isLoggedIn: false,
 	isSignedUp: false,
+	isBlocked: false,
 	error: null,
-	status: null
+	status: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -22,7 +23,7 @@ const authReducer = (state = initialState, action) => {
 				...state,
 				isLoggedIn: false,
 				isLoading: true,
-				status: null
+				status: null,
 			};
 		case LOGIN_SUCCESS:
 			return {
@@ -30,7 +31,8 @@ const authReducer = (state = initialState, action) => {
 				isLoggedIn: true,
 				isLoading: false,
 				error: null,
-				status: action.status
+				status: action.status,
+				isBlocked: action.payload.blocked,
 			};
 		case LOGIN_FAIL:
 			return {
@@ -38,26 +40,26 @@ const authReducer = (state = initialState, action) => {
 				isLoading: false,
 				isLoggedIn: false,
 				error: action.payload,
-				status: action.status
+				status: action.status,
 			};
 		case SIGNUP_START:
 			return {
 				...state,
 				isSignedUp: false,
-				isLoading: true
+				isLoading: true,
 			};
 		case SIGNUP_SUCCESS:
 			return {
 				...state,
 				isSignedUp: true,
-				isLoading: false
+				isLoading: false,
 			};
 		case SIGNUP_FAIL:
 			return {
 				...state,
 				isLoading: false,
 				isSignedUp: false,
-				error: action.payload
+				error: action.payload,
 			};
 		default:
 			return state;
