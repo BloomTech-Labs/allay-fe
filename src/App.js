@@ -37,6 +37,8 @@ const App = () => {
 		<ThemeProvider theme={customTheme}>
 			<div className='App'>
 				<Switch>
+
+					{/* testing Netlify checks on PR */}
 					<Route exact path='/' component={Login} />
 					<Route path='/signup' component={Signup} />
 					<PrivateRoute exact path='/dashboard' component={DashboardHome} />
