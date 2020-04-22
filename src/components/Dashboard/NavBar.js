@@ -286,8 +286,8 @@ function NavBar({
 
 const mapStateToProps = (state) => {
 	return {
-		isBlocked: state.authReducer.isBlocked,
+		isBlocked: state.auth.isBlocked,
 	};
 };
 
-export default connect(mapStateToProps, {})(NavBar);
+export default connect(mapStateToProps, null)(NavBar);
