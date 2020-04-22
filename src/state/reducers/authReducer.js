@@ -12,6 +12,7 @@ const initialState = {
 	isLoggedIn: false,
 	isSignedUp: false,
 	isBlocked: false,
+	isAdmin: false,
 	error: null,
 	status: null,
 };
@@ -33,6 +34,7 @@ const authReducer = (state = initialState, action) => {
 				error: null,
 				status: action.status,
 				isBlocked: action.payload.blocked,
+				isAdmin: action.payload.admin,
 			};
 		case LOGIN_FAIL:
 			return {
