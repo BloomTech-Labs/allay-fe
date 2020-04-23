@@ -14,7 +14,10 @@ import {
   EDIT_REVIEW_SUCCESS,
   DELETE_REVIEW_START,
   DELETE_REVIEW_SUCCESS,
-  DELETE_REVIEW_FAILURE
+  DELETE_REVIEW_FAILURE,
+  BLOCK_USER_FAILURE,
+  BLOCK_USER_START,
+  BLOCK_USER_SUCCESS
 } from "../types";
 
 // ============ GET ALL REVIEWS ===========
@@ -84,5 +87,20 @@ export const deleteReview = (userId, reviewId) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: DELETE_REVIEW_FAILURE, payload: err });
+    });
+};
+
+// ============ BLOCK USER ===========
+
+export const blockUser = userId => dispatch => {
+  dispatch({ type: BLOCK_USER_START });
+  return axiosWithAuth()
+    .put(`/users/${userId}/bind`)
+    .then(res => {
+      console.log("from blocking user", res.data);
+      dispatch({ type: BLOCK_USER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: BLOCK_USER_FAILURE, payload: err });
     });
 };

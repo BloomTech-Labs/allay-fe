@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
+
 import BlockButton from './AdminButtons/BlockButton';
 import ContentButton from './AdminButtons/ContentButton';
 import ReactGA from 'react-ga';
 // actions
 import deleteReview from '../../state/actions/index';
+
 
 // styles
 import {
@@ -31,6 +33,7 @@ import {
 } from '@chakra-ui/core';
 
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
+
 	// NEW post tag logic
 	const [newTag, setNewTag] = useState(false);
 	// get server time and set to readable
@@ -69,11 +72,13 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 	const submitDelete = (user_id, review_id) => {
 		if (review.user_id && review.review_id) {
 			deleteReview(review.user_id, review.review_id).then(() => {
-				window.location.reload();
+				// window.location.reload();
+				history.push("/dashboard")
 			});
 		} else {
 			deleteReview(user_id, review_id).then(() => {
-				window.location.reload();
+				// window.location.reload();
+				history.push("/dashboard")
 			});
 		}
 
@@ -82,6 +87,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 			action: `Submit delete`,
 		});
 	};
+
 
 	return (
 		<>
@@ -539,7 +545,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 					</Flex>
 
 					<ModalFooter>
-						<BlockButton isAdmin={isAdmin} />
+						<BlockButton  user_id={review.user_id} isAdmin={isAdmin} />
 						<ContentButton
 							isAdmin={isAdmin}
 							submitDelete={submitDelete}
