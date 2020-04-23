@@ -41,7 +41,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "coverage": "CI=true npm test --coverage --watchAll=false || true",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:coverage:run": "cypress run || true",
+    "start:coverage": "react-scripts -r @cypress/instrument-cra start",
+    "cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -67,9 +70,12 @@
     ]
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.5.1",
+    "@cypress/instrument-cra": "^1.1.1",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^10.0.0",
-    "cypress": "^4.2.0"
+    "cypress": "^4.2.0",
+    "start-server-and-test": "^1.11.0"
   }
 }
