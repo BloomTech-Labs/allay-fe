@@ -185,7 +185,7 @@ function NavBar({
             onChange={handleInputChange}
           />
         </InputGroup>
-        {!isBlocked ? (
+        {isBlocked ? (
           <Blocked />
         ) : (
           <Button
