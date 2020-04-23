@@ -33,7 +33,7 @@ import {
 } from '@chakra-ui/core';
 
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
-	console.log(review)
+
 	// NEW post tag logic
 	const [newTag, setNewTag] = useState(false);
 	// get server time and set to readable
