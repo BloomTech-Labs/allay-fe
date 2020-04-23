@@ -34,6 +34,27 @@ import {
 
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 
+		//deletes the review in question
+		const submitDelete = (user_id, review_id) => {
+			if (review.user_id && review.review_id) {
+				deleteReview(review.user_id, review.review_id).then(() => {
+					// window.location.reload();
+					history.push("/dashboard")
+				});
+			} else {
+				deleteReview(user_id, review_id).then(() => {
+					// window.location.reload();
+					history.push("/dashboard")
+				});
+			}
+	
+			ReactGA.event({
+				category: 'Review Delete',
+				action: `Submit delete`,
+			});
+		};
+useEffect(() => {
+},[submitDelete])
 	// NEW post tag logic
 	const [newTag, setNewTag] = useState(false);
 	// get server time and set to readable
@@ -68,25 +89,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 		}
 	};
 
-	//deletes the review in question
-	const submitDelete = (user_id, review_id) => {
-		if (review.user_id && review.review_id) {
-			deleteReview(review.user_id, review.review_id).then(() => {
-				// window.location.reload();
-				history.push("/dashboard")
-			});
-		} else {
-			deleteReview(user_id, review_id).then(() => {
-				// window.location.reload();
-				history.push("/dashboard")
-			});
-		}
 
-		ReactGA.event({
-			category: 'Review Delete',
-			action: `Submit delete`,
-		});
-	};
 
 
 	return (

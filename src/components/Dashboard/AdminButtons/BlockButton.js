@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../../App.css";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -19,17 +19,14 @@ export default function BlockButton({ user_id }) {
   const cancelRef = React.useRef();
   const dispatch = useDispatch();
 
+  // get admin status and user status
   const admin = useSelector(state => state.auth.isAdmin);
   const blocked = useSelector(state => state.review.isUserBlocked);
-
+  // func to block/unblock user
   const block = id => {
     dispatch(blockUser(id));
-    // changeBtnColor();
     setIsOpen(false);
   };
-  useEffect(() => {
-    console.log(blocked);
-  }, [block]);
   return (
     <>
       {admin && (
