@@ -31,14 +31,9 @@ import {
 	AlertDialogOverlay,
 	useDisclosure,
 } from '@chakra-ui/core';
-import axiosToDS from "../../utils/axiosToDS";
+
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
-	const data = {text:"string"}
-  useEffect(() => {
-		axiosToDS().post("check_review",data).then(res => {
-			 console.log(res.data)
-		 })
-	},[])
+
 	// NEW post tag logic
 	const [newTag, setNewTag] = useState(false);
 	// get server time and set to readable
