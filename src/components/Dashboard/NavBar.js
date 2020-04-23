@@ -22,40 +22,7 @@ import {
   useDisclosure
 } from "@chakra-ui/core";
 //import modal
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton
-} from "@chakra-ui/core";
-
-// function BasicUsage() {
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-//   return (
-//     <>
-//       <Button onClick={onOpen}>Open Modal</Button>
-
-//       <Modal isOpen={isOpen} onClose={onClose}>
-//         <ModalOverlay />
-//         <ModalContent>
-//           <ModalHeader>Modal Title</ModalHeader>
-//           <ModalCloseButton />
-//           <ModalBody>You've got yourself blocked!</ModalBody>
-
-//           <ModalFooter>
-//             <Button variantColor="blue" mr={3} onClick={onClose}>
-//               Close
-//             </Button>
-//             <Button variant="ghost">Secondary Action</Button>
-//           </ModalFooter>
-//         </ModalContent>
-//       </Modal>
-//     </>
-//   );
-// }
+import Blocked from "../Reusable/BlockedModal";
 
 function NavBar({
   history,
@@ -218,18 +185,9 @@ function NavBar({
             onChange={handleInputChange}
           />
         </InputGroup>
-        {isBlocked ? //   background="#344CD0" // <Button
-        //   color="#FFFFFF"
-        //   rounded="6px"
-        //   border="none"
-        //   size="lg"
-        //   isLoading={isLoading}
-        //   onClick={BasicUsage()}
-        //   data-cy="addReviewButton"
-        // >
-        //   Add Review
-        // </Button>
-        null : (
+        {!isBlocked ? (
+          <Blocked />
+        ) : (
           <Button
             background="#344CD0"
             color="#FFFFFF"
