@@ -7,7 +7,6 @@ import ReactGA from 'react-ga';
 // actions
 import deleteReview from '../../state/actions/index';
 
-
 // styles
 import {
 	Box,
@@ -33,7 +32,6 @@ import {
 } from '@chakra-ui/core';
 
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
-
 	// NEW post tag logic
 	const [newTag, setNewTag] = useState(false);
 	// get server time and set to readable
@@ -73,12 +71,12 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 		if (review.user_id && review.review_id) {
 			deleteReview(review.user_id, review.review_id).then(() => {
 				// window.location.reload();
-				history.push("/dashboard")
+				history.push('/dashboard');
 			});
 		} else {
 			deleteReview(user_id, review_id).then(() => {
 				// window.location.reload();
-				history.push("/dashboard")
+				history.push('/dashboard');
 			});
 		}
 
@@ -88,7 +86,6 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 		});
 	};
 
-
 	return (
 		<>
 			{/* ------------------------------------------------------------------------------------------------ */}
@@ -97,7 +94,11 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 			<Modal isOpen={isOpen} onClose={onClose} size='80%'>
 				<ModalOverlay />
 				<ModalContent w='100%' wrap='nowrap'>
-					<ModalCloseButton background='none' border='none' />
+					<ModalCloseButton
+						data-cy='reviewCloseButton'
+						background='none'
+						border='none'
+					/>
 
 					{/* Basic info container */}
 					<Flex
@@ -545,7 +546,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 					</Flex>
 
 					<ModalFooter>
-						<BlockButton  user_id={review.user_id} isAdmin={isAdmin} />
+						<BlockButton user_id={review.user_id} isAdmin={isAdmin} />
 						<ContentButton
 							isAdmin={isAdmin}
 							submitDelete={submitDelete}

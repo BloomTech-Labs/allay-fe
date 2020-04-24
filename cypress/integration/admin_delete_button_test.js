@@ -121,10 +121,10 @@ describe('Logs into the site', function () {
 		// select are you sure, delete button and click
 		cy.get('[data-cy=adminDeleteReviewConfirm]').as('adminDeleteReviewConfirm');
 		cy.get('@adminDeleteReviewConfirm').click();
-		// cy.wait(3000);
-		// // review card should be deleted and return to dashboard
-		// cy.get('@testReview').should('eq', undefined);
-		// cy.wait(1000);
-		// cy.url().should('include', 'dashboard');
+		cy.wait(3000);
+		// review card should be deleted and return to dashboard
+		cy.get('@testReview').should('eq', undefined);
+		cy.wait(1000);
+		cy.url().should('include', 'dashboard');
 	});
 });
