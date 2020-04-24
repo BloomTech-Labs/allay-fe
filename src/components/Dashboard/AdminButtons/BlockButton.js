@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import '../../../App.css';
+import React, { useState } from "react";
+import "../../../App.css";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { blockUser } from '../../../state/actions/reviewActions';
@@ -19,40 +19,29 @@ export default function BlockButton({ user_id }) {
 	const cancelRef = React.useRef();
 	const dispatch = useDispatch();
 
-	const admin = useSelector((state) => state.auth.isAdmin);
-	const blocked = useSelector((state) => state.review.isUserBlocked);
-
-	const block = (id) => {
-		dispatch(blockUser(id));
-		// changeBtnColor();
-		setIsOpen(false);
-	};
-	useEffect(() => {
-		console.log(blocked);
-	}, [block]);
-	return (
-		<>
-			{admin && (
-				<>
-					{blocked ? (
-						<Button
-							data-cy='unblockUserButton'
-							variantColor='green'
-							onClick={() => setIsOpen(true)}
-						>
-							Unblock User
-						</Button>
-					) : (
-						<Button
-							data-cy='blockUserButton'
-							variantColor='red'
-							onClick={() => setIsOpen(true)}
-						>
-							Block User
-						</Button>
-					)}
-				</>
-			)}
+  // get admin status and user status
+  const admin = useSelector(state => state.auth.isAdmin);
+  const blocked = useSelector(state => state.review.isUserBlocked);
+  // func to block/unblock user
+  const block = id => {
+    dispatch(blockUser(id));
+    setIsOpen(false);
+  };
+  return (
+    <>
+      {admin && (
+        <>
+          {blocked ? (
+            <Button data-cy='unblockUserButton' variantColor="green" onClick={() => setIsOpen(true)}>
+              Unblock User
+            </Button>
+          ) : (
+            <Button data-cy='blockUserButton' variantColor="red" onClick={() => setIsOpen(true)}>
+              Block User
+            </Button>
+          )}
+        </>
+      )}
 
 			<AlertDialog
 				isOpen={isOpen}

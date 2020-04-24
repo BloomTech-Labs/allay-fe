@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import ReactGA from 'react-ga'; // for google analytics
-import { states } from '../../Reusable/statesData';
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import ReactGA from "react-ga"; // for google analytics
+import { states } from "../../Reusable/statesData";
 // redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // actions
-import postReview from '../../../state/actions';
-import getCompanies from '../../../state/actions';
-import postCompany from '../../../state/actions';
+import postReview from "../../../state/actions";
+import getCompanies from "../../../state/actions";
+import postCompany from "../../../state/actions";
 // styles
-import ProgressBar from '../../Reusable/ProgressBar.js';
-import CustomAutoComplete from '../../Reusable/InputFields/Autocomplete';
-import BeautyStars from 'beauty-stars';
-import { ThinkingDots } from '../../Reusable/ThinkingDots';
+import ProgressBar from "../../Reusable/ProgressBar.js";
+import CustomAutoComplete from "../../Reusable/InputFields/Autocomplete";
+import BeautyStars from "beauty-stars";
+import { ThinkingDots } from "../../Reusable/ThinkingDots";
 import {
   FormControl,
   Flex,
@@ -28,10 +28,12 @@ import {
   RadioButtonGroup,
   CheckboxGroup,
   Link
-} from '@chakra-ui/core';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import CustomSpinner from '../../CustomSpinner';
+} from "@chakra-ui/core";
+import AOS from "aos";
+import "aos/dist/aos.css";
+//
+import axiosToDS from "../../../utils/axiosToDS";
+import CustomSpinner from "../../CustomSpinner";
 
 const InterviewForm = ({
   loadingCompanies,
@@ -55,7 +57,7 @@ const InterviewForm = ({
   };
   console.log(thinking);
   // search state
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   // no company state
   const [noCompany, setNoCompany] = useState(false);
@@ -114,10 +116,10 @@ const InterviewForm = ({
       mins: 8,
       prog: 5
     });
-    const element = document.getElementById('Tag1');
+    const element = document.getElementById("Tag1");
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+      behavior: "smooth",
+      block: "start"
     });
   }, [getCompanies]);
 
@@ -139,10 +141,10 @@ const InterviewForm = ({
       mins: 8,
       prog: 20
     });
-    const element = document.getElementById('Tag2');
+    const element = document.getElementById("Tag2");
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+      behavior: "smooth",
+      block: "start"
     });
     setThinking(false);
   };
@@ -161,10 +163,10 @@ const InterviewForm = ({
       mins: 7,
       prog: 30
     });
-    const element = document.getElementById('Tag3');
+    const element = document.getElementById("Tag3");
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
+      behavior: "smooth",
+      block: "center"
     });
     setThinking(false);
   };
@@ -183,10 +185,10 @@ const InterviewForm = ({
       mins: 6,
       prog: 40
     });
-    const element = document.getElementById('Tag4');
+    const element = document.getElementById("Tag4");
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+      behavior: "smooth",
+      block: "start"
     });
     setThinking(false);
   };
@@ -205,10 +207,10 @@ const InterviewForm = ({
       mins: 5,
       prog: 50
     });
-    const element = document.getElementById('Tag5');
+    const element = document.getElementById("Tag5");
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
+      behavior: "smooth",
+      block: "center"
     });
     setThinking(false);
   };
@@ -227,10 +229,10 @@ const InterviewForm = ({
       mins: 4,
       prog: 60
     });
-    const element = document.getElementById('Tag6');
+    const element = document.getElementById("Tag6");
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
+      behavior: "smooth",
+      block: "center"
     });
     setThinking(false);
   };
@@ -249,10 +251,10 @@ const InterviewForm = ({
       mins: 3,
       prog: 70
     });
-    const element = document.getElementById('Tag7');
+    const element = document.getElementById("Tag7");
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
+      behavior: "smooth",
+      block: "center"
     });
     setThinking(false);
   };
@@ -271,10 +273,10 @@ const InterviewForm = ({
       mins: 1,
       prog: 85
     });
-    const element = document.getElementById('Tag8');
+    const element = document.getElementById("Tag8");
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
+      behavior: "smooth",
+      block: "center"
     });
     setThinking(false);
   };
@@ -293,10 +295,10 @@ const InterviewForm = ({
       mins: 0,
       prog: 100
     });
-    const element = document.getElementById('Tag9');
+    const element = document.getElementById("Tag9");
     element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+      behavior: "smooth",
+      block: "start"
     });
     setThinking(false);
   };
@@ -307,62 +309,75 @@ const InterviewForm = ({
     return (
       <Button
         ref={ref}
-        variantColor={isChecked ? 'blue' : 'gray'}
+        variantColor={isChecked ? "blue" : "gray"}
         aria-checked={isChecked}
-        role='radio'
+        role="radio"
         isDisabled={isDisabled}
         {...rest}
       />
     );
   });
+  //push to dashboard and send info to DS for review
+  const send_push = data => {
+    var dataForDS = JSON.stringify(data);
+    axiosToDS()
+      .post("/check_review", dataForDS)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    history.push("/dashboard");
+  };
 
   //submit handler
   const submitForm = data => {
-    postReview(localStorage.getItem('userId'), {
+    postReview(localStorage.getItem("userId"), {
       ...data,
       review_type_id: 2,
       overall_rating: starState,
       offer_status_id: offer,
       city: newLocation.myCity,
       state_id: newLocation.myState
-    }).then(() => history.push('/dashboard'));
+    }).then(() => send_push(data));
     ReactGA.event({
-      category: 'Review',
+      category: "Review",
       action: `Submit review`
     });
   };
 
   return (
     // main container
-    <Flex background='#E5E5E5' w='100%' justify='center'>
+    <Flex background="#E5E5E5" w="100%" justify="center">
       {/* max size */}
-      <Flex maxW='1440px' w='100%'>
+      <Flex maxW="1440px" w="100%">
         {/* progress header */}
         <Flex
-          pt='1%'
-          px='2%'
-          w='70%'
-          h='108px'
-          background='#344CD0'
-          top='0'
-          position='fixed'
-          overflow='hidden'
-          zIndex='999'
-          direction='column'
+          pt="1%"
+          px="2%"
+          w="70%"
+          h="108px"
+          background="#344CD0"
+          top="0"
+          position="fixed"
+          overflow="hidden"
+          zIndex="999"
+          direction="column"
         >
-          <Flex w='100%' color='#FFFFFF'>
+          <Flex w="100%" color="#FFFFFF">
             Your progress
           </Flex>
 
-          <Flex w='100%' justify='space-between' mb='1%' color='#FFFFFF'>
+          <Flex w="100%" justify="space-between" mb="1%" color="#FFFFFF">
             {progress.prec === 100 ? (
               <>
-                <Flex as='h4'>{progress.prec}% Completed!</Flex>
+                <Flex as="h4">{progress.prec}% Completed!</Flex>
               </>
             ) : (
               <>
-                <Flex as='h4'>{progress.prec}% not completed</Flex>
-                <Flex color='#FFFFFF'> {progress.mins} mins</Flex>
+                <Flex as="h4">{progress.prec}% not completed</Flex>
+                <Flex color="#FFFFFF"> {progress.mins} mins</Flex>
               </>
             )}
           </Flex>
@@ -371,12 +386,12 @@ const InterviewForm = ({
         {thinking ? (
           <>
             <Flex
-              bottom='0'
-              position='fixed'
-              overflow='hidden'
-              zIndex='999'
-              pt='5%'
-              pl='15%'
+              bottom="0"
+              position="fixed"
+              overflow="hidden"
+              zIndex="999"
+              pt="5%"
+              pl="15%"
             >
               <ThinkingDots />
             </Flex>
@@ -384,74 +399,74 @@ const InterviewForm = ({
         ) : null}
 
         {/* form container */}
-        <Flex w='100%' bg='white' flexDir='column' px='2%' pt='10%'>
+        <Flex w="100%" bg="white" flexDir="column" px="2%" pt="10%">
           {/*--------------- start of form ---------------  */}
           <form onSubmit={handleSubmit(submitForm)}>
             <FormControl isRequired>
               {/* first prompt */}
               <Flex
-                id='Tag1'
-                align='center'
-                h='5%'
-                p='1%'
-                w='416px'
-                mb='8%'
-                bg='#F2F6FE'
-                rounded='20px'
-                data-aos='fade-up'
-                data-aos-offset='200'
-                data-aos-delay='50'
-                data-aos-duration='1000'
-                data-aos-easing='ease-in-out'
-                data-aos-mirror='true'
-                data-aos-once='true'
+                id="Tag1"
+                align="center"
+                h="5%"
+                p="1%"
+                w="416px"
+                mb="8%"
+                bg="#F2F6FE"
+                rounded="20px"
+                data-aos="fade-up"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000"
+                data-aos-easing="ease-in-out"
+                data-aos-mirror="true"
+                data-aos-once="true"
               >
                 <p>Great! I will need some general details to get started.</p>
               </Flex>
               {/* company container  */}
 
-              <Flex w='100%' justify='flex-end'>
+              <Flex w="100%" justify="flex-end">
                 {/* company box */}
                 <Flex
-                  w='459px'
-                  h='379px'
-                  mb='8%'
-                  px='6'
-                  py='10'
-                  border='1px solid #BBBDC6'
-                  rounded='6px'
-                  flexDir='column'
-                  data-aos='fade-in'
-                  data-aos-offset='200'
-                  data-aos-delay='1000'
-                  data-aos-duration='1500'
-                  data-aos-easing='ease-in-out'
-                  data-aos-mirror='true'
-                  data-aos-once='true'
-                  data-aos-anchor='#Tag1'
+                  w="459px"
+                  h="379px"
+                  mb="8%"
+                  px="6"
+                  py="10"
+                  border="1px solid #BBBDC6"
+                  rounded="6px"
+                  flexDir="column"
+                  data-aos="fade-in"
+                  data-aos-offset="200"
+                  data-aos-delay="1000"
+                  data-aos-duration="1500"
+                  data-aos-easing="ease-in-out"
+                  data-aos-mirror="true"
+                  data-aos-once="true"
+                  data-aos-anchor="#Tag1"
                 >
                   <FormLabel>1. Company name</FormLabel>
                   {loadingCompanies ? (
                     <>
-                      <Flex justify='center' w='100%'>
+                      <Flex justify="center" w="100%">
                         <CustomSpinner />
                       </Flex>
                     </>
                   ) : (
                     <>
                       <Input
-                        h='56px'
-                        variant='filled'
-                        rounded='6px'
-                        autoCapitalize='none'
-                        type='text'
-                        label='company_name'
-                        name='company_name'
-                        list='company_name'
+                        h="56px"
+                        variant="filled"
+                        rounded="6px"
+                        autoCapitalize="none"
+                        type="text"
+                        label="company_name"
+                        name="company_name"
+                        list="company_name"
                         ref={register}
                         onChange={e => setSearchTerm(e.target.value)}
                       />
-                      <datalist id='company_name'>
+                      <datalist id="company_name">
                         {searchResults.map(company => (
                           <option value={company.company_name} key={company.id}>
                             {company.company_name}
@@ -460,93 +475,93 @@ const InterviewForm = ({
                       </datalist>
                       {noCompany ? (
                         <>
-                          <Link mb='3' color='grey' href='/add-company'>
+                          <Link mb="3" color="grey" href="/add-company">
                             Oops, you need to add that company!
                           </Link>
                         </>
                       ) : (
-                        <Flex mb='6' />
+                        <Flex mb="6" />
                       )}
                     </>
                   )}
                   <FormLabel>2. Job title</FormLabel>
                   <Input
-                    h='56px'
-                    mb='6'
-                    rounded='6px'
-                    type='text'
-                    variant='filled'
-                    label='job_title'
-                    name='job_title'
-                    autoCapitalize='none'
+                    h="56px"
+                    mb="6"
+                    rounded="6px"
+                    type="text"
+                    variant="filled"
+                    label="job_title"
+                    name="job_title"
+                    autoCapitalize="none"
                     ref={register}
                   />
                   <FormLabel>3. Place of interview</FormLabel>
                   <CustomAutoComplete
                     stateHelper={stateSelectorHelper}
-                    id='Company Headquarters'
-                    name='Company Headquarters'
-                    label='Company Headquarters'
-                    placeholder='e.g. Los Angeles, CA'
+                    id="Company Headquarters"
+                    name="Company Headquarters"
+                    label="Company Headquarters"
+                    placeholder="e.g. Los Angeles, CA"
                     onChange={time1}
                   />
                 </Flex>
                 {/* avatar */}
                 <Flex
-                  h='379px'
-                  align='flex-end'
-                  ml='1%'
-                  data-aos='fade-in'
-                  data-aos-offset='200'
-                  data-aos-delay='1000'
-                  data-aos-duration='1500'
-                  data-aos-easing='ease-in-out'
-                  data-aos-mirror='true'
-                  data-aos-once='true'
+                  h="379px"
+                  align="flex-end"
+                  ml="1%"
+                  data-aos="fade-in"
+                  data-aos-offset="200"
+                  data-aos-delay="1000"
+                  data-aos-duration="1500"
+                  data-aos-easing="ease-in-out"
+                  data-aos-mirror="true"
+                  data-aos-once="true"
                 >
-                  <Avatar size='md' src='https://bit.ly/broken-link' />
+                  <Avatar size="md" src="https://bit.ly/broken-link" />
                 </Flex>
               </Flex>
               {/* second prompt */}
               {Tag2 ? (
                 <>
                   <Flex
-                    id='Tag2'
-                    align='center'
-                    h='5%'
-                    w='416px'
-                    py='1%'
-                    px='1%'
-                    mb='2%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='50'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="Tag2"
+                    align="center"
+                    h="5%"
+                    w="416px"
+                    py="1%"
+                    px="1%"
+                    mb="2%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>Thank you for that information.</p>
                   </Flex>
                   <Flex
-                    id='roundsTag'
-                    justify='center'
-                    align='center'
-                    p='1%'
-                    h='5%'
-                    w='416px'
-                    mb='8%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='1000'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="roundsTag"
+                    justify="center"
+                    align="center"
+                    p="1%"
+                    h="5%"
+                    w="416px"
+                    mb="8%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="1000"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>
                       For the quality of this review I will ask some in depth
@@ -556,34 +571,34 @@ const InterviewForm = ({
                     </p>
                   </Flex>
                   {/* rounds container  */}
-                  <Flex w='100%' justify='flex-end'>
+                  <Flex w="100%" justify="flex-end">
                     {/* rounds box */}
                     <Flex
-                      w='459px'
-                      h='136px'
-                      mb='8%'
-                      p='6'
-                      border='1px solid #BBBDC6'
-                      rounded='6px'
-                      flexDir='column'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='2000'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
-                      data-aos-anchor='#roundsTag'
+                      w="459px"
+                      h="136px"
+                      mb="8%"
+                      p="6"
+                      border="1px solid #BBBDC6"
+                      rounded="6px"
+                      flexDir="column"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="2000"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
+                      data-aos-anchor="#roundsTag"
                     >
                       <FormLabel>Select rounds of interviews</FormLabel>
                       <Select
-                        h='56px'
-                        mb='6'
-                        rounded='6px'
-                        variant='filled'
-                        label='interview_rounds'
-                        name='interview_rounds'
-                        placeholder='Select one'
+                        h="56px"
+                        mb="6"
+                        rounded="6px"
+                        variant="filled"
+                        label="interview_rounds"
+                        name="interview_rounds"
+                        placeholder="Select one"
                         onChange={time2}
                       >
                         <option value={1}>1</option>
@@ -600,19 +615,19 @@ const InterviewForm = ({
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h='136px'
-                      align='flex-end'
-                      ml='1%'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='2000'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
-                      data-aos-anchor='#roundsTag'
+                      h="136px"
+                      align="flex-end"
+                      ml="1%"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="2000"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
+                      data-aos-anchor="#roundsTag"
                     >
-                      <Avatar size='md' src='https://bit.ly/broken-link' />
+                      <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
                 </>
@@ -621,21 +636,21 @@ const InterviewForm = ({
               {Tag3 ? (
                 <>
                   <Flex
-                    id='Tag3'
-                    align='center'
-                    p='1%'
-                    h='5%'
-                    w='416px'
-                    mb='8%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='50'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="Tag3"
+                    align="center"
+                    p="1%"
+                    h="5%"
+                    w="416px"
+                    mb="8%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>
                       To better assist you I have included several different
@@ -644,91 +659,91 @@ const InterviewForm = ({
                       through.
                     </p>
                   </Flex>
-                  <Flex w='100%' justify='flex-end'>
+                  <Flex w="100%" justify="flex-end">
                     {/* types of interview box */}
                     <Flex
-                      w='459px'
-                      h='190px'
-                      mb='8%'
-                      px='6'
-                      py='8'
-                      border='1px solid #BBBDC6'
-                      rounded='6px'
-                      flexDir='column'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1000'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      w="459px"
+                      h="190px"
+                      mb="8%"
+                      px="6"
+                      py="8"
+                      border="1px solid #BBBDC6"
+                      rounded="6px"
+                      flexDir="column"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1000"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
                       <FormLabel>Select types of interviews</FormLabel>
                       <CheckboxGroup onChange={time3}>
                         <Flex>
-                          <Flex direction='column' pr='0.5%'>
+                          <Flex direction="column" pr="0.5%">
                             <Checkbox
-                              size='md'
-                              border='rgba(72, 72, 72, 0.1)'
-                              name='phone_interview'
+                              size="md"
+                              border="rgba(72, 72, 72, 0.1)"
+                              name="phone_interview"
                               ref={register}
                             >
                               Phone interview
                             </Checkbox>
                             <Checkbox
-                              size='md'
-                              border='rgba(72, 72, 72, 0.1)'
-                              name='resume_review'
+                              size="md"
+                              border="rgba(72, 72, 72, 0.1)"
+                              name="resume_review"
                               ref={register}
                             >
                               Resume review
                             </Checkbox>
                             <Checkbox
-                              size='md'
-                              border='rgba(72, 72, 72, 0.1)'
-                              name='take_home_assignments'
+                              size="md"
+                              border="rgba(72, 72, 72, 0.1)"
+                              name="take_home_assignments"
                               ref={register}
                             >
                               Take home assignments
                             </Checkbox>
                             <Checkbox
-                              size='md'
-                              border='rgba(72, 72, 72, 0.1)'
-                              name='online_coding_assignments'
+                              size="md"
+                              border="rgba(72, 72, 72, 0.1)"
+                              name="online_coding_assignments"
                               ref={register}
                             >
                               Online coding tests
                             </Checkbox>
                           </Flex>
-                          <Flex direction='column'>
+                          <Flex direction="column">
                             <Checkbox
-                              size='md'
-                              border='rgba(72, 72, 72, 0.1)'
-                              name='portfolio_review'
+                              size="md"
+                              border="rgba(72, 72, 72, 0.1)"
+                              name="portfolio_review"
                               ref={register}
                             >
                               Portfolio review
                             </Checkbox>
                             <Checkbox
-                              size='md'
-                              border='rgba(72, 72, 72, 0.1)'
-                              name='screen_share'
+                              size="md"
+                              border="rgba(72, 72, 72, 0.1)"
+                              name="screen_share"
                               ref={register}
                             >
                               Screen share
                             </Checkbox>
                             <Checkbox
-                              size='md'
-                              border='rgba(72, 72, 72, 0.1)'
-                              name='open_source_contribution'
+                              size="md"
+                              border="rgba(72, 72, 72, 0.1)"
+                              name="open_source_contribution"
                               ref={register}
                             >
                               Open source contribution
                             </Checkbox>
                             <Checkbox
-                              size='md'
-                              border='rgba(72, 72, 72, 0.1)'
-                              name='side_projects'
+                              size="md"
+                              border="rgba(72, 72, 72, 0.1)"
+                              name="side_projects"
                               ref={register}
                             >
                               Side projects
@@ -739,18 +754,18 @@ const InterviewForm = ({
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h='190px'
-                      align='flex-end'
-                      ml='1%'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1000'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      h="190px"
+                      align="flex-end"
+                      ml="1%"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1000"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
-                      <Avatar size='md' src='https://bit.ly/broken-link' />
+                      <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
                 </>
@@ -759,93 +774,93 @@ const InterviewForm = ({
               {Tag4 ? (
                 <>
                   <Flex
-                    id='Tag4'
-                    align='center'
-                    p='1%'
-                    mb='2%'
-                    h='5%'
-                    w='416px'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='50'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="Tag4"
+                    align="center"
+                    p="1%"
+                    mb="2%"
+                    h="5%"
+                    w="416px"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>Great!</p>
                   </Flex>
                   <Flex
-                    align='center'
-                    p='1%'
-                    h='5%'
-                    w='416px'
-                    mb='8%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='1200'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    align="center"
+                    p="1%"
+                    h="5%"
+                    w="416px"
+                    mb="8%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="1200"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>
                       Use this section to describe your interview experience
                       using the options selected above for reference.
                     </p>
                   </Flex>
-                  <Flex w='100%' justify='flex-end'>
+                  <Flex w="100%" justify="flex-end">
                     {/* long hand interview box */}
                     <Flex
-                      w='459px'
-                      h='242px'
-                      mb='8%'
-                      px='6'
-                      py='8'
-                      border='1px solid #BBBDC6'
-                      rounded='6px'
-                      flexDir='column'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='2600'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      w="459px"
+                      h="242px"
+                      mb="8%"
+                      px="6"
+                      py="8"
+                      border="1px solid #BBBDC6"
+                      rounded="6px"
+                      flexDir="column"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="2600"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
                       <FormLabel>Describe the interview process</FormLabel>
                       <Textarea
-                        variant='filled'
-                        h='144px'
+                        variant="filled"
+                        h="144px"
                         rowsMax={6}
-                        type='text'
-                        name='comment'
-                        placeholder='What questions came up? What did you discuss? What did you come away with from this interview? '
-                        rounded='6px'
-                        resize='none'
+                        type="text"
+                        name="comment"
+                        placeholder="What questions came up? What did you discuss? What did you come away with from this interview? "
+                        rounded="6px"
+                        resize="none"
                         ref={register}
                         onKeyUp={time4}
-                        data-cy='interviewComment'
+                        data-cy="interviewComment"
                       />
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h='242px'
-                      align='flex-end'
-                      ml='1%'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='2600'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      h="242px"
+                      align="flex-end"
+                      ml="1%"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="2600"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
-                      <Avatar size='md' src='https://bit.ly/broken-link' />
+                      <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
                 </>
@@ -854,21 +869,21 @@ const InterviewForm = ({
               {Tag5 ? (
                 <>
                   <Flex
-                    id='Tag5'
-                    align='center'
-                    h='5%'
-                    p='1%'
-                    w='416px'
-                    mb='2%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='50'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="Tag5"
+                    align="center"
+                    h="5%"
+                    p="1%"
+                    w="416px"
+                    mb="2%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>
                       Thanks! Your opinion is very valuable and helps Lambda
@@ -876,21 +891,21 @@ const InterviewForm = ({
                     </p>
                   </Flex>
                   <Flex
-                    id='diffTag'
-                    align='center'
-                    h='5%'
-                    p='1%'
-                    w='416px'
-                    mb='8%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='2300'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="diffTag"
+                    align="center"
+                    h="5%"
+                    p="1%"
+                    w="416px"
+                    mb="8%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="2300"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>
                       Please provide a difficulty rating for your interview. How
@@ -898,34 +913,34 @@ const InterviewForm = ({
                     </p>
                   </Flex>
                   {/* diff container  */}
-                  <Flex w='100%' justify='flex-end'>
+                  <Flex w="100%" justify="flex-end">
                     {/* diff box */}
                     <Flex
-                      w='459px'
-                      h='136px'
-                      mb='8%'
-                      p='6'
-                      border='1px solid #BBBDC6'
-                      rounded='6px'
-                      flexDir='column'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='3000'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
-                      data-aos-anchor='#diffTag'
+                      w="459px"
+                      h="136px"
+                      mb="8%"
+                      p="6"
+                      border="1px solid #BBBDC6"
+                      rounded="6px"
+                      flexDir="column"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="3000"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
+                      data-aos-anchor="#diffTag"
                     >
                       <FormLabel>Rate the difficulty</FormLabel>
                       <Select
-                        h='56px'
-                        mb='6'
-                        rounded='6px'
-                        variant='filled'
-                        label='difficulty_rating'
-                        name='difficulty_rating'
-                        placeholder='Select one'
+                        h="56px"
+                        mb="6"
+                        rounded="6px"
+                        variant="filled"
+                        label="difficulty_rating"
+                        name="difficulty_rating"
+                        placeholder="Select one"
                         onChange={time5}
                         ref={register}
                       >
@@ -938,19 +953,19 @@ const InterviewForm = ({
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h='136px'
-                      align='flex-end'
-                      ml='1%'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='3000'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
-                      data-aos-anchor='#diffTag'
+                      h="136px"
+                      align="flex-end"
+                      ml="1%"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="3000"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
+                      data-aos-anchor="#diffTag"
                     >
-                      <Avatar size='md' src='https://bit.ly/broken-link' />
+                      <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
                 </>
@@ -959,22 +974,22 @@ const InterviewForm = ({
               {Tag6 ? (
                 <>
                   <Flex
-                    id='Tag6'
-                    justify='center'
-                    align='center'
-                    p='1%'
-                    h='5%'
-                    w='416px'
-                    mb='8%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='50'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="Tag6"
+                    justify="center"
+                    align="center"
+                    p="1%"
+                    h="5%"
+                    w="416px"
+                    mb="8%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>
                       Your review is almost complete. Tell me how your interview
@@ -982,44 +997,44 @@ const InterviewForm = ({
                     </p>
                   </Flex>
                   {/* offer container  */}
-                  <Flex w='100%' justify='flex-end'>
+                  <Flex w="100%" justify="flex-end">
                     {/* diff box */}
                     <Flex
-                      w='459px'
-                      h='176px'
-                      mb='8%'
-                      py='6'
-                      border='1px solid #BBBDC6'
-                      rounded='6px'
-                      flexDir='column'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1000'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      w="459px"
+                      h="176px"
+                      mb="8%"
+                      py="6"
+                      border="1px solid #BBBDC6"
+                      rounded="6px"
+                      flexDir="column"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1000"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
-                      <Flex w='100%' justify='center'>
+                      <Flex w="100%" justify="center">
                         <RadioButtonGroup
-                          display='flex'
-                          flexDir='column'
+                          display="flex"
+                          flexDir="column"
                           spacing={0}
-                          label='offer_status_id'
-                          name='offer_status_id'
-                          defaultValue='1'
+                          label="offer_status_id"
+                          name="offer_status_id"
+                          defaultValue="1"
                           onChange={val => {
                             setOffer(val);
                             time6();
                           }}
                         >
-                          <CustomRadio value='1' w='411px'>
+                          <CustomRadio value="1" w="411px">
                             No offer
                           </CustomRadio>
-                          <CustomRadio value='2' w='411px' data-cy='accepted'>
+                          <CustomRadio value="2" w="411px" data-cy="accepted">
                             Accepted
                           </CustomRadio>
-                          <CustomRadio value='3' w='411px'>
+                          <CustomRadio value="3" w="411px">
                             Declined
                           </CustomRadio>
                         </RadioButtonGroup>
@@ -1027,18 +1042,18 @@ const InterviewForm = ({
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h='176px'
-                      align='flex-end'
-                      ml='1%'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1000'
-                      data-aos-duration='1500'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      h="176px"
+                      align="flex-end"
+                      ml="1%"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1000"
+                      data-aos-duration="1500"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
-                      <Avatar size='md' src='https://bit.ly/broken-link' />
+                      <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
                 </>
@@ -1047,40 +1062,40 @@ const InterviewForm = ({
               {Tag7 ? (
                 <>
                   <Flex
-                    id='Tag7'
-                    align='center'
-                    h='5%'
-                    p='1%'
-                    w='416px'
-                    mb='2%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='50'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="Tag7"
+                    align="center"
+                    h="5%"
+                    p="1%"
+                    w="416px"
+                    mb="2%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>Thank you for that information.</p>
                   </Flex>
                   <Flex
-                    id='salaryTag'
-                    align='center'
-                    h='5%'
-                    p='1%'
-                    w='416px'
-                    mb='8%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='1500'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="salaryTag"
+                    align="center"
+                    h="5%"
+                    p="1%"
+                    w="416px"
+                    mb="8%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="1500"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>
                       If you were offered, asked, or negotiated a salary,
@@ -1089,42 +1104,42 @@ const InterviewForm = ({
                     </p>
                   </Flex>
                   {/* salary container  */}
-                  <Flex w='100%' justify='flex-end'>
+                  <Flex w="100%" justify="flex-end">
                     {/* salary box */}
                     <Flex
-                      w='459px'
-                      h='150px'
-                      mb='8%'
-                      p='6'
-                      border='1px solid #BBBDC6'
-                      rounded='6px'
-                      flexDir='column'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1000'
-                      data-aos-duration='3000'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
-                      data-aos-anchor='#salaryTag'
+                      w="459px"
+                      h="150px"
+                      mb="8%"
+                      p="6"
+                      border="1px solid #BBBDC6"
+                      rounded="6px"
+                      flexDir="column"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1000"
+                      data-aos-duration="3000"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
+                      data-aos-anchor="#salaryTag"
                     >
                       <FormLabel>Salary</FormLabel>
                       <InputGroup>
                         <InputLeftElement
-                          mb='4'
-                          py='28px'
-                          color='gray.300'
-                          fontSize='1.2em'
-                          children='$'
+                          mb="4"
+                          py="28px"
+                          color="gray.300"
+                          fontSize="1.2em"
+                          children="$"
                         />
                         <Input
-                          h='56px'
-                          rounded='6px'
-                          type='number'
-                          variant='filled'
-                          label='salary'
-                          name='salary'
-                          autoCapitalize='none'
+                          h="56px"
+                          rounded="6px"
+                          type="number"
+                          variant="filled"
+                          label="salary"
+                          name="salary"
+                          autoCapitalize="none"
                           onKeyUp={time7}
                           ref={register}
                         />
@@ -1132,19 +1147,19 @@ const InterviewForm = ({
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h='150px'
-                      align='flex-end'
-                      ml='1%'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1000'
-                      data-aos-duration='3000'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
-                      data-aos-anchor='#salaryTag'
+                      h="150px"
+                      align="flex-end"
+                      ml="1%"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1000"
+                      data-aos-duration="3000"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
+                      data-aos-anchor="#salaryTag"
                     >
-                      <Avatar size='md' src='https://bit.ly/broken-link' />
+                      <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
                 </>
@@ -1153,40 +1168,40 @@ const InterviewForm = ({
               {Tag8 ? (
                 <>
                   <Flex
-                    id='Tag8'
-                    align='center'
-                    h='5%'
-                    w='416px'
-                    p='1%'
-                    mb='2%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='50'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="Tag8"
+                    align="center"
+                    h="5%"
+                    w="416px"
+                    p="1%"
+                    mb="2%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>Thanks!</p>
                   </Flex>
                   <Flex
-                    id='ratingTag'
-                    align='center'
-                    p='1%'
-                    h='5%'
-                    w='416px'
-                    mb='8%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='900'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
+                    id="ratingTag"
+                    align="center"
+                    p="1%"
+                    h="5%"
+                    w="416px"
+                    mb="8%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="900"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
                   >
                     <p>
                       Last question. How would you rate your overall interview
@@ -1194,30 +1209,30 @@ const InterviewForm = ({
                     </p>
                   </Flex>
                   {/* overall container  */}
-                  <Flex w='100%' justify='flex-end'>
+                  <Flex w="100%" justify="flex-end">
                     {/* overall box */}
                     <Flex
-                      w='459px'
-                      h='136px'
-                      mb='8%'
-                      p='6'
-                      border='1px solid #BBBDC6'
-                      rounded='6px'
-                      flexDir='column'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1500'
-                      data-aos-duration='1000'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      w="459px"
+                      h="136px"
+                      mb="8%"
+                      p="6"
+                      border="1px solid #BBBDC6"
+                      rounded="6px"
+                      flexDir="column"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1500"
+                      data-aos-duration="1000"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
-                      <FormLabel mb='4'>Rate overall experience</FormLabel>
-                      <Flex justify='center' w='100%'>
+                      <FormLabel mb="4">Rate overall experience</FormLabel>
+                      <Flex justify="center" w="100%">
                         <BeautyStars
-                          name='interviewRating'
+                          name="interviewRating"
                           value={starState}
-                          activeColor='blue'
+                          activeColor="blue"
                           onChange={value => {
                             setStarState(value);
                             time8();
@@ -1227,18 +1242,18 @@ const InterviewForm = ({
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h='136px'
-                      align='flex-end'
-                      ml='1%'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1500'
-                      data-aos-duration='1000'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      h="136px"
+                      align="flex-end"
+                      ml="1%"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1500"
+                      data-aos-duration="1000"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
-                      <Avatar size='md' src='https://bit.ly/broken-link' />
+                      <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
                 </>
@@ -1246,72 +1261,72 @@ const InterviewForm = ({
               {Tag9 ? (
                 <>
                   <Flex
-                    id='Tag9'
-                    align='center'
-                    p='1%'
-                    h='5%'
-                    w='416px'
-                    mb='8%'
-                    bg='#F2F6FE'
-                    rounded='20px'
-                    data-aos='fade-right'
-                    data-aos-offset='200'
-                    data-aos-delay='50'
-                    data-aos-duration='1000'
-                    data-aos-easing='ease-in-out'
-                    data-aos-mirror='true'
-                    data-aos-once='true'
-                    data-aos-anchor='#ratingTag'
+                    id="Tag9"
+                    align="center"
+                    p="1%"
+                    h="5%"
+                    w="416px"
+                    mb="8%"
+                    bg="#F2F6FE"
+                    rounded="20px"
+                    data-aos="fade-right"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                    data-aos-anchor="#ratingTag"
                   >
                     <p>Thank you! Don’t forget to hit submit.</p>
                   </Flex>
                   {/* submit container  */}
-                  <Flex w='100%' justify='flex-end'>
+                  <Flex w="100%" justify="flex-end">
                     {/* submit box */}
                     <Flex
-                      w='459px'
-                      h='136px'
-                      mb='8%'
-                      p='6'
-                      justify='center'
-                      align='center'
-                      border='1px solid #BBBDC6'
-                      rounded='6px'
-                      flexDir='column'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1500'
-                      data-aos-duration='1000'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      w="459px"
+                      h="136px"
+                      mb="8%"
+                      p="6"
+                      justify="center"
+                      align="center"
+                      border="1px solid #BBBDC6"
+                      rounded="6px"
+                      flexDir="column"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1500"
+                      data-aos-duration="1000"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
                       <Button
-                        bg='#344CD0'
-                        color='white'
-                        type='submit'
+                        bg="#344CD0"
+                        color="white"
+                        type="submit"
                         isLoading={formState.isSubmitting}
-                        rounded='6px'
-                        border='none'
-                        data-cy='interviewReviewSubmit'
+                        rounded="6px"
+                        border="none"
+                        data-cy="interviewReviewSubmit"
                       >
                         Submit
                       </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h='136px'
-                      align='flex-end'
-                      ml='1%'
-                      data-aos='fade-in'
-                      data-aos-offset='200'
-                      data-aos-delay='1500'
-                      data-aos-duration='1000'
-                      data-aos-easing='ease-in-out'
-                      data-aos-mirror='true'
-                      data-aos-once='true'
+                      h="136px"
+                      align="flex-end"
+                      ml="1%"
+                      data-aos="fade-in"
+                      data-aos-offset="200"
+                      data-aos-delay="1500"
+                      data-aos-duration="1000"
+                      data-aos-easing="ease-in-out"
+                      data-aos-mirror="true"
+                      data-aos-once="true"
                     >
-                      <Avatar size='md' src='https://bit.ly/broken-link' />
+                      <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
                 </>

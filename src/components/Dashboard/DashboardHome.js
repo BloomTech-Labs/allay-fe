@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 // action
 import getReview from "../../state/actions/index";
 import getCompanyReview from "../../state/actions/index";
@@ -17,11 +18,13 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [trackFilters, setTrackFilters] = useState([]);
   const [typeFilters, setTypeFilters] = useState([]);
+  //
+  const isDeleted = useSelector(state => state.review.isDeleting);
 
   // pull review data
   useEffect(() => {
     getReview();
-  }, [getReview]);
+  }, [getReview, isDeleted]);
 
   // filter searchbar by company name
   useEffect(() => {
