@@ -19,12 +19,12 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   const [trackFilters, setTrackFilters] = useState([]);
   const [typeFilters, setTypeFilters] = useState([]);
   //
-  const isDeleted = useSelector(state => state.review.isDeleting);
+  const isDeleted = useSelector(state => state.review.reviewDeleted);
 
   // pull review data
   useEffect(() => {
     getReview();
-  }, [getReview, isDeleted]);
+  }, [isDeleted, getReview]);
 
   // filter searchbar by company name
   useEffect(() => {
