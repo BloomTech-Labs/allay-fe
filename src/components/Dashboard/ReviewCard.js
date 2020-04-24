@@ -7,7 +7,6 @@ import ReactGA from 'react-ga';
 // actions
 import deleteReview from '../../state/actions/index';
 
-
 // styles
 import {
 	Box,
@@ -91,7 +90,6 @@ useEffect(() => {
 
 
 
-
 	return (
 		<>
 			{/* ------------------------------------------------------------------------------------------------ */}
@@ -100,7 +98,11 @@ useEffect(() => {
 			<Modal isOpen={isOpen} onClose={onClose} size='80%'>
 				<ModalOverlay />
 				<ModalContent w='100%' wrap='nowrap'>
-					<ModalCloseButton background='none' border='none' />
+					<ModalCloseButton
+						data-cy='reviewCloseButton'
+						background='none'
+						border='none'
+					/>
 
 					{/* Basic info container */}
 					<Flex
@@ -548,7 +550,7 @@ useEffect(() => {
 					</Flex>
 
 					<ModalFooter>
-						<BlockButton  user_id={review.user_id} isAdmin={isAdmin} />
+						<BlockButton user_id={review.user_id} isAdmin={isAdmin} />
 						<ContentButton
 							isAdmin={isAdmin}
 							submitDelete={submitDelete}
