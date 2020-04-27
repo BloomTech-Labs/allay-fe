@@ -19,7 +19,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   const [trackFilters, setTrackFilters] = useState([]);
   const [typeFilters, setTypeFilters] = useState([]);
 
-  const isDeleted = useSelector(state => state.review.isDeleting);
+  const isDeleted = useSelector(state => state.review.reviewDeleted);
   //admin check TODO: fix later
   const admin = useSelector(state => state.auth.isAdmin);
   const adminName = localStorage.getItem("username");
