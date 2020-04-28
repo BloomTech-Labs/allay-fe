@@ -71,6 +71,14 @@ const Signup = ({ signup, isLoading, history }) => {
 		return error || true;
 	}
 
+	function validateCohort(value) {
+		let error;
+		if (!value) {
+			error = 'Cohort is required';
+		}
+		return error || true;
+	}
+
 	function validatePassword(value) {
 		let error;
 		if (!value) {
@@ -149,7 +157,7 @@ const Signup = ({ signup, isLoading, history }) => {
 
 							<Flex wrap='wrap' w='653' justify='center'>
 								<FormControl isRequired isInvalid={errors.username}>
-									<FormLabel>First Name</FormLabel>
+									<FormLabel fontFamily='Poppins'>First Name</FormLabel>
 									<SignupLoginInput
 										w='318px'
 										mb='30px'
@@ -166,7 +174,7 @@ const Signup = ({ signup, isLoading, history }) => {
 									</FormErrorMessage>
 								</FormControl>
 								<FormControl isRequired isInvalid={errors.username}>
-									<FormLabel>Last Name</FormLabel>
+									<FormLabel fontFamily='Poppins'>Last Name</FormLabel>
 									<SignupLoginInput
 										w='318px'
 										mb='30px'
@@ -185,7 +193,7 @@ const Signup = ({ signup, isLoading, history }) => {
 
 							<Flex wrap='wrap' w='653' justify='center'>
 								<FormControl isRequired isInvalid={errors.email}>
-									<FormLabel>Email</FormLabel>
+									<FormLabel fontFamily='Poppins'>Email</FormLabel>
 									<SignupLoginInput
 										w='653px'
 										mb='30px'
@@ -204,7 +212,7 @@ const Signup = ({ signup, isLoading, history }) => {
 
 							<Flex wrap='wrap' w='411px%' justify='center'>
 								<FormControl isRequired isInvalid={errors.track_name}>
-									<FormLabel>Track</FormLabel>
+									<FormLabel fontFamily='Poppins'>Track</FormLabel>
 									<Select
 										mb='30px'
 										mr='17px'
@@ -215,44 +223,54 @@ const Signup = ({ signup, isLoading, history }) => {
 										variant='outline'
 										backgroundColor='#FDFDFF'
 										focusBorderColor='#344CD0'
-										borderColor='lightgrey'
-										_hover={{ borderColor: 'black' }}
+										borderColor='#EAF0FE'
+										_hover={{ borderColor: '#9194A8' }}
 										name='track_id'
 										label='track_id'
 										placeholder='Select Your Lambda Track'
 										ref={register({ validate: validateTrack })}
 									>
-										<option value={1}>Android Development</option>
-										<option value={2}>Data Science</option>
-										<option value={3}>Full Stack Web Development</option>
-										<option value={4}>iOS Development </option>
-										<option value={5}>UX Design</option>
+										<option fontFamily='Poppins' value={1}>
+											Android Development
+										</option>
+										<option fontFamily='Poppins' value={2}>
+											Data Science
+										</option>
+										<option fontFamily='Poppins' value={3}>
+											Full Stack Web Development
+										</option>
+										<option fontFamily='Poppins' value={4}>
+											iOS Development{' '}
+										</option>
+										<option fontFamily='Poppins' value={5}>
+											UX Design
+										</option>
 									</Select>
 									<FormErrorMessage>
 										{errors.track_id && errors.track_id.message}
 									</FormErrorMessage>
 								</FormControl>
 								<FormControl isRequired isInvalid={errors.username}>
-									<FormLabel>Cohort</FormLabel>
+									<FormLabel fontFamily='Poppins'>Cohort</FormLabel>
 									<SignupLoginInput
 										w='318px'
 										mb='30px'
 										type='text'
-										name='lastName'
-										label='lastName'
+										name='cohort'
+										label='cohort'
 										placeholder='Ex: FT 1 or PT 1'
 										autoCapitalize='none'
-										ref={register({ validate: validateUsername })}
+										ref={register({ validate: validateCohort })}
 									/>
 									<FormErrorMessage>
-										{errors.username && errors.username.message}
+										{errors.cohort && errors.cohort.message}
 									</FormErrorMessage>
 								</FormControl>
 							</Flex>
 
 							<Flex wrap='wrap' w='411px%' justify='center'>
 								<FormControl isRequired isInvalid={errors.password}>
-									<FormLabel>Password</FormLabel>
+									<FormLabel fontFamily='Poppins'>Password</FormLabel>
 									<InputGroup>
 										<SignupLoginInput
 											w='318px'
@@ -287,7 +305,7 @@ const Signup = ({ signup, isLoading, history }) => {
 									</FormErrorMessage>
 								</FormControl>
 								<FormControl isRequired>
-									<FormLabel>Confirm Password</FormLabel>
+									<FormLabel fontFamily='Poppins'>Confirm Password</FormLabel>
 									<InputGroup>
 										<SignupLoginInput
 											w='318px'
@@ -317,14 +335,19 @@ const Signup = ({ signup, isLoading, history }) => {
 
 							<Flex
 								wrap='wrap'
-								w='653'
+								w='653px'
 								ml='70px'
 								mb='55px'
 								cursor='pointer'
 								justify='flex-start'
 							>
-								<Text mr='5px'>> </Text>
-								<Text> Add Additional Information</Text>
+								<Text fontWeight='bold' fontFamily='Poppins' mr='5px'>
+									>{' '}
+								</Text>
+								<Text fontWeight='bold' fontFamily='Poppins'>
+									{' '}
+									Add Additional Information
+								</Text>
 							</Flex>
 
 							<Flex w='100%' justify='center'>
@@ -333,7 +356,7 @@ const Signup = ({ signup, isLoading, history }) => {
 									border='none'
 									rounded='50px'
 									h='58px'
-									w='404px'
+									w='653px'
 									my='2%'
 									size='lg'
 									color='white'
