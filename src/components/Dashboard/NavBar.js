@@ -46,6 +46,15 @@ function NavBar({
     });
   };
 
+  // use to navigate to profile page
+  const navToProfilePage = () => {
+    history.push("/profile");
+    ReactGA.event({
+      category: "Profile",
+      action: `go to profile`
+    });
+  };
+
   const logout = () => {
     localStorage.clear("token");
     localStorage.clear("userId");
@@ -143,6 +152,21 @@ function NavBar({
                   {localStorage.getItem("username")}
                 </Flex>
               </DrawerHeader>
+              <Flex
+                background="#FFFFFF"
+                mt="3%"
+                color="#494B5B"
+                border="none"
+                py="4%"
+                cursor="pointer"
+                align="center"
+                justifyContent="center"
+                isLoading={isLoading}
+                onClick={navToProfilePage}
+                data-cy="signOut"
+              >
+                <Text fontSize="1.8em">Go to Profile</Text>
+              </Flex>
               <Flex
                 background="#FFFFFF"
                 mt="3%"
