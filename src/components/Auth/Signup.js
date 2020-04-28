@@ -19,7 +19,6 @@ import {
 	InputGroup,
 	InputRightElement,
 	Select,
-	Stack,
 } from '@chakra-ui/core';
 
 const Signup = ({ signup, isLoading, history }) => {
@@ -28,12 +27,28 @@ const Signup = ({ signup, isLoading, history }) => {
 	const handleClick = () => setShow(!show);
 
 	//validation
-	function validateUsername(value) {
+	function validateFirstName(value) {
 		let error;
+		let nameRegex = /^[0-9*#+]+$/;
 		if (!value) {
-			error = 'Username is required';
-		} else if (value.length < 8) {
-			error = 'Username must be at least 8 characters';
+			error = 'First Name is required';
+		} else if (value.length < 2) {
+			error = 'First Name must be at least 2 characters';
+		} else if (nameRegex.test(value)) {
+			error = 'First Name can only contain letters';
+		}
+		return error || true;
+	}
+
+	function validateLastName(value) {
+		let error;
+		let nameRegex = /^[0-9*#+]+$/;
+		if (!value) {
+			error = 'Last Name is required';
+		} else if (value.length < 2) {
+			error = 'Last Name must be at least 2 characters';
+		} else if (nameRegex.test(value)) {
+			error = 'Last Name can only contain letters';
 		}
 		return error || true;
 	}
@@ -144,10 +159,10 @@ const Signup = ({ signup, isLoading, history }) => {
 										label='firstName'
 										placeholder='John'
 										autoCapitalize='none'
-										ref={register({ validate: validateUsername })}
+										ref={register({ validate: validateFirstName })}
 									/>
 									<FormErrorMessage>
-										{errors.username && errors.username.message}
+										{errors.firstName && errors.firstName.message}
 									</FormErrorMessage>
 								</FormControl>
 								<FormControl isRequired isInvalid={errors.username}>
@@ -160,10 +175,10 @@ const Signup = ({ signup, isLoading, history }) => {
 										label='lastName'
 										placeholder='Doe'
 										autoCapitalize='none'
-										ref={register({ validate: validateUsername })}
+										ref={register({ validate: validateLastName })}
 									/>
 									<FormErrorMessage>
-										{errors.username && errors.username.message}
+										{errors.lastName && errors.lastName.message}
 									</FormErrorMessage>
 								</FormControl>
 							</Flex>
