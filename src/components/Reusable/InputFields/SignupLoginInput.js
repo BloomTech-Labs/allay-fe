@@ -4,11 +4,12 @@ import { Input } from '@chakra-ui/core';
 const SignupLoginInput = React.forwardRef(({ ...props }, ref) => {
 	return (
 		<Input
-			w='404px'
+			w={props.w ? props.w : '404px'}
 			h='58px'
 			py='32px'
 			rounded='3px'
 			mb={props.mb}
+			mr={props.mr ? props.mr : '0'}
 			variant='outline'
 			bgColor='#FDFDFF'
 			focusBorderColor='#344CD0'

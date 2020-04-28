@@ -104,26 +104,17 @@ const Signup = ({ signup, isLoading, history }) => {
 	return (
 		<Flex className='RegisterSplash' w='100%' minH='100vh' justify='center'>
 			<Flex maxW='1440px' w='100%'>
-				<Stack wrap='wrap' w='60%' ml='6.5%' justify='center' align='center'>
-					<Text
-						as='h1'
-						w='100%'
-						fontFamily='Poppins'
-						fontSize='80px'
-						fontWeight='bold'
-					>
-						Allay
-					</Text>
-					<Text w='100%' fontFamily='Poppins' fontSize='52px' fontWeight='bold'>
-						We're stronger together.
-					</Text>
-				</Stack>
-
-				<Flex w='40%' mr='8%' justify='center' align='center' flexDir='column'>
+				<Flex
+					w='833px'
+					mx='auto'
+					justify='center'
+					align='center'
+					flexDir='column'
+				>
 					<form onSubmit={handleSubmit(submitForm)}>
 						<Flex
-							w='490px'
-							h='825px'
+							w='833px'
+							// h='825px'
 							p='6'
 							flexDir='column'
 							background='#FDFDFF'
@@ -131,19 +122,57 @@ const Signup = ({ signup, isLoading, history }) => {
 						>
 							<Flex
 								as='h2'
+								w='653'
 								fontSize='32px'
+								fontWeight='600'
 								fontFamily='Poppins'
 								justify='center'
-								mx='1'
-								my='2%'
+								my='68px'
 							>
 								Let's get started!
 							</Flex>
 
-							<Flex wrap='wrap' w='411px%' justify='center'>
+							<Flex wrap='wrap' w='653' justify='center'>
+								<FormControl isRequired isInvalid={errors.username}>
+									<FormLabel>First Name</FormLabel>
+									<SignupLoginInput
+										w='318px'
+										mb='30px'
+										mr='17px'
+										type='text'
+										name='firstName'
+										label='firstName'
+										placeholder='John'
+										autoCapitalize='none'
+										ref={register({ validate: validateUsername })}
+									/>
+									<FormErrorMessage>
+										{errors.username && errors.username.message}
+									</FormErrorMessage>
+								</FormControl>
+								<FormControl isRequired isInvalid={errors.username}>
+									<FormLabel>Last Name</FormLabel>
+									<SignupLoginInput
+										w='318px'
+										mb='30px'
+										type='text'
+										name='lastName'
+										label='lastName'
+										placeholder='Doe'
+										autoCapitalize='none'
+										ref={register({ validate: validateUsername })}
+									/>
+									<FormErrorMessage>
+										{errors.username && errors.username.message}
+									</FormErrorMessage>
+								</FormControl>
+							</Flex>
+
+							<Flex wrap='wrap' w='653' justify='center'>
 								<FormControl isRequired isInvalid={errors.email}>
 									<FormLabel>Email</FormLabel>
 									<SignupLoginInput
+										w='653px'
 										mb='30px'
 										type='email'
 										name='email'
@@ -159,30 +188,14 @@ const Signup = ({ signup, isLoading, history }) => {
 							</Flex>
 
 							<Flex wrap='wrap' w='411px%' justify='center'>
-								<FormControl isRequired isInvalid={errors.username}>
-									<FormLabel>Username</FormLabel>
-									<SignupLoginInput
-										mb='30px'
-										type='text'
-										name='username'
-										label='username'
-										placeholder='lambda1'
-										autoCapitalize='none'
-										ref={register({ validate: validateUsername })}
-									/>
-									<FormErrorMessage>
-										{errors.username && errors.username.message}
-									</FormErrorMessage>
-								</FormControl>
-							</Flex>
-
-							<Flex wrap='wrap' w='411px%' justify='center'>
 								<FormControl isRequired isInvalid={errors.track_name}>
 									<FormLabel>Track</FormLabel>
 									<Select
 										mb='30px'
-										h='70px'
-										w='404px'
+										mr='17px'
+										h='68px'
+										py='16px'
+										w='318px'
 										rounded='3px'
 										variant='outline'
 										backgroundColor='#FDFDFF'
@@ -204,6 +217,22 @@ const Signup = ({ signup, isLoading, history }) => {
 										{errors.track_id && errors.track_id.message}
 									</FormErrorMessage>
 								</FormControl>
+								<FormControl isRequired isInvalid={errors.username}>
+									<FormLabel>Cohort</FormLabel>
+									<SignupLoginInput
+										w='318px'
+										mb='30px'
+										type='text'
+										name='lastName'
+										label='lastName'
+										placeholder='Ex: FT 1 or PT 1'
+										autoCapitalize='none'
+										ref={register({ validate: validateUsername })}
+									/>
+									<FormErrorMessage>
+										{errors.username && errors.username.message}
+									</FormErrorMessage>
+								</FormControl>
 							</Flex>
 
 							<Flex wrap='wrap' w='411px%' justify='center'>
@@ -211,6 +240,9 @@ const Signup = ({ signup, isLoading, history }) => {
 									<FormLabel>Password</FormLabel>
 									<InputGroup>
 										<SignupLoginInput
+											w='318px'
+											// mb='30px'
+											mr='17px'
 											type={show ? 'text' : 'password'}
 											name='password'
 											label='Password'
@@ -218,7 +250,7 @@ const Signup = ({ signup, isLoading, history }) => {
 											autoCapitalize='none'
 											ref={register({ validate: validatePassword })}
 										/>
-										<InputRightElement width='4.5rem' py='32px'>
+										<InputRightElement width='4.5rem' pr='22px' py='32px'>
 											<Button
 												h='1.75rem'
 												color='rgba(72, 72, 72, 0.1)'
@@ -232,20 +264,18 @@ const Signup = ({ signup, isLoading, history }) => {
 										</InputRightElement>
 									</InputGroup>
 
-									<FormHelperText color='rgba(72, 72, 72, 0.2)'>
+									<FormHelperText mb='45px' color='#9194A8'>
 										Must be at least 8 characters
 									</FormHelperText>
 									<FormErrorMessage>
 										{errors.password && errors.password.message}
 									</FormErrorMessage>
 								</FormControl>
-							</Flex>
-
-							<Flex wrap='wrap' w='411px%' justify='center'>
 								<FormControl isRequired>
 									<FormLabel>Confirm Password</FormLabel>
 									<InputGroup>
 										<SignupLoginInput
+											w='318px'
 											mb='30px'
 											type={show ? 'text' : 'password'}
 											name='confirmPassword'
@@ -268,6 +298,18 @@ const Signup = ({ signup, isLoading, history }) => {
 										</InputRightElement>
 									</InputGroup>
 								</FormControl>
+							</Flex>
+
+							<Flex
+								wrap='wrap'
+								w='653'
+								ml='70px'
+								mb='55px'
+								cursor='pointer'
+								justify='flex-start'
+							>
+								<Text mr='5px'>> </Text>
+								<Text> Add Additional Information</Text>
 							</Flex>
 
 							<Flex w='100%' justify='center'>
