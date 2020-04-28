@@ -7,8 +7,10 @@
 /lib
 
 # testing
-coverage
-.nyc_output
+/coverage
+/.nyc_output
+/cypress/screenshots
+/cypress/videos
 
 # production
 /build

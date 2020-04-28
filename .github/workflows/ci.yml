@@ -28,3 +28,7 @@ jobs:
         with:
           # Run our `coverage` command from our `package.json`
           coverageCommand: npm run cypress:coverage
+          # Where to point the coverage report
+          coverageLocations: "./coverage/clover.xml:clover"
+          # Great for troubleshooting
+          debug: true

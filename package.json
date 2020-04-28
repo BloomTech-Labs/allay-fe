@@ -42,7 +42,7 @@
     "eject": "react-scripts eject",
     "cypress:coverage:run": "cypress run || true",
     "start:coverage": "react-scripts -r @cypress/instrument-cra start",
-    "cypress:coverage": "start-server-and-test start:coverage http://localhost:3001 cypress:coverage:run || true"
+    "cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true"
   },
   "jest": {
     "collectCoverageFrom": [
