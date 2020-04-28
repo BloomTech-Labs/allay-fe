@@ -19,7 +19,7 @@ import {
 	InputGroup,
 	InputRightElement,
 	Select,
-	Stack
+	Stack,
 } from '@chakra-ui/core';
 
 const Signup = ({ signup, isLoading, history }) => {
@@ -67,27 +67,27 @@ const Signup = ({ signup, isLoading, history }) => {
 	}
 	// end validation
 
-	const submitForm = creds => {
+	const submitForm = (creds) => {
 		if (creds.confirmPassword === creds.password) {
 			signup({
 				username: creds.username,
 				email: creds.email,
 				password: creds.password,
-				track_id: creds.track_id
+				track_id: creds.track_id,
 			}).then(() => history.push('/dashboard'));
 		} else {
 			alert('Your Passwords must match!');
 		}
 		ReactGA.event({
 			category: 'User',
-			action: `Button Sign Up`
+			action: `Button Sign Up`,
 		});
 	};
 
 	const gaLogin = () => {
 		ReactGA.event({
 			category: 'User',
-			action: `Link Already have an account`
+			action: `Link Already have an account`,
 		});
 	};
 
@@ -186,6 +186,9 @@ const Signup = ({ signup, isLoading, history }) => {
 										rounded='3px'
 										variant='outline'
 										backgroundColor='#FDFDFF'
+										focusBorderColor='#344CD0'
+										borderColor='lightgrey'
+										_hover={{ borderColor: 'black' }}
 										name='track_id'
 										label='track_id'
 										placeholder='Select Your Lambda Track'
@@ -271,6 +274,7 @@ const Signup = ({ signup, isLoading, history }) => {
 								<Button
 									mb='30px'
 									border='none'
+									rounded='50px'
 									h='58px'
 									w='404px'
 									my='2%'
@@ -308,9 +312,9 @@ const Signup = ({ signup, isLoading, history }) => {
 	);
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
-		isLoading: state.auth.isLoading
+		isLoading: state.auth.isLoading,
 	};
 };
 
