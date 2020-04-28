@@ -15,7 +15,8 @@ const SignupLoginInput = React.forwardRef(({ ...props }, ref) => {
 			focusBorderColor='#344CD0'
 			borderColor='#EAF0FE'
 			color='#17171B'
-			_hover={{ borderColor: '#9194A8' }}
+			_hover={{ borderColor: '#BBBDC6' }}
+			_placeholder={{ color: '#BBBDC6' }}
 			type={props.type ? props.type : 'text'}
 			name={props.name}
 			label={props.label}

@@ -3,11 +3,14 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactGA from 'react-ga'; // for google analytics
+//components
+import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
+import SignupAdditional from './Signup-Additional';
 //actions
 import signup from '../../state/actions/index';
 //styles
 import CustomSpinner from '../CustomSpinner.js';
-import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
+
 import {
 	Button,
 	FormControl,
@@ -24,6 +27,7 @@ import {
 const Signup = ({ signup, isLoading, history }) => {
 	const { handleSubmit, errors, register, formState } = useForm();
 	const [show, setShow] = React.useState(false);
+	const [moreInfo, setMoreInfo] = React.useState(false);
 	const handleClick = () => setShow(!show);
 
 	//validation
@@ -105,6 +109,10 @@ const Signup = ({ signup, isLoading, history }) => {
 			category: 'User',
 			action: `Button Sign Up`,
 		});
+	};
+
+	const switchMoreInfo = () => {
+		setMoreInfo(!moreInfo);
 	};
 
 	const gaLogin = () => {
@@ -219,31 +227,36 @@ const Signup = ({ signup, isLoading, history }) => {
 										h='68px'
 										py='16px'
 										w='318px'
-										rounded='3px'
+										rounded='2px'
 										variant='outline'
 										backgroundColor='#FDFDFF'
 										focusBorderColor='#344CD0'
 										borderColor='#EAF0FE'
-										_hover={{ borderColor: '#9194A8' }}
+										color='#BBBDC6'
+										_focus={{ color: '#17171B' }}
+										_hover={{ borderColor: '#BBBDC6' }}
 										name='track_id'
 										label='track_id'
-										placeholder='Select Your Lambda Track'
+										// placeholder='Select Your Lambda Track'
 										ref={register({ validate: validateTrack })}
 									>
+										<option fontFamily='Poppins' value=''>
+											Select Your Lambda Track
+										</option>
 										<option fontFamily='Poppins' value={1}>
-											Android Development
+											Android
 										</option>
 										<option fontFamily='Poppins' value={2}>
-											Data Science
+											DS
 										</option>
 										<option fontFamily='Poppins' value={3}>
-											Full Stack Web Development
+											WEB
 										</option>
 										<option fontFamily='Poppins' value={4}>
-											iOS Development{' '}
+											iOS
 										</option>
 										<option fontFamily='Poppins' value={5}>
-											UX Design
+											UX
 										</option>
 									</Select>
 									<FormErrorMessage>
@@ -336,19 +349,30 @@ const Signup = ({ signup, isLoading, history }) => {
 							<Flex
 								wrap='wrap'
 								w='653px'
-								ml='70px'
-								mb='55px'
+								mx='auto'
+								mb={moreInfo ? '0' : '55px'}
 								cursor='pointer'
 								justify='flex-start'
+								onClick={switchMoreInfo}
 							>
-								<Text fontWeight='bold' fontFamily='Poppins' mr='5px'>
-									>{' '}
-								</Text>
-								<Text fontWeight='bold' fontFamily='Poppins'>
-									{' '}
-									Add Additional Information
-								</Text>
+								<Flex justify='flex-start'>
+									<Text
+										fontWeight='bold'
+										fontFamily='Poppins'
+										textAlign='left'
+										mr='5px'
+									>
+										>{' '}
+									</Text>
+									<Text fontWeight='bold' fontFamily='Poppins'>
+										{' '}
+										Add Additional Information
+									</Text>
+								</Flex>
 							</Flex>
+
+							{/* Start of the additional info */}
+							{moreInfo ? <SignupAdditional register={register} /> : null}
 
 							<Flex w='100%' justify='center'>
 								<Button
@@ -361,6 +385,7 @@ const Signup = ({ signup, isLoading, history }) => {
 									size='lg'
 									color='white'
 									backgroundColor='#344CD0'
+									_hover={{ backgroundColor: '#4254BA', cursor: 'pointer' }}
 									isLoading={formState.isSubmitting}
 									type='submit'
 									data-cy='registerSubmit'
