@@ -143,7 +143,7 @@ const reviewReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: action.payload
+        reviewDeleted: true
       };
     }
     case DELETE_REVIEW_FAILURE: {

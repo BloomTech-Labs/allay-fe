@@ -18,6 +18,8 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [trackFilters, setTrackFilters] = useState([]);
   const [typeFilters, setTypeFilters] = useState([]);
+  const isDeleted = useSelector(state => state.review.reviewDeleted);
+
 
   //admin check TODO: fix later
   const admin = useSelector(state => state.auth.isAdmin);
@@ -36,7 +38,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   // pull review data
   useEffect(() => {
     getReview();
-  }, [getReview, isDeleted]);
+  }, [isDeleted, getReview]);
 
   // filter searchbar by company name
   useEffect(() => {
