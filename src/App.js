@@ -12,7 +12,6 @@ import FormController from "./components/Dashboard/Forms/FormController";
 import PrivateRoute from "./utils/PrivateRoute";
 import EditReviewForm from "./components/Dashboard/Forms/EditReviewForm";
 import EditInterviewForm from "./components/Dashboard/Forms/EditInterviewForm";
-import PofilePage from "./components/Dashboard/UserProfile/ProfilePage";
 import DashboardHome from "./components/Dashboard/DashboardHome";
 import AddCompanyForm from "./components/Dashboard/Forms/AddCompanyForm";
 // google analytics
