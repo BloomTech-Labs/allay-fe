@@ -18,6 +18,9 @@ import AddCompanyForm from "./components/Dashboard/Forms/AddCompanyForm";
 import ReactGA from "react-ga";
 import { useLocation } from "react-router-dom";
 
+import ProfilePage from "./components/Dashboard/UserProfile/ProfilePage";
+
+
 function initializeAnalytics() {
   return process.env.NODE_ENV === "production"
     ? ReactGA.initialize("UA-159325981-1") &&
@@ -29,7 +32,11 @@ function initializeAnalytics() {
 
 const App = () => {
   const location = useLocation();
+
+
+
   // check for admin
+
 
   useEffect(() => {
     initializeAnalytics();
@@ -41,6 +48,9 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/signup" component={Signup} />
+
+          <PrivateRoute exact path="/profile" component={ProfilePage} />
+
           <PrivateRoute exact path="/dashboard" component={DashboardHome} />
           <PrivateRoute
             path="/dashboard/add-review"
