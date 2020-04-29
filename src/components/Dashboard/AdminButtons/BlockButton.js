@@ -21,7 +21,7 @@ export default function BlockButton({ user_id }) {
 
   // get admin status and user status
   const admin = useSelector(state => state.auth.isAdmin);
-  const blocked = useSelector(state => state.review.isUserBlocked);
+  const blocked = useSelector(state => state.user.isUserBlocked);
   // func to block/unblock user
   const block = id => {
     dispatch(blockUser(id));

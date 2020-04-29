@@ -13,10 +13,7 @@ import {
   EDIT_REVIEW_SUCCESS,
   DELETE_REVIEW_START,
   DELETE_REVIEW_SUCCESS,
-  DELETE_REVIEW_FAILURE,
-  BLOCK_USER_FAILURE,
-  BLOCK_USER_SUCCESS,
-  BLOCK_USER_START
+  DELETE_REVIEW_FAILURE
 } from "../types";
 
 const initialState = {
@@ -30,7 +27,6 @@ const initialState = {
   reviewEdited: false,
   reviewDeleted: false,
   deleteFail: false,
-  isUserBlocked: null,
   error: ""
 };
 
@@ -149,24 +145,6 @@ const reviewReducer = (state = initialState, action) => {
     case DELETE_REVIEW_FAILURE: {
       return {
         ...state
-      };
-    }
-    case BLOCK_USER_START: {
-      return {
-        ...state,
-        isLoading: true
-      };
-    }
-    case BLOCK_USER_SUCCESS: {
-      return {
-        ...state,
-        isUserBlocked: action.payload.updatedInfo.blocked
-      };
-    }
-    case BLOCK_USER_FAILURE: {
-      return {
-        ...state,
-        error: ""
       };
     }
     default:
