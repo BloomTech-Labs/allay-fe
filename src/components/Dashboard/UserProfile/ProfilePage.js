@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Flex,
+  Button,
   Image,
   SimpleGrid,
   Box,
@@ -103,6 +104,26 @@ const ProfilePage = () => {
                       justifyContent: "space-evenly"
                     }}
                   >
+                    {/* <Button
+                      style={{
+                        alignSelf: " flex-end",
+                        fontWeight: "600",
+                        borderRadius: "10px ",
+                        width: "45px",
+                        height: "25px",
+                        paddingTop: "3px",
+                        backgroundColor: "#3b98f1",
+                        color: "white",
+                        fontSize: "small",
+                        textAlign: "center"
+                      }}
+                      size="lrg"
+                      rounded="full"
+                      border="none"
+                      value="Web"
+                    >
+                      Web
+                    </Button> */}
                     <span
                       style={{
                         alignSelf: " flex-end",
@@ -284,7 +305,9 @@ const ProfilePage = () => {
         </SimpleGrid>
       </Flex>
       {/* Review section of profile page */}
-      <span style={{ paddingLeft: "14%" }}>Reviews writen by Lisa Smith</span>
+      <Flex justify="center">
+        <Box width="1048px">Reviews written by Lisa Smith</Box>
+      </Flex>
       <Flex justify="center" mt=".5%">
         <Box
           width="1048px"
@@ -292,7 +315,10 @@ const ProfilePage = () => {
         >
           {/* TODO:Map over reviews and return this accordion */}
           <AccordionItem width="816px" style={{ margin: "0 auto" }}>
-            <AccordionHeader _expanded={{ bg: "#007F00", color: "white" }}>
+            <AccordionHeader
+              style={{ borderRadius: "10px " }}
+              _expanded={{ bg: "#007F00", color: "white" }}
+            >
               <Box flex="1" textAlign="left">
                 <span
                   style={{
@@ -316,7 +342,10 @@ const ProfilePage = () => {
           </AccordionItem>
           {/* review 2 == TODO: delete later */}
           <AccordionItem width="816px" style={{ margin: "0 auto" }}>
-            <AccordionHeader _expanded={{ bg: "#0000CC", color: "white" }}>
+            <AccordionHeader
+              style={{ borderRadius: "10px " }}
+              _expanded={{ bg: "#0000CC", color: "white" }}
+            >
               <Box flex="1" textAlign="left">
                 <span
                   style={{
@@ -340,7 +369,10 @@ const ProfilePage = () => {
           </AccordionItem>
           {/* review 3  TODO: delete later */}
           <AccordionItem width="816px" style={{ margin: "0 auto" }}>
-            <AccordionHeader _expanded={{ bg: "#FF0000", color: "white" }}>
+            <AccordionHeader
+              style={{ borderRadius: "10px " }}
+              _expanded={{ bg: "#FF0000", color: "white" }}
+            >
               <Box flex="1" textAlign="left">
                 <span
                   style={{
