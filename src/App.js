@@ -33,6 +33,8 @@ function initializeAnalytics() {
 const App = () => {
   const location = useLocation();
 
+
+
   // check for admin
 
 
@@ -46,6 +48,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/signup" component={Signup} />
+
           <PrivateRoute exact path="/profile" component={ProfilePage} />
 
           <PrivateRoute exact path="/dashboard" component={DashboardHome} />
