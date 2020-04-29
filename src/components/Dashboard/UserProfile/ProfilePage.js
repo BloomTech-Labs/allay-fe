@@ -1,15 +1,17 @@
 import React from "react";
-import {
-  Flex,
-  Image,
-  SimpleGrid,
-  Box,
-  Avatar,
-  AvatarBadge
-} from "@chakra-ui/core";
+import { Flex, Image, SimpleGrid, Box, Avatar } from "@chakra-ui/core";
 const ProfilePage = () => {
+  const _midSectionStyles = {
+    width: "45%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "0% 10%",
+    height: "40px"
+  };
   return (
     <>
+      {/* //Top Section */}
       <Flex Flex w="100%" height="84px" justify="center">
         <Flex maxW="1440px" w="100%" pt="1%" justify="space-between">
           <Flex>
@@ -24,7 +26,9 @@ const ProfilePage = () => {
           </Flex>
         </Flex>
       </Flex>
+      {/* Top two columns */}
       <Flex Flex w="100%" pt="3%" justify="center">
+        {/* Top two columns */}
         <SimpleGrid width="1048px" columns={1} spacingY="4px">
           <Box
             style={{
@@ -42,7 +46,7 @@ const ProfilePage = () => {
               <Avatar
                 size="2xl"
                 name="user"
-                src={require("../../../icons/user.svg")}
+                src={require("../../../icons/lisa.jpg")}
               />
             </Flex>
             <Flex w="80%">
@@ -100,7 +104,11 @@ const ProfilePage = () => {
                     height="60px"
                   >
                     <h6>
-                      <span>#</span>Austin, TX
+                      <i
+                        style={{ opacity: 0.2, paddingRight: "5px" }}
+                        class="fas fa-map-marker-alt"
+                      ></i>
+                      Austin, TX
                     </h6>
                   </Box>
                 </Flex>
@@ -119,17 +127,22 @@ const ProfilePage = () => {
                     >
                       <Image
                         size="20px"
-                        src={require("../../../icons/slack.svg")}
-                      />
-                      <Image
-                        size="20px"
+                        style={{ borderRadius: "40%" }}
                         src={require("../../../icons/linkedIn.png")}
                       />
                       <Image
                         size="20px"
+                        src={require("../../../icons/slack.svg")}
+                      />
+                      <i
+                        style={{ fontSize: "larger" }}
+                        class="fab fa-github"
+                      ></i>
+                      <Image
+                        size="20px"
+                        style={{ borderRadius: "40%" }}
                         src={require("../../../icons/dribble.png")}
                       />
-                      <i class="fab fa-github"></i>
                     </Flex>
                   </SimpleGrid>
                 </Box>
@@ -137,12 +150,31 @@ const ProfilePage = () => {
             </Flex>
           </Box>
           <Box bg="#F7F9FF" height="107px">
-            height="107px"
+            <h4
+              style={{
+                padding: " 2%",
+                paddingLeft: " 3%",
+                fontSize: "medium"
+              }}
+            >
+              Lambda Information
+            </h4>
+            <Flex>
+              <Box style={_midSectionStyles}>
+                <span style={{ opacity: ".5" }}>Cohort:</span>
+                <h6>Web FT 20</h6>
+              </Box>
+              <Box style={_midSectionStyles}>
+                <span style={{ opacity: ".5" }}>Graduated:</span>
+                <h6>August 2019</h6>
+              </Box>
+            </Flex>
           </Box>
         </SimpleGrid>
       </Flex>
-      <Flex Flex w="100%" pt="0.3%" justify="center">
-        <SimpleGrid width="1048px" columns={2} spacingX="4px" spacingY="4px">
+      {/* Bottom two row */}
+      <Flex Flex w="100%" justify="center">
+        <SimpleGrid width="1048px" columns={2}>
           <Box bg="#F7F9FF" height="239px">
             sdvsvd
           </Box>
