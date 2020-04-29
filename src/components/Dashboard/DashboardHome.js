@@ -13,6 +13,7 @@ import { Flex, Alert, AlertDescription } from "@chakra-ui/core";
 import CustomSpinner from "../CustomSpinner.js";
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
+  console.log("here i am", data);
   // search state
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -20,20 +21,19 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   const [typeFilters, setTypeFilters] = useState([]);
   const isDeleted = useSelector(state => state.review.reviewDeleted);
 
-
   //admin check TODO: fix later
-  const admin = useSelector(state => state.auth.isAdmin);
-  const adminName = localStorage.getItem("username");
-  useEffect(() => {
-    if (!admin && adminName === "Mandi Haase") {
-      alert(
-        "Page refreshed, for security we logged you out, please log back in"
-      );
-      localStorage.clear("token");
-      localStorage.clear("userId");
-      history.push("/");
-    }
-  }, []);
+  // const admin = useSelector(state => state.auth.isAdmin);
+  // const adminName = localStorage.getItem("username");
+  // useEffect(() => {
+  //   if (!admin && adminName === "Mandi Haase") {
+  //     alert(
+  //       "Page refreshed, for security we logged you out, please log back in"
+  //     );
+  //     localStorage.clear("token");
+  //     localStorage.clear("userId");
+  //     history.push("/");
+  //   }
+  // }, []);
   //admin check TODO: fix later
   // pull review data
   useEffect(() => {
