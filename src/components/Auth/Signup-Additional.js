@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
 import CustomAutocomplete from '../../components/Reusable/InputFields/Autocomplete';
 import { states } from '../../components/Reusable/statesData';
+import DatePicker from 'react-datepicker';
 //styles
 import {
 	Image,
@@ -20,6 +21,7 @@ import {
 	Select,
 	Input,
 } from '@chakra-ui/core';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const SignupAdditional = ({
 	register,
@@ -27,6 +29,8 @@ const SignupAdditional = ({
 	location,
 	setNewLocation,
 	stateHelper,
+	startDate,
+	setStartDate,
 }) => {
 	//location helpers
 	useEffect(() => {
@@ -36,7 +40,8 @@ const SignupAdditional = ({
 			);
 			setNewLocation({ ...location, myState: stateId[0].id });
 		}
-	}, [location]);
+		console.log('date', startDate);
+	}, [location, startDate]);
 
 	return (
 		<>
@@ -86,10 +91,24 @@ const SignupAdditional = ({
 				<FormLabel fontFamily='Muli'>
 					Have you graduated from Lambda yet?
 				</FormLabel>
-				<RadioGroup isInline spacing={4}>
-					<Radio value='1'>Yes</Radio>
-					<Radio value='2'>No</Radio>
+				<RadioGroup isInline spacing={4} name='graduated' label='graduated'>
+					<Radio key='1' value='1'>
+						Yes
+					</Radio>
+					<Radio key='2' value='2'>
+						No
+					</Radio>
 				</RadioGroup>
+			</Flex>
+
+			<Flex wrap='wrap' w='653px' mx='auto' mb='200px' justify='center'>
+				<FormLabel fontFamily='Muli'>When did you graduate?</FormLabel>
+				<DatePicker
+					selected={startDate}
+					onChange={(date) => setStartDate(date)}
+					dateFormat='MM/yyyy'
+					showMonthYearPicker
+				/>
 			</Flex>
 		</>
 	);
