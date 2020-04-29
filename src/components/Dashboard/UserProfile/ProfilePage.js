@@ -9,15 +9,16 @@ import {
   AccordionHeader,
   AccordionIcon,
   AccordionItem,
-  AccordionPanel
+  AccordionPanel,
+  Link
 } from "@chakra-ui/core";
 const ProfilePage = () => {
   const _midSectionStyles = {
-    width: "45%",
+    width: "40%",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "0% 8%",
+    padding: "0% 5%",
     height: "40px"
   };
   const _emp = {
@@ -41,7 +42,7 @@ const ProfilePage = () => {
           </Flex>
           <Flex>
             <Image
-              size="60px"
+              size="50px"
               style={{ opacity: "0.6" }}
               src={require("../../../icons/user.svg")}
             />
@@ -52,7 +53,7 @@ const ProfilePage = () => {
       {/* Top two columns */}
       <Flex Flex w="100%" pt="3%" justify="center">
         {/* Top two columns */}
-        <SimpleGrid width="1048px" columns={1} spacingY="4px">
+        <SimpleGrid width="1048px" columns={1} spacingY="2px">
           <Box style={{ textAlign: "end", paddingRight: "1%" }}>
             <i
               style={{ opacity: 0.3, paddingRight: "10px" }}
@@ -63,15 +64,14 @@ const ProfilePage = () => {
           <Box
             style={{
               borderRadius: "20px 20px 0 0",
-              display: "inline-flex",
-              letterSpacing: "1px"
+              display: "inline-flex"
             }}
             bg="#F7F9FF"
             height="220px"
           >
             <Flex
               w="20%"
-              style={{ justifyContent: "center", alignItems: "center" }}
+              style={{ padding: "55px 0 0 70px" }}
             >
               <Avatar
                 size="2xl"
@@ -80,7 +80,7 @@ const ProfilePage = () => {
               />
             </Flex>
             <Flex w="80%">
-              <SimpleGrid width="100%" row={2}>
+              <SimpleGrid width="100%" row={2} pr="70px">
                 <Flex
                   height="113px"
                   style={{
@@ -89,45 +89,28 @@ const ProfilePage = () => {
                 >
                   <Box
                     height="27px"
-                    style={{ alignSelf: "flex-end", letterSpacing: "2px " }}
+                    style={{
+                      alignSelf: "flex-end",
+                      marginLeft:"42px"
+                    }}
                     width="20%"
                   >
-                    <h3>Lisa Smith</h3>
+                    <h3 style={{fontFamily: "Poppins", color:" #131C4D"}}>Lisa Smith</h3>
                   </Box>
                   <Box
                     width="33%"
                     height="60px"
-                    pl="3%"
+                    
                     style={{
                       display: "flex",
                       alignSelf: "flex-end",
-                      justifyContent: "space-evenly"
+                      alignItems:"baseline",
+                      justifyContent: "space-evenly",
+                     
                     }}
                   >
-                    {/* <Button
-                      style={{
-                        alignSelf: " flex-end",
-                        fontWeight: "600",
-                        borderRadius: "10px ",
-                        width: "45px",
-                        height: "25px",
-                        paddingTop: "3px",
-                        backgroundColor: "#3b98f1",
-                        color: "white",
-                        fontSize: "small",
-                        textAlign: "center"
-                      }}
-                      size="lrg"
-                      rounded="full"
-                      border="none"
-                      value="Web"
-                    >
-                      Web
-                    </Button> */}
                     <span
                       style={{
-                        alignSelf: " flex-end",
-                        fontWeight: "600",
                         borderRadius: "10px ",
                         width: "45px",
                         height: "25px",
@@ -142,7 +125,9 @@ const ProfilePage = () => {
                     </span>
 
                     <h6 style={{ opacity: "0.5" }}>|</h6>
-                    <h6>Alumni</h6>
+                    <h6 style={{ fontFamily: "Muli", fontWeight: 300 }}>
+                      Alumni
+                    </h6>
                   </Box>
 
                   <Box
@@ -154,7 +139,7 @@ const ProfilePage = () => {
                     width="47%"
                     height="60px"
                   >
-                    <h6>
+                    <h6 style={{ fontFamily: "Muli", fontWeight: 300 }}>
                       <i
                         style={{ opacity: 0.2, paddingRight: "5px" }}
                         class="fas fa-map-marker-alt"
@@ -165,9 +150,13 @@ const ProfilePage = () => {
                 </Flex>
                 <Box>
                   <SimpleGrid width="100%" columns={2}>
-                    <Flex width="45%" justify="space-between">
-                      <h6 style={{ color: "blue" }}>Portfolio</h6>
-                      <h6 style={{ color: "blue" }}>Resume</h6>
+                    <Flex width="55%" justify="space-between" pl="42px" style={{  fontWeight:"bold" }}>
+                      <Link color="#344CD0" isExternal="true" href="#" >
+                        Portfolio
+                      </Link>
+                      <Link color="#344CD0" isExternal="true" href="#" >
+                        Resume
+                      </Link>
                     </Flex>
                     <Flex
                       width="59%"
@@ -178,7 +167,7 @@ const ProfilePage = () => {
                     >
                       <Image
                         size="20px"
-                        style={{ borderRadius: "40%" }}
+                        style={{ borderRadius: "60%" }}
                         src={require("../../../icons/linkedIn.png")}
                       />
                       <Image
@@ -191,7 +180,7 @@ const ProfilePage = () => {
                       ></i>
                       <Image
                         size="20px"
-                        style={{ borderRadius: "40%" }}
+                        style={{ borderRadius: "60%" }}
                         src={require("../../../icons/dribble.png")}
                       />
                     </Flex>
@@ -200,11 +189,12 @@ const ProfilePage = () => {
               </SimpleGrid>
             </Flex>
           </Box>
-          <Box bg="#F7F9FF" height="107px">
+          <Box bg="#F7F9FF" pl="70px" height="107px" style={{fontSize:"16px"}}>
             <h4
               style={{
                 padding: " 2% 0% 1% 3%",
-                fontSize: "medium"
+                fontSize: "14px",
+                color:" #131C4D"
               }}
             >
               Lambda Information
@@ -212,7 +202,7 @@ const ProfilePage = () => {
             <Flex>
               <Box style={_midSectionStyles}>
                 <span style={{ opacity: ".5" }}>Cohort:</span>
-                <h6>Web FT 20</h6>
+                Web FT 20
               </Box>
               <Box
                 style={{
@@ -225,29 +215,31 @@ const ProfilePage = () => {
                 }}
               >
                 <span style={{ opacity: ".5" }}>Graduated:</span>
-                <h6>August 2019</h6>
+                August 2019
               </Box>
             </Flex>
           </Box>
         </SimpleGrid>
       </Flex>
       {/* Bottom two row */}
-      <Flex Flex w="100%" justify="center" mb="3%">
+      <Flex Flex w="100%"  justify="center" mb="3%" style={{fontSize:"16px"}}>
         <SimpleGrid width="1048px" columns={2}>
           <Box
             bg="#F7F9FF"
             height="260px"
+            pl="70px"
             style={{ borderRadius: "0 0 0 20px" }}
           >
             <h4
               style={{
-                padding: " 6% 2% 5% 9%",
-                fontSize: "medium"
+                padding: " 6% 2% 5% 6%",
+                fontSize: "14px",
+                color:" #131C4D"
               }}
             >
               Background
             </h4>
-            <SimpleGrid columns={2} spacing={5} style={{ paddingLeft: "15%" }}>
+            <SimpleGrid columns={2} spacing={5} style={{ paddingLeft: "11%" }}>
               <Box height="20px" style={{ opacity: 0.5 }}>
                 Degree:
               </Box>
@@ -274,7 +266,8 @@ const ProfilePage = () => {
             <h4
               style={{
                 padding: " 6% 2% 5% 7%",
-                fontSize: "medium"
+                fontSize: "14px",
+                color:" #131C4D"
               }}
             >
               Current employment
@@ -282,7 +275,7 @@ const ProfilePage = () => {
             <SimpleGrid
               columns={2}
               spacing={5}
-              style={{ padding: "0 10% 0 5%" }}
+              style={{ padding: "0 20% 0 0%" }}
             >
               <Box height="20px" style={_emp}>
                 Company:
