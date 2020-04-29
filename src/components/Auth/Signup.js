@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -95,6 +95,15 @@ const Signup = ({ signup, isLoading, history }) => {
 			error = 'Password is required';
 		} else if (value.length < 8) {
 			error = 'Password must be at least 8 characters';
+		}
+		return error || true;
+	}
+
+	function validateFieldOfStudy(value) {
+		let error;
+		let nameRegex = /^[0-9*#+]+$/;
+		if (nameRegex.test(value)) {
+			error = 'Field of study can only contain letters';
 		}
 		return error || true;
 	}
@@ -226,7 +235,7 @@ const Signup = ({ signup, isLoading, history }) => {
 
 							<Flex wrap='wrap' w='411px%' justify='center'>
 								<FormControl isRequired isInvalid={errors.track_name}>
-									<FormLabel fontFamily='Poppins'>Track</FormLabel>
+									<FormLabel fontFamily='Muli'>Track</FormLabel>
 									<Select
 										mb='30px'
 										mr='17px'
@@ -246,22 +255,22 @@ const Signup = ({ signup, isLoading, history }) => {
 										// placeholder='Select Your Lambda Track'
 										ref={register({ validate: validateTrack })}
 									>
-										<option fontFamily='Poppins' value=''>
+										<option fontFamily='Muli' value=''>
 											Select Your Lambda Track
 										</option>
-										<option fontFamily='Poppins' value={1}>
+										<option fontFamily='Muli' value={1}>
 											Android
 										</option>
-										<option fontFamily='Poppins' value={2}>
+										<option fontFamily='Muli' value={2}>
 											DS
 										</option>
-										<option fontFamily='Poppins' value={3}>
+										<option fontFamily='Muli' value={3}>
 											WEB
 										</option>
-										<option fontFamily='Poppins' value={4}>
+										<option fontFamily='Muli' value={4}>
 											iOS
 										</option>
-										<option fontFamily='Poppins' value={5}>
+										<option fontFamily='Muli' value={5}>
 											UX
 										</option>
 									</Select>
@@ -386,6 +395,7 @@ const Signup = ({ signup, isLoading, history }) => {
 									newLocation={newLocation}
 									setNewLocation={setNewLocation}
 									stateHelper={stateHelper}
+									validateFieldOfStudy={validateFieldOfStudy}
 								/>
 							) : null}
 
