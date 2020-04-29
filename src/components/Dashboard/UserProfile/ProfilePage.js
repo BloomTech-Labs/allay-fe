@@ -111,14 +111,16 @@ const ProfilePage = () => {
                   >
                     <span
                       style={{
-                        borderRadius: "10px ",
-                        width: "45px",
-                        height: "25px",
-                        paddingTop: "3px",
-                        backgroundColor: "#3b98f1",
-                        color: "white",
-                        fontSize: "small",
-                        textAlign: "center"
+                        borderRadius: "20px",
+                        width: "75px",
+                        height: "36px",
+                        // paddingTop: "3px",
+                        backgroundColor: "#259BF8",
+                        color: "#17171b",
+                        fontSize: "16px",
+                        textTransform:"uppercase",
+                        textAlign:"center",
+                        paddingTop:"5px"
                       }}
                     >
                       Web
