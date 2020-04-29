@@ -17,7 +17,9 @@ import AddCompanyForm from "./components/Dashboard/Forms/AddCompanyForm";
 // google analytics
 import ReactGA from "react-ga";
 import { useLocation } from "react-router-dom";
+
 import ProfilePage from "./components/Dashboard/UserProfile/ProfilePage";
+
 
 function initializeAnalytics() {
   return process.env.NODE_ENV === "production"
@@ -26,9 +28,13 @@ function initializeAnalytics() {
         ReactGA.pageview(window.location.pathname + window.location.search)
     : null;
 }
+//
 
 const App = () => {
   const location = useLocation();
+
+  // check for admin
+
 
   useEffect(() => {
     initializeAnalytics();
@@ -41,6 +47,7 @@ const App = () => {
           <Route exact path="/" component={Login} />
           <Route path="/signup" component={Signup} />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
+
           <PrivateRoute exact path="/dashboard" component={DashboardHome} />
           <PrivateRoute
             path="/dashboard/add-review"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 // action
@@ -18,9 +18,23 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [trackFilters, setTrackFilters] = useState([]);
   const [typeFilters, setTypeFilters] = useState([]);
-  //
   const isDeleted = useSelector(state => state.review.reviewDeleted);
 
+
+  //admin check TODO: fix later
+  const admin = useSelector(state => state.auth.isAdmin);
+  const adminName = localStorage.getItem("username");
+  useEffect(() => {
+    if (!admin && adminName === "Mandi Haase") {
+      alert(
+        "Page refreshed, for security we logged you out, please log back in"
+      );
+      localStorage.clear("token");
+      localStorage.clear("userId");
+      history.push("/");
+    }
+  }, []);
+  //admin check TODO: fix later
   // pull review data
   useEffect(() => {
     getReview();
@@ -28,7 +42,6 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 
   // filter searchbar by company name
   useEffect(() => {
-    // TODO: check if data is not empty array
     const results = data.filter(review =>
       review.company_name.toLowerCase().includes(searchResults)
     );
