@@ -35,8 +35,6 @@ const Signup = ({ signup, isLoading, history }) => {
 	const stateHelper = (value) => {
 		setLocation(value);
 	};
-	//date state
-	const [startDate, setStartDate] = useState(new Date());
 
 	//validation
 	function validateFirstName(value) {
@@ -388,8 +386,6 @@ const Signup = ({ signup, isLoading, history }) => {
 									newLocation={newLocation}
 									setNewLocation={setNewLocation}
 									stateHelper={stateHelper}
-									startDate={startDate}
-									setStartDate={setStartDate}
 								/>
 							) : null}
 

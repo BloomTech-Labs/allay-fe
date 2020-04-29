@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 //components
 import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
 import CustomAutocomplete from '../../components/Reusable/InputFields/Autocomplete';
 import { states } from '../../components/Reusable/statesData';
-import DatePicker from 'react-datepicker';
 //styles
 import {
 	Image,
@@ -21,7 +20,6 @@ import {
 	Select,
 	Input,
 } from '@chakra-ui/core';
-import 'react-datepicker/dist/react-datepicker.css';
 
 const SignupAdditional = ({
 	register,
@@ -29,9 +27,15 @@ const SignupAdditional = ({
 	location,
 	setNewLocation,
 	stateHelper,
-	startDate,
-	setStartDate,
 }) => {
+	//state
+	const [graduated, setGraduated] = useState(false);
+	const isGraduated = () => {
+		setGraduated(true);
+	};
+	const notGraduated = () => {
+		setGraduated(false);
+	};
 	//location helpers
 	useEffect(() => {
 		if (location.myState) {
@@ -40,8 +44,7 @@ const SignupAdditional = ({
 			);
 			setNewLocation({ ...location, myState: stateId[0].id });
 		}
-		console.log('date', startDate);
-	}, [location, startDate]);
+	}, [location]);
 
 	return (
 		<>
@@ -87,29 +90,114 @@ const SignupAdditional = ({
 				</FormControl>
 			</Flex>
 
-			<Flex wrap='wrap' w='653px' mx='auto' justify='space-between'>
+			<Flex wrap='wrap' w='653px' mx='auto' mb='20px' justify='space-between'>
 				<FormLabel fontFamily='Muli'>
 					Have you graduated from Lambda yet?
 				</FormLabel>
 				<RadioGroup isInline spacing={4} name='graduated' label='graduated'>
-					<Radio key='1' value='1'>
+					<Radio key='radio1' value='1' onClick={isGraduated}>
 						Yes
 					</Radio>
-					<Radio key='2' value='2'>
+					<Radio key='radio2' value='2' onClick={notGraduated}>
 						No
 					</Radio>
 				</RadioGroup>
 			</Flex>
 
-			<Flex wrap='wrap' w='653px' mx='auto' mb='200px' justify='center'>
-				<FormLabel fontFamily='Muli'>When did you graduate?</FormLabel>
-				<DatePicker
-					selected={startDate}
-					onChange={(date) => setStartDate(date)}
-					dateFormat='MM/yyyy'
-					showMonthYearPicker
-				/>
-			</Flex>
+			{graduated ? (
+				<Flex
+					wrap='wrap'
+					w='653px'
+					mx='auto'
+					mb='30px'
+					justify='space-between'
+					align='center'
+				>
+					<FormLabel fontFamily='Muli'>When did you graduate?</FormLabel>
+					<Flex align='center' alignContent='center'>
+						<FormControl>
+							<Select
+								mr='17px'
+								h='68px'
+								py='16px'
+								w='159px'
+								rounded='2px'
+								variant='outline'
+								backgroundColor='#FDFDFF'
+								focusBorderColor='#344CD0'
+								borderColor='#EAF0FE'
+								color='#BBBDC6'
+								_focus={{ color: '#17171B' }}
+								_hover={{ borderColor: '#BBBDC6' }}
+								name='gradMonth'
+								label='gradMonth'
+								// placeholder='Select Your Lambda Track'
+							>
+								<option fontFamily='Muli' value=''>
+									Month
+								</option>
+								<option fontFamily='Muli' value='01'>
+									01
+								</option>
+								<option fontFamily='Muli' value={2}>
+									02
+								</option>
+								<option fontFamily='Muli' value={3}>
+									03
+								</option>
+								<option fontFamily='Muli' value={4}>
+									04
+								</option>
+								<option fontFamily='Muli' value={5}>
+									05
+								</option>
+								<option fontFamily='Muli' value={5}>
+									06
+								</option>
+								<option fontFamily='Muli' value={5}>
+									07
+								</option>
+								<option fontFamily='Muli' value={5}>
+									08
+								</option>
+								<option fontFamily='Muli' value={5}>
+									09
+								</option>
+								<option fontFamily='Muli' value={5}>
+									10
+								</option>
+								<option fontFamily='Muli' value={5}>
+									11
+								</option>
+								<option fontFamily='Muli' value={5}>
+									12
+								</option>
+							</Select>
+						</FormControl>
+						<FormControl>
+							<Select
+								h='68px'
+								py='16px'
+								w='159px'
+								rounded='2px'
+								variant='outline'
+								backgroundColor='#FDFDFF'
+								focusBorderColor='#344CD0'
+								borderColor='#EAF0FE'
+								color='#BBBDC6'
+								_focus={{ color: '#17171B' }}
+								_hover={{ borderColor: '#BBBDC6' }}
+								name='track_id'
+								label='track_id'
+							>
+								<option fontFamily='Muli' value=''>
+									Year
+								</option>
+							</Select>
+						</FormControl>
+					</Flex>
+				</Flex>
+			) : null}
 		</>
 	);
 };
