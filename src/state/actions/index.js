@@ -6,11 +6,10 @@ import {
   getReviewById,
   postReview,
   editReview,
-  deleteReview,
-  blockUser
+  deleteReview
 } from "./reviewActions";
 import { getCompanies, postCompany } from "./companyActions";
-
+import { blockUser } from "./userActions";
 export default {
   login,
   signup,

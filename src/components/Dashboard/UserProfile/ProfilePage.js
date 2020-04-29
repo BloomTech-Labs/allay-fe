@@ -207,11 +207,11 @@ const ProfilePage = () => {
               </Box>
               <Box
                 style={{
-                  width: "39%",
+                  width: "38.5%",
                   display: " flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  padding: "0% 0% 1% 12%",
+                  padding: "0% 0% 1% 11%",
                   height: "40px"
                 }}
               >
