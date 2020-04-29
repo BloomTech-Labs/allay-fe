@@ -12,6 +12,8 @@ import {
   AccordionPanel,
   Link
 } from "@chakra-ui/core";
+
+///////////
 const ProfilePage = () => {
   const _midSectionStyles = {
     width: "40%",
@@ -69,10 +71,7 @@ const ProfilePage = () => {
             bg="#F7F9FF"
             height="220px"
           >
-            <Flex
-              w="20%"
-              style={{ padding: "55px 0 0 70px" }}
-            >
+            <Flex w="20%" style={{ padding: "55px 0 0 70px" }}>
               <Avatar
                 size="2xl"
                 name="user"
@@ -91,22 +90,22 @@ const ProfilePage = () => {
                     height="27px"
                     style={{
                       alignSelf: "flex-end",
-                      marginLeft:"42px"
+                      marginLeft: "42px"
                     }}
                     width="20%"
                   >
-                    <h3 style={{fontFamily: "Poppins", color:" #131C4D"}}>Lisa Smith</h3>
+                    <h3 style={{ fontFamily: "Poppins", color: " #131C4D" }}>
+                      Lisa Smith
+                    </h3>
                   </Box>
                   <Box
                     width="33%"
                     height="60px"
-                    
                     style={{
                       display: "flex",
                       alignSelf: "flex-end",
-                      alignItems:"baseline",
-                      justifyContent: "space-evenly",
-                     
+                      alignItems: "baseline",
+                      justifyContent: "space-evenly"
                     }}
                   >
                     <span
@@ -117,9 +116,9 @@ const ProfilePage = () => {
                         backgroundColor: "#259BF8",
                         color: "#17171b",
                         fontSize: "16px",
-                        textTransform:"uppercase",
-                        textAlign:"center",
-                        paddingTop:"5px"
+                        textTransform: "uppercase",
+                        textAlign: "center",
+                        paddingTop: "5px"
                       }}
                     >
                       Web
@@ -151,11 +150,16 @@ const ProfilePage = () => {
                 </Flex>
                 <Box>
                   <SimpleGrid width="100%" columns={2}>
-                    <Flex width="55%" justify="space-between" pl="42px" style={{  fontWeight:"bold" }}>
-                      <Link color="#344CD0" isExternal="true" href="#" >
+                    <Flex
+                      width="55%"
+                      justify="space-between"
+                      pl="42px"
+                      style={{ fontWeight: "bold" }}
+                    >
+                      <Link color="#344CD0" isExternal="true" href="#">
                         Portfolio
                       </Link>
-                      <Link color="#344CD0" isExternal="true" href="#" >
+                      <Link color="#344CD0" isExternal="true" href="#">
                         Resume
                       </Link>
                     </Flex>
@@ -190,12 +194,17 @@ const ProfilePage = () => {
               </SimpleGrid>
             </Flex>
           </Box>
-          <Box bg="#F7F9FF" pl="70px" height="107px" style={{fontSize:"16px"}}>
+          <Box
+            bg="#F7F9FF"
+            pl="70px"
+            height="107px"
+            style={{ fontSize: "16px" }}
+          >
             <h4
               style={{
                 padding: " 2% 0% 1% 3%",
                 fontSize: "14px",
-                color:" #131C4D"
+                color: " #131C4D"
               }}
             >
               Lambda Information
@@ -223,7 +232,7 @@ const ProfilePage = () => {
         </SimpleGrid>
       </Flex>
       {/* Bottom two row */}
-      <Flex Flex w="100%"  justify="center" mb="3%" style={{fontSize:"16px"}}>
+      <Flex Flex w="100%" justify="center" mb="3%" style={{ fontSize: "16px" }}>
         <SimpleGrid width="1048px" columns={2}>
           <Box
             bg="#F7F9FF"
@@ -235,7 +244,7 @@ const ProfilePage = () => {
               style={{
                 padding: " 6% 2% 5% 6%",
                 fontSize: "14px",
-                color:" #131C4D"
+                color: " #131C4D"
               }}
             >
               Background
@@ -268,7 +277,7 @@ const ProfilePage = () => {
               style={{
                 padding: " 6% 2% 5% 7%",
                 fontSize: "14px",
-                color:" #131C4D"
+                color: " #131C4D"
               }}
             >
               Current employment

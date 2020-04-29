@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import ReactGA from "react-ga"; // for google analytics
 //redux
 import { connect } from "react-redux";
@@ -48,13 +48,13 @@ function NavBar({
   };
 
   // use to navigate to profile page
-  const navToProfilePage = () => {
-    history.push("/profile");
-    ReactGA.event({
-      category: "Profile",
-      action: `go to profile`
-    });
-  };
+  // const navToProfilePage = () => {
+  //   history.push("/profile");
+  //   ReactGA.event({
+  //     category: "Profile",
+  //     action: `go to profile`
+  //   });
+  // };
 
   const logout = () => {
     localStorage.clear("token");
@@ -163,10 +163,17 @@ function NavBar({
                 align="center"
                 justifyContent="center"
                 isLoading={isLoading}
-                onClick={navToProfilePage}
                 data-cy="signOut"
               >
-                <Text fontSize="1.8em">Go to Profile</Text>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: "black"
+                  }}
+                  to="/profile/:id"
+                >
+                  <Text fontSize="1.8em">Go to Profile</Text>
+                </Link>
               </Flex>
               <Flex
                 background="#FFFFFF"

@@ -25,12 +25,12 @@ const Login = ({ login, isLoading, history }) => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
-  function validateUsername(value) {
+  function validateEmail(value) {
     let error;
     if (!value) {
-      error = "Username is required";
+      error = "email is required";
     } else if (value.length < 5) {
-      error = "Username must be at least 5 characters";
+      error = "email needed";
     }
     return error || true;
   }
@@ -123,19 +123,19 @@ const Login = ({ login, isLoading, history }) => {
               </Flex>
 
               <Flex wrap="wrap" w="411px%" justify="center">
-                <FormControl isInvalid={errors.username}>
-                  <FormLabel>Username</FormLabel>
+                <FormControl isInvalid={errors.email}>
+                  <FormLabel>email</FormLabel>
                   <SignupLoginInput
                     mb="30px"
                     type="text"
-                    name="username"
-                    label="username"
+                    name="email"
+                    label="email"
                     placeholder="lambda1"
                     autoCapitalize="none"
-                    ref={register({ validate: validateUsername })}
+                    ref={register({ validate: validateEmail })}
                   />
                   <FormErrorMessage>
-                    {errors.username && errors.username.message}
+                    {errors.email && errors.email.message}
                   </FormErrorMessage>
                 </FormControl>
                 <FormControl isInvalid={errors.password}>
