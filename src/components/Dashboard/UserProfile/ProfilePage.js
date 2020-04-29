@@ -114,7 +114,6 @@ const ProfilePage = () => {
                         borderRadius: "20px",
                         width: "75px",
                         height: "36px",
-                        // paddingTop: "3px",
                         backgroundColor: "#259BF8",
                         color: "#17171b",
                         fontSize: "16px",

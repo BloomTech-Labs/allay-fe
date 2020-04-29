@@ -1,4 +1,5 @@
 import React from "react";
+
 import ReactGA from "react-ga"; // for google analytics
 //redux
 import { connect } from "react-redux";
