@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -26,9 +26,15 @@ import {
 
 const Signup = ({ signup, isLoading, history }) => {
 	const { handleSubmit, errors, register, formState } = useForm();
-	const [show, setShow] = React.useState(false);
-	const [moreInfo, setMoreInfo] = React.useState(false);
+	const [show, setShow] = useState(false);
+	const [moreInfo, setMoreInfo] = useState(false);
 	const handleClick = () => setShow(!show);
+	//location state
+	const [location, setLocation] = useState({});
+	const [newLocation, setNewLocation] = useState({});
+	const stateHelper = (value) => {
+		setLocation(value);
+	};
 
 	//validation
 	function validateFirstName(value) {
@@ -372,7 +378,16 @@ const Signup = ({ signup, isLoading, history }) => {
 							</Flex>
 
 							{/* Start of the additional info */}
-							{moreInfo ? <SignupAdditional register={register} /> : null}
+							{moreInfo ? (
+								<SignupAdditional
+									register={register}
+									errors={errors}
+									location={location}
+									newLocation={newLocation}
+									setNewLocation={setNewLocation}
+									stateHelper={stateHelper}
+								/>
+							) : null}
 
 							<Flex w='100%' justify='center'>
 								<Button
