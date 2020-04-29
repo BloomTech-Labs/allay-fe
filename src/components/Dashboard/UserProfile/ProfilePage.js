@@ -6,14 +6,25 @@ const ProfilePage = () => {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: "0% 10%",
+    padding: "0% 8%",
     height: "40px"
+  };
+  const _emp = {
+    padding: "0 0 0 22%",
+    opacity: 0.5
   };
   return (
     <>
       {/* //Top Section */}
       <Flex Flex w="100%" height="84px" justify="center">
-        <Flex maxW="1440px" w="100%" pt="1%" justify="space-between">
+        <Flex
+          maxW="1440px"
+          w="100%"
+          pt="1%"
+          pr="3%"
+          pl="3%"
+          justify="space-between"
+        >
           <Flex>
             <h1> Allay </h1>
           </Flex>
@@ -26,10 +37,18 @@ const ProfilePage = () => {
           </Flex>
         </Flex>
       </Flex>
+
       {/* Top two columns */}
       <Flex Flex w="100%" pt="3%" justify="center">
         {/* Top two columns */}
         <SimpleGrid width="1048px" columns={1} spacingY="4px">
+          <Box style={{ textAlign: "end", paddingRight: "1%" }}>
+            <i
+              style={{ opacity: 0.3, paddingRight: "10px" }}
+              class="far fa-edit"
+            ></i>
+            Edit profile
+          </Box>
           <Box
             style={{
               borderRadius: "20px 20px 0 0",
@@ -94,6 +113,7 @@ const ProfilePage = () => {
                     <h6 style={{ opacity: "0.5" }}>|</h6>
                     <h6>Alumni</h6>
                   </Box>
+
                   <Box
                     style={{
                       alignSelf: "flex-end",
@@ -115,8 +135,8 @@ const ProfilePage = () => {
                 <Box>
                   <SimpleGrid width="100%" columns={2}>
                     <Flex width="45%" justify="space-between">
-                      <h6>Portfolio</h6>
-                      <h6>Resume</h6>
+                      <h6 style={{ color: "blue" }}>Portfolio</h6>
+                      <h6 style={{ color: "blue" }}>Resume</h6>
                     </Flex>
                     <Flex
                       width="59%"
@@ -152,8 +172,7 @@ const ProfilePage = () => {
           <Box bg="#F7F9FF" height="107px">
             <h4
               style={{
-                padding: " 2%",
-                paddingLeft: " 3%",
+                padding: " 2% 0% 1% 3%",
                 fontSize: "medium"
               }}
             >
@@ -164,7 +183,16 @@ const ProfilePage = () => {
                 <span style={{ opacity: ".5" }}>Cohort:</span>
                 <h6>Web FT 20</h6>
               </Box>
-              <Box style={_midSectionStyles}>
+              <Box
+                style={{
+                  width: "39%",
+                  display: " flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "0% 0% 1% 12%",
+                  height: "40px"
+                }}
+              >
                 <span style={{ opacity: ".5" }}>Graduated:</span>
                 <h6>August 2019</h6>
               </Box>
@@ -175,11 +203,73 @@ const ProfilePage = () => {
       {/* Bottom two row */}
       <Flex Flex w="100%" justify="center">
         <SimpleGrid width="1048px" columns={2}>
-          <Box bg="#F7F9FF" height="239px">
-            sdvsvd
+          <Box
+            bg="#F7F9FF"
+            height="260px"
+            style={{ borderRadius: "0 0 0 20px" }}
+          >
+            <h4
+              style={{
+                padding: " 6% 2% 5% 9%",
+                fontSize: "medium"
+              }}
+            >
+              Background
+            </h4>
+            <SimpleGrid columns={2} spacing={5} style={{ paddingLeft: "15%" }}>
+              <Box height="20px" style={{ opacity: 0.5 }}>
+                Degree:
+              </Box>
+              <Box height="20px">Bachelor of Art</Box>
+              <Box height="20px" style={{ opacity: 0.5 }}>
+                Field of Study:
+              </Box>
+              <Box height="20px">English</Box>
+              <Box height="20px" style={{ opacity: 0.5 }}>
+                Prior web experience:
+              </Box>
+              <Box height="20px">None</Box>
+              <Box height="20px" style={{ opacity: 0.5 }}>
+                Lambda TL/SL position:
+              </Box>
+              <Box height="20px">Yes</Box>
+            </SimpleGrid>
           </Box>
-          <Box bg="#F7F9FF" height="239px">
-            svsv
+          <Box
+            bg="#F7F9FF"
+            height="260px"
+            style={{ borderRadius: "0 0 20px 0" }}
+          >
+            <h4
+              style={{
+                padding: " 6% 2% 5% 7%",
+                fontSize: "medium"
+              }}
+            >
+              Current employment
+            </h4>
+            <SimpleGrid
+              columns={2}
+              spacing={5}
+              style={{ padding: "0 10% 0 5%" }}
+            >
+              <Box height="20px" style={_emp}>
+                Company:
+              </Box>
+              <Box height="20px">Indeed</Box>
+              <Box height="20px" style={_emp}>
+                Job tittle:
+              </Box>
+              <Box height="20px">Junior Front End Developer</Box>
+              <Box height="20px" style={_emp}>
+                Start date:
+              </Box>
+              <Box height="20px">January 1st, 2020</Box>
+              <Box height="20px" style={_emp}>
+                Remote:
+              </Box>
+              <Box height="20px">No</Box>
+            </SimpleGrid>
           </Box>
         </SimpleGrid>
       </Flex>
