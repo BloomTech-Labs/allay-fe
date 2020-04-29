@@ -1,5 +1,15 @@
 import React from "react";
-import { Flex, Image, SimpleGrid, Box, Avatar } from "@chakra-ui/core";
+import {
+  Flex,
+  Image,
+  SimpleGrid,
+  Box,
+  Avatar,
+  AccordionHeader,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel
+} from "@chakra-ui/core";
 const ProfilePage = () => {
   const _midSectionStyles = {
     width: "45%",
@@ -201,7 +211,7 @@ const ProfilePage = () => {
         </SimpleGrid>
       </Flex>
       {/* Bottom two row */}
-      <Flex Flex w="100%" justify="center">
+      <Flex Flex w="100%" justify="center" mb="3%">
         <SimpleGrid width="1048px" columns={2}>
           <Box
             bg="#F7F9FF"
@@ -272,6 +282,87 @@ const ProfilePage = () => {
             </SimpleGrid>
           </Box>
         </SimpleGrid>
+      </Flex>
+      {/* Review section of profile page */}
+      <span style={{ paddingLeft: "14%" }}>Reviews writen by Lisa Smith</span>
+      <Flex justify="center" mt=".5%">
+        <Box
+          width="1048px"
+          style={{ border: "1px solid #e6e5e5", padding: "3%" }}
+        >
+          {/* TODO:Map over reviews and return this accordion */}
+          <AccordionItem width="816px" style={{ margin: "0 auto" }}>
+            <AccordionHeader _expanded={{ bg: "#007F00", color: "white" }}>
+              <Box flex="1" textAlign="left">
+                <span
+                  style={{
+                    borderRadius: "35%",
+                    backgroundColor: "#a5a5a5",
+                    padding: ".5%"
+                  }}
+                >
+                  Interview
+                </span>{" "}
+                posted 01/01/2020
+              </Box>
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionPanel>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </AccordionPanel>
+          </AccordionItem>
+          {/* review 2 == TODO: delete later */}
+          <AccordionItem width="816px" style={{ margin: "0 auto" }}>
+            <AccordionHeader _expanded={{ bg: "#0000CC", color: "white" }}>
+              <Box flex="1" textAlign="left">
+                <span
+                  style={{
+                    borderRadius: "35%",
+                    backgroundColor: "#a5a5a5",
+                    padding: ".5%"
+                  }}
+                >
+                  Interview
+                </span>{" "}
+                posted 01/01/2020
+              </Box>
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionPanel>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </AccordionPanel>
+          </AccordionItem>
+          {/* review 3  TODO: delete later */}
+          <AccordionItem width="816px" style={{ margin: "0 auto" }}>
+            <AccordionHeader _expanded={{ bg: "#FF0000", color: "white" }}>
+              <Box flex="1" textAlign="left">
+                <span
+                  style={{
+                    borderRadius: "35%",
+                    backgroundColor: "#a5a5a5",
+                    padding: ".5%"
+                  }}
+                >
+                  Interview
+                </span>{" "}
+                posted 01/01/2020
+              </Box>
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionPanel>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </AccordionPanel>
+          </AccordionItem>
+        </Box>
       </Flex>
     </>
   );
