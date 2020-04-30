@@ -23,7 +23,6 @@ const SignupAdditional = ({
 	setNewLocation,
 	stateHelper,
 	validateFieldOfStudy,
-	selectedTrack,
 }) => {
 	//state
 	const [graduated, setGraduated] = useState(false);
@@ -41,6 +40,12 @@ const SignupAdditional = ({
 	const notEmployed = () => {
 		setEmployed(false);
 	};
+
+	//radio button state
+	const [priorExp, setPriorExp] = useState(false);
+	const [tlsl, setTlsl] = useState(false);
+	const [remote, setRemote] = useState(false);
+
 	//location helpers
 	useEffect(() => {
 		if (location.myState) {
@@ -115,14 +120,25 @@ const SignupAdditional = ({
 				<FormLabel fontFamily='Muli'>
 					Have you graduated from Lambda yet?
 				</FormLabel>
-				<RadioGroup isInline spacing={4} name='graduated' label='graduated'>
-					<Radio key='graduated-1' value={true} onClick={isGraduated}>
-						Yes
-					</Radio>
-					<Radio key='graduated-2' value={false} onClick={notGraduated}>
-						No
-					</Radio>
-				</RadioGroup>
+
+				<Radio
+					name='graduated'
+					id='graduated-1'
+					value={true}
+					defaultChecked={graduated === true}
+					onClick={isGraduated}
+				>
+					Yes
+				</Radio>
+				<Radio
+					name='graduated'
+					id='graduated-2'
+					value={false}
+					defaultChecked={graduated === false}
+					onClick={notGraduated}
+				>
+					No
+				</Radio>
 			</Flex>
 
 			{/* GRADUATED MONTH AND YEAR */}
@@ -311,20 +327,25 @@ const SignupAdditional = ({
 				<FormLabel fontFamily='Muli'>
 					Prior to Lambda did you have any experience in your track?
 				</FormLabel>
-				<RadioGroup
-					isInline
-					spacing={4}
+
+				<Radio
 					name='prior_experience'
-					label='prior_experience'
+					id='priorExp-1'
 					ref={register}
+					value={true}
+					defaultChecked={priorExp === true}
 				>
-					<Radio key='priorExp-1' value={true}>
-						Yes
-					</Radio>
-					<Radio key='priorExp-2' value={false}>
-						No
-					</Radio>
-				</RadioGroup>
+					Yes
+				</Radio>
+				<Radio
+					name='prior_experience'
+					id='priorExp-2'
+					ref={register}
+					value={false}
+					defaultChecked={priorExp === false}
+				>
+					No
+				</Radio>
 			</Flex>
 
 			{/* DID YOU TL/SL */}
@@ -332,20 +353,25 @@ const SignupAdditional = ({
 				<FormLabel fontFamily='Muli'>
 					Have you been a TL/SL while at Lambda?
 				</FormLabel>
-				<RadioGroup
-					isInline
-					spacing={4}
+
+				<Radio
 					name='tlsl_experience'
-					label='tlsl_experience'
+					id='TLSL-1'
+					value={true}
 					ref={register}
+					defaultChecked={tlsl === false}
 				>
-					<Radio key='TLSL-1' value={true}>
-						Yes
-					</Radio>
-					<Radio key='TLSL-2' value={false}>
-						No
-					</Radio>
-				</RadioGroup>
+					Yes
+				</Radio>
+				<Radio
+					name='tlsl_experience'
+					id='TLSL-2'
+					value={false}
+					ref={register}
+					defaultChecked={tlsl === false}
+				>
+					No
+				</Radio>
 			</Flex>
 
 			<Flex
@@ -378,14 +404,25 @@ const SignupAdditional = ({
 				<FormLabel fontFamily='Muli'>
 					Are you currently employed in your field of study?
 				</FormLabel>
-				<RadioGroup isInline spacing={4} name='employed' label='employed'>
-					<Radio key='employed-1' value={true} onClick={isEmployed}>
-						Yes
-					</Radio>
-					<Radio key='employed-2' value={false} onClick={notEmployed}>
-						No
-					</Radio>
-				</RadioGroup>
+
+				<Radio
+					name='employed'
+					id='employed-1'
+					value={true}
+					defaultChecked={employed === true}
+					onClick={isEmployed}
+				>
+					Yes
+				</Radio>
+				<Radio
+					name='employed'
+					id='employed-2'
+					value={false}
+					defaultChecked={employed === false}
+					onClick={isEmployed}
+				>
+					No
+				</Radio>
 			</Flex>
 
 			{/* EMPLOYED COMPANY NAME AND JOB TITLE */}
@@ -425,20 +462,25 @@ const SignupAdditional = ({
 			{employed ? (
 				<Flex wrap='wrap' w='653px' mx='auto' mb='30px' justify='space-between'>
 					<FormLabel fontFamily='Muli'>Are you working remotely?</FormLabel>
-					<RadioGroup
-						isInline
-						spacing={4}
+
+					<Radio
 						name='employed_remote'
-						label='employed_remote'
+						id='employed_remote-1'
+						value={true}
 						ref={register}
+						defaultChecked={remote === true}
 					>
-						<Radio key='remoteWork-1' value={true}>
-							Yes
-						</Radio>
-						<Radio key='remoteWork-2' value={false}>
-							No
-						</Radio>
-					</RadioGroup>
+						Yes
+					</Radio>
+					<Radio
+						name='employed_remote'
+						id='employed_remote-2'
+						value={false}
+						ref={register}
+						defaultChecked={remote === false}
+					>
+						No
+					</Radio>
 				</Flex>
 			) : null}
 

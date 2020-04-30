@@ -112,6 +112,7 @@ const Signup = ({ signup, isLoading, history }) => {
 
 	const submitForm = (creds) => {
 		if (creds.confirmPassword === creds.password) {
+			// TODO: format the signup state to match the back end tables/columns
 			const userFields = {
 				email: 'new@email.com',
 				password: 'password',
