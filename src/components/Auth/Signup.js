@@ -22,6 +22,7 @@ import {
 	InputGroup,
 	InputRightElement,
 	Select,
+	Icon,
 } from '@chakra-ui/core';
 
 const Signup = ({ signup, isLoading, history }) => {
@@ -178,9 +179,12 @@ const Signup = ({ signup, isLoading, history }) => {
 								Let's get started!
 							</Flex>
 
+							{/* FIRST NAME, LAST NAME */}
 							<Flex wrap='wrap' w='653' justify='center'>
 								<FormControl isRequired isInvalid={errors.username}>
-									<FormLabel fontFamily='Poppins'>First Name</FormLabel>
+									<FormLabel color='#131C4D' fontSize='20px' fontFamily='Muli'>
+										First Name
+									</FormLabel>
 									<SignupLoginInput
 										w='318px'
 										mb='30px'
@@ -197,7 +201,9 @@ const Signup = ({ signup, isLoading, history }) => {
 									</FormErrorMessage>
 								</FormControl>
 								<FormControl isRequired isInvalid={errors.username}>
-									<FormLabel fontFamily='Poppins'>Last Name</FormLabel>
+									<FormLabel color='#131C4D' fontSize='20px' fontFamily='Muli'>
+										Last Name
+									</FormLabel>
 									<SignupLoginInput
 										w='318px'
 										mb='30px'
@@ -214,9 +220,12 @@ const Signup = ({ signup, isLoading, history }) => {
 								</FormControl>
 							</Flex>
 
+							{/* EMAIL */}
 							<Flex wrap='wrap' w='653' justify='center'>
 								<FormControl isRequired isInvalid={errors.email}>
-									<FormLabel fontFamily='Poppins'>Email</FormLabel>
+									<FormLabel color='#131C4D' fontSize='20px' fontFamily='Muli'>
+										Email
+									</FormLabel>
 									<SignupLoginInput
 										w='653px'
 										mb='30px'
@@ -233,9 +242,12 @@ const Signup = ({ signup, isLoading, history }) => {
 								</FormControl>
 							</Flex>
 
+							{/* TRACK */}
 							<Flex wrap='wrap' w='411px%' justify='center'>
 								<FormControl isRequired isInvalid={errors.track_name}>
-									<FormLabel fontFamily='Muli'>Track</FormLabel>
+									<FormLabel color='#131C4D' fontSize='20px' fontFamily='Muli'>
+										Track
+									</FormLabel>
 									<Select
 										mb='30px'
 										mr='17px'
@@ -252,7 +264,6 @@ const Signup = ({ signup, isLoading, history }) => {
 										_hover={{ borderColor: '#BBBDC6' }}
 										name='track_id'
 										label='track_id'
-										// placeholder='Select Your Lambda Track'
 										ref={register({ validate: validateTrack })}
 									>
 										<option fontFamily='Muli' value=''>
@@ -279,7 +290,9 @@ const Signup = ({ signup, isLoading, history }) => {
 									</FormErrorMessage>
 								</FormControl>
 								<FormControl isRequired isInvalid={errors.username}>
-									<FormLabel fontFamily='Poppins'>Cohort</FormLabel>
+									<FormLabel color='#131C4D' fontSize='20px' fontFamily='Muli'>
+										Cohort
+									</FormLabel>
 									<SignupLoginInput
 										w='318px'
 										mb='30px'
@@ -296,9 +309,12 @@ const Signup = ({ signup, isLoading, history }) => {
 								</FormControl>
 							</Flex>
 
+							{/* PASSWORD, CONFIRM PASSWORD */}
 							<Flex wrap='wrap' w='411px%' justify='center'>
 								<FormControl isRequired isInvalid={errors.password}>
-									<FormLabel fontFamily='Poppins'>Password</FormLabel>
+									<FormLabel color='#131C4D' fontSize='20px' fontFamily='Muli'>
+										Password
+									</FormLabel>
 									<InputGroup>
 										<SignupLoginInput
 											w='318px'
@@ -324,7 +340,6 @@ const Signup = ({ signup, isLoading, history }) => {
 											</Button>
 										</InputRightElement>
 									</InputGroup>
-
 									<FormHelperText mb='45px' color='#9194A8'>
 										Must be at least 8 characters
 									</FormHelperText>
@@ -333,7 +348,9 @@ const Signup = ({ signup, isLoading, history }) => {
 									</FormErrorMessage>
 								</FormControl>
 								<FormControl isRequired>
-									<FormLabel fontFamily='Poppins'>Confirm Password</FormLabel>
+									<FormLabel color='#131C4D' fontSize='20px' fontFamily='Muli'>
+										Confirm Password
+									</FormLabel>
 									<InputGroup>
 										<SignupLoginInput
 											w='318px'
@@ -361,6 +378,7 @@ const Signup = ({ signup, isLoading, history }) => {
 								</FormControl>
 							</Flex>
 
+							{/* CLICK FOR LONGFORM SIGNUP */}
 							<Flex
 								wrap='wrap'
 								w='653px'
@@ -371,22 +389,35 @@ const Signup = ({ signup, isLoading, history }) => {
 								onClick={switchMoreInfo}
 							>
 								<Flex justify='flex-start'>
-									<Text
-										fontWeight='bold'
-										fontFamily='Poppins'
-										textAlign='left'
-										mr='5px'
-									>
-										>{' '}
-									</Text>
-									<Text fontWeight='bold' fontFamily='Poppins'>
+									{moreInfo ? (
+										<Icon
+											fontWeight='bold'
+											name='chevron-down'
+											textAlign='left'
+											size='30px'
+											mr='5px'
+											ml='-8px'
+											pt='3px'
+										/>
+									) : (
+										<Icon
+											fontWeight='bold'
+											name='chevron-right'
+											textAlign='left'
+											size='30px'
+											mr='5px'
+											ml='-8px'
+											pt='3px'
+										/>
+									)}
+									<Text fontWeight='bold' fontSize='20px' fontFamily='Muli'>
 										{' '}
 										Add Additional Information
 									</Text>
 								</Flex>
 							</Flex>
 
-							{/* Start of the additional info */}
+							{/* ADDITIONAL INFO COMPONENT */}
 							{moreInfo ? (
 								<SignupAdditional
 									register={register}
@@ -419,16 +450,17 @@ const Signup = ({ signup, isLoading, history }) => {
 								</Button>
 							</Flex>
 							<Flex m='15px' justify='center' fontWeight='light'>
-								<Text>
+								<Text fontSize='16px' color='#17171B' fontFamily='Muli'>
 									Already have an account?{' '}
 									<Link
 										to='/'
-										color='black'
 										onClick={gaLogin}
-										fontColor='black'
-										fontWeight='bold'
-										fontDecoration='none'
-										underline='none'
+										style={{
+											textDecoration: 'none',
+											fontWeight: 'bold',
+											color: '#344CD0',
+											fontSize: '16px',
+										}}
 									>
 										Sign in here!
 									</Link>
