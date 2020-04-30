@@ -112,12 +112,38 @@ const Signup = ({ signup, isLoading, history }) => {
 
 	const submitForm = (creds) => {
 		if (creds.confirmPassword === creds.password) {
-			signup({
-				username: creds.username,
-				email: creds.email,
-				password: creds.password,
-				track_id: creds.track_id,
-			}).then(() => history.push('/dashboard'));
+			const userFields = {
+				email: 'new@email.com',
+				password: 'password',
+				track_id: 2,
+				first_name: 'Jane',
+				last_name: 'Foo',
+				cohort: 'New Cohort',
+				contact_email: 'contact@email.com',
+				location: 'New Location',
+				graduated: '2020-01-01',
+				highest_ed: 'High School',
+				field_of_study: 'Back End',
+				prior_experience: true,
+				tlsl_experience: true,
+				employed_company: 'Company Name',
+				employed_title: 'Job Title',
+				employed_remote: true,
+				employed_start: '2020-02-02',
+				resume: 'Resume URL',
+				linked_in: 'Linked In URL',
+				slack: 'Slack Username',
+				github: 'Github Username',
+				dribble: 'Dribble Username',
+				profile_image: 'Image URL',
+			};
+			// signup({
+			// 	username: creds.username,
+			// 	email: creds.email,
+			// 	password: creds.password,
+			// 	track_id: creds.track_id,
+			// }).then(() => history.push('/dashboard'));
+			console.log('creds', creds);
 		} else {
 			alert('Your Passwords must match!');
 		}
