@@ -10,6 +10,18 @@ export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 
+// ============ FETCH SINGLE USER ===========
+
+export const FETCH_USER_START = "FETCH_USER_START";
+export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
+export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
+
+// ============ BLOCK USER ===========
+
+export const BLOCK_USER_FAILURE = "BLOCK_USER_FAILURE ";
+export const BLOCK_USER_START = "BLOCK_USER_START";
+export const BLOCK_USER_SUCCESS = " BLOCK_USER_SUCCESS";
+
 // ============ FETCH REVIEW LIST ===========
 
 export const FETCH_REVIEWS_START = "FETCH_REVIEWS_START";
@@ -49,9 +61,3 @@ export const FETCH_COMPANIES_FAILURE = "FETCH_COMPANIES_FAILURE";
 export const POST_COMPANY_START = "POST_COMPANY_START";
 export const POST_COMPANY_SUCCESS = "POST_COMPANY_SUCCESS";
 export const POST_COMPANY_FAILURE = "POST_COMPANY_FAILURE";
-
-// ============ BLOCK USER ===========
-
-export const BLOCK_USER_FAILURE = "BLOCK_USER_FAILURE ";
-export const BLOCK_USER_START = "BLOCK_USER_START";
-export const BLOCK_USER_SUCCESS = " BLOCK_USER_SUCCESS";

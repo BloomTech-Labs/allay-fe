@@ -25,6 +25,7 @@ const Login = ({ login, isLoading, history }) => {
 	const [show, setShow] = React.useState(false);
 	const handleClick = () => setShow(!show);
 
+<<<<<<< HEAD
 	function validateUsername(value) {
 		let error;
 		if (!value) {
@@ -34,6 +35,17 @@ const Login = ({ login, isLoading, history }) => {
 		}
 		return error || true;
 	}
+=======
+  function validateEmail(value) {
+    let error;
+    if (!value) {
+      error = "email is required";
+    } else if (value.length < 5) {
+      error = "email needed";
+    }
+    return error || true;
+  }
+>>>>>>> 1c6cdc7dabaea2e050d47b1f2d77ec0e56e1b2fe
 
 	function validatePassword(value) {
 		let error;
@@ -122,94 +134,93 @@ const Login = ({ login, isLoading, history }) => {
 								Welcome back!
 							</Flex>
 
-							<Flex wrap='wrap' w='411px%' justify='center'>
-								<FormControl isInvalid={errors.username}>
-									<FormLabel>Username</FormLabel>
-									<SignupLoginInput
-										mb='30px'
-										type='text'
-										name='username'
-										label='username'
-										placeholder='lambda1'
-										autoCapitalize='none'
-										ref={register({ validate: validateUsername })}
-									/>
-									<FormErrorMessage>
-										{errors.username && errors.username.message}
-									</FormErrorMessage>
-								</FormControl>
-								<FormControl isInvalid={errors.password}>
-									<Flex flexDir='column'>
-										<FormLabel>Password</FormLabel>
-										<InputGroup>
-											<SignupLoginInput
-												mb='30px'
-												type={show ? 'text' : 'password'}
-												name='password'
-												label='Password'
-												placeholder='********'
-												autoCapitalize='none'
-												ref={register({ validate: validatePassword })}
-											/>
-											<InputRightElement width='4.5rem' py='32px'>
-												<Button
-													// position='fixed'
-													h='1.75rem'
-													color='rgba(72, 72, 72, 0.1)'
-													border='none'
-													size='sm'
-													backgroundColor='#FDFDFF'
-													onClick={handleClick}
-												>
-													{show ? 'Hide' : 'Show'}
-												</Button>
-											</InputRightElement>
-										</InputGroup>
-										<FormErrorMessage>
-											{errors.password && errors.password.message}
-										</FormErrorMessage>
-									</Flex>
-								</FormControl>
-								<Flex w='100%' justify='center'>
-									<Button
-										mb='30px'
-										border='none'
-										rounded='50px'
-										h='58px'
-										w='404px'
-										my='2%'
-										size='lg'
-										color='white'
-										backgroundColor='#344CD0'
-										isLoading={formState.isSubmitting}
-										type='submit'
-										data-cy='loginSubmit'
-									>
-										Login
-									</Button>
-								</Flex>
-							</Flex>
-							<Flex m='15px' justify='center' fontWeight='light'>
-								<Text>
-									Don't have an account?{' '}
-									<Link
-										to='/signup'
-										color='black'
-										onClick={gaSignup}
-										fontWeight='bold'
-										underline='none'
-										data-cy='signupLink'
-									>
-										Sign up here!
-									</Link>
-								</Text>
-							</Flex>
-						</Flex>
-					</form>
-				</Flex>
-			</Flex>
-		</Flex>
-	);
+              <Flex wrap="wrap" w="411px%" justify="center">
+                <FormControl isInvalid={errors.email}>
+                  <FormLabel>email</FormLabel>
+                  <SignupLoginInput
+                    mb="30px"
+                    type="text"
+                    name="email"
+                    label="email"
+                    placeholder="lambda1"
+                    autoCapitalize="none"
+                    ref={register({ validate: validateEmail })}
+                  />
+                  <FormErrorMessage>
+                    {errors.email && errors.email.message}
+                  </FormErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={errors.password}>
+                  <Flex flexDir="column">
+                    <FormLabel>Password</FormLabel>
+                    <InputGroup>
+                      <SignupLoginInput
+                        mb="30px"
+                        type={show ? "text" : "password"}
+                        name="password"
+                        label="Password"
+                        placeholder="********"
+                        autoCapitalize="none"
+                        ref={register({ validate: validatePassword })}
+                      />
+                      <InputRightElement width="4.5rem" py="32px">
+                        <Button
+                          // position='fixed'
+                          h="1.75rem"
+                          color="rgba(72, 72, 72, 0.1)"
+                          border="none"
+                          size="sm"
+                          backgroundColor="#FDFDFF"
+                          onClick={handleClick}
+                        >
+                          {show ? "Hide" : "Show"}
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
+                    <FormErrorMessage>
+                      {errors.password && errors.password.message}
+                    </FormErrorMessage>
+                  </Flex>
+                </FormControl>
+                <Flex w="100%" justify="center">
+                  <Button
+                    mb="30px"
+                    border="none"
+                    h="58px"
+                    w="404px"
+                    my="2%"
+                    size="lg"
+                    color="white"
+                    backgroundColor="#344CD0"
+                    isLoading={formState.isSubmitting}
+                    type="submit"
+                    data-cy="loginSubmit"
+                  >
+                    Login
+                  </Button>
+                </Flex>
+              </Flex>
+              <Flex m="15px" justify="center" fontWeight="light">
+                <Text>
+                  Don't have an account?{" "}
+                  <Link
+                    to="/signup"
+                    color="black"
+                    onClick={gaSignup}
+                    fontWeight="bold"
+                    underline="none"
+                    data-cy="signupLink"
+                  >
+                    Sign up here!
+                  </Link>
+                </Text>
+              </Flex>
+            </Flex>
+          </form>
+        </Flex>
+      </Flex>
+    </Flex>
+  );
 };
 
 const mapStateToProps = (state) => {
