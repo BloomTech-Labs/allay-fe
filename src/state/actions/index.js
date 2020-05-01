@@ -9,7 +9,7 @@ import {
   deleteReview
 } from "./reviewActions";
 import { getCompanies, postCompany } from "./companyActions";
-import { blockUser } from "./userActions";
+import { blockUser, getUser } from "./userActions";
 export default {
   login,
   signup,
@@ -20,5 +20,6 @@ export default {
   deleteReview,
   getCompanies,
   postCompany,
-  blockUser
+  blockUser,
+  getUser
 };

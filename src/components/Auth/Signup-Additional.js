@@ -14,6 +14,9 @@ import {
 	RadioGroup,
 	Radio,
 	Select,
+	Tooltip,
+	Box,
+	
 } from '@chakra-ui/core';
 
 const SignupAdditional = ({
@@ -61,6 +64,14 @@ const SignupAdditional = ({
 		const year = new Date().getFullYear();
 		setYears(Array.from(new Array(20), (val, index) => year - index));
 	}, []);
+
+	///info for slack ID
+
+	const info = <Box >
+  <Image 
+    objectFit="fit" width="300px" height="300px" src={require("../../icons/slackID.jpg")} alt="slack info" />
+		</Box>
+
 
 	return (
 		<>
@@ -419,7 +430,7 @@ const SignupAdditional = ({
 					id='employed-2'
 					value={false}
 					defaultChecked={employed === false}
-					onClick={isEmployed}
+					onClick={notEmployed}
 				>
 					No
 				</Radio>
@@ -707,14 +718,16 @@ const SignupAdditional = ({
 				align='center'
 			>
 				<Text align='center' fontFamily='Muli'>
-					Slack username
+				SLack ID<Tooltip hasArrow label={info} placement="top"><i style={{paddingLeft:"10px"}} class="fas fa-question"></i>
+
+</Tooltip>
 				</Text>
 				<SignupLoginInput
 					w='318px'
 					type='text'
 					name='slack'
 					label='slack'
-					placeholder='Enter your Slack username'
+					placeholder='Enter your Slack ID'
 					autoCapitalize='none'
 					ref={register}
 				/>
@@ -730,14 +743,14 @@ const SignupAdditional = ({
 				align='center'
 			>
 				<Text align='center' fontFamily='Muli'>
-					Github username
+					Github URL
 				</Text>
 				<SignupLoginInput
 					w='318px'
 					type='text'
 					name='github'
 					label='github'
-					placeholder='Enter your Github username'
+					placeholder='Enter your Github URL'
 					autoCapitalize='none'
 					ref={register}
 				/>

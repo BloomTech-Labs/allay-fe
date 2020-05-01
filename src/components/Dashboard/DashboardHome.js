@@ -13,7 +13,6 @@ import { Flex, Alert, AlertDescription } from "@chakra-ui/core";
 import CustomSpinner from "../CustomSpinner.js";
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
-  console.log("here i am", data);
   // search state
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
