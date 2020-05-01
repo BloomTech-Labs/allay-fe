@@ -67,9 +67,11 @@ Expects:
 ```json
 {
 	"id": 1,
-	"username": "yourusername",
-	"email": "youremail@youremail.com",
+	"first_name": "Jane",
+	"last_name": "Doe",
+	"email": "janedoe@email.com",
 	"track_id": 1,
+	"cohort": "FT 1",
 	"password": "password"
 }
 ```
@@ -79,9 +81,11 @@ Returns:
 ```json
 {
 	"id": 1,
-	"username": "yourusername",
-	"email": "youremail@youremail.com",
+	"first_name": "Jane",
+	"last_name": "Doe",
+	"email": "janedoe@email.com",
 	"track_id": 1,
+	"cohort":"FT 1",
 	"reviews": []
 }
 ```
