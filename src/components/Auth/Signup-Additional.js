@@ -14,6 +14,9 @@ import {
 	RadioGroup,
 	Radio,
 	Select,
+	Tooltip,
+	Box,
+	
 } from '@chakra-ui/core';
 
 const SignupAdditional = ({
@@ -61,6 +64,14 @@ const SignupAdditional = ({
 		const year = new Date().getFullYear();
 		setYears(Array.from(new Array(20), (val, index) => year - index));
 	}, []);
+
+	///info for slack ID
+
+	const info = <Box >
+  <Image 
+    objectFit="fit" width="300px" height="300px" src={require("../../icons/slackID.jpg")} alt="slack info" />
+		</Box>
+
 
 	return (
 		<>
@@ -707,7 +718,9 @@ const SignupAdditional = ({
 				align='center'
 			>
 				<Text align='center' fontFamily='Muli'>
-					Slack ID
+				SLack ID<Tooltip hasArrow label={info} placement="top"><i style={{paddingLeft:"10px"}} class="fas fa-question"></i>
+
+</Tooltip>
 				</Text>
 				<SignupLoginInput
 					w='318px'

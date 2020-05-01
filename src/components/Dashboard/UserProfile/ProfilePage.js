@@ -14,6 +14,7 @@ import {
   Link
 } from "@chakra-ui/core";
 import { getUser } from "../../../state/actions/userActions";
+import { set } from "react-ga";
 
 const ProfilePage = ({ match }) => {
   const id = match.params.id;
@@ -37,10 +38,6 @@ const ProfilePage = ({ match }) => {
     padding: "0 0 0 22%",
     opacity: 0.5
   };
-  useEffect(() => {
-    dispatch(getUser(id));
-  }, []);
-
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.user.isLoading);
   const userData = useSelector(state => state.user.userData);
@@ -52,7 +49,7 @@ const ProfilePage = ({ match }) => {
   const track = ["arrayStartsWithZero :D", "android", "ds", "web", "ios", "ux"][
     userData.track_id
   ];
-  // console.log(userData);
+
   return (
     <>
       {/* //Top Section */}
@@ -417,9 +414,11 @@ const ProfilePage = ({ match }) => {
                   </Box>
                   <Box height="20px">January 1st, 2020</Box>
                   <Box height="20px" style={_emp}>
+                    Remote
+                  </Box>
+                  <Box height="20px">
                     {userData.employed_remote ? "Yes" : "No"}
                   </Box>
-                  <Box height="20px">No</Box>
                 </SimpleGrid>
               </Box>
             </SimpleGrid>
