@@ -14,18 +14,11 @@ import {
   Link
 } from "@chakra-ui/core";
 import { getUser } from "../../../state/actions/userActions";
-import { set } from "react-ga";
 
 const ProfilePage = ({ match }) => {
   const id = match.params.id;
-  ///
-  // TODO:format the time and Date
-  // / TODO: add portfolio field
-  // TODO:resume and profile image needs to be a link not a google drive view
-  // TODO:ask about the portfolio column and city or location object
-  ///
 
-  //Some randome styling//
+  // styling//
   const _midSectionStyles = {
     width: "40%",
     display: "flex",
@@ -38,18 +31,21 @@ const ProfilePage = ({ match }) => {
     padding: "0 0 0 22%",
     opacity: 0.5
   };
+  //state info
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.user.isLoading);
   const userData = useSelector(state => state.user.userData);
-  // TODO:update the slack link for Mandi only
-  const slackID = "W012JHX6LD8";
-  const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
+  useEffect(() => {
+    dispatch(getUser(id));
+  }, []);
 
   //helper func to get the correct track name
   const track = ["arrayStartsWithZero :D", "android", "ds", "web", "ios", "ux"][
     userData.track_id
   ];
-
+  //slack id
+  const slackID = "W012JHX6LD8";
+  const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
   return (
     <>
       {/* //Top Section */}

@@ -66,7 +66,6 @@ const SignupAdditional = ({
 	}, []);
 
 	///info for slack ID
-
 	const info = <Box >
   <Image 
     objectFit="fit" width="300px" height="300px" src={require("../../icons/slackID.jpg")} alt="slack info" />
