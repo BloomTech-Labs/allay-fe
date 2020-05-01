@@ -419,7 +419,7 @@ const SignupAdditional = ({
 					id='employed-2'
 					value={false}
 					defaultChecked={employed === false}
-					onClick={isEmployed}
+					onClick={notEmployed}
 				>
 					No
 				</Radio>
@@ -707,14 +707,14 @@ const SignupAdditional = ({
 				align='center'
 			>
 				<Text align='center' fontFamily='Muli'>
-					Slack username
+					Slack ID
 				</Text>
 				<SignupLoginInput
 					w='318px'
 					type='text'
 					name='slack'
 					label='slack'
-					placeholder='Enter your Slack username'
+					placeholder='Enter your Slack ID'
 					autoCapitalize='none'
 					ref={register}
 				/>
@@ -730,14 +730,14 @@ const SignupAdditional = ({
 				align='center'
 			>
 				<Text align='center' fontFamily='Muli'>
-					Github username
+					Github URL
 				</Text>
 				<SignupLoginInput
 					w='318px'
 					type='text'
 					name='github'
 					label='github'
-					placeholder='Enter your Github username'
+					placeholder='Enter your Github URL'
 					autoCapitalize='none'
 					ref={register}
 				/>

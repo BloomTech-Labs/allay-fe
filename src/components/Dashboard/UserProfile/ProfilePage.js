@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import GridLoader from "react-spinners/GridLoader";
 import {
   Flex,
-  Button,
   Image,
   SimpleGrid,
   Box,
@@ -14,13 +13,18 @@ import {
   AccordionPanel,
   Link
 } from "@chakra-ui/core";
-
-///////////
 import { getUser } from "../../../state/actions/userActions";
 
-const ProfilePage = props => {
-  const id = props.match.params.id;
-  const dispatch = useDispatch();
+const ProfilePage = ({ match }) => {
+  const id = match.params.id;
+  ///
+  // TODO:format the time and Date
+  // / TODO: add portfolio field
+  // TODO:resume and profile image needs to be a link not a google drive view
+  // TODO:ask about the portfolio column and city or location object
+  ///
+
+  //Some randome styling//
   const _midSectionStyles = {
     width: "40%",
     display: "flex",
@@ -33,15 +37,22 @@ const ProfilePage = props => {
     padding: "0 0 0 22%",
     opacity: 0.5
   };
-
-  const isLoading = useSelector(state => state.user.isLoading);
-  const userData = useSelector(state => state.user.userData);
-
   useEffect(() => {
     dispatch(getUser(id));
   }, []);
-  console.log("isLoading", isLoading);
-  console.log("userData", userData);
+
+  const dispatch = useDispatch();
+  const isLoading = useSelector(state => state.user.isLoading);
+  const userData = useSelector(state => state.user.userData);
+  // TODO:update the slack link for Mandi only
+  const slackID = "W012JHX6LD8";
+  const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
+
+  //helper func to get the correct track name
+  const track = ["arrayStartsWithZero :D", "android", "ds", "web", "ios", "ux"][
+    userData.track_id
+  ];
+  // console.log(userData);
   return (
     <>
       {/* //Top Section */}
@@ -90,7 +101,9 @@ const ProfilePage = props => {
                   <Avatar
                     size="2xl"
                     name="user"
-                    src={require("../../../icons/lisa.jpg")}
+                    src={
+                      "https://drive.google.com/file/d/0B6M_KioiSkDpSGkwZ25CN19ZYUE/view"
+                    }
                   />
                 </Flex>
                 <Flex w="80%" pl="6%">
@@ -115,11 +128,11 @@ const ProfilePage = props => {
                             color: " #131C4D"
                           }}
                         >
-                          Lisa Smith
+                          {userData.first_name} {userData.last_name}
                         </h3>
                       </Box>
                       <Box
-                        width="50%"
+                        width="43%"
                         height="53px"
                         style={{
                           display: "flex",
@@ -142,7 +155,7 @@ const ProfilePage = props => {
                             paddingTop: "6px"
                           }}
                         >
-                          Web
+                          {track}
                         </span>
 
                         <h6
@@ -186,12 +199,27 @@ const ProfilePage = props => {
                           pl="42px"
                           style={{ fontWeight: "bold" }}
                         >
-                          <Link color="#344CD0" isExternal="true" href="#">
+                          <a
+                            style={{
+                              textDecoration: "none",
+                              color: "#344CD0"
+                            }}
+                            target="blank"
+                            href="#"
+                          >
                             Portfolio
-                          </Link>
-                          <Link color="#344CD0" isExternal="true" href="#">
+                          </a>
+
+                          <a
+                            style={{
+                              textDecoration: "none",
+                              color: "#344CD0"
+                            }}
+                            target="blank"
+                            href={userData.resume}
+                          >
                             Resume
-                          </Link>
+                          </a>
                         </Flex>
                         <Flex
                           width="62%"
@@ -199,24 +227,70 @@ const ProfilePage = props => {
                           justifySelf="flex-end"
                           alignItems="center"
                         >
-                          <Image
-                            size="20px"
-                            style={{ borderRadius: "60%" }}
-                            src={require("../../../icons/linkedIn.png")}
-                          />
-                          <Image
-                            size="20px"
-                            src={require("../../../icons/slack.svg")}
-                          />
-                          <i
-                            style={{ fontSize: "larger" }}
-                            class="fab fa-github"
-                          ></i>
-                          <Image
-                            size="20px"
-                            style={{ borderRadius: "60%" }}
-                            src={require("../../../icons/dribble.png")}
-                          />
+                          {userData.linked_in ? (
+                            <a target="blank" href={userData.linked_in}>
+                              <Image
+                                size="20px"
+                                style={{ borderRadius: "60%" }}
+                                src={require("../../../icons/linkedIn.png")}
+                              />
+                            </a>
+                          ) : (
+                            <Image
+                              size="20px"
+                              opacity=".3"
+                              style={{ borderRadius: "60%" }}
+                              src={require("../../../icons/linkedIn.png")}
+                            />
+                          )}
+                          {userData.slack ? (
+                            <a target="blank" href={slackLink}>
+                              <Image
+                                size="20px"
+                                src={require("../../../icons/slack.svg")}
+                              />
+                            </a>
+                          ) : (
+                            <Image
+                              opacity="0.3"
+                              size="20px"
+                              src={require("../../../icons/slack.svg")}
+                            />
+                          )}
+                          {userData.github ? (
+                            <a
+                              style={{ height: "20px" }}
+                              target="blank"
+                              href={userData.github}
+                            >
+                              <i
+                                style={{ fontSize: "larger" }}
+                                class="fab fa-github"
+                              />
+                            </a>
+                          ) : (
+                            <i
+                              style={{ fontSize: "larger", opacity: "0.3" }}
+                              class="fab fa-github"
+                            ></i>
+                          )}
+
+                          {userData.dribble ? (
+                            <a target="blank" href={userData.dribble}>
+                              <Image
+                                size="20px"
+                                style={{ borderRadius: "60%" }}
+                                src={require("../../../icons/dribble.png")}
+                              />
+                            </a>
+                          ) : (
+                            <Image
+                              size="20px"
+                              opacity="0.3"
+                              style={{ borderRadius: "60%" }}
+                              src={require("../../../icons/dribble.png")}
+                            />
+                          )}
                         </Flex>
                       </SimpleGrid>
                     </Box>
@@ -241,7 +315,7 @@ const ProfilePage = props => {
                 <Flex>
                   <Box style={_midSectionStyles}>
                     <span style={{ opacity: ".5" }}>Cohort:</span>
-                    Web FT 20
+                    {userData.cohort}
                   </Box>
                   <Box
                     style={{
@@ -292,19 +366,23 @@ const ProfilePage = props => {
                   <Box height="20px" style={{ opacity: 0.5 }}>
                     Degree:
                   </Box>
-                  <Box height="20px">Bachelor of Art</Box>
+                  <Box height="20px">{userData.highest_ed}</Box>
                   <Box height="20px" style={{ opacity: 0.5 }}>
                     Field of Study:
                   </Box>
-                  <Box height="20px">English</Box>
+                  <Box height="20px">{userData.field_of_study}</Box>
                   <Box height="20px" style={{ opacity: 0.5 }}>
                     Prior web experience:
                   </Box>
-                  <Box height="20px">None</Box>
+                  <Box height="20px">
+                    {userData.prior_experience ? "Yes" : "None"}
+                  </Box>
                   <Box height="20px" style={{ opacity: 0.5 }}>
                     Lambda TL/SL position:
                   </Box>
-                  <Box height="20px">Yes</Box>
+                  <Box height="20px">
+                    {userData.tlsl_experience ? "Yes" : "None"}
+                  </Box>
                 </SimpleGrid>
               </Box>
               <Box
@@ -329,17 +407,17 @@ const ProfilePage = props => {
                   <Box height="20px" style={_emp}>
                     Company:
                   </Box>
-                  <Box height="20px">Indeed</Box>
+                  <Box height="20px">{userData.employed_company}</Box>
                   <Box height="20px" style={_emp}>
                     Job tittle:
                   </Box>
-                  <Box height="20px">Junior Front End Developer</Box>
+                  <Box height="20px">{userData.employed_title}</Box>
                   <Box height="20px" style={_emp}>
                     Start date:
                   </Box>
                   <Box height="20px">January 1st, 2020</Box>
                   <Box height="20px" style={_emp}>
-                    Remote:
+                    {userData.employed_remote ? "Yes" : "No"}
                   </Box>
                   <Box height="20px">No</Box>
                 </SimpleGrid>
@@ -386,7 +464,7 @@ const ProfilePage = props => {
         </>
       ) : (
         <Flex justify="center" pt="15%">
-          <PacmanLoader size={100} color={"#344CD0"} />
+          <GridLoader size={50} color={"#259bf8"} />
         </Flex>
       )}
     </>
