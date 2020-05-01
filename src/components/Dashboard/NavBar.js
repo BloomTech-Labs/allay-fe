@@ -55,7 +55,7 @@ function NavBar({
   //     action: `go to profile`
   //   });
   // };
-
+  const profile_id = localStorage.getItem("userId");
   const logout = () => {
     localStorage.clear("token");
     localStorage.clear("userId");
@@ -170,7 +170,7 @@ function NavBar({
                     textDecoration: "none",
                     color: "black"
                   }}
-                  to="/profile/:id"
+                  to={`/profile/${profile_id}`}
                 >
                   <Text fontSize="1.8em">Go to Profile</Text>
                 </Link>

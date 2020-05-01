@@ -15,11 +15,13 @@ export const getUser = userId => dispatch => {
   return axiosWithAuth()
     .get(`/users/${userId}`)
     .then(res => {
-      console.log("FETCH USER START", res.data);
-      // dispatch({ type: FETCH_USER_SUCCESS, payload: res.data });
+      ///so we can see a spinner in action lol
+      setTimeout(function() {
+        dispatch({ type: FETCH_USER_SUCCESS, payload: res.data });
+      }, 3000);
     })
     .catch(err => {
-      dispatch({ type: FETCH_USER_FAILURE, payload: err });
+      dispatch({ type: FETCH_USER_FAILURE, payload: err.response });
     });
 };
 
@@ -30,7 +32,6 @@ export const blockUser = userId => dispatch => {
   return axiosWithAuth()
     .put(`/users/${userId}/bind`)
     .then(res => {
-      console.log("from blocking user", res.data);
       dispatch({ type: BLOCK_USER_SUCCESS, payload: res.data });
     })
     .catch(err => {
