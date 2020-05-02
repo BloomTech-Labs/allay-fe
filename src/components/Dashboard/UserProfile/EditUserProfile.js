@@ -45,7 +45,7 @@ const EditUserProfile = ({ match }) => {
           </Flex>
         </Flex>
       </Flex>
-      <h1>HI FROM EDIR PROFILE</h1>
+      <h6>HI FROM EDIT PROFILE</h6>
     </>
   );
 };
