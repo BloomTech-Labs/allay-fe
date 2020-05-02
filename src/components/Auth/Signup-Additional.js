@@ -25,7 +25,7 @@ const SignupAdditional = ({
   stateHelper,
   validateFieldOfStudy,
 }) => {
-  //state
+  // graduated state
   const [graduated, setGraduated] = useState(false);
   const [years, setYears] = useState([]);
   const isGraduated = () => {
@@ -43,18 +43,19 @@ const SignupAdditional = ({
   };
 
   //radio button state
-  const [priorExp, setPriorExp] = useState(false);
-  const [tlsl, setTlsl] = useState(false);
-  const [remote, setRemote] = useState(false);
+  const [priorExp] = useState(false);
+  const [tlsl] = useState(false);
+  const [remote] = useState(false);
 
   //location helpers
   useEffect(() => {
-    if (location.myState) {
-      const stateId = states.filter((i) =>
-        i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
-      );
-      setNewLocation({ ...location, myState: stateId[0].id });
-    }
+    // if (location.myState) {
+    //   const stateId = states.filter((i) =>
+    //     i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
+    //   );
+    //   setNewLocation({ ...location, myState: stateId[0].id });
+    // }
+    setNewLocation({ ...location, myState: location.myState });
     // removes numbers, commas, and whitespaces from city
     if (location.myCity) {
       if (/^[0-9]+$/.test(location.myCity) || /\s/.test(location.myCity)) {

@@ -53,7 +53,6 @@ function CustomAutocomplete({ ...props }, ref) {
         myState: locationState,
       });
     }
-    console.log('location object', location);
   }
 
   return (

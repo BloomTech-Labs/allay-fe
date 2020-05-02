@@ -36,6 +36,8 @@ const Signup = ({ signup, isLoading, history }) => {
   const stateHelper = (value) => {
     setLocation(value);
   };
+  // profile image state
+  const [profile_image, setProfile_Image] = useState('');
 
   //validation
   function validateFirstName(value) {
@@ -112,49 +114,54 @@ const Signup = ({ signup, isLoading, history }) => {
 
   const submitForm = (creds) => {
     // correcting grad date format
+    let graduated = '';
     if (creds.gradMonth && creds.gradYear) {
-      let graduated = `${creds.gradYear}-${creds.gradMonth}-01`;
-    } else {
-      let graduated = '';
+      graduated = `${creds.gradYear}-${creds.gradMonth}-01`;
     }
 
     // correcting employed date format
+    let employed_start = '';
     if (creds.workMonth && creds.workYear) {
-      let employed_start = `${creds.workYear}-${creds.workMonth}-01`;
-    } else {
-      let employed_start = '';
+      employed_start = `${creds.workYear}-${creds.workMonth}-01`;
     }
 
     if (creds.confirmPassword === creds.password) {
-      // TODO: format the signup state to match the back end tables/columns
-      //   signup({
-      // 	email: creds.email,
-      //     password: creds.password,
-      //     track_id: creds.track_id,
-      //     first_name: creds.firstName,
-      //     last_name: creds.lastName,
-      //     cohort: creds.cohort,
-      //     contact_email: creds.contact_email || '',
-      //     location: 'New Location',
-      //     graduated: '2020-01-01',
-      //     highest_ed: 'High School',
-      //     field_of_study: 'Back End',
-      //     prior_experience: true,
-      //     tlsl_experience: true,
-      //     employed_company: 'Company Name',
-      //     employed_title: 'Job Title',
-      //     employed_remote: true,
-      //     employed_start: '2020-02-02',
-      //     resume: 'Resume URL',
-      //     linked_in: 'Linked In URL',
-      //     slack: 'Slack Username',
-      //     github: 'Github Username',
-      //     dribble: 'Dribble Username',
-      //     profile_image: 'Image URL',
-      //   }).then(() => history.push('/dashboard'));
+      // formatting the signup state to match the back end columns
+      signup({
+        email: creds.email,
+        password: creds.password,
+        track_id: Number(creds.track_id),
+        first_name: creds.firstName,
+        last_name: creds.lastName,
+        cohort: creds.cohort,
+        contact_email: creds.contact_email || '',
+        location: newLocation
+          ? `${newLocation.myCity}, ${newLocation.myState}`
+          : '',
+        graduated: graduated,
+        highest_ed: creds.highest_ed || '',
+        field_of_study: creds.field_of_study || '',
+        prior_experience: creds.prior_experience
+          ? JSON.parse(creds.prior_experience)
+          : false,
+        tlsl_experience: creds.tlsl_experience
+          ? JSON.parse(creds.tlsl_experience)
+          : false,
+        employed_company: creds.employed_company || '',
+        employed_title: creds.employed_title || '',
+        employed_remote: creds.employed_remote
+          ? JSON.parse(creds.employed_remote)
+          : false,
+        employed_start: employed_start,
+        resume: creds.resume || '',
+        linked_in: creds.linked_in || '',
+        slack: creds.slack || '',
+        github: creds.github || '',
+        dribble: creds.dribble || '',
+        profile_image: profile_image ? profile_image : '',
+      }).then(() => history.push('/'));
+
       console.log('creds', creds);
-      console.log('location', location);
-      console.log('new location', newLocation);
     } else {
       alert('Your Passwords must match!');
     }
