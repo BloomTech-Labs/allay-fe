@@ -14,11 +14,11 @@ import EditReviewForm from "./components/Dashboard/Forms/EditReviewForm";
 import EditInterviewForm from "./components/Dashboard/Forms/EditInterviewForm";
 import DashboardHome from "./components/Dashboard/DashboardHome";
 import AddCompanyForm from "./components/Dashboard/Forms/AddCompanyForm";
+import ProfilePage from "./components/Dashboard/UserProfile/ProfilePage";
+import EditUserProfile from "./components/Dashboard/UserProfile/EditUserProfile";
 // google analytics
 import ReactGA from "react-ga";
 import { useLocation } from "react-router-dom";
-
-import ProfilePage from "./components/Dashboard/UserProfile/ProfilePage";
 
 function initializeAnalytics() {
   return process.env.NODE_ENV === "production"
@@ -46,7 +46,11 @@ const App = () => {
           <Route path="/signup" component={Signup} />
 
           <PrivateRoute exact path="/profile/:id" component={ProfilePage} />
-
+          <PrivateRoute
+            exact
+            path="/profile/:id/edit"
+            component={EditUserProfile}
+          />
           <PrivateRoute exact path="/dashboard" component={DashboardHome} />
           <PrivateRoute
             path="/dashboard/add-review"

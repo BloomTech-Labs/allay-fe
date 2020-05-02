@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { ProfilePageReview } from "./ProfilePageReview";
 import GridLoader from "react-spinners/GridLoader";
-import {
-  Flex,
-  Image,
-  SimpleGrid,
-  Box,
-  Avatar,
-  AccordionHeader,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Link
-} from "@chakra-ui/core";
+import { Flex, Image, SimpleGrid, Box, Avatar } from "@chakra-ui/core";
 import { getUser } from "../../../state/actions/userActions";
+import { Link } from "react-router-dom";
 
 const ProfilePage = ({ match }) => {
   const id = match.params.id;
-
+  useEffect(() => {
+    dispatch(getUser(id));
+  }, []);
   // styling//
   const _midSectionStyles = {
     width: "40%",
@@ -35,14 +28,12 @@ const ProfilePage = ({ match }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.user.isLoading);
   const userData = useSelector(state => state.user.userData);
-  useEffect(() => {
-    dispatch(getUser(id));
-  }, []);
 
   //helper func to get the correct track name
   const track = ["arrayStartsWithZero :D", "android", "ds", "web", "ios", "ux"][
     userData.track_id
   ];
+
   //slack id
   const slackID = "W012JHX6LD8";
   const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
@@ -59,7 +50,15 @@ const ProfilePage = ({ match }) => {
           justify="space-between"
         >
           <Flex>
-            <h1> Allay </h1>
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "black"
+              }}
+              to="/dashboard"
+            >
+              <h1> Allay </h1>
+            </Link>
           </Flex>
           <Flex>
             <Image
@@ -76,11 +75,19 @@ const ProfilePage = ({ match }) => {
           <Flex Flex w="100%" pt="3%" justify="center">
             <SimpleGrid width="1048px" columns={1}>
               <Box style={{ textAlign: "end", paddingRight: "1%" }}>
-                <i
-                  style={{ opacity: 0.3, paddingRight: "10px" }}
-                  class="far fa-edit"
-                ></i>
-                Edit profile
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: "black"
+                  }}
+                  to={`/profile/${id}/edit`}
+                >
+                  <i
+                    style={{ opacity: 0.3, paddingRight: "10px" }}
+                    class="far fa-edit"
+                  ></i>
+                  Edit profile
+                </Link>
               </Box>
               <Box
                 style={{
@@ -157,7 +164,7 @@ const ProfilePage = ({ match }) => {
                             fontWeight: 300
                           }}
                         >
-                          Alumni
+                          {userData.graduated ? "Alumni" : "Student"}
                         </h6>
                       </Box>
 
@@ -421,41 +428,11 @@ const ProfilePage = ({ match }) => {
           </Flex>
 
           <Flex justify="center">
-            <Box width="1048px">Reviews written by Lisa Smith</Box>
-          </Flex>
-          <Flex justify="center" mt=".5%">
-            <Box
-              width="1048px"
-              style={{ border: "1px solid #e6e5e5", padding: "3%" }}
-            >
-              <AccordionItem width="816px" style={{ margin: "0 auto" }}>
-                <AccordionHeader
-                  style={{ borderRadius: "10px " }}
-                  _expanded={{ bg: "#007F00", color: "white" }}
-                >
-                  <Box flex="1" textAlign="left">
-                    <span
-                      style={{
-                        borderRadius: "35%",
-                        backgroundColor: "#a5a5a5",
-                        padding: ".5%"
-                      }}
-                    >
-                      Interview
-                    </span>{" "}
-                    posted 01/01/2020
-                  </Box>
-                  <AccordionIcon />
-                </AccordionHeader>
-                <AccordionPanel>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </AccordionPanel>
-              </AccordionItem>
+            <Box width="1048px">
+              Reviews written by {userData.first_name} {userData.last_name}
             </Box>
           </Flex>
+          <ProfilePageReview userReviews={userData.reviews} />
         </>
       ) : (
         <Flex justify="center" pt="15%">

@@ -18,7 +18,7 @@ export const getUser = userId => dispatch => {
       ///so we can see a spinner in action lol
       setTimeout(function() {
         dispatch({ type: FETCH_USER_SUCCESS, payload: res.data });
-      }, 3000);
+      }, 1000);
     })
     .catch(err => {
       dispatch({ type: FETCH_USER_FAILURE, payload: err.response });
