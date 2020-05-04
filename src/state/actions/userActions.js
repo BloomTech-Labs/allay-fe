@@ -20,6 +20,7 @@ export const getUser = (userId) => (dispatch) => {
     .then((res) => {
       ///so we can see a spinner in action lol
       setTimeout(function () {
+        console.log(res.data);
         dispatch({ type: FETCH_USER_SUCCESS, payload: res.data });
       }, 1000);
     })

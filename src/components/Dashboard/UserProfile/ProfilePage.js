@@ -11,6 +11,7 @@ const ProfilePage = ({ match }) => {
   useEffect(() => {
     dispatch(getUser(id));
   }, []);
+
   // styling//
   const _midSectionStyles = {
     width: "40%",
@@ -29,13 +30,13 @@ const ProfilePage = ({ match }) => {
   const isLoading = useSelector(state => state.user.isLoading);
   const userData = useSelector(state => state.user.userData);
 
-  //helper func to get the correct track name
+  //array to get the correct track name
   const track = ["arrayStartsWithZero :D", "android", "ds", "web", "ios", "ux"][
     userData.track_id
   ];
-
+  console.log(userData);
   //slack id
-  const slackID = "W012JHX6LD8";
+  const slackID = userData.slack;
   const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
   return (
     <>
@@ -98,13 +99,7 @@ const ProfilePage = ({ match }) => {
                 height="220px"
               >
                 <Flex w="20%" style={{ padding: "55px 0 0 90px" }}>
-                  <Avatar
-                    size="2xl"
-                    name="user"
-                    src={
-                      "https://drive.google.com/file/d/0B6M_KioiSkDpSGkwZ25CN19ZYUE/view"
-                    }
-                  />
+                  <Avatar size="2xl" name="user" src={userData.profile_image} />
                 </Flex>
                 <Flex w="80%" pl="6%">
                   <SimpleGrid width="100%" row={2} pr="70px">
@@ -123,7 +118,7 @@ const ProfilePage = ({ match }) => {
                       >
                         <h3
                           style={{
-                            fontSize: "32px",
+                            fontSize: "25px",
                             fontFamily: "Poppins",
                             color: " #131C4D"
                           }}
@@ -132,7 +127,7 @@ const ProfilePage = ({ match }) => {
                         </h3>
                       </Box>
                       <Box
-                        width="43%"
+                        width="50%"
                         height="53px"
                         style={{
                           display: "flex",
