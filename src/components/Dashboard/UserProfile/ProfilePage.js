@@ -35,6 +35,23 @@ const ProfilePage = ({ match }) => {
     userData.track_id
   ];
   console.log(userData);
+
+  // formating graduated date
+  let graduated = userData.graduated;
+  graduated = new Date(graduated).toUTCString();
+  graduated = graduated
+    .split(" ")
+    .slice(2, 4)
+    .join(" ");
+  console.log(graduated);
+
+  // formating employed date
+  let hired = userData.employed_start;
+  hired = new Date(hired).toUTCString();
+  hired = hired
+    .split(" ")
+    .slice(2, 4)
+    .join(" ");
   //slack id
   const slackID = userData.slack;
   const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
@@ -118,7 +135,7 @@ const ProfilePage = ({ match }) => {
                       >
                         <h3
                           style={{
-                            fontSize: "25px",
+                            fontSize: "24px",
                             fontFamily: "Poppins",
                             color: " #131C4D"
                           }}
@@ -182,7 +199,7 @@ const ProfilePage = ({ match }) => {
                             style={{ opacity: 0.2, paddingRight: "5px" }}
                             class="fas fa-map-marker-alt"
                           ></i>
-                          Austin, TX
+                          {userData.location}
                         </h6>
                       </Box>
                     </Flex>
@@ -200,7 +217,7 @@ const ProfilePage = ({ match }) => {
                               color: "#344CD0"
                             }}
                             target="blank"
-                            href="#"
+                            href=""
                           >
                             Portfolio
                           </a>
@@ -323,7 +340,7 @@ const ProfilePage = ({ match }) => {
                     }}
                   >
                     <span style={{ opacity: ".5" }}>Graduated:</span>
-                    August 2019
+                    {graduated}
                   </Box>
                 </Flex>
               </Box>
@@ -410,7 +427,7 @@ const ProfilePage = ({ match }) => {
                   <Box height="20px" style={_emp}>
                     Start date:
                   </Box>
-                  <Box height="20px">January 1st, 2020</Box>
+                  <Box height="20px">{hired}</Box>
                   <Box height="20px" style={_emp}>
                     Remote
                   </Box>
