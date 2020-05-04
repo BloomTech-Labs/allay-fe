@@ -4,14 +4,17 @@ import {
   BLOCK_USER_START,
   FETCH_USER_START,
   FETCH_USER_SUCCESS,
-  FETCH_USER_FAILURE
+  FETCH_USER_FAILURE,
+  EDIT_USER_START,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAILURE,
 } from "../types";
 
 const initialState = {
   userData: {},
   isLoading: false,
   isUserBlocked: null,
-  error: ""
+  error: "",
 };
 
 // Reducer
@@ -20,38 +23,57 @@ const userReducer = (state = initialState, action) => {
     case BLOCK_USER_START: {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     }
     case BLOCK_USER_SUCCESS: {
       return {
         ...state,
-        isUserBlocked: action.payload.updatedInfo.blocked
+        isUserBlocked: action.payload.updatedInfo.blocked,
       };
     }
     case BLOCK_USER_FAILURE: {
       return {
         ...state,
-        error: ""
+        error: "",
       };
     }
     case FETCH_USER_START: {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     }
     case FETCH_USER_SUCCESS: {
       return {
         ...state,
         userData: action.payload,
-        isLoading: false
+        isLoading: false,
       };
     }
     case FETCH_USER_FAILURE: {
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+      };
+    }
+    case EDIT_USER_START: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case EDIT_USER_SUCCESS: {
+      return {
+        ...state,
+        userData: action.payload,
+        isLoading: false,
+      };
+    }
+    case EDIT_USER_FAILURE: {
+      return {
+        ...state,
+        error: action.payload,
       };
     }
     default:

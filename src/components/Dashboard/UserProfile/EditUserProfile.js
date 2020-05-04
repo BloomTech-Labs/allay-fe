@@ -6,9 +6,8 @@ import ReactGA from "react-ga"; // for google analytics
 //components
 import SignupLoginInput from "../../Reusable/InputFields/SignupLoginInput.js";
 import CustomAutocomplete from "../../Reusable/InputFields/Autocomplete.js";
-
 //actions
-import signup from "../../../state/actions/index";
+import updateUser from "../../../state/actions/index";
 //styles
 import CustomSpinner from "../../CustomSpinner.js";
 
@@ -30,9 +29,40 @@ import {
 } from "@chakra-ui/core";
 
 //need to make new action creator editUser
-const EditUserProfile = ({ match, isLoading, history }) => {
+const EditUserProfile = ({
+  match,
+  history,
+  userData,
+  isLoading,
+  updateUser,
+}) => {
   const id = match.params.id;
-  const { handleSubmit, errors, register, formState } = useForm();
+  const { handleSubmit, errors, register, formState } = useForm({
+    defaultValues: {
+      firstName: userData.first_name,
+      lastName: userData.last_name,
+      location: userData.location,
+      gradMonth: userData.graduated ? userData.graduated.slice(5, 7) : "",
+      gradYear: userData.graduated ? userData.graduated.slice(0, 4) : "",
+      highest_ed: userData.highest_ed,
+      field_of_study: userData.field_of_study,
+      employed_company: userData.employed_company,
+      employed_title: userData.employed_title,
+      workMonth: userData.employed_start
+        ? userData.employed_start.slice(5, 7)
+        : "",
+      workYear: userData.employed_start
+        ? userData.employed_start.slice(0, 4)
+        : "",
+      portfolio_URL: userData.portfolio,
+      resume: userData.resume,
+      linked_in: userData.linked_in,
+      slack: userData.slack,
+      github: userData.github,
+      dribble: userData.dribble,
+      profile_image: userData.profile_image,
+    },
+  });
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   //location state
@@ -62,9 +92,16 @@ const EditUserProfile = ({ match, isLoading, history }) => {
   };
 
   //radio button state
-  const [priorExp] = useState(false);
-  const [tlsl] = useState(false);
-  const [remote] = useState(false);
+  const [priorExp, setPriorExp] = useState(false);
+  const [tlsl, setTlsl] = useState(false);
+  const [remote, setRemote] = useState(false);
+
+  //set radio button state on load
+  useEffect(() => {
+    setPriorExp(userData.prior_experience);
+    setTlsl(userData.tlsl_experience);
+    setRemote(userData.employed_remote);
+  }, []);
 
   //location helpers
   useEffect(() => {
@@ -139,56 +176,57 @@ const EditUserProfile = ({ match, isLoading, history }) => {
 
   const submitForm = (creds) => {
     // correcting grad date format
-    let graduated = "";
+    let graduated = null;
     if (creds.gradMonth && creds.gradYear) {
       graduated = `${creds.gradYear}-${creds.gradMonth}-01`;
     }
 
     // correcting employed date format
-    let employed_start = "";
+    let employed_start = null;
     if (creds.workMonth && creds.workYear) {
       employed_start = `${creds.workYear}-${creds.workMonth}-01`;
     }
 
     // formatting the signup state to match the back end columns
-    signup({
-      email: creds.email,
-      password: creds.password,
-      track_id: Number(creds.track_id),
+    updateUser(id, {
       first_name: creds.firstName,
       last_name: creds.lastName,
-      cohort: creds.cohort,
-      contact_email: creds.contact_email || "",
       location: newLocation
         ? `${newLocation.myCity}, ${newLocation.myState}`
-        : "",
+        : null,
       graduated: graduated,
-      highest_ed: creds.highest_ed || "",
-      field_of_study: creds.field_of_study || "",
+      highest_ed: creds.highest_ed || null,
+      field_of_study: creds.field_of_study || null,
       prior_experience: creds.prior_experience
         ? JSON.parse(creds.prior_experience)
         : false,
       tlsl_experience: creds.tlsl_experience
         ? JSON.parse(creds.tlsl_experience)
         : false,
-      employed_company: creds.employed_company || "",
-      employed_title: creds.employed_title || "",
+      employed_company: creds.employed_company || null,
+      employed_title: creds.employed_title || null,
       employed_remote: creds.employed_remote
         ? JSON.parse(creds.employed_remote)
         : false,
       employed_start: employed_start,
-      resume: creds.resume || "",
-      linked_in: creds.linked_in || "",
-      slack: creds.slack || "",
-      github: creds.github || "",
-      dribble: creds.dribble || "",
-      profile_image: profile_image ? profile_image : "",
-    }).then(() => history.push("/"));
+      resume: creds.resume || null,
+      linked_in: creds.linked_in || null,
+      slack: creds.slack || null,
+      github: creds.github || null,
+      dribble: creds.dribble || null,
+      profile_image: profile_image ? profile_image : null,
+    }).then(() => history.push(`/profile/${id}`));
 
-    ReactGA.event({
-      category: "User",
-      action: `Button Sign Up`,
-    });
+    // TODO: implement google analytics for updating a user
+    // ReactGA.event({
+    //   category: "User",
+    //   action: `Button Sign Up`,
+    // });
+  };
+
+  const returnToProfile = (e) => {
+    e.preventDefault();
+    history.push(`/profile/${id}`);
   };
 
   if (isLoading) {
@@ -258,7 +296,7 @@ const EditUserProfile = ({ match, isLoading, history }) => {
             background="#FDFDFF"
             justify="center"
           >
-            <Flex w="653px" justify="space-between" my="68px">
+            <Flex w="653px" justify="space-between" my="68px" mx="auto">
               <Text
                 as="h2"
                 fontSize="24px"
@@ -274,6 +312,8 @@ const EditUserProfile = ({ match, isLoading, history }) => {
                   fontSize="22px"
                   fontWeight="normal"
                   color="#9194A8"
+                  _hover={{ cursor: "pointer" }}
+                  onClick={returnToProfile}
                 >
                   Cancel
                 </Text>
@@ -283,6 +323,8 @@ const EditUserProfile = ({ match, isLoading, history }) => {
                   fontSize="22px"
                   fontWeight="bold"
                   color="#344CD0"
+                  _hover={{ cursor: "pointer" }}
+                  onClick={handleSubmit(submitForm)}
                 >
                   Save
                 </Text>
@@ -1030,7 +1072,6 @@ const EditUserProfile = ({ match, isLoading, history }) => {
 
             <Flex w="100%" justify="center" direction="column">
               <Button
-                mb="30px"
                 border="none"
                 rounded="5px"
                 h="58px"
@@ -1044,7 +1085,7 @@ const EditUserProfile = ({ match, isLoading, history }) => {
                 type="submit"
                 data-cy="registerSubmit"
               >
-                Sign up
+                Save
               </Button>
               <Button
                 mb="30px"
@@ -1057,9 +1098,7 @@ const EditUserProfile = ({ match, isLoading, history }) => {
                 color="#9194A8"
                 backgroundColor="#FDFDFF"
                 _hover={{ cursor: "pointer" }}
-                isLoading={formState.isSubmitting}
-                type="submit"
-                data-cy="registerSubmit"
+                onClick={returnToProfile}
               >
                 Cancel
               </Button>
@@ -1071,4 +1110,11 @@ const EditUserProfile = ({ match, isLoading, history }) => {
   );
 };
 
-export default EditUserProfile;
+const mapStateToProps = (state) => {
+  return {
+    userData: state.user.userData,
+    isLoading: state.user.isLoading,
+  };
+};
+
+export default connect(mapStateToProps, updateUser)(EditUserProfile);
