@@ -34,9 +34,9 @@ const ProfilePage = ({ match }) => {
   const track = ["arrayStartsWithZero :D", "android", "ds", "web", "ios", "ux"][
     userData.track_id
   ];
-
+  console.log(userData);
   //slack id
-  const slackID = "W012JHX6LD8";
+  const slackID = userData.slack;
   const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
   return (
     <>
