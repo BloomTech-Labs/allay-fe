@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 //components
 import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js';
 import CustomAutocomplete from '../Reusable/InputFields/Autocomplete';
-import { states } from '../Reusable/statesData';
+
 //styles
 import {
   Image,
@@ -49,12 +49,6 @@ const SignupAdditional = ({
 
   //location helpers
   useEffect(() => {
-    // if (location.myState) {
-    //   const stateId = states.filter((i) =>
-    //     i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
-    //   );
-    //   setNewLocation({ ...location, myState: stateId[0].id });
-    // }
     setNewLocation({ ...location, myState: location.myState });
     // removes numbers, commas, and whitespaces from city
     if (location.myCity) {

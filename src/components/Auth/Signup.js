@@ -161,7 +161,6 @@ const Signup = ({ signup, isLoading, history }) => {
         profile_image: profile_image ? profile_image : '',
       }).then(() => history.push('/'));
 
-      console.log('creds', creds);
     } else {
       alert('Your Passwords must match!');
     }
