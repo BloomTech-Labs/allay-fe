@@ -99,13 +99,7 @@ const ProfilePage = ({ match }) => {
                 height="220px"
               >
                 <Flex w="20%" style={{ padding: "55px 0 0 90px" }}>
-                  <Avatar
-                    size="2xl"
-                    name="user"
-                    src={
-                      "https://drive.google.com/file/d/0B6M_KioiSkDpSGkwZ25CN19ZYUE/view"
-                    }
-                  />
+                  <Avatar size="2xl" name="user" src={userData.profile_image} />
                 </Flex>
                 <Flex w="80%" pl="6%">
                   <SimpleGrid width="100%" row={2} pr="70px">
@@ -124,7 +118,7 @@ const ProfilePage = ({ match }) => {
                       >
                         <h3
                           style={{
-                            fontSize: "32px",
+                            fontSize: "25px",
                             fontFamily: "Poppins",
                             color: " #131C4D"
                           }}
