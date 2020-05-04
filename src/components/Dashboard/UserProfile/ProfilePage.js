@@ -11,6 +11,7 @@ const ProfilePage = ({ match }) => {
   useEffect(() => {
     dispatch(getUser(id));
   }, []);
+
   // styling//
   const _midSectionStyles = {
     width: "40%",
@@ -29,7 +30,7 @@ const ProfilePage = ({ match }) => {
   const isLoading = useSelector(state => state.user.isLoading);
   const userData = useSelector(state => state.user.userData);
 
-  //helper func to get the correct track name
+  //array to get the correct track name
   const track = ["arrayStartsWithZero :D", "android", "ds", "web", "ios", "ux"][
     userData.track_id
   ];
@@ -132,7 +133,7 @@ const ProfilePage = ({ match }) => {
                         </h3>
                       </Box>
                       <Box
-                        width="43%"
+                        width="50%"
                         height="53px"
                         style={{
                           display: "flex",
