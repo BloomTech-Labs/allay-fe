@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useForm } from 'react-hook-form';
 import { Link } from "react-router-dom";
-import { Flex, Image } from "@chakra-ui/core";
+import { connect } from 'react-redux';
+import ReactGA from 'react-ga'; // for google analytics
+//components
+import SignupLoginIput from '../../Reusable/InputFields/SignupLoginInput.js';
+import SignupAdditional from '../../Auth/Signup-Additional.js';
+//actions
+import signup from '../../../state/actions/index';
+//styles
+import CustomSpinner from '../../CustomSpinner.js';
+
+import {
+  Image,
+  Button,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  FormErrorMessage,
+  Flex,
+  Text,
+  InputGroup,
+  InputRightElement,
+  Select,
+  Icon,
+} from '@chakra-ui/core';
 
 const EditUserProfile = ({ match }) => {
   const id = match.params.id;
