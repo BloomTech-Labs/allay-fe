@@ -17,6 +17,7 @@
     "emotion-theming": "^10.0.27",
     "minimist": "^1.2.5",
     "mutationobserver-shim": "^0.3.3",
+    "open": "^7.0.3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-ga": "^2.7.0",
@@ -75,7 +76,7 @@
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^10.0.0",
-    "cypress": "^4.2.0",
+    "cypress": "^4.5.0",
     "start-server-and-test": "^1.11.0"
   }
 }
