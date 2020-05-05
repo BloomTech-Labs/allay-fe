@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import ReactGA from 'react-ga'; // for google analytics
+
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import ReactGA from "react-ga"; // for google analytics
 //components
 import SignupLoginInput from '../../Reusable/InputFields/SignupLoginInput.js';
 import CustomAutocomplete from '../../Reusable/InputFields/Autocomplete.js';
@@ -53,17 +55,15 @@ const EditUserProfile = ({
         ? userData.employed_start.slice(5, 7)
         : '',
       workYear: userData.employed_start
-        ? userData.employed_start.slice(0, 4)
-        : '',
+        ? userData.employed_start.slice(0, 4),
+      resume: null,
       portfolio_URL: userData.portfolio,
-      resume: userData.resume,
       linked_in: userData.linked_in,
       slack: userData.slack,
       github: userData.github,
       dribble: userData.dribble,
-      profile_image: userData.profile_image,
-      profile_resume: userData.profile_resume,
-    },
+      profile_image: userData.profile_image
+    }
   });
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -223,14 +223,14 @@ const EditUserProfile = ({
     if (creds.workMonth && creds.workYear) {
       employed_start = `${creds.workYear}-${creds.workMonth}-01`;
     }
-
+    console.log(newLocation);
     // formatting the signup state to match the back end columns
     updateUser(id, {
       first_name: creds.firstName,
       last_name: creds.lastName,
-      location: newLocation
-        ? `${newLocation.myCity} ${newLocation.myState}`
-        : null,
+      location: !newLocation
+        ? userData.location
+        : `${newLocation.myCity} ${newLocation.myState}`,
       graduated: graduated,
       highest_ed: creds.highest_ed || null,
       field_of_study: creds.field_of_study || null,
@@ -268,13 +268,7 @@ const EditUserProfile = ({
   };
 
   if (isLoading) {
-    return (
-      <Flex justify='center' align='center' w='100vh' h='100vh'>
-        <Flex>
-          <CustomSpinner />
-        </Flex>
-      </Flex>
-    );
+   return null;
   }
 
   return (
@@ -382,13 +376,13 @@ const EditUserProfile = ({
                 <Avatar
                   size='2xl'
                   name={userData.first_name}
-                  style={{ borderRadius: '50px' }}
+                  style={{ borderRadius: "50%" }}
                   src={userData.profile_image}
                 />
               ) : (
                 <Avatar
-                  size='2xl'
-                  style={{ borderRadius: '50px' }}
+                  size="2xl"
+                  style={{ borderRadius: "50%" }}
                   src={newProfile_image}
                 />
               )}

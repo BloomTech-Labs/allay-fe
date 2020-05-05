@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { ProfilePageReview } from './ProfilePageReview';
-import GridLoader from 'react-spinners/GridLoader';
-import { Flex, Image, SimpleGrid, Box, Avatar } from '@chakra-ui/core';
-import { getUser } from '../../../state/actions/userActions';
-import { Link } from 'react-router-dom';
-import updateUser from '../../../state/actions/index';
+
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { ProfilePageReview } from "./ProfilePageReview";
+import GridLoader from "react-spinners/GridLoader";
+import { Flex, Image, SimpleGrid, Box, Avatar } from "@chakra-ui/core";
+import { getUser } from "../../../state/actions/userActions";
+import { Link } from "react-router-dom";
+
 
 const ProfilePage = (props) => {
   const id = props.match.params.id;
-  useEffect(() => {
-    dispatch(getUser(id));
-  }, [updateUser]);
 
   //
   const dispatch = useDispatch();
@@ -19,6 +17,7 @@ const ProfilePage = (props) => {
   const isUpdated = useSelector((state) => state.user.isUpdated);
   const userData = useSelector((state) => state.user.userData);
   //
+
   const _midSectionStyles = {
     width: '40%',
     display: 'flex',
@@ -65,6 +64,10 @@ const ProfilePage = (props) => {
   const slackID = userData.slack;
   const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
 
+  useEffect(() => {
+    dispatch(getUser(id));
+  }, []);
+  console.log(userData);
   return (
     <>
       {/* //Top Section */}
@@ -157,17 +160,20 @@ const ProfilePage = (props) => {
                         <h3
                           id='profileNames'
                           style={{
-                            fontSize: '24px',
-                            fontFamily: 'Poppins',
-                            color: ' #131C4D',
+                            fontSize: "27px",
+                            fontFamily: "Poppins",
+                            color: " #131C4D",
+                            width: "210px"
+
                           }}
                         >
                           {userData.first_name} {userData.last_name}
                         </h3>
                       </Box>
                       <Box
-                        width='50%'
-                        height='53px'
+                        width="47%"
+                        height="53px"
+
                         style={{
                           display: 'flex',
                           alignSelf: 'flex-end',
@@ -223,9 +229,9 @@ const ProfilePage = (props) => {
                             className='fas fa-map-marker-alt'
                           ></i>
 
-                          {userData.location !== ' '
-                            ? userData.location
-                            : 'Blue planet'}
+                          {/* TODO: */}
+                          {userData.location}
+
                         </h6>
                       </Box>
                     </Flex>
@@ -365,8 +371,9 @@ const ProfilePage = (props) => {
                       height: '40px',
                     }}
                   >
-                    <span style={{ opacity: '.5' }}>Graduated:</span>
-                    {graduated}
+                    <span style={{ opacity: ".5" }}>Graduated:</span>
+                    {userData.graduated ? graduated : "N/A"}
+
                   </Box>
                 </Flex>
               </Box>
@@ -404,12 +411,12 @@ const ProfilePage = (props) => {
                   <Box height='20px' style={{ opacity: 0.5 }}>
                     Degree:
                   </Box>
-                  <Box height='20px'>{userData.highest_ed}</Box>
-                  <Box height='20px' style={{ opacity: 0.5 }}>
+                  <Box height="20px">{userData.highest_ed || "N/A"}</Box>
+                  <Box height="20px" style={{ opacity: 0.5 }}>
                     Field of Study:
                   </Box>
-                  <Box height='20px'>{userData.field_of_study}</Box>
-                  <Box height='20px' style={{ opacity: 0.5 }}>
+                  <Box height="20px">{userData.field_of_study || "N/A"}</Box>
+                  <Box height="20px" style={{ opacity: 0.5 }}>
                     Prior web experience:
                   </Box>
                   <Box height='20px'>
@@ -445,16 +452,18 @@ const ProfilePage = (props) => {
                   <Box height='20px' style={_emp}>
                     Company:
                   </Box>
-                  <Box height='20px'>{userData.employed_company}</Box>
-                  <Box height='20px' style={_emp}>
+                  <Box height="20px">{userData.employed_company || "N/A"}</Box>
+                  <Box height="20px" style={_emp}>
                     Job tittle:
                   </Box>
-                  <Box height='20px'>{userData.employed_title}</Box>
-                  <Box height='20px' style={_emp}>
+                  <Box height="20px">{userData.employed_title || "N/A"}</Box>
+                  <Box height="20px" style={_emp}>
                     Start date:
                   </Box>
-                  <Box height='20px'>{hired}</Box>
-                  <Box height='20px' style={_emp}>
+                  <Box height="20px">
+                    {userData.employed_start ? hired : "N/A"}
+                  </Box>
+                  <Box height="20px" style={_emp}>
                     Remote
                   </Box>
                   <Box height='20px'>
