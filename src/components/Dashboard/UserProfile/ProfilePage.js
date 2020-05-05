@@ -5,14 +5,20 @@ import GridLoader from "react-spinners/GridLoader";
 import { Flex, Image, SimpleGrid, Box, Avatar } from "@chakra-ui/core";
 import { getUser } from "../../../state/actions/userActions";
 import { Link } from "react-router-dom";
+import updateUser from "../../../state/actions/index";
 
-const ProfilePage = ({ match }) => {
-  const id = match.params.id;
+const ProfilePage = props => {
+  const id = props.match.params.id;
   useEffect(() => {
     dispatch(getUser(id));
-  }, []);
+  }, [updateUser]);
 
-  // styling//
+  //
+  const dispatch = useDispatch();
+  const isLoading = useSelector(state => state.user.isLoading);
+  const isUpdated = useSelector(state => state.user.isUpdated);
+  const userData = useSelector(state => state.user.userData);
+  //
   const _midSectionStyles = {
     width: "40%",
     display: "flex",
@@ -25,19 +31,46 @@ const ProfilePage = ({ match }) => {
     padding: "0 0 0 22%",
     opacity: 0.5
   };
-  //state info
-  const dispatch = useDispatch();
-  const isLoading = useSelector(state => state.user.isLoading);
-  const userData = useSelector(state => state.user.userData);
 
+  // box that shows on profile update
+  let changes_div = {
+    position: "absolute",
+    width: "1048px",
+    marginTop: "25px",
+    borderRadius: "20px 20px 0 0",
+    height: "50px",
+    backgroundColor: "#77E0B5",
+    textAlign: "center",
+    color: "#fff",
+    fontSize: "16px",
+    fontFamily: "Muli",
+    fontWeight: "bold"
+  };
   //array to get the correct track name
   const track = ["arrayStartsWithZero :D", "android", "ds", "web", "ios", "ux"][
     userData.track_id
   ];
-  console.log(userData);
-  //slack id
+
+  // formating graduated date
+  let graduated = userData.graduated;
+  graduated = new Date(graduated).toUTCString();
+  graduated = graduated
+    .split(" ")
+    .slice(2, 4)
+    .join(" ");
+
+  // formating employed date
+  let hired = userData.employed_start;
+  hired = new Date(hired).toUTCString();
+  hired = hired
+    .split(" ")
+    .slice(2, 4)
+    .join(" ");
+
+  //slack link helper
   const slackID = userData.slack;
   const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
+
   return (
     <>
       {/* //Top Section */}
@@ -85,11 +118,17 @@ const ProfilePage = ({ match }) => {
                 >
                   <i
                     style={{ opacity: 0.3, paddingRight: "10px" }}
-                    class="far fa-edit"
+                    className="far fa-edit"
                   ></i>
                   Edit profile
                 </Link>
               </Box>
+              <div
+                id="changesDiv"
+                style={isUpdated ? changes_div : { display: "none" }}
+              >
+                Changes successfully saved
+              </div>
               <Box
                 style={{
                   borderRadius: "20px 20px 0 0",
@@ -99,7 +138,11 @@ const ProfilePage = ({ match }) => {
                 height="220px"
               >
                 <Flex w="20%" style={{ padding: "55px 0 0 90px" }}>
-                  <Avatar size="2xl" name="user" src={userData.profile_image} />
+                  <Avatar
+                    size="2xl"
+                    name={userData.first_name}
+                    src={userData.profile_image}
+                  />
                 </Flex>
                 <Flex w="80%" pl="6%">
                   <SimpleGrid width="100%" row={2} pr="70px">
@@ -118,7 +161,7 @@ const ProfilePage = ({ match }) => {
                       >
                         <h3
                           style={{
-                            fontSize: "25px",
+                            fontSize: "24px",
                             fontFamily: "Poppins",
                             color: " #131C4D"
                           }}
@@ -156,7 +199,8 @@ const ProfilePage = ({ match }) => {
                         <h6
                           style={{
                             fontFamily: "Muli",
-                            fontWeight: 300
+                            fontWeight: 300,
+                            paddingRight: "10px"
                           }}
                         >
                           {userData.graduated ? "Alumni" : "Student"}
@@ -180,9 +224,12 @@ const ProfilePage = ({ match }) => {
                         >
                           <i
                             style={{ opacity: 0.2, paddingRight: "5px" }}
-                            class="fas fa-map-marker-alt"
+                            className="fas fa-map-marker-alt"
                           ></i>
-                          Austin, TX
+
+                          {userData.location !== " "
+                            ? userData.location
+                            : "Blue planet"}
                         </h6>
                       </Box>
                     </Flex>
@@ -200,7 +247,7 @@ const ProfilePage = ({ match }) => {
                               color: "#344CD0"
                             }}
                             target="blank"
-                            href="#"
+                            href={userData.portfolio}
                           >
                             Portfolio
                           </a>
@@ -260,13 +307,13 @@ const ProfilePage = ({ match }) => {
                             >
                               <i
                                 style={{ fontSize: "larger" }}
-                                class="fab fa-github"
+                                className="fab fa-github"
                               />
                             </a>
                           ) : (
                             <i
                               style={{ fontSize: "larger", opacity: "0.3" }}
-                              class="fab fa-github"
+                              className="fab fa-github"
                             ></i>
                           )}
 
@@ -314,7 +361,7 @@ const ProfilePage = ({ match }) => {
                   </Box>
                   <Box
                     style={{
-                      width: "38.5%",
+                      width: "35.5%",
                       display: " flex",
                       alignItems: "center",
                       justifyContent: "space-between",
@@ -323,7 +370,7 @@ const ProfilePage = ({ match }) => {
                     }}
                   >
                     <span style={{ opacity: ".5" }}>Graduated:</span>
-                    August 2019
+                    {graduated}
                   </Box>
                 </Flex>
               </Box>
@@ -410,7 +457,7 @@ const ProfilePage = ({ match }) => {
                   <Box height="20px" style={_emp}>
                     Start date:
                   </Box>
-                  <Box height="20px">January 1st, 2020</Box>
+                  <Box height="20px">{hired}</Box>
                   <Box height="20px" style={_emp}>
                     Remote
                   </Box>

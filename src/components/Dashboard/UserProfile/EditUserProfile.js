@@ -26,6 +26,7 @@ import {
   InputRightElement,
   Select,
   Icon,
+  Avatar
 } from "@chakra-ui/core";
 
 //need to make new action creator editUser
@@ -34,7 +35,7 @@ const EditUserProfile = ({
   history,
   userData,
   isLoading,
-  updateUser,
+  updateUser
 }) => {
   const id = match.params.id;
   const { handleSubmit, errors, register, formState } = useForm({
@@ -61,18 +62,20 @@ const EditUserProfile = ({
       github: userData.github,
       dribble: userData.dribble,
       profile_image: userData.profile_image,
-    },
+      profile_resume: userData.profile_resume
+    }
   });
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   //location state
   const [location, setLocation] = useState({});
   const [newLocation, setNewLocation] = useState({});
-  const stateHelper = (value) => {
+  const stateHelper = value => {
     setLocation(value);
   };
-  // profile image state
-  const [profile_image, setProfile_Image] = useState("");
+  // cloudinary stuff
+  const [newProfile_image, setNewProfile_Image] = useState("");
+  const [newProfile_resume, setNewProfile_resume] = useState("");
 
   // graduated state
   const [graduated, setGraduated] = useState(false);
@@ -112,7 +115,7 @@ const EditUserProfile = ({
         const tempCity = location.myCity;
         setNewLocation({
           ...location,
-          myCity: tempCity.replace(/^[\s,\d]+/, ""),
+          myCity: tempCity.replace(/^[\s,\d]+/, "")
         });
       }
     }
@@ -174,7 +177,41 @@ const EditUserProfile = ({
   }
   //end validation
 
-  const submitForm = (creds) => {
+  //add image to cloudinary
+  const updateImage = async e => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "upload");
+    const res = await fetch(
+      "	https://api.cloudinary.com/v1_1/takija/image/upload",
+      {
+        method: "POST",
+        body: data
+      }
+    );
+    const file = await res.json();
+    setNewProfile_Image(...newProfile_image, file.secure_url);
+  };
+
+  //upload resume to cloudinary
+  const updateResume = async e => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "upload");
+    const res = await fetch(
+      "	https://api.cloudinary.com/v1_1/takija/image/upload",
+      {
+        method: "POST",
+        body: data
+      }
+    );
+    const file = await res.json();
+    setNewProfile_resume(...newProfile_resume, file.secure_url);
+  };
+
+  const submitForm = creds => {
     // correcting grad date format
     let graduated = null;
     if (creds.gradMonth && creds.gradYear) {
@@ -192,7 +229,7 @@ const EditUserProfile = ({
       first_name: creds.firstName,
       last_name: creds.lastName,
       location: newLocation
-        ? `${newLocation.myCity}, ${newLocation.myState}`
+        ? `${newLocation.myCity} ${newLocation.myState}`
         : null,
       graduated: graduated,
       highest_ed: creds.highest_ed || null,
@@ -209,12 +246,13 @@ const EditUserProfile = ({
         ? JSON.parse(creds.employed_remote)
         : false,
       employed_start: employed_start,
-      resume: creds.resume || null,
+      resume: newProfile_resume || userData.resume,
       linked_in: creds.linked_in || null,
       slack: creds.slack || null,
       github: creds.github || null,
       dribble: creds.dribble || null,
-      profile_image: profile_image ? profile_image : null,
+      profile_image: newProfile_image || userData.profile_image,
+      portfolio: creds.portfolio_URL || null
     }).then(() => history.push(`/profile/${id}`));
 
     // TODO: implement google analytics for updating a user
@@ -224,7 +262,7 @@ const EditUserProfile = ({
     // });
   };
 
-  const returnToProfile = (e) => {
+  const returnToProfile = e => {
     e.preventDefault();
     history.push(`/profile/${id}`);
   };
@@ -253,7 +291,7 @@ const EditUserProfile = ({
           <Link
             style={{
               textDecoration: "none",
-              color: "black",
+              color: "black"
             }}
             to="/dashboard"
           >
@@ -266,7 +304,7 @@ const EditUserProfile = ({
             <Link
               style={{
                 textDecoration: "none",
-                color: "black",
+                color: "black"
               }}
               to={`/profile/${id}`}
             >
@@ -312,7 +350,7 @@ const EditUserProfile = ({
                   fontSize="22px"
                   fontWeight="normal"
                   color="#9194A8"
-                  _hover={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer" }}
                   onClick={returnToProfile}
                 >
                   Cancel
@@ -323,24 +361,66 @@ const EditUserProfile = ({
                   fontSize="22px"
                   fontWeight="bold"
                   color="#344CD0"
-                  _hover={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer" }}
                   onClick={handleSubmit(submitForm)}
                 >
                   Save
                 </Text>
               </Flex>
             </Flex>
-
             {/* CLOUDINARY IMAGE UPLOAD */}
+
             <Flex
               wrap="wrap"
               w="653px"
               mx="auto"
               mb="55px"
-              justify="flex-start"
+              justify="space-evenly"
+              alignItems="center"
             >
-              <Image size="100px" src={require("../../../icons/user.png")} />
-              <Text>Cloudinary upload here</Text>
+              {!newProfile_image ? (
+                <Avatar
+                  size="2xl"
+                  name={userData.first_name}
+                  style={{ borderRadius: "50px" }}
+                  src={userData.profile_image}
+                />
+              ) : (
+                <Avatar
+                  size="2xl"
+                  style={{ borderRadius: "50px" }}
+                  src={newProfile_image}
+                />
+              )}
+
+              <Flex alignItems="center">
+                <input
+                  type="file"
+                  filename="image"
+                  placeholder="Upload profile picture"
+                  onChange={updateImage}
+                  style={{
+                    opacity: "1",
+                    width: "105px",
+                    color: "transparent",
+                    backgroundColor: "transparent"
+                  }}
+                />
+                {!newProfile_image ? (
+                  <label htmlFor="files" className="btn">
+                    Update profile image
+                  </label>
+                ) : (
+                  <i
+                    style={{
+                      fontSize: "1.4rem",
+                      color: "green",
+                      paddingLeft: "20px"
+                    }}
+                    className="far fa-check-circle"
+                  ></i>
+                )}
+              </Flex>
             </Flex>
 
             {/* FIRST NAME, LAST NAME */}
@@ -439,7 +519,6 @@ const EditUserProfile = ({
                 No
               </Radio>
             </Flex>
-
             {/* GRADUATED MONTH AND YEAR */}
             {graduated ? (
               <Flex
@@ -541,7 +620,6 @@ const EditUserProfile = ({
                 </Flex>
               </Flex>
             ) : null}
-
             <Flex
               wrap="wrap"
               w="653px"
@@ -560,7 +638,6 @@ const EditUserProfile = ({
                 Background
               </Text>
             </Flex>
-
             {/* HIGHEST LEVEL OF EDUCATION */}
             <Flex wrap="wrap" w="411px%" justify="center">
               <FormControl>
@@ -622,7 +699,6 @@ const EditUserProfile = ({
                 </FormErrorMessage>
               </FormControl>
             </Flex>
-
             {/* PRIOR EXPERIENCE */}
             <Flex
               wrap="wrap"
@@ -654,7 +730,6 @@ const EditUserProfile = ({
                 No
               </Radio>
             </Flex>
-
             {/* DID YOU TL/SL */}
             <Flex
               wrap="wrap"
@@ -686,8 +761,8 @@ const EditUserProfile = ({
                 No
               </Radio>
             </Flex>
-
             {/* RESUME UPLOAD */}
+            {/* /// */}
             <Flex
               wrap="wrap"
               w="653px"
@@ -699,17 +774,36 @@ const EditUserProfile = ({
               <Text align="center" fontFamily="Muli">
                 Resume
               </Text>
-              <SignupLoginInput
-                w="318px"
-                type="text"
-                name="resume"
-                label="resume"
-                placeholder="Upload resume"
-                autoCapitalize="none"
-                ref={register}
-              />
+              <Flex width="270px">
+                <input
+                  type="file"
+                  filename="image"
+                  placeholder="Upload profile picture"
+                  onChange={updateResume}
+                  style={{
+                    opacity: "1",
+                    width: "105px",
+                    color: "transparent",
+                    backgroundColor: "transparent"
+                  }}
+                />
+                <label htmlFor="files" className="btn">
+                  {!newProfile_resume ? (
+                    "Upload resume"
+                  ) : (
+                    <i
+                      style={{
+                        fontSize: "1.4rem",
+                        color: "green",
+                        paddingLeft: "20px"
+                      }}
+                      className="far fa-check-circle"
+                    ></i>
+                  )}
+                </label>
+              </Flex>
             </Flex>
-
+            {/* //// */}
             <Flex
               wrap="wrap"
               w="653px"
@@ -728,7 +822,6 @@ const EditUserProfile = ({
                 Employment
               </Text>
             </Flex>
-
             {/* EMPLOYED CHECK */}
             <Flex
               wrap="wrap"
@@ -760,7 +853,6 @@ const EditUserProfile = ({
                 No
               </Radio>
             </Flex>
-
             {/* EMPLOYED COMPANY NAME AND JOB TITLE */}
             {employed ? (
               <Flex wrap="wrap" w="653" justify="center">
@@ -793,7 +885,6 @@ const EditUserProfile = ({
                 </FormControl>
               </Flex>
             ) : null}
-
             {/* REMOTE WORK CHECK */}
             {employed ? (
               <Flex
@@ -827,7 +918,6 @@ const EditUserProfile = ({
                 </Radio>
               </Flex>
             ) : null}
-
             {/* EMPLOYMENT START DATE */}
             {employed ? (
               <Flex
@@ -929,7 +1019,6 @@ const EditUserProfile = ({
                 </Flex>
               </Flex>
             ) : null}
-
             <Flex
               wrap="wrap"
               w="653px"
@@ -948,7 +1037,6 @@ const EditUserProfile = ({
                 Online presence
               </Text>
             </Flex>
-
             {/* PORTFOLIO URL */}
             <Flex
               wrap="wrap"
@@ -971,7 +1059,6 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
             {/* LINKEDIN URL */}
             <Flex
               wrap="wrap"
@@ -994,7 +1081,6 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
             {/* SLACK USERNAME */}
             <Flex
               wrap="wrap"
@@ -1009,7 +1095,7 @@ const EditUserProfile = ({
                 <Tooltip hasArrow label={info} placement="top">
                   <i
                     style={{ paddingLeft: "10px" }}
-                    class="fas fa-question"
+                    className="fas fa-question"
                   ></i>
                 </Tooltip>
               </Text>
@@ -1023,7 +1109,6 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
             {/* GITHUB USERNAME */}
             <Flex
               wrap="wrap"
@@ -1046,7 +1131,6 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
             {/* DRIBBBLE URL */}
             <Flex
               wrap="wrap"
@@ -1069,7 +1153,6 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
             <Flex w="100%" justify="center" direction="column">
               <Button
                 border="none"
@@ -1110,10 +1193,10 @@ const EditUserProfile = ({
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     userData: state.user.userData,
-    isLoading: state.user.isLoading,
+    isLoading: state.user.isLoading
   };
 };
 

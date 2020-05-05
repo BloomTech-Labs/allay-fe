@@ -22,7 +22,7 @@ import {
   InputGroup,
   InputRightElement,
   Select,
-  Icon,
+  Icon
 } from "@chakra-ui/core";
 
 const Signup = ({ signup, isLoading, history }) => {
@@ -33,10 +33,9 @@ const Signup = ({ signup, isLoading, history }) => {
   //location state
   const [location, setLocation] = useState({});
   const [newLocation, setNewLocation] = useState({});
-  const stateHelper = (value) => {
+  const stateHelper = value => {
     setLocation(value);
   };
-  // profile image state
   const [profile_image, setProfile_Image] = useState("");
   const [profile_resume, setProfile_resume] = useState("");
   //validation
@@ -113,7 +112,7 @@ const Signup = ({ signup, isLoading, history }) => {
   // end validation
 
   //add image to cloudinary
-  const uploadImage = async (e) => {
+  const uploadImage = async e => {
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -122,7 +121,7 @@ const Signup = ({ signup, isLoading, history }) => {
       "	https://api.cloudinary.com/v1_1/takija/image/upload",
       {
         method: "POST",
-        body: data,
+        body: data
       }
     );
     const file = await res.json();
@@ -130,7 +129,7 @@ const Signup = ({ signup, isLoading, history }) => {
   };
 
   //upload resume to cloudinary
-  const uploadResume = async (e) => {
+  const uploadResume = async e => {
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -139,7 +138,7 @@ const Signup = ({ signup, isLoading, history }) => {
       "	https://api.cloudinary.com/v1_1/takija/image/upload",
       {
         method: "POST",
-        body: data,
+        body: data
       }
     );
     const file = await res.json();
@@ -147,7 +146,7 @@ const Signup = ({ signup, isLoading, history }) => {
     setProfile_resume(...profile_resume, file.secure_url);
   };
 
-  const submitForm = (creds) => {
+  const submitForm = creds => {
     // correcting grad date format
     let graduated = null;
     if (creds.gradMonth && creds.gradYear) {
@@ -171,8 +170,8 @@ const Signup = ({ signup, isLoading, history }) => {
         cohort: creds.cohort,
         contact_email: creds.contact_email || null,
         location: newLocation
-          ? `${newLocation.myCity}, ${newLocation.myState}`
-          : "",
+          ? `${newLocation.myCity} ${newLocation.myState}`
+          : null,
         graduated: graduated,
         highest_ed: creds.highest_ed || null,
         field_of_study: creds.field_of_study || null,
@@ -194,13 +193,14 @@ const Signup = ({ signup, isLoading, history }) => {
         github: creds.github || null,
         dribble: creds.dribble || null,
         profile_image: profile_image || null,
+        portfolio: creds.portfolio_URL || null
       }).then(() => history.push("/"));
     } else {
       alert("Your Passwords must match!");
     }
     ReactGA.event({
       category: "User",
-      action: `Button Sign Up`,
+      action: `Button Sign Up`
     });
   };
 
@@ -211,7 +211,7 @@ const Signup = ({ signup, isLoading, history }) => {
   const gaLogin = () => {
     ReactGA.event({
       category: "User",
-      action: `Link Already have an account`,
+      action: `Link Already have an account`
     });
   };
 
@@ -540,7 +540,7 @@ const Signup = ({ signup, isLoading, history }) => {
                       textDecoration: "none",
                       fontWeight: "bold",
                       color: "#344CD0",
-                      fontSize: "16px",
+                      fontSize: "16px"
                     }}
                   >
                     Sign in here!
@@ -555,9 +555,9 @@ const Signup = ({ signup, isLoading, history }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    isLoading: state.auth.isLoading,
+    isLoading: state.auth.isLoading
   };
 };
 

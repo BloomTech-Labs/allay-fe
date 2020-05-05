@@ -14,8 +14,9 @@ export const login = creds => dispatch => {
     .post("/auth/login", creds)
     .then(res => {
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("name", res.data.first_name);
       localStorage.setItem("userId", res.data.id);
-      localStorage.setItem("username", res.data.email);
+      localStorage.setItem("email", res.data.email);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,
