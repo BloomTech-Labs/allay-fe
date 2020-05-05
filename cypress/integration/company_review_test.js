@@ -1,16 +1,16 @@
-describe('Navs to company review form.', function() {
+describe('Navs to company review form.', function () {
   //Arrange
-  it('Visits a new site', function() {
+  it('Visits a new site', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
-  it('should navigate to add review after logging in the submit a review', function() {
+  it('should navigate to add review after logging in the submit a review', function () {
     // select element and alias them
-    cy.get('input[name="username"]').as('usernameText');
+    cy.get('input[name="email"]').as('emailText');
     cy.get('input[name="password"]').as('passwordText');
     cy.get('[data-cy=loginSubmit]').as('loginSubmit');
     // interact with element
-    cy.get('@usernameText').type('testuser1');
+    cy.get('@emailText').type('testuser1@gmail.com');
     cy.get('@passwordText').type('12345678');
     cy.get('@loginSubmit').click();
     // wait until pushed to dashboard
@@ -42,9 +42,7 @@ describe('Navs to company review form.', function() {
     cy.get('input[name="Company Headquarters"]').as('locationText');
     cy.get('@locationText').type('Atlanta');
     cy.wait(300);
-    cy.get('@locationText')
-      .type('{downArrow}')
-      .type('{enter}');
+    cy.get('@locationText').type('{downArrow}').type('{enter}');
 
     cy.get('input[name="start_date"]').as('startDateText');
     cy.get('@startDateText').type('1999');
@@ -62,9 +60,7 @@ describe('Navs to company review form.', function() {
     cy.get('@salaryText').type('123456');
 
     cy.get('ul>li').as('companyOverall');
-    cy.get('@companyOverall')
-      .eq(2)
-      .click();
+    cy.get('@companyOverall').eq(2).click();
 
     //submit the form
     cy.get('[data-cy=companyReviewSubmit]').click();

@@ -6,11 +6,11 @@ describe('Navs to edit review form and edits a review successfully', function ()
   });
   it('should navigate to edit review form and successfully edits review', function () {
     // select element and alias them
-    cy.get('input[name="username"]').as('usernameText');
+    cy.get('input[name="email"]').as('emailText');
     cy.get('input[name="password"]').as('passwordText');
     cy.get('[data-cy=loginSubmit]').as('loginSubmit');
     // interact with element
-    cy.get('@usernameText').type('testuser1');
+    cy.get('@emailText').type('testuser1@gmail.com');
     cy.get('@passwordText').type('12345678');
     cy.get('@loginSubmit').click();
     // wait until pushed to dashboard
@@ -42,9 +42,7 @@ describe('Navs to edit review form and edits a review successfully', function ()
     cy.get('input[name="Company Headquarters"]').as('locationText');
     cy.get('@locationText').type('Atlanta');
     cy.wait(300);
-    cy.get('@locationText')
-      .type('{downArrow}')
-      .type('{enter}');
+    cy.get('@locationText').type('{downArrow}').type('{enter}');
 
     cy.get('input[name="start_date"]').as('startDateText');
     cy.get('@startDateText').type('1999');
@@ -62,9 +60,7 @@ describe('Navs to edit review form and edits a review successfully', function ()
     cy.get('@salaryText').type('123456');
 
     cy.get('ul>li').as('companyOverall');
-    cy.get('@companyOverall')
-      .eq(2)
-      .click();
+    cy.get('@companyOverall').eq(2).click();
 
     // submit the form
     cy.get('[data-cy=companyReviewSubmit]').click();
@@ -81,8 +77,7 @@ describe('Navs to edit review form and edits a review successfully', function ()
     cy.get('@cityText').type('New York');
     cy.wait(300);
 
-    cy.get('select[name="state_id"]')
-      .select('NY');
+    cy.get('select[name="state_id"]').select('NY');
 
     cy.get('input[name="salary"]').as('salaryText');
     cy.get('@salaryText').type('78910');
@@ -102,8 +97,7 @@ describe('Navs to edit review form and edits a review successfully', function ()
     cy.get('[name="comment"]').type('TESTING EVEN MORE VIA CYPRESS');
 
     cy.get('select[name="overall_rating"]').as('companyOverall');
-    cy.get('@companyOverall')
-      .select('1');
+    cy.get('@companyOverall').select('1');
 
     // submit the edit review form
     cy.get('[data-cy=companyEditReviewSubmit]').click();
@@ -111,13 +105,13 @@ describe('Navs to edit review form and edits a review successfully', function ()
     // checks all elements of the dashboard card were changed
     cy.contains('New Cypress Engineer');
     cy.contains('78910.00');
-    cy.contains('New York, NY')
-    cy.contains('2001-2002')
+    cy.contains('New York, NY');
+    cy.contains('2001-2002');
     cy.contains('TESTING EVEN MORE VIA CYPRESS');
 
     // checks all elements of the modal card were changed
     cy.contains('TESTING EVEN MORE VIA CYPRESS').click();
-    cy.contains('20 hrs week')
+    cy.contains('20 hrs week');
     cy.contains('Intern');
     // needs test for finding star changes (overall_rating)
   });
