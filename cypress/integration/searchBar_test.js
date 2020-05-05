@@ -6,11 +6,11 @@ describe('Returns with empty search if company not found', function () {
   });
   it('should navigate to Dashboard after login', function () {
     // select element and alias them
-    cy.get('input[name="username"]').as('usernameText');
+    cy.get('input[name="email"]').as('emailText');
     cy.get('input[name="password"]').as('passwordText');
     cy.get('[data-cy=loginSubmit]').as('loginSubmit');
     // interact with element
-    cy.get('@usernameText').type('testuser1');
+    cy.get('@emailText').type('testing123@gmail.com');
     cy.get('@passwordText').type('12345678');
     cy.get('@loginSubmit').click();
     // wait until pushed to dashboard
@@ -18,6 +18,6 @@ describe('Returns with empty search if company not found', function () {
   });
   it('returns with no reviews on unsuccessful search', function () {
     cy.get('input[name="searchbar"]').type('fgkjhieahggdsafevca');
-    cy.contains('Sorry, no job reviews found.')
+    cy.contains('Sorry, no job reviews found.');
   });
 });

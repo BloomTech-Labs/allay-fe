@@ -7,7 +7,7 @@ describe('Navs to edit interview form and edits an interview successfully', func
   it('should navigate to edit interview form and successfully edits interview', function () {
     // select elements and alias them
     cy.get('input[name="email"]').as('emailText');
-    cy.get('@emailText').type('testuser1@gmail.com');
+    cy.get('@emailText').type('testing123@gmail.com');
 
     cy.get('input[name="password"]').as('passwordText');
     cy.get('@passwordText').type('12345678');

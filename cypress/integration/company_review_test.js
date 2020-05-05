@@ -10,7 +10,7 @@ describe('Navs to company review form.', function () {
     cy.get('input[name="password"]').as('passwordText');
     cy.get('[data-cy=loginSubmit]').as('loginSubmit');
     // interact with element
-    cy.get('@emailText').type('testuser1@gmail.com');
+    cy.get('@emailText').type('testing123@gmail.com');
     cy.get('@passwordText').type('12345678');
     cy.get('@loginSubmit').click();
     // wait until pushed to dashboard
