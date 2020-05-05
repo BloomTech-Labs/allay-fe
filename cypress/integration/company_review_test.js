@@ -11,7 +11,7 @@ describe('Navs to company review form.', function () {
     cy.get('[data-cy=loginSubmit]').as('loginSubmit');
     // interact with element
     cy.get('@emailText').type('testing123@gmail.com');
-    cy.get('@passwordText').type('12345678');
+    cy.get('@passwordText').type('password');
     cy.get('@loginSubmit').click();
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
@@ -29,7 +29,7 @@ describe('Navs to company review form.', function () {
 
     //Successfully fills out the form and submits a new Company Review
     //get the elements and assign alias then type
-    cy.wait(3000);
+    cy.wait(6000);
     cy.get('input[name="company_name"]').as('companyNameText');
     cy.get('@companyNameText').type('Google');
 

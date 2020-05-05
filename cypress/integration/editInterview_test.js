@@ -10,7 +10,7 @@ describe('Navs to edit interview form and edits an interview successfully', func
     cy.get('@emailText').type('testing123@gmail.com');
 
     cy.get('input[name="password"]').as('passwordText');
-    cy.get('@passwordText').type('12345678');
+    cy.get('@passwordText').type('password');
 
     cy.get('[data-cy=loginSubmit]').click();
     // wait until pushed to dashboard

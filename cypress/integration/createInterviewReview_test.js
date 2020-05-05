@@ -10,7 +10,7 @@ describe('Creates a new interview review', function () {
     cy.get('@emailText').type('testing123@gmail.com');
 
     cy.get('input[name="password"]').as('passwordText');
-    cy.get('@passwordText').type('12345678');
+    cy.get('@passwordText').type('password');
 
     cy.get('[data-cy=loginSubmit]').click();
     // wait until pushed to dashboard
@@ -31,7 +31,7 @@ describe('Creates a new interview review', function () {
     //Successfully fills out the form and submits a new Interview Review
     //gets the elements, assign an alias then fills them out
     // it('should complete and submit interview review', function() {
-    cy.wait(3000);
+    cy.wait(6000);
     cy.get('input[name="company_name"]').as('company_nameText');
     cy.get('@company_nameText').type('Amazon Web Services');
 

@@ -155,6 +155,7 @@ const ProfilePage = (props) => {
                         }}
                       >
                         <h3
+                          id='profileNames'
                           style={{
                             fontSize: '24px',
                             fontFamily: 'Poppins',

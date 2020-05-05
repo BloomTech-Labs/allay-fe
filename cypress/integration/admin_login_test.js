@@ -31,7 +31,7 @@ describe('Logs into the site', function () {
     cy.get('[data-cy=loginSubmit]').as('loginSubmit');
     // interact with element
     cy.get('@emailText').type('haase1020@gmail.com');
-    cy.get('@passwordText').type('password');
+    cy.get('@passwordText').type('passwordddd');
     cy.get('@loginSubmit').click();
     // wait until pushed to dashboard
     cy.location().should((loc) => {
