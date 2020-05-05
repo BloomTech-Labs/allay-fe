@@ -16,6 +16,12 @@ export const FETCH_USER_START = "FETCH_USER_START";
 export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
 export const FETCH_USER_FAILURE = "FETCH_USER_FAILURE";
 
+// ============ EDIT SINGLE USER ===========
+
+export const EDIT_USER_START = "EDIT_USER_START";
+export const EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS";
+export const EDIT_USER_FAILURE = "EDIT_USER_FAILURE";
+
 // ============ BLOCK USER ===========
 
 export const BLOCK_USER_FAILURE = "BLOCK_USER_FAILURE ";
