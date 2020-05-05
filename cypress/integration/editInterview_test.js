@@ -6,11 +6,11 @@ describe('Navs to edit interview form and edits an interview successfully', func
   });
   it('should navigate to edit interview form and successfully edits interview', function () {
     // select elements and alias them
-    cy.get('input[name="username"]').as('usernameText');
-    cy.get('@usernameText').type('testuser1');
+    cy.get('input[name="email"]').as('emailText');
+    cy.get('@emailText').type('testing123@gmail.com');
 
     cy.get('input[name="password"]').as('passwordText');
-    cy.get('@passwordText').type('12345678');
+    cy.get('@passwordText').type('password');
 
     cy.get('[data-cy=loginSubmit]').click();
     // wait until pushed to dashboard
@@ -37,15 +37,11 @@ describe('Navs to edit interview form and edits an interview successfully', func
     cy.get('input[name="Company Headquarters"]').as('locationText');
     cy.get('@locationText').type('Denver');
     cy.wait(300);
-    cy.get('@locationText')
-      .type('{downArrow}')
-      .type('{enter}');
+    cy.get('@locationText').type('{downArrow}').type('{enter}');
     cy.wait(1500);
 
     cy.get('select[name=interview_rounds').as('interview_rounds');
-    cy.get('@interview_rounds')
-      .select('3')
-      .type('{end}');
+    cy.get('@interview_rounds').select('3').type('{end}');
     cy.wait(4000);
 
     cy.get('[type="checkbox"]').check({ force: true });
@@ -65,15 +61,11 @@ describe('Navs to edit interview form and edits an interview successfully', func
     cy.wait(2000);
 
     cy.get('input[name="salary"]').as('salary');
-    cy.get('@salary')
-      .type('98000')
-      .type('{end}');
+    cy.get('@salary').type('98000').type('{end}');
     cy.wait(2000);
 
     cy.get('ul>li').as('interviewRating');
-    cy.get('@interviewRating')
-      .eq(3)
-      .click();
+    cy.get('@interviewRating').eq(3).click();
     cy.wait(2000);
 
     cy.get('[data-cy=interviewReviewSubmit]').as('interviewReviewSubmit');
@@ -83,7 +75,9 @@ describe('Navs to edit interview form and edits an interview successfully', func
     cy.url().should('include', 'dashboard');
 
     // navigate to edit interview form
-    cy.contains('There were many questions asked. We talked about computer stuff, food and long walks on the beach at sunset. It was pretty epic.').click();
+    cy.contains(
+      'There were many questions asked. We talked about computer stuff, food and long walks on the beach at sunset. It was pretty epic.'
+    ).click();
     cy.get('[data-cy=editModalReview]').click();
 
     // successfully fills out the form and edits the interview
@@ -94,8 +88,7 @@ describe('Navs to edit interview form and edits an interview successfully', func
     cy.get('@cityText').type('Mushroom Kingdom');
     cy.wait(300);
 
-    cy.get('select[name="state_id"]')
-      .select('FL');
+    cy.get('select[name="state_id"]').select('FL');
 
     cy.get('input[name="salary"]').as('salaryText');
     cy.get('@salaryText').type('10001');
@@ -114,8 +107,7 @@ describe('Navs to edit interview form and edits an interview successfully', func
     cy.get('[name="comment"]').type('Nevermind. It was all just a dream.');
 
     cy.get('select[name="overall_rating"]').as('companyOverall');
-    cy.get('@companyOverall')
-      .select('1');
+    cy.get('@companyOverall').select('1');
 
     // submit the edit review form
     cy.get('[data-cy=companyEditInterviewSubmit]').click();
