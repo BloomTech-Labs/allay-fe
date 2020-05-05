@@ -61,16 +61,16 @@ const userReducer = (state = initialState, action) => {
     case EDIT_USER_START: {
       return {
         ...state,
-        isUpdated: false,
-        isLoading: true
+        isLoading: true,
+        isUpdated: true
       };
     }
     case EDIT_USER_SUCCESS: {
       return {
         ...state,
-        userData: action.payload,
-        isUpdated: true,
-        isLoading: false
+        isLoading: false,
+        isUpdated: false,
+        userData: action.payload
       };
     }
     case EDIT_USER_FAILURE: {

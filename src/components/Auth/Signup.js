@@ -194,7 +194,7 @@ const Signup = ({ signup, isLoading, history }) => {
         dribble: creds.dribble || null,
         profile_image: profile_image || null,
         portfolio: creds.portfolio_URL || null
-      }).then(() => history.push("/"));
+      }).then(() => history.push("/dashboard"));
     } else {
       alert("Your Passwords must match!");
     }
