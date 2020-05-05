@@ -1,16 +1,16 @@
-describe('Creates a new interview review', function() {
+describe('Creates a new interview review', function () {
   //Arrange
-  it('Visits a new site', function() {
+  it('Visits a new site', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
-  it('should navigate to add review form after logging in', function() {
+  it('should navigate to add review form after logging in', function () {
     // select elements and alias them
-    cy.get('input[name="username"]').as('usernameText');
-    cy.get('@usernameText').type('testuser1');
+    cy.get('input[name="email"]').as('emailText');
+    cy.get('@emailText').type('testing123@gmail.com');
 
     cy.get('input[name="password"]').as('passwordText');
-    cy.get('@passwordText').type('12345678');
+    cy.get('@passwordText').type('password');
 
     cy.get('[data-cy=loginSubmit]').click();
     // wait until pushed to dashboard
@@ -31,7 +31,7 @@ describe('Creates a new interview review', function() {
     //Successfully fills out the form and submits a new Interview Review
     //gets the elements, assign an alias then fills them out
     // it('should complete and submit interview review', function() {
-    cy.wait(3000);
+    cy.wait(6000);
     cy.get('input[name="company_name"]').as('company_nameText');
     cy.get('@company_nameText').type('Amazon Web Services');
 
@@ -41,15 +41,11 @@ describe('Creates a new interview review', function() {
     cy.get('input[name="Company Headquarters"]').as('locationText');
     cy.get('@locationText').type('Denver');
     cy.wait(300);
-    cy.get('@locationText')
-      .type('{downArrow}')
-      .type('{enter}');
+    cy.get('@locationText').type('{downArrow}').type('{enter}');
     cy.wait(1500);
 
     cy.get('select[name=interview_rounds').as('interview_rounds');
-    cy.get('@interview_rounds')
-      .select('3')
-      .type('{end}');
+    cy.get('@interview_rounds').select('3').type('{end}');
     // cy.get('input[type=checkbox').as('interview_rounds');
     cy.wait(4000);
 
@@ -70,15 +66,11 @@ describe('Creates a new interview review', function() {
     cy.wait(2000);
 
     cy.get('input[name="salary"]').as('salary');
-    cy.get('@salary')
-      .type('98000')
-      .type('{end}');
+    cy.get('@salary').type('98000').type('{end}');
     cy.wait(2000);
 
     cy.get('ul>li').as('interviewRating');
-    cy.get('@interviewRating')
-      .eq(3)
-      .click();
+    cy.get('@interviewRating').eq(3).click();
     cy.wait(2000);
 
     cy.get('[data-cy=interviewReviewSubmit]').as('interviewReviewSubmit');
