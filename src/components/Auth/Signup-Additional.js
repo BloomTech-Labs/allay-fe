@@ -14,7 +14,7 @@ import {
   Radio,
   Select,
   Tooltip,
-  Box
+  Box,
 } from "@chakra-ui/core";
 
 const SignupAdditional = ({
@@ -27,7 +27,7 @@ const SignupAdditional = ({
   uploadImage,
   profile_image,
   uploadResume,
-  profile_resume
+  profile_resume,
 }) => {
   // graduated state
   const [graduated, setGraduated] = useState(false);
@@ -53,12 +53,6 @@ const SignupAdditional = ({
 
   //location helpers
   useEffect(() => {
-    // if (location.myState) {
-    //   const stateId = states.filter((i) =>
-    //     i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
-    //   );
-    //   setNewLocation({ ...location, myState: stateId[0].id });
-    // }
     setNewLocation({ ...location, myState: location.myState });
     // removes numbers, commas, and whitespaces from city
     if (location.myCity) {
@@ -66,7 +60,7 @@ const SignupAdditional = ({
         const tempCity = location.myCity;
         setNewLocation({
           ...location,
-          myCity: tempCity.replace(/^[\s,\d]+/, "")
+          myCity: tempCity.replace(/^[\s,\d]+/, ""),
         });
       }
     }
@@ -134,7 +128,7 @@ const SignupAdditional = ({
               opacity: "1",
               width: "105px",
               color: "transparent",
-              backgroundColor: "transparent"
+              backgroundColor: "transparent",
             }}
           />
           <label for="files" class="btn">
@@ -687,7 +681,7 @@ const SignupAdditional = ({
               opacity: "1",
               width: "105px",
               color: "transparent",
-              backgroundColor: "transparent"
+              backgroundColor: "transparent",
             }}
           />
           <label for="files" class="btn">
@@ -698,7 +692,7 @@ const SignupAdditional = ({
                 style={{
                   fontSize: "1.4rem",
                   color: "green",
-                  paddingLeft: "20px"
+                  paddingLeft: "20px",
                 }}
                 class="far fa-check-circle"
               ></i>
