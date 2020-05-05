@@ -150,7 +150,7 @@ function NavBar({
                   fontWeight="light"
                   fontSize="1.5em"
                 >
-                  {localStorage.getItem("username")}
+                  Hi, {localStorage.getItem("name")}
                 </Flex>
               </DrawerHeader>
               <Flex
