@@ -172,7 +172,7 @@ const Signup = ({ signup, isLoading, history }) => {
         contact_email: creds.contact_email || null,
         location: newLocation
           ? `${newLocation.myCity}, ${newLocation.myState}`
-          : "",
+          : null,
         graduated: graduated,
         highest_ed: creds.highest_ed || null,
         field_of_study: creds.field_of_study || null,

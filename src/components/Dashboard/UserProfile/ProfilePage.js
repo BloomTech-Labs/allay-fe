@@ -12,7 +12,6 @@ const ProfilePage = ({ match }) => {
     dispatch(getUser(id));
   }, []);
 
-  // styling//
   const _midSectionStyles = {
     width: "40%",
     display: "flex",
@@ -25,7 +24,7 @@ const ProfilePage = ({ match }) => {
     padding: "0 0 0 22%",
     opacity: 0.5
   };
-  //state info
+  //
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.user.isLoading);
   const userData = useSelector(state => state.user.userData);
@@ -43,7 +42,6 @@ const ProfilePage = ({ match }) => {
     .split(" ")
     .slice(2, 4)
     .join(" ");
-  console.log(graduated);
 
   // formating employed date
   let hired = userData.employed_start;
@@ -52,9 +50,11 @@ const ProfilePage = ({ match }) => {
     .split(" ")
     .slice(2, 4)
     .join(" ");
-  //slack id
+
+  //slack link helper
   const slackID = userData.slack;
   const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
+
   return (
     <>
       {/* //Top Section */}
@@ -199,7 +199,9 @@ const ProfilePage = ({ match }) => {
                             style={{ opacity: 0.2, paddingRight: "5px" }}
                             class="fas fa-map-marker-alt"
                           ></i>
-                          {userData.location}
+                          {userData.location
+                            ? userData.location
+                            : "Blue Planet"}
                         </h6>
                       </Box>
                     </Flex>
