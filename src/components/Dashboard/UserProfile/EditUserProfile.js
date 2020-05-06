@@ -303,11 +303,22 @@ const EditUserProfile = ({
               to={`/profile/${id}`}
             >
               {' '}
-              <Image
-                size='50px'
-                style={{ opacity: '0.6' }}
-                src={require('../../../icons/user.svg')}
-              />
+              {/* <Image */}
+              {!newProfile_image ? (
+                <Image
+                  size='50px'
+                  name={userData.first_name}
+                  style={{ borderRadius: "50%" }}
+                  src={userData.profile_image}
+                />
+              ) : (
+                <Image
+                  size="50px"
+                  style={{ borderRadius: "50%" }}
+                  src={newProfile_image}
+                />
+              )}
+              
             </Link>
           </Flex>
         </Flex>

@@ -60,6 +60,9 @@ const ProfilePage = (props) => {
   hired = new Date(hired).toUTCString();
   hired = hired.split(' ').slice(2, 4).join(' ');
 
+  //formatting profile image
+  let profile_image = userData.profile_image;
+
   //slack link helper
   const slackID = userData.slack;
   const slackLink = `https://lambda-students.slack.com/app_redirect?channel=${slackID}`;
@@ -92,11 +95,21 @@ const ProfilePage = (props) => {
             </Link>
           </Flex>
           <Flex>
+          {!profile_image ? (
+            <Image
+             size='50px'
+             style={{ opacity: '0.6' }}
+             src={require('../../../icons/user.svg')}
+            />
+          ):(
             <Image
               size='50px'
-              style={{ opacity: '0.6' }}
-              src={require('../../../icons/user.svg')}
-            />
+              // style={{ opacity: '0.6' }}
+              name={userData.first_name}
+               src={userData.profile_image}
+               borderRadius="50%"
+              // src={require('../../../icons/user.svg')}
+            />)}
           </Flex>
         </Flex>
       </Flex>
