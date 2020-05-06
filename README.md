@@ -16,20 +16,17 @@ You can find the deployed project on [Heroku](https://labs21-allay-fe.herokuapp.
 |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/spencer-mcguire)                   |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Playtez)                           |                        [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/nasraaden)                         |                      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/taterntots)                       |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wchamber01)                           |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ignaciosm)                   |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/spencer-mcguire/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/aaron-pleitez-14277818a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/nasra-aden-168b5618a/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/matthew-a-weidner/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/william-chambers-8729b650/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ignaciosm/) |
 
-
-
-|                                      [Mandi Haase](https://github.com/haase1020)                                               |                                               [Justine Gennaro](https://dribbble.com/justinegennaro)                                                |                                              [Shawn DelPercio](https://github.com/sdelpercio)                                               |                                          [Edvin Saletovic](https://github.com/VodeniZeko)                                          |                                             [Alex Jenkins-Neary](https://github.com/alexmjn)                                              |                                     [Noah Franco](https://github.com/noahfranco)                                     |
-| :------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: |
-|                         [<img src="./profile-img/MandiHaase.png" />](https://github.com/haase1020)                          |                          [<img src="./profile-img/JustineGennaro.png" />](https://dribbble.com/justinegennaro)                           |                        [<img src="./profile-img/ShawnDelPercio.png" />](https://github.com/sdelpercio)                        |                      [<img src="./profile-img/EdvinSaletovic.png" />](https://github.com/VodeniZeko)                      |                          [<img src="./profile-img/AlexJenkinsNeary.png" />](https://github.com/alexmjn)                          |                  [<img src="./profile-img/NoahFranco.png" />](https://github.com/noahfranco)                   |
-|                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/haase1020)                   |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://dribbble.com/justinegennaro/)                           |                        [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sdelpercio)                         |                      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/VodeniZeko)                       |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/alexjn)                           |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/noahfranco)                   |
+|                                              [Mandi Haase](https://github.com/haase1020)                                              |                                           [Justine Gennaro](https://dribbble.com/justinegennaro)                                           |                                              [Shawn DelPercio](https://github.com/sdelpercio)                                              |                                         [Edvin Saletovic](https://github.com/VodeniZeko)                                         |                                         [Alex Jenkins-Neary](https://github.com/alexmjn)                                          |                                        [Noah Franco](https://github.com/noahfranco)                                         |
+| :-----------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
+|                              [<img src="./profile-img/MandiHaase.png" />](https://github.com/haase1020)                               |                           [<img src="./profile-img/JustineGennaro.png" />](https://dribbble.com/justinegennaro)                            |                              [<img src="./profile-img/ShawnDelPercio.png" />](https://github.com/sdelpercio)                               |                         [<img src="./profile-img/EdvinSaletovic.png" />](https://github.com/VodeniZeko)                          |                          [<img src="./profile-img/AlexJenkinsNeary.png" />](https://github.com/alexmjn)                           |                         [<img src="./profile-img/NoahFranco.png" />](https://github.com/noahfranco)                         |
+|                        [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/haase1020)                         |                       [<img src="https://github.com/favicon.ico" width="15"> ](https://dribbble.com/justinegennaro/)                       |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sdelpercio)                           |                     [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/VodeniZeko)                      |                        [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/alexjn)                        |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/noahfranco)                   |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/mandi-haase-66a0b013/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/justine-gennaro-761838162/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/shawn-delpercio-b481a4145/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/edvin-saletovic/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/alexjenkinsneary/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/noahfranco/) |
 
-
-|                                      [Heriberto Galvez Garcia](https://github.com/HeribertoGalvezGarcia)                                               |                                               [J. Caleb Spraul](https://github.com/jcs-lambda)                                                |                                              [Andrew Archie](https://github.com)                                               |                                                                              |
-| :------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: |
-|                         [<img src="./profile-img/LambdaSchool.png" width="200" />](https://github.com/HeribertoGalvezGarcia)                          |                          [<img src="./profile-img/LambdaSchool.png" width="200" />](https://github.com/jcs-lambda)                           |                        [<img src="./profile-img/AndrewArchie.png" width="200" />](https://github.com/)                        |                                       |
-|                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/HeribertoGalvezGarcia)                   |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jcs-lambda)                           |                        [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                         |                                         
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) 
+|                      [Heriberto Galvez Garcia](https://github.com/HeribertoGalvezGarcia)                      |                               [J. Caleb Spraul](https://github.com/jcs-lambda)                                |                                                   [Andrew Archie](https://github.com)                                                    |     |
+| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: | --- |
+|     [<img src="./profile-img/LambdaSchool.png" width="200" />](https://github.com/HeribertoGalvezGarcia)      |           [<img src="./profile-img/JCalebSpraul.png" width="200" />](https://github.com/jcs-lambda)           |                             [<img src="./profile-img/AndrewArchie.png" width="200" />](https://github.com/)                              |     |
+|      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/HeribertoGalvezGarcia)       |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jcs-lambda)            |                         [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/BaiganKing)                          |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/andrew-archie-04b24b1a9/) |
 
 <br>
 <br>
@@ -39,8 +36,6 @@ You can find the deployed project on [Heroku](https://labs21-allay-fe.herokuapp.
 [Trello Board](https://trello.com/b/wDXK4crl/allay23-sprint-2-%F0%9F%94%A5-28-04-20-11-05-20)
 
 [Product Canvas](https://www.notion.so/Allay-eb3c5b88ffab4ff199663cb40fcc1402)
-
-[UX Design files](https://www.figma.com/file/UVcnH59LM8olfEPMHLVaaO/Allay%2C-Justine)
 
 Welcome to Allay! We are a platform that aims to relieve stress for students by providing a message board where students and alumni can talk about their job seeking experience. We do this by allowing alumni to leave reviews, post about job interviews, and share salaries. Additionally, we aim to provide basic social networking between students and hired alumni.
 
@@ -81,13 +76,13 @@ Expects:
 
 ```json
 {
-	"id": 1,
-	"first_name": "Jane",
-	"last_name": "Doe",
-	"email": "janedoe@email.com",
-	"track_id": 1,
-	"cohort": "FT 1",
-	"password": "password"
+  "id": 1,
+  "first_name": "Jane",
+  "last_name": "Doe",
+  "email": "janedoe@email.com",
+  "track_id": 1,
+  "cohort": "FT 1",
+  "password": "password"
 }
 ```
 
@@ -95,13 +90,13 @@ Returns:
 
 ```json
 {
-	"id": 1,
-	"first_name": "Jane",
-	"last_name": "Doe",
-	"email": "janedoe@email.com",
-	"track_id": 1,
-	"cohort":"FT 1",
-	"reviews": []
+  "id": 1,
+  "first_name": "Jane",
+  "last_name": "Doe",
+  "email": "janedoe@email.com",
+  "track_id": 1,
+  "cohort": "FT 1",
+  "reviews": []
 }
 ```
 
@@ -223,7 +218,7 @@ Remember that this project is licensed under the MIT license, and by submitting 
 - Include the relevant issue number, if applicable.
 - You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
 
-### ESLint && Prettier 
+### ESLint && Prettier
 
 - Configuration is already set up
 - Team members most download prettier && ESLint as a VScode plugin
