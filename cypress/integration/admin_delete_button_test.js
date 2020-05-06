@@ -4,15 +4,18 @@ describe('Creates a new interview review', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.login();
+    cy.saveLocalStorage();
+  });
+
+  before(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should navigate to add review form after logging in', function () {
-    // select elements and alias them
-    cy.get('input[name="email"]').as('emailText');
-    cy.get('@emailText').type('testing123@gmail.com');
-
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('@passwordText').type('password');
-
-    cy.get('[data-cy=loginSubmit]').click();
+    cy.visit('http://localhost:3000/dashboard');
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
 
@@ -31,7 +34,7 @@ describe('Creates a new interview review', function () {
     //Successfully fills out the form and submits a new Interview Review
     //gets the elements, assign an alias then fills them out
     // it('should complete and submit interview review', function() {
-    cy.wait(3000);
+    cy.wait(7000);
     cy.get('input[name="company_name"]').as('company_nameText');
     cy.get('@company_nameText').type('Amazon Web Services');
 
@@ -81,6 +84,9 @@ describe('Creates a new interview review', function () {
     cy.wait(3000);
     cy.url().should('include', 'dashboard');
   });
+  before(() => {
+    cy.restoreLocalStorage();
+  });
   it('Opens the hamburger menu and logs out', function () {
     // click hamburger button
     cy.wait(3000);
@@ -97,15 +103,17 @@ describe('Logs into the site', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.adminLogin();
+    cy.saveLocalStorage();
+  });
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should navigate to Dashboard after logging in as admin', function () {
-    // select element and alias them
-    cy.get('input[name="email"]').as('emailText');
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('[data-cy=loginSubmit]').as('loginSubmit');
-    // interact with element
-    cy.get('@emailText').type('haase1020@gmail.com');
-    cy.get('@passwordText').type('password');
-    cy.get('@loginSubmit').click();
+    cy.visit('http://localhost:3000/dashboard');
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
   });
@@ -123,7 +131,7 @@ describe('Logs into the site', function () {
     cy.get('@adminDeleteReviewConfirm').click();
     cy.wait(3000);
     // review card should be deleted and return to dashboard
-    cy.get('@testReview').should('eq', undefined);
+    cy.get('@testReview').should('eq', null);
     cy.wait(1000);
     cy.url().should('include', 'dashboard');
   });

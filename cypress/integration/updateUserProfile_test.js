@@ -5,15 +5,18 @@ describe('update user profile', function () {
     cy.visit('http://localhost:3000/');
   });
 
+  before(() => {
+    cy.login();
+    cy.saveLocalStorage();
+  });
+
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should navigate to user profile after logging in', function () {
-    // select elements and alias them
-    cy.get('input[name="email"]').as('emailText');
-    cy.get('@emailText').type('testing123@gmail.com');
+    cy.visit('http://localhost:3000/dashboard');
 
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('@passwordText').type('password');
-
-    cy.get('[data-cy=loginSubmit]').click();
     // wait until pushed to dashboard
     cy.wait(2000);
     cy.url().should('include', 'dashboard');
@@ -53,11 +56,11 @@ describe('update user profile', function () {
     cy.get('[data-cy=registerSubmit]').as('save');
     cy.get('[data-cy=cancelUpdate]').as('cancel');
     // interact with element
-    cy.get('@priorExpFalse').click({ force: true });
+    cy.get('@priorExpTrue').click({ force: true });
 
-    // cy.get('@save').click();
-    // cy.wait(2000);
+    cy.get('@save').click();
+    cy.wait(2000);
 
-    // cy.url().should('eq', 'http://localhost:3000/profile/45');
+    cy.url().should('eq', 'http://localhost:3000/profile/45');
   });
 });

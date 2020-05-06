@@ -4,15 +4,18 @@ describe('Creates a new interview review', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.login();
+    cy.saveLocalStorage();
+  });
+
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should navigate to add review form after logging in', function () {
-    // select elements and alias them
-    cy.get('input[name="email"]').as('emailText');
-    cy.get('@emailText').type('testing123@gmail.com');
-
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('@passwordText').type('password');
-
-    cy.get('[data-cy=loginSubmit]').click();
+    cy.visit('http://localhost:3000/dashboard');
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
 

@@ -4,15 +4,18 @@ describe('Logs into the site', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.adminLogin();
+    cy.saveLocalStorage();
+  });
+
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should navigate to Dashboard after submitting.', function () {
-    // select element and alias them
-    cy.get('input[name="email"]').as('emailText');
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('[data-cy=loginSubmit]').as('loginSubmit');
-    // interact with element
-    cy.get('@emailText').type('haase1020@gmail.com');
-    cy.get('@passwordText').type('password');
-    cy.get('@loginSubmit').click();
+    cy.visit('http://localhost:3000/dashboard');
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
   });
