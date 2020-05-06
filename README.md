@@ -223,6 +223,12 @@ Remember that this project is licensed under the MIT license, and by submitting 
 - Include the relevant issue number, if applicable.
 - You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
 
+### ESLint && Prettier 
+
+- Configuration is already set up
+- Team members most download prettier && ESLint as a VScode plugin
+- for more information on changing the config files visit: https://lambda-school-labs.github.io/labs-guides/topics/eslint-prettier-setup/
+
 ### Attribution
 
 These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
