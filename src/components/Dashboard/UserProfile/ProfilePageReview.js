@@ -14,7 +14,7 @@ export const ProfilePageReview = ({ userReviews }) => {
   const under = { textDecoration: "underline" };
 
   return (
-    <Flex justify="center" mt=".5%">
+    <Flex justify="center" mt=".5%" mb="2%">
       {!isLoading ? (
         <Box
           width="1048px"

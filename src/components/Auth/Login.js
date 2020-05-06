@@ -140,7 +140,7 @@ const Login = ({ login, isLoading, history }) => {
                 </FormControl>
                 <FormControl isInvalid={errors.password}>
                   <Flex flexDir="column">
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>password</FormLabel>
                     <InputGroup>
                       <SignupLoginInput
                         mb="30px"
@@ -190,7 +190,7 @@ const Login = ({ login, isLoading, history }) => {
               </Flex>
               <Flex m="15px" justify="center" fontWeight="light">
                 <Text>
-                  Don't have an account?{" "}
+                  Don't have an account?
                   <Link
                     to="/signup"
                     color="black"

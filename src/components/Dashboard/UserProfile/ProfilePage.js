@@ -96,11 +96,19 @@ const ProfilePage = props => {
             </Link>
           </Flex>
           <Flex>
-            <Image
-              size="50px"
-              style={{ opacity: "0.6" }}
-              src={require("../../../icons/user.svg")}
-            />
+            {userData.profile_image === "h" ? (
+              <Image
+                size="50px"
+                style={{ opacity: "0.6" }}
+                src={require("../../../icons/user.svg")}
+              />
+            ) : (
+              <Image
+                size="50px"
+                style={{ opacity: "0.6", borderRadius: "50%" }}
+                src={userData.profile_image}
+              />
+            )}
           </Flex>
         </Flex>
       </Flex>

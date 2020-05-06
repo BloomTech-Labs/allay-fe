@@ -35,6 +35,7 @@ export const updateUser = (userId, userInfo) => dispatch => {
   return axiosWithAuth()
     .put(`/users/${userId}`, userInfo)
     .then(res => {
+      console.log(res.data);
       // TODO://temp fix for => isUpdated value not showing true while edit_user_start in order to display changes saved message in profilepage.js file (console.log(isUpdated) and see the issues after removing timeout)
       setTimeout(function() {
         dispatch({ type: EDIT_USER_SUCCESS, payload: res.data });
