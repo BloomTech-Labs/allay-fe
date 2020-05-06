@@ -6,12 +6,12 @@ describe('Logs out user and redirects to login page', function () {
   });
   it('should navigate to Dashboard after login', function () {
     // select element and alias them
-    cy.get('input[name="username"]').as('usernameText');
+    cy.get('input[name="email"]').as('emailText');
     cy.get('input[name="password"]').as('passwordText');
     cy.get('[data-cy=loginSubmit]').as('loginSubmit');
     // interact with element
-    cy.get('@usernameText').type('testuser1');
-    cy.get('@passwordText').type('12345678');
+    cy.get('@emailText').type('testing123@gmail.com');
+    cy.get('@passwordText').type('password');
     cy.get('@loginSubmit').click();
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
