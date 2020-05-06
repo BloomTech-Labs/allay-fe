@@ -97,6 +97,15 @@ describe('Logs into the site', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.adminLogin();
+    cy.saveLocalStorage();
+  });
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should navigate to Dashboard after logging in as admin', function () {
     // select element and alias them
     cy.get('input[name="email"]').as('emailText');
@@ -124,11 +133,11 @@ describe('Logs into the site', function () {
     // cy.wait(3000);
 
     //the following tests are not working because the blockUserButton Confirm returns a 401 error
-    // cy.get('[data-cy=reviewCloseButton]').click();
-    // cy.get('@testReview').click();
+    cy.get('[data-cy=reviewCloseButton]').click();
+    cy.get('@testReview').click();
 
     // unbind user
-    // cy.get('[data-cy=unblockUserButton]').click();
-    // cy.get('[data-cy=unblockUserButtonConfirm]').click();
+    cy.get('[data-cy=unblockUserButton]').click();
+    cy.get('[data-cy=unblockUserButtonConfirm]').click();
   });
 });
