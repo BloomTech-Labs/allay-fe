@@ -228,9 +228,9 @@ const EditUserProfile = ({
     updateUser(id, {
       first_name: creds.firstName,
       last_name: creds.lastName,
-      location: !newLocation
-        ? userData.location
-        : `${newLocation.myCity} ${newLocation.myState}`,
+      location: newLocation
+        ? `${newLocation.myCity} ${newLocation.myState}`
+        : creds.location,
       graduated: graduated,
       highest_ed: creds.highest_ed || null,
       field_of_study: creds.field_of_study || null,
@@ -254,7 +254,7 @@ const EditUserProfile = ({
       profile_image: newProfile_image || userData.profile_image,
       portfolio: creds.portfolio_URL || null,
     }).then(() => history.push(`/profile/${id}`));
-
+    console.log("from edit", creds);
     // TODO: implement google analytics for updating a user
     // ReactGA.event({
     //   category: "User",
@@ -302,12 +302,19 @@ const EditUserProfile = ({
               }}
               to={`/profile/${id}`}
             >
-              {' '}
-              <Image
-                size='50px'
-                style={{ opacity: '0.6' }}
-                src={require('../../../icons/user.svg')}
-              />
+              {userData.profile_image === "h" ? (
+                <Image
+                  size="50px"
+                  style={{ opacity: "0.6" }}
+                  src={require("../../../icons/user.svg")}
+                />
+              ) : (
+                <Image
+                  size="50px"
+                  style={{ opacity: "0.6", borderRadius: "50%" }}
+                  src={userData.profile_image}
+                />
+              )}
             </Link>
           </Flex>
         </Flex>
