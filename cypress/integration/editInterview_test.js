@@ -4,15 +4,18 @@ describe('Navs to edit interview form and edits an interview successfully', func
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.login();
+    cy.saveLocalStorage();
+  });
+
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should navigate to edit interview form and successfully edits interview', function () {
-    // select elements and alias them
-    cy.get('input[name="email"]').as('emailText');
-    cy.get('@emailText').type('testing123@gmail.com');
-
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('@passwordText').type('password');
-
-    cy.get('[data-cy=loginSubmit]').click();
+    cy.visit('http://localhost:3000/dashboard');
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
 

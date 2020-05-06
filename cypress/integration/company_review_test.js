@@ -4,15 +4,18 @@ describe('Navs to company review form.', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.login();
+    cy.saveLocalStorage();
+  });
+
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should navigate to add review after logging in the submit a review', function () {
-    // select element and alias them
-    cy.get('input[name="email"]').as('emailText');
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('[data-cy=loginSubmit]').as('loginSubmit');
-    // interact with element
-    cy.get('@emailText').type('testing123@gmail.com');
-    cy.get('@passwordText').type('password');
-    cy.get('@loginSubmit').click();
+    cy.visit('http://localhost:3000/dashboard');
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
     // nav to add review start

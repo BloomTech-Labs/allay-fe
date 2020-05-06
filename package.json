@@ -85,6 +85,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^10.0.0",
     "cypress": "^4.5.0",
+    "cypress-localstorage-commands": "^1.1.9",
     "start-server-and-test": "^1.11.0"
   }
 }

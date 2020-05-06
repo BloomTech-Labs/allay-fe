@@ -4,15 +4,18 @@ describe('Creates and successfully deletes a review', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.login();
+    cy.saveLocalStorage();
+  });
+
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should delete a review form after creation', function () {
-    // select element and alias them
-    cy.get('input[name="email"]').as('emailText');
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('[data-cy=loginSubmit]').as('loginSubmit');
-    // interact with element
-    cy.get('@emailText').type('testing123@gmail.com');
-    cy.get('@passwordText').type('password');
-    cy.get('@loginSubmit').click();
+    cy.visit('http://localhost:3000/dashboard');
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
     // nav to add review start
@@ -50,15 +53,19 @@ describe('Creates and successfully deletes a review', function () {
     cy.get('input[name="end_date"]').as('endDateText');
     cy.get('@endDateText').type('2000');
 
+    cy.wait(2000);
     cy.get('[data-cy=companyComment]').as('commentText');
     cy.get('@commentText').type('TESTING VIA CYPRESS DELETE');
 
+    cy.wait(2000);
     cy.get('select[name="typical_hours"]').as('hoursDropdown');
     cy.get('@hoursDropdown').select('30 hours+');
 
+    cy.wait(2000);
     cy.get('input[name="salary"]').as('salaryText');
     cy.get('@salaryText').type('123456');
 
+    cy.wait(2000);
     cy.get('ul>li').as('companyOverall');
     cy.get('@companyOverall').eq(2).click();
 
@@ -70,7 +77,8 @@ describe('Creates and successfully deletes a review', function () {
     cy.get('[data-cy=deleteModalReview]').click();
     cy.get('[data-cy=confirmDeleteModalReview]').click();
 
+    cy.wait(3000);
     // confirms review was deleted
-    // cy.window().should('not.include', 'TESTING VIA CYPRESS DELETE');
+    cy.get('TESTING VIA CYPRESS DELETE').should('not.exist');
   });
 });
