@@ -55,7 +55,7 @@ const EditUserProfile = ({
         ? userData.employed_start.slice(5, 7)
         : '',
       workYear: userData.employed_start
-        ? userData.employed_start.slice(0, 4),
+        ? userData.employed_start.slice(0, 4) : '',
       resume: null,
       portfolio_URL: userData.portfolio,
       linked_in: userData.linked_in,
