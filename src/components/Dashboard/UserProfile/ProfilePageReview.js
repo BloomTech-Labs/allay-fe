@@ -9,6 +9,15 @@ import {
   AccordionPanel
 } from "@chakra-ui/core";
 
+const dateConvert = date => {
+  date = new Date(date).toUTCString();
+  date = date
+    .split(" ")
+    .slice(0, 4)
+    .join(" ");
+  return date;
+};
+
 export const ProfilePageReview = ({ userReviews }) => {
   const isLoading = useSelector(state => state.user.isLoading);
   const under = { textDecoration: "underline" };
@@ -22,12 +31,7 @@ export const ProfilePageReview = ({ userReviews }) => {
         >
           {userReviews && userReviews.length > 0 ? (
             userReviews.map(review => {
-              let postedOn = review.created_at;
-              postedOn = new Date(postedOn).toUTCString();
-              postedOn = postedOn
-                .split(" ")
-                .slice(2, 4)
-                .join(" ");
+              const postedOn = dateConvert(review.created_at);
               return (
                 <AccordionItem
                   key={review.review_id}
