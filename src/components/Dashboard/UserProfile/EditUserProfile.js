@@ -1,17 +1,16 @@
-
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { useSelector } from "react-redux";
-import ReactGA from "react-ga"; // for google analytics
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
+import ReactGA from 'react-ga' // for google analytics
 //components
-import SignupLoginInput from '../../Reusable/InputFields/SignupLoginInput.js';
-import CustomAutocomplete from '../../Reusable/InputFields/Autocomplete.js';
+import SignupLoginInput from '../../Reusable/InputFields/SignupLoginInput.js'
+import CustomAutocomplete from '../../Reusable/InputFields/Autocomplete.js'
 //actions
-import updateUser from '../../../state/actions/index';
+import updateUser from '../../../state/actions/index'
 //styles
-import CustomSpinner from '../../CustomSpinner.js';
+import CustomSpinner from '../../CustomSpinner.js'
 
 import {
   Image,
@@ -29,7 +28,7 @@ import {
   Select,
   Icon,
   Avatar,
-} from '@chakra-ui/core';
+} from '@chakra-ui/core'
 
 //need to make new action creator editUser
 const EditUserProfile = ({
@@ -39,12 +38,11 @@ const EditUserProfile = ({
   isLoading,
   updateUser,
 }) => {
-  const id = match.params.id;
+  const id = match.params.id
   const { handleSubmit, errors, register, formState } = useForm({
     defaultValues: {
       firstName: userData.first_name,
       lastName: userData.last_name,
-      location: userData.location,
       gradMonth: userData.graduated ? userData.graduated.slice(5, 7) : '',
       gradYear: userData.graduated ? userData.graduated.slice(0, 4) : '',
       highest_ed: userData.highest_ed,
@@ -55,181 +53,182 @@ const EditUserProfile = ({
         ? userData.employed_start.slice(5, 7)
         : '',
       workYear: userData.employed_start
-        ? userData.employed_start.slice(0, 4) : '',
+        ? userData.employed_start.slice(0, 4)
+        : '',
       resume: null,
       portfolio_URL: userData.portfolio,
       linked_in: userData.linked_in,
       slack: userData.slack,
       github: userData.github,
       dribble: userData.dribble,
-      profile_image: userData.profile_image
-    }
-  });
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
+      profile_image: userData.profile_image,
+    },
+  })
+  const [show, setShow] = useState(false)
+  const handleClick = () => setShow(!show)
   //location state
-  const [location, setLocation] = useState({});
-  const [newLocation, setNewLocation] = useState({});
-  const stateHelper = (value) => {
-    setLocation(value);
-  };
+  const [location, setLocation] = useState({})
+  const [newLocation, setNewLocation] = useState({})
+  const stateHelper = value => {
+    setLocation(value)
+  }
   // cloudinary stuff
-  const [newProfile_image, setNewProfile_Image] = useState('');
-  const [newProfile_resume, setNewProfile_resume] = useState('');
+  const [newProfile_image, setNewProfile_Image] = useState('')
+  const [newProfile_resume, setNewProfile_resume] = useState('')
 
   // graduated state
-  const [graduated, setGraduated] = useState(false);
-  const [years, setYears] = useState([]);
+  const [graduated, setGraduated] = useState(false)
+  const [years, setYears] = useState([])
   const isGraduated = () => {
-    setGraduated(true);
-  };
+    setGraduated(true)
+  }
   const notGraduated = () => {
-    setGraduated(false);
-  };
-  const [employed, setEmployed] = useState(false);
+    setGraduated(false)
+  }
+  const [employed, setEmployed] = useState(false)
   const isEmployed = () => {
-    setEmployed(true);
-  };
+    setEmployed(true)
+  }
   const notEmployed = () => {
-    setEmployed(false);
-  };
+    setEmployed(false)
+  }
 
   //radio button state
-  const [priorExp, setPriorExp] = useState(false);
-  const [tlsl, setTlsl] = useState(false);
-  const [remote, setRemote] = useState(false);
+  const [priorExp, setPriorExp] = useState(false)
+  const [tlsl, setTlsl] = useState(false)
+  const [remote, setRemote] = useState(false)
 
   //set radio button state on load
   useEffect(() => {
-    setPriorExp(userData.prior_experience);
-    setTlsl(userData.tlsl_experience);
-    setRemote(userData.employed_remote);
-  }, []);
+    setPriorExp(userData.prior_experience)
+    setTlsl(userData.tlsl_experience)
+    setRemote(userData.employed_remote)
+  }, [])
 
   //location helpers
   useEffect(() => {
-    setNewLocation({ ...location, myState: location.myState });
+    setNewLocation({ ...location, myState: location.myState })
     // removes numbers, commas, and whitespaces from city
     if (location.myCity) {
       if (/^[0-9]+$/.test(location.myCity) || /\s/.test(location.myCity)) {
-        const tempCity = location.myCity;
+        const tempCity = location.myCity
         setNewLocation({
           ...location,
           myCity: tempCity.replace(/^[\s,\d]+/, ''),
-        });
+        })
       }
     }
-  }, [location]);
+  }, [location])
 
   // year helper
   useEffect(() => {
-    const year = new Date().getFullYear();
-    setYears(Array.from(new Array(20), (val, index) => year - index));
-  }, []);
+    const year = new Date().getFullYear()
+    setYears(Array.from(new Array(20), (val, index) => year - index))
+  }, [])
 
   ///info for slack ID
   const info = (
     <Box>
       <Image
-        objectFit='fit'
-        width='300px'
-        height='300px'
+        objectFit="fit"
+        width="300px"
+        height="300px"
         src={require('../../../icons/slackID.jpg')}
-        alt='slack info'
+        alt="slack info"
       />
     </Box>
-  );
+  )
 
   //validation
   function validateFirstName(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (!value) {
-      error = 'First Name is required';
+      error = 'First Name is required'
     } else if (value.length < 2) {
-      error = 'First Name must be at least 2 characters';
+      error = 'First Name must be at least 2 characters'
     } else if (nameRegex.test(value)) {
-      error = 'First Name can only contain letters';
+      error = 'First Name can only contain letters'
     }
-    return error || true;
+    return error || true
   }
 
   function validateLastName(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (!value) {
-      error = 'Last Name is required';
+      error = 'Last Name is required'
     } else if (value.length < 2) {
-      error = 'Last Name must be at least 2 characters';
+      error = 'Last Name must be at least 2 characters'
     } else if (nameRegex.test(value)) {
-      error = 'Last Name can only contain letters';
+      error = 'Last Name can only contain letters'
     }
-    return error || true;
+    return error || true
   }
 
   function validateFieldOfStudy(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (nameRegex.test(value)) {
-      error = 'Field of study can only contain letters';
+      error = 'Field of study can only contain letters'
     }
-    return error || true;
+    return error || true
   }
   //end validation
 
   //add image to cloudinary
-  const updateImage = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append('file', files[0]);
-    data.append('upload_preset', 'upload');
+  const updateImage = async e => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'upload')
     const res = await fetch(
       '	https://api.cloudinary.com/v1_1/takija/image/upload',
       {
         method: 'POST',
         body: data,
       }
-    );
-    const file = await res.json();
-    setNewProfile_Image(...newProfile_image, file.secure_url);
-  };
+    )
+    const file = await res.json()
+    setNewProfile_Image(...newProfile_image, file.secure_url)
+  }
 
   //upload resume to cloudinary
-  const updateResume = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append('file', files[0]);
-    data.append('upload_preset', 'upload');
+  const updateResume = async e => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'upload')
     const res = await fetch(
       '	https://api.cloudinary.com/v1_1/takija/image/upload',
       {
         method: 'POST',
         body: data,
       }
-    );
-    const file = await res.json();
-    setNewProfile_resume(...newProfile_resume, file.secure_url);
-  };
+    )
+    const file = await res.json()
+    setNewProfile_resume(...newProfile_resume, file.secure_url)
+  }
 
-  const submitForm = (creds) => {
+  const submitForm = creds => {
     // correcting grad date format
-    let graduated = null;
+    let graduated = null
     if (creds.gradMonth && creds.gradYear) {
-      graduated = `${creds.gradYear}-${creds.gradMonth}-01`;
+      graduated = `${creds.gradYear}-${creds.gradMonth}-01`
     }
 
     // correcting employed date format
-    let employed_start = null;
+    let employed_start = null
     if (creds.workMonth && creds.workYear) {
-      employed_start = `${creds.workYear}-${creds.workMonth}-01`;
+      employed_start = `${creds.workYear}-${creds.workMonth}-01`
     }
-    console.log(newLocation);
+    console.log(newLocation)
     // formatting the signup state to match the back end columns
     updateUser(id, {
       first_name: creds.firstName,
       last_name: creds.lastName,
       location: newLocation
-        ? `${newLocation.myCity} ${newLocation.myState}`
+        ? `${newLocation.myCity || userData.location} ${newLocation.myState}`
         : creds.location,
       graduated: graduated,
       highest_ed: creds.highest_ed || null,
@@ -253,41 +252,41 @@ const EditUserProfile = ({
       dribble: creds.dribble || null,
       profile_image: newProfile_image || userData.profile_image,
       portfolio: creds.portfolio_URL || null,
-    }).then(() => history.push(`/profile/${id}`));
-    console.log("from edit", creds);
+    }).then(() => history.push(`/profile/${id}`))
+    console.log('from edit', creds)
     // TODO: implement google analytics for updating a user
     // ReactGA.event({
     //   category: "User",
     //   action: `Button Sign Up`,
     // });
-  };
+  }
 
-  const returnToProfile = (e) => {
-    e.preventDefault();
-    history.push(`/profile/${id}`);
-  };
+  const returnToProfile = e => {
+    e.preventDefault()
+    history.push(`/profile/${id}`)
+  }
 
   if (isLoading) {
-   return null;
+    return null
   }
 
   return (
     <>
-      <Flex Flex w='100%' height='84px' justify='center'>
+      <Flex Flex w="100%" height="84px" justify="center">
         <Flex
-          maxW='1440px'
-          w='100%'
-          pt='1%'
-          pr='3%'
-          pl='3%'
-          justify='space-between'
+          maxW="1440px"
+          w="100%"
+          pt="1%"
+          pr="3%"
+          pl="3%"
+          justify="space-between"
         >
           <Link
             style={{
               textDecoration: 'none',
               color: 'black',
             }}
-            to='/dashboard'
+            to="/dashboard"
           >
             {' '}
             <Flex>
@@ -302,16 +301,16 @@ const EditUserProfile = ({
               }}
               to={`/profile/${id}`}
             >
-              {userData.profile_image === "h" ? (
+              {userData.profile_image === 'h' ? (
                 <Image
                   size="50px"
-                  style={{ opacity: "0.6" }}
-                  src={require("../../../icons/user.svg")}
+                  style={{ opacity: '0.6' }}
+                  src={require('../../../icons/user.svg')}
                 />
               ) : (
                 <Image
                   size="50px"
-                  style={{ opacity: "0.6", borderRadius: "50%" }}
+                  style={{ opacity: '0.6', borderRadius: '50%' }}
                   src={userData.profile_image}
                 />
               )}
@@ -320,48 +319,48 @@ const EditUserProfile = ({
         </Flex>
       </Flex>
       <Flex
-        w='833px'
-        mx='auto'
-        justify='center'
-        align='center'
-        flexDir='column'
+        w="833px"
+        mx="auto"
+        justify="center"
+        align="center"
+        flexDir="column"
       >
         <form onSubmit={handleSubmit(submitForm)}>
           <Flex
-            w='833px'
+            w="833px"
             // h='825px'
-            p='6'
-            flexDir='column'
-            background='#FDFDFF'
-            justify='center'
+            p="6"
+            flexDir="column"
+            background="#FDFDFF"
+            justify="center"
           >
-            <Flex w='653px' justify='space-between' my='68px' mx='auto'>
+            <Flex w="653px" justify="space-between" my="68px" mx="auto">
               <Text
-                as='h2'
-                fontSize='24px'
-                fontWeight='600'
-                fontFamily='Poppins'
+                as="h2"
+                fontSize="24px"
+                fontWeight="600"
+                fontFamily="Poppins"
               >
                 Edit Profile
               </Text>
-              <Flex w='150px' justify='space-between'>
+              <Flex w="150px" justify="space-between">
                 <Text
-                  as='h3'
-                  fontFamily='Muli'
-                  fontSize='22px'
-                  fontWeight='normal'
-                  color='#9194A8'
+                  as="h3"
+                  fontFamily="Muli"
+                  fontSize="22px"
+                  fontWeight="normal"
+                  color="#9194A8"
                   style={{ cursor: 'pointer' }}
                   onClick={returnToProfile}
                 >
                   Cancel
                 </Text>
                 <Text
-                  as='h3'
-                  fontFamily='Muli'
-                  fontSize='22px'
-                  fontWeight='bold'
-                  color='#344CD0'
+                  as="h3"
+                  fontFamily="Muli"
+                  fontSize="22px"
+                  fontWeight="bold"
+                  color="#344CD0"
                   style={{ cursor: 'pointer' }}
                   onClick={handleSubmit(submitForm)}
                 >
@@ -372,33 +371,33 @@ const EditUserProfile = ({
             {/* CLOUDINARY IMAGE UPLOAD */}
 
             <Flex
-              wrap='wrap'
-              w='653px'
-              mx='auto'
-              mb='55px'
-              justify='space-evenly'
-              alignItems='center'
+              wrap="wrap"
+              w="653px"
+              mx="auto"
+              mb="55px"
+              justify="space-evenly"
+              alignItems="center"
             >
               {!newProfile_image ? (
                 <Avatar
-                  size='2xl'
+                  size="2xl"
                   name={userData.first_name}
-                  style={{ borderRadius: "50%" }}
+                  style={{ borderRadius: '50%' }}
                   src={userData.profile_image}
                 />
               ) : (
                 <Avatar
                   size="2xl"
-                  style={{ borderRadius: "50%" }}
+                  style={{ borderRadius: '50%' }}
                   src={newProfile_image}
                 />
               )}
 
-              <Flex alignItems='center'>
+              <Flex alignItems="center">
                 <input
-                  type='file'
-                  filename='image'
-                  placeholder='Upload profile picture'
+                  type="file"
+                  filename="image"
+                  placeholder="Upload profile picture"
                   onChange={updateImage}
                   style={{
                     opacity: '1',
@@ -408,7 +407,7 @@ const EditUserProfile = ({
                   }}
                 />
                 {!newProfile_image ? (
-                  <label htmlFor='files' className='btn'>
+                  <label htmlFor="files" className="btn">
                     Update profile image
                   </label>
                 ) : (
@@ -418,27 +417,27 @@ const EditUserProfile = ({
                       color: 'green',
                       paddingLeft: '20px',
                     }}
-                    className='far fa-check-circle'
+                    className="far fa-check-circle"
                   ></i>
                 )}
               </Flex>
             </Flex>
 
             {/* FIRST NAME, LAST NAME */}
-            <Flex wrap='wrap' w='653' justify='center'>
+            <Flex wrap="wrap" w="653" justify="center">
               <FormControl isRequired isInvalid={errors.username}>
-                <FormLabel color='#131C4D' fontSize='20px' fontFamily='Muli'>
+                <FormLabel color="#131C4D" fontSize="20px" fontFamily="Muli">
                   First Name
                 </FormLabel>
                 <SignupLoginInput
-                  w='318px'
-                  mb='30px'
-                  mr='17px'
-                  type='text'
-                  name='firstName'
-                  label='firstName'
-                  placeholder='John'
-                  autoCapitalize='none'
+                  w="318px"
+                  mb="30px"
+                  mr="17px"
+                  type="text"
+                  name="firstName"
+                  label="firstName"
+                  placeholder="John"
+                  autoCapitalize="none"
                   ref={register({ validate: validateFirstName })}
                 />
                 <FormErrorMessage>
@@ -446,17 +445,17 @@ const EditUserProfile = ({
                 </FormErrorMessage>
               </FormControl>
               <FormControl isRequired isInvalid={errors.username}>
-                <FormLabel color='#131C4D' fontSize='20px' fontFamily='Muli'>
+                <FormLabel color="#131C4D" fontSize="20px" fontFamily="Muli">
                   Last Name
                 </FormLabel>
                 <SignupLoginInput
-                  w='318px'
-                  mb='30px'
-                  type='text'
-                  name='lastName'
-                  label='lastName'
-                  placeholder='Doe'
-                  autoCapitalize='none'
+                  w="318px"
+                  mb="30px"
+                  type="text"
+                  name="lastName"
+                  label="lastName"
+                  placeholder="Doe"
+                  autoCapitalize="none"
                   ref={register({ validate: validateLastName })}
                 />
                 <FormErrorMessage>
@@ -465,45 +464,45 @@ const EditUserProfile = ({
               </FormControl>
             </Flex>
             {/* LOCATION OF USER */}
-            <Flex wrap='wrap' w='653' justify='center'>
+            <Flex wrap="wrap" w="653" justify="center">
               <FormControl>
-                <FormLabel fontFamily='Muli'>Location (City, State)</FormLabel>
+                <FormLabel fontFamily="Muli">Location (City, State)</FormLabel>
                 <CustomAutocomplete
                   stateHelper={stateHelper}
-                  w='653px'
-                  h='58px'
-                  mb='30px'
-                  rounded='2px'
-                  variant='outline'
-                  bgColor='#FDFDFF'
-                  focusBorderColor='#344CD0'
-                  borderColor='#EAF0FE'
-                  color='#17171B'
+                  w="653px"
+                  h="58px"
+                  mb="30px"
+                  rounded="2px"
+                  variant="outline"
+                  bgColor="#FDFDFF"
+                  focusBorderColor="#344CD0"
+                  borderColor="#EAF0FE"
+                  color="#17171B"
                   _hover={{ borderColor: '#BBBDC6' }}
                   _placeholder={{ color: '#BBBDC6' }}
-                  id='location'
-                  name='location'
-                  label='location'
-                  placeholder='e.g. Los Angeles, CA'
+                  id="location"
+                  name="location"
+                  label="location"
+                  placeholder={userData.location}
                   ref={register}
                 />
               </FormControl>
             </Flex>
             {/* GRADUATED CHECK */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mx='auto'
+              wrap="wrap"
+              w="653px"
+              mx="auto"
               mb={graduated ? '20px' : '80px'}
-              justify='space-between'
+              justify="space-between"
             >
-              <FormLabel fontFamily='Muli'>
+              <FormLabel fontFamily="Muli">
                 Have you graduated from Lambda yet?
               </FormLabel>
 
               <Radio
-                name='graduated'
-                id='graduated-1'
+                name="graduated"
+                id="graduated-1"
                 value={true}
                 defaultChecked={graduated === true}
                 onClick={isGraduated}
@@ -511,8 +510,8 @@ const EditUserProfile = ({
                 Yes
               </Radio>
               <Radio
-                name='graduated'
-                id='graduated-2'
+                name="graduated"
+                id="graduated-2"
                 value={false}
                 defaultChecked={graduated === false}
                 onClick={notGraduated}
@@ -523,92 +522,92 @@ const EditUserProfile = ({
             {/* GRADUATED MONTH AND YEAR */}
             {graduated ? (
               <Flex
-                wrap='wrap'
-                w='653px'
-                mx='auto'
-                mb='80px'
-                justify='space-between'
-                align='center'
+                wrap="wrap"
+                w="653px"
+                mx="auto"
+                mb="80px"
+                justify="space-between"
+                align="center"
               >
-                <FormLabel fontFamily='Muli'>When did you graduate?</FormLabel>
-                <Flex align='center' alignContent='center'>
+                <FormLabel fontFamily="Muli">When did you graduate?</FormLabel>
+                <Flex align="center" alignContent="center">
                   <FormControl>
                     <Select
-                      mr='17px'
-                      h='68px'
-                      py='16px'
-                      w='155px'
-                      rounded='2px'
-                      variant='outline'
-                      backgroundColor='#FDFDFF'
-                      focusBorderColor='#344CD0'
-                      borderColor='#EAF0FE'
-                      color='#BBBDC6'
+                      mr="17px"
+                      h="68px"
+                      py="16px"
+                      w="155px"
+                      rounded="2px"
+                      variant="outline"
+                      backgroundColor="#FDFDFF"
+                      focusBorderColor="#344CD0"
+                      borderColor="#EAF0FE"
+                      color="#BBBDC6"
                       _focus={{ color: '#17171B' }}
                       _hover={{ borderColor: '#BBBDC6' }}
-                      name='gradMonth'
-                      label='gradMonth'
+                      name="gradMonth"
+                      label="gradMonth"
                       ref={register}
                     >
-                      <option fontFamily='Muli' value=''>
+                      <option fontFamily="Muli" value="">
                         Month
                       </option>
-                      <option fontFamily='Muli' value='01'>
+                      <option fontFamily="Muli" value="01">
                         Jan
                       </option>
-                      <option fontFamily='Muli' value='02'>
+                      <option fontFamily="Muli" value="02">
                         Feb
                       </option>
-                      <option fontFamily='Muli' value='03'>
+                      <option fontFamily="Muli" value="03">
                         Mar
                       </option>
-                      <option fontFamily='Muli' value='04'>
+                      <option fontFamily="Muli" value="04">
                         Apr
                       </option>
-                      <option fontFamily='Muli' value='05'>
+                      <option fontFamily="Muli" value="05">
                         May
                       </option>
-                      <option fontFamily='Muli' value='06'>
+                      <option fontFamily="Muli" value="06">
                         Jun
                       </option>
-                      <option fontFamily='Muli' value='07'>
+                      <option fontFamily="Muli" value="07">
                         Jul
                       </option>
-                      <option fontFamily='Muli' value='08'>
+                      <option fontFamily="Muli" value="08">
                         Aug
                       </option>
-                      <option fontFamily='Muli' value='09'>
+                      <option fontFamily="Muli" value="09">
                         Sep
                       </option>
-                      <option fontFamily='Muli' value='10'>
+                      <option fontFamily="Muli" value="10">
                         Oct
                       </option>
-                      <option fontFamily='Muli' value='11'>
+                      <option fontFamily="Muli" value="11">
                         Nov
                       </option>
-                      <option fontFamily='Muli' value='12'>
+                      <option fontFamily="Muli" value="12">
                         Dec
                       </option>
                     </Select>
                   </FormControl>
                   <FormControl>
                     <Select
-                      h='68px'
-                      py='16px'
-                      w='155px'
-                      rounded='2px'
-                      variant='outline'
-                      backgroundColor='#FDFDFF'
-                      focusBorderColor='#344CD0'
-                      borderColor='#EAF0FE'
-                      color='#BBBDC6'
+                      h="68px"
+                      py="16px"
+                      w="155px"
+                      rounded="2px"
+                      variant="outline"
+                      backgroundColor="#FDFDFF"
+                      focusBorderColor="#344CD0"
+                      borderColor="#EAF0FE"
+                      color="#BBBDC6"
                       _focus={{ color: '#17171B' }}
                       _hover={{ borderColor: '#BBBDC6' }}
-                      name='gradYear'
-                      label='gradYear'
+                      name="gradYear"
+                      label="gradYear"
                       ref={register}
                     >
-                      <option fontFamily='Muli' value=''>
+                      <option fontFamily="Muli" value="">
                         Year
                       </option>
                       {years.map((year, index) => (
@@ -622,77 +621,77 @@ const EditUserProfile = ({
               </Flex>
             ) : null}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mx='auto'
-              mb='35px'
-              justify='flex-start'
-              borderTop='1px solid #DADADD'
+              wrap="wrap"
+              w="653px"
+              mx="auto"
+              mb="35px"
+              justify="flex-start"
+              borderTop="1px solid #DADADD"
             >
               <Text
-                fontFamily='Poppins'
-                fontWeight='600'
-                fontSize='24px'
-                lineHeight='36px'
-                color='#BBBDC6'
+                fontFamily="Poppins"
+                fontWeight="600"
+                fontSize="24px"
+                lineHeight="36px"
+                color="#BBBDC6"
               >
                 Background
               </Text>
             </Flex>
             {/* HIGHEST LEVEL OF EDUCATION */}
-            <Flex wrap='wrap' w='411px%' justify='center'>
+            <Flex wrap="wrap" w="411px%" justify="center">
               <FormControl>
-                <FormLabel fontFamily='Muli'>
+                <FormLabel fontFamily="Muli">
                   Highest level of education
                 </FormLabel>
                 <Select
-                  mb='30px'
-                  mr='17px'
-                  h='68px'
-                  py='16px'
-                  w='318px'
-                  rounded='2px'
-                  variant='outline'
-                  backgroundColor='#FDFDFF'
-                  focusBorderColor='#344CD0'
-                  borderColor='#EAF0FE'
-                  color='#BBBDC6'
+                  mb="30px"
+                  mr="17px"
+                  h="68px"
+                  py="16px"
+                  w="318px"
+                  rounded="2px"
+                  variant="outline"
+                  backgroundColor="#FDFDFF"
+                  focusBorderColor="#344CD0"
+                  borderColor="#EAF0FE"
+                  color="#BBBDC6"
                   _focus={{ color: '#17171B' }}
                   _hover={{ borderColor: '#BBBDC6' }}
-                  name='highest_ed'
-                  label='highest_ed'
+                  name="highest_ed"
+                  label="highest_ed"
                   ref={register}
                 >
-                  <option fontFamily='Muli' value=''>
+                  <option fontFamily="Muli" value="">
                     Select your education level
                   </option>
-                  <option fontFamily='Muli' value='High school diploma'>
+                  <option fontFamily="Muli" value="High school diploma">
                     High school diploma
                   </option>
-                  <option fontFamily='Muli' value="Associate's degree">
+                  <option fontFamily="Muli" value="Associate's degree">
                     Associate's degree
                   </option>
-                  <option fontFamily='Muli' value="Bachelor's degree">
+                  <option fontFamily="Muli" value="Bachelor's degree">
                     Bachelor's degree
                   </option>
-                  <option fontFamily='Muli' value="Master's degree">
+                  <option fontFamily="Muli" value="Master's degree">
                     Master's degree
                   </option>
-                  <option fontFamily='Muli' value='PhD'>
+                  <option fontFamily="Muli" value="PhD">
                     PhD
                   </option>
                 </Select>
               </FormControl>
               <FormControl isInvalid={errors.fieldOfStudy}>
-                <FormLabel fontFamily='Muli'>Field of study</FormLabel>
+                <FormLabel fontFamily="Muli">Field of study</FormLabel>
                 <SignupLoginInput
-                  w='318px'
-                  mb='30px'
-                  type='text'
-                  name='field_of_study'
-                  label='field_of_study'
-                  placeholder='Enter your field of study'
-                  autoCapitalize='none'
+                  w="318px"
+                  mb="30px"
+                  type="text"
+                  name="field_of_study"
+                  label="field_of_study"
+                  placeholder="Enter your field of study"
+                  autoCapitalize="none"
                   ref={register({ validate: validateFieldOfStudy })}
                 />
                 <FormErrorMessage>
@@ -702,19 +701,19 @@ const EditUserProfile = ({
             </Flex>
             {/* PRIOR EXPERIENCE */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mx='auto'
-              mb='30px'
-              justify='space-between'
+              wrap="wrap"
+              w="653px"
+              mx="auto"
+              mb="30px"
+              justify="space-between"
             >
-              <FormLabel fontFamily='Muli'>
+              <FormLabel fontFamily="Muli">
                 Prior to Lambda did you have any experience in your track?
               </FormLabel>
 
               <Radio
-                name='prior_experience'
-                id='priorExp-1'
+                name="prior_experience"
+                id="priorExp-1"
                 ref={register}
                 value={true}
                 defaultChecked={priorExp === true}
@@ -722,8 +721,8 @@ const EditUserProfile = ({
                 Yes
               </Radio>
               <Radio
-                name='prior_experience'
-                id='priorExp-2'
+                name="prior_experience"
+                id="priorExp-2"
                 ref={register}
                 value={false}
                 defaultChecked={priorExp === false}
@@ -733,19 +732,19 @@ const EditUserProfile = ({
             </Flex>
             {/* DID YOU TL/SL */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mx='auto'
-              mb='100px'
-              justify='space-between'
+              wrap="wrap"
+              w="653px"
+              mx="auto"
+              mb="100px"
+              justify="space-between"
             >
-              <FormLabel fontFamily='Muli'>
+              <FormLabel fontFamily="Muli">
                 Have you been a TL/SL while at Lambda?
               </FormLabel>
 
               <Radio
-                name='tlsl_experience'
-                id='TLSL-1'
+                name="tlsl_experience"
+                id="TLSL-1"
                 value={true}
                 ref={register}
                 defaultChecked={tlsl === false}
@@ -753,8 +752,8 @@ const EditUserProfile = ({
                 Yes
               </Radio>
               <Radio
-                name='tlsl_experience'
-                id='TLSL-2'
+                name="tlsl_experience"
+                id="TLSL-2"
                 value={false}
                 ref={register}
                 defaultChecked={tlsl === false}
@@ -765,21 +764,21 @@ const EditUserProfile = ({
             {/* RESUME UPLOAD */}
             {/* /// */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mb='30px'
-              mx='auto'
-              justify='space-between'
-              align='center'
+              wrap="wrap"
+              w="653px"
+              mb="30px"
+              mx="auto"
+              justify="space-between"
+              align="center"
             >
-              <Text align='center' fontFamily='Muli'>
+              <Text align="center" fontFamily="Muli">
                 Resume
               </Text>
-              <Flex width='270px'>
+              <Flex width="270px">
                 <input
-                  type='file'
-                  filename='image'
-                  placeholder='Upload profile picture'
+                  type="file"
+                  filename="image"
+                  placeholder="Upload profile picture"
                   onChange={updateResume}
                   style={{
                     opacity: '1',
@@ -788,7 +787,7 @@ const EditUserProfile = ({
                     backgroundColor: 'transparent',
                   }}
                 />
-                <label htmlFor='files' className='btn'>
+                <label htmlFor="files" className="btn">
                   {!newProfile_resume ? (
                     'Upload resume'
                   ) : (
@@ -798,7 +797,7 @@ const EditUserProfile = ({
                         color: 'green',
                         paddingLeft: '20px',
                       }}
-                      className='far fa-check-circle'
+                      className="far fa-check-circle"
                     ></i>
                   )}
                 </label>
@@ -806,38 +805,38 @@ const EditUserProfile = ({
             </Flex>
             {/* //// */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mx='auto'
-              mb='35px'
-              justify='flex-start'
-              borderTop='1px solid #DADADD'
+              wrap="wrap"
+              w="653px"
+              mx="auto"
+              mb="35px"
+              justify="flex-start"
+              borderTop="1px solid #DADADD"
             >
               <Text
-                fontFamily='Poppins'
-                fontWeight='600'
-                fontSize='24px'
-                lineHeight='36px'
-                color='#BBBDC6'
+                fontFamily="Poppins"
+                fontWeight="600"
+                fontSize="24px"
+                lineHeight="36px"
+                color="#BBBDC6"
               >
                 Employment
               </Text>
             </Flex>
             {/* EMPLOYED CHECK */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mx='auto'
+              wrap="wrap"
+              w="653px"
+              mx="auto"
               mb={employed ? '30px' : '80px'}
-              justify='space-between'
+              justify="space-between"
             >
-              <FormLabel fontFamily='Muli'>
+              <FormLabel fontFamily="Muli">
                 Are you currently employed in your field of study?
               </FormLabel>
 
               <Radio
-                name='employed'
-                id='employed-1'
+                name="employed"
+                id="employed-1"
                 value={true}
                 defaultChecked={employed === true}
                 onClick={isEmployed}
@@ -845,8 +844,8 @@ const EditUserProfile = ({
                 Yes
               </Radio>
               <Radio
-                name='employed'
-                id='employed-2'
+                name="employed"
+                id="employed-2"
                 value={false}
                 defaultChecked={employed === false}
                 onClick={notEmployed}
@@ -856,31 +855,31 @@ const EditUserProfile = ({
             </Flex>
             {/* EMPLOYED COMPANY NAME AND JOB TITLE */}
             {employed ? (
-              <Flex wrap='wrap' w='653' justify='center'>
+              <Flex wrap="wrap" w="653" justify="center">
                 <FormControl>
-                  <FormLabel fontFamily='Muli'>Company name</FormLabel>
+                  <FormLabel fontFamily="Muli">Company name</FormLabel>
                   <SignupLoginInput
-                    w='318px'
-                    mb='30px'
-                    mr='17px'
-                    type='text'
-                    name='employed_company'
-                    label='employed_company'
-                    placeholder='Enter the company name'
-                    autoCapitalize='none'
+                    w="318px"
+                    mb="30px"
+                    mr="17px"
+                    type="text"
+                    name="employed_company"
+                    label="employed_company"
+                    placeholder="Enter the company name"
+                    autoCapitalize="none"
                     ref={register}
                   />
                 </FormControl>
                 <FormControl>
-                  <FormLabel fontFamily='Muli'>Job title</FormLabel>
+                  <FormLabel fontFamily="Muli">Job title</FormLabel>
                   <SignupLoginInput
-                    w='318px'
-                    mb='30px'
-                    type='text'
-                    name='employed_title'
-                    label='employed_title'
-                    placeholder='Enter your job title'
-                    autoCapitalize='none'
+                    w="318px"
+                    mb="30px"
+                    type="text"
+                    name="employed_title"
+                    label="employed_title"
+                    placeholder="Enter your job title"
+                    autoCapitalize="none"
                     ref={register}
                   />
                 </FormControl>
@@ -889,19 +888,19 @@ const EditUserProfile = ({
             {/* REMOTE WORK CHECK */}
             {employed ? (
               <Flex
-                wrap='wrap'
-                w='653px'
-                mx='auto'
-                mb='30px'
-                justify='space-between'
+                wrap="wrap"
+                w="653px"
+                mx="auto"
+                mb="30px"
+                justify="space-between"
               >
-                <FormLabel fontFamily='Muli'>
+                <FormLabel fontFamily="Muli">
                   Are you working remotely?
                 </FormLabel>
 
                 <Radio
-                  name='employed_remote'
-                  id='employed_remote-1'
+                  name="employed_remote"
+                  id="employed_remote-1"
                   value={true}
                   ref={register}
                   defaultChecked={remote === true}
@@ -909,8 +908,8 @@ const EditUserProfile = ({
                   Yes
                 </Radio>
                 <Radio
-                  name='employed_remote'
-                  id='employed_remote-2'
+                  name="employed_remote"
+                  id="employed_remote-2"
                   value={false}
                   ref={register}
                   defaultChecked={remote === false}
@@ -922,92 +921,92 @@ const EditUserProfile = ({
             {/* EMPLOYMENT START DATE */}
             {employed ? (
               <Flex
-                wrap='wrap'
-                w='653px'
-                mx='auto'
-                mb='80px'
-                justify='space-between'
-                align='center'
+                wrap="wrap"
+                w="653px"
+                mx="auto"
+                mb="80px"
+                justify="space-between"
+                align="center"
               >
-                <FormLabel fontFamily='Muli'>When did you start?</FormLabel>
-                <Flex align='center' alignContent='center'>
+                <FormLabel fontFamily="Muli">When did you start?</FormLabel>
+                <Flex align="center" alignContent="center">
                   <FormControl>
                     <Select
-                      mr='17px'
-                      h='68px'
-                      py='16px'
-                      w='159px'
-                      rounded='2px'
-                      variant='outline'
-                      backgroundColor='#FDFDFF'
-                      focusBorderColor='#344CD0'
-                      borderColor='#EAF0FE'
-                      color='#BBBDC6'
+                      mr="17px"
+                      h="68px"
+                      py="16px"
+                      w="159px"
+                      rounded="2px"
+                      variant="outline"
+                      backgroundColor="#FDFDFF"
+                      focusBorderColor="#344CD0"
+                      borderColor="#EAF0FE"
+                      color="#BBBDC6"
                       _focus={{ color: '#17171B' }}
                       _hover={{ borderColor: '#BBBDC6' }}
-                      name='workMonth'
-                      label='workMonth'
+                      name="workMonth"
+                      label="workMonth"
                       ref={register}
                     >
-                      <option fontFamily='Muli' value=''>
+                      <option fontFamily="Muli" value="">
                         Month
                       </option>
-                      <option fontFamily='Muli' value='01'>
+                      <option fontFamily="Muli" value="01">
                         Jan
                       </option>
-                      <option fontFamily='Muli' value='02'>
+                      <option fontFamily="Muli" value="02">
                         Feb
                       </option>
-                      <option fontFamily='Muli' value='03'>
+                      <option fontFamily="Muli" value="03">
                         Mar
                       </option>
-                      <option fontFamily='Muli' value='04'>
+                      <option fontFamily="Muli" value="04">
                         Apr
                       </option>
-                      <option fontFamily='Muli' value='05'>
+                      <option fontFamily="Muli" value="05">
                         May
                       </option>
-                      <option fontFamily='Muli' value='06'>
+                      <option fontFamily="Muli" value="06">
                         Jun
                       </option>
-                      <option fontFamily='Muli' value='07'>
+                      <option fontFamily="Muli" value="07">
                         Jul
                       </option>
-                      <option fontFamily='Muli' value='08'>
+                      <option fontFamily="Muli" value="08">
                         Aug
                       </option>
-                      <option fontFamily='Muli' value='09'>
+                      <option fontFamily="Muli" value="09">
                         Sep
                       </option>
-                      <option fontFamily='Muli' value='10'>
+                      <option fontFamily="Muli" value="10">
                         Oct
                       </option>
-                      <option fontFamily='Muli' value='11'>
+                      <option fontFamily="Muli" value="11">
                         Nov
                       </option>
-                      <option fontFamily='Muli' value='12'>
+                      <option fontFamily="Muli" value="12">
                         Dec
                       </option>
                     </Select>
                   </FormControl>
                   <FormControl>
                     <Select
-                      h='68px'
-                      py='16px'
-                      w='159px'
-                      rounded='2px'
-                      variant='outline'
-                      backgroundColor='#FDFDFF'
-                      focusBorderColor='#344CD0'
-                      borderColor='#EAF0FE'
-                      color='#BBBDC6'
+                      h="68px"
+                      py="16px"
+                      w="159px"
+                      rounded="2px"
+                      variant="outline"
+                      backgroundColor="#FDFDFF"
+                      focusBorderColor="#344CD0"
+                      borderColor="#EAF0FE"
+                      color="#BBBDC6"
                       _focus={{ color: '#17171B' }}
                       _hover={{ borderColor: '#BBBDC6' }}
-                      name='workYear'
-                      label='workYear'
+                      name="workYear"
+                      label="workYear"
                       ref={register}
                     >
-                      <option fontFamily='Muli' value=''>
+                      <option fontFamily="Muli" value="">
                         Year
                       </option>
                       {years.map((year, index) => (
@@ -1021,169 +1020,174 @@ const EditUserProfile = ({
               </Flex>
             ) : null}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mx='auto'
-              mb='35px'
-              justify='flex-start'
-              borderTop='1px solid #DADADD'
+              wrap="wrap"
+              w="653px"
+              mx="auto"
+              mb="35px"
+              justify="flex-start"
+              borderTop="1px solid #DADADD"
             >
               <Text
-                fontFamily='Poppins'
-                fontWeight='600'
-                fontSize='24px'
-                lineHeight='36px'
-                color='#BBBDC6'
+                fontFamily="Poppins"
+                fontWeight="600"
+                fontSize="24px"
+                lineHeight="36px"
+                color="#BBBDC6"
               >
                 Online presence
               </Text>
             </Flex>
             {/* PORTFOLIO URL */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mb='15px'
-              mx='auto'
-              justify='space-between'
-              align='center'
+              wrap="wrap"
+              w="653px"
+              mb="15px"
+              mx="auto"
+              justify="space-between"
+              align="center"
             >
-              <Text align='center' fontFamily='Muli'>
+              <Text align="center" fontFamily="Muli">
                 Portfolio URL
               </Text>
               <SignupLoginInput
-                w='318px'
-                type='text'
-                name='portfolio_URL'
-                label='portfolio_URL'
-                placeholder='Enter your portfolio URL'
-                autoCapitalize='none'
+                w="318px"
+                type="text"
+                name="portfolio_URL"
+                label="portfolio_URL"
+                placeholder="Enter your portfolio URL"
+                autoCapitalize="none"
                 ref={register}
               />
             </Flex>
             {/* LINKEDIN URL */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mb='15px'
-              mx='auto'
-              justify='space-between'
-              align='center'
+              wrap="wrap"
+              w="653px"
+              mb="15px"
+              mx="auto"
+              justify="space-between"
+              align="center"
             >
-              <Text align='center' fontFamily='Muli'>
+              <Text align="center" fontFamily="Muli">
                 LinkedIn URL
               </Text>
               <SignupLoginInput
-                w='318px'
-                type='text'
-                name='linked_in'
-                label='linked_in'
-                placeholder='Enter your LinkedIn URL'
-                autoCapitalize='none'
+                w="318px"
+                type="text"
+                name="linked_in"
+                label="linked_in"
+                placeholder="Enter your LinkedIn URL"
+                autoCapitalize="none"
                 ref={register}
               />
             </Flex>
             {/* SLACK USERNAME */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mb='15px'
-              mx='auto'
-              justify='space-between'
-              align='center'
+              wrap="wrap"
+              w="653px"
+              mb="15px"
+              mx="auto"
+              justify="space-between"
+              align="center"
             >
-              <Text align='center' fontFamily='Muli'>
+              <Text align="center" fontFamily="Muli">
                 SLack ID
-                <Tooltip hasArrow label={info} placement='top'>
+                <Tooltip hasArrow label={info} placement="top">
                   <i
                     style={{ paddingLeft: '10px' }}
-                    className='fas fa-question'
+                    className="fas fa-question"
                   ></i>
                 </Tooltip>
               </Text>
               <SignupLoginInput
-                w='318px'
-                type='text'
-                name='slack'
-                label='slack'
-                placeholder='Enter your Slack ID'
-                autoCapitalize='none'
+                w="318px"
+                type="text"
+                name="slack"
+                label="slack"
+                placeholder="Enter your Slack ID"
+                autoCapitalize="none"
                 ref={register}
               />
             </Flex>
             {/* GITHUB USERNAME */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mb='15px'
-              mx='auto'
-              justify='space-between'
-              align='center'
+              wrap="wrap"
+              w="653px"
+              mb="15px"
+              mx="auto"
+              justify="space-between"
+              align="center"
             >
-              <Text align='center' fontFamily='Muli'>
+              <Text align="center" fontFamily="Muli">
                 Github URL
               </Text>
               <SignupLoginInput
-                w='318px'
-                type='text'
-                name='github'
-                label='github'
-                placeholder='Enter your Github URL'
-                autoCapitalize='none'
+                w="318px"
+                type="text"
+                name="github"
+                label="github"
+                placeholder="Enter your Github URL"
+                autoCapitalize="none"
                 ref={register}
               />
             </Flex>
             {/* DRIBBBLE URL */}
             <Flex
-              wrap='wrap'
-              w='653px'
-              mb='15px'
-              mx='auto'
-              justify='space-between'
-              align='center'
+              wrap="wrap"
+              w="653px"
+              mb="15px"
+              mx="auto"
+              justify="space-between"
+              align="center"
             >
-              <Text align='center' fontFamily='Muli'>
+              <Text align="center" fontFamily="Muli">
                 Dribbble URL
               </Text>
               <SignupLoginInput
-                w='318px'
-                type='text'
-                name='dribble'
-                label='dribble'
-                placeholder='Enter your Dribbble URL'
-                autoCapitalize='none'
+                w="318px"
+                type="text"
+                name="dribble"
+                label="dribble"
+                placeholder="Enter your Dribbble URL"
+                autoCapitalize="none"
                 ref={register}
               />
             </Flex>
-            <Flex w='100%' justify='center' direction='column'>
+            <Flex
+              w="100%"
+              style={{ alignItems: 'center' }}
+              justify="center"
+              direction="column"
+            >
               <Button
-                border='none'
-                rounded='5px'
-                h='58px'
-                w='653px'
-                my='2%'
-                size='lg'
-                color='white'
-                backgroundColor='#344CD0'
+                border="none"
+                rounded="5px"
+                h="58px"
+                w="653px"
+                my="2%"
+                size="lg"
+                color="white"
+                backgroundColor="#344CD0"
                 _hover={{ backgroundColor: '#4254BA', cursor: 'pointer' }}
                 isLoading={formState.isSubmitting}
-                type='submit'
-                data-cy='registerSubmit'
+                type="submit"
+                data-cy="registerSubmit"
               >
                 Save
               </Button>
               <Button
-                mb='30px'
-                border='none'
-                rounded='5px'
-                h='58px'
-                w='653px'
-                my='2%'
-                size='lg'
-                color='#9194A8'
-                backgroundColor='#FDFDFF'
+                mb="30px"
+                border="none"
+                rounded="5px"
+                h="58px"
+                w="653px"
+                my="2%"
+                size="lg"
+                color="#9194A8"
+                backgroundColor="#FDFDFF"
                 _hover={{ cursor: 'pointer' }}
                 onClick={returnToProfile}
-                data-cy='cancelUpdate'
+                data-cy="cancelUpdate"
               >
                 Cancel
               </Button>
@@ -1192,14 +1196,14 @@ const EditUserProfile = ({
         </form>
       </Flex>
     </>
-  );
-};
+  )
+}
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     userData: state.user.userData,
     isLoading: state.user.isLoading,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, updateUser)(EditUserProfile);
+export default connect(mapStateToProps, updateUser)(EditUserProfile)
