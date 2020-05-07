@@ -1,37 +1,37 @@
-import React, { useState, useEffect, useRef } from "react";
-import { connect } from "react-redux";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect, useRef } from 'react'
+import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 // action
-import getReview from "../../state/actions/index";
-import getCompanyReview from "../../state/actions/index";
+import getReview from '../../state/actions/index'
+import getCompanyReview from '../../state/actions/index'
 
 // component
-import NavBar from "./NavBar";
-import ReviewCard from "./ReviewCard";
+import NavBar from './NavBar'
+import ReviewCard from './ReviewCard'
 // styles
-import { Flex, Alert, AlertDescription } from "@chakra-ui/core";
-import CustomSpinner from "../CustomSpinner.js";
+import { Flex, Alert, AlertDescription } from '@chakra-ui/core'
+import CustomSpinner from '../CustomSpinner.js'
 
 const DashboardHome = ({ data, getReview, history, isLoading }) => {
   // search state
-  const [filteredReviews, setFilteredReviews] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-  const [trackFilters, setTrackFilters] = useState([]);
-  const [typeFilters, setTypeFilters] = useState([]);
-  const isDeleted = useSelector(state => state.review.reviewDeleted);
+  const [filteredReviews, setFilteredReviews] = useState([])
+  const [searchResults, setSearchResults] = useState([])
+  const [trackFilters, setTrackFilters] = useState([])
+  const [typeFilters, setTypeFilters] = useState([])
+  const isDeleted = useSelector(state => state.review.reviewDeleted)
 
   useEffect(() => {
-    getReview();
-  }, [isDeleted, getReview]);
+    getReview()
+  }, [isDeleted, getReview])
 
   // filter searchbar by company name
   useEffect(() => {
     const results = data.filter(review =>
       review.company_name.toLowerCase().includes(searchResults)
-    );
+    )
     // data = results;
-    setFilteredReviews(results);
-  }, [searchResults]);
+    setFilteredReviews(results)
+  }, [searchResults])
 
   // filter by track and review type
   useEffect(() => {
@@ -42,9 +42,9 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
         : trackFilters.length > 0
         ? trackFilters.includes(review.track_name)
         : typeFilters.includes(review.review_type)
-    );
-    setFilteredReviews(filteredResults);
-  }, [trackFilters, typeFilters]);
+    )
+    setFilteredReviews(filteredResults)
+  }, [trackFilters, typeFilters])
 
   return (
     <>
@@ -121,16 +121,16 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
         </Flex>
       </Flex>
     </>
-  );
-};
+  )
+}
 
 const mapStateToProps = state => {
   return {
     isLoading: state.review.fetchingData,
-    data: state.review.data
-  };
-};
+    data: state.review.data,
+  }
+}
 export default connect(
   mapStateToProps,
   (getReview, getCompanyReview)
-)(DashboardHome);
+)(DashboardHome)
