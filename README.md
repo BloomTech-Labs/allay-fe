@@ -24,7 +24,7 @@ You can find the deployed project on [Heroku](https://labs21-allay-fe.herokuapp.
 
 |                      [Heriberto Galvez Garcia](https://github.com/HeribertoGalvezGarcia)                      |                               [J. Caleb Spraul](https://github.com/jcs-lambda)                                |                                      [Andrew Archie](https://github.com)                                      |     |
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-: |
-|     [<img src="./profile-img/LambdaSchool.png" width="200" />](https://github.com/HeribertoGalvezGarcia)      |           [<img src="./profile-img/LambdaSchool.png" width="200" />](https://github.com/jcs-lambda)           |                [<img src="./profile-img/AndrewArchie.png" width="200" />](https://github.com/)                |     |
+|     [<img src="./profile-img/LambdaSchool.png" width="200" />](https://github.com/HeribertoGalvezGarcia)      |           [<img src="./profile-img/JCalebSpraul.png" width="200" />](https://github.com/jcs-lambda)           |                [<img src="./profile-img/AndrewArchie.png" width="200" />](https://github.com/)                |     |
 |      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/HeribertoGalvezGarcia)       |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jcs-lambda)            |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                 |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
 
@@ -36,8 +36,6 @@ You can find the deployed project on [Heroku](https://labs21-allay-fe.herokuapp.
 [Trello Board](https://trello.com/b/wDXK4crl/allay23-sprint-2-%F0%9F%94%A5-28-04-20-11-05-20)
 
 [Product Canvas](https://www.notion.so/Allay-eb3c5b88ffab4ff199663cb40fcc1402)
-
-[UX Design files](https://www.figma.com/file/UVcnH59LM8olfEPMHLVaaO/Allay%2C-Justine)
 
 Welcome to Allay! We are a platform that aims to relieve stress for students by providing a message board where students and alumni can talk about their job seeking experience. We do this by allowing alumni to leave reviews, post about job interviews, and share salaries. Additionally, we aim to provide basic social networking between students and hired alumni.
 
