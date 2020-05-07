@@ -153,28 +153,29 @@ function NavBar({
                   {localStorage.getItem("username")}
                 </Flex>
               </DrawerHeader>
-              <Flex
-                background="#FFFFFF"
-                mt="3%"
-                color="#494B5B"
-                border="none"
-                py="4%"
-                cursor="pointer"
-                align="center"
-                justifyContent="center"
-                isLoading={isLoading}
-                data-cy="signOut"
+              <Link
+                style={{
+                  textDecoration: "none",
+                  color: "black"
+                }}
+                to={`/profile/${profile_id}`}
               >
-                <Link
-                  style={{
-                    textDecoration: "none",
-                    color: "black"
-                  }}
-                  to={`/profile/${profile_id}`}
+                {" "}
+                <Flex
+                  background="#FFFFFF"
+                  mt="3%"
+                  color="#494B5B"
+                  border="none"
+                  py="4%"
+                  cursor="pointer"
+                  align="center"
+                  justifyContent="center"
+                  isLoading={isLoading}
+                  data-cy="signOut"
                 >
                   <Text fontSize="1.8em">Go to Profile</Text>
-                </Link>
-              </Flex>
+                </Flex>
+              </Link>
               <Flex
                 background="#FFFFFF"
                 mt="3%"
