@@ -79,7 +79,7 @@ const SignupAdditional = ({
         objectFit="fit"
         width="300px"
         height="300px"
-        src={require('../../icons/slackID.jpg')}
+        src={require('../../icons/slack.gif')}
         alt="slack info"
       />
     </Box>
