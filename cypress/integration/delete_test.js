@@ -4,15 +4,18 @@ describe('Creates and successfully deletes a review', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.login();
+    cy.saveLocalStorage();
+  });
+
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should delete a review form after creation', function () {
-    // select element and alias them
-    cy.get('input[name="username"]').as('usernameText');
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('[data-cy=loginSubmit]').as('loginSubmit');
-    // interact with element
-    cy.get('@usernameText').type('testuser1');
-    cy.get('@passwordText').type('12345678');
-    cy.get('@loginSubmit').click();
+    cy.visit('http://localhost:3000/dashboard');
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
     // nav to add review start
@@ -42,9 +45,7 @@ describe('Creates and successfully deletes a review', function () {
     cy.get('input[name="Company Headquarters"]').as('locationText');
     cy.get('@locationText').type('Atlanta');
     cy.wait(300);
-    cy.get('@locationText')
-      .type('{downArrow}')
-      .type('{enter}');
+    cy.get('@locationText').type('{downArrow}').type('{enter}');
 
     cy.get('input[name="start_date"]').as('startDateText');
     cy.get('@startDateText').type('1999');
@@ -52,19 +53,21 @@ describe('Creates and successfully deletes a review', function () {
     cy.get('input[name="end_date"]').as('endDateText');
     cy.get('@endDateText').type('2000');
 
+    cy.wait(2000);
     cy.get('[data-cy=companyComment]').as('commentText');
     cy.get('@commentText').type('TESTING VIA CYPRESS DELETE');
 
+    cy.wait(2000);
     cy.get('select[name="typical_hours"]').as('hoursDropdown');
     cy.get('@hoursDropdown').select('30 hours+');
 
+    cy.wait(2000);
     cy.get('input[name="salary"]').as('salaryText');
     cy.get('@salaryText').type('123456');
 
+    cy.wait(2000);
     cy.get('ul>li').as('companyOverall');
-    cy.get('@companyOverall')
-      .eq(2)
-      .click();
+    cy.get('@companyOverall').eq(2).click();
 
     // submit the form
     cy.get('[data-cy=companyReviewSubmit]').click();
@@ -74,7 +77,8 @@ describe('Creates and successfully deletes a review', function () {
     cy.get('[data-cy=deleteModalReview]').click();
     cy.get('[data-cy=confirmDeleteModalReview]').click();
 
+    cy.wait(3000);
     // confirms review was deleted
-    // cy.window().should('not.include', 'TESTING VIA CYPRESS DELETE');
+    cy.get('TESTING VIA CYPRESS DELETE').should('not.exist');
   });
 });

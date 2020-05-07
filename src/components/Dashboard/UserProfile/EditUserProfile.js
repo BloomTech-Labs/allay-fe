@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import ReactGA from "react-ga"; // for google analytics
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
+import ReactGA from 'react-ga' // for google analytics
 //components
-import SignupLoginInput from "../../Reusable/InputFields/SignupLoginInput.js";
-import CustomAutocomplete from "../../Reusable/InputFields/Autocomplete.js";
+import SignupLoginInput from '../../Reusable/InputFields/SignupLoginInput.js'
+import CustomAutocomplete from '../../Reusable/InputFields/Autocomplete.js'
 //actions
-import updateUser from "../../../state/actions/index";
+import updateUser from '../../../state/actions/index'
 //styles
-import CustomSpinner from "../../CustomSpinner.js";
+import CustomSpinner from '../../CustomSpinner.js'
 
 import {
   Image,
@@ -26,7 +27,8 @@ import {
   InputRightElement,
   Select,
   Icon,
-} from "@chakra-ui/core";
+  Avatar,
+} from '@chakra-ui/core'
 
 //need to make new action creator editUser
 const EditUserProfile = ({
@@ -36,93 +38,93 @@ const EditUserProfile = ({
   isLoading,
   updateUser,
 }) => {
-  const id = match.params.id;
+  const id = match.params.id
   const { handleSubmit, errors, register, formState } = useForm({
     defaultValues: {
       firstName: userData.first_name,
       lastName: userData.last_name,
-      location: userData.location,
-      gradMonth: userData.graduated ? userData.graduated.slice(5, 7) : "",
-      gradYear: userData.graduated ? userData.graduated.slice(0, 4) : "",
+      gradMonth: userData.graduated ? userData.graduated.slice(5, 7) : '',
+      gradYear: userData.graduated ? userData.graduated.slice(0, 4) : '',
       highest_ed: userData.highest_ed,
       field_of_study: userData.field_of_study,
       employed_company: userData.employed_company,
       employed_title: userData.employed_title,
       workMonth: userData.employed_start
         ? userData.employed_start.slice(5, 7)
-        : "",
+        : '',
       workYear: userData.employed_start
         ? userData.employed_start.slice(0, 4)
-        : "",
+        : '',
+      resume: null,
       portfolio_URL: userData.portfolio,
-      resume: userData.resume,
       linked_in: userData.linked_in,
       slack: userData.slack,
       github: userData.github,
       dribble: userData.dribble,
       profile_image: userData.profile_image,
     },
-  });
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
+  })
+  const [show, setShow] = useState(false)
+  const handleClick = () => setShow(!show)
   //location state
-  const [location, setLocation] = useState({});
-  const [newLocation, setNewLocation] = useState({});
-  const stateHelper = (value) => {
-    setLocation(value);
-  };
-  // profile image state
-  const [profile_image, setProfile_Image] = useState("");
+  const [location, setLocation] = useState({})
+  const [newLocation, setNewLocation] = useState({})
+  const stateHelper = value => {
+    setLocation(value)
+  }
+  // cloudinary stuff
+  const [newProfile_image, setNewProfile_Image] = useState('')
+  const [newProfile_resume, setNewProfile_resume] = useState('')
 
   // graduated state
-  const [graduated, setGraduated] = useState(false);
-  const [years, setYears] = useState([]);
+  const [graduated, setGraduated] = useState(false)
+  const [years, setYears] = useState([])
   const isGraduated = () => {
-    setGraduated(true);
-  };
+    setGraduated(true)
+  }
   const notGraduated = () => {
-    setGraduated(false);
-  };
-  const [employed, setEmployed] = useState(false);
+    setGraduated(false)
+  }
+  const [employed, setEmployed] = useState(false)
   const isEmployed = () => {
-    setEmployed(true);
-  };
+    setEmployed(true)
+  }
   const notEmployed = () => {
-    setEmployed(false);
-  };
+    setEmployed(false)
+  }
 
   //radio button state
-  const [priorExp, setPriorExp] = useState(false);
-  const [tlsl, setTlsl] = useState(false);
-  const [remote, setRemote] = useState(false);
+  const [priorExp, setPriorExp] = useState(false)
+  const [tlsl, setTlsl] = useState(false)
+  const [remote, setRemote] = useState(false)
 
   //set radio button state on load
   useEffect(() => {
-    setPriorExp(userData.prior_experience);
-    setTlsl(userData.tlsl_experience);
-    setRemote(userData.employed_remote);
-  }, []);
+    setPriorExp(userData.prior_experience)
+    setTlsl(userData.tlsl_experience)
+    setRemote(userData.employed_remote)
+  }, [])
 
   //location helpers
   useEffect(() => {
-    setNewLocation({ ...location, myState: location.myState });
+    setNewLocation({ ...location, myState: location.myState })
     // removes numbers, commas, and whitespaces from city
     if (location.myCity) {
       if (/^[0-9]+$/.test(location.myCity) || /\s/.test(location.myCity)) {
-        const tempCity = location.myCity;
+        const tempCity = location.myCity
         setNewLocation({
           ...location,
-          myCity: tempCity.replace(/^[\s,\d]+/, ""),
-        });
+          myCity: tempCity.replace(/^[\s,\d]+/, ''),
+        })
       }
     }
-  }, [location]);
+  }, [location])
 
   // year helper
   useEffect(() => {
-    const year = new Date().getFullYear();
-    setYears(Array.from(new Array(20), (val, index) => year - index));
-  }, []);
+    const year = new Date().getFullYear()
+    setYears(Array.from(new Array(20), (val, index) => year - index))
+  }, [])
 
   ///info for slack ID
   const info = (
@@ -131,69 +133,103 @@ const EditUserProfile = ({
         objectFit="fit"
         width="300px"
         height="300px"
-        src={require("../../../icons/slackID.jpg")}
+        src={require('../../../icons/slackID.jpg')}
         alt="slack info"
       />
     </Box>
-  );
+  )
 
   //validation
   function validateFirstName(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (!value) {
-      error = "First Name is required";
+      error = 'First Name is required'
     } else if (value.length < 2) {
-      error = "First Name must be at least 2 characters";
+      error = 'First Name must be at least 2 characters'
     } else if (nameRegex.test(value)) {
-      error = "First Name can only contain letters";
+      error = 'First Name can only contain letters'
     }
-    return error || true;
+    return error || true
   }
 
   function validateLastName(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (!value) {
-      error = "Last Name is required";
+      error = 'Last Name is required'
     } else if (value.length < 2) {
-      error = "Last Name must be at least 2 characters";
+      error = 'Last Name must be at least 2 characters'
     } else if (nameRegex.test(value)) {
-      error = "Last Name can only contain letters";
+      error = 'Last Name can only contain letters'
     }
-    return error || true;
+    return error || true
   }
 
   function validateFieldOfStudy(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (nameRegex.test(value)) {
-      error = "Field of study can only contain letters";
+      error = 'Field of study can only contain letters'
     }
-    return error || true;
+    return error || true
   }
   //end validation
 
-  const submitForm = (creds) => {
+  //add image to cloudinary
+  const updateImage = async e => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'upload')
+    const res = await fetch(
+      '	https://api.cloudinary.com/v1_1/takija/image/upload',
+      {
+        method: 'POST',
+        body: data,
+      }
+    )
+    const file = await res.json()
+    setNewProfile_Image(...newProfile_image, file.secure_url)
+  }
+
+  //upload resume to cloudinary
+  const updateResume = async e => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'upload')
+    const res = await fetch(
+      '	https://api.cloudinary.com/v1_1/takija/image/upload',
+      {
+        method: 'POST',
+        body: data,
+      }
+    )
+    const file = await res.json()
+    setNewProfile_resume(...newProfile_resume, file.secure_url)
+  }
+
+  const submitForm = creds => {
     // correcting grad date format
-    let graduated = null;
+    let graduated = null
     if (creds.gradMonth && creds.gradYear) {
-      graduated = `${creds.gradYear}-${creds.gradMonth}-01`;
+      graduated = `${creds.gradYear}-${creds.gradMonth}-01`
     }
 
     // correcting employed date format
-    let employed_start = null;
+    let employed_start = null
     if (creds.workMonth && creds.workYear) {
-      employed_start = `${creds.workYear}-${creds.workMonth}-01`;
+      employed_start = `${creds.workYear}-${creds.workMonth}-01`
     }
-
+    console.log(newLocation)
     // formatting the signup state to match the back end columns
     updateUser(id, {
       first_name: creds.firstName,
       last_name: creds.lastName,
       location: newLocation
-        ? `${newLocation.myCity}, ${newLocation.myState}`
-        : null,
+        ? `${newLocation.myCity || userData.location} ${newLocation.myState}`
+        : creds.location,
       graduated: graduated,
       highest_ed: creds.highest_ed || null,
       field_of_study: creds.field_of_study || null,
@@ -209,34 +245,29 @@ const EditUserProfile = ({
         ? JSON.parse(creds.employed_remote)
         : false,
       employed_start: employed_start,
-      resume: creds.resume || null,
+      resume: newProfile_resume || userData.resume,
       linked_in: creds.linked_in || null,
       slack: creds.slack || null,
       github: creds.github || null,
       dribble: creds.dribble || null,
-      profile_image: profile_image ? profile_image : null,
-    }).then(() => history.push(`/profile/${id}`));
-
+      profile_image: newProfile_image || userData.profile_image,
+      portfolio: creds.portfolio_URL || null,
+    }).then(() => history.push(`/profile/${id}`))
+    console.log('from edit', creds)
     // TODO: implement google analytics for updating a user
     // ReactGA.event({
     //   category: "User",
     //   action: `Button Sign Up`,
     // });
-  };
+  }
 
-  const returnToProfile = (e) => {
-    e.preventDefault();
-    history.push(`/profile/${id}`);
-  };
+  const returnToProfile = e => {
+    e.preventDefault()
+    history.push(`/profile/${id}`)
+  }
 
   if (isLoading) {
-    return (
-      <Flex justify="center" align="center" w="100vh" h="100vh">
-        <Flex>
-          <CustomSpinner />
-        </Flex>
-      </Flex>
-    );
+    return null
   }
 
   return (
@@ -252,12 +283,12 @@ const EditUserProfile = ({
         >
           <Link
             style={{
-              textDecoration: "none",
-              color: "black",
+              textDecoration: 'none',
+              color: 'black',
             }}
             to="/dashboard"
           >
-            {" "}
+            {' '}
             <Flex>
               <h1> Allay </h1>
             </Flex>
@@ -265,17 +296,24 @@ const EditUserProfile = ({
           <Flex>
             <Link
               style={{
-                textDecoration: "none",
-                color: "black",
+                textDecoration: 'none',
+                color: 'black',
               }}
               to={`/profile/${id}`}
             >
-              {" "}
-              <Image
-                size="50px"
-                style={{ opacity: "0.6" }}
-                src={require("../../../icons/user.svg")}
-              />
+              {userData.profile_image === 'h' ? (
+                <Image
+                  size="50px"
+                  style={{ opacity: '0.6' }}
+                  src={require('../../../icons/user.svg')}
+                />
+              ) : (
+                <Image
+                  size="50px"
+                  style={{ opacity: '0.6', borderRadius: '50%' }}
+                  src={userData.profile_image}
+                />
+              )}
             </Link>
           </Flex>
         </Flex>
@@ -312,7 +350,7 @@ const EditUserProfile = ({
                   fontSize="22px"
                   fontWeight="normal"
                   color="#9194A8"
-                  _hover={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                   onClick={returnToProfile}
                 >
                   Cancel
@@ -323,24 +361,66 @@ const EditUserProfile = ({
                   fontSize="22px"
                   fontWeight="bold"
                   color="#344CD0"
-                  _hover={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                   onClick={handleSubmit(submitForm)}
                 >
                   Save
                 </Text>
               </Flex>
             </Flex>
-
             {/* CLOUDINARY IMAGE UPLOAD */}
+
             <Flex
               wrap="wrap"
               w="653px"
               mx="auto"
               mb="55px"
-              justify="flex-start"
+              justify="space-evenly"
+              alignItems="center"
             >
-              <Image size="100px" src={require("../../../icons/user.png")} />
-              <Text>Cloudinary upload here</Text>
+              {!newProfile_image ? (
+                <Avatar
+                  size="2xl"
+                  name={userData.first_name}
+                  style={{ borderRadius: '50%' }}
+                  src={userData.profile_image}
+                />
+              ) : (
+                <Avatar
+                  size="2xl"
+                  style={{ borderRadius: '50%' }}
+                  src={newProfile_image}
+                />
+              )}
+
+              <Flex alignItems="center">
+                <input
+                  type="file"
+                  filename="image"
+                  placeholder="Upload profile picture"
+                  onChange={updateImage}
+                  style={{
+                    opacity: '1',
+                    width: '105px',
+                    color: 'transparent',
+                    backgroundColor: 'transparent',
+                  }}
+                />
+                {!newProfile_image ? (
+                  <label htmlFor="files" className="btn">
+                    Update profile image
+                  </label>
+                ) : (
+                  <i
+                    style={{
+                      fontSize: '1.4rem',
+                      color: 'green',
+                      paddingLeft: '20px',
+                    }}
+                    className="far fa-check-circle"
+                  ></i>
+                )}
+              </Flex>
             </Flex>
 
             {/* FIRST NAME, LAST NAME */}
@@ -398,12 +478,12 @@ const EditUserProfile = ({
                   focusBorderColor="#344CD0"
                   borderColor="#EAF0FE"
                   color="#17171B"
-                  _hover={{ borderColor: "#BBBDC6" }}
-                  _placeholder={{ color: "#BBBDC6" }}
+                  _hover={{ borderColor: '#BBBDC6' }}
+                  _placeholder={{ color: '#BBBDC6' }}
                   id="location"
                   name="location"
                   label="location"
-                  placeholder="e.g. Los Angeles, CA"
+                  placeholder={userData.location}
                   ref={register}
                 />
               </FormControl>
@@ -413,7 +493,7 @@ const EditUserProfile = ({
               wrap="wrap"
               w="653px"
               mx="auto"
-              mb={graduated ? "20px" : "80px"}
+              mb={graduated ? '20px' : '80px'}
               justify="space-between"
             >
               <FormLabel fontFamily="Muli">
@@ -439,7 +519,6 @@ const EditUserProfile = ({
                 No
               </Radio>
             </Flex>
-
             {/* GRADUATED MONTH AND YEAR */}
             {graduated ? (
               <Flex
@@ -464,8 +543,8 @@ const EditUserProfile = ({
                       focusBorderColor="#344CD0"
                       borderColor="#EAF0FE"
                       color="#BBBDC6"
-                      _focus={{ color: "#17171B" }}
-                      _hover={{ borderColor: "#BBBDC6" }}
+                      _focus={{ color: '#17171B' }}
+                      _hover={{ borderColor: '#BBBDC6' }}
                       name="gradMonth"
                       label="gradMonth"
                       ref={register}
@@ -522,8 +601,8 @@ const EditUserProfile = ({
                       focusBorderColor="#344CD0"
                       borderColor="#EAF0FE"
                       color="#BBBDC6"
-                      _focus={{ color: "#17171B" }}
-                      _hover={{ borderColor: "#BBBDC6" }}
+                      _focus={{ color: '#17171B' }}
+                      _hover={{ borderColor: '#BBBDC6' }}
                       name="gradYear"
                       label="gradYear"
                       ref={register}
@@ -541,7 +620,6 @@ const EditUserProfile = ({
                 </Flex>
               </Flex>
             ) : null}
-
             <Flex
               wrap="wrap"
               w="653px"
@@ -560,7 +638,6 @@ const EditUserProfile = ({
                 Background
               </Text>
             </Flex>
-
             {/* HIGHEST LEVEL OF EDUCATION */}
             <Flex wrap="wrap" w="411px%" justify="center">
               <FormControl>
@@ -579,8 +656,8 @@ const EditUserProfile = ({
                   focusBorderColor="#344CD0"
                   borderColor="#EAF0FE"
                   color="#BBBDC6"
-                  _focus={{ color: "#17171B" }}
-                  _hover={{ borderColor: "#BBBDC6" }}
+                  _focus={{ color: '#17171B' }}
+                  _hover={{ borderColor: '#BBBDC6' }}
                   name="highest_ed"
                   label="highest_ed"
                   ref={register}
@@ -622,7 +699,6 @@ const EditUserProfile = ({
                 </FormErrorMessage>
               </FormControl>
             </Flex>
-
             {/* PRIOR EXPERIENCE */}
             <Flex
               wrap="wrap"
@@ -654,7 +730,6 @@ const EditUserProfile = ({
                 No
               </Radio>
             </Flex>
-
             {/* DID YOU TL/SL */}
             <Flex
               wrap="wrap"
@@ -686,8 +761,8 @@ const EditUserProfile = ({
                 No
               </Radio>
             </Flex>
-
             {/* RESUME UPLOAD */}
+            {/* /// */}
             <Flex
               wrap="wrap"
               w="653px"
@@ -699,17 +774,36 @@ const EditUserProfile = ({
               <Text align="center" fontFamily="Muli">
                 Resume
               </Text>
-              <SignupLoginInput
-                w="318px"
-                type="text"
-                name="resume"
-                label="resume"
-                placeholder="Upload resume"
-                autoCapitalize="none"
-                ref={register}
-              />
+              <Flex width="270px">
+                <input
+                  type="file"
+                  filename="image"
+                  placeholder="Upload profile picture"
+                  onChange={updateResume}
+                  style={{
+                    opacity: '1',
+                    width: '105px',
+                    color: 'transparent',
+                    backgroundColor: 'transparent',
+                  }}
+                />
+                <label htmlFor="files" className="btn">
+                  {!newProfile_resume ? (
+                    'Upload resume'
+                  ) : (
+                    <i
+                      style={{
+                        fontSize: '1.4rem',
+                        color: 'green',
+                        paddingLeft: '20px',
+                      }}
+                      className="far fa-check-circle"
+                    ></i>
+                  )}
+                </label>
+              </Flex>
             </Flex>
-
+            {/* //// */}
             <Flex
               wrap="wrap"
               w="653px"
@@ -728,13 +822,12 @@ const EditUserProfile = ({
                 Employment
               </Text>
             </Flex>
-
             {/* EMPLOYED CHECK */}
             <Flex
               wrap="wrap"
               w="653px"
               mx="auto"
-              mb={employed ? "30px" : "80px"}
+              mb={employed ? '30px' : '80px'}
               justify="space-between"
             >
               <FormLabel fontFamily="Muli">
@@ -760,7 +853,6 @@ const EditUserProfile = ({
                 No
               </Radio>
             </Flex>
-
             {/* EMPLOYED COMPANY NAME AND JOB TITLE */}
             {employed ? (
               <Flex wrap="wrap" w="653" justify="center">
@@ -793,7 +885,6 @@ const EditUserProfile = ({
                 </FormControl>
               </Flex>
             ) : null}
-
             {/* REMOTE WORK CHECK */}
             {employed ? (
               <Flex
@@ -827,7 +918,6 @@ const EditUserProfile = ({
                 </Radio>
               </Flex>
             ) : null}
-
             {/* EMPLOYMENT START DATE */}
             {employed ? (
               <Flex
@@ -852,8 +942,8 @@ const EditUserProfile = ({
                       focusBorderColor="#344CD0"
                       borderColor="#EAF0FE"
                       color="#BBBDC6"
-                      _focus={{ color: "#17171B" }}
-                      _hover={{ borderColor: "#BBBDC6" }}
+                      _focus={{ color: '#17171B' }}
+                      _hover={{ borderColor: '#BBBDC6' }}
                       name="workMonth"
                       label="workMonth"
                       ref={register}
@@ -910,8 +1000,8 @@ const EditUserProfile = ({
                       focusBorderColor="#344CD0"
                       borderColor="#EAF0FE"
                       color="#BBBDC6"
-                      _focus={{ color: "#17171B" }}
-                      _hover={{ borderColor: "#BBBDC6" }}
+                      _focus={{ color: '#17171B' }}
+                      _hover={{ borderColor: '#BBBDC6' }}
                       name="workYear"
                       label="workYear"
                       ref={register}
@@ -929,7 +1019,6 @@ const EditUserProfile = ({
                 </Flex>
               </Flex>
             ) : null}
-
             <Flex
               wrap="wrap"
               w="653px"
@@ -948,7 +1037,6 @@ const EditUserProfile = ({
                 Online presence
               </Text>
             </Flex>
-
             {/* PORTFOLIO URL */}
             <Flex
               wrap="wrap"
@@ -971,7 +1059,6 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
             {/* LINKEDIN URL */}
             <Flex
               wrap="wrap"
@@ -994,7 +1081,6 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
             {/* SLACK USERNAME */}
             <Flex
               wrap="wrap"
@@ -1008,8 +1094,8 @@ const EditUserProfile = ({
                 SLack ID
                 <Tooltip hasArrow label={info} placement="top">
                   <i
-                    style={{ paddingLeft: "10px" }}
-                    class="fas fa-question"
+                    style={{ paddingLeft: '10px' }}
+                    className="fas fa-question"
                   ></i>
                 </Tooltip>
               </Text>
@@ -1023,7 +1109,6 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
             {/* GITHUB USERNAME */}
             <Flex
               wrap="wrap"
@@ -1046,7 +1131,6 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
             {/* DRIBBBLE URL */}
             <Flex
               wrap="wrap"
@@ -1069,8 +1153,12 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
-
-            <Flex w="100%" justify="center" direction="column">
+            <Flex
+              w="100%"
+              style={{ alignItems: 'center' }}
+              justify="center"
+              direction="column"
+            >
               <Button
                 border="none"
                 rounded="5px"
@@ -1080,7 +1168,7 @@ const EditUserProfile = ({
                 size="lg"
                 color="white"
                 backgroundColor="#344CD0"
-                _hover={{ backgroundColor: "#4254BA", cursor: "pointer" }}
+                _hover={{ backgroundColor: '#4254BA', cursor: 'pointer' }}
                 isLoading={formState.isSubmitting}
                 type="submit"
                 data-cy="registerSubmit"
@@ -1097,8 +1185,9 @@ const EditUserProfile = ({
                 size="lg"
                 color="#9194A8"
                 backgroundColor="#FDFDFF"
-                _hover={{ cursor: "pointer" }}
+                _hover={{ cursor: 'pointer' }}
                 onClick={returnToProfile}
+                data-cy="cancelUpdate"
               >
                 Cancel
               </Button>
@@ -1107,14 +1196,14 @@ const EditUserProfile = ({
         </form>
       </Flex>
     </>
-  );
-};
+  )
+}
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     userData: state.user.userData,
     isLoading: state.user.isLoading,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, updateUser)(EditUserProfile);
+export default connect(mapStateToProps, updateUser)(EditUserProfile)

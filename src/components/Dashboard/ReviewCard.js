@@ -125,7 +125,7 @@ useEffect(() => {
 							<Flex justify='space-between'>
 								<Flex flexDir='column'>
 									<Flex fontSize='small' fontWeight='light' color='#9194A8'>
-										Location !
+										Location 
 									</Flex>
 									<Flex>
 										{review.city}, {review.state_name}

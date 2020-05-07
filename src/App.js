@@ -22,7 +22,7 @@ import { useLocation } from "react-router-dom";
 
 function initializeAnalytics() {
   return process.env.NODE_ENV === "production"
-    ? ReactGA.initialize("UA-159325981-1") &&
+    ? ReactGA.initialize("UA-165296425-1") &&
         // ReactGA.ga('send', 'pageview', window.location.pathname)
         ReactGA.pageview(window.location.pathname + window.location.search)
     : null;

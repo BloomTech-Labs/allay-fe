@@ -4,20 +4,23 @@ describe('Returns with empty search if company not found', function () {
     // Act
     cy.visit('http://localhost:3000');
   });
+
+  before(() => {
+    cy.login();
+    cy.saveLocalStorage();
+  });
+
+  beforeEach(() => {
+    cy.restoreLocalStorage();
+  });
+
   it('should navigate to Dashboard after login', function () {
-    // select element and alias them
-    cy.get('input[name="username"]').as('usernameText');
-    cy.get('input[name="password"]').as('passwordText');
-    cy.get('[data-cy=loginSubmit]').as('loginSubmit');
-    // interact with element
-    cy.get('@usernameText').type('testuser1');
-    cy.get('@passwordText').type('12345678');
-    cy.get('@loginSubmit').click();
+    cy.visit('http://localhost:3000/dashboard');
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard');
   });
   it('returns with no reviews on unsuccessful search', function () {
     cy.get('input[name="searchbar"]').type('fgkjhieahggdsafevca');
-    cy.contains('Sorry, no job reviews found.')
+    cy.contains('Sorry, no job reviews found.');
   });
 });

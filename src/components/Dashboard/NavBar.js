@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ReactGA from "react-ga"; // for google analytics
+import React from 'react'
+import { Link } from 'react-router-dom'
+import ReactGA from 'react-ga' // for google analytics
 //redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux'
 //styles
 import {
   Flex,
@@ -20,10 +20,10 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Box,
-  useDisclosure
-} from "@chakra-ui/core";
+  useDisclosure,
+} from '@chakra-ui/core'
 //import modal
-import Blocked from "../Reusable/BlockedModal";
+import Blocked from '../Reusable/BlockedModal'
 
 function NavBar({
   history,
@@ -33,19 +33,19 @@ function NavBar({
   trackFilters,
   setTrackFilters,
   typeFilters,
-  setTypeFilters
+  setTypeFilters,
 }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = React.useRef()
 
   // use to navigate to review form
   const navToReviewForm = () => {
-    history.push("/dashboard/add-review");
+    history.push('/dashboard/add-review')
     ReactGA.event({
-      category: "Review",
-      action: `Add new review`
-    });
-  };
+      category: 'Review',
+      action: `Add new review`,
+    })
+  }
 
   // use to navigate to profile page
   // const navToProfilePage = () => {
@@ -55,42 +55,42 @@ function NavBar({
   //     action: `go to profile`
   //   });
   // };
-  const profile_id = localStorage.getItem("userId");
+  const profile_id = localStorage.getItem('userId')
   const logout = () => {
-    localStorage.clear("token");
-    localStorage.clear("userId");
-    history.push("/");
-  };
+    localStorage.clear('token')
+    localStorage.clear('userId')
+    history.push('/')
+  }
 
   const handleInputChange = event => {
-    event.preventDefault();
-    setSearchResults(event.target.value);
-  };
+    event.preventDefault()
+    setSearchResults(event.target.value)
+  }
 
   // We could get this fronm the DB if we had endpoints
   const types = [
-    { id: 1, criteria: "type", name: "Interview" },
-    { id: 2, criteria: "type", name: "Company" }
-  ];
+    { id: 1, criteria: 'type', name: 'Interview' },
+    { id: 2, criteria: 'type', name: 'Company' },
+  ]
 
   const tracks = [
-    { id: 1, criteria: "track", name: "WEB" },
-    { id: 2, criteria: "track", name: "UX" },
-    { id: 3, criteria: "track", name: "DS" },
-    { id: 4, criteria: "track", name: "IOS" },
-    { id: 5, criteria: "track", name: "AND" }
-  ];
+    { id: 1, criteria: 'track', name: 'WEB' },
+    { id: 2, criteria: 'track', name: 'UX' },
+    { id: 3, criteria: 'track', name: 'DS' },
+    { id: 4, criteria: 'track', name: 'IOS' },
+    { id: 5, criteria: 'track', name: 'AND' },
+  ]
 
   const handleFilter = e => {
-    e.criteria === "type"
+    e.criteria === 'type'
       ? typeFilters.includes(e.name)
         ? setTypeFilters(typeFilters.filter(item => item !== e.name))
         : setTypeFilters([...typeFilters, e.name])
       : trackFilters.includes(e.name)
       ? setTrackFilters(trackFilters.filter(item => item !== e.name))
-      : setTrackFilters([...trackFilters, e.name]);
-    e.selected = !e.selected;
-  };
+      : setTrackFilters([...trackFilters, e.name])
+    e.selected = !e.selected
+  }
 
   return (
     <Flex
@@ -118,7 +118,7 @@ function NavBar({
           >
             <Image
               size="40px"
-              src={require("../../icons/hamburger-blue.svg")}
+              src={require('../../icons/hamburger-blue.svg')}
             />
           </Box>
           <Drawer
@@ -140,7 +140,7 @@ function NavBar({
                 <Flex justifyContent="center" mt="15%">
                   <Image
                     size="150px"
-                    src={require("../../icons/user-logout.svg")}
+                    src={require('../../icons/user-logout.svg')}
                   />
                 </Flex>
                 <Flex
@@ -150,17 +150,17 @@ function NavBar({
                   fontWeight="light"
                   fontSize="1.5em"
                 >
-                  {localStorage.getItem("username")}
+                  Hi, {localStorage.getItem('name')}
                 </Flex>
               </DrawerHeader>
               <Link
                 style={{
-                  textDecoration: "none",
-                  color: "black"
+                  textDecoration: 'none',
+                  color: 'black',
                 }}
                 to={`/profile/${profile_id}`}
               >
-                {" "}
+                {' '}
                 <Flex
                   background="#FFFFFF"
                   mt="3%"
@@ -192,7 +192,7 @@ function NavBar({
                 <Image
                   size="40px"
                   mr="7%"
-                  src={require("../../icons/logout-gray.svg")}
+                  src={require('../../icons/logout-gray.svg')}
                 />
                 <Text fontSize="1.8em">Sign out</Text>
               </Flex>
@@ -261,21 +261,21 @@ function NavBar({
               border="none"
               _hover={
                 typeFilters.includes(type.name)
-                  ? "none"
+                  ? 'none'
                   : {
-                      bg: "#E2E8F0"
+                      bg: '#E2E8F0',
                     }
               }
               _focus={{
-                boxShadow: "none"
+                boxShadow: 'none',
               }}
               borderRadius="30px"
-              color={typeFilters.includes(type.name) ? "white" : "black"}
+              color={typeFilters.includes(type.name) ? 'white' : 'black'}
               py="1%"
               px="3%"
               fontWeight="light"
               background={
-                typeFilters.includes(type.name) ? "#259BF8" : "#FDFDFF"
+                typeFilters.includes(type.name) ? '#259BF8' : '#FDFDFF'
               }
               value={type}
             >
@@ -289,26 +289,26 @@ function NavBar({
               rounded="full"
               border="none"
               _active={{
-                bg: "#259BF8 !important",
-                color: "white"
+                bg: '#259BF8 !important',
+                color: 'white',
               }}
               _hover={
                 trackFilters.includes(track.name)
-                  ? "none"
+                  ? 'none'
                   : {
-                      bg: "#E2E8F0"
+                      bg: '#E2E8F0',
                     }
               }
               _focus={{
-                boxShadow: "none"
+                boxShadow: 'none',
               }}
               borderRadius="30px"
-              color={trackFilters.includes(track.name) ? "white" : "black"}
+              color={trackFilters.includes(track.name) ? 'white' : 'black'}
               py="1%"
               px="3%"
               fontWeight="light"
               background={
-                trackFilters.includes(track.name) ? "#259BF8" : "#FDFDFF"
+                trackFilters.includes(track.name) ? '#259BF8' : '#FDFDFF'
               }
               value={track}
             >
@@ -318,13 +318,13 @@ function NavBar({
         </RadioButtonGroup>
       </Flex>
     </Flex>
-  );
+  )
 }
 
 const mapStateToProps = state => {
   return {
-    isBlocked: state.auth.isBlocked
-  };
-};
+    isBlocked: state.auth.isBlocked,
+  }
+}
 
-export default connect(mapStateToProps, null)(NavBar);
+export default connect(mapStateToProps, null)(NavBar)

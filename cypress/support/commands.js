@@ -23,3 +23,39 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+import 'cypress-localstorage-commands';
+
+Cypress.Commands.add('login', () => {
+  cy.request({
+    method: 'POST',
+    url: 'https://labs21-allay-be.herokuapp.com/api/auth/login',
+    body: {
+      email: 'testing123@gmail.com',
+      password: 'password',
+    },
+  })
+    .its('body')
+    .then((body) => {
+      cy.setLocalStorage('token', body.token);
+      cy.setLocalStorage('name', body.first_name);
+      cy.setLocalStorage('userId', body.id);
+      cy.setLocalStorage('email', body.email);
+    });
+});
+Cypress.Commands.add('adminLogin', () => {
+  cy.request({
+    method: 'POST',
+    url: 'https://labs21-allay-be.herokuapp.com/api/auth/login',
+    body: {
+      email: 'haase1020@gmail.com',
+      password: 'password',
+    },
+  })
+    .its('body')
+    .then((body) => {
+      cy.setLocalStorage('token', body.token);
+      cy.setLocalStorage('name', body.first_name);
+      cy.setLocalStorage('userId', body.id);
+      cy.setLocalStorage('email', body.email);
+    });
+});

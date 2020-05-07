@@ -6,7 +6,7 @@ import {
   getReviewById,
   postReview,
   editReview,
-  deleteReview,
+  deleteReview
 } from "./reviewActions";
 import { getCompanies, postCompany } from "./companyActions";
 import { blockUser, getUser, updateUser } from "./userActions";
@@ -22,5 +22,5 @@ export default {
   postCompany,
   blockUser,
   getUser,
-  updateUser,
+  updateUser
 };
