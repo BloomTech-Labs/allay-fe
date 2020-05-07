@@ -133,7 +133,7 @@ const EditUserProfile = ({
         objectFit="fit"
         width="300px"
         height="300px"
-        src={require('../../../icons/slackID.jpg')}
+        src={require('../../../icons/slack.gif')}
         alt="slack info"
       />
     </Box>
@@ -501,6 +501,7 @@ const EditUserProfile = ({
               </FormLabel>
 
               <Radio
+                isInvalid
                 name="graduated"
                 id="graduated-1"
                 value={true}
@@ -510,6 +511,7 @@ const EditUserProfile = ({
                 Yes
               </Radio>
               <Radio
+                isInvalid
                 name="graduated"
                 id="graduated-2"
                 value={false}
@@ -713,6 +715,7 @@ const EditUserProfile = ({
 
               <Radio
                 name="prior_experience"
+                isInvalid
                 id="priorExp-1"
                 ref={register}
                 value={true}
@@ -721,6 +724,7 @@ const EditUserProfile = ({
                 Yes
               </Radio>
               <Radio
+                isInvalid
                 name="prior_experience"
                 id="priorExp-2"
                 ref={register}
@@ -743,6 +747,7 @@ const EditUserProfile = ({
               </FormLabel>
 
               <Radio
+                isInvalid
                 name="tlsl_experience"
                 id="TLSL-1"
                 value={true}
@@ -752,6 +757,7 @@ const EditUserProfile = ({
                 Yes
               </Radio>
               <Radio
+                isInvalid
                 name="tlsl_experience"
                 id="TLSL-2"
                 value={false}
@@ -835,6 +841,7 @@ const EditUserProfile = ({
               </FormLabel>
 
               <Radio
+                isInvalid
                 name="employed"
                 id="employed-1"
                 value={true}
@@ -844,6 +851,7 @@ const EditUserProfile = ({
                 Yes
               </Radio>
               <Radio
+                isInvalid
                 name="employed"
                 id="employed-2"
                 value={false}
@@ -899,6 +907,7 @@ const EditUserProfile = ({
                 </FormLabel>
 
                 <Radio
+                  isInvalid
                   name="employed_remote"
                   id="employed_remote-1"
                   value={true}
@@ -908,6 +917,7 @@ const EditUserProfile = ({
                   Yes
                 </Radio>
                 <Radio
+                  isInvalid
                   name="employed_remote"
                   id="employed_remote-2"
                   value={false}
