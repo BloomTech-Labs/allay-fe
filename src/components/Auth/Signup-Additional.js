@@ -171,27 +171,32 @@ const SignupAdditional = ({
         <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Have you graduated from Lambda yet?
         </FormLabel>
-
-        <Radio
-          name="graduated"
-          id="graduated-1"
-          value={true}
-          isInvalid
-          defaultChecked={graduated === true}
-          onClick={isGraduated}
-        >
-          Yes
-        </Radio>
-        <Radio
-          isInvalid
-          name="graduated"
-          id="graduated-2"
-          value={false}
-          defaultChecked={graduated === false}
-          onClick={notGraduated}
-        >
-          No
-        </Radio>
+        <Flex justify="space-between" w="131px">
+          <Radio
+            name="graduated"
+            id="graduated-1"
+            value={true}
+            isChecked={graduated === true}
+            onClick={isGraduated}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: "#344CD0" }}
+          >
+            Yes
+          </Radio>
+          <Radio
+            name="graduated"
+            id="graduated-2"
+            value={false}
+            isChecked={graduated === false}
+            onClick={notGraduated}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: "#344CD0" }}
+          >
+            No
+          </Radio>
+        </Flex>
       </Flex>
 
       {/* GRADUATED MONTH AND YEAR */}
@@ -361,6 +366,8 @@ const SignupAdditional = ({
             </option>
           </Select>
         </FormControl>
+
+        {/* FIELD OF STUDY */}
         <FormControl isInvalid={errors.fieldOfStudy}>
           <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
             Field of study
@@ -386,27 +393,34 @@ const SignupAdditional = ({
         <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Prior to Lambda did you have any experience in your track?
         </FormLabel>
-
-        <Radio
-          isInvalid
-          name="prior_experience"
-          id="priorExp-1"
-          ref={register}
-          value={true}
-          defaultChecked={priorExp === true}
-        >
-          Yes
-        </Radio>
-        <Radio
-          isInvalid
-          name="prior_experience"
-          id="priorExp-2"
-          ref={register}
-          value={false}
-          defaultChecked={priorExp === false}
-        >
-          No
-        </Radio>
+        <Flex justify="space-between" w="131px">
+          <Radio
+            name="prior_experience"
+            id="priorExp-1"
+            ref={register}
+            value={true}
+            isChecked={priorExp === true}
+            onChange={() => setPriorExp(true)}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: "#344CD0" }}
+          >
+            Yes
+          </Radio>
+          <Radio
+            name="prior_experience"
+            id="priorExp-2"
+            ref={register}
+            value={false}
+            isChecked={priorExp === false}
+            onChange={() => setPriorExp(false)}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: "#344CD0" }}
+          >
+            No
+          </Radio>
+        </Flex>
       </Flex>
 
       {/* DID YOU TL/SL */}
@@ -414,27 +428,34 @@ const SignupAdditional = ({
         <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Have you been a TL/SL while at Lambda?
         </FormLabel>
-
-        <Radio
-          isInvalid
-          name="tlsl_experience"
-          id="TLSL-1"
-          value={true}
-          ref={register}
-          defaultChecked={tlsl === false}
-        >
-          Yes
-        </Radio>
-        <Radio
-          isInvalid
-          name="tlsl_experience"
-          id="TLSL-2"
-          value={false}
-          ref={register}
-          defaultChecked={tlsl === false}
-        >
-          No
-        </Radio>
+        <Flex justify="space-between" w="131px">
+          <Radio
+            name="tlsl_experience"
+            id="TLSL-1"
+            value={true}
+            ref={register}
+            isChecked={tlsl === false}
+            onChange={() => setTlsl(true)}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: "#344CD0" }}
+          >
+            Yes
+          </Radio>
+          <Radio
+            name="tlsl_experience"
+            id="TLSL-2"
+            value={false}
+            ref={register}
+            isChecked={tlsl === false}
+            onChange={() => setTlsl(false)}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: "#344CD0" }}
+          >
+            No
+          </Radio>
+        </Flex>
       </Flex>
 
       <Flex
@@ -467,27 +488,32 @@ const SignupAdditional = ({
         <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Are you currently employed in your field of study?
         </FormLabel>
-
-        <Radio
-          isInvalid
-          name="employed"
-          id="employed-1"
-          value={true}
-          defaultChecked={employed === true}
-          onClick={isEmployed}
-        >
-          Yes
-        </Radio>
-        <Radio
-          isInvalid
-          name="employed"
-          id="employed-2"
-          value={false}
-          defaultChecked={employed === false}
-          onClick={notEmployed}
-        >
-          No
-        </Radio>
+        <Flex justify="space-between" w="131px">
+          <Radio
+            name="employed"
+            id="employed-1"
+            value={true}
+            isChecked={employed === true}
+            onClick={isEmployed}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: "#344CD0" }}
+          >
+            Yes
+          </Radio>
+          <Radio
+            name="employed"
+            id="employed-2"
+            value={false}
+            isChecked={employed === false}
+            onClick={notEmployed}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: "#344CD0" }}
+          >
+            No
+          </Radio>
+        </Flex>
       </Flex>
 
       {/* EMPLOYED COMPANY NAME AND JOB TITLE */}
@@ -533,27 +559,34 @@ const SignupAdditional = ({
           <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
             Are you working remotely?
           </FormLabel>
-
-          <Radio
-            isInvalid
-            name="employed_remote"
-            id="employed_remote-1"
-            value={true}
-            ref={register}
-            defaultChecked={remote === true}
-          >
-            Yes
-          </Radio>
-          <Radio
-            isInvalid
-            name="employed_remote"
-            id="employed_remote-2"
-            value={false}
-            ref={register}
-            defaultChecked={remote === false}
-          >
-            No
-          </Radio>
+          <Flex justify="space-between" w="131px">
+            <Radio
+              name="employed_remote"
+              id="employed_remote-1"
+              value={true}
+              ref={register}
+              isChecked={remote === true}
+              onChange={() => setRemote(true)}
+              borderRadius="md"
+              borderColor="#D9D9D9"
+              _checked={{ bg: "#344CD0" }}
+            >
+              Yes
+            </Radio>
+            <Radio
+              name="employed_remote"
+              id="employed_remote-2"
+              value={false}
+              ref={register}
+              isChecked={remote === false}
+              onChange={() => setRemote(false)}
+              borderRadius="md"
+              borderColor="#D9D9D9"
+              _checked={{ bg: "#344CD0" }}
+            >
+              No
+            </Radio>
+          </Flex>
         </Flex>
       ) : null}
 
@@ -676,7 +709,7 @@ const SignupAdditional = ({
           lineHeight="36px"
           color="#BBBDC6"
         >
-          Online presence
+          Online Presence
         </Text>
       </Flex>
 
