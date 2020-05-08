@@ -244,7 +244,6 @@ const EditUserProfile = ({
       profile_image: newProfile_image || userData.profile_image,
       portfolio: creds.portfolio_URL || null,
     }).then(() => history.push(`/profile/${id}`));
-    console.log("from edit", creds);
 
     ReactGA.event({
       category: "User",
@@ -416,7 +415,7 @@ const EditUserProfile = ({
             {/* FIRST NAME, LAST NAME */}
             <Flex wrap="wrap" w="653" justify="center">
               <FormControl isRequired isInvalid={errors.username}>
-                <FormLabel color="#131C4D" fontSize="20px" fontFamily="Muli">
+                <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
                   First Name
                 </FormLabel>
                 <SignupLoginInput
@@ -435,7 +434,7 @@ const EditUserProfile = ({
                 </FormErrorMessage>
               </FormControl>
               <FormControl isRequired isInvalid={errors.username}>
-                <FormLabel color="#131C4D" fontSize="20px" fontFamily="Muli">
+                <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
                   Last Name
                 </FormLabel>
                 <SignupLoginInput
@@ -457,7 +456,9 @@ const EditUserProfile = ({
             {/* LOCATION OF USER */}
             <Flex wrap="wrap" w="653" justify="center">
               <FormControl>
-                <FormLabel fontFamily="Muli">Location (City, State)</FormLabel>
+                <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
+                  Location (City, State)
+                </FormLabel>
                 <CustomAutocomplete
                   stateHelper={stateHelper}
                   w="653px"
@@ -488,7 +489,7 @@ const EditUserProfile = ({
               mb={graduated ? "20px" : "80px"}
               justify="space-between"
             >
-              <FormLabel fontFamily="Muli">
+              <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
                 Have you graduated from Lambda yet?
               </FormLabel>
               <Flex justify="space-between" w="131px">
@@ -528,7 +529,9 @@ const EditUserProfile = ({
                 justify="space-between"
                 align="center"
               >
-                <FormLabel fontFamily="Muli">When did you graduate?</FormLabel>
+                <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
+                  When did you graduate?
+                </FormLabel>
                 <Flex align="center" alignContent="center">
                   <FormControl>
                     <Select
@@ -641,7 +644,7 @@ const EditUserProfile = ({
             {/* HIGHEST LEVEL OF EDUCATION */}
             <Flex wrap="wrap" w="411px%" justify="center">
               <FormControl>
-                <FormLabel fontFamily="Muli">
+                <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
                   Highest level of education
                 </FormLabel>
                 <Select
@@ -685,7 +688,9 @@ const EditUserProfile = ({
 
               {/* FIELD OF STUDY */}
               <FormControl isInvalid={errors.fieldOfStudy}>
-                <FormLabel fontFamily="Muli">Field of study</FormLabel>
+                <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
+                  Field of study
+                </FormLabel>
                 <SignupLoginInput
                   w="318px"
                   mb="30px"
@@ -710,7 +715,7 @@ const EditUserProfile = ({
               mb="30px"
               justify="space-between"
             >
-              <FormLabel fontFamily="Muli">
+              <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
                 Prior to Lambda did you have any experience in your track?
               </FormLabel>
               <Flex justify="space-between" w="131px">
@@ -751,7 +756,7 @@ const EditUserProfile = ({
               mb="100px"
               justify="space-between"
             >
-              <FormLabel fontFamily="Muli">
+              <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
                 Have you been a TL/SL while at Lambda?
               </FormLabel>
               <Flex justify="space-between" w="131px">
@@ -793,7 +798,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                fontSize="18px"
+                color="#131C4D"
+                align="center"
+                fontFamily="Muli"
+              >
                 Resume
               </Text>
               <Flex width="270px" justify="flex-end">
@@ -859,7 +869,7 @@ const EditUserProfile = ({
               mb={employed ? "30px" : "80px"}
               justify="space-between"
             >
-              <FormLabel fontFamily="Muli">
+              <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
                 Are you currently employed in your field of study?
               </FormLabel>
               <Flex justify="space-between" w="131px">
@@ -894,7 +904,9 @@ const EditUserProfile = ({
             {employed ? (
               <Flex wrap="wrap" w="653" justify="center">
                 <FormControl>
-                  <FormLabel fontFamily="Muli">Company name</FormLabel>
+                  <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+                    Company name
+                  </FormLabel>
                   <SignupLoginInput
                     w="318px"
                     mb="30px"
@@ -908,7 +920,9 @@ const EditUserProfile = ({
                   />
                 </FormControl>
                 <FormControl>
-                  <FormLabel fontFamily="Muli">Job title</FormLabel>
+                  <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+                    Job title
+                  </FormLabel>
                   <SignupLoginInput
                     w="318px"
                     mb="30px"
@@ -932,7 +946,7 @@ const EditUserProfile = ({
                 mb="30px"
                 justify="space-between"
               >
-                <FormLabel fontFamily="Muli">
+                <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
                   Are you working remotely?
                 </FormLabel>
                 <Flex justify="space-between" w="131px">
@@ -976,7 +990,9 @@ const EditUserProfile = ({
                 justify="space-between"
                 align="center"
               >
-                <FormLabel fontFamily="Muli">When did you start?</FormLabel>
+                <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+                  When did you start?
+                </FormLabel>
                 <Flex align="center" alignContent="center">
                   <FormControl>
                     <Select
@@ -1095,7 +1111,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
                 Portfolio URL
               </Text>
               <SignupLoginInput
@@ -1118,7 +1139,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
                 LinkedIn URL
               </Text>
               <SignupLoginInput
@@ -1141,7 +1167,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
                 Slack ID
                 <Tooltip hasArrow label={info} placement="top">
                   <i
@@ -1170,7 +1201,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
                 Github URL
               </Text>
               <SignupLoginInput
@@ -1193,7 +1229,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
                 Dribbble URL
               </Text>
               <SignupLoginInput

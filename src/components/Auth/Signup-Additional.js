@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 //components
-import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js'
-import CustomAutocomplete from '../Reusable/InputFields/Autocomplete'
-
+import SignupLoginInput from "../Reusable/InputFields/SignupLoginInput.js";
+import CustomAutocomplete from "../Reusable/InputFields/Autocomplete";
+import { years } from "../Reusable/yearsData";
 //styles
 import {
   Image,
   FormControl,
   FormLabel,
+  FormHelperText,
   FormErrorMessage,
   Flex,
   Text,
@@ -15,7 +16,7 @@ import {
   Select,
   Tooltip,
   Box,
-} from '@chakra-ui/core'
+} from "@chakra-ui/core";
 
 const SignupAdditional = ({
   register,
@@ -29,48 +30,42 @@ const SignupAdditional = ({
   uploadResume,
   profile_resume,
 }) => {
-  // graduated state
-  const [graduated, setGraduated] = useState(false)
-  const [years, setYears] = useState([])
+  // graduated state/helpers
+  const [graduated, setGraduated] = useState(false);
   const isGraduated = () => {
-    setGraduated(true)
-  }
+    setGraduated(true);
+  };
   const notGraduated = () => {
-    setGraduated(false)
-  }
-  const [employed, setEmployed] = useState(false)
+    setGraduated(false);
+  };
+  // employed state/helpers
+  const [employed, setEmployed] = useState(false);
   const isEmployed = () => {
-    setEmployed(true)
-  }
+    setEmployed(true);
+  };
   const notEmployed = () => {
-    setEmployed(false)
-  }
+    setEmployed(false);
+  };
 
   //radio button state
-  const [priorExp] = useState(false)
-  const [tlsl] = useState(false)
-  const [remote] = useState(false)
+  const [priorExp, setPriorExp] = useState(false);
+  const [tlsl, setTlsl] = useState(false);
+  const [remote, setRemote] = useState(false);
 
-  //location helpers
+  //location helper
   useEffect(() => {
-    setNewLocation({ ...location, myState: location.myState })
+    setNewLocation({ ...location, myState: location.myState });
     // removes numbers, commas, and whitespaces from city
     if (location.myCity) {
       if (/^[0-9]+$/.test(location.myCity) || /\s/.test(location.myCity)) {
-        const tempCity = location.myCity
+        const tempCity = location.myCity;
         setNewLocation({
           ...location,
-          myCity: tempCity.replace(/^[\s,\d]+/, ''),
-        })
+          myCity: tempCity.replace(/^[\s,\d]+/, ""),
+        });
       }
     }
-  }, [location])
-
-  // year helper
-  useEffect(() => {
-    const year = new Date().getFullYear()
-    setYears(Array.from(new Array(20), (val, index) => year - index))
-  }, [])
+  }, [location]);
 
   ///info for slack ID
   const info = (
@@ -79,11 +74,11 @@ const SignupAdditional = ({
         objectFit="fit"
         width="300px"
         height="300px"
-        src={require('../../icons/slack.gif')}
+        src={require("../../icons/slack.gif")}
         alt="slack info"
       />
     </Box>
-  )
+  );
 
   return (
     <>
@@ -95,7 +90,7 @@ const SignupAdditional = ({
         justify="flex-start"
         fontSize="16px"
       >
-        <Text fontFamily="Muli">
+        <Text color="#131C4D" fontFamily="Muli">
           The information below will be visible on your profile page by others
         </Text>
       </Flex>
@@ -110,11 +105,11 @@ const SignupAdditional = ({
         alignItems="center"
       >
         {!profile_image ? (
-          <Image size="100px" src={require('../../icons/user.png')} />
+          <Image size="100px" src={require("../../icons/user.svg")} />
         ) : (
           <Image
             size="100px"
-            style={{ borderRadius: '50px' }}
+            style={{ borderRadius: "50px" }}
             src={profile_image}
           />
         )}
@@ -125,10 +120,10 @@ const SignupAdditional = ({
             placeholder="Upload profile picture"
             onChange={uploadImage}
             style={{
-              opacity: '1',
-              width: '105px',
-              color: 'transparent',
-              backgroundColor: 'transparent',
+              opacity: "1",
+              width: "105px",
+              color: "transparent",
+              backgroundColor: "transparent",
             }}
           />
           <label for="files" class="btn">
@@ -140,7 +135,9 @@ const SignupAdditional = ({
       {/* LOCATION OF USER */}
       <Flex wrap="wrap" w="653" justify="center">
         <FormControl>
-          <FormLabel fontFamily="Muli">Location (City, State)</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            Location (City, State)
+          </FormLabel>
           <CustomAutocomplete
             stateHelper={stateHelper}
             w="653px"
@@ -152,8 +149,8 @@ const SignupAdditional = ({
             focusBorderColor="#344CD0"
             borderColor="#EAF0FE"
             color="#17171B"
-            _hover={{ borderColor: '#BBBDC6' }}
-            _placeholder={{ color: '#BBBDC6' }}
+            _hover={{ borderColor: "#BBBDC6" }}
+            _placeholder={{ color: "#BBBDC6" }}
             id="location"
             name="location"
             label="location"
@@ -168,10 +165,10 @@ const SignupAdditional = ({
         wrap="wrap"
         w="653px"
         mx="auto"
-        mb={graduated ? '20px' : '80px'}
+        mb={graduated ? "20px" : "80px"}
         justify="space-between"
       >
-        <FormLabel fontFamily="Muli">
+        <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Have you graduated from Lambda yet?
         </FormLabel>
 
@@ -207,7 +204,9 @@ const SignupAdditional = ({
           justify="space-between"
           align="center"
         >
-          <FormLabel fontFamily="Muli">When did you graduate?</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            When did you graduate?
+          </FormLabel>
           <Flex align="center" alignContent="center">
             <FormControl>
               <Select
@@ -221,8 +220,8 @@ const SignupAdditional = ({
                 focusBorderColor="#344CD0"
                 borderColor="#EAF0FE"
                 color="#BBBDC6"
-                _focus={{ color: '#17171B' }}
-                _hover={{ borderColor: '#BBBDC6' }}
+                _focus={{ color: "#17171B" }}
+                _hover={{ borderColor: "#BBBDC6" }}
                 name="gradMonth"
                 label="gradMonth"
                 ref={register}
@@ -279,8 +278,8 @@ const SignupAdditional = ({
                 focusBorderColor="#344CD0"
                 borderColor="#EAF0FE"
                 color="#BBBDC6"
-                _focus={{ color: '#17171B' }}
-                _hover={{ borderColor: '#BBBDC6' }}
+                _focus={{ color: "#17171B" }}
+                _hover={{ borderColor: "#BBBDC6" }}
                 name="gradYear"
                 label="gradYear"
                 ref={register}
@@ -321,7 +320,9 @@ const SignupAdditional = ({
       {/* HIGHEST LEVEL OF EDUCATION */}
       <Flex wrap="wrap" w="411px%" justify="center">
         <FormControl>
-          <FormLabel fontFamily="Muli">Highest level of education</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            Highest level of education
+          </FormLabel>
           <Select
             mb="30px"
             mr="17px"
@@ -334,8 +335,8 @@ const SignupAdditional = ({
             focusBorderColor="#344CD0"
             borderColor="#EAF0FE"
             color="#BBBDC6"
-            _focus={{ color: '#17171B' }}
-            _hover={{ borderColor: '#BBBDC6' }}
+            _focus={{ color: "#17171B" }}
+            _hover={{ borderColor: "#BBBDC6" }}
             name="highest_ed"
             label="highest_ed"
             ref={register}
@@ -361,7 +362,9 @@ const SignupAdditional = ({
           </Select>
         </FormControl>
         <FormControl isInvalid={errors.fieldOfStudy}>
-          <FormLabel fontFamily="Muli">Field of study</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            Field of study
+          </FormLabel>
           <SignupLoginInput
             w="318px"
             mb="30px"
@@ -380,7 +383,7 @@ const SignupAdditional = ({
 
       {/* PRIOR EXPERIENCE */}
       <Flex wrap="wrap" w="653px" mx="auto" mb="30px" justify="space-between">
-        <FormLabel fontFamily="Muli">
+        <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Prior to Lambda did you have any experience in your track?
         </FormLabel>
 
@@ -408,7 +411,7 @@ const SignupAdditional = ({
 
       {/* DID YOU TL/SL */}
       <Flex wrap="wrap" w="653px" mx="auto" mb="100px" justify="space-between">
-        <FormLabel fontFamily="Muli">
+        <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Have you been a TL/SL while at Lambda?
         </FormLabel>
 
@@ -458,10 +461,10 @@ const SignupAdditional = ({
         wrap="wrap"
         w="653px"
         mx="auto"
-        mb={employed ? '30px' : '80px'}
+        mb={employed ? "30px" : "80px"}
         justify="space-between"
       >
-        <FormLabel fontFamily="Muli">
+        <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Are you currently employed in your field of study?
         </FormLabel>
 
@@ -491,7 +494,9 @@ const SignupAdditional = ({
       {employed ? (
         <Flex wrap="wrap" w="653" justify="center">
           <FormControl>
-            <FormLabel fontFamily="Muli">Company name</FormLabel>
+            <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+              Company name
+            </FormLabel>
             <SignupLoginInput
               w="318px"
               mb="30px"
@@ -505,7 +510,9 @@ const SignupAdditional = ({
             />
           </FormControl>
           <FormControl>
-            <FormLabel fontFamily="Muli">Job title</FormLabel>
+            <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+              Job title
+            </FormLabel>
             <SignupLoginInput
               w="318px"
               mb="30px"
@@ -523,7 +530,9 @@ const SignupAdditional = ({
       {/* REMOTE WORK CHECK */}
       {employed ? (
         <Flex wrap="wrap" w="653px" mx="auto" mb="30px" justify="space-between">
-          <FormLabel fontFamily="Muli">Are you working remotely?</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            Are you working remotely?
+          </FormLabel>
 
           <Radio
             isInvalid
@@ -558,7 +567,9 @@ const SignupAdditional = ({
           justify="space-between"
           align="center"
         >
-          <FormLabel fontFamily="Muli">When did you start?</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            When did you start?
+          </FormLabel>
           <Flex align="center" alignContent="center">
             <FormControl>
               <Select
@@ -572,8 +583,8 @@ const SignupAdditional = ({
                 focusBorderColor="#344CD0"
                 borderColor="#EAF0FE"
                 color="#BBBDC6"
-                _focus={{ color: '#17171B' }}
-                _hover={{ borderColor: '#BBBDC6' }}
+                _focus={{ color: "#17171B" }}
+                _hover={{ borderColor: "#BBBDC6" }}
                 name="workMonth"
                 label="workMonth"
                 ref={register}
@@ -630,8 +641,8 @@ const SignupAdditional = ({
                 focusBorderColor="#344CD0"
                 borderColor="#EAF0FE"
                 color="#BBBDC6"
-                _focus={{ color: '#17171B' }}
-                _hover={{ borderColor: '#BBBDC6' }}
+                _focus={{ color: "#17171B" }}
+                _hover={{ borderColor: "#BBBDC6" }}
                 name="workYear"
                 label="workYear"
                 ref={register}
@@ -673,42 +684,46 @@ const SignupAdditional = ({
       <Flex
         wrap="wrap"
         w="653px"
-        mb="30px"
         mx="auto"
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" color="#131C4D" fontSize="18px" fontFamily="Muli">
           Resume
         </Text>
-        <Flex width="270px">
+        <Flex width="270px" justify="flex-end">
           <input
             type="file"
             filename="image"
             placeholder="Upload profile picture"
             onChange={uploadResume}
             style={{
-              opacity: '1',
-              width: '105px',
-              color: 'transparent',
-              backgroundColor: 'transparent',
+              opacity: "1",
+              width: "105px",
+              color: "transparent",
+              backgroundColor: "transparent",
             }}
           />
           <label for="files" class="btn">
             {!profile_resume ? (
-              'Upload resume'
+              "Upload resume"
             ) : (
               <i
                 style={{
-                  fontSize: '1.4rem',
-                  color: 'green',
-                  paddingLeft: '20px',
+                  fontSize: "1.4rem",
+                  color: "green",
+                  paddingLeft: "20px",
                 }}
                 class="far fa-check-circle"
               ></i>
             )}
           </label>
         </Flex>
+      </Flex>
+      <Flex w="653px" mx="auto" justify="flex-start">
+        <FormHelperText w="653px" mb="30px" color="#9194A8">
+          Must be a .pdf file
+        </FormHelperText>
       </Flex>
 
       {/* CONTACT EMAIL */}
@@ -720,7 +735,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           Email address
         </Text>
         <SignupLoginInput
@@ -743,7 +758,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           Portfolio URL
         </Text>
         <SignupLoginInput
@@ -766,7 +781,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           LinkedIn URL
         </Text>
         <SignupLoginInput
@@ -789,10 +804,10 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
-          SLack ID
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
+          Slack ID
           <Tooltip hasArrow label={info} placement="top">
-            <i style={{ paddingLeft: '10px' }} class="fas fa-question"></i>
+            <i style={{ paddingLeft: "10px" }} class="fas fa-question"></i>
           </Tooltip>
         </Text>
         <SignupLoginInput
@@ -815,7 +830,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           Github URL
         </Text>
         <SignupLoginInput
@@ -838,7 +853,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           Dribbble URL
         </Text>
         <SignupLoginInput
@@ -852,6 +867,6 @@ const SignupAdditional = ({
         />
       </Flex>
     </>
-  )
-}
-export default SignupAdditional
+  );
+};
+export default SignupAdditional;
