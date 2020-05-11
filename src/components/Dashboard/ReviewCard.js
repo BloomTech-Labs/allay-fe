@@ -34,6 +34,7 @@ import {
 } from "@chakra-ui/core";
 import { GoLocation } from "react-icons/go";
 import { FaRegBuilding } from "react-icons/fa";
+import { MdRateReview } from "react-icons/md";
 
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   //deletes the review in question
@@ -93,6 +94,13 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   // adjust logo for api call
   const adjustedName = review.company_name.replace(" ", "+");
 
+  // adjust date of posting
+  let tempDate = new Date(review.created_at).toUTCString();
+  const tempDay = tempDate.split(" ").slice(1, 2);
+  const tempMonth = tempDate.split(" ").slice(2, 3);
+  const tempYear = tempDate.split(" ").slice(3, 4);
+  const adjustedDate = `${tempMonth} ${tempDay}, ${tempYear}`;
+
   return (
     <>
       {/* ------------------------------------------------------------------------------------------------ */}
@@ -120,6 +128,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                 direction="column"
                 justify="space-between"
                 align="flex-start"
+                position="relative"
                 w="261px"
                 height="100%"
                 top="0"
@@ -249,10 +258,26 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               {/* RIGHT SIDE MODAL */}
               <Flex
                 direction="column"
-                justify="flex-start"
-                align="center"
-                ml="30%"
-              ></Flex>
+                justify="space-evenly"
+                align="flex-start"
+                position="absolute"
+                w="659px"
+                ml="291px"
+                mb="50px"
+                mt="35px"
+              >
+                {/* TYPE OF REVIEW, TRACK, DATE POSTED */}
+                <Flex>
+                  <Box as={MdRateReview} size="28px" color="#BBBDC6" />
+                  <Text>
+                    {review.review_type === "Company"
+                      ? "Company Review"
+                      : "Interview Review"}
+                  </Text>
+                  <Box>{review.track_name}</Box>
+                  <Text>Posted at: {adjustedDate}</Text>
+                </Flex>
+              </Flex>
 
               {/* <ModalFooter>
             <BlockButton user_id={review.user_id} isAdmin={isAdmin} />
