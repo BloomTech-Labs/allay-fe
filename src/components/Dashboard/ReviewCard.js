@@ -32,6 +32,8 @@ import {
   AlertDialogOverlay,
   useDisclosure,
 } from "@chakra-ui/core";
+import { GoLocation } from "react-icons/go";
+import { FaRegBuilding } from "react-icons/fa";
 
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   //deletes the review in question
@@ -88,6 +90,9 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
     }
   };
 
+  // adjust logo for api call
+  const adjustedName = review.company_name.replace(" ", "+");
+
   return (
     <>
       {/* ------------------------------------------------------------------------------------------------ */}
@@ -100,7 +105,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
             preserveScrollBarGap
             isOpen={true}
             onClose={onClose}
-            size="80%"
+            size="950px"
           >
             <ModalOverlay />
             <ModalContent w="100%" wrap="nowrap">
@@ -113,15 +118,19 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               {/* LEFT SIDE MODAL */}
               <Flex
                 direction="column"
-                justify="space-evenly"
-                align="center"
-                w="30%"
+                justify="space-between"
+                align="flex-start"
+                w="261px"
                 height="100%"
                 top="0"
                 left="0"
+                pb="50px"
+                pt="35px"
+                pl="50px"
                 bg="#F2F6FE"
                 borderRadius="0px 40px 40px 0px"
               >
+                {/* USER AVATAR AND NAME */}
                 <Flex justify="space-evenly" align="center">
                   <Image
                     size="50px"
@@ -130,9 +139,13 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                   />
                   <Text>By Caroline Preston</Text>
                 </Flex>
-                <Flex direction="column">
-                  <Image src={`//logo.clearbit.com/${review.logo}`} />
-                  <Flex>
+                {/* COMPANY LOGO AND REVIEW STARS */}
+                <Flex direction="column" justify="center" align="flex-start">
+                  <Image
+                    src={`//logo.clearbit.com/${review.logo}?size=125`}
+                    fallbackSrc={`https://via.placeholder.com/125/F2F6FE/344CD0?text=${adjustedName}`}
+                  />
+                  <Flex mt="13px">
                     {Array(5)
                       .fill("")
                       .map((_, i) => (
@@ -145,6 +158,91 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                           ml="4px"
                         />
                       ))}
+                  </Flex>
+                </Flex>
+                {/* COMPANY LOCATION AND NAME */}
+                <Flex direction="column" justify="center" align="flex-start">
+                  <Flex>
+                    <Box as={GoLocation} size="28px" color="#BBBDC6" />
+                    <Text>
+                      {review.city}, {review.state_name}
+                    </Text>
+                  </Flex>
+                  <Flex>
+                    <Box as={FaRegBuilding} size="28px" color="#BBBDC6" />
+                    <Text>{review.company_name}</Text>
+                  </Flex>
+                </Flex>
+                {/* JOB/INTERVIEW INFORMATION */}
+                <Flex
+                  direction="column"
+                  justify="space-between"
+                  align="flex-start"
+                >
+                  <Flex
+                    direction="column"
+                    justify="flex-start"
+                    align="flex-start"
+                  >
+                    <Text>{review.job_title}</Text>
+                    <Text>Job title</Text>
+                  </Flex>
+                  <Flex
+                    direction="column"
+                    justify="flex-start"
+                    align="flex-start"
+                  >
+                    <Text>{`${review.salary}.00`}</Text>
+                    <Text>Salary</Text>
+                  </Flex>
+                  <Flex
+                    direction="column"
+                    justify="flex-start"
+                    align="flex-start"
+                  >
+                    <Text>
+                      {review.review_type === "Company" ? (
+                        <Text>{review.work_status}</Text>
+                      ) : review.difficulty_rating === 1 ? (
+                        <Text>Very easy</Text>
+                      ) : review.difficulty_rating === 2 ? (
+                        <Text>Easy</Text>
+                      ) : review.difficulty_rating === 3 ? (
+                        <Text>Somewhat easy</Text>
+                      ) : review.difficulty_rating === 4 ? (
+                        <Text>Somewhat hard</Text>
+                      ) : review.difficulty_rating === 5 ? (
+                        <Text>Hard</Text>
+                      ) : (
+                        <Text>N/A</Text>
+                      )}
+                    </Text>
+                    <Text>
+                      {review.review_type === "Company"
+                        ? "Status"
+                        : "Interview difficulty"}
+                    </Text>
+                  </Flex>
+                  <Flex
+                    direction="column"
+                    justify="flex-start"
+                    align="flex-start"
+                  >
+                    <Text>
+                      {review.review_type === "Company" ? (
+                        <Text>
+                          {review.start_date} -{" "}
+                          {review.end_date ? review.end_date : "Present"}
+                        </Text>
+                      ) : (
+                        review.offer_status
+                      )}
+                    </Text>
+                    <Text>
+                      {review.review_type === "Company"
+                        ? "Dates"
+                        : "Job offer?"}
+                    </Text>
                   </Flex>
                 </Flex>
               </Flex>
