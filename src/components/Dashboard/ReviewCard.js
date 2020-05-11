@@ -10,6 +10,7 @@ import deleteReview from '../../state/actions/index';
 // styles
 import {
 	Box,
+	Text,
 	Avatar,
 	Flex,
 	Modal,
@@ -567,28 +568,33 @@ useEffect(() => {
 
 			{/* Review container */}
 			<PseudoBox
-				width={[
-					'100%', // base
-					'100%', // 480px upwards
-					'100%', // 768px upwards
-					'45%', // 992px upwards
-				]}
+				// width={[
+				// 	'100%', // base
+				// 	'100%', // 480px upwards
+				// 	'100%', // 768px upwards
+				// 	'45%', // 992px upwards
+				// ]}
+				
 				mb='3%'
 				mx='2.5%'
-				px='4%'
-				py='2%'
-				background='#F2F6FE'
+				px='1%'
+				py='1%'
+				
+				border="1px solid #E9F0FF"
+				width="408px"
+				height="309px"
 				borderRadius='12px'
 				display='flex'
 				flexDir='column'
-				justifyContent='center'
-				alignItems='center'
+				// justifyContent='center'
+				// alignItems='center'
 				_hover={{ bg: '#E9F0FF' }}
-				onClick={onOpen}
+				// TODO:open Shawns modal on click
+				// onClick={onOpen}
 				data-cy='modalCard'
 			>
 				{/* Review content container */}
-				<Flex width='100%' justifyContent='flex-end' mb='2%'>
+				{/* <Flex width='100%' justifyContent='flex-end' mb='2%'>
 					{newTag ? (
 						<>
 							<Badge
@@ -628,31 +634,27 @@ useEffect(() => {
 					>
 						{review.track_name}
 					</Badge>
-				</Flex>
+				</Flex> */}
 
 				{/* Review content container */}
-				<Flex flexDir='column'>
+				<Flex flexDir='column' >
 					{/* headline container  */}
-					<Flex maxW='530px' h='100px'>
+					<Flex maxW='530px'  >
 						{/* avatar box */}
-						<Box justify='center' align='center' h='88px' mr='40px'>
+						{/* <Box justify='center' align='center' h='88px' mr='40px'>
 							<Avatar size='xl' src={`//logo.clearbit.com/${review.logo}`} />
-						</Box>
+						</Box> */}
 						{/* tag container */}
-						<Flex maxW='391px' h='32px' wrap='wrap'>
+						<Flex justify="space-between" maxW='391px'  p='0 2%' wrap='wrap'  >
 							<Flex
-								as='h2'
-								maxW='400px'
-								align='center'
+								as='h3'
 								overflow='hidden'
 								isTruncated
 							>
-								{review.company_name}
+								{review.review_type === "Company" ? review.company_name : review.job_title}
 							</Flex>
-							<Flex width='100%'>
-								<Flex as='h4' align='center'>
-									{review.overall_rating}.0
-								</Flex>
+							<Flex><i style={{alignSelf:"center", fontSize:"22px", opacity:".2"}} class="far fa-heart"></i></Flex>
+							<Flex justify="space-between" width='391px'>
 								<Flex align='center'>
 									{Array(5)
 										.fill('')
@@ -661,21 +663,38 @@ useEffect(() => {
 												name='star'
 												key={i}
 												color={
-													i < review.overall_rating ? '#344CD0' : 'gray.300'
+													i < review.overall_rating ? '#F9DC76' : '#fff'
 												}
 												ml='8%'
 											/>
 										))}
 								</Flex>
+								<Flex>
+									{newTag ? (
+						<>
+							<Text
+							style={{color:"457929", fontSize:"14px"}}
+							>
+								New
+							</Text>
+						</>
+					) : <Text
+					style={{color:"457929", fontSize:"14px"}}
+					>
+						x days old
+					</Text>}</Flex>
 							</Flex>
-							<Flex as='p' w='100%' fontWeight='light'>
+							{/* <Flex as='p' w='100%' fontWeight='light'>
 								Position: {review.job_title}
-							</Flex>
+							</Flex> */}
+<Flex width="391px" ml="2%"><Image src={require('../../icons/comment.png')}/>{review.review_type} review</Flex>
 						</Flex>
+
 					</Flex>
+		
 
 					{/* Second main container */}
-					<Flex
+					{/* <Flex
 						w='100%'
 						font-size='18'
 						fontWeight='light'
@@ -733,13 +752,28 @@ useEffect(() => {
 								<Flex as='p'>{review.offer_status}</Flex>
 							</Flex>
 						) : null}
-					</Flex>
+					</Flex> */}
 				</Flex>
 
 				{/* summary container */}
-				<Flex w='100%' h='95px' overflow='hidden'>
-					<p>{review.comment}</p>
+				<Flex w='348px' h='55px'  overflow='hidden'>
+					<p style={{fontSize:"14px"}}>{review.comment}</p>
 				</Flex>
+				<Flex>
+					<Avatar size='small' src={require("../../icons/user.png")}/>
+					<Badge
+						backgroundColor='#344CD0'
+						color='white'
+						fontSize='1em'
+						fontWeight='light'
+						rounded='full'
+						px='15px'
+						overflow='hidden'
+						ml='10px'
+					>
+						{review.track_name}
+					</Badge>
+					</Flex>
 				{/* {admin action buttons} */}
 			</PseudoBox>
 		</>

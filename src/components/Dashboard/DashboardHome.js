@@ -32,7 +32,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
     // data = results;
     setFilteredReviews(results)
   }, [searchResults])
-
+  console.log(data)
   // filter by track and review type
   useEffect(() => {
     const filteredResults = data.filter(review =>
@@ -67,11 +67,11 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             setTypeFilters={setTypeFilters}
           />
 
-          <Flex align="center" justify="flex-start" mb="1%" ml="2.5%">
+          {/* <Flex align="center" justify="flex-start" mb="1%" ml="2.5%">
             <Flex as="h2">Recent Posts</Flex>
-          </Flex>
+          </Flex> */}
 
-          <Flex height="70%" wrap="wrap">
+          <Flex justify="space-evenly" height="70%" wrap="wrap">
             {isLoading ? (
               <Flex w="100%" h="100%" justify="center" align="center">
                 <CustomSpinner />
