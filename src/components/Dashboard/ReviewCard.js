@@ -144,12 +144,17 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
             borderRadius="0px 40px 40px 0px"
           >
             {/* USER AVATAR AND NAME */}
-            <Flex justify="space-evenly" align="center" mb="30px">
+            <Flex
+              justify="space-evenly"
+              align="center"
+              mb="30px"
+              onClick={navToProfile}
+              style={{ cursor: "pointer" }}
+            >
               {review.user_profile_image === "h" ? (
                 <Image
                   size="40px"
                   mr="7px"
-                  onClick={navToProfile}
                   style={{ opacity: "0.6" }}
                   src={require("../../icons/user.svg")}
                 />
@@ -157,8 +162,6 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                 <Image
                   size="40px"
                   mr="7px"
-                  onClick={navToProfile}
-                  _hover={{ cursor: "pointer" }}
                   style={{ opacity: "0.6", borderRadius: "50%" }}
                   src={review.user_profile_image}
                 />
