@@ -380,6 +380,71 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                 </Text>
               </Flex>
             </Flex>
+            <Flex>
+              {Number(loginId) === Number(review.user_id) ? (
+                <Image
+                  src={require("../../icons/edit.png")}
+                  onClick={navToEditRoute}
+                  cursor="pointer"
+                  size="1.5em"
+                  mr="12px"
+                  data-cy="editModalReview"
+                />
+              ) : null}
+              {Number(loginId) === Number(review.user_id) ? (
+                <Image
+                  src={require("../../icons/trash.png")}
+                  onClick={() => setIsOpen2(true)}
+                  cursor="pointer"
+                  size="1.5em"
+                  data-cy="deleteModalReview"
+                />
+              ) : null}
+              <AlertDialog
+                isOpen={isOpen2}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose2}
+              >
+                <AlertDialogOverlay />
+                <AlertDialogContent>
+                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    Delete review
+                  </AlertDialogHeader>
+
+                  <AlertDialogBody>
+                    Are you sure? You can't undo this action afterwards.
+                  </AlertDialogBody>
+
+                  <AlertDialogFooter>
+                    <Flex
+                      align="center"
+                      justify="center"
+                      height="56px"
+                      width="30%"
+                      color="#344CD0"
+                      fontSize="16px"
+                      fontWeight="bold"
+                      ref={cancelRef}
+                      onClick={onClose2}
+                    >
+                      Cancel
+                    </Flex>
+                    <Button
+                      h="56px"
+                      rounded="10px"
+                      border="none"
+                      color="white"
+                      variantColor="red"
+                      ml={3}
+                      onClick={submitDelete}
+                      data-cy="confirmDeleteModalReview"
+                    >
+                      Delete
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </Flex>
           </Flex>
           {/* RIGHT SIDE MODAL */}
           <Flex
