@@ -53,7 +53,7 @@
     "cypress:coverage": "start-server-and-test start:coverage http://localhost:3000 cypress:coverage:run || true",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md)\"" 
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md)\""
   },
   "jest": {
     "collectCoverageFrom": [

@@ -286,7 +286,7 @@ useEffect(() => {
 										size='2.5em'
 										mr='15px'
 									/>
-									<Flex flexDir='column'>
+									<Flex  flexDir='column'>
 										<Flex as='h3' fontWeight='light' fontSize='md' isTruncated>
 											${review.salary}.00
 										</Flex>
@@ -695,7 +695,7 @@ useEffect(() => {
 				<Flex m="10px 20px" w='348px' h='55px'  overflow='hidden'>
 					<p style={{fontSize:"14px", color:"gray"}}>{review.comment}</p>
 				</Flex>
-				</Flex>
+				</Flex> 
 				<Flex margin="0px 12px 0px 20px" align="center" pt="5px" height="40px" justify="space-between">
 <Flex alignItems="center"><Avatar size='md' src={review.user_profile_image}/><Text pl="5px" fontSize="14px">{review.user_first_name} {review.user_last_name}</Text></Flex>
 					<Badge
@@ -713,7 +713,7 @@ useEffect(() => {
 					>
 						<span>{review.track_name}</span> 
 					</Badge>
-					</Flex>
+					</Flex> 
 			</PseudoBox>
 		</>
 	);
@@ -726,3 +726,4 @@ const mapStateToProps = (state) => {
 	};
 };
 export default connect(mapStateToProps, deleteReview)(ReviewCard);
+ 

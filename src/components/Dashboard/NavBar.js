@@ -62,7 +62,7 @@ function NavBar({
     history.push('/')
   }
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     event.preventDefault()
     setSearchResults(event.target.value)
   }
@@ -81,13 +81,13 @@ function NavBar({
     { id: 5, criteria: 'track', name: 'AND' },
   ]
 
-  const handleFilter = e => {
+  const handleFilter = (e) => {
     e.criteria === 'type'
       ? typeFilters.includes(e.name)
-        ? setTypeFilters(typeFilters.filter(item => item !== e.name))
+        ? setTypeFilters(typeFilters.filter((item) => item !== e.name))
         : setTypeFilters([...typeFilters, e.name])
       : trackFilters.includes(e.name)
-      ? setTrackFilters(trackFilters.filter(item => item !== e.name))
+      ? setTrackFilters(trackFilters.filter((item) => item !== e.name))
       : setTrackFilters([...trackFilters, e.name])
     e.selected = !e.selected
   }
@@ -253,7 +253,7 @@ function NavBar({
           onChange={handleFilter}
           boxShadow="none"
         >
-          {types.map(type => (
+          {types.map((type) => (
             <Button
               key={type.id}
               size="lrg"
@@ -282,7 +282,7 @@ function NavBar({
               {type.name}
             </Button>
           ))}
-          {tracks.map(track => (
+          {tracks.map((track) => (
             <Button
               key={track.id}
               size="lrg"
@@ -321,7 +321,7 @@ function NavBar({
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isBlocked: state.auth.isBlocked,
   }

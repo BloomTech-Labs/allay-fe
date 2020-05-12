@@ -18,7 +18,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   const [searchResults, setSearchResults] = useState([])
   const [trackFilters, setTrackFilters] = useState([])
   const [typeFilters, setTypeFilters] = useState([])
-  const isDeleted = useSelector(state => state.review.reviewDeleted)
+  const isDeleted = useSelector((state) => state.review.reviewDeleted)
 
   useEffect(() => {
     getReview()
@@ -26,7 +26,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 
   // filter searchbar by company name
   useEffect(() => {
-    const results = data.filter(review =>
+    const results = data.filter((review) =>
       review.company_name.toLowerCase().includes(searchResults)
     )
     // data = results;
@@ -35,7 +35,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   console.log(data)
   // filter by track and review type
   useEffect(() => {
-    const filteredResults = data.filter(review =>
+    const filteredResults = data.filter((review) =>
       trackFilters.length > 0 && typeFilters.length > 0
         ? trackFilters.includes(review.track_name) &&
           typeFilters.includes(review.review_type)
@@ -73,7 +73,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
                 <CustomSpinner />
               </Flex>
             ) : filteredReviews.length >= 1 ? (
-              filteredReviews.map(review => (
+              filteredReviews.map((review) => (
                 <ReviewCard
                   key={review.review_id}
                   review={review}
@@ -105,7 +105,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
               </Flex>
             ) : (
               data.length > 0 &&
-              data.map(review => (
+              data.map((review) => (
                 <ReviewCard
                   key={review.review_id}
                   review={review}
@@ -120,7 +120,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoading: state.review.fetchingData,
     data: state.review.data,
