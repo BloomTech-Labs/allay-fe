@@ -134,7 +134,25 @@ useEffect(() => {
 		}
 	}
 
-// trackColorPicker(review.track_name)
+	// TODO:cal dates
+	// const dateConvert = date => {
+	// 	date = new Date(date).toUTCString();
+	// 	date = date
+	// 		.split(" ")
+	// 		.slice(0, 4)
+	// 		.join(" ");
+	// 	return date;
+	// };
+
+
+	// console.log(dateConvert(review.created_at))
+	// console.log(new Date())
+
+
+	//remove white space from company name for logo usage
+	let stripped = review.company_name.replace(/ /g,'');
+	let com = ".com"
+	const logo = stripped.concat(com)
 	return (
 		<>
 			{/* ------------------------------------------------------------------------------------------------ */}
@@ -612,13 +630,6 @@ useEffect(() => {
 
 			{/* Review container */}
 			<PseudoBox
-				// width={[
-				// 	'100%', // base
-				// 	'100%', // 480px upwards
-				// 	'100%', // 768px upwards
-				// 	'45%', // 992px upwards
-				// ]}
-				
 				mb='3%'
 				mx='2.5%'
 				px='1%'
@@ -630,76 +641,22 @@ useEffect(() => {
 				borderRadius='12px'
 				display='flex'
 				flexDir='column'
-				// justifyContent='center'
-				// alignItems='center'
 				_hover={{ bg: '#E9F0FF' }}
-				// TODO:open Shawns modal on click
-				// onClick={onOpen}
+				onClick={onOpen}
 				data-cy='modalCard'
 			>
-				{/* Review content container */}
-				{/* <Flex width='100%' justifyContent='flex-end' mb='2%'>
-					{newTag ? (
-						<>
-							<Badge
-								rounded='full'
-								color='#494B5B'
-								fontSize='1em'
-								fontWeight='light'
-								px='15px'
-								overflow='hidden'
-								variantColor='teal'
-							>
-								New
-							</Badge>
-						</>
-					) : null}
-					<Badge
-						backgroundColor='#95C8D8'
-						color='white'
-						fontSize='1em'
-						fontWeight='light'
-						rounded='full'
-						px='15px'
-						ml='10px'
-						overflow='hidden'
-					>
-						{review.review_type}
-					</Badge>
-					<Badge
-						backgroundColor='#344CD0'
-						color='white'
-						fontSize='1em'
-						fontWeight='light'
-						rounded='full'
-						px='15px'
-						overflow='hidden'
-						ml='10px'
-					>
-						{review.track_name}
-					</Badge>
-				</Flex> */}
-
 				{/* Review content container */}
 				<Flex flexDir='column' >
 					{/* headline container  */}
 					<Flex maxW='530px'  >
-						{/* avatar box */}
-						{/* <Box justify='center' align='center' h='88px' mr='40px'>
-							<Avatar size='xl' src={`//logo.clearbit.com/${review.logo}`} />
-						</Box> */}
-						{/* tag container */}
 						<Flex height="115px" justify="space-between" maxW='391px'  p='2% 5%' wrap='wrap'  >
 							<Flex
-								as='h3'
-								overflow='hidden'
-								isTruncated
                 maxW='300px'
 							>
-								{review.review_type === "Company" ? review.company_name : review.job_title}
+								{review.review_type === "Company" ? <Image backgorund="gray" width="106px" height="40px" src={`https://logo.clearbit.com/${review.logo != "unknown" ? review.logo : logo}`} /> : review.job_title}
 							</Flex>
-							<Flex height="24px"><i style={{alignSelf:"center", fontSize:"22px", opacity:".2"}} class="far fa-heart"></i></Flex>
-							<Flex justify="space-between" width='391px'>
+							<i style={{alignSelf:"center", fontSize:"22px", opacity:".2"}} class="far fa-heart"></i>
+							<Flex justify="space-between" width='391px' pt="2%">
 								<Flex align='center'>
 									{Array(5)
 										.fill('')
@@ -729,85 +686,18 @@ useEffect(() => {
 						x days old
 					</Text>}</Flex>
 							</Flex>
-							{/* <Flex as='p' w='100%' fontWeight='light'>
-								Position: {review.job_title}
-							</Flex> */}
-<Flex width="391px" height="45px" pt="15px"><Image src={require('../../icons/comment.png')}/><span style={{paddingLeft:'5px'}}>{review.review_type} review</span></Flex>
+<Flex width="391px" height="45px" pt="15px"><Image width="20px" height="20px" mt="1%" src={require('../../icons/comment.png')}/><span style={{paddingLeft:'5px'}}>{review.review_type} review</span></Flex>
 						</Flex>
-
 					</Flex>
-		
-
-					{/* Second main container */}
-					{/* <Flex
-						w='100%'
-						font-size='18'
-						fontWeight='light'
-						justify='space-evenly'
-						align='center'
-						my='4%'
-					>
-						<Flex align='center'>
-							<Image
-								src={require('../../icons/dollar-sign.png')}
-								size='1.5em'
-							/>
-							<Flex as='p' overflow='hidden'>
-								{review.salary}.00
-							</Flex>
-						</Flex>
-
-						<Flex align='center'>
-							<Image
-								src={require('../../icons/map-pin.png')}
-								size='1.5em'
-								mr='5px'
-							/>
-							<Flex as='p'>
-								{review.city}, {review.state_name}
-							</Flex>
-						</Flex>
-
-						{review.review_type === 'Company' ? (
-							<Flex align='center'>
-								<Image
-									src={require('../../icons/clock.png')}
-									size='1.5em'
-									mr='5px'
-								/>
-								<Flex as='p'>
-									{review.start_date}-{review.end_date}
-								</Flex>
-							</Flex>
-						) : review.review_type === 'Interview' ? (
-							<Flex align='center'>
-								{review.offer_status === 'Offer Accepted' ? (
-									<Image
-										src={require('../../icons/thumbs-up.png')}
-										size='1.5em'
-										mr='5px'
-									/>
-								) : review.offer_status === 'Offer Declined' || 'No Offer' ? (
-									<Image
-										src={require('../../icons/thumbs-down.png')}
-										size='1.5em'
-										mr='5px'
-									/>
-								) : null}
-								<Flex as='p'>{review.offer_status}</Flex>
-							</Flex>
-						) : null}
-					</Flex> */}
 				</Flex>
-
 				{/* summary container */}
 				<Flex width="100%" height="100px">
 				<Flex m="10px 20px" w='348px' h='55px'  overflow='hidden'>
-					<p style={{fontSize:"14px"}}>{review.comment}</p>
+					<p style={{fontSize:"14px", color:"gray"}}>{review.comment}</p>
 				</Flex>
 				</Flex>
-				<Flex margin="0px 12px 0px 20px" align="flex-end" pt="5px" height="40px" justify="space-between">
-					<Avatar size='md' src={require("../../icons/user.png")}/>
+				<Flex margin="0px 12px 0px 20px" align="center" pt="5px" height="40px" justify="space-between">
+<Flex alignItems="center"><Avatar size='md' src={review.user_profile_image}/><Text pl="5px" fontSize="14px">{review.user_first_name} {review.user_last_name}</Text></Flex>
 					<Badge
 						backgroundColor={trackColorPicker(review.track_name) }
 						color={trackFontColor(review.track_name)}
@@ -824,7 +714,6 @@ useEffect(() => {
 						<span>{review.track_name}</span> 
 					</Badge>
 					</Flex>
-				{/* {admin action buttons} */}
 			</PseudoBox>
 		</>
 	);
