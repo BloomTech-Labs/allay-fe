@@ -89,8 +89,52 @@ useEffect(() => {
 		}
 	};
 
+	//track name font color picker
+	const trackFontColor = (trackName) => {
+		switch (trackName) {
+			case 'DS':
+					return "#35694F";
+				break;
+			case 'WEB':
+					return "#474EA7";
+				break;
+				case 'iOS' || "IOS":
+				return "#8E3D19";
+				break;
+				case "Android":
+				return "#4B3569";
+				break;
+				case "UX":
+						return "#9F3A5A";
+						break;
+			default:
+				return;
+		}
+	}
+   //track name background color picker
+	const trackColorPicker = (trackName) => {
+		switch (trackName) {
+			case 'DS':
+					return "#D3F2CD";
+				break;
+			case 'WEB':
+					return "#DBEBFD";
+				break;
+				case 'iOS' || "IOS":
+				return "#F4E6BE";
+				break;
+				case "Android":
+						return "#E9D9FF";
+						break;
+						case "UX":
+								return "#F9E3DE";
+								break;
+			default:
+				return;
+		}
+	}
 
-
+// trackColorPicker(review.track_name)
 	return (
 		<>
 			{/* ------------------------------------------------------------------------------------------------ */}
@@ -645,15 +689,16 @@ useEffect(() => {
 							<Avatar size='xl' src={`//logo.clearbit.com/${review.logo}`} />
 						</Box> */}
 						{/* tag container */}
-						<Flex justify="space-between" maxW='391px'  p='0 2%' wrap='wrap'  >
+						<Flex height="115px" justify="space-between" maxW='391px'  p='2% 5%' wrap='wrap'  >
 							<Flex
 								as='h3'
 								overflow='hidden'
 								isTruncated
+                maxW='300px'
 							>
 								{review.review_type === "Company" ? review.company_name : review.job_title}
 							</Flex>
-							<Flex><i style={{alignSelf:"center", fontSize:"22px", opacity:".2"}} class="far fa-heart"></i></Flex>
+							<Flex height="24px"><i style={{alignSelf:"center", fontSize:"22px", opacity:".2"}} class="far fa-heart"></i></Flex>
 							<Flex justify="space-between" width='391px'>
 								<Flex align='center'>
 									{Array(5)
@@ -671,15 +716,15 @@ useEffect(() => {
 								</Flex>
 								<Flex>
 									{newTag ? (
-						<>
+						
 							<Text
-							style={{color:"457929", fontSize:"14px"}}
+							style={{color:"#457929", fontSize:"14px", fontWeight:"bold"}}
 							>
 								New
 							</Text>
-						</>
+						
 					) : <Text
-					style={{color:"457929", fontSize:"14px"}}
+					style={{ color:"#BBBDC6",fontSize:"14px",fontWeight:"bold"}}
 					>
 						x days old
 					</Text>}</Flex>
@@ -687,7 +732,7 @@ useEffect(() => {
 							{/* <Flex as='p' w='100%' fontWeight='light'>
 								Position: {review.job_title}
 							</Flex> */}
-<Flex width="391px" ml="2%"><Image src={require('../../icons/comment.png')}/>{review.review_type} review</Flex>
+<Flex width="391px" height="45px" pt="15px"><Image src={require('../../icons/comment.png')}/><span style={{paddingLeft:'5px'}}>{review.review_type} review</span></Flex>
 						</Flex>
 
 					</Flex>
@@ -756,22 +801,27 @@ useEffect(() => {
 				</Flex>
 
 				{/* summary container */}
-				<Flex w='348px' h='55px'  overflow='hidden'>
+				<Flex width="100%" height="100px">
+				<Flex m="10px 20px" w='348px' h='55px'  overflow='hidden'>
 					<p style={{fontSize:"14px"}}>{review.comment}</p>
 				</Flex>
-				<Flex>
-					<Avatar size='small' src={require("../../icons/user.png")}/>
+				</Flex>
+				<Flex margin="0px 12px 0px 20px" align="flex-end" pt="5px" height="40px" justify="space-between">
+					<Avatar size='md' src={require("../../icons/user.png")}/>
 					<Badge
-						backgroundColor='#344CD0'
-						color='white'
+						backgroundColor={trackColorPicker(review.track_name) }
+						color={trackFontColor(review.track_name)}
 						fontSize='1em'
 						fontWeight='light'
 						rounded='full'
-						px='15px'
+					textAlign="center"
+					pt="5px"
 						overflow='hidden'
 						ml='10px'
+						width="58px"
+						height="36px"
 					>
-						{review.track_name}
+						<span>{review.track_name}</span> 
 					</Badge>
 					</Flex>
 				{/* {admin action buttons} */}
