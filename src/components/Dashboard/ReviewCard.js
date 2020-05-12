@@ -91,6 +91,12 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
     }
   };
 
+  //routes to user's profile page
+  const navToProfile = (e) => {
+    e.preventDefault();
+    history.push(`/profile/${review.user_id}`);
+  };
+
   // adjust logo for api call
   const adjustedName = review.company_name.replace(" ", "+");
 
@@ -138,29 +144,41 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
             borderRadius="0px 40px 40px 0px"
           >
             {/* USER AVATAR AND NAME */}
-            <Flex justify="space-evenly" align="center">
+            <Flex justify="space-evenly" align="center" mb="30px">
               {review.user_profile_image === "h" ? (
                 <Image
-                  size="50px"
+                  size="40px"
+                  mr="7px"
+                  onClick={navToProfile}
                   style={{ opacity: "0.6" }}
                   src={require("../../icons/user.svg")}
                 />
               ) : (
                 <Image
-                  size="50px"
+                  size="40px"
+                  mr="7px"
+                  onClick={navToProfile}
+                  _hover={{ cursor: "pointer" }}
                   style={{ opacity: "0.6", borderRadius: "50%" }}
                   src={review.user_profile_image}
                 />
               )}
-              <Text>
+              <Text color="#131C4D" fontSize="14px" fontFamily="Muli">
                 By {review.user_first_name} {review.user_last_name}
               </Text>
             </Flex>
             {/* COMPANY LOGO AND REVIEW STARS */}
-            <Flex direction="column" justify="center" align="flex-start">
+            <Flex
+              direction="column"
+              justify="center"
+              align="flex-start"
+              mb="20px"
+            >
               <Image
-                src={`//logo.clearbit.com/${review.logo}?size=125`}
-                fallbackSrc={`https://via.placeholder.com/125/FFFFFF/344CD0?text=${adjustedName}`}
+                w="148px"
+                h="70px"
+                src={`//logo.clearbit.com/${review.logo}?size=150`}
+                fallbackSrc={require("../../icons/placeholder-logo-2.png")}
               />
               <Flex mt="13px">
                 {Array(5)
@@ -176,61 +194,185 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               </Flex>
             </Flex>
             {/* COMPANY LOCATION AND NAME */}
-            <Flex direction="column" justify="center" align="flex-start">
-              <Flex>
-                <Box as={GoLocation} size="28px" color="#BBBDC6" />
-                <Text>
+            <Flex
+              direction="column"
+              justify="center"
+              align="flex-start"
+              mb="40px"
+            >
+              <Flex mb="5px">
+                <Box as={GoLocation} size="21px" color="#BBBDC6" mr="7px" />
+                <Text color="#BBBDC6" fontSize="14px" fontFamily="Muli">
                   {review.city}, {review.state_name}
                 </Text>
               </Flex>
               <Flex>
-                <Box as={FaRegBuilding} size="28px" color="#BBBDC6" />
-                <Text>{review.company_name}</Text>
+                <Box as={FaRegBuilding} size="21px" color="#BBBDC6" mr="7px" />
+                <Text color="#BBBDC6" fontSize="14px" fontFamily="Muli">
+                  {review.company_name}
+                </Text>
               </Flex>
             </Flex>
             {/* JOB/INTERVIEW INFORMATION */}
             <Flex direction="column" justify="space-between" align="flex-start">
-              <Flex direction="column" justify="flex-start" align="flex-start">
-                <Text>{review.job_title}</Text>
-                <Text>Job title</Text>
+              <Flex
+                direction="column"
+                justify="flex-start"
+                align="flex-start"
+                mb="20px"
+              >
+                <Text
+                  color="#131C4C"
+                  fontSize="18px"
+                  fontFamily="Muli"
+                  fontWeight="bold"
+                >
+                  {review.job_title}
+                </Text>
+                <Text
+                  color="#9194A8"
+                  fontSize="14px"
+                  fontFamily="Muli"
+                  fontWeight="bold"
+                >
+                  Job title
+                </Text>
               </Flex>
-              <Flex direction="column" justify="flex-start" align="flex-start">
-                <Text>{`${review.salary}.00`}</Text>
-                <Text>Salary</Text>
+              <Flex
+                direction="column"
+                justify="flex-start"
+                align="flex-start"
+                mb="20px"
+              >
+                <Text
+                  color="#131C4C"
+                  fontSize="18px"
+                  fontFamily="Muli"
+                  fontWeight="bold"
+                >{`${review.salary}.00`}</Text>
+                <Text
+                  color="#9194A8"
+                  fontSize="14px"
+                  fontFamily="Muli"
+                  fontWeight="bold"
+                >
+                  Salary
+                </Text>
               </Flex>
-              <Flex direction="column" justify="flex-start" align="flex-start">
+              <Flex
+                direction="column"
+                justify="flex-start"
+                align="flex-start"
+                mb="20px"
+              >
                 {review.review_type === "Company" ? (
-                  <Text>{review.work_status}</Text>
+                  <Text
+                    color="#131C4C"
+                    fontSize="18px"
+                    fontFamily="Muli"
+                    fontWeight="bold"
+                  >
+                    {review.work_status}
+                  </Text>
                 ) : review.difficulty_rating === 1 ? (
-                  <Text>Very easy</Text>
+                  <Text
+                    color="#131C4C"
+                    fontSize="18px"
+                    fontFamily="Muli"
+                    fontWeight="bold"
+                  >
+                    Very easy
+                  </Text>
                 ) : review.difficulty_rating === 2 ? (
-                  <Text>Easy</Text>
+                  <Text
+                    color="#131C4C"
+                    fontSize="18px"
+                    fontFamily="Muli"
+                    fontWeight="bold"
+                  >
+                    Easy
+                  </Text>
                 ) : review.difficulty_rating === 3 ? (
-                  <Text>Somewhat easy</Text>
+                  <Text
+                    color="#131C4C"
+                    fontSize="18px"
+                    fontFamily="Muli"
+                    fontWeight="bold"
+                  >
+                    Somewhat easy
+                  </Text>
                 ) : review.difficulty_rating === 4 ? (
-                  <Text>Somewhat hard</Text>
+                  <Text
+                    color="#131C4C"
+                    fontSize="18px"
+                    fontFamily="Muli"
+                    fontWeight="bold"
+                  >
+                    Somewhat hard
+                  </Text>
                 ) : review.difficulty_rating === 5 ? (
-                  <Text>Hard</Text>
+                  <Text
+                    color="#131C4C"
+                    fontSize="18px"
+                    fontFamily="Muli"
+                    fontWeight="bold"
+                  >
+                    Hard
+                  </Text>
                 ) : (
-                  <Text>N/A</Text>
+                  <Text
+                    color="#131C4C"
+                    fontSize="18px"
+                    fontFamily="Muli"
+                    fontWeight="bold"
+                  >
+                    N/A
+                  </Text>
                 )}
 
-                <Text>
+                <Text
+                  color="#9194A8"
+                  fontSize="14px"
+                  fontFamily="Muli"
+                  fontWeight="bold"
+                >
                   {review.review_type === "Company"
                     ? "Status"
                     : "Interview difficulty"}
                 </Text>
               </Flex>
-              <Flex direction="column" justify="flex-start" align="flex-start">
+              <Flex
+                direction="column"
+                justify="flex-start"
+                align="flex-start"
+                mb="20px"
+              >
                 {review.review_type === "Company" ? (
-                  <Text>
+                  <Text
+                    color="#131C4C"
+                    fontSize="18px"
+                    fontFamily="Muli"
+                    fontWeight="bold"
+                  >
                     {review.start_date} -{" "}
                     {review.end_date ? review.end_date : "Present"}
                   </Text>
                 ) : (
-                  <Text>{review.offer_status}</Text>
+                  <Text
+                    color="#131C4C"
+                    fontSize="18px"
+                    fontFamily="Muli"
+                    fontWeight="bold"
+                  >
+                    {review.offer_status}
+                  </Text>
                 )}
-                <Text>
+                <Text
+                  color="#9194A8"
+                  fontSize="14px"
+                  fontFamily="Muli"
+                  fontWeight="bold"
+                >
                   {review.review_type === "Company" ? "Dates" : "Job offer?"}
                 </Text>
               </Flex>
@@ -249,10 +391,15 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
             mt="35px"
           >
             {/* TYPE OF REVIEW, TRACK, DATE POSTED */}
-            <Flex justify="space-between" w="100%">
+            <Flex justify="space-between" w="100%" mb="70px">
               <Flex justify="space-between">
-                <Box as={MdRateReview} size="28px" color="#BBBDC6" mr="4px" />
-                <Text mr="40px">
+                <Box as={MdRateReview} size="24px" color="#BBBDC6" mr="4px" />
+                <Text
+                  mr="40px"
+                  color="#131C4D"
+                  fontFamily="Muli"
+                  fontSize="14px"
+                >
                   {review.review_type === "Company"
                     ? "Company Review"
                     : "Interview Review"}
@@ -286,6 +433,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                   }
                   fontSize="16px "
                   fontWeight="light"
+                  fontFamily="Muli"
                   rounded="full"
                   px="15px"
                   pt="2px"
@@ -294,11 +442,15 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                   {review.track_name}
                 </Badge>
               </Flex>
-              <Text>{adjustedDate}</Text>
+              <Text color="#9194A8" fontSize="14px" fontFamily="Muli">
+                {adjustedDate}
+              </Text>
             </Flex>
             {/* INTERVIEW TYPES */}
             {review.review_type === "Interview" ? (
-              <Flex>Interviews</Flex>
+              <Flex color="#9194A8" fontSize="14px" fontFamily="Muli">
+                Interviews
+              </Flex>
             ) : null}
             {review.review_type === "Interview" ? (
               <Flex
@@ -306,44 +458,125 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                 wrap="wrap"
                 whiteSpace="nowrap"
                 width="100%"
+                mb="50px"
               >
                 {review.phone_interview ? (
-                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                  <Flex
+                    as="p"
+                    color="#131C4D"
+                    fontSize="16px"
+                    fontFamily="Muli"
+                    bg="#EAF0FE"
+                    px="1%"
+                    mt="1.5%"
+                    mr="3%"
+                    rounded="3px"
+                  >
                     Phone screening
                   </Flex>
                 ) : null}
                 {review.resume_review ? (
-                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                  <Flex
+                    as="p"
+                    color="#131C4D"
+                    fontSize="16px"
+                    fontFamily="Muli"
+                    bg="#EAF0FE"
+                    px="1%"
+                    mt="1.5%"
+                    mr="3%"
+                    rounded="3px"
+                  >
                     Resume review
                   </Flex>
                 ) : null}
                 {review.take_home_assignments ? (
-                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                  <Flex
+                    as="p"
+                    color="#131C4D"
+                    fontSize="16px"
+                    fontFamily="Muli"
+                    bg="#EAF0FE"
+                    px="1%"
+                    mt="1.5%"
+                    mr="3%"
+                    rounded="3px"
+                  >
                     Take home assignments
                   </Flex>
                 ) : null}
                 {review.online_coding_assignments ? (
-                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                  <Flex
+                    as="p"
+                    color="#131C4D"
+                    fontSize="16px"
+                    fontFamily="Muli"
+                    bg="#EAF0FE"
+                    px="1%"
+                    mt="1.5%"
+                    mr="3%"
+                    rounded="3px"
+                  >
                     Online coding assignments
                   </Flex>
                 ) : null}
                 {review.portfolio_review ? (
-                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                  <Flex
+                    as="p"
+                    color="#131C4D"
+                    fontSize="16px"
+                    fontFamily="Muli"
+                    bg="#EAF0FE"
+                    px="1%"
+                    mt="1.5%"
+                    mr="3%"
+                    rounded="3px"
+                  >
                     Portfolio review
                   </Flex>
                 ) : null}
                 {review.screen_share ? (
-                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                  <Flex
+                    as="p"
+                    color="#131C4D"
+                    fontSize="16px"
+                    fontFamily="Muli"
+                    bg="#EAF0FE"
+                    px="1%"
+                    mt="1.5%"
+                    mr="3%"
+                    rounded="3px"
+                  >
                     Screen share
                   </Flex>
                 ) : null}
                 {review.open_source_contribution ? (
-                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                  <Flex
+                    as="p"
+                    color="#131C4D"
+                    fontSize="16px"
+                    fontFamily="Muli"
+                    bg="#EAF0FE"
+                    px="1%"
+                    mt="1.5%"
+                    mr="3%"
+                    rounded="3px"
+                  >
                     Open source contribution
                   </Flex>
                 ) : null}
                 {review.side_projects ? (
-                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                  <Flex
+                    as="p"
+                    color="#131C4D"
+                    fontSize="16px"
+                    fontFamily="Muli"
+                    bg="#EAF0FE"
+                    px="1%"
+                    mt="1.5%"
+                    mr="3%"
+                    rounded="3px"
+                  >
                     Side projects
                   </Flex>
                 ) : null}
@@ -351,8 +584,17 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
             ) : null}
             {/* DESCRIPTION */}
             <Flex direction="column">
-              <Text>Description</Text>
-              <Text>{review.comment}</Text>
+              <Text color="#9194A8" fontSize="14px" fontFamily="Muli" mb="7px">
+                Description
+              </Text>
+              <Text
+                color="#131C4D"
+                fontSize="16px"
+                fontFamily="Muli"
+                lineHeight="23px"
+              >
+                {review.comment}
+              </Text>
             </Flex>
           </Flex>
           {/* ADMIN BUTTONS */}
