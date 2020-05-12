@@ -107,179 +107,262 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
       {/* ---------------------------------------Modal Cards (for edit)----------------------------------- */}
       {/* ------------------------------------------------------------------------------------------------ */}
 
-      <SlideIn in={isOpen}>
-        {(styles) => (
-          <Modal
-            preserveScrollBarGap
-            isOpen={true}
-            onClose={onClose}
-            size="950px"
+      <Modal
+        preserveScrollBarGap
+        isOpen={isOpen}
+        onClose={onClose}
+        size="950px"
+      >
+        <ModalOverlay />
+        <ModalContent w="100%" wrap="nowrap">
+          <ModalCloseButton
+            data-cy="reviewCloseButton"
+            background="none"
+            border="none"
+          />
+
+          {/* LEFT SIDE MODAL */}
+          <Flex
+            direction="column"
+            justify="space-between"
+            align="flex-start"
+            position="relative"
+            w="261px"
+            height="100%"
+            top="0"
+            left="0"
+            pb="50px"
+            pt="35px"
+            pl="40px"
+            bg="#F2F6FE"
+            borderRadius="0px 40px 40px 0px"
           >
-            <ModalOverlay />
-            <ModalContent w="100%" wrap="nowrap">
-              <ModalCloseButton
-                data-cy="reviewCloseButton"
-                background="none"
-                border="none"
+            {/* USER AVATAR AND NAME */}
+            <Flex justify="space-evenly" align="center">
+              {review.user_profile_image === "h" ? (
+                <Image
+                  size="50px"
+                  style={{ opacity: "0.6" }}
+                  src={require("../../icons/user.svg")}
+                />
+              ) : (
+                <Image
+                  size="50px"
+                  style={{ opacity: "0.6", borderRadius: "50%" }}
+                  src={review.user_profile_image}
+                />
+              )}
+              <Text>
+                By {review.user_first_name} {review.user_last_name}
+              </Text>
+            </Flex>
+            {/* COMPANY LOGO AND REVIEW STARS */}
+            <Flex direction="column" justify="center" align="flex-start">
+              <Image
+                src={`//logo.clearbit.com/${review.logo}?size=125`}
+                fallbackSrc={`https://via.placeholder.com/125/FFFFFF/344CD0?text=${adjustedName}`}
               />
-
-              {/* LEFT SIDE MODAL */}
-              <Flex
-                direction="column"
-                justify="space-between"
-                align="flex-start"
-                position="relative"
-                w="261px"
-                height="100%"
-                top="0"
-                left="0"
-                pb="50px"
-                pt="35px"
-                pl="50px"
-                bg="#F2F6FE"
-                borderRadius="0px 40px 40px 0px"
-              >
-                {/* USER AVATAR AND NAME */}
-                <Flex justify="space-evenly" align="center">
-                  <Image
-                    size="50px"
-                    style={{ opacity: "0.6" }}
-                    src={require("../../icons/user.svg")}
-                  />
-                  <Text>By Caroline Preston</Text>
-                </Flex>
-                {/* COMPANY LOGO AND REVIEW STARS */}
-                <Flex direction="column" justify="center" align="flex-start">
-                  <Image
-                    src={`//logo.clearbit.com/${review.logo}?size=125`}
-                    fallbackSrc={`https://via.placeholder.com/125/F2F6FE/344CD0?text=${adjustedName}`}
-                  />
-                  <Flex mt="13px">
-                    {Array(5)
-                      .fill("")
-                      .map((_, i) => (
-                        <Icon
-                          name="star"
-                          key={i}
-                          color={
-                            i < review.overall_rating ? "#F9DC76" : "#DADADD"
-                          }
-                          ml="4px"
-                        />
-                      ))}
-                  </Flex>
-                </Flex>
-                {/* COMPANY LOCATION AND NAME */}
-                <Flex direction="column" justify="center" align="flex-start">
-                  <Flex>
-                    <Box as={GoLocation} size="28px" color="#BBBDC6" />
-                    <Text>
-                      {review.city}, {review.state_name}
-                    </Text>
-                  </Flex>
-                  <Flex>
-                    <Box as={FaRegBuilding} size="28px" color="#BBBDC6" />
-                    <Text>{review.company_name}</Text>
-                  </Flex>
-                </Flex>
-                {/* JOB/INTERVIEW INFORMATION */}
-                <Flex
-                  direction="column"
-                  justify="space-between"
-                  align="flex-start"
-                >
-                  <Flex
-                    direction="column"
-                    justify="flex-start"
-                    align="flex-start"
-                  >
-                    <Text>{review.job_title}</Text>
-                    <Text>Job title</Text>
-                  </Flex>
-                  <Flex
-                    direction="column"
-                    justify="flex-start"
-                    align="flex-start"
-                  >
-                    <Text>{`${review.salary}.00`}</Text>
-                    <Text>Salary</Text>
-                  </Flex>
-                  <Flex
-                    direction="column"
-                    justify="flex-start"
-                    align="flex-start"
-                  >
-                    <Text>
-                      {review.review_type === "Company" ? (
-                        <Text>{review.work_status}</Text>
-                      ) : review.difficulty_rating === 1 ? (
-                        <Text>Very easy</Text>
-                      ) : review.difficulty_rating === 2 ? (
-                        <Text>Easy</Text>
-                      ) : review.difficulty_rating === 3 ? (
-                        <Text>Somewhat easy</Text>
-                      ) : review.difficulty_rating === 4 ? (
-                        <Text>Somewhat hard</Text>
-                      ) : review.difficulty_rating === 5 ? (
-                        <Text>Hard</Text>
-                      ) : (
-                        <Text>N/A</Text>
-                      )}
-                    </Text>
-                    <Text>
-                      {review.review_type === "Company"
-                        ? "Status"
-                        : "Interview difficulty"}
-                    </Text>
-                  </Flex>
-                  <Flex
-                    direction="column"
-                    justify="flex-start"
-                    align="flex-start"
-                  >
-                    <Text>
-                      {review.review_type === "Company" ? (
-                        <Text>
-                          {review.start_date} -{" "}
-                          {review.end_date ? review.end_date : "Present"}
-                        </Text>
-                      ) : (
-                        review.offer_status
-                      )}
-                    </Text>
-                    <Text>
-                      {review.review_type === "Company"
-                        ? "Dates"
-                        : "Job offer?"}
-                    </Text>
-                  </Flex>
-                </Flex>
+              <Flex mt="13px">
+                {Array(5)
+                  .fill("")
+                  .map((_, i) => (
+                    <Icon
+                      name="star"
+                      key={i}
+                      color={i < review.overall_rating ? "#F9DC76" : "#DADADD"}
+                      ml="4px"
+                    />
+                  ))}
               </Flex>
-              {/* RIGHT SIDE MODAL */}
-              <Flex
-                direction="column"
-                justify="space-evenly"
-                align="flex-start"
-                position="absolute"
-                w="659px"
-                ml="291px"
-                mb="50px"
-                mt="35px"
-              >
-                {/* TYPE OF REVIEW, TRACK, DATE POSTED */}
-                <Flex>
-                  <Box as={MdRateReview} size="28px" color="#BBBDC6" />
+            </Flex>
+            {/* COMPANY LOCATION AND NAME */}
+            <Flex direction="column" justify="center" align="flex-start">
+              <Flex>
+                <Box as={GoLocation} size="28px" color="#BBBDC6" />
+                <Text>
+                  {review.city}, {review.state_name}
+                </Text>
+              </Flex>
+              <Flex>
+                <Box as={FaRegBuilding} size="28px" color="#BBBDC6" />
+                <Text>{review.company_name}</Text>
+              </Flex>
+            </Flex>
+            {/* JOB/INTERVIEW INFORMATION */}
+            <Flex direction="column" justify="space-between" align="flex-start">
+              <Flex direction="column" justify="flex-start" align="flex-start">
+                <Text>{review.job_title}</Text>
+                <Text>Job title</Text>
+              </Flex>
+              <Flex direction="column" justify="flex-start" align="flex-start">
+                <Text>{`${review.salary}.00`}</Text>
+                <Text>Salary</Text>
+              </Flex>
+              <Flex direction="column" justify="flex-start" align="flex-start">
+                {review.review_type === "Company" ? (
+                  <Text>{review.work_status}</Text>
+                ) : review.difficulty_rating === 1 ? (
+                  <Text>Very easy</Text>
+                ) : review.difficulty_rating === 2 ? (
+                  <Text>Easy</Text>
+                ) : review.difficulty_rating === 3 ? (
+                  <Text>Somewhat easy</Text>
+                ) : review.difficulty_rating === 4 ? (
+                  <Text>Somewhat hard</Text>
+                ) : review.difficulty_rating === 5 ? (
+                  <Text>Hard</Text>
+                ) : (
+                  <Text>N/A</Text>
+                )}
+
+                <Text>
+                  {review.review_type === "Company"
+                    ? "Status"
+                    : "Interview difficulty"}
+                </Text>
+              </Flex>
+              <Flex direction="column" justify="flex-start" align="flex-start">
+                {review.review_type === "Company" ? (
                   <Text>
-                    {review.review_type === "Company"
-                      ? "Company Review"
-                      : "Interview Review"}
+                    {review.start_date} -{" "}
+                    {review.end_date ? review.end_date : "Present"}
                   </Text>
-                  <Box>{review.track_name}</Box>
-                  <Text>Posted at: {adjustedDate}</Text>
-                </Flex>
+                ) : (
+                  <Text>{review.offer_status}</Text>
+                )}
+                <Text>
+                  {review.review_type === "Company" ? "Dates" : "Job offer?"}
+                </Text>
               </Flex>
-
-              {/* <ModalFooter>
+            </Flex>
+          </Flex>
+          {/* RIGHT SIDE MODAL */}
+          <Flex
+            direction="column"
+            justify="flex-start"
+            align="flex-start"
+            position="absolute"
+            w="575px"
+            h="100%"
+            ml="291px"
+            mb="50px"
+            mt="35px"
+          >
+            {/* TYPE OF REVIEW, TRACK, DATE POSTED */}
+            <Flex justify="space-between" w="100%">
+              <Flex justify="space-between">
+                <Box as={MdRateReview} size="28px" color="#BBBDC6" mr="4px" />
+                <Text mr="40px">
+                  {review.review_type === "Company"
+                    ? "Company Review"
+                    : "Interview Review"}
+                </Text>
+                <Badge
+                  backgroundColor={
+                    review.track_name === "WEB"
+                      ? "#DBEBFD"
+                      : review.track_name === "iOS"
+                      ? "#F4E6BE"
+                      : review.track_name === "UX"
+                      ? "#F9E3DE"
+                      : review.track_name === "DS"
+                      ? "#D3F2CD"
+                      : review.track_name === "Android"
+                      ? "#E9D9FF"
+                      : "#DBEBFD"
+                  }
+                  color={
+                    review.track_name === "WEB"
+                      ? "#474EA7"
+                      : review.track_name === "iOS"
+                      ? "#8E3D19"
+                      : review.track_name === "UX"
+                      ? "#9F3A5A "
+                      : review.track_name === "DS"
+                      ? "#35694F"
+                      : review.track_name === "Android"
+                      ? "#4B3569"
+                      : "#474EA7"
+                  }
+                  fontSize="16px "
+                  fontWeight="light"
+                  rounded="full"
+                  px="15px"
+                  pt="2px"
+                  overflow="hidden"
+                >
+                  {review.track_name}
+                </Badge>
+              </Flex>
+              <Text>{adjustedDate}</Text>
+            </Flex>
+            {/* INTERVIEW TYPES */}
+            {review.review_type === "Interview" ? (
+              <Flex>Interviews</Flex>
+            ) : null}
+            {review.review_type === "Interview" ? (
+              <Flex
+                justify="flex-start"
+                wrap="wrap"
+                whiteSpace="nowrap"
+                width="100%"
+              >
+                {review.phone_interview ? (
+                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                    Phone screening
+                  </Flex>
+                ) : null}
+                {review.resume_review ? (
+                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                    Resume review
+                  </Flex>
+                ) : null}
+                {review.take_home_assignments ? (
+                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                    Take home assignments
+                  </Flex>
+                ) : null}
+                {review.online_coding_assignments ? (
+                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                    Online coding assignments
+                  </Flex>
+                ) : null}
+                {review.portfolio_review ? (
+                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                    Portfolio review
+                  </Flex>
+                ) : null}
+                {review.screen_share ? (
+                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                    Screen share
+                  </Flex>
+                ) : null}
+                {review.open_source_contribution ? (
+                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                    Open source contribution
+                  </Flex>
+                ) : null}
+                {review.side_projects ? (
+                  <Flex as="p" bg="#F2F6FE" px="1%" mt="1.5%" mr="3%">
+                    Side projects
+                  </Flex>
+                ) : null}
+              </Flex>
+            ) : null}
+            {/* DESCRIPTION */}
+            <Flex direction="column">
+              <Text>Description</Text>
+              <Text>{review.comment}</Text>
+            </Flex>
+          </Flex>
+          {/* ADMIN BUTTONS */}
+          <ModalFooter
+            w="689px"
+            ml="261px"
+            mb="20px"
+            position="absolute"
+            bottom="0"
+          >
             <BlockButton user_id={review.user_id} isAdmin={isAdmin} />
             <ContentButton
               isAdmin={isAdmin}
@@ -287,11 +370,9 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               user_id={review.user_id}
               review_id={review.review_id}
             />
-          </ModalFooter> */}
-            </ModalContent>
-          </Modal>
-        )}
-      </SlideIn>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
 
       {/* ------------------------------------------------------------------------------------------------ */}
       {/* ---------------------------------------DashBoard Cards------------------------------------------ */}
