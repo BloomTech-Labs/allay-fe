@@ -96,7 +96,7 @@ function NavBar({
     trackFilters.includes(name)
     setTrackFilters(trackFilters.filter((item) => item !== name))
   }
-  console.log(tracks)
+
   return (
     <Flex
       maxW="1440px"
