@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ReactGA from 'react-ga' // for google analytics
 //redux
@@ -28,6 +28,8 @@ import {
 } from '@chakra-ui/core'
 //import modal
 import Blocked from '../Reusable/BlockedModal'
+//import user
+import { getUser } from '../../state/actions/userActions'
 
 function NavBar({
   history,
@@ -38,7 +40,12 @@ function NavBar({
   setTrackFilters,
   typeFilters,
   setTypeFilters,
+  getUser,
+  match,
+  userData,
 }) {
+  const userId = window.localStorage.getItem('userId')
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
@@ -97,6 +104,11 @@ function NavBar({
     setTrackFilters(trackFilters.filter((item) => item !== name))
   }
   console.log(tracks)
+
+  useEffect(() => {
+    getUser(userId)
+  }, [])
+  console.log(getUser)
   return (
     <Flex
       maxW="1440px"
@@ -112,6 +124,24 @@ function NavBar({
         <Flex align="center">
           <h1> Allay </h1>
         </Flex>
+
+        {/* Profile Icon */}
+        <Flex>
+          {userData.profile_image === 'h' ? (
+            <Image
+              size="50px"
+              style={{ opacity: '0.6' }}
+              src={require('../../icons/user.svg')}
+            />
+          ) : (
+            <Image
+              size="50px"
+              style={{ opacity: '0.6', borderRadius: '50%' }}
+              src={userData.profile_image}
+            />
+          )}
+        </Flex>
+
         <Flex>
           {/* Hamburger Menu */}
           <Box
@@ -300,7 +330,8 @@ function NavBar({
 const mapStateToProps = (state) => {
   return {
     isBlocked: state.auth.isBlocked,
+    userData: state.user.userData,
   }
 }
 
-export default connect(mapStateToProps, null)(NavBar)
+export default connect(mapStateToProps, { getUser })(NavBar)
