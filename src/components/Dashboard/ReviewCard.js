@@ -98,7 +98,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   }
 
   // adjust logo for api call
-  const adjustedName = review.company_name.replace(' ', '+')
+  // const adjustedName = review.company_name.replace(' ', '+')
 
   // adjust date of posting
   let tempDate = new Date(review.created_at).toUTCString()
@@ -169,7 +169,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 
   // console.log(dateConvert(review.created_at))
   // console.log(new Date())
-
+  console.log(review)
   return (
     <>
       {/* ------------------------------------------------------------------------------------------------ */}
