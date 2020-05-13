@@ -92,11 +92,9 @@ function NavBar({
     }
   }
 
-
   useEffect(() => {
     getUser(userId)
   }, [])
-  console.log(getUser)
 
   return (
     <Flex
@@ -109,7 +107,7 @@ function NavBar({
       zIndex="999"
       direction="column"
     >
-      <Flex align="center" justify="space-between" pt="1%" mb="8%">
+      <Flex align="center" justify="space-between" pt="1%" mb="4%" h="100px">
         <Flex color="#344CD0" align="center">
           <h1>Allay</h1>
         </Flex>
@@ -246,7 +244,7 @@ function NavBar({
             </MenuList>
           </Menu>
         </Flex>
-        <Flex align="center" justify="space-between" pt="1%">
+        <Flex align="center" justify="space-between">
           {isBlocked ? (
             <Blocked />
           ) : (
