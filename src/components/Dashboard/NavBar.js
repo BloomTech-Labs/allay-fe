@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import ReactGA from 'react-ga' // for google analytics
 //redux
 import { connect } from 'react-redux'
@@ -7,18 +6,12 @@ import { connect } from 'react-redux'
 import {
   Flex,
   Button,
-  Text,
+  Heading,
   Image,
   Input,
   InputGroup,
   InputRightElement,
   Icon,
-  Drawer,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Box,
   useDisclosure,
   Menu,
   MenuButton,
@@ -42,13 +35,9 @@ function NavBar({
   typeFilters,
   setTypeFilters,
   getUser,
-  match,
   userData,
 }) {
   const userId = window.localStorage.getItem('userId')
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
 
   // use to navigate to review form
   const navToReviewForm = () => {
@@ -86,25 +75,22 @@ function NavBar({
   ]
 
   const handleType = (name) => {
-    typeFilters.includes(name)
-    setTypeFilters(typeFilters.filter((item) => item !== name))
-    setTypeFilters([...typeFilters, name])
-  }
-  const removeType = (name) => {
-    trackFilters.includes(name)
-    setTypeFilters(typeFilters.filter((item) => item !== name))
+    if (typeFilters.includes(name)) {
+      setTypeFilters(typeFilters.filter((item) => item !== name))
+    } else {
+      setTypeFilters(typeFilters.filter((item) => item !== name))
+      setTypeFilters([...typeFilters, name])
+    }
   }
 
   const handleTrack = (name) => {
-    trackFilters.includes(name)
-    setTrackFilters(trackFilters.filter((item) => item !== name))
-    setTrackFilters([...trackFilters, name])
+    if (trackFilters.includes(name)) {
+      setTrackFilters(trackFilters.filter((item) => item !== name))
+    } else {
+      setTrackFilters(trackFilters.filter((item) => item !== name))
+      setTrackFilters([...trackFilters, name])
+    }
   }
-  const removeTrack = (name) => {
-    trackFilters.includes(name)
-    setTrackFilters(trackFilters.filter((item) => item !== name))
-  }
-  console.log(tracks)
 
   useEffect(() => {
     getUser(userId)
@@ -121,59 +107,13 @@ function NavBar({
       zIndex="999"
       direction="column"
     >
-      <Flex align="center" justify="space-between" pt="1%">
-        <Flex align="center">
-          <h1> Allay </h1>
+      <Flex align="center" justify="space-between" pt="1%" mb="8%">
+        <Flex color="#344CD0" align="center">
+          <h1>Allay</h1>
         </Flex>
 
-        {/* Profile Icon */}
-        <Flex>
-          <Menu>
-            <MenuButton backroundColor="#E5E5E5" border="none">
-              {userData.profile_image === 'h' ? (
-                <Image
-                  size="50px"
-                  style={{ opacity: '0.6' }}
-                  src={require('../../icons/user.svg')}
-                />
-              ) : (
-                <Image
-                  size="50px"
-                  style={{ opacity: '0.6', borderRadius: '50%' }}
-                  src={userData.profile_image}
-                />
-              )}
-            </MenuButton>
-            <MenuList>
-              <Link
-                style={{
-                  textDecoration: 'none',
-                  color: 'black',
-                }}
-                to={`/profile/${profile_id}`}
-              >
-                <MenuItem data-cy="signOut">Profile</MenuItem>
-              </Link>
-              <Link
-                style={{
-                  textDecoration: 'none',
-                  color: 'black',
-                }}
-                to={`/profile/${profile_id}/edit`}
-              >
-                <MenuItem data-cy="signOut">Account settings</MenuItem>
-              </Link>
-              <MenuItem onClick={logout} data-cy="signOut">
-                Log out
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </Flex>
-      </Flex>
-
-      {/* Search Bar */}
-      <Flex align="center" justify="space-between" pt="1%">
-        <InputGroup w="30%">
+        {/* Search bar*/}
+        <InputGroup w="40%">
           <InputRightElement
             children={<Icon name="search-2" color="#344CD0" />}
           />
@@ -188,76 +128,141 @@ function NavBar({
             onChange={handleInputChange}
           />
         </InputGroup>
-        {isBlocked ? (
-          <Blocked />
-        ) : (
-          <Button
-            background="#344CD0"
-            color="#FFFFFF"
-            rounded="6px"
-            border="none"
-            size="lg"
-            isLoading={isLoading}
-            onClick={navToReviewForm}
-            data-cy="addReviewButton"
-          >
-            Add Review
-          </Button>
-        )}
+
+        {/* Profile Icon and user menu*/}
+        <Flex>
+          <Menu position="absolute" height="226px">
+            <MenuButton
+              as={Image}
+              size="50px"
+              style={{
+                opacity: '0.6',
+                borderRadius: userData.profile_image === 'h' ? 'none' : '50%',
+              }}
+              src={
+                userData.profile_image === 'h'
+                  ? require('../../icons/user.svg')
+                  : userData.profile_image
+              }
+            />
+            <MenuList>
+              <MenuItem
+                border="none"
+                backgroundColor="#FFF"
+                data-cy="signOut"
+                onClick={() => history.push(`/profile/${profile_id}`)}
+              >
+                Profile
+              </MenuItem>
+              <MenuItem
+                border="none"
+                backgroundColor="#FFF"
+                data-cy="signOut"
+                onClick={() => history.push(`/profile/${profile_id}/edit`)}
+              >
+                Account settings
+              </MenuItem>
+              <MenuItem
+                border="none"
+                backgroundColor="#FFF"
+                onClick={logout}
+                data-cy="signOut"
+              >
+                Log out
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
       </Flex>
 
-      {/* Filtered Search Buttons */}
-      <Flex
-        align="space-around"
-        justify="space-around"
-        p="1%"
-        width="100%"
-        margin="0 auto"
-      >
-        <Menu closeOnSelect={false}>
-          <MenuButton
-            w="309px"
-            h="55px"
-            style={{
-              fontSize: '20px',
-              fontWeight: 'bold',
-              borderRadius: '50px',
-              outline: 'none',
-            }}
-          >
-            Filter by review type <i class="fas fa-arrow-down"></i>
-          </MenuButton>
-          <MenuList minWidth="240px">
-            {types.map((type) => (
-              <MenuOptionGroup onChange={() => handleType(type.name)}>
-                <MenuItemOption value={type.name}>{type.name}</MenuItemOption>
-                <Button onClick={() => removeType(type.name)}>X</Button>
-              </MenuOptionGroup>
-            ))}
-          </MenuList>
-        </Menu>
-        <Menu closeOnSelect={false}>
-          <MenuButton
-            w="209px"
-            h="55px"
-            style={{
-              fontSize: '20px',
-              fontWeight: 'bold',
-              borderRadius: '50px',
-              outline: 'none',
-            }}
-          >
-            Filter by field <i class="fas fa-arrow-down"></i>
-          </MenuButton>
-          <MenuList minWidth="240px">
-            {tracks.map((track) => (
-              <MenuOptionGroup onChange={() => handleTrack(track.name)}>
-                <MenuItemOption value={track.name}>{track.name}</MenuItemOption>
-                <Button onClick={() => removeTrack(track.name)}>X</Button>
-              </MenuOptionGroup>
-            ))}
-          </MenuList>
-        </Menu>
+      <Flex>
+        {/* Filtered Search Buttons */}
+        <Flex
+          align="space-around"
+          justify="space-around"
+          p="1%"
+          width="100%"
+          margin="0 auto"
+        >
+          <Heading as="h1" size="xl">
+            Reviews
+          </Heading>
+          <Menu margin="3%" closeOnSelect={false}>
+            <MenuButton
+              w="309px"
+              h="55px"
+              bg="#FFFFFF"
+              border="2px solid #EAF0FE"
+              rounded="50px"
+              fontFamily="Muli"
+              fontSize="20px"
+              fontWeight="bold"
+            >
+              Filter by review type
+              <Icon name="triangle-down" color="#344CD0" />
+            </MenuButton>
+            <MenuList minWidth="240px">
+              {types.map((type) => (
+                <MenuOptionGroup type="checkbox">
+                  <MenuItemOption
+                    border="none"
+                    backgroundColor="#FFF"
+                    onClick={() => handleType(type.name)}
+                  >
+                    {type.name}
+                  </MenuItemOption>
+                </MenuOptionGroup>
+              ))}
+            </MenuList>
+          </Menu>
+          <Menu closeOnSelect={false}>
+            <MenuButton
+              w="240px"
+              h="55px"
+              bg="#FFFFFF"
+              border="2px solid #EAF0FE"
+              rounded="50px"
+              fontFamily="Muli"
+              fontSize="20px"
+              fontWeight="bold"
+            >
+              Filter by field
+              <Icon name="triangle-down" color="#344CD0" />
+            </MenuButton>
+            <MenuList minWidth="240px">
+              {tracks.map((track) => (
+                <MenuOptionGroup type="checkbox">
+                  <MenuItemOption
+                    border="none"
+                    backgroundColor="#FFF"
+                    onClick={() => handleTrack(track.name)}
+                  >
+                    {track.name}
+                  </MenuItemOption>
+                </MenuOptionGroup>
+              ))}
+            </MenuList>
+          </Menu>
+        </Flex>
+        <Flex align="center" justify="space-between" pt="1%">
+          {isBlocked ? (
+            <Blocked />
+          ) : (
+            <Button
+              margin="5%"
+              background="#344CD0"
+              color="#FFFFFF"
+              rounded="35px"
+              border="none"
+              size="lg"
+              isLoading={isLoading}
+              onClick={navToReviewForm}
+              data-cy="addReviewButton"
+            >
+              Add Review
+            </Button>
+          )}
+        </Flex>
       </Flex>
     </Flex>
   )
