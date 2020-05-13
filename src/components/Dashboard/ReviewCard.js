@@ -107,6 +107,69 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   const tempYear = tempDate.split(' ').slice(3, 4)
   const adjustedDate = `${tempMonth} ${tempDay}, ${tempYear}`
 
+  //track name font color picker
+  const trackFontColor = (trackName) => {
+    switch (trackName) {
+      case 'DS':
+        return '#35694F'
+        break
+      case 'WEB':
+        return '#474EA7'
+        break
+      case 'iOS' || 'IOS':
+        return '#8E3D19'
+        break
+      case 'Android':
+        return '#4B3569'
+        break
+      case 'UX':
+        return '#9F3A5A'
+        break
+      default:
+        return
+    }
+  }
+  //track name background color picker
+  const trackColorPicker = (trackName) => {
+    switch (trackName) {
+      case 'DS':
+        return '#D3F2CD'
+        break
+      case 'WEB':
+        return '#DBEBFD'
+        break
+      case 'iOS' || 'IOS':
+        return '#F4E6BE'
+        break
+      case 'Android':
+        return '#E9D9FF'
+        break
+      case 'UX':
+        return '#F9E3DE'
+        break
+      default:
+        return
+    }
+  }
+
+  //remove white space from company name for logo usage
+  let stripped = review.company_name.replace(/ /g, '')
+  let com = '.com'
+  const logo = stripped.concat(com)
+
+  // TODO: cal dates
+  // const dateConvert = date => {
+  // 	date = new Date(date).toUTCString();
+  // 	date = date
+  // 		.split(" ")
+  // 		.slice(0, 4)
+  // 		.join(" ");
+  // 	return date;
+  // };
+
+  // console.log(dateConvert(review.created_at))
+  // console.log(new Date())
+
   return (
     <>
       {/* ------------------------------------------------------------------------------------------------ */}
@@ -726,7 +789,10 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                     }`}
                   />
                 ) : (
-                  review.job_title
+                  <Text style={{ fontSize: '22px', fontWeight: 'bold' }}>
+                    {' '}
+                    {review.job_title}
+                  </Text>
                 )}
               </Flex>
               <i
@@ -771,12 +837,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                 </Flex>
               </Flex>
               <Flex width="391px" height="45px" pt="15px">
-                <Image
-                  width="20px"
-                  height="20px"
-                  mt="1%"
-                  src={require('../../icons/comment.png')}
-                />
+                <Box as={MdRateReview} size="24px" color="#BBBDC6" mr="4px" />
                 <span style={{ paddingLeft: '5px' }}>
                   {review.review_type} review
                 </span>
