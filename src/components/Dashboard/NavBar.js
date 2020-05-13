@@ -25,6 +25,7 @@ import {
   MenuOptionGroup,
   MenuItemOption,
   MenuList,
+  MenuItem,
 } from '@chakra-ui/core'
 //import modal
 import Blocked from '../Reusable/BlockedModal'
@@ -127,66 +128,23 @@ function NavBar({
 
         {/* Profile Icon */}
         <Flex>
-          {userData.profile_image === 'h' ? (
-            <Image
-              size="50px"
-              style={{ opacity: '0.6' }}
-              src={require('../../icons/user.svg')}
-            />
-          ) : (
-            <Image
-              size="50px"
-              style={{ opacity: '0.6', borderRadius: '50%' }}
-              src={userData.profile_image}
-            />
-          )}
-        </Flex>
-
-        <Flex>
-          {/* Hamburger Menu */}
-          <Box
-            ref={btnRef}
-            cursor="pointer"
-            onClick={onOpen}
-            data-cy="hamburger"
-          >
-            <Image
-              size="40px"
-              src={require('../../icons/hamburger-blue.svg')}
-            />
-          </Box>
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            size="xs"
-            onClose={onClose}
-            finalFocusRef={btnRef}
-          >
-            <DrawerOverlay />
-            <DrawerContent bg="#344CD0">
-              <DrawerCloseButton
-                color="white"
-                border="none"
-                bg="#344CD0"
-                fontSize="2em"
-              />
-              <DrawerHeader>
-                <Flex justifyContent="center" mt="15%">
-                  <Image
-                    size="150px"
-                    src={require('../../icons/user-logout.svg')}
-                  />
-                </Flex>
-                <Flex
-                  justifyContent="center"
-                  mt="5%"
-                  color="white"
-                  fontWeight="light"
-                  fontSize="1.5em"
-                >
-                  Hi, {localStorage.getItem('name')}
-                </Flex>
-              </DrawerHeader>
+          <Menu>
+            <MenuButton backroundColor="#E5E5E5" border="none">
+              {userData.profile_image === 'h' ? (
+                <Image
+                  size="50px"
+                  style={{ opacity: '0.6' }}
+                  src={require('../../icons/user.svg')}
+                />
+              ) : (
+                <Image
+                  size="50px"
+                  style={{ opacity: '0.6', borderRadius: '50%' }}
+                  src={userData.profile_image}
+                />
+              )}
+            </MenuButton>
+            <MenuList>
               <Link
                 style={{
                   textDecoration: 'none',
@@ -194,44 +152,22 @@ function NavBar({
                 }}
                 to={`/profile/${profile_id}`}
               >
-                {' '}
-                <Flex
-                  background="#FFFFFF"
-                  mt="3%"
-                  color="#494B5B"
-                  border="none"
-                  py="4%"
-                  cursor="pointer"
-                  align="center"
-                  justifyContent="center"
-                  isLoading={isLoading}
-                  data-cy="signOut"
-                >
-                  <Text fontSize="1.8em">Go to Profile</Text>
-                </Flex>
+                <MenuItem data-cy="signOut">Profile</MenuItem>
               </Link>
-              <Flex
-                background="#FFFFFF"
-                mt="3%"
-                color="#494B5B"
-                border="none"
-                py="4%"
-                cursor="pointer"
-                align="center"
-                justifyContent="center"
-                isLoading={isLoading}
-                onClick={logout}
-                data-cy="signOut"
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: 'black',
+                }}
+                to={`/profile/${profile_id}/edit`}
               >
-                <Image
-                  size="40px"
-                  mr="7%"
-                  src={require('../../icons/logout-gray.svg')}
-                />
-                <Text fontSize="1.8em">Sign out</Text>
-              </Flex>
-            </DrawerContent>
-          </Drawer>
+                <MenuItem data-cy="signOut">Account settings</MenuItem>
+              </Link>
+              <MenuItem onClick={logout} data-cy="signOut">
+                Log out
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
       </Flex>
 
