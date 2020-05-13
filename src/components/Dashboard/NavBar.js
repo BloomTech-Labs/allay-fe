@@ -13,7 +13,6 @@ import {
   InputGroup,
   InputRightElement,
   Icon,
-  RadioButtonGroup,
   Drawer,
   DrawerHeader,
   DrawerOverlay,
@@ -21,6 +20,11 @@ import {
   DrawerCloseButton,
   Box,
   useDisclosure,
+  Menu,
+  MenuButton,
+  MenuOptionGroup,
+  MenuItemOption,
+  MenuList,
 } from '@chakra-ui/core'
 //import modal
 import Blocked from '../Reusable/BlockedModal'
@@ -47,14 +51,6 @@ function NavBar({
     })
   }
 
-  // use to navigate to profile page
-  // const navToProfilePage = () => {
-  //   history.push("/profile");
-  //   ReactGA.event({
-  //     category: "Profile",
-  //     action: `go to profile`
-  //   });
-  // };
   const profile_id = localStorage.getItem('userId')
   const logout = () => {
     localStorage.clear('token')
@@ -62,7 +58,7 @@ function NavBar({
     history.push('/')
   }
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     event.preventDefault()
     setSearchResults(event.target.value)
   }
@@ -81,17 +77,26 @@ function NavBar({
     { id: 5, criteria: 'track', name: 'AND' },
   ]
 
-  const handleFilter = e => {
-    e.criteria === 'type'
-      ? typeFilters.includes(e.name)
-        ? setTypeFilters(typeFilters.filter(item => item !== e.name))
-        : setTypeFilters([...typeFilters, e.name])
-      : trackFilters.includes(e.name)
-      ? setTrackFilters(trackFilters.filter(item => item !== e.name))
-      : setTrackFilters([...trackFilters, e.name])
-    e.selected = !e.selected
+  const handleType = (name) => {
+    typeFilters.includes(name)
+    setTypeFilters(typeFilters.filter((item) => item !== name))
+    setTypeFilters([...typeFilters, name])
+  }
+  const removeType = (name) => {
+    trackFilters.includes(name)
+    setTypeFilters(typeFilters.filter((item) => item !== name))
   }
 
+  const handleTrack = (name) => {
+    trackFilters.includes(name)
+    setTrackFilters(trackFilters.filter((item) => item !== name))
+    setTrackFilters([...trackFilters, name])
+  }
+  const removeTrack = (name) => {
+    trackFilters.includes(name)
+    setTrackFilters(trackFilters.filter((item) => item !== name))
+  }
+  console.log(tracks)
   return (
     <Flex
       maxW="1440px"
@@ -100,7 +105,6 @@ function NavBar({
       background="#FFFFFF"
       top="0"
       position="fixed"
-      overflow="hidden"
       zIndex="999"
       direction="column"
     >
@@ -244,84 +248,56 @@ function NavBar({
         width="100%"
         margin="0 auto"
       >
-        <RadioButtonGroup
-          display="flex"
-          align="center"
-          justifyContent="center"
-          spacing={12}
-          isInline
-          onChange={handleFilter}
-          boxShadow="none"
-        >
-          {types.map(type => (
-            <Button
-              key={type.id}
-              size="lrg"
-              rounded="full"
-              border="none"
-              _hover={
-                typeFilters.includes(type.name)
-                  ? 'none'
-                  : {
-                      bg: '#E2E8F0',
-                    }
-              }
-              _focus={{
-                boxShadow: 'none',
-              }}
-              borderRadius="30px"
-              color={typeFilters.includes(type.name) ? 'white' : 'black'}
-              py="1%"
-              px="3%"
-              fontWeight="light"
-              background={
-                typeFilters.includes(type.name) ? '#259BF8' : '#FDFDFF'
-              }
-              value={type}
-            >
-              {type.name}
-            </Button>
-          ))}
-          {tracks.map(track => (
-            <Button
-              key={track.id}
-              size="lrg"
-              rounded="full"
-              border="none"
-              _active={{
-                bg: '#259BF8 !important',
-                color: 'white',
-              }}
-              _hover={
-                trackFilters.includes(track.name)
-                  ? 'none'
-                  : {
-                      bg: '#E2E8F0',
-                    }
-              }
-              _focus={{
-                boxShadow: 'none',
-              }}
-              borderRadius="30px"
-              color={trackFilters.includes(track.name) ? 'white' : 'black'}
-              py="1%"
-              px="3%"
-              fontWeight="light"
-              background={
-                trackFilters.includes(track.name) ? '#259BF8' : '#FDFDFF'
-              }
-              value={track}
-            >
-              {track.name}
-            </Button>
-          ))}
-        </RadioButtonGroup>
+        <Menu closeOnSelect={false}>
+          <MenuButton
+            w="309px"
+            h="55px"
+            style={{
+              fontSize: '20px',
+              fontWeight: 'bold',
+              borderRadius: '50px',
+              outline: 'none',
+            }}
+          >
+            Filter by review type <i class="fas fa-arrow-down"></i>
+          </MenuButton>
+          <MenuList minWidth="240px">
+            {types.map((type) => (
+              <MenuOptionGroup onChange={() => handleType(type.name)}>
+                <MenuItemOption value={type.name}>{type.name}</MenuItemOption>
+                <Button onClick={() => removeType(type.name)}>X</Button>
+              </MenuOptionGroup>
+            ))}
+          </MenuList>
+        </Menu>
+        <Menu closeOnSelect={false}>
+          <MenuButton
+            w="209px"
+            h="55px"
+            style={{
+              fontSize: '20px',
+              fontWeight: 'bold',
+              borderRadius: '50px',
+              outline: 'none',
+            }}
+          >
+            Filter by field <i class="fas fa-arrow-down"></i>
+          </MenuButton>
+          <MenuList minWidth="240px">
+            {tracks.map((track) => (
+              <MenuOptionGroup onChange={() => handleTrack(track.name)}>
+                <MenuItemOption value={track.name}>{track.name}</MenuItemOption>
+                <Button onClick={() => removeTrack(track.name)}>X</Button>
+              </MenuOptionGroup>
+            ))}
+          </MenuList>
+        </Menu>
       </Flex>
     </Flex>
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isBlocked: state.auth.isBlocked,
   }
