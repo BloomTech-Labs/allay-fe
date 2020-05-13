@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useRef, useEffect } from 'react'
+import { connect } from 'react-redux'
 
-import BlockButton from "./AdminButtons/BlockButton";
-import ContentButton from "./AdminButtons/ContentButton";
-import ReactGA from "react-ga";
+import BlockButton from './AdminButtons/BlockButton'
+import ContentButton from './AdminButtons/ContentButton'
+import ReactGA from 'react-ga'
 // actions
-import deleteReview from "../../state/actions/index";
+import deleteReview from '../../state/actions/index'
 
 // styles
 import {
@@ -31,10 +31,10 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   useDisclosure,
-} from "@chakra-ui/core";
-import { GoLocation } from "react-icons/go";
-import { FaRegBuilding } from "react-icons/fa";
-import { MdRateReview } from "react-icons/md";
+} from '@chakra-ui/core'
+import { GoLocation } from 'react-icons/go'
+import { FaRegBuilding } from 'react-icons/fa'
+import { MdRateReview } from 'react-icons/md'
 
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   //deletes the review in question
@@ -42,71 +42,134 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
     if (review.user_id && review.review_id) {
       deleteReview(review.user_id, review.review_id).then(() => {
         // window.location.reload();
-        history.push("/dashboard");
-      });
+        history.push('/dashboard')
+      })
     } else {
       deleteReview(user_id, review_id).then(() => {
         // window.location.reload();
-        history.push("/dashboard");
-      });
+        history.push('/dashboard')
+      })
     }
 
     ReactGA.event({
-      category: "Review Delete",
+      category: 'Review Delete',
       action: `Submit delete`,
-    });
-  };
-  useEffect(() => {}, [submitDelete]);
+    })
+  }
+  useEffect(() => {}, [submitDelete])
   // NEW post tag logic
-  const [newTag, setNewTag] = useState(false);
+  const [newTag, setNewTag] = useState(false)
   // get server time and set to readable
-  var serverDay = new Date(review.created_at).getDay();
+  var serverDay = new Date(review.created_at).getDay()
   //get local time and set to readable
-  var localTime = Date.now();
-  let today = new Date(localTime).getDay();
+  var localTime = Date.now()
+  let today = new Date(localTime).getDay()
   //logic to set view state
   useEffect(() => {
     if (serverDay === today) {
-      setNewTag(true);
+      setNewTag(true)
     } else {
-      setNewTag(false);
+      setNewTag(false)
     }
-  }, [newTag, serverDay, today]);
+  }, [newTag, serverDay, today])
 
   // basic usage for the SingleReview modal
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const loginId = localStorage.getItem("userId");
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const loginId = localStorage.getItem('userId')
 
   // specifically for the cancel review delete button functionality
-  const [isOpen2, setIsOpen2] = useState();
-  const onClose2 = () => setIsOpen2(false);
-  const cancelRef = useRef();
+  const [isOpen2, setIsOpen2] = useState()
+  const onClose2 = () => setIsOpen2(false)
+  const cancelRef = useRef()
 
   //routes to single review
   const navToEditRoute = () => {
-    if (review.review_type === "Company") {
-      history.push(`/dashboard/review/${review.review_id}`);
+    if (review.review_type === 'Company') {
+      history.push(`/dashboard/review/${review.review_id}`)
     } else {
-      history.push(`/dashboard/interview/${review.review_id}`);
+      history.push(`/dashboard/interview/${review.review_id}`)
     }
-  };
+  }
 
   //routes to user's profile page
   const navToProfile = (e) => {
-    e.preventDefault();
-    history.push(`/profile/${review.user_id}`);
-  };
+    e.preventDefault()
+    history.push(`/profile/${review.user_id}`)
+  }
 
   // adjust logo for api call
-  const adjustedName = review.company_name.replace(" ", "+");
+  // const adjustedName = review.company_name.replace(' ', '+')
 
   // adjust date of posting
-  let tempDate = new Date(review.created_at).toUTCString();
-  const tempDay = tempDate.split(" ").slice(1, 2);
-  const tempMonth = tempDate.split(" ").slice(2, 3);
-  const tempYear = tempDate.split(" ").slice(3, 4);
-  const adjustedDate = `${tempMonth} ${tempDay}, ${tempYear}`;
+  let tempDate = new Date(review.created_at).toUTCString()
+  const tempDay = tempDate.split(' ').slice(1, 2)
+  const tempMonth = tempDate.split(' ').slice(2, 3)
+  const tempYear = tempDate.split(' ').slice(3, 4)
+  const adjustedDate = `${tempMonth} ${tempDay}, ${tempYear}`
 
+  //track name font color picker
+  const trackFontColor = (trackName) => {
+    switch (trackName) {
+      case 'DS':
+        return '#35694F'
+        break
+      case 'WEB':
+        return '#474EA7'
+        break
+      case 'iOS' || 'IOS':
+        return '#8E3D19'
+        break
+      case 'Android':
+        return '#4B3569'
+        break
+      case 'UX':
+        return '#9F3A5A'
+        break
+      default:
+        return
+    }
+  }
+  //track name background color picker
+  const trackColorPicker = (trackName) => {
+    switch (trackName) {
+      case 'DS':
+        return '#D3F2CD'
+        break
+      case 'WEB':
+        return '#DBEBFD'
+        break
+      case 'iOS' || 'IOS':
+        return '#F4E6BE'
+        break
+      case 'Android':
+        return '#E9D9FF'
+        break
+      case 'UX':
+        return '#F9E3DE'
+        break
+      default:
+        return
+    }
+  }
+
+  //remove white space from company name for logo usage
+  let stripped = review.company_name.replace(/ /g, '')
+  let com = '.com'
+  const logo = stripped.concat(com)
+
+  // TODO: cal dates
+  // const dateConvert = date => {
+  // 	date = new Date(date).toUTCString();
+  // 	date = date
+  // 		.split(" ")
+  // 		.slice(0, 4)
+  // 		.join(" ");
+  // 	return date;
+  // };
+
+  // console.log(dateConvert(review.created_at))
+  // console.log(new Date())
+  console.log(review)
   return (
     <>
       {/* ------------------------------------------------------------------------------------------------ */}
@@ -149,20 +212,20 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               align="center"
               mb="30px"
               onClick={navToProfile}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
             >
-              {review.user_profile_image === "h" ? (
+              {review.user_profile_image === 'h' ? (
                 <Image
                   size="40px"
                   mr="7px"
-                  style={{ opacity: "0.6" }}
-                  src={require("../../icons/user.svg")}
+                  style={{ opacity: '0.6' }}
+                  src={require('../../icons/user.svg')}
                 />
               ) : (
                 <Image
                   size="40px"
                   mr="7px"
-                  style={{ opacity: "0.6", borderRadius: "50%" }}
+                  style={{ opacity: '0.6', borderRadius: '50%' }}
                   src={review.user_profile_image}
                 />
               )}
@@ -180,17 +243,20 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               <Image
                 w="148px"
                 h="70px"
-                src={`//logo.clearbit.com/${review.logo}?size=150`}
-                fallbackSrc={require("../../icons/placeholder-logo-2.png")}
+                src={`https://logo.clearbit.com/${
+                  review.logo != 'unknown' ? review.logo : logo
+                }`}
+                fallbackSrc={`http://samscct.com/wp-content/uploads/2014/09/no-logo.png`}
               />
+
               <Flex mt="13px">
                 {Array(5)
-                  .fill("")
+                  .fill('')
                   .map((_, i) => (
                     <Icon
                       name="star"
                       key={i}
-                      color={i < review.overall_rating ? "#F9DC76" : "#DADADD"}
+                      color={i < review.overall_rating ? '#F9DC76' : '#DADADD'}
                       ml="4px"
                     />
                   ))}
@@ -268,7 +334,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                 align="flex-start"
                 mb="20px"
               >
-                {review.review_type === "Company" ? (
+                {review.review_type === 'Company' ? (
                   <Text
                     color="#131C4C"
                     fontSize="18px"
@@ -339,9 +405,9 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                   fontFamily="Muli"
                   fontWeight="bold"
                 >
-                  {review.review_type === "Company"
-                    ? "Status"
-                    : "Interview difficulty"}
+                  {review.review_type === 'Company'
+                    ? 'Status'
+                    : 'Interview difficulty'}
                 </Text>
               </Flex>
               <Flex
@@ -350,15 +416,15 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                 align="flex-start"
                 mb="20px"
               >
-                {review.review_type === "Company" ? (
+                {review.review_type === 'Company' ? (
                   <Text
                     color="#131C4C"
                     fontSize="18px"
                     fontFamily="Muli"
                     fontWeight="bold"
                   >
-                    {review.start_date} -{" "}
-                    {review.end_date ? review.end_date : "Present"}
+                    {review.start_date} -{' '}
+                    {review.end_date ? review.end_date : 'Present'}
                   </Text>
                 ) : (
                   <Text
@@ -376,14 +442,14 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                   fontFamily="Muli"
                   fontWeight="bold"
                 >
-                  {review.review_type === "Company" ? "Dates" : "Job offer?"}
+                  {review.review_type === 'Company' ? 'Dates' : 'Job offer?'}
                 </Text>
               </Flex>
             </Flex>
             <Flex>
               {Number(loginId) === Number(review.user_id) ? (
                 <Image
-                  src={require("../../icons/edit.png")}
+                  src={require('../../icons/edit.png')}
                   onClick={navToEditRoute}
                   cursor="pointer"
                   size="1.5em"
@@ -393,7 +459,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               ) : null}
               {Number(loginId) === Number(review.user_id) ? (
                 <Image
-                  src={require("../../icons/trash.png")}
+                  src={require('../../icons/trash.png')}
                   onClick={() => setIsOpen2(true)}
                   cursor="pointer"
                   size="1.5em"
@@ -468,36 +534,36 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                   fontFamily="Muli"
                   fontSize="14px"
                 >
-                  {review.review_type === "Company"
-                    ? "Company Review"
-                    : "Interview Review"}
+                  {review.review_type === 'Company'
+                    ? 'Company Review'
+                    : 'Interview Review'}
                 </Text>
                 <Badge
                   backgroundColor={
-                    review.track_name === "WEB"
-                      ? "#DBEBFD"
-                      : review.track_name === "iOS"
-                      ? "#F4E6BE"
-                      : review.track_name === "UX"
-                      ? "#F9E3DE"
-                      : review.track_name === "DS"
-                      ? "#D3F2CD"
-                      : review.track_name === "Android"
-                      ? "#E9D9FF"
-                      : "#DBEBFD"
+                    review.track_name === 'WEB'
+                      ? '#DBEBFD'
+                      : review.track_name === 'iOS'
+                      ? '#F4E6BE'
+                      : review.track_name === 'UX'
+                      ? '#F9E3DE'
+                      : review.track_name === 'DS'
+                      ? '#D3F2CD'
+                      : review.track_name === 'Android'
+                      ? '#E9D9FF'
+                      : '#DBEBFD'
                   }
                   color={
-                    review.track_name === "WEB"
-                      ? "#474EA7"
-                      : review.track_name === "iOS"
-                      ? "#8E3D19"
-                      : review.track_name === "UX"
-                      ? "#9F3A5A "
-                      : review.track_name === "DS"
-                      ? "#35694F"
-                      : review.track_name === "Android"
-                      ? "#4B3569"
-                      : "#474EA7"
+                    review.track_name === 'WEB'
+                      ? '#474EA7'
+                      : review.track_name === 'iOS'
+                      ? '#8E3D19'
+                      : review.track_name === 'UX'
+                      ? '#9F3A5A '
+                      : review.track_name === 'DS'
+                      ? '#35694F'
+                      : review.track_name === 'Android'
+                      ? '#4B3569'
+                      : '#474EA7'
                   }
                   fontSize="16px "
                   fontWeight="light"
@@ -515,12 +581,12 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               </Text>
             </Flex>
             {/* INTERVIEW TYPES */}
-            {review.review_type === "Interview" ? (
+            {review.review_type === 'Interview' ? (
               <Flex color="#9194A8" fontSize="14px" fontFamily="Muli">
                 Interviews
               </Flex>
             ) : null}
-            {review.review_type === "Interview" ? (
+            {review.review_type === 'Interview' ? (
               <Flex
                 justify="flex-start"
                 wrap="wrap"
@@ -690,189 +756,142 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
 
       {/* Review container */}
       <PseudoBox
-        width={[
-          "100%", // base
-          "100%", // 480px upwards
-          "100%", // 768px upwards
-          "45%", // 992px upwards
-        ]}
         mb="3%"
         mx="2.5%"
-        px="4%"
-        py="2%"
-        background="#F2F6FE"
+        px="1%"
+        py="1%"
+        border="1px solid #E9F0FF"
+        width="408px"
+        height="309px"
         borderRadius="12px"
         display="flex"
         flexDir="column"
-        justifyContent="center"
-        alignItems="center"
-        _hover={{ bg: "#E9F0FF" }}
+        _hover={{ bg: '#E9F0FF' }}
         onClick={onOpen}
         data-cy="modalCard"
       >
         {/* Review content container */}
-        <Flex width="100%" justifyContent="flex-end" mb="2%">
-          {newTag ? (
-            <>
-              <Badge
-                rounded="full"
-                color="#494B5B"
-                fontSize="1em"
-                fontWeight="light"
-                px="15px"
-                overflow="hidden"
-                variantColor="teal"
-              >
-                New
-              </Badge>
-            </>
-          ) : null}
-          <Badge
-            backgroundColor="#95C8D8"
-            color="white"
-            fontSize="1em"
-            fontWeight="light"
-            rounded="full"
-            px="15px"
-            ml="10px"
-            overflow="hidden"
-          >
-            {review.review_type}
-          </Badge>
-          <Badge
-            backgroundColor="#344CD0"
-            color="white"
-            fontSize="1em"
-            fontWeight="light"
-            rounded="full"
-            px="15px"
-            overflow="hidden"
-            ml="10px"
-          >
-            {review.track_name}
-          </Badge>
-        </Flex>
-
-        {/* Review content container */}
         <Flex flexDir="column">
           {/* headline container  */}
-          <Flex maxW="530px" h="100px">
-            {/* avatar box */}
-            <Box justify="center" align="center" h="88px" mr="40px">
-              <Avatar size="xl" src={`//logo.clearbit.com/${review.logo}`} />
-            </Box>
-            {/* tag container */}
-            <Flex maxW="391px" h="32px" wrap="wrap">
-              <Flex
-                as="h2"
-                maxW="400px"
-                align="center"
-                overflow="hidden"
-                isTruncated
-              >
-                {review.company_name}
+          <Flex maxW="530px">
+            <Flex
+              height="115px"
+              justify="space-between"
+              maxW="391px"
+              p="2% 5%"
+              wrap="wrap"
+            >
+              <Flex maxW="300px">
+                {review.review_type === 'Company' ? (
+                  <Image
+                    width="106px"
+                    height="40px"
+                    src={`https://logo.clearbit.com/${
+                      review.logo != 'unknown' ? review.logo : logo
+                    }`}
+                    fallbackSrc={`http://samscct.com/wp-content/uploads/2014/09/no-logo.png`}
+                  />
+                ) : (
+                  <Text style={{ fontSize: '22px', fontWeight: 'bold' }}>
+                    {' '}
+                    {review.job_title}
+                  </Text>
+                )}
               </Flex>
-              <Flex width="100%">
-                <Flex as="h4" align="center">
-                  {review.overall_rating}.0
-                </Flex>
+              <i
+                style={{ alignSelf: 'center', fontSize: '22px', opacity: '.2' }}
+                class="far fa-heart"
+              ></i>
+              <Flex justify="space-between" width="391px" pt="2%">
                 <Flex align="center">
                   {Array(5)
-                    .fill("")
+                    .fill('')
                     .map((_, i) => (
                       <Icon
                         name="star"
                         key={i}
-                        color={
-                          i < review.overall_rating ? "#344CD0" : "gray.300"
-                        }
+                        color={i < review.overall_rating ? '#F9DC76' : '#fff'}
                         ml="8%"
                       />
                     ))}
                 </Flex>
-              </Flex>
-              <Flex as="p" w="100%" fontWeight="light">
-                Position: {review.job_title}
-              </Flex>
-            </Flex>
-          </Flex>
-
-          {/* Second main container */}
-          <Flex
-            w="100%"
-            font-size="18"
-            fontWeight="light"
-            justify="space-evenly"
-            align="center"
-            my="4%"
-          >
-            <Flex align="center">
-              <Image
-                src={require("../../icons/dollar-sign.png")}
-                size="1.5em"
-              />
-              <Flex as="p" overflow="hidden">
-                {review.salary}.00
-              </Flex>
-            </Flex>
-
-            <Flex align="center">
-              <Image
-                src={require("../../icons/map-pin.png")}
-                size="1.5em"
-                mr="5px"
-              />
-              <Flex as="p">
-                {review.city}, {review.state_name}
-              </Flex>
-            </Flex>
-
-            {review.review_type === "Company" ? (
-              <Flex align="center">
-                <Image
-                  src={require("../../icons/clock.png")}
-                  size="1.5em"
-                  mr="5px"
-                />
-                <Flex as="p">
-                  {review.start_date}-{review.end_date}
+                <Flex>
+                  {newTag ? (
+                    <Text
+                      style={{
+                        color: '#457929',
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      New
+                    </Text>
+                  ) : (
+                    <Text
+                      style={{
+                        color: '#BBBDC6',
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      x days old
+                    </Text>
+                  )}
                 </Flex>
               </Flex>
-            ) : review.review_type === "Interview" ? (
-              <Flex align="center">
-                {review.offer_status === "Offer Accepted" ? (
-                  <Image
-                    src={require("../../icons/thumbs-up.png")}
-                    size="1.5em"
-                    mr="5px"
-                  />
-                ) : review.offer_status === "Offer Declined" || "No Offer" ? (
-                  <Image
-                    src={require("../../icons/thumbs-down.png")}
-                    size="1.5em"
-                    mr="5px"
-                  />
-                ) : null}
-                <Flex as="p">{review.offer_status}</Flex>
+              <Flex width="391px" height="45px" pt="15px">
+                <Box as={MdRateReview} size="24px" color="#BBBDC6" mr="4px" />
+                <span style={{ paddingLeft: '5px' }}>
+                  {review.review_type} review
+                </span>
               </Flex>
-            ) : null}
+            </Flex>
           </Flex>
         </Flex>
-
         {/* summary container */}
-        <Flex w="100%" h="95px" overflow="hidden">
-          <p>{review.comment}</p>
+        <Flex width="100%" height="100px">
+          <Flex m="10px 20px" w="348px" h="55px" overflow="hidden">
+            <p style={{ fontSize: '14px', color: 'gray' }}>{review.comment}</p>
+          </Flex>
         </Flex>
-        {/* {admin action buttons} */}
+        <Flex
+          margin="0px 12px 0px 20px"
+          align="center"
+          pt="5px"
+          height="40px"
+          justify="space-between"
+        >
+          <Flex alignItems="center">
+            <Avatar size="md" src={review.user_profile_image} />
+            <Text pl="5px" fontSize="14px">
+              {review.user_first_name} {review.user_last_name}
+            </Text>
+          </Flex>
+          <Badge
+            backgroundColor={trackColorPicker(review.track_name)}
+            color={trackFontColor(review.track_name)}
+            fontSize="1em"
+            fontWeight="light"
+            rounded="full"
+            textAlign="center"
+            pt="5px"
+            overflow="hidden"
+            ml="10px"
+            width="58px"
+            height="36px"
+          >
+            <span>{review.track_name}</span>
+          </Badge>
+        </Flex>
       </PseudoBox>
     </>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     reviewDeleted: state.review.reviewDeleted,
     isAdmin: state.auth.isAdmin,
-  };
-};
-export default connect(mapStateToProps, deleteReview)(ReviewCard);
+  }
+}
+export default connect(mapStateToProps, deleteReview)(ReviewCard)

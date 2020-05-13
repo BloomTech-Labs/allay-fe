@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import ReactGA from "react-ga"; // for google analytics
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import ReactGA from 'react-ga' // for google analytics
 //components
-import SignupLoginInput from "../Reusable/InputFields/SignupLoginInput.js";
-import SignupAdditional from "./Signup-Additional";
+import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js'
+import SignupAdditional from './Signup-Additional'
 //actions
-import signup from "../../state/actions/index";
+import signup from '../../state/actions/index'
 //styles
-import CustomSpinner from "../CustomSpinner.js";
+import CustomSpinner from '../CustomSpinner.js'
 
 import {
   Button,
@@ -23,140 +23,140 @@ import {
   InputRightElement,
   Select,
   Icon,
-} from "@chakra-ui/core";
+} from '@chakra-ui/core'
 
 const Signup = ({ signup, isLoading, history }) => {
-  const { handleSubmit, errors, register, formState } = useForm();
-  const [show, setShow] = useState(false);
-  const [moreInfo, setMoreInfo] = useState(false);
-  const handleClick = () => setShow(!show);
+  const { handleSubmit, errors, register, formState } = useForm()
+  const [show, setShow] = useState(false)
+  const [moreInfo, setMoreInfo] = useState(false)
+  const handleClick = () => setShow(!show)
   //location state
-  const [location, setLocation] = useState({});
-  const [newLocation, setNewLocation] = useState({});
+  const [location, setLocation] = useState({})
+  const [newLocation, setNewLocation] = useState({})
   const stateHelper = (value) => {
-    setLocation(value);
-  };
-  const [profile_image, setProfile_Image] = useState("");
-  const [profile_resume, setProfile_resume] = useState("");
+    setLocation(value)
+  }
+  const [profile_image, setProfile_Image] = useState('')
+  const [profile_resume, setProfile_resume] = useState('')
   //validation
   function validateFirstName(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (!value) {
-      error = "First Name is required";
+      error = 'First Name is required'
     } else if (value.length < 2) {
-      error = "First Name must be at least 2 characters";
+      error = 'First Name must be at least 2 characters'
     } else if (nameRegex.test(value)) {
-      error = "First Name can only contain letters";
+      error = 'First Name can only contain letters'
     }
-    return error || true;
+    return error || true
   }
 
   function validateLastName(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (!value) {
-      error = "Last Name is required";
+      error = 'Last Name is required'
     } else if (value.length < 2) {
-      error = "Last Name must be at least 2 characters";
+      error = 'Last Name must be at least 2 characters'
     } else if (nameRegex.test(value)) {
-      error = "Last Name can only contain letters";
+      error = 'Last Name can only contain letters'
     }
-    return error || true;
+    return error || true
   }
 
   function validateEmail(value) {
-    let error;
+    let error
     if (!value) {
-      error = "Email is required";
-    } else if (!value.includes("@")) {
-      error = "Must be a valid email";
+      error = 'Email is required'
+    } else if (!value.includes('@')) {
+      error = 'Must be a valid email'
     }
-    return error || true;
+    return error || true
   }
 
   function validateTrack(value) {
-    let error;
+    let error
     if (!value) {
-      error = "Lambda track is required";
+      error = 'Lambda track is required'
     }
-    return error || true;
+    return error || true
   }
 
   function validateCohort(value) {
-    let error;
+    let error
     if (!value) {
-      error = "Cohort is required";
+      error = 'Cohort is required'
     }
-    return error || true;
+    return error || true
   }
 
   function validatePassword(value) {
-    let error;
+    let error
     if (!value) {
-      error = "Password is required";
+      error = 'Password is required'
     } else if (value.length < 8) {
-      error = "Password must be at least 8 characters";
+      error = 'Password must be at least 8 characters'
     }
-    return error || true;
+    return error || true
   }
 
   function validateFieldOfStudy(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (nameRegex.test(value)) {
-      error = "Field of study can only contain letters";
+      error = 'Field of study can only contain letters'
     }
-    return error || true;
+    return error || true
   }
   // end validation
 
   //add image to cloudinary
   const uploadImage = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "upload");
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'upload')
     const res = await fetch(
-      "	https://api.cloudinary.com/v1_1/takija/image/upload",
+      '	https://api.cloudinary.com/v1_1/takija/image/upload',
       {
-        method: "POST",
+        method: 'POST',
         body: data,
       }
-    );
-    const file = await res.json();
-    setProfile_Image(...profile_image, file.secure_url);
-  };
+    )
+    const file = await res.json()
+    setProfile_Image(...profile_image, file.secure_url)
+  }
 
   //upload resume to cloudinary
   const uploadResume = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "upload");
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'upload')
     const res = await fetch(
-      "	https://api.cloudinary.com/v1_1/takija/image/upload",
+      '	https://api.cloudinary.com/v1_1/takija/image/upload',
       {
-        method: "POST",
+        method: 'POST',
         body: data,
       }
-    );
-    const file = await res.json();
-    console.log("here", file);
-    setProfile_resume(...profile_resume, file.secure_url);
-  };
+    )
+    const file = await res.json()
+    console.log('here', file)
+    setProfile_resume(...profile_resume, file.secure_url)
+  }
 
   const submitForm = (creds) => {
     // correcting grad date format
-    let graduated = null;
+    let graduated = null
     if (creds.gradMonth && creds.gradYear) {
-      graduated = `${creds.gradYear}-${creds.gradMonth}-01`;
+      graduated = `${creds.gradYear}-${creds.gradMonth}-01`
     }
 
     // correcting employed date format
-    let employed_start = null;
+    let employed_start = null
     if (creds.workMonth && creds.workYear) {
-      employed_start = `${creds.workYear}-${creds.workMonth}-01`;
+      employed_start = `${creds.workYear}-${creds.workMonth}-01`
     }
 
     if (creds.confirmPassword === creds.password) {
@@ -194,26 +194,26 @@ const Signup = ({ signup, isLoading, history }) => {
         dribble: creds.dribble || null,
         profile_image: profile_image || null,
         portfolio: creds.portfolio_URL || null,
-      }).then(() => history.push("/dashboard"));
+      }).then(() => history.push('/dashboard'))
     } else {
-      alert("Your Passwords must match!");
+      alert('Your Passwords must match!')
     }
     ReactGA.event({
-      category: "User",
+      category: 'User',
       action: `Button Sign Up`,
-    });
-  };
+    })
+  }
 
   const switchMoreInfo = () => {
-    setMoreInfo(!moreInfo);
-  };
+    setMoreInfo(!moreInfo)
+  }
 
   const gaLogin = () => {
     ReactGA.event({
-      category: "User",
+      category: 'User',
       action: `Link Already have an account`,
-    });
-  };
+    })
+  }
 
   if (isLoading) {
     return (
@@ -222,7 +222,7 @@ const Signup = ({ signup, isLoading, history }) => {
           <CustomSpinner />
         </Flex>
       </Flex>
-    );
+    )
   }
 
   return (
@@ -337,8 +337,8 @@ const Signup = ({ signup, isLoading, history }) => {
                     focusBorderColor="#344CD0"
                     borderColor="#EAF0FE"
                     color="#BBBDC6"
-                    _focus={{ color: "#17171B" }}
-                    _hover={{ borderColor: "#BBBDC6" }}
+                    _focus={{ color: '#17171B' }}
+                    _hover={{ borderColor: '#BBBDC6' }}
                     name="track_id"
                     label="track_id"
                     ref={register({ validate: validateTrack })}
@@ -356,7 +356,7 @@ const Signup = ({ signup, isLoading, history }) => {
                       WEB
                     </option>
                     <option fontFamily="Muli" value={4}>
-                      iOS
+                      IOS
                     </option>
                     <option fontFamily="Muli" value={5}>
                       UX
@@ -397,7 +397,7 @@ const Signup = ({ signup, isLoading, history }) => {
                       w="318px"
                       // mb='30px'
                       mr="17px"
-                      type={show ? "text" : "password"}
+                      type={show ? 'text' : 'password'}
                       name="password"
                       label="Password"
                       placeholder="********"
@@ -413,7 +413,7 @@ const Signup = ({ signup, isLoading, history }) => {
                         backgroundColor="#FDFDFF"
                         onClick={handleClick}
                       >
-                        {show ? "Hide" : "Show"}
+                        {show ? 'Hide' : 'Show'}
                       </Button>
                     </InputRightElement>
                   </InputGroup>
@@ -432,7 +432,7 @@ const Signup = ({ signup, isLoading, history }) => {
                     <SignupLoginInput
                       w="318px"
                       mb="30px"
-                      type={show ? "text" : "password"}
+                      type={show ? 'text' : 'password'}
                       name="confirmPassword"
                       label="Confirm Password"
                       placeholder="********"
@@ -448,7 +448,7 @@ const Signup = ({ signup, isLoading, history }) => {
                         backgroundColor="#FDFDFF"
                         onClick={handleClick}
                       >
-                        {show ? "Hide" : "Show"}
+                        {show ? 'Hide' : 'Show'}
                       </Button>
                     </InputRightElement>
                   </InputGroup>
@@ -460,7 +460,7 @@ const Signup = ({ signup, isLoading, history }) => {
                 wrap="wrap"
                 w="653px"
                 mx="auto"
-                mb={moreInfo ? "0" : "55px"}
+                mb={moreInfo ? '0' : '55px'}
                 cursor="pointer"
                 justify="flex-start"
                 data-cy="longFormDropdown"
@@ -489,7 +489,7 @@ const Signup = ({ signup, isLoading, history }) => {
                     />
                   )}
                   <Text fontWeight="bold" fontSize="20px" fontFamily="Muli">
-                    {" "}
+                    {' '}
                     Add Additional Information
                   </Text>
                 </Flex>
@@ -523,7 +523,7 @@ const Signup = ({ signup, isLoading, history }) => {
                   size="lg"
                   color="white"
                   backgroundColor="#344CD0"
-                  _hover={{ backgroundColor: "#4254BA", cursor: "pointer" }}
+                  _hover={{ backgroundColor: '#4254BA', cursor: 'pointer' }}
                   isLoading={formState.isSubmitting}
                   type="submit"
                   data-cy="registerSubmit"
@@ -533,15 +533,15 @@ const Signup = ({ signup, isLoading, history }) => {
               </Flex>
               <Flex m="15px" justify="center" fontWeight="light">
                 <Text fontSize="16px" color="#17171B" fontFamily="Muli">
-                  Already have an account?{" "}
+                  Already have an account?{' '}
                   <Link
                     to="/"
                     onClick={gaLogin}
                     style={{
-                      textDecoration: "none",
-                      fontWeight: "bold",
-                      color: "#344CD0",
-                      fontSize: "16px",
+                      textDecoration: 'none',
+                      fontWeight: 'bold',
+                      color: '#344CD0',
+                      fontSize: '16px',
                     }}
                   >
                     Sign in here!
@@ -553,13 +553,13 @@ const Signup = ({ signup, isLoading, history }) => {
         </Flex>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     isLoading: state.auth.isLoading,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, signup)(Signup);
+export default connect(mapStateToProps, signup)(Signup)
