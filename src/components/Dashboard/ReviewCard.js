@@ -243,9 +243,12 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               <Image
                 w="148px"
                 h="70px"
-                src={`//logo.clearbit.com/${review.logo}?size=150`}
-                fallbackSrc={require('../../icons/placeholder-logo-2.png')}
+                src={`https://logo.clearbit.com/${
+                  review.logo != 'unknown' ? review.logo : logo
+                }`}
+                fallbackSrc={`http://samscct.com/wp-content/uploads/2014/09/no-logo.png`}
               />
+
               <Flex mt="13px">
                 {Array(5)
                   .fill('')
@@ -781,12 +784,12 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               <Flex maxW="300px">
                 {review.review_type === 'Company' ? (
                   <Image
-                    backgorund="gray"
                     width="106px"
                     height="40px"
                     src={`https://logo.clearbit.com/${
                       review.logo != 'unknown' ? review.logo : logo
                     }`}
+                    fallbackSrc={`http://samscct.com/wp-content/uploads/2014/09/no-logo.png`}
                   />
                 ) : (
                   <Text style={{ fontSize: '22px', fontWeight: 'bold' }}>
