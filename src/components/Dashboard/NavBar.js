@@ -13,7 +13,6 @@ import {
   InputGroup,
   InputRightElement,
   Icon,
-  RadioButtonGroup,
   Drawer,
   DrawerHeader,
   DrawerOverlay,
@@ -23,11 +22,9 @@ import {
   useDisclosure,
   Menu,
   MenuButton,
-  MenuItem,
   MenuOptionGroup,
   MenuItemOption,
   MenuList,
-  MenuDivider,
 } from '@chakra-ui/core'
 //import modal
 import Blocked from '../Reusable/BlockedModal'
@@ -54,14 +51,6 @@ function NavBar({
     })
   }
 
-  // use to navigate to profile page
-  // const navToProfilePage = () => {
-  //   history.push("/profile");
-  //   ReactGA.event({
-  //     category: "Profile",
-  //     action: `go to profile`
-  //   });
-  // };
   const profile_id = localStorage.getItem('userId')
   const logout = () => {
     localStorage.clear('token')
@@ -281,45 +270,6 @@ function NavBar({
             ))}
           </MenuList>
         </Menu>
-        {/* <RadioButtonGroup
-          display="flex"
-          align="center"
-          justifyContent="center"
-          spacing={12}
-          isInline
-          onChange={handleFilter}
-          boxShadow="none"
-        >
-          {types.map((type) => (
-            <Button
-              key={type.id}
-              size="lrg"
-              rounded="full"
-              border="none"
-              _hover={
-                typeFilters.includes(type.name)
-                  ? 'none'
-                  : {
-                      bg: '#E2E8F0',
-                    }
-              }
-              _focus={{
-                boxShadow: 'none',
-              }}
-              borderRadius="30px"
-              color={typeFilters.includes(type.name) ? 'white' : 'black'}
-              py="1%"
-              px="3%"
-              fontWeight="light"
-              background={
-                typeFilters.includes(type.name) ? '#259BF8' : '#FDFDFF'
-              }
-              value={type}
-            >
-              {type.name}
-            </Button>
-          ))}
-        </RadioButtonGroup> */}
         <Menu closeOnSelect={false}>
           <MenuButton
             w="209px"
@@ -354,37 +304,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, null)(NavBar)
-
-// {
-//   tracks.map((track) => (
-//     <Button
-//       key={track.id}
-//       size="lrg"
-//       rounded="full"
-//       border="none"
-//       _active={{
-//         bg: '#259BF8 !important',
-//         color: 'white',
-//       }}
-//       _hover={
-//         trackFilters.includes(track.name)
-//           ? 'none'
-//           : {
-//               bg: '#E2E8F0',
-//             }
-//       }
-//       _focus={{
-//         boxShadow: 'none',
-//       }}
-//       borderRadius="30px"
-//       color={trackFilters.includes(track.name) ? 'white' : 'black'}
-//       py="1%"
-//       px="3%"
-//       fontWeight="light"
-//       background={trackFilters.includes(track.name) ? '#259BF8' : '#FDFDFF'}
-//       value={track}
-//     >
-//       {track.name}
-//     </T>
-//   ))
-// }
