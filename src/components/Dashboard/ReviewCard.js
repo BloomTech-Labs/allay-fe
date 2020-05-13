@@ -10,7 +10,6 @@ import deleteReview from '../../state/actions/index'
 // styles
 import {
   Box,
-  SlideIn,
   Text,
   Avatar,
   Flex,
@@ -35,7 +34,8 @@ import {
 import { GoLocation } from 'react-icons/go'
 import { FaRegBuilding } from 'react-icons/fa'
 import { MdRateReview } from 'react-icons/md'
-
+//for time display
+var moment = require('moment') // require
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   //deletes the review in question
   const submitDelete = (user_id, review_id) => {
@@ -57,22 +57,6 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
     })
   }
   useEffect(() => {}, [submitDelete])
-  // NEW post tag logic
-  const [newTag, setNewTag] = useState(false)
-  // get server time and set to readable
-  var serverDay = new Date(review.created_at).getDay()
-  //get local time and set to readable
-  var localTime = Date.now()
-  let today = new Date(localTime).getDay()
-  //logic to set view state
-  useEffect(() => {
-    if (serverDay === today) {
-      setNewTag(true)
-    } else {
-      setNewTag(false)
-    }
-  }, [newTag, serverDay, today])
-
   // basic usage for the SingleReview modal
   const { isOpen, onOpen, onClose } = useDisclosure()
   const loginId = localStorage.getItem('userId')
@@ -157,18 +141,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   let com = '.com'
   const logo = stripped.concat(com)
 
-  // TODO: cal dates
-  // const dateConvert = date => {
-  // 	date = new Date(date).toUTCString();
-  // 	date = date
-  // 		.split(" ")
-  // 		.slice(0, 4)
-  // 		.join(" ");
-  // 	return date;
-  // };
-
-  // console.log(dateConvert(review.created_at))
-  // console.log(new Date())
+  const created = moment(review.created_at).fromNow()
 
   return (
     <>
@@ -816,27 +789,16 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                     ))}
                 </Flex>
                 <Flex>
-                  {newTag ? (
-                    <Text
-                      style={{
-                        color: '#457929',
-                        fontSize: '14px',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      New
-                    </Text>
-                  ) : (
-                    <Text
-                      style={{
-                        color: '#BBBDC6',
-                        fontSize: '14px',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      x days old
-                    </Text>
-                  )}
+                  <Text
+                    style={{
+                      color: '#BBBDC6',
+                      fontSize: '14px',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {created}
+                  </Text>
+                  {/* )} */}
                 </Flex>
               </Flex>
               <Flex width="391px" height="45px" pt="15px">

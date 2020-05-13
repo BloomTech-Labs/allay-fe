@@ -92,10 +92,12 @@ function NavBar({
     }
   }
 
+
   useEffect(() => {
     getUser(userId)
   }, [])
   console.log(getUser)
+
   return (
     <Flex
       maxW="1440px"
