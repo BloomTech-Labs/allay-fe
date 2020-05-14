@@ -48,7 +48,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 
   return (
     <>
-      <Flex w="100%" minH="100vh" justify="center">
+      <Flex w="100%" minH="100vh" justify="center" pt="4%">
         <Flex
           maxW="1440px"
           w="100%"

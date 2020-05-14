@@ -14,6 +14,8 @@ import {
   InputRightElement,
   Icon,
   useDisclosure,
+  Stack,
+  Badge,
   Menu,
   MenuButton,
   MenuOptionGroup,
@@ -75,28 +77,109 @@ function NavBar({
     { id: 5, criteria: 'track', name: 'Android' },
   ]
 
+  //track badge colors and background color picker
+  const trackFontColor = (trackName) => {
+    switch (trackName) {
+      case 'DS':
+        return '#35694F'
+        break
+      case 'WEB':
+        return '#474EA7'
+        break
+      case 'iOS' || 'IOS':
+        return '#8E3D19'
+        break
+      case 'Android':
+        return '#4B3569'
+        break
+      case 'UX':
+        return '#9F3A5A'
+        break
+      default:
+        return
+    }
+  }
+  const trackColorPicker = (trackName) => {
+    switch (trackName) {
+      case 'DS':
+        return '#D3F2CD'
+        break
+      case 'WEB':
+        return '#DBEBFD'
+        break
+      case 'iOS' || 'IOS':
+        return '#F4E6BE'
+        break
+      case 'Android':
+        return '#E9D9FF'
+        break
+      case 'UX':
+        return '#F9E3DE'
+        break
+      default:
+        return
+    }
+  }
+  ///
+  //// handle type filter and state for the badge / show
+  const [type, setType] = useState([])
   const handleType = (name) => {
     if (typeFilters.includes(name)) {
       setTypeFilters(typeFilters.filter((item) => item !== name))
+      setType(type.filter((x) => x !== name))
     } else {
       setTypeFilters(typeFilters.filter((item) => item !== name))
       setTypeFilters([...typeFilters, name])
+      setType([...type, name])
     }
   }
 
+  const typeBadge = (name) => {
+    return name.map((typeName) => (
+      <Badge
+        backgroundColor="#d3d3d3"
+        color="black"
+        p="0px 5px"
+        m="5px"
+        style={{ borderRadius: '50px' }}
+        variantColor="green"
+      >
+        {typeName}
+      </Badge>
+    ))
+  }
+  //// handle track filter and state for the badge color / show
+
+  const [track, setTrack] = useState([])
   const handleTrack = (name) => {
     if (trackFilters.includes(name)) {
       setTrackFilters(trackFilters.filter((item) => item !== name))
+      setTrack(track.filter((x) => x !== name))
     } else {
       setTrackFilters(trackFilters.filter((item) => item !== name))
       setTrackFilters([...trackFilters, name])
+      setTrack([...track, name])
     }
+  }
+
+  const trackBadge = (name) => {
+    return name.map((typeName) => (
+      <Badge
+        p="0px 2px"
+        m="2px"
+        backgroundColor={trackColorPicker(typeName)}
+        color={trackFontColor(typeName)}
+        style={{ borderRadius: '50px' }}
+        variantColor="green"
+      >
+        {typeName}
+      </Badge>
+    ))
   }
 
   useEffect(() => {
     getUser(userId)
   }, [])
-  console.log(getUser)
 
   return (
     <Flex
@@ -109,7 +192,7 @@ function NavBar({
       zIndex="999"
       direction="column"
     >
-      <Flex align="center" justify="space-between" pt="1%" mb="8%">
+      <Flex align="center" justify="space-between" pt="1%" mb="4%" h="100px">
         <Flex color="#344CD0" align="center">
           <h1>Allay</h1>
         </Flex>
@@ -190,6 +273,7 @@ function NavBar({
           </Heading>
           <Menu margin="3%" closeOnSelect={false}>
             <MenuButton
+              outline="none"
               w="309px"
               h="55px"
               bg="#FFFFFF"
@@ -199,7 +283,7 @@ function NavBar({
               fontSize="20px"
               fontWeight="bold"
             >
-              Filter by review type
+              {type.length > 0 ? typeBadge(type) : 'Filter by review type'}
               <Icon name="triangle-down" color="#344CD0" />
             </MenuButton>
             <MenuList minWidth="240px">
@@ -219,6 +303,7 @@ function NavBar({
           </Menu>
           <Menu closeOnSelect={false}>
             <MenuButton
+              outline="none"
               w="240px"
               h="55px"
               bg="#FFFFFF"
@@ -228,7 +313,7 @@ function NavBar({
               fontSize="20px"
               fontWeight="bold"
             >
-              Filter by field
+              {track.length > 0 ? trackBadge(track) : 'Filter by field'}
               <Icon name="triangle-down" color="#344CD0" />
             </MenuButton>
             <MenuList minWidth="240px">
