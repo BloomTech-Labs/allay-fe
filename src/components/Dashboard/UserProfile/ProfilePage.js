@@ -65,7 +65,7 @@ const ProfilePage = (props) => {
   useEffect(() => {
     dispatch(getUser(id))
   }, [])
-  console.log(userData)
+
   return (
     <>
       {/* //Top Section */}
@@ -89,21 +89,24 @@ const ProfilePage = (props) => {
               <h1> Allay </h1>
             </Link>
           </Flex>
-          <Flex>
-            {userData.profile_image === 'h' ? (
-              <Image
-                size="50px"
-                style={{ opacity: '0.6' }}
-                src={require('../../../icons/user.svg')}
-              />
-            ) : (
-              <Image
-                size="50px"
-                style={{ opacity: '0.6', borderRadius: '50%' }}
-                src={userData.profile_image}
-              />
-            )}
-          </Flex>
+
+          {userId == userData.id ? (
+            <Flex>
+              {userData.profile_image === 'h' ? (
+                <Image
+                  size="50px"
+                  style={{ opacity: '0.6' }}
+                  src={require('../../../icons/user.svg')}
+                />
+              ) : (
+                <Image
+                  size="50px"
+                  style={{ opacity: '0.6', borderRadius: '50%' }}
+                  src={userData.profile_image}
+                />
+              )}
+            </Flex>
+          ) : null}
         </Flex>
       </Flex>
 
