@@ -189,6 +189,7 @@ function NavBar({
           </Heading>
           <Menu margin="3%" closeOnSelect={false}>
             <MenuButton
+              outline="none"
               w="309px"
               h="55px"
               bg="#FFFFFF"
@@ -217,6 +218,7 @@ function NavBar({
           </Menu>
           <Menu closeOnSelect={false}>
             <MenuButton
+              outline="none"
               w="240px"
               h="55px"
               bg="#FFFFFF"
