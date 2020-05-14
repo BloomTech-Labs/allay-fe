@@ -58,7 +58,7 @@ function NavBar({
 
   const handleInputChange = (event) => {
     event.preventDefault()
-    setSearchResults(event.target.value)
+    setSearchResults(event.target.value.toLowerCase())
   }
 
   // We could get this fronm the DB if we had endpoints
