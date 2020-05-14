@@ -67,7 +67,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             setTypeFilters={setTypeFilters}
           />
 
-          <Flex height="70%" wrap="wrap" pt="5%">
+          <Flex height="70%" wrap="wrap" mt="90px">
             {isLoading ? (
               <Flex w="100%" h="100%" justify="center" align="center">
                 <CustomSpinner />
