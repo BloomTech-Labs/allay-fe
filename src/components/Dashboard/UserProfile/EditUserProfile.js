@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import ReactGA from "react-ga"; // for google analytics
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import ReactGA from 'react-ga' // for google analytics
 //components
-import SignupLoginInput from "../../Reusable/InputFields/SignupLoginInput.js";
-import CustomAutocomplete from "../../Reusable/InputFields/Autocomplete.js";
-import { years } from "../../Reusable/yearsData";
+import SignupLoginInput from '../../Reusable/InputFields/SignupLoginInput.js'
+import CustomAutocomplete from '../../Reusable/InputFields/Autocomplete.js'
+import { years } from '../../Reusable/yearsData'
 //actions
-import updateUser from "../../../state/actions/index";
+import updateUser from '../../../state/actions/index'
 //styles
 import {
   Image,
@@ -24,7 +24,7 @@ import {
   Select,
   Avatar,
   FormHelperText,
-} from "@chakra-ui/core";
+} from '@chakra-ui/core'
 
 const EditUserProfile = ({
   match,
@@ -33,7 +33,7 @@ const EditUserProfile = ({
   isLoading,
   updateUser,
 }) => {
-  const id = match.params.id;
+  const id = match.params.id
   // creating form state, setting default values
   const { handleSubmit, errors, register, formState } = useForm({
     defaultValues: {
@@ -59,63 +59,63 @@ const EditUserProfile = ({
       dribble: userData.dribble ? userData.dribble : null,
       profile_image: userData.profile_image ? userData.profile_image : null,
     },
-  });
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
+  })
+  const [show, setShow] = useState(false)
+  const handleClick = () => setShow(!show)
   //location state/helpers
-  const [location, setLocation] = useState({});
-  const [newLocation, setNewLocation] = useState({});
+  const [location, setLocation] = useState({})
+  const [newLocation, setNewLocation] = useState({})
   const stateHelper = (value) => {
-    setLocation(value);
-  };
+    setLocation(value)
+  }
   // cloudinary stuff
-  const [newProfile_image, setNewProfile_Image] = useState("");
-  const [newProfile_resume, setNewProfile_resume] = useState("");
+  const [newProfile_image, setNewProfile_Image] = useState('')
+  const [newProfile_resume, setNewProfile_resume] = useState('')
 
   // graduated state/helpers
-  const [graduated, setGraduated] = useState(userData.graduated ? true : false);
+  const [graduated, setGraduated] = useState(userData.graduated ? true : false)
   const isGraduated = () => {
-    setGraduated(true);
-  };
+    setGraduated(true)
+  }
   const notGraduated = () => {
-    setGraduated(false);
-  };
+    setGraduated(false)
+  }
   // employed state/helpers
   const [employed, setEmployed] = useState(
     userData.employed_start ? true : false
-  );
+  )
   const isEmployed = () => {
-    setEmployed(true);
-  };
+    setEmployed(true)
+  }
   const notEmployed = () => {
-    setEmployed(false);
-  };
+    setEmployed(false)
+  }
 
   //radio button state
   const [priorExp, setPriorExp] = useState(
     userData.prior_experience ? userData.prior_experience : false
-  );
+  )
   const [tlsl, setTlsl] = useState(
     userData.tlsl_experience ? userData.tlsl_experience : false
-  );
+  )
   const [remote, setRemote] = useState(
     userData.employed_remote ? userData.employed_remote : false
-  );
+  )
 
   //location helper
   useEffect(() => {
-    setNewLocation({ ...location, myState: location.myState });
+    setNewLocation({ ...location, myState: location.myState })
     // removes numbers, commas, and whitespaces from city
     if (location.myCity) {
       if (/^[0-9]+$/.test(location.myCity) || /\s/.test(location.myCity)) {
-        const tempCity = location.myCity;
+        const tempCity = location.myCity
         setNewLocation({
           ...location,
-          myCity: tempCity.replace(/^[\s,\d]+/, ""),
-        });
+          myCity: tempCity.replace(/^[\s,\d]+/, ''),
+        })
       }
     }
-  }, [location]);
+  }, [location])
 
   ///info for slack ID
   const info = (
@@ -124,95 +124,95 @@ const EditUserProfile = ({
         objectFit="fit"
         width="300px"
         height="300px"
-        src={require("../../../icons/slack.gif")}
+        src={require('../../../icons/slack.gif')}
         alt="slack info"
       />
     </Box>
-  );
+  )
 
   //validation
   function validateFirstName(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (!value) {
-      error = "First Name is required";
+      error = 'First Name is required'
     } else if (value.length < 2) {
-      error = "First Name must be at least 2 characters";
+      error = 'First Name must be at least 2 characters'
     } else if (nameRegex.test(value)) {
-      error = "First Name can only contain letters";
+      error = 'First Name can only contain letters'
     }
-    return error || true;
+    return error || true
   }
 
   function validateLastName(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (!value) {
-      error = "Last Name is required";
+      error = 'Last Name is required'
     } else if (value.length < 2) {
-      error = "Last Name must be at least 2 characters";
+      error = 'Last Name must be at least 2 characters'
     } else if (nameRegex.test(value)) {
-      error = "Last Name can only contain letters";
+      error = 'Last Name can only contain letters'
     }
-    return error || true;
+    return error || true
   }
 
   function validateFieldOfStudy(value) {
-    let error;
-    let nameRegex = /^[0-9*#+]+$/;
+    let error
+    let nameRegex = /^[0-9*#+]+$/
     if (nameRegex.test(value)) {
-      error = "Field of study can only contain letters";
+      error = 'Field of study can only contain letters'
     }
-    return error || true;
+    return error || true
   }
   //end validation
 
   //add image to cloudinary
   const updateImage = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "upload");
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'upload')
     const res = await fetch(
-      "	https://api.cloudinary.com/v1_1/takija/image/upload",
+      '	https://api.cloudinary.com/v1_1/takija/image/upload',
       {
-        method: "POST",
+        method: 'POST',
         body: data,
       }
-    );
-    const file = await res.json();
-    setNewProfile_Image(...newProfile_image, file.secure_url);
-  };
+    )
+    const file = await res.json()
+    setNewProfile_Image(...newProfile_image, file.secure_url)
+  }
 
   //upload resume to cloudinary
   const updateResume = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "upload");
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'upload')
     const res = await fetch(
-      "	https://api.cloudinary.com/v1_1/takija/image/upload",
+      '	https://api.cloudinary.com/v1_1/takija/image/upload',
       {
-        method: "POST",
+        method: 'POST',
         body: data,
       }
-    );
-    const file = await res.json();
-    setNewProfile_resume(...newProfile_resume, file.secure_url);
-  };
+    )
+    const file = await res.json()
+    setNewProfile_resume(...newProfile_resume, file.secure_url)
+  }
 
   // FORM SUBMISSION
   const submitForm = (creds) => {
     // correcting grad date format
-    let graduated = null;
+    let graduated = null
     if (creds.gradMonth && creds.gradYear) {
-      graduated = `${creds.gradYear}-${creds.gradMonth}-01`;
+      graduated = `${creds.gradYear}-${creds.gradMonth}-01`
     }
 
     // correcting employed date format
-    let employed_start = null;
+    let employed_start = null
     if (creds.workMonth && creds.workYear) {
-      employed_start = `${creds.workYear}-${creds.workMonth}-01`;
+      employed_start = `${creds.workYear}-${creds.workMonth}-01`
     }
     // formatting the signup state to match the back end columns
     updateUser(id, {
@@ -243,21 +243,21 @@ const EditUserProfile = ({
       dribble: creds.dribble || null,
       profile_image: newProfile_image || userData.profile_image,
       portfolio: creds.portfolio_URL || null,
-    }).then(() => history.push(`/profile/${id}`));
+    }).then(() => history.push(`/profile/${id}`))
 
     ReactGA.event({
-      category: "User",
+      category: 'User',
       action: `Button Update Profile`,
-    });
-  };
+    })
+  }
 
   const returnToProfile = (e) => {
-    e.preventDefault();
-    history.push(`/profile/${id}`);
-  };
+    e.preventDefault()
+    history.push(`/profile/${id}`)
+  }
 
   if (isLoading) {
-    return null;
+    return null
   }
 
   return (
@@ -273,12 +273,12 @@ const EditUserProfile = ({
         >
           <Link
             style={{
-              textDecoration: "none",
-              color: "black",
+              textDecoration: 'none',
+              color: '#344CD0',
             }}
             to="/dashboard"
           >
-            {" "}
+            {' '}
             <Flex>
               <h1> Allay </h1>
             </Flex>
@@ -286,21 +286,21 @@ const EditUserProfile = ({
           <Flex>
             <Link
               style={{
-                textDecoration: "none",
-                color: "black",
+                textDecoration: 'none',
+                color: 'black',
               }}
               to={`/profile/${id}`}
             >
-              {userData.profile_image === "h" ? (
+              {userData.profile_image === 'h' ? (
                 <Image
                   size="50px"
-                  style={{ opacity: "0.6" }}
-                  src={require("../../../icons/user.svg")}
+                  style={{ opacity: '0.6' }}
+                  src={require('../../../icons/user.svg')}
                 />
               ) : (
                 <Image
                   size="50px"
-                  style={{ opacity: "0.6", borderRadius: "50%" }}
+                  style={{ opacity: '0.6', borderRadius: '50%' }}
                   src={userData.profile_image}
                 />
               )}
@@ -339,7 +339,7 @@ const EditUserProfile = ({
                   fontSize="22px"
                   fontWeight="normal"
                   color="#9194A8"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                   onClick={returnToProfile}
                 >
                   Cancel
@@ -350,7 +350,7 @@ const EditUserProfile = ({
                   fontSize="22px"
                   fontWeight="bold"
                   color="#344CD0"
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                   onClick={handleSubmit(submitForm)}
                 >
                   Save
@@ -371,13 +371,13 @@ const EditUserProfile = ({
                 <Avatar
                   size="2xl"
                   name={userData.first_name}
-                  style={{ borderRadius: "50%" }}
+                  style={{ borderRadius: '50%' }}
                   src={userData.profile_image}
                 />
               ) : (
                 <Avatar
                   size="2xl"
-                  style={{ borderRadius: "50%" }}
+                  style={{ borderRadius: '50%' }}
                   src={newProfile_image}
                 />
               )}
@@ -389,10 +389,10 @@ const EditUserProfile = ({
                   placeholder="Upload profile picture"
                   onChange={updateImage}
                   style={{
-                    opacity: "1",
-                    width: "105px",
-                    color: "transparent",
-                    backgroundColor: "transparent",
+                    opacity: '1',
+                    width: '105px',
+                    color: 'transparent',
+                    backgroundColor: 'transparent',
                   }}
                 />
                 {!newProfile_image ? (
@@ -402,9 +402,9 @@ const EditUserProfile = ({
                 ) : (
                   <i
                     style={{
-                      fontSize: "1.4rem",
-                      color: "green",
-                      paddingLeft: "20px",
+                      fontSize: '1.4rem',
+                      color: 'green',
+                      paddingLeft: '20px',
                     }}
                     className="far fa-check-circle"
                   ></i>
@@ -470,8 +470,8 @@ const EditUserProfile = ({
                   focusBorderColor="#344CD0"
                   borderColor="#EAF0FE"
                   color="#17171B"
-                  _hover={{ borderColor: "#BBBDC6" }}
-                  _placeholder={{ color: "#BBBDC6" }}
+                  _hover={{ borderColor: '#BBBDC6' }}
+                  _placeholder={{ color: '#BBBDC6' }}
                   id="location"
                   name="location"
                   label="location"
@@ -486,7 +486,7 @@ const EditUserProfile = ({
               wrap="wrap"
               w="653px"
               mx="auto"
-              mb={graduated ? "20px" : "80px"}
+              mb={graduated ? '20px' : '80px'}
               justify="space-between"
             >
               <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
@@ -501,7 +501,7 @@ const EditUserProfile = ({
                   onClick={isGraduated}
                   borderRadius="md"
                   borderColor="#D9D9D9"
-                  _checked={{ bg: "#344CD0" }}
+                  _checked={{ bg: '#344CD0' }}
                 >
                   Yes
                 </Radio>
@@ -513,7 +513,7 @@ const EditUserProfile = ({
                   onClick={notGraduated}
                   borderRadius="md"
                   borderColor="#D9D9D9"
-                  _checked={{ bg: "#344CD0" }}
+                  _checked={{ bg: '#344CD0' }}
                 >
                   No
                 </Radio>
@@ -545,8 +545,8 @@ const EditUserProfile = ({
                       focusBorderColor="#344CD0"
                       borderColor="#EAF0FE"
                       color="#BBBDC6"
-                      _focus={{ color: "#17171B" }}
-                      _hover={{ borderColor: "#BBBDC6" }}
+                      _focus={{ color: '#17171B' }}
+                      _hover={{ borderColor: '#BBBDC6' }}
                       name="gradMonth"
                       label="gradMonth"
                       ref={register}
@@ -603,8 +603,8 @@ const EditUserProfile = ({
                       focusBorderColor="#344CD0"
                       borderColor="#EAF0FE"
                       color="#BBBDC6"
-                      _focus={{ color: "#17171B" }}
-                      _hover={{ borderColor: "#BBBDC6" }}
+                      _focus={{ color: '#17171B' }}
+                      _hover={{ borderColor: '#BBBDC6' }}
                       name="gradYear"
                       label="gradYear"
                       ref={register}
@@ -659,8 +659,8 @@ const EditUserProfile = ({
                   focusBorderColor="#344CD0"
                   borderColor="#EAF0FE"
                   color="#BBBDC6"
-                  _focus={{ color: "#17171B" }}
-                  _hover={{ borderColor: "#BBBDC6" }}
+                  _focus={{ color: '#17171B' }}
+                  _hover={{ borderColor: '#BBBDC6' }}
                   name="highest_ed"
                   label="highest_ed"
                   ref={register}
@@ -728,7 +728,7 @@ const EditUserProfile = ({
                   onChange={() => setPriorExp(true)}
                   borderRadius="md"
                   borderColor="#D9D9D9"
-                  _checked={{ bg: "#344CD0" }}
+                  _checked={{ bg: '#344CD0' }}
                 >
                   Yes
                 </Radio>
@@ -741,7 +741,7 @@ const EditUserProfile = ({
                   onChange={() => setPriorExp(false)}
                   borderRadius="md"
                   borderColor="#D9D9D9"
-                  _checked={{ bg: "#344CD0" }}
+                  _checked={{ bg: '#344CD0' }}
                 >
                   No
                 </Radio>
@@ -769,7 +769,7 @@ const EditUserProfile = ({
                   onChange={() => setTlsl(true)}
                   borderRadius="md"
                   borderColor="#D9D9D9"
-                  _checked={{ bg: "#344CD0" }}
+                  _checked={{ bg: '#344CD0' }}
                 >
                   Yes
                 </Radio>
@@ -782,7 +782,7 @@ const EditUserProfile = ({
                   onChange={() => setTlsl(false)}
                   borderRadius="md"
                   borderColor="#D9D9D9"
-                  _checked={{ bg: "#344CD0" }}
+                  _checked={{ bg: '#344CD0' }}
                 >
                   No
                 </Radio>
@@ -813,21 +813,21 @@ const EditUserProfile = ({
                   placeholder="Upload profile picture"
                   onChange={updateResume}
                   style={{
-                    opacity: "1",
-                    width: "105px",
-                    color: "transparent",
-                    backgroundColor: "transparent",
+                    opacity: '1',
+                    width: '105px',
+                    color: 'transparent',
+                    backgroundColor: 'transparent',
                   }}
                 />
                 <label htmlFor="files" className="btn">
                   {!newProfile_resume ? (
-                    "Upload resume"
+                    'Upload resume'
                   ) : (
                     <i
                       style={{
-                        fontSize: "1.4rem",
-                        color: "green",
-                        paddingLeft: "20px",
+                        fontSize: '1.4rem',
+                        color: 'green',
+                        paddingLeft: '20px',
                       }}
                       className="far fa-check-circle"
                     ></i>
@@ -866,7 +866,7 @@ const EditUserProfile = ({
               wrap="wrap"
               w="653px"
               mx="auto"
-              mb={employed ? "30px" : "80px"}
+              mb={employed ? '30px' : '80px'}
               justify="space-between"
             >
               <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
@@ -881,7 +881,7 @@ const EditUserProfile = ({
                   onClick={isEmployed}
                   borderRadius="md"
                   borderColor="#D9D9D9"
-                  _checked={{ bg: "#344CD0" }}
+                  _checked={{ bg: '#344CD0' }}
                 >
                   Yes
                 </Radio>
@@ -893,7 +893,7 @@ const EditUserProfile = ({
                   onClick={notEmployed}
                   borderRadius="md"
                   borderColor="#D9D9D9"
-                  _checked={{ bg: "#344CD0" }}
+                  _checked={{ bg: '#344CD0' }}
                 >
                   No
                 </Radio>
@@ -959,7 +959,7 @@ const EditUserProfile = ({
                     onChange={() => setRemote(true)}
                     borderRadius="md"
                     borderColor="#D9D9D9"
-                    _checked={{ bg: "#344CD0" }}
+                    _checked={{ bg: '#344CD0' }}
                   >
                     Yes
                   </Radio>
@@ -972,7 +972,7 @@ const EditUserProfile = ({
                     onChange={() => setRemote(false)}
                     borderRadius="md"
                     borderColor="#D9D9D9"
-                    _checked={{ bg: "#344CD0" }}
+                    _checked={{ bg: '#344CD0' }}
                   >
                     No
                   </Radio>
@@ -1006,8 +1006,8 @@ const EditUserProfile = ({
                       focusBorderColor="#344CD0"
                       borderColor="#EAF0FE"
                       color="#BBBDC6"
-                      _focus={{ color: "#17171B" }}
-                      _hover={{ borderColor: "#BBBDC6" }}
+                      _focus={{ color: '#17171B' }}
+                      _hover={{ borderColor: '#BBBDC6' }}
                       name="workMonth"
                       label="workMonth"
                       ref={register}
@@ -1064,8 +1064,8 @@ const EditUserProfile = ({
                       focusBorderColor="#344CD0"
                       borderColor="#EAF0FE"
                       color="#BBBDC6"
-                      _focus={{ color: "#17171B" }}
-                      _hover={{ borderColor: "#BBBDC6" }}
+                      _focus={{ color: '#17171B' }}
+                      _hover={{ borderColor: '#BBBDC6' }}
                       name="workYear"
                       label="workYear"
                       ref={register}
@@ -1176,7 +1176,7 @@ const EditUserProfile = ({
                 Slack ID
                 <Tooltip hasArrow label={info} placement="top">
                   <i
-                    style={{ paddingLeft: "10px" }}
+                    style={{ paddingLeft: '10px' }}
                     className="fas fa-question"
                   ></i>
                 </Tooltip>
@@ -1249,7 +1249,7 @@ const EditUserProfile = ({
             </Flex>
             <Flex
               w="100%"
-              style={{ alignItems: "center" }}
+              style={{ alignItems: 'center' }}
               justify="center"
               direction="column"
             >
@@ -1262,7 +1262,7 @@ const EditUserProfile = ({
                 size="lg"
                 color="white"
                 backgroundColor="#344CD0"
-                _hover={{ backgroundColor: "#4254BA", cursor: "pointer" }}
+                _hover={{ backgroundColor: '#4254BA', cursor: 'pointer' }}
                 isLoading={formState.isSubmitting}
                 type="submit"
                 data-cy="registerSubmit"
@@ -1279,7 +1279,7 @@ const EditUserProfile = ({
                 size="lg"
                 color="#9194A8"
                 backgroundColor="#FDFDFF"
-                _hover={{ cursor: "pointer" }}
+                _hover={{ cursor: 'pointer' }}
                 onClick={returnToProfile}
                 data-cy="cancelUpdate"
               >
@@ -1290,14 +1290,14 @@ const EditUserProfile = ({
         </form>
       </Flex>
     </>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     userData: state.user.userData,
     isLoading: state.user.isLoading,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, updateUser)(EditUserProfile);
+export default connect(mapStateToProps, updateUser)(EditUserProfile)
