@@ -4,6 +4,7 @@ import ReactGA from 'react-ga' // for google analytics
 import { connect } from 'react-redux'
 //styles
 import {
+  Box,
   Flex,
   Button,
   Heading,
@@ -70,8 +71,8 @@ function NavBar({
     { id: 1, criteria: 'track', name: 'WEB' },
     { id: 2, criteria: 'track', name: 'UX' },
     { id: 3, criteria: 'track', name: 'DS' },
-    { id: 4, criteria: 'track', name: 'IOS' },
-    { id: 5, criteria: 'track', name: 'AND' },
+    { id: 4, criteria: 'track', name: 'iOS' },
+    { id: 5, criteria: 'track', name: 'Android' },
   ]
 
   const handleType = (name) => {
@@ -91,7 +92,6 @@ function NavBar({
       setTrackFilters([...trackFilters, name])
     }
   }
-
 
   useEffect(() => {
     getUser(userId)
@@ -177,14 +177,13 @@ function NavBar({
         </Flex>
       </Flex>
 
-      <Flex>
+      <Box>
         {/* Filtered Search Buttons */}
         <Flex
-          align="space-around"
-          justify="space-around"
-          p="1%"
+          align="center"
           width="100%"
           margin="0 auto"
+          justify="space-between"
         >
           <Heading as="h1" size="xl">
             Reviews
@@ -205,10 +204,11 @@ function NavBar({
             </MenuButton>
             <MenuList minWidth="240px">
               {types.map((type) => (
-                <MenuOptionGroup type="checkbox">
+                <MenuOptionGroup defaultValue={typeFilters} type="checkbox">
                   <MenuItemOption
                     border="none"
                     backgroundColor="#FFF"
+                    value={type.name}
                     onClick={() => handleType(type.name)}
                   >
                     {type.name}
@@ -233,10 +233,11 @@ function NavBar({
             </MenuButton>
             <MenuList minWidth="240px">
               {tracks.map((track) => (
-                <MenuOptionGroup type="checkbox">
+                <MenuOptionGroup defaultValue={trackFilters} type="checkbox">
                   <MenuItemOption
                     border="none"
                     backgroundColor="#FFF"
+                    value={track.name}
                     onClick={() => handleTrack(track.name)}
                   >
                     {track.name}
@@ -245,16 +246,14 @@ function NavBar({
               ))}
             </MenuList>
           </Menu>
-        </Flex>
-        <Flex align="center" justify="space-between" pt="1%">
           {isBlocked ? (
             <Blocked />
           ) : (
             <Button
-              margin="5%"
               background="#344CD0"
               color="#FFFFFF"
               rounded="35px"
+              ml="50px"
               border="none"
               size="lg"
               isLoading={isLoading}
@@ -265,7 +264,7 @@ function NavBar({
             </Button>
           )}
         </Flex>
-      </Flex>
+      </Box>
     </Flex>
   )
 }
