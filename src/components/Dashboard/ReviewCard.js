@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 
 import BlockButton from './AdminButtons/BlockButton'
@@ -56,7 +56,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
       action: `Submit delete`,
     })
   }
-  useEffect(() => {}, [submitDelete])
+  // useEffect(() => {}, [submitDelete])
   // basic usage for the SingleReview modal
   const { isOpen, onOpen, onClose } = useDisclosure()
   const loginId = localStorage.getItem('userId')
@@ -217,7 +217,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                 w="148px"
                 h="70px"
                 src={`https://logo.clearbit.com/${
-                  review.logo != 'unknown' ? review.logo : logo
+                  review.logo !== 'unknown' ? review.logo : logo
                 }`}
                 fallbackSrc={`http://samscct.com/wp-content/uploads/2014/09/no-logo.png`}
               />
@@ -475,7 +475,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                       color="white"
                       variantColor="red"
                       ml={3}
-                      onClick={submitDelete}
+                      onClick={() => submitDelete}
                       data-cy="confirmDeleteModalReview"
                     >
                       Delete
@@ -760,7 +760,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                     width="106px"
                     height="40px"
                     src={`https://logo.clearbit.com/${
-                      review.logo != 'unknown' ? review.logo : logo
+                      review.logo !== 'unknown' ? review.logo : logo
                     }`}
                     fallbackSrc={`http://samscct.com/wp-content/uploads/2014/09/no-logo.png`}
                   />
@@ -773,7 +773,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               </Flex>
               <i
                 style={{ alignSelf: 'center', fontSize: '22px', opacity: '.2' }}
-                class="far fa-heart"
+                className="far fa-heart"
               ></i>
               <Flex justify="space-between" width="391px" pt="2%">
                 <Flex align="center">

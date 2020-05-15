@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import "../../../App.css";
+import React from 'react'
+import '../../../App.css'
 
-import { useDispatch, useSelector } from "react-redux";
-import { blockUser } from "../../../state/actions/userActions";
+import { useDispatch, useSelector } from 'react-redux'
+import { blockUser } from '../../../state/actions/userActions'
 import {
   AlertDialog,
   AlertDialogBody,
@@ -10,23 +10,23 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  Button
-} from "@chakra-ui/core";
+  Button,
+} from '@chakra-ui/core'
 
 export default function BlockButton({ user_id }) {
-  const [isOpen, setIsOpen] = React.useState();
-  const onClose = () => setIsOpen(false);
-  const cancelRef = React.useRef();
-  const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = React.useState()
+  const onClose = () => setIsOpen(false)
+  const cancelRef = React.useRef()
+  const dispatch = useDispatch()
 
   // get admin status and user status
-  const admin = useSelector(state => state.auth.isAdmin);
-  const blocked = useSelector(state => state.user.isUserBlocked);
+  const admin = useSelector((state) => state.auth.isAdmin)
+  const blocked = useSelector((state) => state.user.isUserBlocked)
   // func to block/unblock user
-  const block = id => {
-    dispatch(blockUser(id));
-    setIsOpen(false);
-  };
+  const block = (id) => {
+    dispatch(blockUser(id))
+    setIsOpen(false)
+  }
   return (
     <>
       {admin && (
@@ -97,5 +97,5 @@ export default function BlockButton({ user_id }) {
         </AlertDialogContent>
       </AlertDialog>
     </>
-  );
+  )
 }

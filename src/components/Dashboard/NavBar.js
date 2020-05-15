@@ -4,6 +4,7 @@ import ReactGA from 'react-ga' // for google analytics
 import { connect } from 'react-redux'
 //styles
 import {
+  Spinner,
   Box,
   Flex,
   Button,
@@ -13,8 +14,6 @@ import {
   InputGroup,
   InputRightElement,
   Icon,
-  useDisclosure,
-  Stack,
   Badge,
   Menu,
   MenuButton,
@@ -41,7 +40,6 @@ function NavBar({
   userData,
 }) {
   const userId = window.localStorage.getItem('userId')
-
   // use to navigate to review form
   const navToReviewForm = () => {
     history.push('/dashboard/add-review')
@@ -179,7 +177,7 @@ function NavBar({
 
   useEffect(() => {
     getUser(userId)
-  }, [])
+  }, [getUser, userId])
 
   return (
     <Flex
@@ -204,7 +202,7 @@ function NavBar({
           />
           <Input
             width="100%"
-            placeholder="Search by company"
+            placeholder="Search for company or position..."
             name="searchbar"
             type="text"
             rounded="20px"
@@ -217,19 +215,25 @@ function NavBar({
         {/* Profile Icon and user menu*/}
         <Flex>
           <Menu position="absolute" height="226px">
-            <MenuButton
-              as={Image}
-              size="50px"
-              style={{
-                opacity: '0.6',
-                borderRadius: userData.profile_image === 'h' ? 'none' : '50%',
-              }}
-              src={
-                userData.profile_image === 'h'
-                  ? require('../../icons/user.svg')
-                  : userData.profile_image
-              }
-            />
+            {!userData.profile_image ||
+            Number(userId) !== Number(userData.id) ? (
+              <Spinner />
+            ) : (
+              <MenuButton
+                as={Image}
+                size="50px"
+                cursor="pointer"
+                style={{
+                  opacity: '0.6',
+                  borderRadius: userData.profile_image === 'h' ? 'none' : '50%',
+                }}
+                src={
+                  userData.profile_image === 'h'
+                    ? require('../../icons/user.svg')
+                    : userData.profile_image
+                }
+              />
+            )}
             <MenuList>
               <MenuItem
                 border="none"
@@ -288,7 +292,11 @@ function NavBar({
             </MenuButton>
             <MenuList minWidth="240px">
               {types.map((type) => (
-                <MenuOptionGroup defaultValue={typeFilters} type="checkbox">
+                <MenuOptionGroup
+                  key={type.name}
+                  defaultValue={typeFilters}
+                  type="checkbox"
+                >
                   <MenuItemOption
                     border="none"
                     backgroundColor="#FFF"
@@ -318,7 +326,11 @@ function NavBar({
             </MenuButton>
             <MenuList minWidth="240px">
               {tracks.map((track) => (
-                <MenuOptionGroup defaultValue={trackFilters} type="checkbox">
+                <MenuOptionGroup
+                  key={track.name}
+                  defaultValue={trackFilters}
+                  type="checkbox"
+                >
                   <MenuItemOption
                     border="none"
                     backgroundColor="#FFF"
