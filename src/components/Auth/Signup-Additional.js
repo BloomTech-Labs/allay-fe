@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 //components
-import SignupLoginInput from "../Reusable/InputFields/SignupLoginInput.js";
-import CustomAutocomplete from "../Reusable/InputFields/Autocomplete";
-import { years } from "../Reusable/yearsData";
+import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js'
+import CustomAutocomplete from '../Reusable/InputFields/Autocomplete'
+import { years } from '../Reusable/yearsData'
 //styles
 import {
   Image,
@@ -16,7 +16,7 @@ import {
   Select,
   Tooltip,
   Box,
-} from "@chakra-ui/core";
+} from '@chakra-ui/core'
 
 const SignupAdditional = ({
   register,
@@ -31,41 +31,41 @@ const SignupAdditional = ({
   profile_resume,
 }) => {
   // graduated state/helpers
-  const [graduated, setGraduated] = useState(false);
+  const [graduated, setGraduated] = useState(false)
   const isGraduated = () => {
-    setGraduated(true);
-  };
+    setGraduated(true)
+  }
   const notGraduated = () => {
-    setGraduated(false);
-  };
+    setGraduated(false)
+  }
   // employed state/helpers
-  const [employed, setEmployed] = useState(false);
+  const [employed, setEmployed] = useState(false)
   const isEmployed = () => {
-    setEmployed(true);
-  };
+    setEmployed(true)
+  }
   const notEmployed = () => {
-    setEmployed(false);
-  };
+    setEmployed(false)
+  }
 
   //radio button state
-  const [priorExp, setPriorExp] = useState(false);
-  const [tlsl, setTlsl] = useState(false);
-  const [remote, setRemote] = useState(false);
+  const [priorExp, setPriorExp] = useState(false)
+  const [tlsl, setTlsl] = useState(false)
+  const [remote, setRemote] = useState(false)
 
   //location helper
   useEffect(() => {
-    setNewLocation({ ...location, myState: location.myState });
+    setNewLocation({ ...location, myState: location.myState })
     // removes numbers, commas, and whitespaces from city
     if (location.myCity) {
       if (/^[0-9]+$/.test(location.myCity) || /\s/.test(location.myCity)) {
-        const tempCity = location.myCity;
+        const tempCity = location.myCity
         setNewLocation({
           ...location,
-          myCity: tempCity.replace(/^[\s,\d]+/, ""),
-        });
+          myCity: tempCity.replace(/^[\s,\d]+/, ''),
+        })
       }
     }
-  }, [location]);
+  }, [location, setNewLocation])
 
   ///info for slack ID
   const info = (
@@ -74,11 +74,11 @@ const SignupAdditional = ({
         objectFit="fit"
         width="300px"
         height="300px"
-        src={require("../../icons/slack.gif")}
+        src={require('../../icons/slack.gif')}
         alt="slack info"
       />
     </Box>
-  );
+  )
 
   return (
     <>
@@ -105,11 +105,11 @@ const SignupAdditional = ({
         alignItems="center"
       >
         {!profile_image ? (
-          <Image size="100px" src={require("../../icons/user.svg")} />
+          <Image size="100px" src={require('../../icons/user.svg')} />
         ) : (
           <Image
             size="100px"
-            style={{ borderRadius: "50px" }}
+            style={{ borderRadius: '50px' }}
             src={profile_image}
           />
         )}
@@ -120,10 +120,10 @@ const SignupAdditional = ({
             placeholder="Upload profile picture"
             onChange={uploadImage}
             style={{
-              opacity: "1",
-              width: "105px",
-              color: "transparent",
-              backgroundColor: "transparent",
+              opacity: '1',
+              width: '105px',
+              color: 'transparent',
+              backgroundColor: 'transparent',
             }}
           />
           <label for="files" class="btn">
@@ -149,8 +149,8 @@ const SignupAdditional = ({
             focusBorderColor="#344CD0"
             borderColor="#EAF0FE"
             color="#17171B"
-            _hover={{ borderColor: "#BBBDC6" }}
-            _placeholder={{ color: "#BBBDC6" }}
+            _hover={{ borderColor: '#BBBDC6' }}
+            _placeholder={{ color: '#BBBDC6' }}
             id="location"
             name="location"
             label="location"
@@ -165,7 +165,7 @@ const SignupAdditional = ({
         wrap="wrap"
         w="653px"
         mx="auto"
-        mb={graduated ? "20px" : "80px"}
+        mb={graduated ? '20px' : '80px'}
         justify="space-between"
       >
         <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
@@ -180,7 +180,7 @@ const SignupAdditional = ({
             onClick={isGraduated}
             borderRadius="md"
             borderColor="#D9D9D9"
-            _checked={{ bg: "#344CD0" }}
+            _checked={{ bg: '#344CD0' }}
           >
             Yes
           </Radio>
@@ -192,7 +192,7 @@ const SignupAdditional = ({
             onClick={notGraduated}
             borderRadius="md"
             borderColor="#D9D9D9"
-            _checked={{ bg: "#344CD0" }}
+            _checked={{ bg: '#344CD0' }}
           >
             No
           </Radio>
@@ -225,8 +225,8 @@ const SignupAdditional = ({
                 focusBorderColor="#344CD0"
                 borderColor="#EAF0FE"
                 color="#BBBDC6"
-                _focus={{ color: "#17171B" }}
-                _hover={{ borderColor: "#BBBDC6" }}
+                _focus={{ color: '#17171B' }}
+                _hover={{ borderColor: '#BBBDC6' }}
                 name="gradMonth"
                 label="gradMonth"
                 ref={register}
@@ -283,8 +283,8 @@ const SignupAdditional = ({
                 focusBorderColor="#344CD0"
                 borderColor="#EAF0FE"
                 color="#BBBDC6"
-                _focus={{ color: "#17171B" }}
-                _hover={{ borderColor: "#BBBDC6" }}
+                _focus={{ color: '#17171B' }}
+                _hover={{ borderColor: '#BBBDC6' }}
                 name="gradYear"
                 label="gradYear"
                 ref={register}
@@ -340,8 +340,8 @@ const SignupAdditional = ({
             focusBorderColor="#344CD0"
             borderColor="#EAF0FE"
             color="#BBBDC6"
-            _focus={{ color: "#17171B" }}
-            _hover={{ borderColor: "#BBBDC6" }}
+            _focus={{ color: '#17171B' }}
+            _hover={{ borderColor: '#BBBDC6' }}
             name="highest_ed"
             label="highest_ed"
             ref={register}
@@ -403,7 +403,7 @@ const SignupAdditional = ({
             onChange={() => setPriorExp(true)}
             borderRadius="md"
             borderColor="#D9D9D9"
-            _checked={{ bg: "#344CD0" }}
+            _checked={{ bg: '#344CD0' }}
           >
             Yes
           </Radio>
@@ -416,7 +416,7 @@ const SignupAdditional = ({
             onChange={() => setPriorExp(false)}
             borderRadius="md"
             borderColor="#D9D9D9"
-            _checked={{ bg: "#344CD0" }}
+            _checked={{ bg: '#344CD0' }}
           >
             No
           </Radio>
@@ -438,7 +438,7 @@ const SignupAdditional = ({
             onChange={() => setTlsl(true)}
             borderRadius="md"
             borderColor="#D9D9D9"
-            _checked={{ bg: "#344CD0" }}
+            _checked={{ bg: '#344CD0' }}
           >
             Yes
           </Radio>
@@ -451,7 +451,7 @@ const SignupAdditional = ({
             onChange={() => setTlsl(false)}
             borderRadius="md"
             borderColor="#D9D9D9"
-            _checked={{ bg: "#344CD0" }}
+            _checked={{ bg: '#344CD0' }}
           >
             No
           </Radio>
@@ -482,7 +482,7 @@ const SignupAdditional = ({
         wrap="wrap"
         w="653px"
         mx="auto"
-        mb={employed ? "30px" : "80px"}
+        mb={employed ? '30px' : '80px'}
         justify="space-between"
       >
         <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
@@ -497,7 +497,7 @@ const SignupAdditional = ({
             onClick={isEmployed}
             borderRadius="md"
             borderColor="#D9D9D9"
-            _checked={{ bg: "#344CD0" }}
+            _checked={{ bg: '#344CD0' }}
           >
             Yes
           </Radio>
@@ -509,7 +509,7 @@ const SignupAdditional = ({
             onClick={notEmployed}
             borderRadius="md"
             borderColor="#D9D9D9"
-            _checked={{ bg: "#344CD0" }}
+            _checked={{ bg: '#344CD0' }}
           >
             No
           </Radio>
@@ -569,7 +569,7 @@ const SignupAdditional = ({
               onChange={() => setRemote(true)}
               borderRadius="md"
               borderColor="#D9D9D9"
-              _checked={{ bg: "#344CD0" }}
+              _checked={{ bg: '#344CD0' }}
             >
               Yes
             </Radio>
@@ -582,7 +582,7 @@ const SignupAdditional = ({
               onChange={() => setRemote(false)}
               borderRadius="md"
               borderColor="#D9D9D9"
-              _checked={{ bg: "#344CD0" }}
+              _checked={{ bg: '#344CD0' }}
             >
               No
             </Radio>
@@ -616,8 +616,8 @@ const SignupAdditional = ({
                 focusBorderColor="#344CD0"
                 borderColor="#EAF0FE"
                 color="#BBBDC6"
-                _focus={{ color: "#17171B" }}
-                _hover={{ borderColor: "#BBBDC6" }}
+                _focus={{ color: '#17171B' }}
+                _hover={{ borderColor: '#BBBDC6' }}
                 name="workMonth"
                 label="workMonth"
                 ref={register}
@@ -674,8 +674,8 @@ const SignupAdditional = ({
                 focusBorderColor="#344CD0"
                 borderColor="#EAF0FE"
                 color="#BBBDC6"
-                _focus={{ color: "#17171B" }}
-                _hover={{ borderColor: "#BBBDC6" }}
+                _focus={{ color: '#17171B' }}
+                _hover={{ borderColor: '#BBBDC6' }}
                 name="workYear"
                 label="workYear"
                 ref={register}
@@ -731,21 +731,21 @@ const SignupAdditional = ({
             placeholder="Upload profile picture"
             onChange={uploadResume}
             style={{
-              opacity: "1",
-              width: "105px",
-              color: "transparent",
-              backgroundColor: "transparent",
+              opacity: '1',
+              width: '105px',
+              color: 'transparent',
+              backgroundColor: 'transparent',
             }}
           />
           <label for="files" class="btn">
             {!profile_resume ? (
-              "Upload resume"
+              'Upload resume'
             ) : (
               <i
                 style={{
-                  fontSize: "1.4rem",
-                  color: "green",
-                  paddingLeft: "20px",
+                  fontSize: '1.4rem',
+                  color: 'green',
+                  paddingLeft: '20px',
                 }}
                 class="far fa-check-circle"
               ></i>
@@ -840,7 +840,7 @@ const SignupAdditional = ({
         <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           Slack ID
           <Tooltip hasArrow label={info} placement="top">
-            <i style={{ paddingLeft: "10px" }} class="fas fa-question"></i>
+            <i style={{ paddingLeft: '10px' }} class="fas fa-question"></i>
           </Tooltip>
         </Text>
         <SignupLoginInput
@@ -900,6 +900,6 @@ const SignupAdditional = ({
         />
       </Flex>
     </>
-  );
-};
-export default SignupAdditional;
+  )
+}
+export default SignupAdditional

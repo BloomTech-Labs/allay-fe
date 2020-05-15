@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useSelector } from 'react-redux'
 // action
@@ -31,7 +31,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
     )
     // data = results;
     setFilteredReviews(results)
-  }, [searchResults])
+  }, [searchResults, data])
 
   // filter by track and review type
   useEffect(() => {
@@ -44,7 +44,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
         : typeFilters.includes(review.review_type)
     )
     setFilteredReviews(filteredResults)
-  }, [trackFilters, typeFilters])
+  }, [trackFilters, typeFilters, data])
 
   return (
     <>
@@ -67,9 +67,9 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             setTypeFilters={setTypeFilters}
           />
 
-          <Flex height="70%" wrap="wrap" mt="90px">
+          <Flex height="70%" wrap="wrap" justify="center" mt="90px">
             {isLoading ? (
-              <Flex w="100%" h="100%" justify="center" align="center">
+              <Flex w="100%" h="100%" align="center">
                 <CustomSpinner />
               </Flex>
             ) : filteredReviews.length >= 1 ? (

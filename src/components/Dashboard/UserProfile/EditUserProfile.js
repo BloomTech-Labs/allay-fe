@@ -60,8 +60,8 @@ const EditUserProfile = ({
       profile_image: userData.profile_image ? userData.profile_image : null,
     },
   })
-  const [show, setShow] = useState(false)
-  const handleClick = () => setShow(!show)
+  // const [show, setShow] = useState(false)
+  // const handleClick = () => setShow(!show)
   //location state/helpers
   const [location, setLocation] = useState({})
   const [newLocation, setNewLocation] = useState({})

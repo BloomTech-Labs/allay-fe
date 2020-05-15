@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ProfilePageReview } from './ProfilePageReview'
 import GridLoader from 'react-spinners/GridLoader'
@@ -64,7 +64,7 @@ const ProfilePage = (props) => {
 
   useEffect(() => {
     dispatch(getUser(id))
-  }, [])
+  }, [dispatch, id])
 
   return (
     <>
@@ -90,7 +90,7 @@ const ProfilePage = (props) => {
             </Link>
           </Flex>
 
-          {userId == userData.id ? (
+          {Number(userId) === Number(userData.id) ? (
             <Flex>
               {userData.profile_image === 'h' ? (
                 <Image
