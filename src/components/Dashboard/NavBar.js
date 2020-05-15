@@ -202,7 +202,7 @@ function NavBar({
           />
           <Input
             width="100%"
-            placeholder="Search by company"
+            placeholder="Search for company or position..."
             name="searchbar"
             type="text"
             rounded="20px"
