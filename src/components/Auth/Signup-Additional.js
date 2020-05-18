@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 //components
 import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js'
 import CustomAutocomplete from '../Reusable/InputFields/Autocomplete'
-
+import { years } from '../Reusable/yearsData'
 //styles
 import {
   Image,
   FormControl,
   FormLabel,
+  FormHelperText,
   FormErrorMessage,
   Flex,
   Text,
@@ -29,15 +30,15 @@ const SignupAdditional = ({
   uploadResume,
   profile_resume,
 }) => {
-  // graduated state
+  // graduated state/helpers
   const [graduated, setGraduated] = useState(false)
-  const [years, setYears] = useState([])
   const isGraduated = () => {
     setGraduated(true)
   }
   const notGraduated = () => {
     setGraduated(false)
   }
+  // employed state/helpers
   const [employed, setEmployed] = useState(false)
   const isEmployed = () => {
     setEmployed(true)
@@ -47,11 +48,11 @@ const SignupAdditional = ({
   }
 
   //radio button state
-  const [priorExp] = useState(false)
-  const [tlsl] = useState(false)
-  const [remote] = useState(false)
+  const [priorExp, setPriorExp] = useState(false)
+  const [tlsl, setTlsl] = useState(false)
+  const [remote, setRemote] = useState(false)
 
-  //location helpers
+  //location helper
   useEffect(() => {
     setNewLocation({ ...location, myState: location.myState })
     // removes numbers, commas, and whitespaces from city
@@ -64,13 +65,7 @@ const SignupAdditional = ({
         })
       }
     }
-  }, [location])
-
-  // year helper
-  useEffect(() => {
-    const year = new Date().getFullYear()
-    setYears(Array.from(new Array(20), (val, index) => year - index))
-  }, [])
+  }, [location, setNewLocation])
 
   ///info for slack ID
   const info = (
@@ -95,7 +90,7 @@ const SignupAdditional = ({
         justify="flex-start"
         fontSize="16px"
       >
-        <Text fontFamily="Muli">
+        <Text color="#131C4D" fontFamily="Muli">
           The information below will be visible on your profile page by others
         </Text>
       </Flex>
@@ -110,7 +105,7 @@ const SignupAdditional = ({
         alignItems="center"
       >
         {!profile_image ? (
-          <Image size="100px" src={require('../../icons/user.png')} />
+          <Image size="100px" src={require('../../icons/user.svg')} />
         ) : (
           <Image
             size="100px"
@@ -140,7 +135,9 @@ const SignupAdditional = ({
       {/* LOCATION OF USER */}
       <Flex wrap="wrap" w="653" justify="center">
         <FormControl>
-          <FormLabel fontFamily="Muli">Location (City, State)</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            Location (City, State)
+          </FormLabel>
           <CustomAutocomplete
             stateHelper={stateHelper}
             w="653px"
@@ -171,30 +168,35 @@ const SignupAdditional = ({
         mb={graduated ? '20px' : '80px'}
         justify="space-between"
       >
-        <FormLabel fontFamily="Muli">
+        <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Have you graduated from Lambda yet?
         </FormLabel>
-
-        <Radio
-          name="graduated"
-          id="graduated-1"
-          value={true}
-          isInvalid
-          defaultChecked={graduated === true}
-          onClick={isGraduated}
-        >
-          Yes
-        </Radio>
-        <Radio
-          isInvalid
-          name="graduated"
-          id="graduated-2"
-          value={false}
-          defaultChecked={graduated === false}
-          onClick={notGraduated}
-        >
-          No
-        </Radio>
+        <Flex justify="space-between" w="131px">
+          <Radio
+            name="graduated"
+            id="graduated-1"
+            value={true}
+            isChecked={graduated === true}
+            onClick={isGraduated}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: '#344CD0' }}
+          >
+            Yes
+          </Radio>
+          <Radio
+            name="graduated"
+            id="graduated-2"
+            value={false}
+            isChecked={graduated === false}
+            onClick={notGraduated}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: '#344CD0' }}
+          >
+            No
+          </Radio>
+        </Flex>
       </Flex>
 
       {/* GRADUATED MONTH AND YEAR */}
@@ -207,7 +209,9 @@ const SignupAdditional = ({
           justify="space-between"
           align="center"
         >
-          <FormLabel fontFamily="Muli">When did you graduate?</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            When did you graduate?
+          </FormLabel>
           <Flex align="center" alignContent="center">
             <FormControl>
               <Select
@@ -321,7 +325,9 @@ const SignupAdditional = ({
       {/* HIGHEST LEVEL OF EDUCATION */}
       <Flex wrap="wrap" w="411px%" justify="center">
         <FormControl>
-          <FormLabel fontFamily="Muli">Highest level of education</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            Highest level of education
+          </FormLabel>
           <Select
             mb="30px"
             mr="17px"
@@ -360,8 +366,12 @@ const SignupAdditional = ({
             </option>
           </Select>
         </FormControl>
+
+        {/* FIELD OF STUDY */}
         <FormControl isInvalid={errors.fieldOfStudy}>
-          <FormLabel fontFamily="Muli">Field of study</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            Field of study
+          </FormLabel>
           <SignupLoginInput
             w="318px"
             mb="30px"
@@ -380,58 +390,72 @@ const SignupAdditional = ({
 
       {/* PRIOR EXPERIENCE */}
       <Flex wrap="wrap" w="653px" mx="auto" mb="30px" justify="space-between">
-        <FormLabel fontFamily="Muli">
+        <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Prior to Lambda did you have any experience in your track?
         </FormLabel>
-
-        <Radio
-          isInvalid
-          name="prior_experience"
-          id="priorExp-1"
-          ref={register}
-          value={true}
-          defaultChecked={priorExp === true}
-        >
-          Yes
-        </Radio>
-        <Radio
-          isInvalid
-          name="prior_experience"
-          id="priorExp-2"
-          ref={register}
-          value={false}
-          defaultChecked={priorExp === false}
-        >
-          No
-        </Radio>
+        <Flex justify="space-between" w="131px">
+          <Radio
+            name="prior_experience"
+            id="priorExp-1"
+            ref={register}
+            value={true}
+            isChecked={priorExp === true}
+            onChange={() => setPriorExp(true)}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: '#344CD0' }}
+          >
+            Yes
+          </Radio>
+          <Radio
+            name="prior_experience"
+            id="priorExp-2"
+            ref={register}
+            value={false}
+            isChecked={priorExp === false}
+            onChange={() => setPriorExp(false)}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: '#344CD0' }}
+          >
+            No
+          </Radio>
+        </Flex>
       </Flex>
 
       {/* DID YOU TL/SL */}
       <Flex wrap="wrap" w="653px" mx="auto" mb="100px" justify="space-between">
-        <FormLabel fontFamily="Muli">
+        <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Have you been a TL/SL while at Lambda?
         </FormLabel>
-
-        <Radio
-          isInvalid
-          name="tlsl_experience"
-          id="TLSL-1"
-          value={true}
-          ref={register}
-          defaultChecked={tlsl === false}
-        >
-          Yes
-        </Radio>
-        <Radio
-          isInvalid
-          name="tlsl_experience"
-          id="TLSL-2"
-          value={false}
-          ref={register}
-          defaultChecked={tlsl === false}
-        >
-          No
-        </Radio>
+        <Flex justify="space-between" w="131px">
+          <Radio
+            name="tlsl_experience"
+            id="TLSL-1"
+            value={true}
+            ref={register}
+            isChecked={tlsl === false}
+            onChange={() => setTlsl(true)}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: '#344CD0' }}
+          >
+            Yes
+          </Radio>
+          <Radio
+            name="tlsl_experience"
+            id="TLSL-2"
+            value={false}
+            ref={register}
+            isChecked={tlsl === false}
+            onChange={() => setTlsl(false)}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: '#344CD0' }}
+          >
+            No
+          </Radio>
+        </Flex>
       </Flex>
 
       <Flex
@@ -461,37 +485,44 @@ const SignupAdditional = ({
         mb={employed ? '30px' : '80px'}
         justify="space-between"
       >
-        <FormLabel fontFamily="Muli">
+        <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
           Are you currently employed in your field of study?
         </FormLabel>
-
-        <Radio
-          isInvalid
-          name="employed"
-          id="employed-1"
-          value={true}
-          defaultChecked={employed === true}
-          onClick={isEmployed}
-        >
-          Yes
-        </Radio>
-        <Radio
-          isInvalid
-          name="employed"
-          id="employed-2"
-          value={false}
-          defaultChecked={employed === false}
-          onClick={notEmployed}
-        >
-          No
-        </Radio>
+        <Flex justify="space-between" w="131px">
+          <Radio
+            name="employed"
+            id="employed-1"
+            value={true}
+            isChecked={employed === true}
+            onClick={isEmployed}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: '#344CD0' }}
+          >
+            Yes
+          </Radio>
+          <Radio
+            name="employed"
+            id="employed-2"
+            value={false}
+            isChecked={employed === false}
+            onClick={notEmployed}
+            borderRadius="md"
+            borderColor="#D9D9D9"
+            _checked={{ bg: '#344CD0' }}
+          >
+            No
+          </Radio>
+        </Flex>
       </Flex>
 
       {/* EMPLOYED COMPANY NAME AND JOB TITLE */}
       {employed ? (
         <Flex wrap="wrap" w="653" justify="center">
           <FormControl>
-            <FormLabel fontFamily="Muli">Company name</FormLabel>
+            <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+              Company name
+            </FormLabel>
             <SignupLoginInput
               w="318px"
               mb="30px"
@@ -505,7 +536,9 @@ const SignupAdditional = ({
             />
           </FormControl>
           <FormControl>
-            <FormLabel fontFamily="Muli">Job title</FormLabel>
+            <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+              Job title
+            </FormLabel>
             <SignupLoginInput
               w="318px"
               mb="30px"
@@ -523,28 +556,37 @@ const SignupAdditional = ({
       {/* REMOTE WORK CHECK */}
       {employed ? (
         <Flex wrap="wrap" w="653px" mx="auto" mb="30px" justify="space-between">
-          <FormLabel fontFamily="Muli">Are you working remotely?</FormLabel>
-
-          <Radio
-            isInvalid
-            name="employed_remote"
-            id="employed_remote-1"
-            value={true}
-            ref={register}
-            defaultChecked={remote === true}
-          >
-            Yes
-          </Radio>
-          <Radio
-            isInvalid
-            name="employed_remote"
-            id="employed_remote-2"
-            value={false}
-            ref={register}
-            defaultChecked={remote === false}
-          >
-            No
-          </Radio>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            Are you working remotely?
+          </FormLabel>
+          <Flex justify="space-between" w="131px">
+            <Radio
+              name="employed_remote"
+              id="employed_remote-1"
+              value={true}
+              ref={register}
+              isChecked={remote === true}
+              onChange={() => setRemote(true)}
+              borderRadius="md"
+              borderColor="#D9D9D9"
+              _checked={{ bg: '#344CD0' }}
+            >
+              Yes
+            </Radio>
+            <Radio
+              name="employed_remote"
+              id="employed_remote-2"
+              value={false}
+              ref={register}
+              isChecked={remote === false}
+              onChange={() => setRemote(false)}
+              borderRadius="md"
+              borderColor="#D9D9D9"
+              _checked={{ bg: '#344CD0' }}
+            >
+              No
+            </Radio>
+          </Flex>
         </Flex>
       ) : null}
 
@@ -558,7 +600,9 @@ const SignupAdditional = ({
           justify="space-between"
           align="center"
         >
-          <FormLabel fontFamily="Muli">When did you start?</FormLabel>
+          <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+            When did you start?
+          </FormLabel>
           <Flex align="center" alignContent="center">
             <FormControl>
               <Select
@@ -665,7 +709,7 @@ const SignupAdditional = ({
           lineHeight="36px"
           color="#BBBDC6"
         >
-          Online presence
+          Online Presence
         </Text>
       </Flex>
 
@@ -673,15 +717,14 @@ const SignupAdditional = ({
       <Flex
         wrap="wrap"
         w="653px"
-        mb="30px"
         mx="auto"
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" color="#131C4D" fontSize="18px" fontFamily="Muli">
           Resume
         </Text>
-        <Flex width="270px">
+        <Flex width="270px" justify="flex-end">
           <input
             type="file"
             filename="image"
@@ -710,6 +753,11 @@ const SignupAdditional = ({
           </label>
         </Flex>
       </Flex>
+      <Flex w="653px" mx="auto" justify="flex-start">
+        <FormHelperText w="653px" mb="30px" color="#9194A8">
+          Must be a .pdf file
+        </FormHelperText>
+      </Flex>
 
       {/* CONTACT EMAIL */}
       <Flex
@@ -720,7 +768,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           Email address
         </Text>
         <SignupLoginInput
@@ -743,7 +791,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           Portfolio URL
         </Text>
         <SignupLoginInput
@@ -766,7 +814,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           LinkedIn URL
         </Text>
         <SignupLoginInput
@@ -789,8 +837,8 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
-          SLack ID
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
+          Slack ID
           <Tooltip hasArrow label={info} placement="top">
             <i style={{ paddingLeft: '10px' }} class="fas fa-question"></i>
           </Tooltip>
@@ -815,7 +863,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           Github URL
         </Text>
         <SignupLoginInput
@@ -838,7 +886,7 @@ const SignupAdditional = ({
         justify="space-between"
         align="center"
       >
-        <Text align="center" fontFamily="Muli">
+        <Text align="center" fontSize="18px" color="#131C4D" fontFamily="Muli">
           Dribbble URL
         </Text>
         <SignupLoginInput

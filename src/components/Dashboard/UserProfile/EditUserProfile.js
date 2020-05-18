@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { useSelector } from 'react-redux'
 import ReactGA from 'react-ga' // for google analytics
 //components
 import SignupLoginInput from '../../Reusable/InputFields/SignupLoginInput.js'
 import CustomAutocomplete from '../../Reusable/InputFields/Autocomplete.js'
+import { years } from '../../Reusable/yearsData'
 //actions
 import updateUser from '../../../state/actions/index'
 //styles
-import CustomSpinner from '../../CustomSpinner.js'
-
 import {
   Image,
   Button,
@@ -23,14 +21,11 @@ import {
   Radio,
   Tooltip,
   Box,
-  InputGroup,
-  InputRightElement,
   Select,
-  Icon,
   Avatar,
+  FormHelperText,
 } from '@chakra-ui/core'
 
-//need to make new action creator editUser
 const EditUserProfile = ({
   match,
   history,
@@ -39,53 +34,56 @@ const EditUserProfile = ({
   updateUser,
 }) => {
   const id = match.params.id
+  // creating form state, setting default values
   const { handleSubmit, errors, register, formState } = useForm({
     defaultValues: {
       firstName: userData.first_name,
       lastName: userData.last_name,
-      gradMonth: userData.graduated ? userData.graduated.slice(5, 7) : '',
-      gradYear: userData.graduated ? userData.graduated.slice(0, 4) : '',
+      gradMonth: userData.graduated ? userData.graduated.slice(5, 7) : null,
+      gradYear: userData.graduated ? userData.graduated.slice(0, 4) : null,
       highest_ed: userData.highest_ed,
       field_of_study: userData.field_of_study,
       employed_company: userData.employed_company,
       employed_title: userData.employed_title,
       workMonth: userData.employed_start
         ? userData.employed_start.slice(5, 7)
-        : '',
+        : null,
       workYear: userData.employed_start
         ? userData.employed_start.slice(0, 4)
-        : '',
-      resume: null,
-      portfolio_URL: userData.portfolio,
-      linked_in: userData.linked_in,
-      slack: userData.slack,
-      github: userData.github,
-      dribble: userData.dribble,
-      profile_image: userData.profile_image,
+        : null,
+      resume: userData.resume ? userData.resume : null,
+      portfolio_URL: userData.portfolio ? userData.portfolio : null,
+      linked_in: userData.linked_in ? userData.linked_in : null,
+      slack: userData.slack ? userData.slack : null,
+      github: userData.github ? userData.github : null,
+      dribble: userData.dribble ? userData.dribble : null,
+      profile_image: userData.profile_image ? userData.profile_image : null,
     },
   })
-  const [show, setShow] = useState(false)
-  const handleClick = () => setShow(!show)
-  //location state
+  // const [show, setShow] = useState(false)
+  // const handleClick = () => setShow(!show)
+  //location state/helpers
   const [location, setLocation] = useState({})
   const [newLocation, setNewLocation] = useState({})
-  const stateHelper = value => {
+  const stateHelper = (value) => {
     setLocation(value)
   }
   // cloudinary stuff
   const [newProfile_image, setNewProfile_Image] = useState('')
   const [newProfile_resume, setNewProfile_resume] = useState('')
 
-  // graduated state
-  const [graduated, setGraduated] = useState(false)
-  const [years, setYears] = useState([])
+  // graduated state/helpers
+  const [graduated, setGraduated] = useState(userData.graduated ? true : false)
   const isGraduated = () => {
     setGraduated(true)
   }
   const notGraduated = () => {
     setGraduated(false)
   }
-  const [employed, setEmployed] = useState(false)
+  // employed state/helpers
+  const [employed, setEmployed] = useState(
+    userData.employed_start ? true : false
+  )
   const isEmployed = () => {
     setEmployed(true)
   }
@@ -94,18 +92,17 @@ const EditUserProfile = ({
   }
 
   //radio button state
-  const [priorExp, setPriorExp] = useState(false)
-  const [tlsl, setTlsl] = useState(false)
-  const [remote, setRemote] = useState(false)
+  const [priorExp, setPriorExp] = useState(
+    userData.prior_experience ? userData.prior_experience : false
+  )
+  const [tlsl, setTlsl] = useState(
+    userData.tlsl_experience ? userData.tlsl_experience : false
+  )
+  const [remote, setRemote] = useState(
+    userData.employed_remote ? userData.employed_remote : false
+  )
 
-  //set radio button state on load
-  useEffect(() => {
-    setPriorExp(userData.prior_experience)
-    setTlsl(userData.tlsl_experience)
-    setRemote(userData.employed_remote)
-  }, [])
-
-  //location helpers
+  //location helper
   useEffect(() => {
     setNewLocation({ ...location, myState: location.myState })
     // removes numbers, commas, and whitespaces from city
@@ -119,12 +116,6 @@ const EditUserProfile = ({
       }
     }
   }, [location])
-
-  // year helper
-  useEffect(() => {
-    const year = new Date().getFullYear()
-    setYears(Array.from(new Array(20), (val, index) => year - index))
-  }, [])
 
   ///info for slack ID
   const info = (
@@ -177,7 +168,7 @@ const EditUserProfile = ({
   //end validation
 
   //add image to cloudinary
-  const updateImage = async e => {
+  const updateImage = async (e) => {
     const files = e.target.files
     const data = new FormData()
     data.append('file', files[0])
@@ -194,7 +185,7 @@ const EditUserProfile = ({
   }
 
   //upload resume to cloudinary
-  const updateResume = async e => {
+  const updateResume = async (e) => {
     const files = e.target.files
     const data = new FormData()
     data.append('file', files[0])
@@ -210,7 +201,8 @@ const EditUserProfile = ({
     setNewProfile_resume(...newProfile_resume, file.secure_url)
   }
 
-  const submitForm = creds => {
+  // FORM SUBMISSION
+  const submitForm = (creds) => {
     // correcting grad date format
     let graduated = null
     if (creds.gradMonth && creds.gradYear) {
@@ -222,7 +214,6 @@ const EditUserProfile = ({
     if (creds.workMonth && creds.workYear) {
       employed_start = `${creds.workYear}-${creds.workMonth}-01`
     }
-    console.log(newLocation)
     // formatting the signup state to match the back end columns
     updateUser(id, {
       first_name: creds.firstName,
@@ -253,15 +244,14 @@ const EditUserProfile = ({
       profile_image: newProfile_image || userData.profile_image,
       portfolio: creds.portfolio_URL || null,
     }).then(() => history.push(`/profile/${id}`))
-    console.log('from edit', creds)
-    // TODO: implement google analytics for updating a user
-    // ReactGA.event({
-    //   category: "User",
-    //   action: `Button Sign Up`,
-    // });
+
+    ReactGA.event({
+      category: 'User',
+      action: `Button Update Profile`,
+    })
   }
 
-  const returnToProfile = e => {
+  const returnToProfile = (e) => {
     e.preventDefault()
     history.push(`/profile/${id}`)
   }
@@ -284,7 +274,7 @@ const EditUserProfile = ({
           <Link
             style={{
               textDecoration: 'none',
-              color: 'black',
+              color: '#344CD0',
             }}
             to="/dashboard"
           >
@@ -328,7 +318,6 @@ const EditUserProfile = ({
         <form onSubmit={handleSubmit(submitForm)}>
           <Flex
             w="833px"
-            // h='825px'
             p="6"
             flexDir="column"
             background="#FDFDFF"
@@ -368,8 +357,8 @@ const EditUserProfile = ({
                 </Text>
               </Flex>
             </Flex>
-            {/* CLOUDINARY IMAGE UPLOAD */}
 
+            {/* CLOUDINARY IMAGE UPLOAD */}
             <Flex
               wrap="wrap"
               w="653px"
@@ -426,7 +415,7 @@ const EditUserProfile = ({
             {/* FIRST NAME, LAST NAME */}
             <Flex wrap="wrap" w="653" justify="center">
               <FormControl isRequired isInvalid={errors.username}>
-                <FormLabel color="#131C4D" fontSize="20px" fontFamily="Muli">
+                <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
                   First Name
                 </FormLabel>
                 <SignupLoginInput
@@ -445,7 +434,7 @@ const EditUserProfile = ({
                 </FormErrorMessage>
               </FormControl>
               <FormControl isRequired isInvalid={errors.username}>
-                <FormLabel color="#131C4D" fontSize="20px" fontFamily="Muli">
+                <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
                   Last Name
                 </FormLabel>
                 <SignupLoginInput
@@ -463,10 +452,13 @@ const EditUserProfile = ({
                 </FormErrorMessage>
               </FormControl>
             </Flex>
+
             {/* LOCATION OF USER */}
             <Flex wrap="wrap" w="653" justify="center">
               <FormControl>
-                <FormLabel fontFamily="Muli">Location (City, State)</FormLabel>
+                <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
+                  Location (City, State)
+                </FormLabel>
                 <CustomAutocomplete
                   stateHelper={stateHelper}
                   w="653px"
@@ -488,6 +480,7 @@ const EditUserProfile = ({
                 />
               </FormControl>
             </Flex>
+
             {/* GRADUATED CHECK */}
             <Flex
               wrap="wrap"
@@ -496,30 +489,35 @@ const EditUserProfile = ({
               mb={graduated ? '20px' : '80px'}
               justify="space-between"
             >
-              <FormLabel fontFamily="Muli">
+              <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
                 Have you graduated from Lambda yet?
               </FormLabel>
-
-              <Radio
-                isInvalid
-                name="graduated"
-                id="graduated-1"
-                value={true}
-                defaultChecked={graduated === true}
-                onClick={isGraduated}
-              >
-                Yes
-              </Radio>
-              <Radio
-                isInvalid
-                name="graduated"
-                id="graduated-2"
-                value={false}
-                defaultChecked={graduated === false}
-                onClick={notGraduated}
-              >
-                No
-              </Radio>
+              <Flex justify="space-between" w="131px">
+                <Radio
+                  name="graduated"
+                  id="graduated-1"
+                  value={true}
+                  isChecked={graduated === true}
+                  onClick={isGraduated}
+                  borderRadius="md"
+                  borderColor="#D9D9D9"
+                  _checked={{ bg: '#344CD0' }}
+                >
+                  Yes
+                </Radio>
+                <Radio
+                  name="graduated"
+                  id="graduated-2"
+                  value={false}
+                  isChecked={graduated === false}
+                  onClick={notGraduated}
+                  borderRadius="md"
+                  borderColor="#D9D9D9"
+                  _checked={{ bg: '#344CD0' }}
+                >
+                  No
+                </Radio>
+              </Flex>
             </Flex>
             {/* GRADUATED MONTH AND YEAR */}
             {graduated ? (
@@ -531,7 +529,9 @@ const EditUserProfile = ({
                 justify="space-between"
                 align="center"
               >
-                <FormLabel fontFamily="Muli">When did you graduate?</FormLabel>
+                <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
+                  When did you graduate?
+                </FormLabel>
                 <Flex align="center" alignContent="center">
                   <FormControl>
                     <Select
@@ -640,10 +640,11 @@ const EditUserProfile = ({
                 Background
               </Text>
             </Flex>
+
             {/* HIGHEST LEVEL OF EDUCATION */}
             <Flex wrap="wrap" w="411px%" justify="center">
               <FormControl>
-                <FormLabel fontFamily="Muli">
+                <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
                   Highest level of education
                 </FormLabel>
                 <Select
@@ -684,8 +685,12 @@ const EditUserProfile = ({
                   </option>
                 </Select>
               </FormControl>
+
+              {/* FIELD OF STUDY */}
               <FormControl isInvalid={errors.fieldOfStudy}>
-                <FormLabel fontFamily="Muli">Field of study</FormLabel>
+                <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
+                  Field of study
+                </FormLabel>
                 <SignupLoginInput
                   w="318px"
                   mb="30px"
@@ -701,6 +706,7 @@ const EditUserProfile = ({
                 </FormErrorMessage>
               </FormControl>
             </Flex>
+
             {/* PRIOR EXPERIENCE */}
             <Flex
               wrap="wrap"
@@ -709,31 +715,39 @@ const EditUserProfile = ({
               mb="30px"
               justify="space-between"
             >
-              <FormLabel fontFamily="Muli">
+              <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
                 Prior to Lambda did you have any experience in your track?
               </FormLabel>
-
-              <Radio
-                name="prior_experience"
-                isInvalid
-                id="priorExp-1"
-                ref={register}
-                value={true}
-                defaultChecked={priorExp === true}
-              >
-                Yes
-              </Radio>
-              <Radio
-                isInvalid
-                name="prior_experience"
-                id="priorExp-2"
-                ref={register}
-                value={false}
-                defaultChecked={priorExp === false}
-              >
-                No
-              </Radio>
+              <Flex justify="space-between" w="131px">
+                <Radio
+                  name="prior_experience"
+                  id="priorExp-1"
+                  ref={register}
+                  value={true}
+                  isChecked={priorExp === true}
+                  onChange={() => setPriorExp(true)}
+                  borderRadius="md"
+                  borderColor="#D9D9D9"
+                  _checked={{ bg: '#344CD0' }}
+                >
+                  Yes
+                </Radio>
+                <Radio
+                  name="prior_experience"
+                  id="priorExp-2"
+                  ref={register}
+                  value={false}
+                  isChecked={priorExp === false}
+                  onChange={() => setPriorExp(false)}
+                  borderRadius="md"
+                  borderColor="#D9D9D9"
+                  _checked={{ bg: '#344CD0' }}
+                >
+                  No
+                </Radio>
+              </Flex>
             </Flex>
+
             {/* DID YOU TL/SL */}
             <Flex
               wrap="wrap"
@@ -742,45 +756,57 @@ const EditUserProfile = ({
               mb="100px"
               justify="space-between"
             >
-              <FormLabel fontFamily="Muli">
+              <FormLabel fontSize="18px" color="#131C4D" fontFamily="Muli">
                 Have you been a TL/SL while at Lambda?
               </FormLabel>
-
-              <Radio
-                isInvalid
-                name="tlsl_experience"
-                id="TLSL-1"
-                value={true}
-                ref={register}
-                defaultChecked={tlsl === false}
-              >
-                Yes
-              </Radio>
-              <Radio
-                isInvalid
-                name="tlsl_experience"
-                id="TLSL-2"
-                value={false}
-                ref={register}
-                defaultChecked={tlsl === false}
-              >
-                No
-              </Radio>
+              <Flex justify="space-between" w="131px">
+                <Radio
+                  name="tlsl_experience"
+                  id="TLSL-1"
+                  value={true}
+                  ref={register}
+                  isChecked={tlsl === true}
+                  onChange={() => setTlsl(true)}
+                  borderRadius="md"
+                  borderColor="#D9D9D9"
+                  _checked={{ bg: '#344CD0' }}
+                >
+                  Yes
+                </Radio>
+                <Radio
+                  name="tlsl_experience"
+                  id="TLSL-2"
+                  value={false}
+                  ref={register}
+                  isChecked={tlsl === false}
+                  onChange={() => setTlsl(false)}
+                  borderRadius="md"
+                  borderColor="#D9D9D9"
+                  _checked={{ bg: '#344CD0' }}
+                >
+                  No
+                </Radio>
+              </Flex>
             </Flex>
+
             {/* RESUME UPLOAD */}
             {/* /// */}
             <Flex
               wrap="wrap"
               w="653px"
-              mb="30px"
               mx="auto"
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                fontSize="18px"
+                color="#131C4D"
+                align="center"
+                fontFamily="Muli"
+              >
                 Resume
               </Text>
-              <Flex width="270px">
+              <Flex width="270px" justify="flex-end">
                 <input
                   type="file"
                   filename="image"
@@ -809,6 +835,12 @@ const EditUserProfile = ({
                 </label>
               </Flex>
             </Flex>
+            <Flex w="653px" mx="auto" justify="flex-start">
+              <FormHelperText w="653px" mb="30px" color="#9194A8">
+                Must be a .pdf file
+              </FormHelperText>
+            </Flex>
+
             {/* //// */}
             <Flex
               wrap="wrap"
@@ -828,6 +860,7 @@ const EditUserProfile = ({
                 Employment
               </Text>
             </Flex>
+
             {/* EMPLOYED CHECK */}
             <Flex
               wrap="wrap"
@@ -836,36 +869,44 @@ const EditUserProfile = ({
               mb={employed ? '30px' : '80px'}
               justify="space-between"
             >
-              <FormLabel fontFamily="Muli">
+              <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
                 Are you currently employed in your field of study?
               </FormLabel>
-
-              <Radio
-                isInvalid
-                name="employed"
-                id="employed-1"
-                value={true}
-                defaultChecked={employed === true}
-                onClick={isEmployed}
-              >
-                Yes
-              </Radio>
-              <Radio
-                isInvalid
-                name="employed"
-                id="employed-2"
-                value={false}
-                defaultChecked={employed === false}
-                onClick={notEmployed}
-              >
-                No
-              </Radio>
+              <Flex justify="space-between" w="131px">
+                <Radio
+                  name="employed"
+                  id="employed-1"
+                  value={true}
+                  isChecked={employed === true}
+                  onClick={isEmployed}
+                  borderRadius="md"
+                  borderColor="#D9D9D9"
+                  _checked={{ bg: '#344CD0' }}
+                >
+                  Yes
+                </Radio>
+                <Radio
+                  name="employed"
+                  id="employed-2"
+                  value={false}
+                  isChecked={employed === false}
+                  onClick={notEmployed}
+                  borderRadius="md"
+                  borderColor="#D9D9D9"
+                  _checked={{ bg: '#344CD0' }}
+                >
+                  No
+                </Radio>
+              </Flex>
             </Flex>
+
             {/* EMPLOYED COMPANY NAME AND JOB TITLE */}
             {employed ? (
               <Flex wrap="wrap" w="653" justify="center">
                 <FormControl>
-                  <FormLabel fontFamily="Muli">Company name</FormLabel>
+                  <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+                    Company name
+                  </FormLabel>
                   <SignupLoginInput
                     w="318px"
                     mb="30px"
@@ -879,7 +920,9 @@ const EditUserProfile = ({
                   />
                 </FormControl>
                 <FormControl>
-                  <FormLabel fontFamily="Muli">Job title</FormLabel>
+                  <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+                    Job title
+                  </FormLabel>
                   <SignupLoginInput
                     w="318px"
                     mb="30px"
@@ -893,6 +936,7 @@ const EditUserProfile = ({
                 </FormControl>
               </Flex>
             ) : null}
+
             {/* REMOTE WORK CHECK */}
             {employed ? (
               <Flex
@@ -902,32 +946,40 @@ const EditUserProfile = ({
                 mb="30px"
                 justify="space-between"
               >
-                <FormLabel fontFamily="Muli">
+                <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
                   Are you working remotely?
                 </FormLabel>
-
-                <Radio
-                  isInvalid
-                  name="employed_remote"
-                  id="employed_remote-1"
-                  value={true}
-                  ref={register}
-                  defaultChecked={remote === true}
-                >
-                  Yes
-                </Radio>
-                <Radio
-                  isInvalid
-                  name="employed_remote"
-                  id="employed_remote-2"
-                  value={false}
-                  ref={register}
-                  defaultChecked={remote === false}
-                >
-                  No
-                </Radio>
+                <Flex justify="space-between" w="131px">
+                  <Radio
+                    name="employed_remote"
+                    id="employed_remote-1"
+                    value={true}
+                    ref={register}
+                    isChecked={remote === true}
+                    onChange={() => setRemote(true)}
+                    borderRadius="md"
+                    borderColor="#D9D9D9"
+                    _checked={{ bg: '#344CD0' }}
+                  >
+                    Yes
+                  </Radio>
+                  <Radio
+                    name="employed_remote"
+                    id="employed_remote-2"
+                    value={false}
+                    ref={register}
+                    isChecked={remote === false}
+                    onChange={() => setRemote(false)}
+                    borderRadius="md"
+                    borderColor="#D9D9D9"
+                    _checked={{ bg: '#344CD0' }}
+                  >
+                    No
+                  </Radio>
+                </Flex>
               </Flex>
             ) : null}
+
             {/* EMPLOYMENT START DATE */}
             {employed ? (
               <Flex
@@ -938,7 +990,9 @@ const EditUserProfile = ({
                 justify="space-between"
                 align="center"
               >
-                <FormLabel fontFamily="Muli">When did you start?</FormLabel>
+                <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+                  When did you start?
+                </FormLabel>
                 <Flex align="center" alignContent="center">
                   <FormControl>
                     <Select
@@ -1044,9 +1098,10 @@ const EditUserProfile = ({
                 lineHeight="36px"
                 color="#BBBDC6"
               >
-                Online presence
+                Online Presence
               </Text>
             </Flex>
+
             {/* PORTFOLIO URL */}
             <Flex
               wrap="wrap"
@@ -1056,7 +1111,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
                 Portfolio URL
               </Text>
               <SignupLoginInput
@@ -1069,6 +1129,7 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
+
             {/* LINKEDIN URL */}
             <Flex
               wrap="wrap"
@@ -1078,7 +1139,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
                 LinkedIn URL
               </Text>
               <SignupLoginInput
@@ -1091,6 +1157,7 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
+
             {/* SLACK USERNAME */}
             <Flex
               wrap="wrap"
@@ -1100,8 +1167,13 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
-                SLack ID
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
+                Slack ID
                 <Tooltip hasArrow label={info} placement="top">
                   <i
                     style={{ paddingLeft: '10px' }}
@@ -1119,6 +1191,7 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
+
             {/* GITHUB USERNAME */}
             <Flex
               wrap="wrap"
@@ -1128,7 +1201,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
                 Github URL
               </Text>
               <SignupLoginInput
@@ -1141,6 +1219,7 @@ const EditUserProfile = ({
                 ref={register}
               />
             </Flex>
+
             {/* DRIBBBLE URL */}
             <Flex
               wrap="wrap"
@@ -1150,7 +1229,12 @@ const EditUserProfile = ({
               justify="space-between"
               align="center"
             >
-              <Text align="center" fontFamily="Muli">
+              <Text
+                color="#131C4D"
+                fontSize="18px"
+                align="center"
+                fontFamily="Muli"
+              >
                 Dribbble URL
               </Text>
               <SignupLoginInput
@@ -1171,7 +1255,7 @@ const EditUserProfile = ({
             >
               <Button
                 border="none"
-                rounded="5px"
+                rounded="50px"
                 h="58px"
                 w="653px"
                 my="2%"
@@ -1188,7 +1272,7 @@ const EditUserProfile = ({
               <Button
                 mb="30px"
                 border="none"
-                rounded="5px"
+                rounded="50px"
                 h="58px"
                 w="653px"
                 my="2%"
@@ -1209,7 +1293,7 @@ const EditUserProfile = ({
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     userData: state.user.userData,
     isLoading: state.user.isLoading,

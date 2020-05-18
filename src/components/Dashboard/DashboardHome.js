@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useSelector } from 'react-redux'
 // action
@@ -18,7 +18,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   const [searchResults, setSearchResults] = useState([])
   const [trackFilters, setTrackFilters] = useState([])
   const [typeFilters, setTypeFilters] = useState([])
-  const isDeleted = useSelector(state => state.review.reviewDeleted)
+  const isDeleted = useSelector((state) => state.review.reviewDeleted)
 
   useEffect(() => {
     getReview()
@@ -26,16 +26,16 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
 
   // filter searchbar by company name
   useEffect(() => {
-    const results = data.filter(review =>
+    const results = data.filter((review) =>
       review.company_name.toLowerCase().includes(searchResults)
     )
     // data = results;
     setFilteredReviews(results)
-  }, [searchResults])
+  }, [searchResults, data])
 
   // filter by track and review type
   useEffect(() => {
-    const filteredResults = data.filter(review =>
+    const filteredResults = data.filter((review) =>
       trackFilters.length > 0 && typeFilters.length > 0
         ? trackFilters.includes(review.track_name) &&
           typeFilters.includes(review.review_type)
@@ -44,11 +44,11 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
         : typeFilters.includes(review.review_type)
     )
     setFilteredReviews(filteredResults)
-  }, [trackFilters, typeFilters])
+  }, [trackFilters, typeFilters, data])
 
   return (
     <>
-      <Flex w="100%" minH="100vh" justify="center">
+      <Flex w="100%" minH="100vh" justify="center" pt="4%">
         <Flex
           maxW="1440px"
           w="100%"
@@ -67,17 +67,13 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
             setTypeFilters={setTypeFilters}
           />
 
-          <Flex align="center" justify="flex-start" mb="1%" ml="2.5%">
-            <Flex as="h2">Recent Posts</Flex>
-          </Flex>
-
-          <Flex height="70%" wrap="wrap">
+          <Flex height="70%" wrap="wrap" justify="center" mt="90px">
             {isLoading ? (
-              <Flex w="100%" h="100%" justify="center" align="center">
+              <Flex w="100%" h="100%" align="center">
                 <CustomSpinner />
               </Flex>
             ) : filteredReviews.length >= 1 ? (
-              filteredReviews.map(review => (
+              filteredReviews.map((review) => (
                 <ReviewCard
                   key={review.review_id}
                   review={review}
@@ -109,7 +105,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
               </Flex>
             ) : (
               data.length > 0 &&
-              data.map(review => (
+              data.map((review) => (
                 <ReviewCard
                   key={review.review_id}
                   review={review}
@@ -124,7 +120,7 @@ const DashboardHome = ({ data, getReview, history, isLoading }) => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoading: state.review.fetchingData,
     data: state.review.data,

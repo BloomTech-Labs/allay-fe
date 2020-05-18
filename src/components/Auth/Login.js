@@ -17,7 +17,7 @@ import {
   Text,
   InputGroup,
   InputRightElement,
-  Stack
+  Stack,
 } from "@chakra-ui/core";
 
 const Login = ({ login, isLoading, history }) => {
@@ -45,19 +45,19 @@ const Login = ({ login, isLoading, history }) => {
     return error || true;
   }
 
-  const submitForm = creds => {
+  const submitForm = (creds) => {
     // action function here
     login(creds).then(() => history.push("/dashboard"));
     ReactGA.event({
       category: "User",
-      action: `Button Login`
+      action: `Button Login`,
     });
   };
 
   const gaSignup = () => {
     ReactGA.event({
       category: "User",
-      action: `Link Don't have an account`
+      action: `Link Don't have an account`,
     });
   };
 
@@ -113,7 +113,7 @@ const Login = ({ login, isLoading, history }) => {
             >
               <Flex
                 as="h2"
-                fontSize="32px"
+                fontSize="36px"
                 fontFamily="Poppins"
                 justify="center"
                 mx="1"
@@ -124,7 +124,9 @@ const Login = ({ login, isLoading, history }) => {
 
               <Flex wrap="wrap" w="411px%" justify="center">
                 <FormControl isInvalid={errors.email}>
-                  <FormLabel>email</FormLabel>
+                  <FormLabel color="#131C4D" fontSize="18px" fontFamily="Muli">
+                    Email
+                  </FormLabel>
                   <SignupLoginInput
                     mb="30px"
                     type="text"
@@ -140,7 +142,13 @@ const Login = ({ login, isLoading, history }) => {
                 </FormControl>
                 <FormControl isInvalid={errors.password}>
                   <Flex flexDir="column">
-                    <FormLabel>password</FormLabel>
+                    <FormLabel
+                      color="#131C4D"
+                      fontSize="18px"
+                      fontFamily="Muli"
+                    >
+                      Password
+                    </FormLabel>
                     <InputGroup>
                       <SignupLoginInput
                         mb="30px"
@@ -153,7 +161,6 @@ const Login = ({ login, isLoading, history }) => {
                       />
                       <InputRightElement width="4.5rem" py="32px">
                         <Button
-                          // position='fixed'
                           h="1.75rem"
                           color="rgba(72, 72, 72, 0.1)"
                           border="none"
@@ -174,12 +181,14 @@ const Login = ({ login, isLoading, history }) => {
                   <Button
                     mb="30px"
                     border="none"
+                    rounded="50px"
                     h="58px"
                     w="404px"
                     my="2%"
                     size="lg"
                     color="white"
                     backgroundColor="#344CD0"
+                    _hover={{ backgroundColor: "#4254BA", cursor: "pointer" }}
                     isLoading={formState.isSubmitting}
                     type="submit"
                     data-cy="loginSubmit"
@@ -189,15 +198,18 @@ const Login = ({ login, isLoading, history }) => {
                 </Flex>
               </Flex>
               <Flex m="15px" justify="center" fontWeight="light">
-                <Text>
-                  Don't have an account?
+                <Text fontSize="16px" color="#17171B" fontFamily="Muli">
+                  Don't have an account?{" "}
                   <Link
                     to="/signup"
-                    color="black"
                     onClick={gaSignup}
-                    fontWeight="bold"
-                    underline="none"
                     data-cy="signupLink"
+                    style={{
+                      textDecoration: "none",
+                      fontWeight: "bold",
+                      color: "#344CD0",
+                      fontSize: "16px",
+                    }}
                   >
                     Sign up here!
                   </Link>
@@ -211,9 +223,9 @@ const Login = ({ login, isLoading, history }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isLoading: state.auth.isLoading
+    isLoading: state.auth.isLoading,
   };
 };
 
