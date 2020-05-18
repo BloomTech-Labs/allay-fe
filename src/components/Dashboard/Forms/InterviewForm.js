@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import ReactGA from "react-ga"; // for google analytics
-import { states } from "../../Reusable/statesData";
+import React, { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import ReactGA from 'react-ga' // for google analytics
+import { states } from '../../Reusable/statesData'
 // redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux'
 // actions
-import postReview from "../../../state/actions";
-import getCompanies from "../../../state/actions";
-import postCompany from "../../../state/actions";
+import postReview from '../../../state/actions'
+import getCompanies from '../../../state/actions'
+import postCompany from '../../../state/actions'
 // styles
-import ProgressBar from "../../Reusable/ProgressBar.js";
-import CustomAutoComplete from "../../Reusable/InputFields/Autocomplete";
-import BeautyStars from "beauty-stars";
-import { ThinkingDots } from "../../Reusable/ThinkingDots";
+import ProgressBar from '../../Reusable/ProgressBar.js'
+import CustomAutoComplete from '../../Reusable/InputFields/Autocomplete'
+import BeautyStars from 'beauty-stars'
+import { ThinkingDots } from '../../Reusable/ThinkingDots'
 import {
   FormControl,
   Flex,
@@ -27,325 +27,325 @@ import {
   Avatar,
   RadioButtonGroup,
   CheckboxGroup,
-  Link
-} from "@chakra-ui/core";
-import AOS from "aos";
-import "aos/dist/aos.css";
+  Link,
+} from '@chakra-ui/core'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 //
-import axiosToDS from "../../../utils/axiosToDS";
-import CustomSpinner from "../../CustomSpinner";
+import axiosToDS from '../../../utils/axiosToDS'
+import CustomSpinner from '../../CustomSpinner'
 
 const InterviewForm = ({
   loadingCompanies,
   getCompanies,
   companies,
   postReview,
-  history
+  history,
 }) => {
-  AOS.init();
-  const { register, handleSubmit, formState } = useForm();
+  AOS.init()
+  const { register, handleSubmit, formState } = useForm()
   // state "state"
-  const [location, setLocation] = useState({});
-  const [newLocation, setNewLocation] = useState({});
-  const stateSelectorHelper = value => {
-    setLocation(value);
-  };
+  const [location, setLocation] = useState({})
+  const [newLocation, setNewLocation] = useState({})
+  const stateSelectorHelper = (value) => {
+    setLocation(value)
+  }
   // thinking state
-  const [thinking, setThinking] = useState(false);
+  const [thinking, setThinking] = useState(false)
   const dots = () => {
-    setThinking(true);
-  };
-  console.log(thinking);
+    setThinking(true)
+  }
+  console.log(thinking)
   // search state
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [searchResults, setSearchResults] = useState([])
   // no company state
-  const [noCompany, setNoCompany] = useState(false);
+  const [noCompany, setNoCompany] = useState(false)
   // star rating
-  const [starState, setStarState] = useState(0);
+  const [starState, setStarState] = useState(0)
   // custom radio button state offer status
-  const [offer, setOffer] = useState(1);
+  const [offer, setOffer] = useState(1)
   //progress bar
   const [progress, setProgress] = useState({
     prec: 99,
     mins: 10,
-    prog: 2
-  });
+    prog: 2,
+  })
 
   // company search function
   useEffect(() => {
     if (searchTerm.length >= 3) {
-      const results = companies.filter(company =>
+      const results = companies.filter((company) =>
         company.company_name.toLowerCase().startsWith(searchTerm.toLowerCase())
-      );
-      setSearchResults(results);
+      )
+      setSearchResults(results)
       if (results.length === 0) {
-        setNoCompany(true);
+        setNoCompany(true)
       } else {
-        setNoCompany(false);
+        setNoCompany(false)
       }
     }
-  }, [searchTerm, companies]);
+  }, [searchTerm, companies])
 
   // state confirmation search function
 
   useEffect(() => {
     if (location.myState) {
-      const stateId = states.filter(i =>
+      const stateId = states.filter((i) =>
         i.state_name.toLowerCase().startsWith(location.myState.toLowerCase())
-      );
-      setNewLocation({ ...location, myState: stateId[0].id });
+      )
+      setNewLocation({ ...location, myState: stateId[0].id })
     }
-  }, [location]);
+  }, [location])
 
   // state for visibility
-  const [Tag2, setTag2] = useState(false);
-  const [Tag3, setTag3] = useState(false);
-  const [Tag4, setTag4] = useState(false);
-  const [Tag5, setTag5] = useState(false);
-  const [Tag6, setTag6] = useState(false);
-  const [Tag7, setTag7] = useState(false);
-  const [Tag8, setTag8] = useState(false);
-  const [Tag9, setTag9] = useState(false);
+  const [Tag2, setTag2] = useState(false)
+  const [Tag3, setTag3] = useState(false)
+  const [Tag4, setTag4] = useState(false)
+  const [Tag5, setTag5] = useState(false)
+  const [Tag6, setTag6] = useState(false)
+  const [Tag7, setTag7] = useState(false)
+  const [Tag8, setTag8] = useState(false)
+  const [Tag9, setTag9] = useState(false)
 
   // brings to top on render
   useEffect(() => {
-    getCompanies();
+    getCompanies()
     setProgress({
       prec: 95,
       mins: 8,
-      prog: 5
-    });
-    const element = document.getElementById("Tag1");
+      prog: 5,
+    })
+    const element = document.getElementById('Tag1')
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }, [getCompanies]);
+      behavior: 'smooth',
+      block: 'start',
+    })
+  }, [getCompanies])
 
   // timers for moves
-  let timer = null;
-  let dotTimer = null;
+  let timer = null
+  let dotTimer = null
   // 2nd tag
   const time1 = () => {
-    clearTimeout(timer);
-    clearTimeout(dotTimer);
-    dotTimer = setTimeout(dots, 500);
-    timer = setTimeout(routeTo2, 2000);
-  };
+    clearTimeout(timer)
+    clearTimeout(dotTimer)
+    dotTimer = setTimeout(dots, 500)
+    timer = setTimeout(routeTo2, 4000)
+  }
 
   const routeTo2 = () => {
-    setTag2(true);
+    setTag2(true)
     setProgress({
       prec: 80,
       mins: 8,
-      prog: 20
-    });
-    const element = document.getElementById("Tag2");
+      prog: 20,
+    })
+    const element = document.getElementById('Tag2')
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-    setThinking(false);
-  };
+      behavior: 'smooth',
+      block: 'start',
+    })
+    setThinking(false)
+  }
   // 3rd tag
   const time2 = () => {
-    clearTimeout(timer);
-    clearTimeout(dotTimer);
-    dotTimer = setTimeout(dots, 500);
-    timer = setTimeout(routeTo3, 2000);
-  };
+    clearTimeout(timer)
+    clearTimeout(dotTimer)
+    dotTimer = setTimeout(dots, 500)
+    timer = setTimeout(routeTo3, 2000)
+  }
 
   const routeTo3 = () => {
-    setTag3(true);
+    setTag3(true)
     setProgress({
       prec: 70,
       mins: 7,
-      prog: 30
-    });
-    const element = document.getElementById("Tag3");
+      prog: 30,
+    })
+    const element = document.getElementById('Tag3')
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-    setThinking(false);
-  };
+      behavior: 'smooth',
+      block: 'center',
+    })
+    setThinking(false)
+  }
   //4th tag
   const time3 = () => {
-    clearTimeout(timer);
-    clearTimeout(dotTimer);
-    dotTimer = setTimeout(dots, 500);
-    timer = setTimeout(routeTo4, 2000);
-  };
+    clearTimeout(timer)
+    clearTimeout(dotTimer)
+    dotTimer = setTimeout(dots, 500)
+    timer = setTimeout(routeTo4, 2000)
+  }
 
   const routeTo4 = () => {
-    setTag4(true);
+    setTag4(true)
     setProgress({
       prec: 60,
       mins: 6,
-      prog: 40
-    });
-    const element = document.getElementById("Tag4");
+      prog: 40,
+    })
+    const element = document.getElementById('Tag4')
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-    setThinking(false);
-  };
+      behavior: 'smooth',
+      block: 'start',
+    })
+    setThinking(false)
+  }
   // 5th tag
   const time4 = () => {
-    clearTimeout(timer);
-    clearTimeout(dotTimer);
-    dotTimer = setTimeout(dots, 500);
-    timer = setTimeout(routeTo5, 2000);
-  };
+    clearTimeout(timer)
+    clearTimeout(dotTimer)
+    dotTimer = setTimeout(dots, 500)
+    timer = setTimeout(routeTo5, 2000)
+  }
 
   const routeTo5 = () => {
-    setTag5(true);
+    setTag5(true)
     setProgress({
       prec: 50,
       mins: 5,
-      prog: 50
-    });
-    const element = document.getElementById("Tag5");
+      prog: 50,
+    })
+    const element = document.getElementById('Tag5')
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-    setThinking(false);
-  };
+      behavior: 'smooth',
+      block: 'center',
+    })
+    setThinking(false)
+  }
   // 6th tag
   const time5 = () => {
-    clearTimeout(timer);
-    clearTimeout(dotTimer);
-    dotTimer = setTimeout(dots, 500);
-    timer = setTimeout(routeTo6, 2000);
-  };
+    clearTimeout(timer)
+    clearTimeout(dotTimer)
+    dotTimer = setTimeout(dots, 500)
+    timer = setTimeout(routeTo6, 2000)
+  }
 
   const routeTo6 = () => {
-    setTag6(true);
+    setTag6(true)
     setProgress({
       prec: 40,
       mins: 4,
-      prog: 60
-    });
-    const element = document.getElementById("Tag6");
+      prog: 60,
+    })
+    const element = document.getElementById('Tag6')
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-    setThinking(false);
-  };
+      behavior: 'smooth',
+      block: 'center',
+    })
+    setThinking(false)
+  }
   // 7th tag
   const time6 = () => {
-    clearTimeout(timer);
-    clearTimeout(dotTimer);
-    dotTimer = setTimeout(dots, 500);
-    timer = setTimeout(routeTo7, 2000);
-  };
+    clearTimeout(timer)
+    clearTimeout(dotTimer)
+    dotTimer = setTimeout(dots, 500)
+    timer = setTimeout(routeTo7, 2000)
+  }
 
   const routeTo7 = () => {
-    setTag7(true);
+    setTag7(true)
     setProgress({
       prec: 30,
       mins: 3,
-      prog: 70
-    });
-    const element = document.getElementById("Tag7");
+      prog: 70,
+    })
+    const element = document.getElementById('Tag7')
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-    setThinking(false);
-  };
+      behavior: 'smooth',
+      block: 'center',
+    })
+    setThinking(false)
+  }
   // 8th tag
   const time7 = () => {
-    clearTimeout(timer);
-    clearTimeout(dotTimer);
-    dotTimer = setTimeout(dots, 500);
-    timer = setTimeout(routeTo8, 2000);
-  };
+    clearTimeout(timer)
+    clearTimeout(dotTimer)
+    dotTimer = setTimeout(dots, 500)
+    timer = setTimeout(routeTo8, 2000)
+  }
 
   const routeTo8 = () => {
-    setTag8(true);
+    setTag8(true)
     setProgress({
       prec: 20,
       mins: 1,
-      prog: 85
-    });
-    const element = document.getElementById("Tag8");
+      prog: 85,
+    })
+    const element = document.getElementById('Tag8')
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-    setThinking(false);
-  };
+      behavior: 'smooth',
+      block: 'center',
+    })
+    setThinking(false)
+  }
   // 9th tag
   const time8 = () => {
-    clearTimeout(timer);
-    clearTimeout(dotTimer);
-    dotTimer = setTimeout(dots, 500);
-    timer = setTimeout(routeTo9, 2000);
-  };
+    clearTimeout(timer)
+    clearTimeout(dotTimer)
+    dotTimer = setTimeout(dots, 500)
+    timer = setTimeout(routeTo9, 2000)
+  }
 
   const routeTo9 = () => {
-    setTag9(true);
+    setTag9(true)
     setProgress({
       prec: 100,
       mins: 0,
-      prog: 100
-    });
-    const element = document.getElementById("Tag9");
+      prog: 100,
+    })
+    const element = document.getElementById('Tag9')
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-    setThinking(false);
-  };
+      behavior: 'smooth',
+      block: 'start',
+    })
+    setThinking(false)
+  }
 
   // custom select for offer accepted
   const CustomRadio = React.forwardRef((props, ref) => {
-    const { isChecked, isDisabled, value, ...rest } = props;
+    const { isChecked, isDisabled, value, ...rest } = props
     return (
       <Button
         ref={ref}
-        variantColor={isChecked ? "blue" : "gray"}
+        variantColor={isChecked ? 'blue' : 'gray'}
         aria-checked={isChecked}
         role="radio"
         isDisabled={isDisabled}
         {...rest}
       />
-    );
-  });
+    )
+  })
   //push to dashboard and send info to DS for review
-  const send_push = data => {
-    var dataForDS = JSON.stringify(data);
+  const send_push = (data) => {
+    var dataForDS = JSON.stringify(data)
     axiosToDS()
-      .post("/check_review", dataForDS)
-      .then(res => {
-        console.log(res);
+      .post('/check_review', dataForDS)
+      .then((res) => {
+        console.log(res)
       })
-      .catch(err => {
-        console.log(err);
-      });
-    history.push("/dashboard");
-  };
+      .catch((err) => {
+        console.log(err)
+      })
+    history.push('/dashboard')
+  }
 
   //submit handler
-  const submitForm = data => {
-    postReview(localStorage.getItem("userId"), {
+  const submitForm = (data) => {
+    postReview(localStorage.getItem('userId'), {
       ...data,
       review_type_id: 2,
       overall_rating: starState,
       offer_status_id: offer,
       city: newLocation.myCity,
-      state_id: newLocation.myState
-    }).then(() => send_push(data));
+      state_id: newLocation.myState,
+    }).then(() => send_push(data))
     ReactGA.event({
-      category: "Review",
-      action: `Submit review`
-    });
-  };
+      category: 'Review',
+      action: `Submit review`,
+    })
+  }
 
   return (
     // main container
@@ -376,7 +376,7 @@ const InterviewForm = ({
               </>
             ) : (
               <>
-                <Flex as="h4">{progress.prec}% not completed</Flex>
+                <Flex as="h4">{100 - progress.prec}% completed</Flex>
                 <Flex color="#FFFFFF"> {progress.mins} mins</Flex>
               </>
             )}
@@ -458,16 +458,16 @@ const InterviewForm = ({
                         h="56px"
                         variant="filled"
                         rounded="6px"
-                        autoCapitalize="none"
+                        textTransform="capitalize"
                         type="text"
                         label="company_name"
                         name="company_name"
                         list="company_name"
                         ref={register}
-                        onChange={e => setSearchTerm(e.target.value)}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                       />
                       <datalist id="company_name">
-                        {searchResults.map(company => (
+                        {searchResults.map((company) => (
                           <option value={company.company_name} key={company.id}>
                             {company.company_name}
                           </option>
@@ -503,6 +503,7 @@ const InterviewForm = ({
                     name="Company Headquarters"
                     label="Company Headquarters"
                     placeholder="e.g. Los Angeles, CA"
+                    textTransform="capitalize"
                     onChange={time1}
                   />
                 </Flex>
@@ -1023,9 +1024,9 @@ const InterviewForm = ({
                           label="offer_status_id"
                           name="offer_status_id"
                           defaultValue="1"
-                          onChange={val => {
-                            setOffer(val);
-                            time6();
+                          onChange={(val) => {
+                            setOffer(val)
+                            time6()
                           }}
                         >
                           <CustomRadio value="1" w="411px">
@@ -1233,9 +1234,9 @@ const InterviewForm = ({
                           name="interviewRating"
                           value={starState}
                           activeColor="blue"
-                          onChange={value => {
-                            setStarState(value);
-                            time8();
+                          onChange={(value) => {
+                            setStarState(value)
+                            time8()
                           }}
                         />
                       </Flex>
@@ -1338,17 +1339,17 @@ const InterviewForm = ({
         {/* <Flex w='30%' /> */}
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     loadingCompanies: state.company.isLoading,
-    companies: state.company.data
-  };
-};
+    companies: state.company.data,
+  }
+}
 
 export default connect(
   mapStateToProps,
   (postReview, getCompanies, postCompany)
-)(InterviewForm);
+)(InterviewForm)
