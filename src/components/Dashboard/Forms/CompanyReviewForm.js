@@ -121,8 +121,8 @@ const ReviewForm2 = ({
   const time1 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo2, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo2, 1000)
   }
   const routeTo2 = () => {
     setTag2(true)
@@ -140,8 +140,8 @@ const ReviewForm2 = ({
   const time2 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 800)
-    timer = setTimeout(routeTo3, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo3, 1000)
   }
   const routeTo3 = () => {
     setTag3(true)
@@ -159,8 +159,8 @@ const ReviewForm2 = ({
   const time3 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 2000)
-    timer = setTimeout(routeTo4, 4000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo4, 1000)
   }
   const routeTo4 = () => {
     setTag4(true)
@@ -178,8 +178,8 @@ const ReviewForm2 = ({
   const time4 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo5, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo5, 1000)
   }
   const routeTo5 = () => {
     setTag5(true)
@@ -197,8 +197,8 @@ const ReviewForm2 = ({
   const time5 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo6, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo6, 1000)
   }
   const routeTo6 = () => {
     setTag6(true)
@@ -309,13 +309,14 @@ const ReviewForm2 = ({
                 {/* company box */}
                 <Flex
                   w="459px"
-                  h="600px"
+                  h="800px"
                   mb="8%"
                   px="6"
                   py="8"
                   border="1px solid #BBBDC6"
                   rounded="6px"
                   flexDir="column"
+                  justify="space-evenly"
                   data-aos="fade-in"
                   data-aos-offset="200"
                   data-aos-delay="1000"
@@ -431,10 +432,12 @@ const ReviewForm2 = ({
                       label="end_date"
                       name="end_date"
                       placeholder="YYYY"
-                      onKeyUp={time1}
                       ref={register}
                     />
                   </Flex>
+                  <Button mt="8px" h="56px" rounded="6px" onClick={time1}>
+                    Next
+                  </Button>
                 </Flex>
                 {/* avatar */}
                 <Flex
@@ -501,13 +504,14 @@ const ReviewForm2 = ({
                     {/* long hand interview box */}
                     <Flex
                       w="459px"
-                      h="242px"
+                      h="350px"
                       mb="8%"
                       px="6"
                       py="8"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
+                      justify="space-evenly"
                       data-aos="fade-in"
                       data-aos-offset="200"
                       data-aos-delay="2400"
@@ -526,10 +530,12 @@ const ReviewForm2 = ({
                         type="text"
                         name="comment"
                         rounded="6px"
-                        onKeyUp={time2}
                         ref={register}
                         data-cy="companyComment"
                       />
+                      <Button mt="8px" h="56px" rounded="6px" onClick={time2}>
+                        Next
+                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
@@ -677,12 +683,13 @@ const ReviewForm2 = ({
                     {/* salary box */}
                     <Flex
                       w="459px"
-                      h="150px"
+                      h="250px"
                       mb="8%"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
+                      justify="space-evenly"
                       data-aos="fade-in"
                       data-aos-offset="200"
                       data-aos-delay="1000"
@@ -709,10 +716,12 @@ const ReviewForm2 = ({
                           type="number"
                           label="salary"
                           name="salary"
-                          onKeyUp={time4}
                           ref={register}
                         />
                       </InputGroup>
+                      <Button h="56px" rounded="6px" mt="7px" onClick={time4}>
+                        Next
+                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
