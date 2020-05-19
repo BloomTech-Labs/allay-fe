@@ -41,12 +41,10 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   const submitDelete = (user_id, review_id) => {
     if (review.user_id && review.review_id) {
       deleteReview(review.user_id, review.review_id).then(() => {
-        // window.location.reload();
         history.push('/dashboard')
       })
     } else {
       deleteReview(user_id, review_id).then(() => {
-        // window.location.reload();
         history.push('/dashboard')
       })
     }
@@ -475,7 +473,7 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                       color="white"
                       variantColor="red"
                       ml={3}
-                      onClick={() => submitDelete}
+                      onClick={submitDelete}
                       data-cy="confirmDeleteModalReview"
                     >
                       Delete
