@@ -130,8 +130,8 @@ const InterviewForm = ({
   const time1 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo2, 4000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo2, 1000)
   }
 
   const routeTo2 = () => {
@@ -152,8 +152,8 @@ const InterviewForm = ({
   const time2 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo3, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo3, 1000)
   }
 
   const routeTo3 = () => {
@@ -174,8 +174,8 @@ const InterviewForm = ({
   const time3 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo4, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo4, 1000)
   }
 
   const routeTo4 = () => {
@@ -196,8 +196,8 @@ const InterviewForm = ({
   const time4 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo5, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo5, 1000)
   }
 
   const routeTo5 = () => {
@@ -218,8 +218,8 @@ const InterviewForm = ({
   const time5 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo6, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo6, 1000)
   }
 
   const routeTo6 = () => {
@@ -240,8 +240,8 @@ const InterviewForm = ({
   const time6 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo7, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo7, 1000)
   }
 
   const routeTo7 = () => {
@@ -262,8 +262,8 @@ const InterviewForm = ({
   const time7 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo8, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo8, 1000)
   }
 
   const routeTo8 = () => {
@@ -284,8 +284,8 @@ const InterviewForm = ({
   const time8 = () => {
     clearTimeout(timer)
     clearTimeout(dotTimer)
-    dotTimer = setTimeout(dots, 500)
-    timer = setTimeout(routeTo9, 2000)
+    dotTimer = setTimeout(dots, 300)
+    timer = setTimeout(routeTo9, 1000)
   }
 
   const routeTo9 = () => {
@@ -436,6 +436,7 @@ const InterviewForm = ({
                   border="1px solid #BBBDC6"
                   rounded="6px"
                   flexDir="column"
+                  justify="space-evenly"
                   data-aos="fade-in"
                   data-aos-offset="200"
                   data-aos-delay="1000"
@@ -504,8 +505,12 @@ const InterviewForm = ({
                     label="Company Headquarters"
                     placeholder="e.g. Los Angeles, CA"
                     textTransform="capitalize"
-                    onChange={time1}
+                    h="56px"
+                    mb="6"
                   />
+                  <Button h="56px" rounded="6px" onClick={time1}>
+                    Next
+                  </Button>
                 </Flex>
                 {/* avatar */}
                 <Flex
@@ -576,12 +581,13 @@ const InterviewForm = ({
                     {/* rounds box */}
                     <Flex
                       w="459px"
-                      h="136px"
+                      h="250px"
                       mb="8%"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
+                      justify="space-evenly"
                       data-aos="fade-in"
                       data-aos-offset="200"
                       data-aos-delay="2000"
@@ -600,7 +606,6 @@ const InterviewForm = ({
                         label="interview_rounds"
                         name="interview_rounds"
                         placeholder="Select one"
-                        onChange={time2}
                       >
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -613,6 +618,9 @@ const InterviewForm = ({
                         <option value={9}>9</option>
                         <option value={10}>10</option>
                       </Select>
+                      <Button h="56px" rounded="6px" onClick={time2}>
+                        Next
+                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
@@ -664,13 +672,14 @@ const InterviewForm = ({
                     {/* types of interview box */}
                     <Flex
                       w="459px"
-                      h="190px"
+                      h="250px"
                       mb="8%"
                       px="6"
                       py="8"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
+                      justify="space-evenly"
                       data-aos="fade-in"
                       data-aos-offset="200"
                       data-aos-delay="1000"
@@ -680,7 +689,7 @@ const InterviewForm = ({
                       data-aos-once="true"
                     >
                       <FormLabel>Select types of interviews</FormLabel>
-                      <CheckboxGroup onChange={time3}>
+                      <CheckboxGroup>
                         <Flex>
                           <Flex direction="column" pr="0.5%">
                             <Checkbox
@@ -752,6 +761,9 @@ const InterviewForm = ({
                           </Flex>
                         </Flex>
                       </CheckboxGroup>
+                      <Button mt="8px" h="56px" rounded="6px" onClick={time3}>
+                        Next
+                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
@@ -825,6 +837,7 @@ const InterviewForm = ({
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
+                      justify="space-evenly"
                       data-aos="fade-in"
                       data-aos-offset="200"
                       data-aos-delay="2600"
@@ -844,9 +857,11 @@ const InterviewForm = ({
                         rounded="6px"
                         resize="none"
                         ref={register}
-                        onKeyUp={time4}
                         data-cy="interviewComment"
                       />
+                      <Button mt="10px" h="56px" rounded="6px" onClick={time4}>
+                        Next
+                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
@@ -918,12 +933,13 @@ const InterviewForm = ({
                     {/* diff box */}
                     <Flex
                       w="459px"
-                      h="136px"
+                      h="250px"
                       mb="8%"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
+                      justify="space-evenly"
                       data-aos="fade-in"
                       data-aos-offset="200"
                       data-aos-delay="3000"
@@ -942,7 +958,7 @@ const InterviewForm = ({
                         label="difficulty_rating"
                         name="difficulty_rating"
                         placeholder="Select one"
-                        onChange={time5}
+                        // onChange={time5}
                         ref={register}
                       >
                         <option value={5}>Very difficult</option>
@@ -951,6 +967,7 @@ const InterviewForm = ({
                         <option value={2}>Easy</option>
                         <option value={1}>Very easy</option>
                       </Select>
+                      <Button onClick={time5}>Next</Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
@@ -1109,12 +1126,13 @@ const InterviewForm = ({
                     {/* salary box */}
                     <Flex
                       w="459px"
-                      h="150px"
+                      h="250px"
                       mb="8%"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
+                      justify="space-evenly"
                       data-aos="fade-in"
                       data-aos-offset="200"
                       data-aos-delay="1000"
@@ -1141,10 +1159,13 @@ const InterviewForm = ({
                           label="salary"
                           name="salary"
                           autoCapitalize="none"
-                          onKeyUp={time7}
+                          // onKeyUp={time7}
                           ref={register}
                         />
                       </InputGroup>
+                      <Button h="56px" rounded="6px" mt="7px" onClick={time7}>
+                        Next
+                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
