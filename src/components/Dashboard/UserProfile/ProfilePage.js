@@ -83,6 +83,9 @@ const ProfilePage = (props) => {
               style={{
                 textDecoration: 'none',
                 color: '#344CD0',
+                fontFamily: 'Poppins',
+                fontWeight: '600',
+                fontSize: '32px',
               }}
               to="/dashboard"
             >
