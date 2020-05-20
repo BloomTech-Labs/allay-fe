@@ -28,7 +28,12 @@ const FormController = ({ history }) => {
   return (
     // main container
     <>
-      <Flex className="Splash" w="100vw" minH="100vh" justify="center">
+      <Flex
+        // className="Splash"
+        w="100vw"
+        minH="100vh"
+        justify="center"
+      >
         {/* max size */}
         <Flex maxW="1440px" w="100%">
           {/* form container */}
@@ -44,7 +49,7 @@ const FormController = ({ history }) => {
             <Flex
               pt="1%"
               px="2%"
-              w="70%"
+              w="100%"
               h="108px"
               background="#344CD0"
               top="0"
@@ -65,7 +70,17 @@ const FormController = ({ history }) => {
                 ) : (
                   <>
                     <Flex as="h4">{100 - progress.prec}% completed</Flex>
-                    <Flex color="#FFFFFF"> {progress.mins} mins</Flex>
+
+                    {/* <Flex color="#FFFFFF"> {progress.mins} mins</Flex> */}
+                    <Button
+                      rounded="50px"
+                      _hover={{ backgroundColor: '#FFF', cursor: 'pointer' }}
+                      onClick={() => {
+                        history.push('/dashboard')
+                      }}
+                    >
+                      Cancel
+                    </Button>
                   </>
                 )}
               </Flex>
@@ -80,13 +95,13 @@ const FormController = ({ history }) => {
               overflow="hidden"
               zIndex="997"
             >
-              <Button
+              {/* <Button
                 onClick={() => {
                   history.push('/dashboard')
                 }}
               >
                 Cancel
-              </Button>
+              </Button> */}
             </Flex>
             {/* Start of messenger  */}
             <Flex
@@ -167,7 +182,7 @@ const FormController = ({ history }) => {
                 mb="8%"
                 px="6"
                 py="5"
-                border="1px solid #BBBDC6"
+                border="1px solid #e6e5e5"
                 rounded="6px"
                 flexDir="column"
                 data-aos="fade-in"

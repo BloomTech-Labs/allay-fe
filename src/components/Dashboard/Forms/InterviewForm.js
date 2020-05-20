@@ -508,9 +508,21 @@ const InterviewForm = ({
                     h="56px"
                     mb="6"
                   />
-                  <Button h="56px" rounded="6px" onClick={time1}>
+                  {/* <Flex width="100%" justify="center"> */}
+                  <Button
+                    h="56px"
+                    rounded="50px"
+                    mb="30px"
+                    border="none"
+                    size="lg"
+                    color="white"
+                    backgroundColor="#344CD0"
+                    _hover={{ backgroundColor: '#4254BA', cursor: 'pointer' }}
+                    onClick={time1}
+                  >
                     Next
                   </Button>
+                  {/* </Flex> */}
                 </Flex>
                 {/* avatar */}
                 <Flex
@@ -618,7 +630,7 @@ const InterviewForm = ({
                         <option value={9}>9</option>
                         <option value={10}>10</option>
                       </Select>
-                      <Button h="56px" rounded="6px" onClick={time2}>
+                      <Button h="56px" rounded="50px" onClick={time2}>
                         Next
                       </Button>
                     </Flex>
