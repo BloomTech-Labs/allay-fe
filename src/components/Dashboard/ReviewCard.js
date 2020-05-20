@@ -67,13 +67,10 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   const cancelRef = useRef()
 
   //routes to single review
-  const navToEditRoute = () => {
-    if (review.review_type === 'Company') {
-      history.push(`/dashboard/review/${review.review_id}`)
-    } else {
-      history.push(`/dashboard/interview/${review.review_id}`)
-    }
-  }
+  const navToEditRoute = () =>
+    review.review_type === 'Company'
+      ? history.push(`/dashboard/review/${review.review_id}`)
+      : history.push(`/dashboard/interview/${review.review_id}`)
 
   //routes to user's profile page
   const navToProfile = (e) => {
