@@ -214,7 +214,7 @@ function NavBar({
       <Flex
         align="center"
         justify="space-between"
-        pt="1%"
+        py="28px"
         mb="4%"
         h="100px"
         borderBottom="1px solid #EAF0FE"

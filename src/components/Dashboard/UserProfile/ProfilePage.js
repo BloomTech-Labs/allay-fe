@@ -69,48 +69,49 @@ const ProfilePage = (props) => {
   return (
     <>
       {/* //Top Section */}
-      <Flex Flex w="100%" height="84px" justify="center">
-        <Flex
-          maxW="1440px"
-          w="100%"
-          pt="1%"
-          pr="3%"
-          pl="3%"
-          justify="space-between"
-        >
-          <Flex>
-            <Link
-              style={{
-                textDecoration: 'none',
-                color: '#344CD0',
-                fontFamily: 'Poppins',
-                fontWeight: '600',
-                fontSize: '32px',
-              }}
-              to="/dashboard"
-            >
-              <h1> Allay </h1>
-            </Link>
-          </Flex>
 
-          {Number(userId) === Number(userData.id) ? (
-            <Flex>
-              {userData.profile_image === 'h' ? (
-                <Image
-                  size="50px"
-                  style={{ opacity: '0.6' }}
-                  src={require('../../../icons/user.svg')}
-                />
-              ) : (
-                <Image
-                  size="50px"
-                  style={{ opacity: '0.6', borderRadius: '50%' }}
-                  src={userData.profile_image}
-                />
-              )}
-            </Flex>
-          ) : null}
+      <Flex
+        maxW="1440px"
+        w="100%"
+        px="40px"
+        py="28px"
+        m="0 auto"
+        justify="space-between"
+        align="center"
+        borderBottom="1px solid #EAF0FE"
+      >
+        <Flex>
+          <Link
+            style={{
+              textDecoration: 'none',
+              color: '#344CD0',
+              fontFamily: 'Poppins',
+              fontWeight: '600',
+              fontSize: '32px',
+            }}
+            to="/dashboard"
+          >
+            <h1> Allay </h1>
+          </Link>
         </Flex>
+
+        {Number(userId) === Number(userData.id) ? (
+          <Flex>
+            {userData.profile_image === 'h' ? (
+              <Image
+                size="58px"
+                style={{ opacity: '0.6' }}
+                src={require('../../../icons/user.svg')}
+              />
+            ) : (
+              <Image
+                size="58px"
+                style={{ opacity: '0.6', borderRadius: '50%' }}
+                src={userData.profile_image}
+              />
+            )}
+          </Flex>
+        ) : null}
       </Flex>
 
       {!isLoading ? (
