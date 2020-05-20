@@ -138,7 +138,9 @@ function NavBar({
         key={`ReviewBadge-${index}`}
         backgroundColor="#E2E2E2"
         color="#131C4D"
-        p="8px 18px"
+        fontFamily="Muli"
+        fontWeight="normal"
+        p="5px 15px"
         m="5px"
         style={{ borderRadius: '50px' }}
         variantColor="green"
@@ -168,8 +170,10 @@ function NavBar({
           return (
             <Badge
               key={`TrackBadge-${index}`}
-              p="8px 18px"
+              p="5px 15px"
               m="2px"
+              fontFamily="Muli"
+              fontWeight="normal"
               backgroundColor={trackColorPicker(typeName)}
               color={trackFontColor(typeName)}
               style={{ borderRadius: '50px' }}
@@ -184,8 +188,10 @@ function NavBar({
               key={`TrackBadge-${index}`}
               backgroundColor="#E2E2E2"
               color="#131C4D"
-              p="8px 18px"
-              m="5px"
+              fontFamily="Muli"
+              fontWeight="normal"
+              p="5px 15px"
+              m="2px"
               style={{ borderRadius: '50px' }}
               variantColor="green"
             >
@@ -325,8 +331,20 @@ function NavBar({
                 fontSize="20px"
                 fontWeight="bold"
               >
-                {type.length > 0 ? typeBadge(type) : 'Filter by review type'}
-                <Icon name="triangle-down" color="#344CD0" />
+                <Flex
+                  justify="space-between"
+                  align="center"
+                  pl={track.length > 0 ? '10px' : '30px'}
+                  pr="18px"
+                >
+                  <Flex w="100%">
+                    {type.length > 0
+                      ? typeBadge(type)
+                      : 'Filter by review type'}
+                  </Flex>
+
+                  <Icon name="triangle-down" color="#344CD0" fontSize="16px" />
+                </Flex>
               </MenuButton>
               <MenuList minWidth="240px">
                 {types.map((type) => (
@@ -350,7 +368,7 @@ function NavBar({
             <Menu closeOnSelect={false}>
               <MenuButton
                 outline="none"
-                w="290px"
+                w="260px"
                 h="65px"
                 bg="#FFFFFF"
                 border="2px solid #EAF0FE"
@@ -359,8 +377,18 @@ function NavBar({
                 fontSize="20px"
                 fontWeight="bold"
               >
-                {track.length > 0 ? trackBadge(track) : 'Filter by field'}
-                <Icon name="triangle-down" color="#344CD0" />
+                <Flex
+                  justify="space-between"
+                  align="center"
+                  pl={track.length > 0 ? '10px' : '30px'}
+                  pr="18px"
+                >
+                  <Flex w="100%">
+                    {track.length > 0 ? trackBadge(track) : 'Filter by field'}
+                  </Flex>
+
+                  <Icon name="triangle-down" color="#344CD0" fontSize="16px" />
+                </Flex>
               </MenuButton>
               <MenuList minWidth="240px">
                 {tracks.map((track) => (
