@@ -387,16 +387,22 @@ function NavBar({
           ) : (
             <Button
               background="#344CD0"
-              color="#FFFFFF"
+              color="#FDFDFF"
+              _hover={{ bg: '#4254BA', cursor: 'pointer' }}
+              fontFamily="Muli"
+              fontWeight="bold"
+              fontSize="20px"
               rounded="35px"
-              ml="50px"
+              p="19px 20px"
+              w="180px"
+              h="63px"
               border="none"
               size="lg"
               isLoading={isLoading}
               onClick={navToReviewForm}
               data-cy="addReviewButton"
             >
-              Add Review
+              Write a review
             </Button>
           )}
         </Flex>
