@@ -37,6 +37,8 @@ import { MdRateReview } from 'react-icons/md'
 //for time display
 var moment = require('moment') // require
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
+  const singleReview = review
+  console.log(singleReview)
   //deletes the review in question
   const submitDelete = (user_id, review_id) => {
     if (review.user_id && review.review_id) {
@@ -65,13 +67,13 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   const cancelRef = useRef()
 
   //routes to single review
-  const navToEditRoute = () => {
-    if (review.review_type === 'Company') {
-      history.push(`/dashboard/review/${review.review_id}`)
-    } else {
-      history.push(`/dashboard/interview/${review.review_id}`)
-    }
-  }
+  const navToEditRoute = () =>
+    review.review_type === 'Company'
+      ? history.push({
+          pathname: `/dashboard/review/${review.review_id}`,
+          state: singleReview,
+        })
+      : history.push(`/dashboard/interview/${review.review_id}`)
 
   //routes to user's profile page
   const navToProfile = (e) => {

@@ -26,13 +26,7 @@ import {
   FormHelperText,
 } from '@chakra-ui/core'
 
-const EditUserProfile = ({
-  match,
-  history,
-  userData,
-  isLoading,
-  updateUser,
-}) => {
+const EditUserProfile = ({ match, history, userData, updateUser }) => {
   const id = match.params.id
   const userId = window.localStorage.getItem('userId')
   // creating form state, setting default values
@@ -61,8 +55,7 @@ const EditUserProfile = ({
       profile_image: userData.profile_image ? userData.profile_image : null,
     },
   })
-  // const [show, setShow] = useState(false)
-  // const handleClick = () => setShow(!show)
+
   //location state/helpers
   const [location, setLocation] = useState({})
   const [newLocation, setNewLocation] = useState({})
@@ -257,9 +250,12 @@ const EditUserProfile = ({
     history.push(`/profile/${id}`)
   }
 
-  if (isLoading) {
-    return null
-  }
+  //see profilePage component for details
+  const lazySolution =
+    userData.location != 'undefined undefined ' &&
+    userData.location != 'undefined undefined'
+      ? userData.location
+      : 'Enter your location'
 
   return (
     <>
@@ -468,7 +464,7 @@ const EditUserProfile = ({
                   id="location"
                   name="location"
                   label="location"
-                  placeholder={userData.location}
+                  placeholder={lazySolution}
                   ref={register}
                 />
               </FormControl>
