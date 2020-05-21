@@ -249,6 +249,13 @@ const EditUserProfile = ({ match, history, userData, updateUser }) => {
     history.push(`/profile/${id}`)
   }
 
+  //see profilePage component for details
+  const lazySolution =
+    userData.location != 'undefined undefined ' &&
+    userData.location != 'undefined undefined'
+      ? userData.location
+      : 'Enter your location'
+
   return (
     <>
       <Flex Flex w="100%" height="84px" justify="center">
@@ -464,7 +471,7 @@ const EditUserProfile = ({ match, history, userData, updateUser }) => {
                   id="location"
                   name="location"
                   label="location"
-                  placeholder={userData.location}
+                  placeholder={lazySolution}
                   ref={register}
                 />
               </FormControl>

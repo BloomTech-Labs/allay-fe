@@ -66,6 +66,14 @@ const ProfilePage = (props) => {
     dispatch(getUser(id))
   }, [dispatch, id])
 
+  //send location: null receive undefiend send again empty recieve the same with white space, backend fix but itll do for now
+
+  const lazySolution =
+    userData.location != 'undefined undefined ' &&
+    userData.location != 'undefined undefined'
+      ? userData.location
+      : 'null'
+
   return (
     <>
       {/* //Top Section */}
@@ -238,8 +246,7 @@ const ProfilePage = (props) => {
                             className="fas fa-map-marker-alt"
                           ></i>
 
-                          {/* TODO: */}
-                          {userData.location}
+                          {lazySolution}
                         </h6>
                       </Box>
                     </Flex>
