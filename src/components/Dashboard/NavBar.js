@@ -49,7 +49,14 @@ function NavBar({
     })
   }
 
-  const profile_id = localStorage.getItem('userId')
+  // image helper
+  const [imageTimeout, setImageTimeout] = useState(true)
+  useEffect(() => {
+    setTimeout(function () {
+      setImageTimeout(false)
+    }, 1500)
+  }, [])
+
   const logout = () => {
     localStorage.clear('token')
     localStorage.clear('userId')
@@ -233,9 +240,9 @@ function NavBar({
 
         {/* Search bar*/}
         <InputGroup w="40%">
-          <InputRightElement
-            children={<Icon name="search-2" color="#344CD0" />}
-          />
+          <InputRightElement>
+            <Icon name="search-2" color="#344CD0" />
+          </InputRightElement>
           <Input
             width="100%"
             placeholder="Search for company or position..."
@@ -251,8 +258,7 @@ function NavBar({
         {/* Profile Icon and user menu*/}
         <Flex pr="40px">
           <Menu position="absolute" height="226px">
-            {!userData.profile_image ||
-            Number(userId) !== Number(userData.id) ? (
+            {imageTimeout ? (
               <Spinner />
             ) : (
               <MenuButton
@@ -262,11 +268,8 @@ function NavBar({
                 style={{
                   borderRadius: '50%',
                 }}
-                src={
-                  userData.profile_image === 'h'
-                    ? require('../../icons/user.svg')
-                    : userData.profile_image
-                }
+                src={userData.profile_image}
+                fallbackSrc={require('../../icons/user.svg')}
               />
             )}
             <MenuList>
@@ -274,7 +277,7 @@ function NavBar({
                 border="none"
                 backgroundColor="#FFF"
                 data-cy="signOut"
-                onClick={() => history.push(`/profile/${profile_id}`)}
+                onClick={() => history.push(`/profile/${userId}`)}
               >
                 Profile
               </MenuItem>
@@ -282,7 +285,7 @@ function NavBar({
                 border="none"
                 backgroundColor="#FFF"
                 data-cy="signOut"
-                onClick={() => history.push(`/profile/${profile_id}/edit`)}
+                onClick={() => history.push(`/profile/${userId}/edit`)}
               >
                 Account settings
               </MenuItem>
