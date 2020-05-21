@@ -9,7 +9,8 @@ import postReview from '../../../state/actions'
 import getCompanies from '../../../state/actions'
 import postCompany from '../../../state/actions'
 // styles
-import ProgressBar from '../../Reusable/ProgressBar.js'
+
+import ProgressBar from '../../Reusable/ProgressBar'
 import CustomAutoComplete from '../../Reusable/InputFields/Autocomplete'
 import BeautyStars from 'beauty-stars'
 import { ThinkingDots } from '../../Reusable/ThinkingDots'
@@ -356,33 +357,54 @@ const InterviewForm = ({
         <Flex
           pt="1%"
           px="2%"
-          w="70%"
-          h="108px"
-          background="#344CD0"
+          w="100%"
+          h="130px"
+          background="#F2F6FE"
           top="0"
           position="fixed"
           overflow="hidden"
           zIndex="999"
           direction="column"
         >
-          <Flex w="100%" color="#FFFFFF">
-            Your progress
+          <Flex w="100%">
+            <h2 fontSize="24px" color="#131C4D" fontFamily="poppins">
+              Write a review
+            </h2>
           </Flex>
 
-          <Flex w="100%" justify="space-between" mb="1%" color="#FFFFFF">
+          <Flex w="100%" justify="space-between" mb="1%">
             {progress.prec === 100 ? (
               <>
-                <Flex as="h4">{progress.prec}% Completed!</Flex>
+                <Flex as="h4" size="22px">
+                  {progress.prec}% Completed!
+                </Flex>{' '}
               </>
             ) : (
               <>
-                <Flex as="h4">{100 - progress.prec}% completed</Flex>
-                <Flex color="#FFFFFF"> {progress.mins} mins</Flex>
+                <Flex as="h4" fontFamily="muli" color="#131C4D">
+                  {100 - progress.prec}% completed
+                </Flex>
+
+                {/* <Flex color="#FFFFFF"> {progress.mins} mins</Flex> */}
+                <Button
+                  border="none"
+                  backgroundColor="#F2F6FE"
+                  color="#344CD0"
+                  fontSize="20px"
+                  rounded="50px"
+                  _hover={{ backgroundColor: '#FFF', cursor: 'pointer' }}
+                  onClick={() => {
+                    history.push('/dashboard')
+                  }}
+                >
+                  Cancel
+                </Button>
               </>
             )}
           </Flex>
           <ProgressBar value={progress.prog} />
         </Flex>
+
         {thinking ? (
           <>
             <Flex
@@ -430,13 +452,13 @@ const InterviewForm = ({
                 <Flex
                   w="459px"
                   h="379px"
-                  mb="8%"
+                  // mb="8%"
                   px="6"
                   py="10"
                   border="1px solid #BBBDC6"
                   rounded="6px"
                   flexDir="column"
-                  justify="space-evenly"
+                  // justify="space-evenly"
                   data-aos="fade-in"
                   data-aos-offset="200"
                   data-aos-delay="1000"
@@ -508,26 +530,33 @@ const InterviewForm = ({
                     h="56px"
                     mb="6"
                   />
-                  {/* <Flex width="100%" justify="center"> */}
-                  <Button
-                    h="56px"
-                    rounded="50px"
-                    mb="30px"
-                    border="none"
-                    size="lg"
-                    color="white"
-                    backgroundColor="#344CD0"
-                    _hover={{ backgroundColor: '#4254BA', cursor: 'pointer' }}
-                    onClick={time1}
+                  {/* avatar */}
+                  <Flex
+                    h="234px"
+                    align="flex-end"
+                    ml="1%"
+                    mr="2%"
+                    data-aos="fade-in"
+                    data-aos-offset="200"
+                    data-aos-delay="3000"
+                    data-aos-duration="2000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="false"
                   >
-                    Next
-                  </Button>
+                    <Avatar size="md" src="https://bit.ly/broken-link" />
+                  </Flex>
+                  {/* <Flex width="100%" justify="center"> */}
+
                   {/* </Flex> */}
                 </Flex>
                 {/* avatar */}
+
                 <Flex
-                  h="379px"
-                  align="flex-end"
+                  // h="379px"
+                  mt="5px"
+                  align-self="flex-end"
+                  flexDir="column"
                   ml="1%"
                   data-aos="fade-in"
                   data-aos-offset="200"
@@ -539,7 +568,21 @@ const InterviewForm = ({
                 >
                   <Avatar size="md" src="https://bit.ly/broken-link" />
                 </Flex>
+                <Flex justify="right-align">
+                  <Button
+                    h="56px"
+                    rounded="35px"
+                    border="1px solid #344CD0"
+                    color="#344CD0"
+                    backgroundColor="#FFF"
+                    _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                    onClick={time1}
+                  >
+                    Next
+                  </Button>
+                </Flex>
               </Flex>
+
               {/* second prompt */}
               {Tag2 ? (
                 <>

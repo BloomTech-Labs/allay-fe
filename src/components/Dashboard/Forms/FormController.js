@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 //styles
 import companyIcon from '../../../companyIcon.png'
 import interviewIcon from '../../../interviewIcon.png'
-import { Flex, Avatar, Button, Image } from '@chakra-ui/core'
+import { Flex, Avatar, Button, Image, Text } from '@chakra-ui/core'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import ProgressBar from '../../Reusable/ProgressBar.js'
+import ProgressBar from '../../Reusable/ProgressBar'
 //components
 import InterviewForm from './InterviewForm'
 import CompanyReviewForm from './CompanyReviewForm'
@@ -17,7 +17,7 @@ const FormController = ({ history }) => {
   const [showInterview, setShowInterview] = useState(false)
   // state to show company review
   const [showCompanyReview, setShowCompanyReview] = useState(false)
-  //progress bar
+
   //progress bar
   const [progress] = useState({
     prec: 99,
@@ -50,29 +50,39 @@ const FormController = ({ history }) => {
               pt="1%"
               px="2%"
               w="100%"
-              h="108px"
-              background="#344CD0"
+              h="130px"
+              background="#F2F6FE"
               top="0"
               position="fixed"
               overflow="hidden"
               zIndex="999"
               direction="column"
             >
-              <Flex w="100%" color="#FFFFFF">
-                Your progress
+              <Flex w="100%">
+                <h2 fontSize="24px" color="#131C4D" fontFamily="poppins">
+                  Write a review
+                </h2>
               </Flex>
 
-              <Flex w="100%" justify="space-between" mb="1%" color="#FFFFFF">
+              <Flex w="100%" justify="space-between" mb="1%">
                 {progress.prec === 100 ? (
                   <>
-                    <Flex as="h4">{progress.prec}% Completed!</Flex>{' '}
+                    <Flex as="h4" size="22px">
+                      {progress.prec}% Completed!
+                    </Flex>{' '}
                   </>
                 ) : (
                   <>
-                    <Flex as="h4">{100 - progress.prec}% completed</Flex>
+                    <Flex as="h4" fontFamily="muli" color="#131C4D" w="50%">
+                      {100 - progress.prec}% <span>completed</span>
+                    </Flex>
 
                     {/* <Flex color="#FFFFFF"> {progress.mins} mins</Flex> */}
                     <Button
+                      border="none"
+                      backgroundColor="#F2F6FE"
+                      color="#344CD0"
+                      fontSize="20px"
                       rounded="50px"
                       _hover={{ backgroundColor: '#FFF', cursor: 'pointer' }}
                       onClick={() => {
@@ -86,23 +96,7 @@ const FormController = ({ history }) => {
               </Flex>
               <ProgressBar value={progress.prog} />
             </Flex>
-            <Flex
-              w="70%"
-              pb="1%"
-              justify="flex-end"
-              bottom="0"
-              position="fixed"
-              overflow="hidden"
-              zIndex="997"
-            >
-              {/* <Button
-                onClick={() => {
-                  history.push('/dashboard')
-                }}
-              >
-                Cancel
-              </Button> */}
-            </Flex>
+
             {/* Start of messenger  */}
             <Flex
               align="center"
