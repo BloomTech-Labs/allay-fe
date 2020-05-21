@@ -52,7 +52,6 @@ export const postReview = (userId, newReview) => (dispatch) => {
   return axiosWithAuth()
     .post(`/users/${userId}/add-review`, newReview)
     .then((res) => {
-      console.log('new review', res)
       dispatch({ type: POST_REVIEW_SUCCESS, payload: res.data })
     })
     .catch((err) => {

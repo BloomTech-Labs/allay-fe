@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { connect } from 'react-redux'
-import getReviewById from '../../../state/actions/index.js'
-import editReview from '../../../state/actions/index.js'
+import { useDispatch, useSelector } from 'react-redux'
+// import getReviewById from '../../../state/actions/index.js'
+import { editReview } from '../../../state/actions/reviewActions'
 import ReactGA from 'react-ga'
 import { states } from '../../Reusable/statesData'
-import EditReviewInput from '../../Reusable/InputFields/EditReviewInput'
+// import EditReviewInput from '../../Reusable/InputFields/EditReviewInput'
 import { useForm } from 'react-hook-form'
 
 //imported styles
@@ -12,6 +12,7 @@ import CustomSpinner from '../../CustomSpinner'
 import {
   Flex,
   Button,
+  Input,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -26,43 +27,41 @@ import {
   AlertDialogOverlay,
   AlertDialogFooter,
 } from '@chakra-ui/core'
+import { match } from 'assert'
 
 const EditReviewForm = ({
-  review,
-  getReviewById,
-  editReview,
+  // getReviewById,
+  // editReview,
   match,
   history,
-  isLoading,
+  location,
 }) => {
-  const { register, handleSubmit, errors, formState } = useForm()
+  const state = location.state
+  const dispatch = useDispatch()
   const id = match.params.id
+  const userId = localStorage.getItem('userId')
+  // useEffect(() => {
+  //   getReviewById(id)
+  // }, [id, getReviewById])
+
+  const { register, handleSubmit, errors, formState } = useForm({})
+
   const [editValue, setEditValue] = useState({
     id: id,
-    city: review.city || null,
-    comment: null,
-    company_name: null,
-    difficulty_rating: null,
-    end_date: null,
-    interview_rounds: null,
-    job_title: null,
-    offer_status: null,
-    online_coding_assignments: null,
-    open_source_contribution: null,
-    overall_rating: null,
-    phone_interview: null,
-    portfolio_review: null,
-    resume_review: null,
-    review_type: null,
-    salary: null,
-    screen_share: null,
-    side_projects: null,
-    start_date: null,
-    state_name: null,
-    take_home_assignments: null,
-    typical_hours: null,
-    work_status: null,
+    job_title: state.job_title || null,
+    city: state.city || null,
+    state_id: null,
+    salary: state.salary || null,
+    company_name: state.company_name || null,
+    work_status_id: null,
+    start_date: state.start_date || null,
+    end_date: state.end_date || null,
+    typical_hours: state.typical_hours || null,
+    comment: state.comment || null,
+    overall_rating: state.overall_rating || null,
   })
+
+  console.log('here', editValue)
 
   // specifically for the cancel button functionality
   const [isOpen, setIsOpen] = useState()
@@ -78,23 +77,21 @@ const EditReviewForm = ({
     return error || true
   }
 
-  useEffect(() => {
-    getReviewById(id)
-  }, [id, getReviewById])
+  // if (isLoading) {
+  //   return (
+  //     <Flex justify="center" align="center" w="100vh" h="100vh">
+  //       <CustomSpinner />
+  //     </Flex>
+  //   )
+  // }
 
-  if (isLoading) {
-    return (
-      <Flex justify="center" align="center" w="100vh" h="100vh">
-        <CustomSpinner />
-      </Flex>
-    )
-  }
-  console.log(review)
-  console.log(editValue)
+  // console.log('before sent', editValue)
   const submitEdits = () => {
-    editReview(review.user_id, review.review_id, editValue).then(() => {
-      history.push('/dashboard')
+    dispatch(editReview(userId, id, editValue)).then(() => {
+      console.log('sent', editValue)
+      // history.push('/dashboard')
     })
+
     ReactGA.event({
       category: 'Company Review Edit',
       action: `Submit edit`,
@@ -112,10 +109,25 @@ const EditReviewForm = ({
             <FormLabel color="#525252" mt="3">
               Job title
             </FormLabel>
-            <EditReviewInput
+            <Input
               name="job_title"
-              placeholder={review.job_title}
+              type="text"
+              label="job_title"
+              placeholder={state.job_title}
               value={editValue.job_title}
+              onChange={(e) =>
+                setEditValue({ ...editValue, [e.target.name]: e.target.value })
+              }
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel color="#525252" mt="3">
+              Company
+            </FormLabel>
+            <Input
+              name="company_name"
+              placeholder={state.company_name}
+              value={editValue.company_name}
               onChange={(e) =>
                 setEditValue({ ...editValue, [e.target.name]: e.target.value })
               }
@@ -127,14 +139,14 @@ const EditReviewForm = ({
               Job location
             </FormLabel>
             <Flex justify="space-between" wrap="nowrap">
-              <EditReviewInput
+              <Input
                 w="60%"
                 h="58px"
                 py="32px"
                 borderColor="#ECF1FE"
                 rounded="3px"
                 name="city"
-                placeholder={review.city}
+                placeholder={state.city}
                 value={editValue.city}
                 onChange={(e) =>
                   setEditValue({
@@ -159,7 +171,7 @@ const EditReviewForm = ({
                   })
                 }
               >
-                <option value={0}>{review.state_name}</option>
+                <option value={0}>{state.state_name}</option>
                 {states.map((i) => (
                   <option key={i.id} value={i.id}>
                     {i.state_name}
@@ -183,13 +195,13 @@ const EditReviewForm = ({
                 fontSize="1.2em"
                 children="$"
               />
-              <EditReviewInput
+              <Input
                 pl="6%"
                 borderColor="#ECF1FE"
                 rounded="3px"
                 name="salary"
                 type="number"
-                placeholder={review.salary}
+                placeholder={state.salary}
                 ref={register({ validate: validateSalary })}
                 value={editValue.salary}
                 onChange={(e) =>
@@ -224,7 +236,7 @@ const EditReviewForm = ({
                 })
               }
             >
-              <option value={0}>{review.work_status}</option>
+              <option value={0}>{state.work_status}</option>
               <option value={1}>Current Employee</option>
               <option value={2}>Former Employee</option>
               <option value={3}>Full Time</option>
@@ -239,11 +251,11 @@ const EditReviewForm = ({
               Years of employment
             </FormLabel>
             <Flex justify="space-between" wrap="nowrap">
-              <EditReviewInput
+              <Input
                 w="48%"
                 name="start_date"
                 type="number"
-                placeholder={`Start - ${review.start_date}`}
+                placeholder={`Start - ${state.start_date}`}
                 value={editValue.start_date}
                 onChange={(e) =>
                   setEditValue({
@@ -252,12 +264,12 @@ const EditReviewForm = ({
                   })
                 }
               />
-              <EditReviewInput
+              <Input
                 w="48%"
                 name="end_date"
                 type="number"
-                placeholder={`End - ${review.end_date}`}
-                value={editValue.end_date || review.end_date}
+                placeholder={`End - ${state.end_date}`}
+                value={editValue.end_date}
                 onChange={(e) =>
                   setEditValue({
                     ...editValue,
@@ -272,10 +284,10 @@ const EditReviewForm = ({
             <FormLabel fontSize="15px" color="#525252">
               Working hours
             </FormLabel>
-            <EditReviewInput
+            <Input
               name="typical_hours"
               type="number"
-              placeholder={review.typical_hours}
+              placeholder={state.typical_hours}
               value={editValue.typical_hours}
               onChange={(e) =>
                 setEditValue({
@@ -300,7 +312,7 @@ const EditReviewForm = ({
               resize="none"
               type="text"
               name="comment"
-              placeholder={review.comment}
+              placeholder={state.comment}
               ref={register}
               value={editValue.comment}
               onChange={(e) =>
@@ -328,7 +340,7 @@ const EditReviewForm = ({
                 })
               }
             >
-              <option value={0}>{review.overall_rating}</option>
+              <option value={0}>{state.overall_rating}</option>
               <option value={5}>5 - Great</option>
               <option value={4}>4 - Good</option>
               <option value={3}>3 - OK </option>
@@ -346,7 +358,7 @@ const EditReviewForm = ({
               w="65%"
               h="72px"
               fontSize="18px"
-              data-cy="companyEditReviewSubmit"
+              // data-cy="companyEditstateSubmit"
             >
               Save changes
             </Button>
@@ -418,13 +430,13 @@ const EditReviewForm = ({
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    review: state.review.dataById,
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     review: state.review.dataById,
+//   }
+// }
 
-export default connect(
-  mapStateToProps,
-  (getReviewById, editReview)
-)(EditReviewForm)
+export default // mapStateToProps,
+// (getReviewById, editReview)
+
+EditReviewForm

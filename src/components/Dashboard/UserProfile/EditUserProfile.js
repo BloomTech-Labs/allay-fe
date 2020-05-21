@@ -26,13 +26,7 @@ import {
   FormHelperText,
 } from '@chakra-ui/core'
 
-const EditUserProfile = ({
-  match,
-  history,
-  userData,
-  isLoading,
-  updateUser,
-}) => {
+const EditUserProfile = ({ match, history, userData, updateUser }) => {
   const id = match.params.id
   // creating form state, setting default values
   const { handleSubmit, errors, register, formState } = useForm({
@@ -253,10 +247,6 @@ const EditUserProfile = ({
   const returnToProfile = (e) => {
     e.preventDefault()
     history.push(`/profile/${id}`)
-  }
-
-  if (isLoading) {
-    return null
   }
 
   return (
