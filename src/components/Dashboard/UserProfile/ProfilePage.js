@@ -72,7 +72,7 @@ const ProfilePage = (props) => {
     userData.location != 'undefined undefined ' &&
     userData.location != 'undefined undefined'
       ? userData.location
-      : 'null'
+      : ''
 
   return (
     <>
