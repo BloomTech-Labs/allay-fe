@@ -292,19 +292,12 @@ const EditUserProfile = ({
 
         {Number(userId) === Number(userData.id) ? (
           <Flex>
-            {userData.profile_image === 'h' ? (
-              <Image
-                size="58px"
-                style={{ opacity: '0.6' }}
-                src={require('../../../icons/user.svg')}
-              />
-            ) : (
-              <Image
-                size="58px"
-                style={{ opacity: '0.6', borderRadius: '50%' }}
-                src={userData.profile_image}
-              />
-            )}
+            <Image
+              size="58px"
+              style={{ opacity: '0.6', borderRadius: '50%' }}
+              src={userData.profile_image}
+              fallbackSrc={require('../../../icons/user.svg')}
+            />
           </Flex>
         ) : null}
       </Flex>
