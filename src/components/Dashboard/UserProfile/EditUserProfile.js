@@ -260,6 +260,12 @@ const EditUserProfile = ({
   if (isLoading) {
     return null
   }
+  //see explanation in profile page component
+  const ridiculousLazyCheck =
+    userData.location != 'undefined undefined ' &&
+    userData.location != 'undefined undefined'
+      ? userData.location
+      : 'Enter your location'
 
   return (
     <>
@@ -292,12 +298,19 @@ const EditUserProfile = ({
 
         {Number(userId) === Number(userData.id) ? (
           <Flex>
-            <Image
-              size="58px"
-              style={{ opacity: '0.6', borderRadius: '50%' }}
-              src={userData.profile_image}
-              fallbackSrc={require('../../../icons/user.svg')}
-            />
+            {userData.profile_image === 'h' ? (
+              <Image
+                size="58px"
+                style={{ opacity: '0.6' }}
+                src={require('../../../icons/user.svg')}
+              />
+            ) : (
+              <Image
+                size="58px"
+                style={{ opacity: '0.6', borderRadius: '50%' }}
+                src={userData.profile_image}
+              />
+            )}
           </Flex>
         ) : null}
       </Flex>
@@ -468,7 +481,7 @@ const EditUserProfile = ({
                   id="location"
                   name="location"
                   label="location"
-                  placeholder={userData.location}
+                  placeholder={ridiculousLazyCheck}
                   ref={register}
                 />
               </FormControl>

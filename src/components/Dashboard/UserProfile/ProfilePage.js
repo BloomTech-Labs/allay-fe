@@ -66,6 +66,13 @@ const ProfilePage = (props) => {
     dispatch(getUser(id))
   }, [dispatch, id])
 
+  // send location : null recieve undefiend send null again receive undefiend with white space, lazy but it get the job done for now
+
+  const ridiculousLazyCheck =
+    userData.location != 'undefined undefined ' &&
+    userData.location != 'undefined undefined'
+      ? userData.location
+      : ''
   return (
     <>
       {/* //Top Section */}
@@ -236,7 +243,7 @@ const ProfilePage = (props) => {
                           ></i>
 
                           {/* TODO: */}
-                          {userData.location}
+                          {ridiculousLazyCheck}
                         </h6>
                       </Box>
                     </Flex>
