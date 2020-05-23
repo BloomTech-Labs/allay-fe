@@ -4,7 +4,6 @@ import { Progress } from '@chakra-ui/core'
 const ProgressBar = React.forwardRef(({ ...props }, ref) => {
   return (
     <Progress
-      w="100%"
       h="10%"
       color="blue"
       background="#F2F6FE"
@@ -12,7 +11,7 @@ const ProgressBar = React.forwardRef(({ ...props }, ref) => {
       hasStripe
       border="1px solid #131C4D"
       value={props.value}
-      // mb="10px"
+
       // ref={ref}
     />
   )

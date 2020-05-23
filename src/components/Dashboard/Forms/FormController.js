@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 //styles
 import companyIcon from '../../../companyIcon.png'
 import interviewIcon from '../../../interviewIcon.png'
-import { Flex, Avatar, Button, Image, Text } from '@chakra-ui/core'
+import { Flex, Avatar, Button, Image, Box } from '@chakra-ui/core'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import ProgressBar from '../../Reusable/ProgressBar'
@@ -30,15 +30,18 @@ const FormController = ({ history }) => {
     <>
       <Flex
         // className="Splash"
-        w="100vw"
-        minH="100vh"
+        w="100%"
+        // minH="100vh"
         justify="center"
       >
         {/* max size */}
-        <Flex maxW="1440px" w="100%">
+        <Flex
+          // maxW="1440px"
+          w="100%"
+        >
           {/* form container */}
           <Flex
-            w="70%"
+            // w="70%"
             bg="white"
             justify="center"
             flexDir="column"
@@ -50,7 +53,7 @@ const FormController = ({ history }) => {
               pt="1%"
               px="2%"
               w="100%"
-              h="130px"
+              h="20%"
               background="#F2F6FE"
               top="0"
               position="fixed"
@@ -73,8 +76,8 @@ const FormController = ({ history }) => {
                   </>
                 ) : (
                   <>
-                    <Flex as="h4" fontFamily="muli" color="#131C4D" w="50%">
-                      {100 - progress.prec}% <span>completed</span>
+                    <Flex as="h4" fontFamily="muli" color="#131C4D" width="3em">
+                      {100 - progress.prec}% completed
                     </Flex>
 
                     {/* <Flex color="#FFFFFF"> {progress.mins} mins</Flex> */}
@@ -82,7 +85,7 @@ const FormController = ({ history }) => {
                       border="none"
                       backgroundColor="#F2F6FE"
                       color="#344CD0"
-                      fontSize="20px"
+                      fontSize="1.3em"
                       rounded="50px"
                       _hover={{ backgroundColor: '#FFF', cursor: 'pointer' }}
                       onClick={() => {
@@ -96,14 +99,14 @@ const FormController = ({ history }) => {
               </Flex>
               <ProgressBar value={progress.prog} />
             </Flex>
-
             {/* Start of messenger  */}
+
             <Flex
               align="center"
               p="1%"
               ml="2%"
-              w="416px"
-              mt="10%"
+              // w="416px"
+              mt="20%"
               mb="2%"
               bg="#F2F6FE"
               position="relative"
@@ -131,7 +134,7 @@ const FormController = ({ history }) => {
               align="center"
               p="1%"
               ml="2%"
-              w="416px"
+              // w="416px"
               mb="2%"
               bg="#F2F6FE"
               rounded="20px"
@@ -152,7 +155,7 @@ const FormController = ({ history }) => {
               align="center"
               p="1%"
               ml="2%"
-              w="416px"
+              // w="416px"
               mb="8%"
               bg="#F2F6FE"
               rounded="20px"
@@ -167,16 +170,20 @@ const FormController = ({ history }) => {
               <p>What do you want to post about?</p>
             </Flex>
             {/* company container  */}
-            <Flex w="100%" justify="flex-end">
+            <Flex
+              w="100%"
+              justify="center"
+              // justify="flex-end"
+            >
               {/* company box */}
 
               <Flex
-                w="465px"
-                h="234px"
-                mb="8%"
+                w="50%"
+                // h="234px"
+                // mb="8%"
                 px="6"
                 py="5"
-                border="1px solid #e6e5e5"
+                border="1px solid #EAF0FE"
                 rounded="6px"
                 flexDir="column"
                 data-aos="fade-in"
@@ -186,6 +193,8 @@ const FormController = ({ history }) => {
                 data-aos-easing="ease-in-out"
                 data-aos-mirror="true"
                 data-aos-once="false"
+                // align="flex-start"
+                align="center"
               >
                 <Flex
                   w="100%"
@@ -195,7 +204,7 @@ const FormController = ({ history }) => {
                 >
                   Choose a topic
                 </Flex>
-                <Flex justify="space-evenly" mt="3%">
+                <Flex justify="space-between" mt="3%" align="center">
                   <Flex
                     justify="center"
                     align="center"
@@ -212,9 +221,10 @@ const FormController = ({ history }) => {
                   </Flex>
                   <Flex
                     justify="center"
-                    align="center"
+                    ml="5%"
                     w="100px"
                     h="100px"
+                    mb="10%"
                     onClick={() => {
                       setShowInterview(false)
                       setShowCompanyReview(true)
@@ -252,7 +262,7 @@ const FormController = ({ history }) => {
               </Flex>
               {/* avatar */}
               <Flex
-                h="234px"
+                // h="234px"
                 align="flex-end"
                 ml="1%"
                 mr="2%"
@@ -263,17 +273,16 @@ const FormController = ({ history }) => {
                 data-aos-easing="ease-in-out"
                 data-aos-mirror="true"
                 data-aos-once="false"
+                justify="flex-end"
               >
-                <Avatar size="md" src="https://bit.ly/broken-link" />
+                <Flex align="center" justify="space-evenly" width="40%" mt="3%">
+                  <Avatar size="md" src="https://bit.ly/broken-link" />
+                </Flex>
               </Flex>
             </Flex>
             {showInterview ? <InterviewForm history={history} /> : null}
-
             {showCompanyReview ? <CompanyReviewForm history={history} /> : null}
           </Flex>
-
-          {/* blank space container */}
-          <Flex w="30%" />
         </Flex>
       </Flex>
     </>
