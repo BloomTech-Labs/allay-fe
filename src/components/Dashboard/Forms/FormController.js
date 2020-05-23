@@ -28,79 +28,73 @@ const FormController = ({ history }) => {
   return (
     // main container
     <>
-      <Flex
-        // className="Splash"
-        w="100%"
-        // minH="100vh"
-        justify="center"
-      >
+      <Flex w="100%" margin="0 auto" minH="100vh">
         {/* max size */}
+
+        {/* progress header */}
         <Flex
-          // maxW="1440px"
+          justify="center"
+          // pt="1%"
+          px="2%"
           w="100%"
+          h="20%"
+          background="#F2F6FE"
+          top="0"
+          position="fixed"
+          overflow="hidden"
+          zIndex="999"
+          direction="column"
         >
-          {/* form container */}
+          <Flex w="100%">
+            <h2 fontSize="24px" color="#131C4D" fontFamily="poppins">
+              Write a review
+            </h2>
+          </Flex>
+
+          <Flex w="100%" justify="space-between" mb="1%">
+            {progress.prec === 100 ? (
+              <>
+                <Flex as="h4" size="22px">
+                  {progress.prec}% Completed!
+                </Flex>{' '}
+              </>
+            ) : (
+              <>
+                <Flex as="h4" fontFamily="muli" color="#131C4D" width="3em">
+                  {100 - progress.prec}% completed
+                </Flex>
+
+                {/* <Flex color="#FFFFFF"> {progress.mins} mins</Flex> */}
+                <Button
+                  border="none"
+                  backgroundColor="#F2F6FE"
+                  color="#344CD0"
+                  fontSize="1.3em"
+                  rounded="50px"
+                  _hover={{ backgroundColor: '#FFF', cursor: 'pointer' }}
+                  onClick={() => {
+                    history.push('/dashboard')
+                  }}
+                >
+                  Cancel
+                </Button>
+              </>
+            )}
+          </Flex>
+          <ProgressBar value={progress.prog} />
+        </Flex>
+
+        {/* Start of messenger  */}
+        {/* form container */}
+        <Flex margin="0 auto">
           <Flex
             // w="70%"
             bg="white"
-            justify="center"
+            // justify="center"
             flexDir="column"
             // px='2%'
             pt="5%"
           >
-            {/* progress header */}
-            <Flex
-              pt="1%"
-              px="2%"
-              w="100%"
-              h="20%"
-              background="#F2F6FE"
-              top="0"
-              position="fixed"
-              overflow="hidden"
-              zIndex="999"
-              direction="column"
-            >
-              <Flex w="100%">
-                <h2 fontSize="24px" color="#131C4D" fontFamily="poppins">
-                  Write a review
-                </h2>
-              </Flex>
-
-              <Flex w="100%" justify="space-between" mb="1%">
-                {progress.prec === 100 ? (
-                  <>
-                    <Flex as="h4" size="22px">
-                      {progress.prec}% Completed!
-                    </Flex>{' '}
-                  </>
-                ) : (
-                  <>
-                    <Flex as="h4" fontFamily="muli" color="#131C4D" width="3em">
-                      {100 - progress.prec}% completed
-                    </Flex>
-
-                    {/* <Flex color="#FFFFFF"> {progress.mins} mins</Flex> */}
-                    <Button
-                      border="none"
-                      backgroundColor="#F2F6FE"
-                      color="#344CD0"
-                      fontSize="1.3em"
-                      rounded="50px"
-                      _hover={{ backgroundColor: '#FFF', cursor: 'pointer' }}
-                      onClick={() => {
-                        history.push('/dashboard')
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                  </>
-                )}
-              </Flex>
-              <ProgressBar value={progress.prog} />
-            </Flex>
-            {/* Start of messenger  */}
-
             <Flex
               align="center"
               p="1%"
@@ -204,7 +198,12 @@ const FormController = ({ history }) => {
                 >
                   Choose a topic
                 </Flex>
-                <Flex justify="space-between" mt="3%" align="center">
+                <Flex
+                  justify="space-between"
+                  mt="3%"
+                  align="center"
+                  width="60%"
+                >
                   <Flex
                     justify="center"
                     align="center"
@@ -221,7 +220,7 @@ const FormController = ({ history }) => {
                   </Flex>
                   <Flex
                     justify="center"
-                    ml="5%"
+                    ml="40%"
                     w="100px"
                     h="100px"
                     mb="10%"

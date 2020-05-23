@@ -350,15 +350,16 @@ const InterviewForm = ({
 
   return (
     // main container
-    <Flex background="#E5E5E5" mw="100%" justify="center">
+    <Flex w="100%" margin="0 auto" minH="100vh">
       {/* max size */}
       <Flex
         // maxW="1440px"
         w="100%"
+        margin="0 auto"
       >
         {/* progress header */}
         <Flex
-          pt="1%"
+          // pt="1%"
           px="2%"
           w="100%"
           h="20%"
