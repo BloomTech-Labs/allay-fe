@@ -1,7 +1,8 @@
 import React from 'react'
 import { Progress } from '@chakra-ui/core'
 
-const ProgressBar = React.forwardRef(({ ...props }, ref) => {
+const ProgressBar = React.forwardRef(({ ...props }) => {
+  console.log('progress bar props', props.value)
   return (
     <Progress
       h="10%"
@@ -11,8 +12,6 @@ const ProgressBar = React.forwardRef(({ ...props }, ref) => {
       hasStripe
       border="1px solid #131C4D"
       value={props.value}
-
-      // ref={ref}
     />
   )
 })

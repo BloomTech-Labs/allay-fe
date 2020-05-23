@@ -10,6 +10,7 @@ import getCompanies from '../../../state/actions'
 import postCompany from '../../../state/actions'
 // styles
 
+import ProgressHeader from '../Forms/ProgressHeader'
 import ProgressBar from '../../Reusable/ProgressBar'
 import CustomAutoComplete from '../../Reusable/InputFields/Autocomplete'
 import BeautyStars from 'beauty-stars'
@@ -72,7 +73,7 @@ const InterviewForm = ({
     mins: 10,
     prog: 2,
   })
-
+  // const newProgress = setProgress({})
   // company search function
   useEffect(() => {
     if (searchTerm.length >= 3) {
@@ -350,60 +351,62 @@ const InterviewForm = ({
 
   return (
     // main container
-    <Flex w="100%" margin="0 auto" minH="100vh">
-      {/* max size */}
-      <Flex
-        // maxW="1440px"
-        w="100%"
-        margin="0 auto"
-      >
-        {/* progress header */}
-        <Flex
-          // pt="1%"
-          px="2%"
-          w="100%"
-          h="20%"
-          background="#F2F6FE"
-          top="0"
-          position="fixed"
-          overflow="hidden"
-          zIndex="999"
-          direction="column"
-        >
-          <Flex w="100%">
-            <h3 color="#131C4D" fontFamily="poppins">
-              Your progress
-            </h3>
-          </Flex>
+    <>
+      <Flex w="100%" margin="0 auto" minH="100vh">
+        <ProgressHeader />
 
-          <Flex w="100%" justify="space-between" mb="1%">
-            {progress.prec === 100 ? (
-              <>
-                <Flex as="h4">{progress.prec}% Completed!</Flex>
-              </>
-            ) : (
-              <>
-                <Flex as="h4" fontFamily="muli" color="#131C4D" width="3em">
-                  {100 - progress.prec}% completed
-                </Flex>
-                <Button
-                  border="none"
-                  backgroundColor="#F2F6FE"
-                  color="#344CD0"
-                  fontSize="1.3em"
-                  rounded="50px"
-                  _hover={{ backgroundColor: '#FFF', cursor: 'pointer' }}
-                  onClick={() => {
-                    history.push('/dashboard')
-                  }}
-                >
-                  Cancel
-                </Button>
-              </>
-            )}
+        {/* progress header */}
+        {/* <Flex margin="0 auto">
+          <Flex
+            margin="0 auto"
+            // justify="center"
+            // pt="1%"
+            // px="2%"
+            w="100%"
+            h="20%"
+            background="#F2F6FE"
+            top="0"
+            position="fixed"
+            overflow="hidden"
+            zIndex="999"
+            direction="column"
+          >
+            <Flex w="100%">
+              <h2 fontSize="24px" color="#131C4D" fontFamily="poppins">
+                Your progress
+              </h2>
+            </Flex>
+
+            <Flex w="100%" justify="space-between" mb="1%">
+              {progress.prec === 100 ? (
+                <>
+                  <Flex as="h4">{progress.prec}% Completed!</Flex>
+                </>
+              ) : (
+                <>
+                  <Flex as="h4" fontFamily="muli" color="#131C4D" width="3em">
+                    {100 - progress.prec}% completed
+                  </Flex>
+                  <Button
+                    border="none"
+                    backgroundColor="#F2F6FE"
+                    color="#344CD0"
+                    fontSize="1.3em"
+                    rounded="50px"
+                    _hover={{ backgroundColor: '#FFF', cursor: 'pointer' }}
+                    onClick={() => {
+                      history.push('/dashboard')
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                </>
+              )}
+            </Flex>
+            <ProgressBar value={progress.prog} />
           </Flex>
-          <ProgressBar value={progress.prog} />
-        </Flex>
+        </Flex> */}
+
         {thinking ? (
           <>
             <Flex
@@ -424,9 +427,10 @@ const InterviewForm = ({
           w="100%"
           bg="white"
           flexDir="column"
-          px="2%"
+          // px="2%"
           pt="10%"
-          justify="center"
+          // justify="center"
+          margin="0 auto"
         >
           {/*--------------- start of form ---------------  */}
           <form onSubmit={handleSubmit(submitForm)}>
@@ -1401,7 +1405,7 @@ const InterviewForm = ({
           </form>
         </Flex>
       </Flex>
-    </Flex>
+    </>
   )
 }
 
