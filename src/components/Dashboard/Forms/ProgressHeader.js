@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import ProgressBar from '../../Reusable/ProgressBar'
 import { Flex, Button } from '@chakra-ui/core'
 
-const ProgressHeader = (history, props) => {
+const ProgressHeader = ({ progress }) => {
   //progress bar
-  const [progress] = useState({
-    prec: 99,
-    mins: 10,
-    prog: 2,
-  })
-  const newProgress = props.setProgress
-  console.log('my progress', props.setProgress)
+
+  const history = useHistory()
+  console.log('progress', progress)
   return (
     <Flex
       justify="center"
@@ -32,19 +29,18 @@ const ProgressHeader = (history, props) => {
       </Flex>
 
       <Flex w="100%" justify="space-between" mb="1%">
-        {progress.prec === 100 ? (
+        {progress && progress.prec === 100 ? (
           <>
             <Flex as="h4" size="22px">
-              {progress.prec}% Completed!
+              {progress && progress.prec}% Completed!
             </Flex>{' '}
           </>
         ) : (
           <>
             <Flex as="h4" fontFamily="muli" color="#131C4D" width="3em">
-              {100 - progress.prec}% completed
+              {progress && 100 - progress.prec}% completed
             </Flex>
 
-            {/* <Flex color="#FFFFFF"> {progress.mins} mins</Flex> */}
             <Button
               border="none"
               backgroundColor="#F2F6FE"
@@ -61,7 +57,7 @@ const ProgressHeader = (history, props) => {
           </>
         )}
       </Flex>
-      <ProgressBar value={progress.prog} />
+      <ProgressBar value={progress && progress.prog} />
     </Flex>
   )
 }

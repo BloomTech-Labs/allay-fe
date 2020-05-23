@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 //styles
 import companyIcon from '../../../companyIcon.png'
 import interviewIcon from '../../../interviewIcon.png'
-import { Flex, Avatar, Button, Image, Box } from '@chakra-ui/core'
+import { Flex, Avatar, Button, Image } from '@chakra-ui/core'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import ProgressBar from '../../Reusable/ProgressBar'

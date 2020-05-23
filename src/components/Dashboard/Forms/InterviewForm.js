@@ -73,6 +73,7 @@ const InterviewForm = ({
     mins: 10,
     prog: 2,
   })
+
   // const newProgress = setProgress({})
   // company search function
   useEffect(() => {
@@ -349,11 +350,13 @@ const InterviewForm = ({
     })
   }
 
+  const name = 'mandi'
+
   return (
     // main container
-    <>
+    <div>
       <Flex w="100%" margin="0 auto" minH="100vh">
-        <ProgressHeader />
+        <ProgressHeader progress={progress} />
 
         {/* progress header */}
         {/* <Flex margin="0 auto">
@@ -1405,7 +1408,7 @@ const InterviewForm = ({
           </form>
         </Flex>
       </Flex>
-    </>
+    </div>
   )
 }
 
