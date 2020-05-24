@@ -290,8 +290,7 @@ const ReviewForm2 = ({
                 {/* company box */}
                 <Flex
                   w="459px"
-                  h="800px"
-                  mb="8%"
+                  h="700px"
                   px="6"
                   py="8"
                   border="1px solid #BBBDC6"
@@ -416,13 +415,10 @@ const ReviewForm2 = ({
                       ref={register}
                     />
                   </Flex>
-                  <Button mt="8px" h="56px" rounded="6px" onClick={time1}>
-                    Next
-                  </Button>
                 </Flex>
                 {/* avatar */}
                 <Flex
-                  h="600px"
+                  h="700px"
                   align="flex-end"
                   ml="1%"
                   data-aos="fade-in"
@@ -435,6 +431,31 @@ const ReviewForm2 = ({
                 >
                   <Avatar size="md" src="https://bit.ly/broken-link" />
                 </Flex>
+              </Flex>
+              <Flex
+                justify="flex-end"
+                mb="5%"
+                // data-aos="fade-in"
+                data-aos-offset="200"
+                data-aos-delay="1000"
+                data-aos-duration="1500"
+                data-aos-easing="ease-in-out"
+                data-aos-mirror="true"
+                data-aos-once="true"
+              >
+                <Button
+                  h="56px"
+                  w="17%"
+                  mt="2%"
+                  rounded="35px"
+                  border="1px solid #344CD0"
+                  color="#344CD0"
+                  backgroundColor="#FFF"
+                  _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                  onClick={time2}
+                >
+                  Next
+                </Button>
               </Flex>
               {/* Second prompt */}
               {Tag2 ? (
@@ -585,7 +606,6 @@ const ReviewForm2 = ({
                     <Flex
                       w="459px"
                       h="136px"
-                      mb="8%"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
@@ -606,7 +626,6 @@ const ReviewForm2 = ({
                         label="typical_hours"
                         name="typical_hours"
                         placeholder="Select one"
-                        onChange={time3}
                         ref={register}
                       >
                         <option value={29}>Less than 30 hours</option>
@@ -631,6 +650,31 @@ const ReviewForm2 = ({
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
+                  </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="5%"
+                    // data-aos="fade-in"
+                    data-aos-offset="200"
+                    data-aos-delay="2800"
+                    data-aos-duration="1500"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time3}
+                    >
+                      Next
+                    </Button>
                   </Flex>
                 </>
               ) : null}
@@ -664,8 +708,7 @@ const ReviewForm2 = ({
                     {/* salary box */}
                     <Flex
                       w="459px"
-                      h="250px"
-                      mb="8%"
+                      h="150px"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
@@ -700,9 +743,6 @@ const ReviewForm2 = ({
                           ref={register}
                         />
                       </InputGroup>
-                      <Button h="56px" rounded="6px" mt="7px" onClick={time4}>
-                        Next
-                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
@@ -719,6 +759,31 @@ const ReviewForm2 = ({
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
+                  </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="5%"
+                    // data-aos="fade-in"
+                    data-aos-offset="200"
+                    data-aos-delay="1000"
+                    data-aos-duration="1500"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time4}
+                    >
+                      Next
+                    </Button>
                   </Flex>
                 </>
               ) : null}
