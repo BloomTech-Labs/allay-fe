@@ -77,7 +77,6 @@ const InterviewForm = ({
   //progress bar
   const [progress, setProgress] = useState({
     prec: 99,
-    mins: 10,
     prog: 2,
   })
   // company search function
@@ -121,7 +120,6 @@ const InterviewForm = ({
     getCompanies()
     setProgress({
       prec: 95,
-      mins: 8,
       prog: 5,
     })
     const element = document.getElementById('Tag1')
@@ -146,7 +144,6 @@ const InterviewForm = ({
     setTag2(true)
     setProgress({
       prec: 80,
-      mins: 8,
       prog: 20,
     })
     const element = document.getElementById('Tag2')
@@ -169,7 +166,6 @@ const InterviewForm = ({
     setTag3(true)
     setProgress({
       prec: 70,
-      mins: 7,
       prog: 30,
     })
     const element = document.getElementById('Tag3')
@@ -192,7 +188,6 @@ const InterviewForm = ({
     setTag4(true)
     setProgress({
       prec: 60,
-      mins: 6,
       prog: 40,
     })
     const element = document.getElementById('Tag4')
@@ -215,7 +210,6 @@ const InterviewForm = ({
     setTag5(true)
     setProgress({
       prec: 50,
-      mins: 5,
       prog: 50,
     })
     const element = document.getElementById('Tag5')
@@ -237,7 +231,6 @@ const InterviewForm = ({
     setTag6(true)
     setProgress({
       prec: 40,
-      mins: 4,
       prog: 60,
     })
     const element = document.getElementById('Tag6')
@@ -259,7 +252,6 @@ const InterviewForm = ({
     setTag7(true)
     setProgress({
       prec: 30,
-      mins: 3,
       prog: 70,
     })
     const element = document.getElementById('Tag7')
@@ -281,7 +273,6 @@ const InterviewForm = ({
     setTag8(true)
     setProgress({
       prec: 20,
-      mins: 1,
       prog: 85,
     })
     const element = document.getElementById('Tag8')
@@ -303,7 +294,6 @@ const InterviewForm = ({
     setTag9(true)
     setProgress({
       prec: 100,
-      mins: 0,
       prog: 100,
     })
     const element = document.getElementById('Tag9')
@@ -428,7 +418,7 @@ const InterviewForm = ({
                   data-aos-easing="ease-in-out"
                   data-aos-mirror="true"
                   data-aos-once="true"
-                  data-aos-anchor="#Tag1"
+                  data-aos-anchor="Tag1"
                 >
                   <FormLabel>1. Company name</FormLabel>
                   {loadingCompanies ? (
@@ -507,6 +497,7 @@ const InterviewForm = ({
                   data-aos-easing="ease-in-out"
                   data-aos-mirror="true"
                   data-aos-once="true"
+                  data-aos-anchor="Tag1"
                 >
                   <Avatar size="md" src="https://bit.ly/broken-link" />
                 </Flex>
@@ -521,6 +512,7 @@ const InterviewForm = ({
                 data-aos-easing="ease-in-out"
                 data-aos-mirror="true"
                 data-aos-once="true"
+                data-aos-anchor="Tag1"
               >
                 <Button
                   h="56px"
@@ -590,20 +582,20 @@ const InterviewForm = ({
                     {/* rounds box */}
                     <Flex
                       w="459px"
-                      h="250px"
+                      h="150px"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="2000"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#roundsTag"
+                      data-aos-anchor="roundsTag"
                     >
                       <FormLabel>Select rounds of interviews</FormLabel>
                       <Select
@@ -629,7 +621,7 @@ const InterviewForm = ({
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h="250px"
+                      h="150px"
                       align="flex-end"
                       ml="1%"
                       data-aos="fade-in"
@@ -639,7 +631,7 @@ const InterviewForm = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#roundsTag"
+                      data-aos-anchor="roundsTag"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
@@ -654,7 +646,7 @@ const InterviewForm = ({
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
                     data-aos-once="true"
-                    data-aos-anchor="#roundsTag"
+                    data-aos-anchor="roundsTag"
                   >
                     <Button
                       h="56px"
@@ -703,7 +695,7 @@ const InterviewForm = ({
                     {/* types of interview box */}
                     <Flex
                       w="459px"
-                      h="250px"
+                      h="220px"
                       px="6"
                       py="8"
                       border="1px solid #BBBDC6"
@@ -711,12 +703,13 @@ const InterviewForm = ({
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="1000"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag3"
                     >
                       <FormLabel>Select types of interviews</FormLabel>
                       <CheckboxGroup>
@@ -794,16 +787,17 @@ const InterviewForm = ({
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h="250px"
+                      h="220px"
                       align="flex-end"
                       ml="1%"
                       data-aos="fade-in"
-                      data-aos-offset="200"
-                      data-aos-delay="1000"
+                      data-aos-offset="120"
+                      data-aos-delay="0"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      id="Tag3"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
@@ -811,13 +805,14 @@ const InterviewForm = ({
                   <Flex
                     justify="flex-end"
                     mb="5%"
-                    // data-aos="fade-in"
-                    data-aos-offset="200"
-                    data-aos-delay="1000"
+                    data-aos="fade-in"
+                    data-aos-offset="120"
+                    data-aos-delay="0"
                     data-aos-duration="1500"
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
                     data-aos-once="true"
+                    id="Tag3"
                   >
                     <Button
                       h="56px"
@@ -890,12 +885,13 @@ const InterviewForm = ({
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="2600"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag4"
                     >
                       <FormLabel>Describe the interview process</FormLabel>
                       <Textarea
@@ -917,12 +913,13 @@ const InterviewForm = ({
                       align="flex-end"
                       ml="1%"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="2600"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag4"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
@@ -930,13 +927,14 @@ const InterviewForm = ({
                   <Flex
                     justify="flex-end"
                     mb="5%"
-                    // data-aos="fade-in"
-                    data-aos-offset="200"
+                    data-aos="fade-in"
+                    data-aos-offset="120"
                     data-aos-delay="2600"
                     data-aos-duration="1500"
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
                     data-aos-once="true"
+                    data-aos-anchor="Tag4"
                   >
                     <Button
                       h="56px"
@@ -958,7 +956,6 @@ const InterviewForm = ({
               {Tag5 ? (
                 <>
                   <Flex
-                    id="Tag5"
                     align="center"
                     h="5%"
                     p="1%"
@@ -980,7 +977,7 @@ const InterviewForm = ({
                     </p>
                   </Flex>
                   <Flex
-                    id="diffTag"
+                    id="Tag5"
                     align="center"
                     h="5%"
                     p="1%"
@@ -990,7 +987,7 @@ const InterviewForm = ({
                     rounded="20px"
                     data-aos="fade-right"
                     data-aos-offset="200"
-                    data-aos-delay="2300"
+                    data-aos-delay="1000"
                     data-aos-duration="1000"
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
@@ -1013,13 +1010,13 @@ const InterviewForm = ({
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="3000"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#diffTag"
+                      data-aos-anchor="Tag5"
                     >
                       <FormLabel>Rate the difficulty</FormLabel>
                       <Select
@@ -1046,12 +1043,12 @@ const InterviewForm = ({
                       ml="1%"
                       data-aos="fade-in"
                       data-aos-offset="200"
-                      data-aos-delay="2000"
+                      data-aos-delay="3000"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#diffTag"
+                      data-aos-anchor="Tag5"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
@@ -1059,14 +1056,14 @@ const InterviewForm = ({
                   <Flex
                     justify="flex-end"
                     mb="8%"
-                    // data-aos="fade-in"
+                    data-aos="fade-in"
                     data-aos-offset="200"
-                    data-aos-delay="3000"
+                    data-aos-delay="2700"
                     data-aos-duration="1500"
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
                     data-aos-once="true"
-                    data-aos-anchor="#diffTag"
+                    data-aos-anchor="Tag5"
                   >
                     <Button
                       h="56px"
@@ -1142,13 +1139,13 @@ const InterviewForm = ({
                             time6()
                           }}
                         >
-                          <CustomRadio value="1" w="411px">
+                          <CustomRadio value="1" w="100%">
                             No offer
                           </CustomRadio>
-                          <CustomRadio value="2" w="411px" data-cy="accepted">
+                          <CustomRadio value="2" w="100%" data-cy="accepted">
                             Accepted
                           </CustomRadio>
-                          <CustomRadio value="3" w="411px">
+                          <CustomRadio value="3" w="100%">
                             Declined
                           </CustomRadio>
                         </RadioButtonGroup>
@@ -1235,7 +1232,7 @@ const InterviewForm = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#salaryTag"
+                      data-aos-anchor="salaryTag"
                     >
                       <FormLabel>Salary</FormLabel>
                       <InputGroup>
@@ -1270,7 +1267,7 @@ const InterviewForm = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#salaryTag"
+                      data-aos-anchor="salaryTag"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
@@ -1285,7 +1282,7 @@ const InterviewForm = ({
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
                     data-aos-once="true"
-                    data-aos-anchor="#salaryTag"
+                    data-aos-anchor="salaryTag"
                   >
                     <Button
                       h="56px"
@@ -1371,7 +1368,7 @@ const InterviewForm = ({
                         <BeautyStars
                           name="interviewRating"
                           value={starState}
-                          activeColor="blue"
+                          activeColor="#344CD0"
                           onChange={(value) => {
                             setStarState(value)
                             time8()
