@@ -26,14 +26,9 @@ import {
   FormHelperText,
 } from '@chakra-ui/core'
 
-const EditUserProfile = ({
-  match,
-  history,
-  userData,
-  isLoading,
-  updateUser,
-}) => {
+const EditUserProfile = ({ match, history, userData, updateUser }) => {
   const id = match.params.id
+  const userId = window.localStorage.getItem('userId')
   // creating form state, setting default values
   const { handleSubmit, errors, register, formState } = useForm({
     defaultValues: {
@@ -60,8 +55,7 @@ const EditUserProfile = ({
       profile_image: userData.profile_image ? userData.profile_image : null,
     },
   })
-  // const [show, setShow] = useState(false)
-  // const handleClick = () => setShow(!show)
+
   //location state/helpers
   const [location, setLocation] = useState({})
   const [newLocation, setNewLocation] = useState({})
@@ -256,57 +250,52 @@ const EditUserProfile = ({
     history.push(`/profile/${id}`)
   }
 
-  if (isLoading) {
-    return null
-  }
+  //see profilePage component for details
+  const lazySolution =
+    userData.location != 'undefined undefined ' &&
+    userData.location != 'undefined undefined'
+      ? userData.location
+      : 'Enter your location'
 
   return (
     <>
-      <Flex Flex w="100%" height="84px" justify="center">
-        <Flex
-          maxW="1440px"
-          w="100%"
-          pt="1%"
-          pr="3%"
-          pl="3%"
-          justify="space-between"
-        >
+      {/* //Top Section */}
+
+      <Flex
+        maxW="1440px"
+        w="100%"
+        px="40px"
+        py="28px"
+        m="0 auto"
+        justify="space-between"
+        align="center"
+        borderBottom="1px solid #EAF0FE"
+      >
+        <Flex>
           <Link
             style={{
               textDecoration: 'none',
               color: '#344CD0',
+              fontFamily: 'Poppins',
+              fontWeight: '600',
+              fontSize: '32px',
             }}
             to="/dashboard"
           >
-            {' '}
-            <Flex>
-              <h1> Allay </h1>
-            </Flex>
+            <h1> Allay </h1>
           </Link>
-          <Flex>
-            <Link
-              style={{
-                textDecoration: 'none',
-                color: 'black',
-              }}
-              to={`/profile/${id}`}
-            >
-              {userData.profile_image === 'h' ? (
-                <Image
-                  size="50px"
-                  style={{ opacity: '0.6' }}
-                  src={require('../../../icons/user.svg')}
-                />
-              ) : (
-                <Image
-                  size="50px"
-                  style={{ opacity: '0.6', borderRadius: '50%' }}
-                  src={userData.profile_image}
-                />
-              )}
-            </Link>
-          </Flex>
         </Flex>
+
+        {Number(userId) === Number(userData.id) ? (
+          <Flex>
+            <Image
+              size="58px"
+              style={{ opacity: '0.6', borderRadius: '50%' }}
+              src={userData.profile_image}
+              fallbackSrc={require('../../../icons/user.svg')}
+            />
+          </Flex>
+        ) : null}
       </Flex>
       <Flex
         w="833px"
@@ -475,7 +464,7 @@ const EditUserProfile = ({
                   id="location"
                   name="location"
                   label="location"
-                  placeholder={userData.location}
+                  placeholder={lazySolution}
                   ref={register}
                 />
               </FormControl>

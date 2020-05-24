@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
-import getReviewById from '../../../state/actions/index.js';
-import editReview from '../../../state/actions/index.js';
-import ReactGA from 'react-ga';
-import { states } from '../../Reusable/statesData';
-import EditReviewInput from '../../Reusable/InputFields/EditReviewInput';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect, useRef } from 'react'
+import { connect } from 'react-redux'
+import getReviewById from '../../../state/actions/index.js'
+import { editReview } from '../../../state/actions/reviewActions.js'
+import ReactGA from 'react-ga'
+import { states } from '../../Reusable/statesData'
+import EditReviewInput from '../../Reusable/InputFields/EditReviewInput'
+import { useForm } from 'react-hook-form'
 
 //imported styles
-import CustomSpinner from '../../CustomSpinner';
+import CustomSpinner from '../../CustomSpinner'
 import {
   Flex,
   Button,
@@ -26,122 +26,121 @@ import {
   AlertDialogOverlay,
   AlertDialogFooter,
   CheckboxGroup,
-  Checkbox
-} from '@chakra-ui/core';
-
+  Checkbox,
+} from '@chakra-ui/core'
 const EditInterviewForm = ({
   review,
   getReviewById,
   editReview,
   match,
   history,
-  isLoading
+  isLoading,
 }) => {
-  const { register, handleSubmit, errors, formState } = useForm();
-  const id = match.params.id;
+  const { register, handleSubmit, errors, formState } = useForm()
+  const id = match.params.id
   const [editValue, setEditValue] = useState({
-    id: id
-  });
+    id: id,
+  })
 
   // specifically for the cancel button functionality
-  const [isOpen, setIsOpen] = useState();
-  const onClose = () => setIsOpen(false);
-  const cancelRef = useRef();
+  const [isOpen, setIsOpen] = useState()
+  const onClose = () => setIsOpen(false)
+  const cancelRef = useRef()
 
   // validating salary
   function validateSalary(value) {
-    let error;
+    let error
     if (value < 0) {
-      error = 'Salary cannot be less than zero.';
+      error = 'Salary cannot be less than zero.'
     }
-    return error || true;
+    return error || true
   }
 
   useEffect(() => {
-    getReviewById(id);
-  }, [id, getReviewById]);
+    getReviewById(id)
+  }, [id, getReviewById])
 
   if (isLoading) {
     return (
-      <Flex justify='center' align='center' w='100vh' h='100vh'>
+      <Flex justify="center" align="center" w="100vh" h="100vh">
         <CustomSpinner />
       </Flex>
-    );
+    )
   }
 
   const submitEdits = () => {
     editReview(review.user_id, review.review_id, editValue).then(() => {
-      history.push('/dashboard');
-    });
+      history.push('/dashboard')
+    })
     ReactGA.event({
       category: 'Interview Review Edit',
-      action: `Submit edit`
-    });
-  };
+      action: `Submit edit`,
+    })
+  }
 
   return (
-    <Flex justify='center' w='100%' minH='100vh' bg='#F2F6FE'>
-      <Flex w='45%' my='10%' px='4%' justify='center' flexDir='column'>
+    <Flex justify="center" w="100%" minH="100vh" bg="#F2F6FE">
+      <Flex w="45%" my="10%" px="4%" justify="center" flexDir="column">
         <form onSubmit={handleSubmit(submitEdits)}>
           <FormControl>
-            <h2 color='#525252' align='center'>
+            <h2 color="#525252" align="center">
               Edit interview review
             </h2>
-            <FormLabel color='#525252' mt='3'>
+            <FormLabel color="#525252" mt="3">
               Job title
             </FormLabel>
             <EditReviewInput
-              name='job_title'
+              name="job_title"
               placeholder={review.job_title}
               value={editValue.job_title}
-              onChange={e =>
+              onChange={(e) =>
                 setEditValue({
                   ...editValue,
-                  [e.target.name]: e.target.value
+                  [e.target.name]: e.target.value,
                 })
               }
             />
           </FormControl>
 
           <FormControl>
-            <FormLabel fontSize='15px' color='#525252'>
+            <FormLabel fontSize="15px" color="#525252">
               Job location
             </FormLabel>
-            <Flex justify='space-between' wrap='nowrap'>
+            <Flex justify="space-between" wrap="nowrap">
               <EditReviewInput
-                w='60%'
-                h='58px'
-                py='32px'
-                borderColor='#ECF1FE'
-                rounded='3px'
-                name='city'
+                w="60%"
+                h="58px"
+                py="32px"
+                borderColor="#ECF1FE"
+                rounded="3px"
+                name="city"
                 placeholder={review.city}
                 value={editValue.city}
-                onChange={e =>
+                onChange={(e) =>
                   setEditValue({
                     ...editValue,
-                    [e.target.name]: e.target.value
+                    [e.target.name]: e.target.value,
                   })
                 }
               />
 
               <Select
-                w='35%'
-                mb='4'
-                h='65px'
-                rounded='3px'
-                border='1px solid black'
-                name='state_id'
+                w="35%"
+                mb="4"
+                h="65px"
+                rounded="3px"
+                border="1px solid black"
+                name="state_id"
                 ref={register}
-                onChange={e =>
+                onChange={(e) =>
                   setEditValue({
                     ...editValue,
-                    [e.target.name]: e.target.value
+                    [e.target.name]: e.target.value,
                   })
                 }
               >
                 <option value={0}>{review.state_name}</option>
-                {states.map(i => (
+                {states.map((i) => (
                   <option key={i.id} value={i.id}>
                     {i.state_name}
                   </option>
@@ -151,32 +150,32 @@ const EditInterviewForm = ({
           </FormControl>
 
           <FormControl isInvalid={errors.salary}>
-            <FormLabel fontSize='15px' color='#525252'>
+            <FormLabel fontSize="15px" color="#525252">
               Salary
             </FormLabel>
             <InputGroup>
               <InputLeftElement
-                mb='4'
-                h='58px'
-                py='32px'
-                borderColor='#ECF1FE'
-                color='gray.300'
-                fontSize='1.2em'
-                children='$'
+                mb="4"
+                h="58px"
+                py="32px"
+                borderColor="#ECF1FE"
+                color="gray.300"
+                fontSize="1.2em"
+                children="$"
               />
               <EditReviewInput
-                pl='6%'
-                borderColor='#ECF1FE'
-                rounded='3px'
-                name='salary'
-                type='number'
+                pl="6%"
+                borderColor="#ECF1FE"
+                rounded="3px"
+                name="salary"
+                type="number"
                 placeholder={review.salary}
                 ref={register({ validate: validateSalary })}
                 value={editValue.salary}
-                onChange={e =>
+                onChange={(e) =>
                   setEditValue({
                     ...editValue,
-                    [e.target.name]: e.target.value
+                    [e.target.name]: e.target.value,
                   })
                 }
               />
@@ -187,21 +186,21 @@ const EditInterviewForm = ({
           </FormControl>
 
           <FormControl>
-            <FormLabel fontSize='15px' color='#525252'>
+            <FormLabel fontSize="15px" color="#525252">
               Job offer
             </FormLabel>
             <Select
-              mb='4'
-              h='65px'
-              rounded='3px'
-              border='1px solid black'
-              color='#494B5B'
-              name='offer_status_id'
+              mb="4"
+              h="65px"
+              rounded="3px"
+              border="1px solid black"
+              color="#494B5B"
+              name="offer_status_id"
               ref={register}
-              onChange={e =>
+              onChange={(e) =>
                 setEditValue({
                   ...editValue,
-                  [e.target.name]: e.target.value
+                  [e.target.name]: e.target.value,
                 })
               }
             >
@@ -214,21 +213,21 @@ const EditInterviewForm = ({
           </FormControl>
 
           <FormControl>
-            <FormLabel fontSize='15px' color='#525252'>
+            <FormLabel fontSize="15px" color="#525252">
               Interview difficulty
             </FormLabel>
             <Select
-              mb='4'
-              h='65px'
-              rounded='3px'
-              border='1px solid black'
-              color='#494B5B'
-              name='difficulty_rating'
+              mb="4"
+              h="65px"
+              rounded="3px"
+              border="1px solid black"
+              color="#494B5B"
+              name="difficulty_rating"
               ref={register}
-              onChange={e =>
+              onChange={(e) =>
                 setEditValue({
                   ...editValue,
-                  [e.target.name]: e.target.value
+                  [e.target.name]: e.target.value,
                 })
               }
             >
@@ -242,174 +241,200 @@ const EditInterviewForm = ({
           </FormControl>
 
           <FormControl>
-            <FormLabel fontSize='15px' color='#525252'>
+            <FormLabel fontSize="15px" color="#525252">
               Interview rounds
             </FormLabel>
             <EditReviewInput
-              name='interview_rounds'
-              type='number'
-              color='#494B5B'
+              name="interview_rounds"
+              type="number"
+              color="#494B5B"
               placeholder={review.interview_rounds}
               value={editValue.interview_rounds}
-              onChange={e =>
+              onChange={(e) =>
                 setEditValue({
                   ...editValue,
-                  [e.target.name]: e.target.value
+                  [e.target.name]: e.target.value,
                 })
               }
             />
           </FormControl>
 
-          <FormLabel mb='2'>Interview types </FormLabel>
-          <Flex mb='4'>
-            <Flex w='50%'>
+          <FormLabel mb="2">Interview types </FormLabel>
+          <Flex mb="4">
+            <Flex w="50%">
               <CheckboxGroup defaultValue={[true]}>
                 <Checkbox
-                  size='md'
-                  border='rgba(72, 72, 72, 0.1)'
-                  name='phone_interview'
+                  size="md"
+                  border="rgba(72, 72, 72, 0.1)"
+                  name="phone_interview"
                   value={review.phone_interview}
-                  onClick={() => review.phone_interview
-                    ? setEditValue({ ...editValue, phone_interview: false })
-                    : setEditValue({ ...editValue, phone_interview: true })
+                  onClick={() =>
+                    review.phone_interview
+                      ? setEditValue({ ...editValue, phone_interview: false })
+                      : setEditValue({ ...editValue, phone_interview: true })
                   }
                 >
                   Phone Screening
-							  </Checkbox>
+                </Checkbox>
                 <Checkbox
-                  size='md'
-                  border='rgba(72, 72, 72, 0.1)'
-                  name='resume_review'
+                  size="md"
+                  border="rgba(72, 72, 72, 0.1)"
+                  name="resume_review"
                   value={review.resume_review}
-                  onClick={() => review.resume_review
-                    ? setEditValue({ ...editValue, resume_review: false })
-                    : setEditValue({ ...editValue, resume_review: true })
+                  onClick={() =>
+                    review.resume_review
+                      ? setEditValue({ ...editValue, resume_review: false })
+                      : setEditValue({ ...editValue, resume_review: true })
                   }
                 >
                   Resume Review
-							  </Checkbox>
+                </Checkbox>
                 <Checkbox
-                  size='md'
-                  border='rgba(72, 72, 72, 0.1)'
-                  name='take_home_assignments'
+                  size="md"
+                  border="rgba(72, 72, 72, 0.1)"
+                  name="take_home_assignments"
                   value={review.take_home_assignments}
-                  onClick={() => review.take_home_assignments
-                    ? setEditValue({ ...editValue, take_home_assignments: false })
-                    : setEditValue({ ...editValue, take_home_assignments: true })
+                  onClick={() =>
+                    review.take_home_assignments
+                      ? setEditValue({
+                          ...editValue,
+                          take_home_assignments: false,
+                        })
+                      : setEditValue({
+                          ...editValue,
+                          take_home_assignments: true,
+                        })
                   }
                 >
                   Take Home Assignments
-							  </Checkbox>
+                </Checkbox>
                 <Checkbox
-                  size='md'
-                  border='rgba(72, 72, 72, 0.1)'
-                  name='online_coding_assignments'
+                  size="md"
+                  border="rgba(72, 72, 72, 0.1)"
+                  name="online_coding_assignments"
                   value={review.online_coding_assignments}
-                  onClick={() => review.online_coding_assignments
-                    ? setEditValue({ ...editValue, online_coding_assignments: false })
-                    : setEditValue({ ...editValue, online_coding_assignments: true })
+                  onClick={() =>
+                    review.online_coding_assignments
+                      ? setEditValue({
+                          ...editValue,
+                          online_coding_assignments: false,
+                        })
+                      : setEditValue({
+                          ...editValue,
+                          online_coding_assignments: true,
+                        })
                   }
                 >
                   Online Coding Assignments
-							  </Checkbox>
+                </Checkbox>
               </CheckboxGroup>
             </Flex>
             <Flex>
               <CheckboxGroup defaultValue={[true]}>
                 <Checkbox
-                  size='md'
-                  border='rgba(72, 72, 72, 0.1)'
-                  name='portfolio_review'
+                  size="md"
+                  border="rgba(72, 72, 72, 0.1)"
+                  name="portfolio_review"
                   value={review.portfolio_review}
-                  onClick={() => review.portfolio_review
-                    ? setEditValue({ ...editValue, portfolio_review: false })
-                    : setEditValue({ ...editValue, portfolio_review: true })
+                  onClick={() =>
+                    review.portfolio_review
+                      ? setEditValue({ ...editValue, portfolio_review: false })
+                      : setEditValue({ ...editValue, portfolio_review: true })
                   }
                 >
                   Portfoilio Review
-							</Checkbox>
+                </Checkbox>
                 <Checkbox
-                  size='md'
-                  border='rgba(72, 72, 72, 0.1)'
-                  name='screen_share'
+                  size="md"
+                  border="rgba(72, 72, 72, 0.1)"
+                  name="screen_share"
                   value={review.screen_share}
-                  onClick={() => review.screen_share
-                    ? setEditValue({ ...editValue, screen_share: false })
-                    : setEditValue({ ...editValue, screen_share: true })
+                  onClick={() =>
+                    review.screen_share
+                      ? setEditValue({ ...editValue, screen_share: false })
+                      : setEditValue({ ...editValue, screen_share: true })
                   }
                 >
                   Screen Share
-							</Checkbox>
+                </Checkbox>
                 <Checkbox
-                  size='md'
-                  border='rgba(72, 72, 72, 0.1)'
-                  name='open_source_contribution'
+                  size="md"
+                  border="rgba(72, 72, 72, 0.1)"
+                  name="open_source_contribution"
                   value={review.open_source_contribution}
-                  onClick={() => review.open_source_contribution
-                    ? setEditValue({ ...editValue, open_source_contribution: false })
-                    : setEditValue({ ...editValue, open_source_contribution: true })
+                  onClick={() =>
+                    review.open_source_contribution
+                      ? setEditValue({
+                          ...editValue,
+                          open_source_contribution: false,
+                        })
+                      : setEditValue({
+                          ...editValue,
+                          open_source_contribution: true,
+                        })
                   }
                 >
                   Open Source Contribution
-							</Checkbox>
+                </Checkbox>
                 <Checkbox
-                  size='md'
-                  border='rgba(72, 72, 72, 0.1)'
-                  name='side_projects'
+                  size="md"
+                  border="rgba(72, 72, 72, 0.1)"
+                  name="side_projects"
                   value={review.side_projects}
-                  onClick={() => review.side_projects
-                    ? setEditValue({ ...editValue, side_projects: false })
-                    : setEditValue({ ...editValue, side_projects: true })
+                  onClick={() =>
+                    review.side_projects
+                      ? setEditValue({ ...editValue, side_projects: false })
+                      : setEditValue({ ...editValue, side_projects: true })
                   }
                 >
                   Side Projects
-							</Checkbox>
+                </Checkbox>
               </CheckboxGroup>
             </Flex>
           </Flex>
 
           <FormControl>
-            <FormLabel fontSize='15px' color='#525252'>
+            <FormLabel fontSize="15px" color="#525252">
               Job review
             </FormLabel>
             <Textarea
-              mb='4'
-              h='144px'
-              rounded='3px'
-              border='1px solid black'
-              color='#494B5B'
+              mb="4"
+              h="144px"
+              rounded="3px"
+              border="1px solid black"
+              color="#494B5B"
               rowsMax={6}
-              resize='none'
-              type='text'
-              name='comment'
+              resize="none"
+              type="text"
+              name="comment"
               placeholder={review.comment}
               ref={register}
               value={editValue.comment}
-              onChange={e =>
+              onChange={(e) =>
                 setEditValue({
                   ...editValue,
-                  [e.target.name]: e.target.value
+                  [e.target.name]: e.target.value,
                 })
               }
             />
           </FormControl>
 
           <FormControl>
-            <FormLabel fontSize='15px' color='#525252'>
+            <FormLabel fontSize="15px" color="#525252">
               Job rating
             </FormLabel>
             <Select
-              mb='4'
-              h='65px'
-              rounded='3px'
-              border='1px solid black'
-              color='#494B5B'
-              name='overall_rating'
+              mb="4"
+              h="65px"
+              rounded="3px"
+              border="1px solid black"
+              color="#494B5B"
+              name="overall_rating"
               ref={register}
-              onChange={e =>
+              onChange={(e) =>
                 setEditValue({
                   ...editValue,
-                  [e.target.name]: e.target.value
+                  [e.target.name]: e.target.value,
                 })
               }
             >
@@ -422,29 +447,29 @@ const EditInterviewForm = ({
             </Select>
           </FormControl>
 
-          <Flex mt='40px'>
+          <Flex mt="40px">
             <Button
-              bg='#344CD0'
-              color='white'
+              bg="#344CD0"
+              color="white"
               isLoading={formState.isSubmitting}
-              type='submit'
-              w='65%'
-              h='72px'
-              fontSize='18px'
-              data-cy='companyEditInterviewSubmit'
+              type="submit"
+              w="65%"
+              h="72px"
+              fontSize="18px"
+              data-cy="companyEditInterviewSubmit"
             >
               Save changes
             </Button>
             <Flex
-              align='center'
-              justify='center'
+              align="center"
+              justify="center"
               isloading
-              height='72px'
-              width='30%'
-              color='#344CD0'
-              fontSize='18px'
-              fontWeight='bold'
-              cursor='pointer'
+              height="72px"
+              width="30%"
+              color="#344CD0"
+              fontSize="18px"
+              fontWeight="bold"
+              cursor="pointer"
               onClick={() => setIsOpen(true)}
             >
               Cancel
@@ -456,7 +481,7 @@ const EditInterviewForm = ({
             >
               <AlertDialogOverlay />
               <AlertDialogContent>
-                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
                   Cancel form?
                 </AlertDialogHeader>
                 <AlertDialogBody>
@@ -466,27 +491,27 @@ const EditInterviewForm = ({
                 <AlertDialogFooter>
                   <Flex>
                     <Flex
-                      align='center'
-                      justify='center'
+                      align="center"
+                      justify="center"
                       isloading
-                      height='56px'
-                      width='30%'
-                      mr='5%'
-                      color='#344CD0'
-                      fontSize='18px'
-                      fontWeight='bold'
-                      cursor='pointer'
+                      height="56px"
+                      width="30%"
+                      mr="5%"
+                      color="#344CD0"
+                      fontSize="18px"
+                      fontWeight="bold"
+                      cursor="pointer"
                       ref={cancelRef}
                       onClick={onClose}
                     >
                       Cancel
                     </Flex>
                     <Button
-                      h='56px'
-                      rounded='10px'
-                      bg='#344CD0'
-                      border='none'
-                      color='white'
+                      h="56px"
+                      rounded="10px"
+                      bg="#344CD0"
+                      border="none"
+                      color="white"
                       onClick={() => history.push('/dashboard')}
                       ml={3}
                     >
@@ -500,16 +525,16 @@ const EditInterviewForm = ({
         </form>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     review: state.review.dataById,
-  };
-};
+  }
+}
 
 export default connect(
   mapStateToProps,
   (getReviewById, editReview)
-)(EditInterviewForm);
+)(EditInterviewForm)

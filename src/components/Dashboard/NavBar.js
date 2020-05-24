@@ -49,7 +49,14 @@ function NavBar({
     })
   }
 
-  const profile_id = localStorage.getItem('userId')
+  // image helper
+  const [imageTimeout, setImageTimeout] = useState(true)
+  useEffect(() => {
+    setTimeout(function () {
+      setImageTimeout(false)
+    }, 1500)
+  }, [])
+
   const logout = () => {
     localStorage.clear('token')
     localStorage.clear('userId')
@@ -133,11 +140,14 @@ function NavBar({
   }
 
   const typeBadge = (name) => {
-    return name.map((typeName) => (
+    return name.map((typeName, index) => (
       <Badge
-        backgroundColor="#d3d3d3"
-        color="black"
-        p="0px 5px"
+        key={`ReviewBadge-${index}`}
+        backgroundColor="#E2E2E2"
+        color="#131C4D"
+        fontFamily="Muli"
+        fontWeight="normal"
+        p="5px 15px"
         m="5px"
         style={{ borderRadius: '50px' }}
         variantColor="green"
@@ -161,18 +171,43 @@ function NavBar({
   }
 
   const trackBadge = (name) => {
-    return name.map((typeName) => (
-      <Badge
-        p="0px 2px"
-        m="2px"
-        backgroundColor={trackColorPicker(typeName)}
-        color={trackFontColor(typeName)}
-        style={{ borderRadius: '50px' }}
-        variantColor="green"
-      >
-        {typeName}
-      </Badge>
-    ))
+    return name
+      .map((typeName, index) => {
+        if (index < 2) {
+          return (
+            <Badge
+              key={`TrackBadge-${index}`}
+              p="5px 15px"
+              m="2px"
+              fontFamily="Muli"
+              fontWeight="normal"
+              backgroundColor={trackColorPicker(typeName)}
+              color={trackFontColor(typeName)}
+              style={{ borderRadius: '50px' }}
+              variantColor="green"
+            >
+              {typeName}
+            </Badge>
+          )
+        } else {
+          return (
+            <Badge
+              key={`TrackBadge-${index}`}
+              backgroundColor="#E2E2E2"
+              color="#131C4D"
+              fontFamily="Muli"
+              fontWeight="normal"
+              p="5px 15px"
+              m="2px"
+              style={{ borderRadius: '50px' }}
+              variantColor="green"
+            >
+              . . .
+            </Badge>
+          )
+        }
+      })
+      .filter((item, index) => index < 3)
   }
 
   useEffect(() => {
@@ -183,23 +218,31 @@ function NavBar({
     <Flex
       maxW="1440px"
       w="100%"
-      px="40px"
       background="#FFFFFF"
       top="0"
       position="fixed"
       zIndex="999"
       direction="column"
     >
-      <Flex align="center" justify="space-between" pt="1%" mb="4%" h="100px">
-        <Flex color="#344CD0" align="center">
-          <h1>Allay</h1>
+      <Flex
+        align="center"
+        justify="space-between"
+        py="28px"
+        mb="4%"
+        h="100px"
+        borderBottom="1px solid #EAF0FE"
+      >
+        <Flex color="#344CD0" align="center" pl="40px">
+          <h1 fontFamily="Poppins" fontWeight="600" fontSize="32px">
+            Allay
+          </h1>
         </Flex>
 
         {/* Search bar*/}
         <InputGroup w="40%">
-          <InputRightElement
-            children={<Icon name="search-2" color="#344CD0" />}
-          />
+          <InputRightElement>
+            <Icon name="search-2" color="#344CD0" />
+          </InputRightElement>
           <Input
             width="100%"
             placeholder="Search for company or position..."
@@ -213,25 +256,20 @@ function NavBar({
         </InputGroup>
 
         {/* Profile Icon and user menu*/}
-        <Flex>
+        <Flex pr="40px">
           <Menu position="absolute" height="226px">
-            {!userData.profile_image ||
-            Number(userId) !== Number(userData.id) ? (
+            {imageTimeout ? (
               <Spinner />
             ) : (
               <MenuButton
                 as={Image}
-                size="50px"
+                size="58px"
                 cursor="pointer"
                 style={{
-                  opacity: '0.6',
-                  borderRadius: userData.profile_image === 'h' ? 'none' : '50%',
+                  borderRadius: '50%',
                 }}
-                src={
-                  userData.profile_image === 'h'
-                    ? require('../../icons/user.svg')
-                    : userData.profile_image
-                }
+                src={userData.profile_image}
+                fallbackSrc={require('../../icons/user.svg')}
               />
             )}
             <MenuList>
@@ -239,7 +277,7 @@ function NavBar({
                 border="none"
                 backgroundColor="#FFF"
                 data-cy="signOut"
-                onClick={() => history.push(`/profile/${profile_id}`)}
+                onClick={() => history.push(`/profile/${userId}`)}
               >
                 Profile
               </MenuItem>
@@ -247,7 +285,7 @@ function NavBar({
                 border="none"
                 backgroundColor="#FFF"
                 data-cy="signOut"
-                onClick={() => history.push(`/profile/${profile_id}/edit`)}
+                onClick={() => history.push(`/profile/${userId}/edit`)}
               >
                 Account settings
               </MenuItem>
@@ -271,93 +309,131 @@ function NavBar({
           width="100%"
           margin="0 auto"
           justify="space-between"
+          px="40px"
         >
-          <Heading as="h1" size="xl">
+          <Heading
+            as="h1"
+            fontSize="36px"
+            fontFamily="Poppins"
+            fontWeight="600"
+            color="#131C4D"
+          >
             Reviews
           </Heading>
-          <Menu margin="3%" closeOnSelect={false}>
-            <MenuButton
-              outline="none"
-              w="309px"
-              h="55px"
-              bg="#FFFFFF"
-              border="2px solid #EAF0FE"
-              rounded="50px"
-              fontFamily="Muli"
-              fontSize="20px"
-              fontWeight="bold"
-            >
-              {type.length > 0 ? typeBadge(type) : 'Filter by review type'}
-              <Icon name="triangle-down" color="#344CD0" />
-            </MenuButton>
-            <MenuList minWidth="240px">
-              {types.map((type) => (
-                <MenuOptionGroup
-                  key={type.name}
-                  defaultValue={typeFilters}
-                  type="checkbox"
+          <Flex>
+            <Menu margin="3%" closeOnSelect={false}>
+              <MenuButton
+                outline="none"
+                w="309px"
+                h="65px"
+                bg="#FFFFFF"
+                mr="20px"
+                border="2px solid #EAF0FE"
+                rounded="32px"
+                fontFamily="Muli"
+                fontSize="20px"
+                fontWeight="bold"
+              >
+                <Flex
+                  justify="space-between"
+                  align="center"
+                  pl={track.length > 0 ? '10px' : '30px'}
+                  pr="18px"
                 >
-                  <MenuItemOption
-                    border="none"
-                    backgroundColor="#FFF"
-                    value={type.name}
-                    onClick={() => handleType(type.name)}
+                  <Flex w="100%">
+                    {type.length > 0
+                      ? typeBadge(type)
+                      : 'Filter by review type'}
+                  </Flex>
+
+                  <Icon name="triangle-down" color="#344CD0" fontSize="16px" />
+                </Flex>
+              </MenuButton>
+              <MenuList minWidth="240px">
+                {types.map((type) => (
+                  <MenuOptionGroup
+                    key={type.name}
+                    defaultValue={typeFilters}
+                    type="checkbox"
                   >
-                    {type.name}
-                  </MenuItemOption>
-                </MenuOptionGroup>
-              ))}
-            </MenuList>
-          </Menu>
-          <Menu closeOnSelect={false}>
-            <MenuButton
-              outline="none"
-              w="240px"
-              h="55px"
-              bg="#FFFFFF"
-              border="2px solid #EAF0FE"
-              rounded="50px"
-              fontFamily="Muli"
-              fontSize="20px"
-              fontWeight="bold"
-            >
-              {track.length > 0 ? trackBadge(track) : 'Filter by field'}
-              <Icon name="triangle-down" color="#344CD0" />
-            </MenuButton>
-            <MenuList minWidth="240px">
-              {tracks.map((track) => (
-                <MenuOptionGroup
-                  key={track.name}
-                  defaultValue={trackFilters}
-                  type="checkbox"
+                    <MenuItemOption
+                      border="none"
+                      backgroundColor="#FFF"
+                      value={type.name}
+                      onClick={() => handleType(type.name)}
+                    >
+                      {type.name}
+                    </MenuItemOption>
+                  </MenuOptionGroup>
+                ))}
+              </MenuList>
+            </Menu>
+            <Menu closeOnSelect={false}>
+              <MenuButton
+                outline="none"
+                w="260px"
+                h="65px"
+                bg="#FFFFFF"
+                border="2px solid #EAF0FE"
+                rounded="32px"
+                fontFamily="Muli"
+                fontSize="20px"
+                fontWeight="bold"
+              >
+                <Flex
+                  justify="space-between"
+                  align="center"
+                  pl={track.length > 0 ? '10px' : '30px'}
+                  pr="18px"
                 >
-                  <MenuItemOption
-                    border="none"
-                    backgroundColor="#FFF"
-                    value={track.name}
-                    onClick={() => handleTrack(track.name)}
+                  <Flex w="100%">
+                    {track.length > 0 ? trackBadge(track) : 'Filter by field'}
+                  </Flex>
+
+                  <Icon name="triangle-down" color="#344CD0" fontSize="16px" />
+                </Flex>
+              </MenuButton>
+              <MenuList minWidth="240px">
+                {tracks.map((track) => (
+                  <MenuOptionGroup
+                    key={track.name}
+                    defaultValue={trackFilters}
+                    type="checkbox"
                   >
-                    {track.name}
-                  </MenuItemOption>
-                </MenuOptionGroup>
-              ))}
-            </MenuList>
-          </Menu>
+                    <MenuItemOption
+                      border="none"
+                      backgroundColor="#FFF"
+                      value={track.name}
+                      onClick={() => handleTrack(track.name)}
+                    >
+                      {track.name}
+                    </MenuItemOption>
+                  </MenuOptionGroup>
+                ))}
+              </MenuList>
+            </Menu>
+          </Flex>
           {isBlocked ? (
             <Blocked />
           ) : (
             <Button
               background="#344CD0"
-              color="#FFFFFF"
+              color="#FDFDFF"
+              _hover={{ bg: '#4254BA', cursor: 'pointer' }}
+              fontFamily="Muli"
+              fontWeight="bold"
+              fontSize="20px"
               rounded="35px"
-              ml="50px"
+              p="19px 20px"
+              w="180px"
+              h="63px"
               border="none"
               size="lg"
               isLoading={isLoading}
               onClick={navToReviewForm}
               data-cy="addReviewButton"
             >
-              Add Review
+              Write a review
             </Button>
           )}
         </Flex>
