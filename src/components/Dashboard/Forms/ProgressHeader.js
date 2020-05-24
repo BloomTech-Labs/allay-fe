@@ -5,13 +5,11 @@ import { Flex, Button } from '@chakra-ui/core'
 
 const ProgressHeader = ({ progress }) => {
   //progress bar
-
   const history = useHistory()
   console.log('progress', progress)
   return (
     <Flex
       justify="center"
-      // pt="1%"
       px="2%"
       w="100%"
       h="20%"
@@ -31,13 +29,13 @@ const ProgressHeader = ({ progress }) => {
       <Flex w="100%" justify="space-between" mb="1%">
         {progress && progress.prec === 100 ? (
           <>
-            <Flex as="h4" size="22px">
+            <Flex as="h4" fontFamily="muli" color="#131C4D" w="50%">
               {progress && progress.prec}% Completed!
-            </Flex>{' '}
+            </Flex>
           </>
         ) : (
           <>
-            <Flex as="h4" fontFamily="muli" color="#131C4D" width="3em">
+            <Flex as="h4" fontFamily="muli" color="#131C4D" w="50%">
               {progress && 100 - progress.prec}% completed
             </Flex>
 

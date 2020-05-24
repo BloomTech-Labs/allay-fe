@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 //styles
 import companyIcon from '../../../companyIcon.png'
 import interviewIcon from '../../../interviewIcon.png'
-import { Flex, Avatar, Button, Image } from '@chakra-ui/core'
+import { Flex, Avatar, Image } from '@chakra-ui/core'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import ProgressBar from '../../Reusable/ProgressBar'
+
 //components
 import InterviewForm from './InterviewForm'
 import CompanyReviewForm from './CompanyReviewForm'
@@ -18,28 +18,25 @@ const FormController = ({ history }) => {
   const [showInterview, setShowInterview] = useState(false)
   // state to show company review
   const [showCompanyReview, setShowCompanyReview] = useState(false)
+  //progress bar
+  const [progress] = useState({
+    prec: 99,
+    prog: 0,
+  })
 
   return (
     // main container
-
     <>
-      <ProgressHeader />
+      <ProgressHeader progress={progress} />
       {/* Start of messenger  */}
       {/* form container */}
       <Flex margin="0 auto">
-        <Flex
-          // w="70%"
-          bg="white"
-          // justify="center"
-          flexDir="column"
-          // px='2%'
-          pt="5%"
-        >
+        <Flex bg="#FFF" flexDir="column" pt="5%">
           <Flex
             align="center"
             p="1%"
             ml="2%"
-            // w="416px"
+            w="45%"
             mt="20%"
             mb="2%"
             bg="#F2F6FE"
@@ -68,7 +65,7 @@ const FormController = ({ history }) => {
             align="center"
             p="1%"
             ml="2%"
-            // w="416px"
+            w="50%"
             mb="2%"
             bg="#F2F6FE"
             rounded="20px"
@@ -89,7 +86,7 @@ const FormController = ({ history }) => {
             align="center"
             p="1%"
             ml="2%"
-            // w="416px"
+            w="45%"
             mb="8%"
             bg="#F2F6FE"
             rounded="20px"
@@ -104,17 +101,10 @@ const FormController = ({ history }) => {
             <p>What do you want to post about?</p>
           </Flex>
           {/* company container  */}
-          <Flex
-            w="100%"
-            justify="center"
-            // justify="flex-end"
-          >
+          <Flex w="100%" justify="center">
             {/* company box */}
-
             <Flex
               w="50%"
-              // h="234px"
-              // mb="8%"
               px="6"
               py="5"
               border="1px solid #EAF0FE"
@@ -127,7 +117,6 @@ const FormController = ({ history }) => {
               data-aos-easing="ease-in-out"
               data-aos-mirror="true"
               data-aos-once="false"
-              // align="flex-start"
               align="center"
             >
               <Flex w="100%" color="#494B5B" fontSize="20px" fontWeight="light">
@@ -139,7 +128,6 @@ const FormController = ({ history }) => {
                   align="center"
                   w="100px"
                   h="100px"
-                  // mr='15%'
                   onClick={() => {
                     setShowInterview(true)
                     setShowCompanyReview(false)
@@ -191,7 +179,6 @@ const FormController = ({ history }) => {
             </Flex>
             {/* avatar */}
             <Flex
-              // h="234px"
               align="flex-end"
               ml="1%"
               mr="2%"

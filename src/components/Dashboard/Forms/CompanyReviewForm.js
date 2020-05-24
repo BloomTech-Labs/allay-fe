@@ -9,9 +9,11 @@ import postReview from '../../../state/actions'
 import getCompanies from '../../../state/actions'
 import postCompany from '../../../state/actions'
 // styles
+import ProgressHeader from '../Forms/ProgressHeader'
 import ProgressBar from '../../Reusable/ProgressBar.js'
 import CustomAutoComplete from '../../Reusable/InputFields/Autocomplete'
 import BeautyStars from 'beauty-stars'
+import { ThinkingDots } from '../../Reusable/ThinkingDots'
 import {
   FormControl,
   Input,
@@ -28,7 +30,6 @@ import {
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import CustomSpinner from '../../CustomSpinner'
-import { ThinkingDots } from '../../Reusable/ThinkingDots'
 
 const ReviewForm2 = ({
   history,
@@ -40,24 +41,30 @@ const ReviewForm2 = ({
   //initialize animations
   AOS.init()
   const { register, handleSubmit, formState } = useForm()
+
   // thinking state
   const [thinking, setThinking] = useState(false)
   const dots = () => {
     setThinking(true)
   }
+
   // search state
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
+
   // no company state
   const [noCompany, setNoCompany] = useState(false)
+
   // location "state"
   const [location, setLocation] = useState({})
   const [newLocation, setNewLocation] = useState({})
   const stateSelectorHelper = (value) => {
     setLocation(value)
   }
+
   // star rating
   const [starState, setStarState] = useState(0)
+
   //progress bar
   const [progress, setProgress] = useState({
     prec: 99,
@@ -103,7 +110,6 @@ const ReviewForm2 = ({
   }, [searchTerm, companies])
 
   // state confirmation search function
-
   useEffect(() => {
     if (location.myState) {
       const stateId = states.filter((i) =>
@@ -229,40 +235,9 @@ const ReviewForm2 = ({
 
   return (
     // main container
-    <Flex w="100%" justify="center">
-      {/* max size */}
-      <Flex maxW="1440px" w="100%">
-        {/* progress header */}
-        <Flex
-          pt="1%"
-          px="2%"
-          w="70%"
-          h="108px"
-          background="#344CD0"
-          top="0"
-          position="fixed"
-          overflow="hidden"
-          zIndex="999"
-          direction="column"
-        >
-          <Flex w="100%" color="#FFFFFF">
-            Your progress
-          </Flex>
-
-          <Flex w="100%" justify="space-between" mb="1%" color="#FFFFFF">
-            {progress.prec === 100 ? (
-              <>
-                <Flex as="h4">{progress.prec}% Completed!</Flex>{' '}
-              </>
-            ) : (
-              <>
-                <Flex as="h4">{100 - progress.prec}% completed</Flex>
-                <Flex color="#FFFFFF"> {progress.mins} mins</Flex>
-              </>
-            )}
-          </Flex>
-          <ProgressBar value={progress.prog} />
-        </Flex>
+    <div>
+      <Flex w="100%" margin="0 auto" minH="100vh">
+        <ProgressHeader progress={progress} />
         {thinking ? (
           <>
             <Flex
@@ -277,10 +252,16 @@ const ReviewForm2 = ({
             </Flex>
           </>
         ) : null}
-
         {/* form container */}
-        <Flex w="100%" bg="white" flexDir="column" px="2%" pt="5%">
-          {/* start of form  */}
+        <Flex
+          w="100%"
+          bg="#FFF"
+          flexDir="column"
+          px="2%"
+          pt="5%"
+          margin="0 auto"
+        >
+          {/*--------------- start of form ---------------  */}
           <form onSubmit={handleSubmit(submitForm)}>
             <FormControl isRequired>
               {/* first prompt */}
@@ -464,7 +445,7 @@ const ReviewForm2 = ({
                     p="1%"
                     mb="2%"
                     h="5%"
-                    w="416px"
+                    w="45%"
                     bg="#F2F6FE"
                     rounded="20px"
                     data-aos="fade-right"
@@ -910,7 +891,7 @@ const ReviewForm2 = ({
           </form>
         </Flex>
       </Flex>
-    </Flex>
+    </div>
   )
 }
 
