@@ -242,12 +242,7 @@ const ProfilePage = (props) => {
                             className="fas fa-map-marker-alt"
                           ></i>
 
-<<<<<<< HEAD
-                          {/* TODO: */}
-                          {ridiculousLazyCheck}
-=======
                           {lazySolution}
->>>>>>> c5c2b5161db6d9a06b6d9aed22c9faf404494c85
                         </h6>
                       </Box>
                     </Flex>

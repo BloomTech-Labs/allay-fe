@@ -10,6 +10,7 @@ const ProgressBar = React.forwardRef(({ ...props }) => {
       background="#F2F6FE"
       isAnimated
       hasStripe
+      style={{ borderRadius: '10px' }}
       border="1px solid #131C4D"
       value={props.value}
     />

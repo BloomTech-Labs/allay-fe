@@ -28,10 +28,11 @@ const FormController = ({ history }) => {
     // main container
     <>
       <ProgressHeader progress={progress} />
+
       {/* Start of messenger  */}
       {/* form container */}
-      <Flex margin="0 auto">
-        <Flex bg="#FFF" flexDir="column" pt="5%">
+      <Flex margin="0 auto" width="80%">
+        <Flex flexDir="column" pt="5%" width="100%">
           <Flex
             align="center"
             p="1%"
@@ -101,18 +102,18 @@ const FormController = ({ history }) => {
             <p>What do you want to post about?</p>
           </Flex>
           {/* company container  */}
-          <Flex w="100%" justify="center">
+          <Flex w="100%" justify="flex-end" pb="5%">
             {/* company box */}
             <Flex
-              w="50%"
-              px="6"
-              py="5"
+              w="36%"
+              px="6%"
+              py="5%"
               border="1px solid #EAF0FE"
               rounded="6px"
               flexDir="column"
               data-aos="fade-in"
               data-aos-offset="200"
-              data-aos-delay="3000"
+              data-aos-delay="1500"
               data-aos-duration="2000"
               data-aos-easing="ease-in-out"
               data-aos-mirror="true"

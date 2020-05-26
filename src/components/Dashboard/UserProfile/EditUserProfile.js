@@ -250,16 +250,8 @@ const EditUserProfile = ({ match, history, userData, updateUser }) => {
     history.push(`/profile/${id}`)
   }
 
-<<<<<<< HEAD
-  if (isLoading) {
-    return null
-  }
-  //see explanation in profile page component
-  const ridiculousLazyCheck =
-=======
   //see profilePage component for details
   const lazySolution =
->>>>>>> c5c2b5161db6d9a06b6d9aed22c9faf404494c85
     userData.location != 'undefined undefined ' &&
     userData.location != 'undefined undefined'
       ? userData.location
@@ -479,11 +471,7 @@ const EditUserProfile = ({ match, history, userData, updateUser }) => {
                   id="location"
                   name="location"
                   label="location"
-<<<<<<< HEAD
-                  placeholder={ridiculousLazyCheck}
-=======
                   placeholder={lazySolution}
->>>>>>> c5c2b5161db6d9a06b6d9aed22c9faf404494c85
                   ref={register}
                 />
               </FormControl>
