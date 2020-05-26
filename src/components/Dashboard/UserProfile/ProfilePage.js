@@ -66,9 +66,9 @@ const ProfilePage = (props) => {
     dispatch(getUser(id))
   }, [dispatch, id])
 
-  // send location : null recieve undefiend send null again receive undefiend with white space, lazy but it get the job done for now
+  //send location: null receive undefiend send again empty recieve the same with white space, backend fix but itll do for now
 
-  const ridiculousLazyCheck =
+  const lazySolution =
     userData.location != 'undefined undefined ' &&
     userData.location != 'undefined undefined'
       ? userData.location
@@ -242,8 +242,12 @@ const ProfilePage = (props) => {
                             className="fas fa-map-marker-alt"
                           ></i>
 
+<<<<<<< HEAD
                           {/* TODO: */}
                           {ridiculousLazyCheck}
+=======
+                          {lazySolution}
+>>>>>>> c5c2b5161db6d9a06b6d9aed22c9faf404494c85
                         </h6>
                       </Box>
                     </Flex>

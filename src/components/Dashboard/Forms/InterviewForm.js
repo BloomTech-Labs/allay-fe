@@ -9,7 +9,8 @@ import postReview from '../../../state/actions'
 import getCompanies from '../../../state/actions'
 import postCompany from '../../../state/actions'
 // styles
-import ProgressBar from '../../Reusable/ProgressBar.js'
+
+import ProgressHeader from '../Forms/ProgressHeader'
 import CustomAutoComplete from '../../Reusable/InputFields/Autocomplete'
 import BeautyStars from 'beauty-stars'
 import { ThinkingDots } from '../../Reusable/ThinkingDots'
@@ -42,37 +43,44 @@ const InterviewForm = ({
   postReview,
   history,
 }) => {
+  //initialize animations
   AOS.init()
   const { register, handleSubmit, formState } = useForm()
+
   // state "state"
   const [location, setLocation] = useState({})
   const [newLocation, setNewLocation] = useState({})
   const stateSelectorHelper = (value) => {
     setLocation(value)
   }
+
   // thinking state
   const [thinking, setThinking] = useState(false)
   const dots = () => {
     setThinking(true)
   }
   console.log(thinking)
+
   // search state
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
+
   // no company state
   const [noCompany, setNoCompany] = useState(false)
+
   // star rating
   const [starState, setStarState] = useState(0)
+
   // custom radio button state offer status
   const [offer, setOffer] = useState(1)
+
   //progress bar
   const [progress, setProgress] = useState({
     prec: 99,
-    mins: 10,
     prog: 2,
   })
-
   // company search function
+
   useEffect(() => {
     if (searchTerm.length >= 3) {
       const results = companies.filter((company) =>
@@ -88,7 +96,6 @@ const InterviewForm = ({
   }, [searchTerm, companies])
 
   // state confirmation search function
-
   useEffect(() => {
     if (location.myState) {
       const stateId = states.filter((i) =>
@@ -113,7 +120,6 @@ const InterviewForm = ({
     getCompanies()
     setProgress({
       prec: 95,
-      mins: 8,
       prog: 5,
     })
     const element = document.getElementById('Tag1')
@@ -126,6 +132,7 @@ const InterviewForm = ({
   // timers for moves
   let timer = null
   let dotTimer = null
+
   // 2nd tag
   const time1 = () => {
     clearTimeout(timer)
@@ -133,12 +140,10 @@ const InterviewForm = ({
     dotTimer = setTimeout(dots, 300)
     timer = setTimeout(routeTo2, 1000)
   }
-
   const routeTo2 = () => {
     setTag2(true)
     setProgress({
       prec: 80,
-      mins: 8,
       prog: 20,
     })
     const element = document.getElementById('Tag2')
@@ -148,6 +153,7 @@ const InterviewForm = ({
     })
     setThinking(false)
   }
+
   // 3rd tag
   const time2 = () => {
     clearTimeout(timer)
@@ -160,7 +166,6 @@ const InterviewForm = ({
     setTag3(true)
     setProgress({
       prec: 70,
-      mins: 7,
       prog: 30,
     })
     const element = document.getElementById('Tag3')
@@ -170,6 +175,7 @@ const InterviewForm = ({
     })
     setThinking(false)
   }
+
   //4th tag
   const time3 = () => {
     clearTimeout(timer)
@@ -182,7 +188,6 @@ const InterviewForm = ({
     setTag4(true)
     setProgress({
       prec: 60,
-      mins: 6,
       prog: 40,
     })
     const element = document.getElementById('Tag4')
@@ -192,6 +197,7 @@ const InterviewForm = ({
     })
     setThinking(false)
   }
+
   // 5th tag
   const time4 = () => {
     clearTimeout(timer)
@@ -204,7 +210,6 @@ const InterviewForm = ({
     setTag5(true)
     setProgress({
       prec: 50,
-      mins: 5,
       prog: 50,
     })
     const element = document.getElementById('Tag5')
@@ -214,6 +219,7 @@ const InterviewForm = ({
     })
     setThinking(false)
   }
+
   // 6th tag
   const time5 = () => {
     clearTimeout(timer)
@@ -221,12 +227,10 @@ const InterviewForm = ({
     dotTimer = setTimeout(dots, 300)
     timer = setTimeout(routeTo6, 1000)
   }
-
   const routeTo6 = () => {
     setTag6(true)
     setProgress({
       prec: 40,
-      mins: 4,
       prog: 60,
     })
     const element = document.getElementById('Tag6')
@@ -236,6 +240,7 @@ const InterviewForm = ({
     })
     setThinking(false)
   }
+
   // 7th tag
   const time6 = () => {
     clearTimeout(timer)
@@ -243,12 +248,10 @@ const InterviewForm = ({
     dotTimer = setTimeout(dots, 300)
     timer = setTimeout(routeTo7, 1000)
   }
-
   const routeTo7 = () => {
     setTag7(true)
     setProgress({
       prec: 30,
-      mins: 3,
       prog: 70,
     })
     const element = document.getElementById('Tag7')
@@ -258,6 +261,7 @@ const InterviewForm = ({
     })
     setThinking(false)
   }
+
   // 8th tag
   const time7 = () => {
     clearTimeout(timer)
@@ -265,12 +269,10 @@ const InterviewForm = ({
     dotTimer = setTimeout(dots, 300)
     timer = setTimeout(routeTo8, 1000)
   }
-
   const routeTo8 = () => {
     setTag8(true)
     setProgress({
       prec: 20,
-      mins: 1,
       prog: 85,
     })
     const element = document.getElementById('Tag8')
@@ -280,6 +282,7 @@ const InterviewForm = ({
     })
     setThinking(false)
   }
+
   // 9th tag
   const time8 = () => {
     clearTimeout(timer)
@@ -287,12 +290,10 @@ const InterviewForm = ({
     dotTimer = setTimeout(dots, 300)
     timer = setTimeout(routeTo9, 1000)
   }
-
   const routeTo9 = () => {
     setTag9(true)
     setProgress({
       prec: 100,
-      mins: 0,
       prog: 100,
     })
     const element = document.getElementById('Tag9')
@@ -349,40 +350,9 @@ const InterviewForm = ({
 
   return (
     // main container
-    <Flex background="#E5E5E5" w="100%" justify="center">
-      {/* max size */}
-      <Flex maxW="1440px" w="100%">
-        {/* progress header */}
-        <Flex
-          pt="1%"
-          px="2%"
-          w="70%"
-          h="108px"
-          background="#344CD0"
-          top="0"
-          position="fixed"
-          overflow="hidden"
-          zIndex="999"
-          direction="column"
-        >
-          <Flex w="100%" color="#FFFFFF">
-            Your progress
-          </Flex>
-
-          <Flex w="100%" justify="space-between" mb="1%" color="#FFFFFF">
-            {progress.prec === 100 ? (
-              <>
-                <Flex as="h4">{progress.prec}% Completed!</Flex>
-              </>
-            ) : (
-              <>
-                <Flex as="h4">{100 - progress.prec}% completed</Flex>
-                <Flex color="#FFFFFF"> {progress.mins} mins</Flex>
-              </>
-            )}
-          </Flex>
-          <ProgressBar value={progress.prog} />
-        </Flex>
+    <div>
+      <Flex w="100%" margin="0 auto" minH="100vh">
+        <ProgressHeader progress={progress} />
         {thinking ? (
           <>
             <Flex
@@ -399,7 +369,14 @@ const InterviewForm = ({
         ) : null}
 
         {/* form container */}
-        <Flex w="100%" bg="white" flexDir="column" px="2%" pt="10%">
+        <Flex
+          w="100%"
+          bg="#FFF"
+          flexDir="column"
+          px="2%"
+          pt="10%"
+          margin="0 auto"
+        >
           {/*--------------- start of form ---------------  */}
           <form onSubmit={handleSubmit(submitForm)}>
             <FormControl isRequired>
@@ -424,19 +401,16 @@ const InterviewForm = ({
                 <p>Great! I will need some general details to get started.</p>
               </Flex>
               {/* company container  */}
-
               <Flex w="100%" justify="flex-end">
                 {/* company box */}
                 <Flex
                   w="459px"
                   h="379px"
-                  mb="8%"
                   px="6"
                   py="10"
                   border="1px solid #BBBDC6"
                   rounded="6px"
                   flexDir="column"
-                  justify="space-evenly"
                   data-aos="fade-in"
                   data-aos-offset="200"
                   data-aos-delay="1000"
@@ -444,7 +418,7 @@ const InterviewForm = ({
                   data-aos-easing="ease-in-out"
                   data-aos-mirror="true"
                   data-aos-once="true"
-                  data-aos-anchor="#Tag1"
+                  data-aos-anchor="Tag1"
                 >
                   <FormLabel>1. Company name</FormLabel>
                   {loadingCompanies ? (
@@ -508,13 +482,12 @@ const InterviewForm = ({
                     h="56px"
                     mb="6"
                   />
-                  <Button h="56px" rounded="6px" onClick={time1}>
-                    Next
-                  </Button>
                 </Flex>
+
                 {/* avatar */}
                 <Flex
                   h="379px"
+                  mt="5px"
                   align="flex-end"
                   ml="1%"
                   data-aos="fade-in"
@@ -524,10 +497,38 @@ const InterviewForm = ({
                   data-aos-easing="ease-in-out"
                   data-aos-mirror="true"
                   data-aos-once="true"
+                  data-aos-anchor="Tag1"
                 >
                   <Avatar size="md" src="https://bit.ly/broken-link" />
                 </Flex>
               </Flex>
+              <Flex
+                justify="flex-end"
+                mb="5%"
+                data-aos="fade-in"
+                data-aos-offset="200"
+                data-aos-delay="1000"
+                data-aos-duration="1500"
+                data-aos-easing="ease-in-out"
+                data-aos-mirror="true"
+                data-aos-once="true"
+                data-aos-anchor="Tag1"
+              >
+                <Button
+                  h="56px"
+                  w="17%"
+                  mt="2%"
+                  rounded="35px"
+                  border="1px solid #344CD0"
+                  color="#344CD0"
+                  backgroundColor="#FFF"
+                  _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                  onClick={time1}
+                >
+                  Next
+                </Button>
+              </Flex>
+
               {/* second prompt */}
               {Tag2 ? (
                 <>
@@ -581,21 +582,20 @@ const InterviewForm = ({
                     {/* rounds box */}
                     <Flex
                       w="459px"
-                      h="250px"
-                      mb="8%"
+                      h="150px"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="2000"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#roundsTag"
+                      data-aos-anchor="roundsTag"
                     >
                       <FormLabel>Select rounds of interviews</FormLabel>
                       <Select
@@ -618,13 +618,10 @@ const InterviewForm = ({
                         <option value={9}>9</option>
                         <option value={10}>10</option>
                       </Select>
-                      <Button h="56px" rounded="6px" onClick={time2}>
-                        Next
-                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h="136px"
+                      h="150px"
                       align="flex-end"
                       ml="1%"
                       data-aos="fade-in"
@@ -634,10 +631,36 @@ const InterviewForm = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#roundsTag"
+                      data-aos-anchor="roundsTag"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
+                  </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="5%"
+                    data-aos="fade-in"
+                    data-aos-offset="200"
+                    data-aos-delay="2000"
+                    data-aos-duration="1500"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                    data-aos-anchor="roundsTag"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time2}
+                    >
+                      Next
+                    </Button>
                   </Flex>
                 </>
               ) : null}
@@ -672,8 +695,7 @@ const InterviewForm = ({
                     {/* types of interview box */}
                     <Flex
                       w="459px"
-                      h="250px"
-                      mb="8%"
+                      h="220px"
                       px="6"
                       py="8"
                       border="1px solid #BBBDC6"
@@ -681,12 +703,13 @@ const InterviewForm = ({
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="1000"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag3"
                     >
                       <FormLabel>Select types of interviews</FormLabel>
                       <CheckboxGroup>
@@ -761,25 +784,49 @@ const InterviewForm = ({
                           </Flex>
                         </Flex>
                       </CheckboxGroup>
-                      <Button mt="8px" h="56px" rounded="6px" onClick={time3}>
-                        Next
-                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h="190px"
+                      h="220px"
                       align="flex-end"
                       ml="1%"
                       data-aos="fade-in"
-                      data-aos-offset="200"
-                      data-aos-delay="1000"
+                      data-aos-offset="120"
+                      data-aos-delay="0"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      id="Tag3"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
+                  </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="5%"
+                    data-aos="fade-in"
+                    data-aos-offset="120"
+                    data-aos-delay="0"
+                    data-aos-duration="1500"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                    id="Tag3"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time3}
+                    >
+                      Next
+                    </Button>
                   </Flex>
                 </>
               ) : null}
@@ -831,7 +878,6 @@ const InterviewForm = ({
                     <Flex
                       w="459px"
                       h="242px"
-                      mb="8%"
                       px="6"
                       py="8"
                       border="1px solid #BBBDC6"
@@ -839,12 +885,13 @@ const InterviewForm = ({
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="2600"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag4"
                     >
                       <FormLabel>Describe the interview process</FormLabel>
                       <Textarea
@@ -859,9 +906,6 @@ const InterviewForm = ({
                         ref={register}
                         data-cy="interviewComment"
                       />
-                      <Button mt="10px" h="56px" rounded="6px" onClick={time4}>
-                        Next
-                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
@@ -869,15 +913,42 @@ const InterviewForm = ({
                       align="flex-end"
                       ml="1%"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="2600"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag4"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
+                  </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="5%"
+                    data-aos="fade-in"
+                    data-aos-offset="120"
+                    data-aos-delay="2600"
+                    data-aos-duration="1500"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                    data-aos-anchor="Tag4"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time4}
+                    >
+                      Next
+                    </Button>
                   </Flex>
                 </>
               ) : null}
@@ -885,7 +956,6 @@ const InterviewForm = ({
               {Tag5 ? (
                 <>
                   <Flex
-                    id="Tag5"
                     align="center"
                     h="5%"
                     p="1%"
@@ -907,7 +977,7 @@ const InterviewForm = ({
                     </p>
                   </Flex>
                   <Flex
-                    id="diffTag"
+                    id="Tag5"
                     align="center"
                     h="5%"
                     p="1%"
@@ -917,7 +987,7 @@ const InterviewForm = ({
                     rounded="20px"
                     data-aos="fade-right"
                     data-aos-offset="200"
-                    data-aos-delay="2300"
+                    data-aos-delay="1000"
                     data-aos-duration="1000"
                     data-aos-easing="ease-in-out"
                     data-aos-mirror="true"
@@ -933,21 +1003,20 @@ const InterviewForm = ({
                     {/* diff box */}
                     <Flex
                       w="459px"
-                      h="250px"
-                      mb="8%"
+                      h="150px"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="3000"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#diffTag"
+                      data-aos-anchor="Tag5"
                     >
                       <FormLabel>Rate the difficulty</FormLabel>
                       <Select
@@ -958,7 +1027,6 @@ const InterviewForm = ({
                         label="difficulty_rating"
                         name="difficulty_rating"
                         placeholder="Select one"
-                        // onChange={time5}
                         ref={register}
                       >
                         <option value={5}>Very difficult</option>
@@ -967,11 +1035,10 @@ const InterviewForm = ({
                         <option value={2}>Easy</option>
                         <option value={1}>Very easy</option>
                       </Select>
-                      <Button onClick={time5}>Next</Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h="136px"
+                      h="150px"
                       align="flex-end"
                       ml="1%"
                       data-aos="fade-in"
@@ -981,10 +1048,36 @@ const InterviewForm = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#diffTag"
+                      data-aos-anchor="Tag5"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
+                  </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="8%"
+                    data-aos="fade-in"
+                    data-aos-offset="200"
+                    data-aos-delay="2700"
+                    data-aos-duration="1500"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                    data-aos-anchor="Tag5"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time5}
+                    >
+                      Next
+                    </Button>
                   </Flex>
                 </>
               ) : null}
@@ -1046,13 +1139,13 @@ const InterviewForm = ({
                             time6()
                           }}
                         >
-                          <CustomRadio value="1" w="411px">
+                          <CustomRadio value="1" w="100%">
                             No offer
                           </CustomRadio>
-                          <CustomRadio value="2" w="411px" data-cy="accepted">
+                          <CustomRadio value="2" w="100%" data-cy="accepted">
                             Accepted
                           </CustomRadio>
-                          <CustomRadio value="3" w="411px">
+                          <CustomRadio value="3" w="100%">
                             Declined
                           </CustomRadio>
                         </RadioButtonGroup>
@@ -1126,8 +1219,7 @@ const InterviewForm = ({
                     {/* salary box */}
                     <Flex
                       w="459px"
-                      h="250px"
-                      mb="8%"
+                      h="150px"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
@@ -1140,7 +1232,7 @@ const InterviewForm = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#salaryTag"
+                      data-aos-anchor="salaryTag"
                     >
                       <FormLabel>Salary</FormLabel>
                       <InputGroup>
@@ -1159,13 +1251,9 @@ const InterviewForm = ({
                           label="salary"
                           name="salary"
                           autoCapitalize="none"
-                          // onKeyUp={time7}
                           ref={register}
                         />
                       </InputGroup>
-                      <Button h="56px" rounded="6px" mt="7px" onClick={time7}>
-                        Next
-                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
@@ -1179,10 +1267,36 @@ const InterviewForm = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aos-anchor="#salaryTag"
+                      data-aos-anchor="salaryTag"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
+                  </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="5%"
+                    data-aos="fade-in"
+                    data-aos-offset="200"
+                    data-aos-delay="1000"
+                    data-aos-duration="3000"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                    data-aos-anchor="salaryTag"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time7}
+                    >
+                      Next
+                    </Button>
                   </Flex>
                 </>
               ) : null}
@@ -1254,7 +1368,7 @@ const InterviewForm = ({
                         <BeautyStars
                           name="interviewRating"
                           value={starState}
-                          activeColor="blue"
+                          activeColor="#344CD0"
                           onChange={(value) => {
                             setStarState(value)
                             time8()
@@ -1356,10 +1470,8 @@ const InterviewForm = ({
             </FormControl>
           </form>
         </Flex>
-        {/* blank space container */}
-        {/* <Flex w='30%' /> */}
       </Flex>
-    </Flex>
+    </div>
   )
 }
 

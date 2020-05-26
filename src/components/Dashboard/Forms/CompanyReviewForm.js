@@ -9,9 +9,10 @@ import postReview from '../../../state/actions'
 import getCompanies from '../../../state/actions'
 import postCompany from '../../../state/actions'
 // styles
-import ProgressBar from '../../Reusable/ProgressBar.js'
+import ProgressHeader from '../Forms/ProgressHeader'
 import CustomAutoComplete from '../../Reusable/InputFields/Autocomplete'
 import BeautyStars from 'beauty-stars'
+import { ThinkingDots } from '../../Reusable/ThinkingDots'
 import {
   FormControl,
   Input,
@@ -28,7 +29,6 @@ import {
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import CustomSpinner from '../../CustomSpinner'
-import { ThinkingDots } from '../../Reusable/ThinkingDots'
 
 const ReviewForm2 = ({
   history,
@@ -40,28 +40,33 @@ const ReviewForm2 = ({
   //initialize animations
   AOS.init()
   const { register, handleSubmit, formState } = useForm()
+
   // thinking state
   const [thinking, setThinking] = useState(false)
   const dots = () => {
     setThinking(true)
   }
+
   // search state
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResults, setSearchResults] = useState([])
+
   // no company state
   const [noCompany, setNoCompany] = useState(false)
+
   // location "state"
   const [location, setLocation] = useState({})
   const [newLocation, setNewLocation] = useState({})
   const stateSelectorHelper = (value) => {
     setLocation(value)
   }
+
   // star rating
   const [starState, setStarState] = useState(0)
+
   //progress bar
   const [progress, setProgress] = useState({
     prec: 99,
-    mins: 10,
     prog: 2,
   })
 
@@ -77,7 +82,6 @@ const ReviewForm2 = ({
     getCompanies()
     setProgress({
       prec: 95,
-      mins: 8,
       prog: 5,
     })
     const element = document.getElementById('Tag1')
@@ -103,7 +107,6 @@ const ReviewForm2 = ({
   }, [searchTerm, companies])
 
   // state confirmation search function
-
   useEffect(() => {
     if (location.myState) {
       const stateId = states.filter((i) =>
@@ -128,7 +131,6 @@ const ReviewForm2 = ({
     setTag2(true)
     setProgress({
       prec: 70,
-      mins: 8,
       prog: 20,
     })
     const element = document.getElementById('Tag2')
@@ -147,7 +149,6 @@ const ReviewForm2 = ({
     setTag3(true)
     setProgress({
       prec: 65,
-      mins: 6,
       prog: 35,
     })
     const element = document.getElementById('Tag3')
@@ -166,7 +167,6 @@ const ReviewForm2 = ({
     setTag4(true)
     setProgress({
       prec: 45,
-      mins: 4.5,
       prog: 65,
     })
     const element = document.getElementById('Tag4')
@@ -185,7 +185,6 @@ const ReviewForm2 = ({
     setTag5(true)
     setProgress({
       prec: 20,
-      mins: 1,
       prog: 80,
     })
     const element = document.getElementById('Tag5')
@@ -204,7 +203,6 @@ const ReviewForm2 = ({
     setTag6(true)
     setProgress({
       prec: 100,
-      mins: 0,
       prog: 100,
     })
     const element = document.getElementById('Tag6')
@@ -229,40 +227,9 @@ const ReviewForm2 = ({
 
   return (
     // main container
-    <Flex w="100%" justify="center">
-      {/* max size */}
-      <Flex maxW="1440px" w="100%">
-        {/* progress header */}
-        <Flex
-          pt="1%"
-          px="2%"
-          w="70%"
-          h="108px"
-          background="#344CD0"
-          top="0"
-          position="fixed"
-          overflow="hidden"
-          zIndex="999"
-          direction="column"
-        >
-          <Flex w="100%" color="#FFFFFF">
-            Your progress
-          </Flex>
-
-          <Flex w="100%" justify="space-between" mb="1%" color="#FFFFFF">
-            {progress.prec === 100 ? (
-              <>
-                <Flex as="h4">{progress.prec}% Completed!</Flex>{' '}
-              </>
-            ) : (
-              <>
-                <Flex as="h4">{100 - progress.prec}% completed</Flex>
-                <Flex color="#FFFFFF"> {progress.mins} mins</Flex>
-              </>
-            )}
-          </Flex>
-          <ProgressBar value={progress.prog} />
-        </Flex>
+    <div>
+      <Flex w="100%" margin="0 auto" minH="100vh">
+        <ProgressHeader progress={progress} />
         {thinking ? (
           <>
             <Flex
@@ -277,10 +244,16 @@ const ReviewForm2 = ({
             </Flex>
           </>
         ) : null}
-
         {/* form container */}
-        <Flex w="100%" bg="white" flexDir="column" px="2%" pt="5%">
-          {/* start of form  */}
+        <Flex
+          w="100%"
+          bg="#FFF"
+          flexDir="column"
+          px="2%"
+          pt="5%"
+          margin="0 auto"
+        >
+          {/*--------------- start of form ---------------  */}
           <form onSubmit={handleSubmit(submitForm)}>
             <FormControl isRequired>
               {/* first prompt */}
@@ -309,8 +282,7 @@ const ReviewForm2 = ({
                 {/* company box */}
                 <Flex
                   w="459px"
-                  h="800px"
-                  mb="8%"
+                  h="700px"
                   px="6"
                   py="8"
                   border="1px solid #BBBDC6"
@@ -324,6 +296,7 @@ const ReviewForm2 = ({
                   data-aos-easing="ease-in-out"
                   data-aos-mirror="true"
                   data-aos-once="true"
+                  data-aos-anchor="Tag1"
                 >
                   <FormLabel>1. Company name</FormLabel>
                   {loadingCompanies ? (
@@ -435,13 +408,10 @@ const ReviewForm2 = ({
                       ref={register}
                     />
                   </Flex>
-                  <Button mt="8px" h="56px" rounded="6px" onClick={time1}>
-                    Next
-                  </Button>
                 </Flex>
                 {/* avatar */}
                 <Flex
-                  h="600px"
+                  h="700px"
                   align="flex-end"
                   ml="1%"
                   data-aos="fade-in"
@@ -451,9 +421,36 @@ const ReviewForm2 = ({
                   data-aos-easing="ease-in-out"
                   data-aos-mirror="true"
                   data-aos-once="true"
+                  data-aos-anchor="Tag1"
                 >
                   <Avatar size="md" src="https://bit.ly/broken-link" />
                 </Flex>
+              </Flex>
+              <Flex
+                justify="flex-end"
+                mb="5%"
+                data-aos="fade-in"
+                data-aos-offset="120"
+                data-aos-delay="1000"
+                data-aos-duration="1500"
+                data-aos-easing="ease-in-out"
+                data-aos-mirror="true"
+                data-aos-once="true"
+                data-aos-anchor="Tag1"
+              >
+                <Button
+                  h="56px"
+                  w="17%"
+                  mt="2%"
+                  rounded="35px"
+                  border="1px solid #344CD0"
+                  color="#344CD0"
+                  backgroundColor="#FFF"
+                  _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                  onClick={time1}
+                >
+                  Next
+                </Button>
               </Flex>
               {/* Second prompt */}
               {Tag2 ? (
@@ -464,7 +461,7 @@ const ReviewForm2 = ({
                     p="1%"
                     mb="2%"
                     h="5%"
-                    w="416px"
+                    w="45%"
                     bg="#F2F6FE"
                     rounded="20px"
                     data-aos="fade-right"
@@ -478,7 +475,7 @@ const ReviewForm2 = ({
                     <p>Thank you for that information.</p>
                   </Flex>
                   <Flex
-                    id="commentTag"
+                    id="Tag2"
                     align="center"
                     p="1%"
                     h="5%"
@@ -505,7 +502,6 @@ const ReviewForm2 = ({
                     <Flex
                       w="459px"
                       h="350px"
-                      mb="8%"
                       px="6"
                       py="8"
                       border="1px solid #BBBDC6"
@@ -513,19 +509,19 @@ const ReviewForm2 = ({
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="2400"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
-                      data-aod-anchor="#commentTag"
+                      data-aos-anchor="Tag2"
                     >
                       <FormLabel>Comments</FormLabel>
                       <Textarea
                         variant="filled"
                         resize="none"
-                        h="144px"
+                        h="250px"
                         rowsMax={6}
                         type="text"
                         name="comment"
@@ -533,29 +529,53 @@ const ReviewForm2 = ({
                         ref={register}
                         data-cy="companyComment"
                       />
-                      <Button mt="8px" h="56px" rounded="6px" onClick={time2}>
-                        Next
-                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
-                      h="242px"
+                      h="350px"
                       align="flex-end"
                       ml="1%"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="2400"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag2"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
-                  </Flex>{' '}
+                  </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="5%"
+                    data-aos="fade-in"
+                    data-aos-offset="120"
+                    data-aos-delay="2400"
+                    data-aos-duration="1500"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                    data-aos-anchor="Tag2"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time2}
+                    >
+                      Next
+                    </Button>
+                  </Flex>
                 </>
               ) : null}
-              {/* 4th prompt */}
+              {/* 3rd prompt */}
               {Tag3 ? (
                 <>
                   <Flex
@@ -604,18 +624,18 @@ const ReviewForm2 = ({
                     <Flex
                       w="459px"
                       h="136px"
-                      mb="8%"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="2800"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag3"
                     >
                       <FormLabel>Working hours</FormLabel>
                       <Select
@@ -625,7 +645,6 @@ const ReviewForm2 = ({
                         label="typical_hours"
                         name="typical_hours"
                         placeholder="Select one"
-                        onChange={time3}
                         ref={register}
                       >
                         <option value={29}>Less than 30 hours</option>
@@ -647,13 +666,40 @@ const ReviewForm2 = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag3"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="5%"
+                    data-aos="fade-in"
+                    data-aos-offset="120"
+                    data-aos-delay="2800"
+                    data-aos-duration="1500"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                    data-aos-anchor="Tag3"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time3}
+                    >
+                      Next
+                    </Button>
+                  </Flex>
                 </>
               ) : null}
-              {/* 5th prompt */}
+              {/* 4th prompt */}
               {Tag4 ? (
                 <>
                   <Flex
@@ -683,20 +729,20 @@ const ReviewForm2 = ({
                     {/* salary box */}
                     <Flex
                       w="459px"
-                      h="250px"
-                      mb="8%"
+                      h="150px"
                       p="6"
                       border="1px solid #BBBDC6"
                       rounded="6px"
                       flexDir="column"
                       justify="space-evenly"
                       data-aos="fade-in"
-                      data-aos-offset="200"
+                      data-aos-offset="120"
                       data-aos-delay="1000"
                       data-aos-duration="1500"
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag4"
                     >
                       <FormLabel>Hiring salary</FormLabel>
                       <InputGroup>
@@ -719,9 +765,6 @@ const ReviewForm2 = ({
                           ref={register}
                         />
                       </InputGroup>
-                      <Button h="56px" rounded="6px" mt="7px" onClick={time4}>
-                        Next
-                      </Button>
                     </Flex>
                     {/* avatar */}
                     <Flex
@@ -735,13 +778,40 @@ const ReviewForm2 = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag4"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
+                  <Flex
+                    justify="flex-end"
+                    mb="5%"
+                    data-aos="fade-in"
+                    data-aos-offset="120"
+                    data-aos-delay="1000"
+                    data-aos-duration="1500"
+                    data-aos-easing="ease-in-out"
+                    data-aos-mirror="true"
+                    data-aos-once="true"
+                    data-aos-anchor="Tag4"
+                  >
+                    <Button
+                      h="56px"
+                      w="17%"
+                      mt="2%"
+                      rounded="35px"
+                      border="1px solid #344CD0"
+                      color="#344CD0"
+                      backgroundColor="#FFF"
+                      _hover={{ backgroundColor: '#F2F6FE', cursor: 'pointer' }}
+                      onClick={time4}
+                    >
+                      Next
+                    </Button>
+                  </Flex>
                 </>
               ) : null}
-              {/* 6th prompt */}
+              {/* 5th prompt */}
               {Tag5 ? (
                 <>
                   <Flex
@@ -807,7 +877,7 @@ const ReviewForm2 = ({
                         <BeautyStars
                           name="companyOverall"
                           value={starState}
-                          activeColor="blue"
+                          activeColor="#344CD0"
                           onChange={(value) => {
                             setStarState(value)
                             time5()
@@ -827,12 +897,14 @@ const ReviewForm2 = ({
                       data-aos-easing="ease-in-out"
                       data-aos-mirror="true"
                       data-aos-once="true"
+                      data-aos-anchor="Tag5"
                     >
                       <Avatar size="md" src="https://bit.ly/broken-link" />
                     </Flex>
                   </Flex>
                 </>
               ) : null}
+              {/* 6th prompt */}
               {Tag6 ? (
                 <>
                   <Flex
@@ -910,7 +982,7 @@ const ReviewForm2 = ({
           </form>
         </Flex>
       </Flex>
-    </Flex>
+    </div>
   )
 }
 

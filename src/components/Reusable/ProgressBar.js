@@ -1,19 +1,19 @@
-import React from 'react';
-import { Progress } from '@chakra-ui/core';
+import React from 'react'
+import { Progress } from '@chakra-ui/core'
 
-const ProgressBar = React.forwardRef(({ ...props }, ref) => {
+const ProgressBar = React.forwardRef(({ ...props }) => {
+  console.log('progress bar props', props.value)
   return (
     <Progress
-      color='whiteAlpha'
-      background='#344CD0'
+      h="10%"
+      color="blue"
+      background="#F2F6FE"
       isAnimated
       hasStripe
-      rounded='6px'
-      border='1px solid #FFFFFF'
+      border="1px solid #131C4D"
       value={props.value}
-      // ref={ref}
     />
-  );
-});
+  )
+})
 
-export default ProgressBar;
+export default ProgressBar

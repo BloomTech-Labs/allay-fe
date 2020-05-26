@@ -1,13 +1,13 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import ReactGA from "react-ga"; // for google analytics
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import ReactGA from 'react-ga' // for google analytics
 // actions
-import login from "../../state/actions/index";
+import login from '../../state/actions/index'
 // styles
-import CustomSpinner from "../CustomSpinner.js";
-import SignupLoginInput from "../Reusable/InputFields/SignupLoginInput.js";
+import CustomSpinner from '../CustomSpinner.js'
+import SignupLoginInput from '../Reusable/InputFields/SignupLoginInput.js'
 import {
   Button,
   FormControl,
@@ -18,48 +18,48 @@ import {
   InputGroup,
   InputRightElement,
   Stack,
-} from "@chakra-ui/core";
+} from '@chakra-ui/core'
 
 const Login = ({ login, isLoading, history }) => {
-  const { handleSubmit, errors, register, formState } = useForm();
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
+  const { handleSubmit, errors, register, formState } = useForm()
+  const [show, setShow] = React.useState(false)
+  const handleClick = () => setShow(!show)
 
   function validateEmail(value) {
-    let error;
+    let error
     if (!value) {
-      error = "email is required";
+      error = 'email is required'
     } else if (value.length < 5) {
-      error = "email needed";
+      error = 'email needed'
     }
-    return error || true;
+    return error || true
   }
 
   function validatePassword(value) {
-    let error;
+    let error
     if (!value) {
-      error = "Password is required";
+      error = 'Password is required'
     } else if (value.length < 8) {
-      error = "Password must be at least 8 characters";
+      error = 'Password must be at least 8 characters'
     }
-    return error || true;
+    return error || true
   }
 
   const submitForm = (creds) => {
     // action function here
-    login(creds).then(() => history.push("/dashboard"));
+    login(creds).then(() => history.push('/dashboard'))
     ReactGA.event({
-      category: "User",
+      category: 'User',
       action: `Button Login`,
-    });
-  };
+    })
+  }
 
   const gaSignup = () => {
     ReactGA.event({
-      category: "User",
+      category: 'User',
       action: `Link Don't have an account`,
-    });
-  };
+    })
+  }
 
   if (isLoading) {
     return (
@@ -68,7 +68,7 @@ const Login = ({ login, isLoading, history }) => {
           <CustomSpinner />
         </Flex>
       </Flex>
-    );
+    )
   }
 
   return (
@@ -152,7 +152,7 @@ const Login = ({ login, isLoading, history }) => {
                     <InputGroup>
                       <SignupLoginInput
                         mb="30px"
-                        type={show ? "text" : "password"}
+                        type={show ? 'text' : 'password'}
                         name="password"
                         label="Password"
                         placeholder="********"
@@ -168,7 +168,7 @@ const Login = ({ login, isLoading, history }) => {
                           backgroundColor="#FDFDFF"
                           onClick={handleClick}
                         >
-                          {show ? "Hide" : "Show"}
+                          {show ? 'Hide' : 'Show'}
                         </Button>
                       </InputRightElement>
                     </InputGroup>
@@ -177,18 +177,18 @@ const Login = ({ login, isLoading, history }) => {
                     </FormErrorMessage>
                   </Flex>
                 </FormControl>
-                <Flex w="100%" justify="center">
+                <Flex width="100%" justify="center">
                   <Button
+                    width="85%"
                     mb="30px"
                     border="none"
                     rounded="50px"
                     h="58px"
-                    w="404px"
                     my="2%"
                     size="lg"
                     color="white"
                     backgroundColor="#344CD0"
-                    _hover={{ backgroundColor: "#4254BA", cursor: "pointer" }}
+                    _hover={{ backgroundColor: '#4254BA', cursor: 'pointer' }}
                     isLoading={formState.isSubmitting}
                     type="submit"
                     data-cy="loginSubmit"
@@ -199,16 +199,16 @@ const Login = ({ login, isLoading, history }) => {
               </Flex>
               <Flex m="15px" justify="center" fontWeight="light">
                 <Text fontSize="16px" color="#17171B" fontFamily="Muli">
-                  Don't have an account?{" "}
+                  Don't have an account?{' '}
                   <Link
                     to="/signup"
                     onClick={gaSignup}
                     data-cy="signupLink"
                     style={{
-                      textDecoration: "none",
-                      fontWeight: "bold",
-                      color: "#344CD0",
-                      fontSize: "16px",
+                      textDecoration: 'none',
+                      fontWeight: 'bold',
+                      color: '#344CD0',
+                      fontSize: '16px',
                     }}
                   >
                     Sign up here!
@@ -220,13 +220,13 @@ const Login = ({ login, isLoading, history }) => {
         </Flex>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     isLoading: state.auth.isLoading,
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, login)(Login);
+export default connect(mapStateToProps, login)(Login)
