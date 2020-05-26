@@ -262,6 +262,7 @@ function NavBar({
               <Spinner />
             ) : (
               <MenuButton
+                data-cy="profileButton"
                 as={Image}
                 size="58px"
                 cursor="pointer"
@@ -276,7 +277,6 @@ function NavBar({
               <MenuItem
                 border="none"
                 backgroundColor="#FFF"
-                data-cy="signOut"
                 onClick={() => history.push(`/profile/${userId}`)}
               >
                 Profile
@@ -284,7 +284,6 @@ function NavBar({
               <MenuItem
                 border="none"
                 backgroundColor="#FFF"
-                data-cy="signOut"
                 onClick={() => history.push(`/profile/${userId}/edit`)}
               >
                 Account settings

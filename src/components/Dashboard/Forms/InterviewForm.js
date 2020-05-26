@@ -515,6 +515,7 @@ const InterviewForm = ({
                 data-aos-anchor="Tag1"
               >
                 <Button
+                  data-cy="interviewReviewFormButton"
                   h="56px"
                   w="17%"
                   mt="2%"
@@ -649,6 +650,7 @@ const InterviewForm = ({
                     data-aos-anchor="roundsTag"
                   >
                     <Button
+                      data-cy="interviewReviewFormButton"
                       h="56px"
                       w="17%"
                       mt="2%"
@@ -815,6 +817,7 @@ const InterviewForm = ({
                     id="Tag3"
                   >
                     <Button
+                      data-cy="interviewReviewFormButton"
                       h="56px"
                       w="17%"
                       mt="2%"
@@ -937,6 +940,7 @@ const InterviewForm = ({
                     data-aos-anchor="Tag4"
                   >
                     <Button
+                      data-cy="interviewReviewFormButton"
                       h="56px"
                       w="17%"
                       mt="2%"
@@ -1066,6 +1070,7 @@ const InterviewForm = ({
                     data-aos-anchor="Tag5"
                   >
                     <Button
+                      data-cy="interviewReviewFormButton"
                       h="56px"
                       w="17%"
                       mt="2%"
@@ -1285,6 +1290,7 @@ const InterviewForm = ({
                     data-aos-anchor="salaryTag"
                   >
                     <Button
+                      data-cy="interviewReviewFormButton"
                       h="56px"
                       w="17%"
                       mt="2%"
