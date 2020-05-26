@@ -351,10 +351,12 @@ const InterviewForm = ({
   return (
     // main container
     <div>
+
       <Flex justify="center">
         <ProgressHeader progress={progress} />
       </Flex>
       <Flex w="100%" margin="0 auto" minH="100vh">
+
         {thinking ? (
           <>
             <Flex
