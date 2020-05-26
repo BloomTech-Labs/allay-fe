@@ -288,12 +288,19 @@ const EditUserProfile = ({ match, history, userData, updateUser }) => {
 
         {Number(userId) === Number(userData.id) ? (
           <Flex>
-            <Image
-              size="58px"
-              style={{ opacity: '0.6', borderRadius: '50%' }}
-              src={userData.profile_image}
-              fallbackSrc={require('../../../icons/user.svg')}
-            />
+            {userData.profile_image === 'h' ? (
+              <Image
+                size="58px"
+                style={{ opacity: '0.6' }}
+                src={require('../../../icons/user.svg')}
+              />
+            ) : (
+              <Image
+                size="58px"
+                style={{ opacity: '0.6', borderRadius: '50%' }}
+                src={userData.profile_image}
+              />
+            )}
           </Flex>
         ) : null}
       </Flex>
