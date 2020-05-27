@@ -73,7 +73,6 @@ const ProfilePage = (props) => {
     userData.location != 'undefined undefined'
       ? userData.location
       : ''
-
   return (
     <>
       {/* //Top Section */}
