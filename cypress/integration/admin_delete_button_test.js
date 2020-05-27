@@ -55,9 +55,7 @@ describe('Creates a new interview review', function () {
     cy.wait(8000)
 
     cy.get('[data-cy=interviewComment]').as('commentText')
-    cy.get('@commentText').type(
-      'I had a great time here. They asked very technical questions like do you use tabs vs spaces. That kind of thing.'
-    )
+    cy.get('@commentText').type('Supercalifragilisticexpialodosis.')
     cy.wait(1000)
     cy.get('[data-cy=interviewReviewFormButton]').click({ multiple: true })
     cy.wait(8000)
@@ -129,9 +127,7 @@ describe('Logs into the site', function () {
 
   it('should click on review created by testuser1, and delete the review.', function () {
     // click on review card
-    cy.contains(
-      'I had a great time here. They asked very technical questions like do you use tabs vs spaces. That kind of thing.'
-    ).as('testReview')
+    cy.contains('Supercalifragilisticexpialodosis.').as('testReview')
     cy.get('@testReview').click()
     // select admin delete button and click
     cy.get('[data-cy=adminDeleteReview]').as('adminDeleteReview')
@@ -141,7 +137,7 @@ describe('Logs into the site', function () {
     cy.get('@adminDeleteReviewConfirm').click()
     cy.wait(3000)
     // review card should be deleted and return to dashboard
-    cy.get('@testReview').should('eq', null)
+    cy.get('@testReview').should('not.exist')
     cy.wait(1000)
     cy.url().should('include', 'dashboard')
   })
