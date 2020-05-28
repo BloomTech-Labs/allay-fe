@@ -62,9 +62,7 @@ describe('Creates a new interview review', function () {
     cy.wait(8000)
 
     cy.get('[data-cy=interviewComment]').as('commentText')
-    cy.get('@commentText').type(
-      'There were many questions asked. We talked about computer stuff, food and long walks on the beach at sunset. It was pretty epic.'
-    )
+    cy.get('@commentText').type('create interview review test')
     cy.wait(1000)
     cy.get('[data-cy=interviewReviewFormButton]').click({ multiple: true })
     cy.wait(8000)
@@ -93,5 +91,11 @@ describe('Creates a new interview review', function () {
 
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard')
+  })
+  it('should click on review created', function () {
+    // click on review card
+    cy.contains('create interview review test').as('testReview')
+    cy.get('@testReview').click()
+    // select admin bind button and click
   })
 })

@@ -1,33 +1,26 @@
-describe('Register new user', function () {
+describe('Logs into the site and adds review, then deletes', function () {
   //Arrange
   it('Visits a new site', function () {
     // Act
-    cy.visit('http://localhost:3000/signup')
+    cy.visit('http://localhost:3000')
   })
-  it('should navigate to Dashboard after submitting the short-form signup', function () {
-    // Select element and alias them
-    cy.get('input[name="firstName"]').as('firstnameText')
-    cy.get('input[name="lastName"]').as('lastnameText')
-    cy.get('input[name="email"]').as('emailText')
-    cy.get('select[name=track_id').as('track_id')
-    cy.get('input[name="cohort"]').as('cohort')
-    cy.get('input[name="password"]').as('passwordText')
-    cy.get('input[name="confirmPassword"]').as('confirmPasswordText')
-    cy.get('[data-cy=registerSubmit]').as('registerSubmit')
-    // interact with element
-    cy.get('@firstnameText').type('test04')
-    cy.get('@lastnameText').type('user04')
-    cy.get('@emailText').type('testuser04@allay.com')
-    cy.get('@track_id').select('WEB')
-    cy.get('@cohort').type('FT-100')
-    cy.get('@passwordText').type('password')
-    cy.get('@confirmPasswordText').type('password')
-    cy.wait(1000)
-    cy.get('@registerSubmit').click({ multiple: true })
-    cy.wait(1000)
+
+  before(() => {
+    cy.login()
+    cy.saveLocalStorage()
+  })
+
+  beforeEach(() => {
+    cy.restoreLocalStorage()
+  })
+
+  it('should navigate to Dashboard after submitting.', function () {
+    cy.visit('http://localhost:3000/dashboard')
     // wait until pushed to dashboard
     cy.url().should('include', 'dashboard')
-    cy.wait(1000)
+  })
+
+  it('should make a review', function () {
     cy.wait(100)
     cy.get('[data-cy=addReviewButton]').click({ multiple: true })
 
@@ -64,7 +57,7 @@ describe('Register new user', function () {
     cy.wait(8000)
 
     cy.get('[data-cy=companyComment]').as('commentText')
-    cy.get('@commentText').type('TESTING CYPRESS DELETE')
+    cy.get('@commentText').type('I am an interview that needs to be deleted')
     cy.get('[data-cy=companyReviewFormButton]').click({ multiple: true })
     cy.wait(8000)
 
@@ -91,17 +84,20 @@ describe('Register new user', function () {
 
   it('should click on review card just created and delete review', function () {
     // delete the recently added review
-    cy.contains('TESTING CYPRESS DELETE').as('reviewToDelete')
-    cy.get('@reviewToDelete').click({ multiple: true })
+    cy.contains('I am an interview that needs to be deleted').as(
+      'reviewToDelete'
+    )
+    cy.get('@reviewToDelete').click()
+    // select delete icon button and click
     cy.get('[data-cy=deleteModalReview]').as('deleteReview')
-    cy.get('@deleteReview').click({ multiple: true })
-    //confirm want to delete
-    cy.get('[data-cy=confirmDeleteModalReview]').as('deleteReviewConfirm')
-    cy.get('@deleteReviewConfirm').click({ multiple: true })
-    cy.wait(3000)
+    cy.get('@deleteReview').click()
+    // //confirm want to delete
+    // cy.get('[data-cy=confirmDeleteModalReview]').as('deleteReviewConfirm')
+    // cy.get('@deleteReviewConfirm').click()
+    // cy.wait(3000)
 
-    // confirms review was deleted
-    cy.get('TESTING CYPRESS DELETE').should('not.exist')
-    cy.url().should('include', 'dashboard')
+    // // confirms review was deleted
+    // cy.get('I am an interview that needs to be deleted').should('not.exist')
+    // cy.url().should('include', 'dashboard')
   })
 })

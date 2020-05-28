@@ -140,7 +140,6 @@ describe('Logs into the site', function () {
     cy.get('@blockUserButtonConfirm').click()
     // cy.wait(3000);
 
-    //the following tests are not working because the blockUserButton Confirm returns a 401 error
     cy.get('[data-cy=reviewCloseButton]').click()
     cy.get('@testReview').click()
 

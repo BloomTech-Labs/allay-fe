@@ -434,11 +434,11 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
               ) : null}
               {Number(loginId) === Number(review.user_id) ? (
                 <Image
+                  data-cy="deleteModalReview"
                   src={require('../../icons/trash.png')}
                   onClick={() => setIsOpen2(true)}
                   cursor="pointer"
                   size="1.5em"
-                  data-cy="deleteModalReview"
                 />
               ) : null}
               <AlertDialog
@@ -471,14 +471,14 @@ const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
                       Cancel
                     </Flex>
                     <Button
+                      data-cy="confirmDeleteModalReview"
                       h="56px"
                       rounded="10px"
                       border="none"
                       color="white"
                       variantColor="red"
                       ml={3}
-                      onClick={() => submitDelete}
-                      data-cy="confirmDeleteModalReview"
+                      onClick={submitDelete}
                     >
                       Delete
                     </Button>

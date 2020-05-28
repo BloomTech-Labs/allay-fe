@@ -56,7 +56,9 @@ describe('Navs to company review form.', function () {
     cy.wait(8000)
 
     cy.get('[data-cy=companyComment]').as('commentText')
-    cy.get('@commentText').type('TESTING VIA CYPRESS')
+    cy.get('@commentText').type(
+      'I am testing to make sure I can submit a company review.'
+    )
     cy.get('[data-cy=companyReviewFormButton]').click({ multiple: true })
     cy.wait(8000)
 
@@ -75,5 +77,15 @@ describe('Navs to company review form.', function () {
 
     //submit the form
     cy.get('[data-cy=companyReviewSubmit]').click()
+    // wait until pushed to dashboard
+    cy.url().should('include', 'dashboard')
+  })
+  it('should click on review created', function () {
+    // click on review card
+    cy.contains('I am testing to make sure I can submit a company review.').as(
+      'testReview'
+    )
+    cy.get('@testReview').click()
+    // select admin bind button and click
   })
 })
