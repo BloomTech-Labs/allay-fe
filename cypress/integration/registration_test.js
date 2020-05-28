@@ -12,9 +12,9 @@ describe('Register new user', function () {
     cy.get('input[name="confirmPassword"]').as('confirmPasswordText')
 
     // interact with element
-    cy.get('@firstnameText').type('test205')
-    cy.get('@lastnameText').type('user205')
-    cy.get('@emailText').type('testuser205@allay.com')
+    cy.get('@firstnameText').type('test206')
+    cy.get('@lastnameText').type('user206')
+    cy.get('@emailText').type('testuser206@allay.com')
     cy.get('@track_id').select('WEB')
     cy.get('@cohort').type('FT-100')
     cy.get('@passwordText').type('password')
