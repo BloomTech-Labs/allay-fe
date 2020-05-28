@@ -278,6 +278,7 @@ function NavBar({
                 border="none"
                 backgroundColor="#FFF"
                 onClick={() => history.push(`/profile/${userId}`)}
+                data-cy="profileLink"
               >
                 Profile
               </MenuItem>
@@ -285,6 +286,7 @@ function NavBar({
                 border="none"
                 backgroundColor="#FFF"
                 onClick={() => history.push(`/profile/${userId}/edit`)}
+                data-cy="editProfileMenuOption"
               >
                 Account settings
               </MenuItem>

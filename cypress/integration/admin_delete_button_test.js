@@ -30,7 +30,7 @@ describe('Creates a new interview review', function () {
     cy.wait(7000)
     cy.get('input[name="company_name"]').as('company_nameText')
     cy.get('@company_nameText').type('Amazon Web Services')
-
+    cy.wait(2000)
     cy.get('input[name="job_title"]').as('job_titleText')
     cy.get('@job_titleText').type('Senior Web Developer')
 
@@ -90,9 +90,9 @@ describe('Creates a new interview review', function () {
   it('Opens the top right menu and logs out', function () {
     // click profile image button
     cy.wait(8000)
-    cy.get('[data-cy=profileButton]').click()
+    cy.get('[data-cy=profileButton]').click({ force: true })
     // logout upon button click and redirects to login page
-    cy.get('[data-cy=signOut]').click()
+    cy.get('[data-cy=signOut]').click({ force: true })
     cy.url().should('eq', 'http://localhost:3000/')
   })
 })

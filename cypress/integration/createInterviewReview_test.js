@@ -26,10 +26,6 @@ describe('Creates a new interview review', function () {
     cy.url().should('include', 'add-review')
     cy.wait(2000)
     cy.get('[data-cy=interviewReviewButton]').click()
-    // .as('interviewReviewButton');
-    // interact with elements
-    // cy.get('@interviewReviewButton')
-    // });
 
     //Successfully fills out the form and submits a new Interview Review
     //gets the elements, assign an alias then fills them out
@@ -37,6 +33,7 @@ describe('Creates a new interview review', function () {
     cy.wait(6000)
     cy.get('input[name="company_name"]').as('company_nameText')
     cy.get('@company_nameText').type('Amazon Web Services')
+    cy.wait(2000)
 
     cy.get('input[name="job_title"]').as('job_titleText')
     cy.get('@job_titleText').type('Senior Web Developer')

@@ -19,14 +19,14 @@ describe('Logs out user and redirects to login page', function () {
     cy.url().should('include', 'dashboard')
   })
 
-  // it('clicks on user profile image and selects logout', function () {
-  //   cy.visit('http://localhost:3000/dashboard')
-  //   cy.wait(500)
-  //   // click profile image
-  //   cy.get('[data-cy=profileButton]').click()
-  //   cy.wait(500)
-  //   // logout upon button click and redirects to login page
-  //   cy.get('[data-cy=signOut]').click()
-  //   cy.url().should('eq', 'http://localhost:3000/')
+  it('clicks on user profile image and selects logout', function () {
+    cy.visit('http://localhost:3000/dashboard')
+    cy.wait(500)
+    // click profile image
+    cy.get('[data-cy=profileButton]').click({ force: true })
+    cy.wait(500)
+    // logout upon button click and redirects to login page
+    cy.get('[data-cy=signOut]').click({ force: true })
+    cy.url().should('eq', 'http://localhost:3000/')
+  })
 })
-// })

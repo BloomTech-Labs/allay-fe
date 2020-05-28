@@ -87,17 +87,17 @@ describe('Logs into the site and adds review, then deletes', function () {
     cy.contains('I am an interview that needs to be deleted').as(
       'reviewToDelete'
     )
-    cy.get('@reviewToDelete').click()
+    cy.get('@reviewToDelete').click({ force: true })
     // select delete icon button and click
     cy.get('[data-cy=deleteModalReview]').as('deleteReview')
-    cy.get('@deleteReview').click()
-    // //confirm want to delete
-    // cy.get('[data-cy=confirmDeleteModalReview]').as('deleteReviewConfirm')
-    // cy.get('@deleteReviewConfirm').click()
-    // cy.wait(3000)
+    cy.get('@deleteReview').click({ force: true })
+    //confirm want to delete
+    cy.get('[data-cy=confirmDeleteModalReview]').as('deleteReviewConfirm')
+    cy.get('@deleteReviewConfirm').click({ force: true })
+    cy.wait(3000)
 
-    // // confirms review was deleted
-    // cy.get('I am an interview that needs to be deleted').should('not.exist')
-    // cy.url().should('include', 'dashboard')
+    // confirms review was deleted
+    cy.get('I am an interview that needs to be deleted').should('not.exist')
+    cy.url().should('include', 'dashboard')
   })
 })
