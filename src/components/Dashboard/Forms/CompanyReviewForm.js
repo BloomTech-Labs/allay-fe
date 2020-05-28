@@ -250,7 +250,6 @@ const ReviewForm2 = ({
       </Flex>
 
       <Flex w="100%" margin="0 auto" minH="100vh">
-
         {thinking ? (
           <>
             <Flex
@@ -460,6 +459,7 @@ const ReviewForm2 = ({
                 data-aos-anchor="Tag1"
               >
                 <Button
+                  data-cy="companyReviewFormButton"
                   h="56px"
                   w="17%"
                   mt="2%"
@@ -581,6 +581,7 @@ const ReviewForm2 = ({
                     data-aos-anchor="Tag2"
                   >
                     <Button
+                      data-cy="companyReviewFormButton"
                       h="56px"
                       w="17%"
                       mt="2%"
@@ -705,6 +706,7 @@ const ReviewForm2 = ({
                     data-aos-anchor="Tag3"
                   >
                     <Button
+                      data-cy="companyReviewFormButton"
                       h="56px"
                       w="17%"
                       mt="2%"
@@ -817,6 +819,7 @@ const ReviewForm2 = ({
                     data-aos-anchor="Tag4"
                   >
                     <Button
+                      data-cy="companyReviewFormButton"
                       h="56px"
                       w="17%"
                       mt="2%"
@@ -1003,9 +1006,7 @@ const ReviewForm2 = ({
           </form>
         </Flex>
       </Flex>
-
     </>
-
   )
 }
 

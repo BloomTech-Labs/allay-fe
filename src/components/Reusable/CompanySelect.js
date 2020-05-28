@@ -42,7 +42,7 @@ useEffect(() => {
 
 
 onChange={e => setSearchTerm(e.target.value)}
-											/>
+											<>
 											<datalist id='company_name'>
 												{searchResults.map(company => (
 													<option value={company.company_name} key={company.id}>
