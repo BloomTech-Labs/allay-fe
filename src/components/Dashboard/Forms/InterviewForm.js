@@ -59,7 +59,6 @@ const InterviewForm = ({
   const dots = () => {
     setThinking(true)
   }
-  console.log(thinking)
 
   // search state
   const [searchTerm, setSearchTerm] = useState('')
@@ -319,7 +318,7 @@ const InterviewForm = ({
     )
   })
   //push to dashboard and send info to DS for review
-  const send_push = (data) => {
+  const sendInfoToDS = (data) => {
     var dataForDS = JSON.stringify(data)
     axiosToDS()
       .post('/check_review', dataForDS)
@@ -341,7 +340,7 @@ const InterviewForm = ({
       offer_status_id: offer,
       city: newLocation.myCity,
       state_id: newLocation.myState,
-    }).then(() => send_push(data))
+    }).then(() => sendInfoToDS(data))
     ReactGA.event({
       category: 'Review',
       action: `Submit review`,

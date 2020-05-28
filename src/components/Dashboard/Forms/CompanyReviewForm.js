@@ -28,6 +28,8 @@ import {
 } from '@chakra-ui/core'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+//
+import axiosToDS from '../../../utils/axiosToDS'
 import CustomSpinner from '../../CustomSpinner'
 
 const ReviewForm2 = ({
@@ -210,6 +212,20 @@ const ReviewForm2 = ({
     setThinking(false)
   }
 
+  //push to dashboard and send info to DS for review
+  const sendInfoToDS = (data) => {
+    var dataForDS = JSON.stringify(data)
+    axiosToDS()
+      .post('/check_review', dataForDS)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    history.push('/dashboard')
+  }
+
   //submit handler
   const submitForm = (data) => {
     postReview(localStorage.getItem('userId'), {
@@ -218,7 +234,7 @@ const ReviewForm2 = ({
       overall_rating: starState,
       city: newLocation.myCity,
       state_id: newLocation.myState,
-    }).then(() => history.push('/dashboard'))
+    }).then(() => sendInfoToDS(data))
     ReactGA.event({
       category: 'Review',
       action: `Submit review`,

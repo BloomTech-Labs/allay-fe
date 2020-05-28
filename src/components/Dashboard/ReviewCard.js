@@ -38,7 +38,7 @@ import { MdRateReview } from 'react-icons/md'
 var moment = require('moment') // require
 const ReviewCard = ({ review, history, deleteReview, isAdmin }) => {
   const singleReview = review
-  console.log(singleReview)
+
   //deletes the review in question
   const submitDelete = (user_id, review_id) => {
     if (review.user_id && review.review_id) {
