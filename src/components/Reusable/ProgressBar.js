@@ -2,7 +2,6 @@ import React from 'react'
 import { Progress } from '@chakra-ui/core'
 
 const ProgressBar = React.forwardRef(({ ...props }) => {
-  console.log('progress bar props', props.value)
   return (
     <Progress
       h="10%"
