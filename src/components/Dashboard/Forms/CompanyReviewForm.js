@@ -69,6 +69,7 @@ const ReviewForm2 = ({
   //progress bar
   const [progress, setProgress] = useState({
     prec: 99,
+    time: 8,
     prog: 2,
   })
 
@@ -84,6 +85,7 @@ const ReviewForm2 = ({
     getCompanies()
     setProgress({
       prec: 95,
+      time: 7,
       prog: 5,
     })
     const element = document.getElementById('Tag1')
@@ -133,6 +135,7 @@ const ReviewForm2 = ({
     setTag2(true)
     setProgress({
       prec: 70,
+      time: 6,
       prog: 20,
     })
     const element = document.getElementById('Tag2')
@@ -151,6 +154,7 @@ const ReviewForm2 = ({
     setTag3(true)
     setProgress({
       prec: 65,
+      time: 4,
       prog: 35,
     })
     const element = document.getElementById('Tag3')
@@ -169,6 +173,7 @@ const ReviewForm2 = ({
     setTag4(true)
     setProgress({
       prec: 45,
+      time: 2,
       prog: 65,
     })
     const element = document.getElementById('Tag4')
@@ -187,6 +192,7 @@ const ReviewForm2 = ({
     setTag5(true)
     setProgress({
       prec: 20,
+      time: 1,
       prog: 80,
     })
     const element = document.getElementById('Tag5')
@@ -205,6 +211,7 @@ const ReviewForm2 = ({
     setTag6(true)
     setProgress({
       prec: 100,
+      time: 0,
       prog: 100,
     })
     const element = document.getElementById('Tag6')

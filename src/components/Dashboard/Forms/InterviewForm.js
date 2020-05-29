@@ -76,6 +76,7 @@ const InterviewForm = ({
   //progress bar
   const [progress, setProgress] = useState({
     prec: 99,
+    time: 8,
     prog: 2,
   })
   // company search function
@@ -119,6 +120,7 @@ const InterviewForm = ({
     getCompanies()
     setProgress({
       prec: 95,
+      time: 7,
       prog: 5,
     })
     const element = document.getElementById('Tag1')
@@ -143,6 +145,7 @@ const InterviewForm = ({
     setTag2(true)
     setProgress({
       prec: 80,
+      time: 6,
       prog: 20,
     })
     const element = document.getElementById('Tag2')
@@ -165,6 +168,7 @@ const InterviewForm = ({
     setTag3(true)
     setProgress({
       prec: 70,
+      time: 5,
       prog: 30,
     })
     const element = document.getElementById('Tag3')
@@ -187,6 +191,7 @@ const InterviewForm = ({
     setTag4(true)
     setProgress({
       prec: 60,
+      time: 4,
       prog: 40,
     })
     const element = document.getElementById('Tag4')
@@ -209,6 +214,7 @@ const InterviewForm = ({
     setTag5(true)
     setProgress({
       prec: 50,
+      time: 3,
       prog: 50,
     })
     const element = document.getElementById('Tag5')
@@ -230,6 +236,7 @@ const InterviewForm = ({
     setTag6(true)
     setProgress({
       prec: 40,
+      time: 2,
       prog: 60,
     })
     const element = document.getElementById('Tag6')
@@ -251,6 +258,7 @@ const InterviewForm = ({
     setTag7(true)
     setProgress({
       prec: 30,
+      time: 1,
       prog: 70,
     })
     const element = document.getElementById('Tag7')
@@ -272,6 +280,7 @@ const InterviewForm = ({
     setTag8(true)
     setProgress({
       prec: 20,
+      time: 1,
       prog: 85,
     })
     const element = document.getElementById('Tag8')
@@ -293,6 +302,7 @@ const InterviewForm = ({
     setTag9(true)
     setProgress({
       prec: 100,
+      time: 0,
       prog: 100,
     })
     const element = document.getElementById('Tag9')
@@ -350,12 +360,10 @@ const InterviewForm = ({
   return (
     // main container
     <div>
-
       <Flex justify="center">
         <ProgressHeader progress={progress} />
       </Flex>
       <Flex w="100%" margin="0 auto" minH="100vh">
-
         {thinking ? (
           <>
             <Flex
